@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.evandev.modest_meals.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "WorkstoneDispenserMixin"
+  ],
+  "client": [
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
