@@ -1,0 +1,93 @@
+{
+  "config.modest_meals.title": "Modest Meals Configuration",
+  
+  "config.modest_meals.category.gameplay": "Gameplay",
+  "config.modest_meals.category.gameplay.tooltip": "Configure stamina mechanics, durations, recharge rates, and status effects.",
+  "config.modest_meals.group.mechanics": "Stamina Mechanics",
+  "config.modest_meals.group.effects": "Stamina Status Effects",
+  
+  "config.modest_meals.category.hud": "HUD & Display",
+  "config.modest_meals.category.hud.tooltip": "Configure stamina HUD bar visibility, highlight animations, and alternative text overlay.",
+  "config.modest_meals.group.stamina_bar": "Stamina Bar",
+  "config.modest_meals.group.stamina_text": "Alternative Stamina Text",
+  
+  "config.modest_meals.option.stamina_sprint": "Stamina Sprinting",
+  "config.modest_meals.option.stamina_sprint.tooltip": "When enabled, players have a dedicated stamina pool for sprinting. Depleting it completely triggers exhaustion until refilled.",
+  
+  "config.modest_meals.option.stamina_infinite_peaceful": "Infinite Stamina on Peaceful",
+  "config.modest_meals.option.stamina_infinite_peaceful.tooltip": "When enabled, stamina never depletes on Peaceful difficulty.",
+  
+  "config.modest_meals.option.stamina_regain_when_moving": "Movement Regain Rate",
+  "config.modest_meals.option.stamina_regain_when_moving.tooltip": "Controls how quickly stamina recovers while walking or moving: Normal, Half rate, or None (idle only).",
+  
+  "config.modest_meals.option.stamina_duration": "Sprint Duration (Seconds)",
+  "config.modest_meals.option.stamina_duration.tooltip": "The continuous sprint time in seconds before stamina is completely depleted.",
+  
+  "config.modest_meals.option.stamina_recharge": "Exhaustion Recharge Time (Seconds)",
+  "config.modest_meals.option.stamina_recharge.tooltip": "The time in seconds required to recharge from 0% back to 100% capacity when exhausted.",
+  
+  "config.modest_meals.option.stamina_cooldown": "Recharge Cooldown Delay (Seconds)",
+  "config.modest_meals.option.stamina_cooldown.tooltip": "The delay in seconds after stopping sprinting before stamina begins to naturally recover.",
+  
+  "config.modest_meals.option.stamina_saturation_effect": "Saturation Effect Boost",
+  "config.modest_meals.option.stamina_saturation_effect.tooltip": "When enabled, having the Saturation effect doubles stamina recovery and cooldown speed.",
+  
+  "config.modest_meals.option.stamina_hunger_effect": "Hunger Effect Penalty",
+  "config.modest_meals.option.stamina_hunger_effect.tooltip": "When enabled, having the Hunger effect cuts stamina recovery speed in half.",
+  
+  "config.modest_meals.option.hide_stamina_bar": "Hide Stamina Bar",
+  "config.modest_meals.option.hide_stamina_bar.tooltip": "Hides the stamina bar icon display from the HUD.",
+  
+  "config.modest_meals.option.hide_stamina_bar_moving": "Hide Moving Indicator",
+  "config.modest_meals.option.hide_stamina_bar_moving.tooltip": "Disables the red indicator icons shown when stamina cannot recover while moving.",
+  
+  "config.modest_meals.option.hide_stamina_bar_cooldown": "Hide Cooldown Indicator",
+  "config.modest_meals.option.hide_stamina_bar_cooldown.tooltip": "Disables the blue indicator icons shown while stamina is on recharge delay cooldown.",
+  
+  "config.modest_meals.option.hide_stamina_bar_inactive": "Hide Bar When Full / Inactive",
+  "config.modest_meals.option.hide_stamina_bar_inactive.tooltip": "Only displays the stamina bar when stamina is depleted, depleting, or exhausted.",
+  
+  "config.modest_meals.option.highlight_stamina_bar": "Highlight While Draining",
+  "config.modest_meals.option.highlight_stamina_bar.tooltip": "Renders a white outline over the stamina icons while sprinting.",
+  
+  "config.modest_meals.option.flash_stamina_bar_when_full": "Flash When Full",
+  "config.modest_meals.option.flash_stamina_bar_when_full.tooltip": "Flashes the stamina bar icons briefly when stamina reaches 100% full capacity.",
+  
+  "config.modest_meals.option.flash_stamina_bar_at": "Flash at Low Stamina Threshold",
+  "config.modest_meals.option.flash_stamina_bar_at.tooltip": "Pulses the stamina bar when stamina drops below this amount (0-20, 0 to disable).",
+  
+  "config.modest_meals.option.show_stamina_text": "Show Stamina Text",
+  "config.modest_meals.option.show_stamina_text.tooltip": "Displays an on-screen numerical text overlay showing remaining stamina percentage.",
+  
+  "config.modest_meals.option.use_dynamic_stamina_color": "Dynamic Text Color",
+  "config.modest_meals.option.use_dynamic_stamina_color.tooltip": "Dynamically color-codes stamina text according to current percentage and state.",
+  
+  "config.modest_meals.option.alt_stamina_show_on_active": "Show Text Only When Active",
+  "config.modest_meals.option.alt_stamina_show_on_active.tooltip": "Only renders the stamina text when stamina is depleted or exhausted.",
+  
+  "config.modest_meals.option.alt_stamina_corner": "Screen Corner",
+  "config.modest_meals.option.alt_stamina_corner.tooltip": "The screen corner where stamina text is positioned.",
+  
+  "config.modest_meals.option.alt_stamina_offset_x": "Horizontal Offset",
+  "config.modest_meals.option.alt_stamina_offset_x.tooltip": "X-axis pixel offset for stamina text.",
+  
+  "config.modest_meals.option.alt_stamina_offset_y": "Vertical Offset",
+  "config.modest_meals.option.alt_stamina_offset_y.tooltip": "Y-axis pixel offset for stamina text.",
+  
+  "config.modest_meals.option.alt_stamina_shadow": "Text Shadow",
+  "config.modest_meals.option.alt_stamina_shadow.tooltip": "Enables drop shadow behind stamina text.",
+  
+  "config.modest_meals.option.alt_stamina_text": "Text Template",
+  "config.modest_meals.option.alt_stamina_text.tooltip": "Format template for stamina text. Use %v for stamina value, and % followed by a color code (e.g. %a, %c).",
+
+  "config.modest_meals.enum.stamina_regain.normal": "Normal",
+  "config.modest_meals.enum.stamina_regain.half": "Half Rate",
+  "config.modest_meals.enum.stamina_regain.none": "None (Idle Only)",
+  
+  "config.modest_meals.enum.corner.top_left": "Top Left",
+  "config.modest_meals.enum.corner.top_right": "Top Right",
+  "config.modest_meals.enum.corner.bottom_left": "Bottom Left",
+  "config.modest_meals.enum.corner.bottom_right": "Bottom Right",
+
+  "pack.modest_meals.baisylia_hud.title": "Baisylia's Custom HUD"
+}

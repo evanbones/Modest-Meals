@@ -4,9 +4,10 @@
   "package": "com.evandev.modest_meals.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "WorkstoneDispenserMixin"
+    "PlayerMixin"
   ],
   "client": [
+    "LocalPlayerMixin"
   ],
   "server": [],
   "injectors": {
