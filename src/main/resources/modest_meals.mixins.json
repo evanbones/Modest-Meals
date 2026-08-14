@@ -4,6 +4,7 @@
   "package": "com.evandev.modest_meals.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "FoodDataMixin",
     "PlayerMixin"
   ],
   "client": [

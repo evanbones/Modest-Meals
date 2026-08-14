@@ -23,6 +23,7 @@ public class ModestMeals {
         if (FMLEnvironment.dist.isClient()) {
             ClientConfigSetup.register(modContainer);
             modEventBus.register(ClientEventHandler.class);
+            NeoForge.EVENT_BUS.register(ClientEventHandler.GameEvents.class);
         }
     }
 

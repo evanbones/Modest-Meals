@@ -14,6 +14,9 @@
   "config.modest_meals.option.stamina_sprint": "Stamina Sprinting",
   "config.modest_meals.option.stamina_sprint.tooltip": "When enabled, players have a dedicated stamina pool for sprinting. Depleting it completely triggers exhaustion until refilled.",
   
+  "config.modest_meals.option.disable_hunger": "Disable Hunger System",
+  "config.modest_meals.option.disable_hunger.tooltip": "When enabled, food directly restores health instead of filling the hunger bar, and starvation damage is eliminated.",
+
   "config.modest_meals.option.stamina_infinite_peaceful": "Infinite Stamina on Peaceful",
   "config.modest_meals.option.stamina_infinite_peaceful.tooltip": "When enabled, stamina never depletes on Peaceful difficulty.",
   
@@ -35,6 +38,9 @@
   "config.modest_meals.option.stamina_hunger_effect": "Hunger Effect Penalty",
   "config.modest_meals.option.stamina_hunger_effect.tooltip": "When enabled, having the Hunger effect cuts stamina recovery speed in half.",
   
+  "config.modest_meals.option.hide_hunger_bar": "Hide Hunger Bar",
+  "config.modest_meals.option.hide_hunger_bar.tooltip": "Removes the hunger bar from the HUD and restores the classic HUD layout with air bubbles above hearts on the left and armor on the right.",
+
   "config.modest_meals.option.hide_stamina_bar": "Hide Stamina Bar",
   "config.modest_meals.option.hide_stamina_bar.tooltip": "Hides the stamina bar icon display from the HUD.",
   

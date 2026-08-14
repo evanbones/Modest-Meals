@@ -43,6 +43,12 @@ public class ModConfig {
     @SerializedName("stamina_hunger_effect")
     public boolean staminaHungerEffect = false;
 
+    @SerializedName("disable_hunger")
+    public boolean disableHunger = true;
+
+    @SerializedName("hide_hunger_bar")
+    public boolean hideHungerBar = true;
+
     @SerializedName("hide_stamina_bar")
     public boolean hideStaminaBar = false;
 

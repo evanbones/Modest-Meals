@@ -5,7 +5,6 @@ import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -98,7 +97,7 @@ public abstract class StaminaRenderer {
                 fullFlashStartTime = now;
             }
             long elapsed = now - fullFlashStartTime;
-            if (elapsed < 600) { // 4 flashes (150ms each)
+            if (elapsed < 600) {
                 shouldHighlight = (elapsed / 150) % 2 == 0;
             } else {
                 hasBegunToDrain = false;
@@ -116,7 +115,7 @@ public abstract class StaminaRenderer {
         return shouldHighlight;
     }
 
-    public static void render(GuiGraphics graphics, DeltaTracker deltaTracker) {
+    public static void render(GuiGraphics graphics, int rightHeight, int offsetLeft) {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer player = minecraft.player;
 
@@ -127,8 +126,8 @@ public abstract class StaminaRenderer {
         PlayerStamina stamina = StaminaHelper.get(player);
         int width = minecraft.getWindow().getGuiScaledWidth();
         int height = minecraft.getWindow().getGuiScaledHeight();
-        int left = width / 2 + 91;
-        int top = height - minecraft.gui.rightHeight;
+        int left = width / 2 + 91 + offsetLeft;
+        int top = height - rightHeight;
         int level = stamina.getData().getStamina();
 
         if (ModConfig.get().flashStaminaBarWhenFull && level < StaminaData.MAX_STAMINA_LEVEL) {
@@ -154,7 +153,6 @@ public abstract class StaminaRenderer {
             }
         }
 
-        minecraft.gui.rightHeight += 10;
         RenderSystem.disableBlend();
     }
 }
