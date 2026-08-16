@@ -1,0 +1,139 @@
+{
+  "entries": [
+    {
+      "target": "#c:crops/wheat",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 3.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "minecraft:wheat",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 3.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "minecraft:carrot",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 900,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:golden_carrot",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 1800,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:health_addition",
+          "value": 4.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/potato",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.0,
+          "duration": 400
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:potato",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.0,
+          "duration": 400
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:baked_potato",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 3.0
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/beetroot",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:beetroot",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/rice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.0,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:rice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.0,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
+        }
+      ]
+    }
+  ]
+}

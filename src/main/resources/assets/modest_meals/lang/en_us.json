@@ -226,6 +226,33 @@
   "gui.modest_meals.regeneration_tooltip.very_slow": "Very Slow",
 
   "effect.modest_meals.nourishment_health_boost": "Nourishment",
+  "effect.modest_meals.stamina_regen": "Invigorated",
+  "effect.modest_meals.stamina_depletion": "Drained",
+  "effect.modest_meals.stamina_no_regen": "Exhausted",
+  "effect.modest_meals.health_no_regen": "Wounded",
+  "effect.modest_meals.health_regen": "Rejuvenation",
+  "effect.modest_meals.health_depletion": "Decay",
+
+  "modest_meals.trait.header.consumed": "When Consumed:",
+  "modest_meals.trait.header.ingredient": "When Used as Ingredient:",
+  "modest_meals.trait.modifier.plus": "+%s %s",
+  "modest_meals.trait.modifier.take": "-%s %s",
+  "modest_meals.trait.simple.plus": "+%s",
+  "modest_meals.trait.simple.take": "-%s",
+
+  "modest_meals.trait.stamina_regen": "Stamina Regeneration",
+  "modest_meals.trait.stamina_addition": "Stamina Restored",
+  "modest_meals.trait.stamina_depletion": "Stamina Depletion",
+  "modest_meals.trait.stamina_no_regen": "No Stamina Regeneration",
+  "modest_meals.trait.health_regen": "Health Regeneration",
+  "modest_meals.trait.health_addition": "Health Restored",
+  "modest_meals.trait.health_depletion": "Health Depletion",
+  "modest_meals.trait.health_no_regen": "No Health Regeneration",
+  "modest_meals.trait.clear_all_effects": "Clear All Status Effects",
+  "modest_meals.trait.clear_negative_effects": "Clear Negative Status Effects",
+  "modest_meals.trait.teleport_randomly": "Teleport Randomly",
+  "modest_meals.trait.air_bubbles": "Air Bubbles",
+  "modest_meals.trait.fire_extinguish": "Extinguish Fire",
 
   "pack.modest_meals.baisylia_hud.title": "Baisylia's Custom HUD"
 }

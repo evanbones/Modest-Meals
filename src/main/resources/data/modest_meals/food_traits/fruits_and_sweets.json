@@ -1,0 +1,118 @@
+{
+  "entries": [
+    {
+      "target": "minecraft:sugar",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:honey_bottle",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 400,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "minecraft:honeycomb",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:sweet_berries",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 200,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:cocoa_beans",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:melon_slice",
+      "traits": [
+        {
+          "type": "modest_meals:fire_extinguish"
+        }
+      ]
+    },
+    {
+      "target": "minecraft:glistering_melon_slice",
+      "traits": [
+        {
+          "type": "modest_meals:fire_extinguish"
+        },
+        {
+          "type": "modest_meals:health_addition",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:pumpkin",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 4.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "minecraft:pumpkin_pie",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 4.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:chorus_fruit",
+      "traits": [
+        {
+          "type": "modest_meals:teleport_randomly",
+          "range": 16.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.stamina;
 
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,6 +17,7 @@ public class PlayerStamina {
     protected int rechargeInTicks;
     protected int halfRateInTicks;
     protected boolean tickAgain = false;
+
     protected PlayerStamina(Player player, StaminaData data) {
         this.player = player;
         this.data = data;
@@ -147,6 +149,9 @@ public class PlayerStamina {
     }
 
     public boolean isRegainable() {
+        if (this.player.hasEffect(ModMobEffects.STAMINA_NO_REGEN)) {
+            return false;
+        }
         if (ModConfig.get().staminaRegainWhenMoving != StaminaRegain.NONE) {
             return true;
         }
@@ -165,7 +170,9 @@ public class PlayerStamina {
             isHalved = !this.isAtFullSprint() && this.data.isTiring();
         }
 
-        if (ModConfig.get().staminaHungerEffect) {
+        if (this.player.hasEffect(ModMobEffects.STAMINA_DEPLETION)) {
+            isHungry = true;
+        } else if (ModConfig.get().staminaHungerEffect) {
             isHungry = this.player.hasEffect(MobEffects.HUNGER);
         }
 
@@ -184,15 +191,21 @@ public class PlayerStamina {
     }
 
     public boolean hasPositiveEffect() {
-        if (ModConfig.get().staminaSaturationEffect && this.isTiringOrExhausted()) {
-            return this.player.hasEffect(MobEffects.SATURATION) && !this.isAtFullSprint();
+        if (this.isTiringOrExhausted()) {
+            if (this.player.hasEffect(ModMobEffects.STAMINA_REGEN) && !this.isAtFullSprint()) {
+                return true;
+            }
+            return ModConfig.get().staminaSaturationEffect && this.player.hasEffect(MobEffects.SATURATION) && !this.isAtFullSprint();
         }
         return false;
     }
 
     public boolean hasNegativeEffect() {
-        if (ModConfig.get().staminaHungerEffect && this.isTiringOrExhausted()) {
-            return this.player.hasEffect(MobEffects.HUNGER);
+        if (this.isTiringOrExhausted()) {
+            if (this.player.hasEffect(ModMobEffects.STAMINA_DEPLETION)) {
+                return true;
+            }
+            return ModConfig.get().staminaHungerEffect && this.player.hasEffect(MobEffects.HUNGER);
         }
         return false;
     }

@@ -3,6 +3,7 @@ package com.evandev.modest_meals.regen;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.compat.farmers_delight.NourishmentEffectHandler;
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.network.ClientboundHealthRegenSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
 import com.google.gson.Gson;
@@ -17,55 +18,12 @@ import java.util.HashSet;
 
 public class PlayerHealthRegen {
 
-    public static class ConsumedFood {
-        private final int foodComponentId;
-        private final int foodNutrition;
-        private int digestedNutrition = 0;
-        private int ticksCounter = 0;
-        private final int ticksToHeal;
-
-        public ConsumedFood(int foodNutrition, float foodSaturation, int foodComponentId) {
-            this.foodComponentId = foodComponentId;
-            this.foodNutrition = foodNutrition;
-            if (ModConfig.get().saturationBasedRegeneration) {
-                float ratio = Math.min(5.0F, foodNutrition / Math.max(0.1F, foodSaturation));
-                this.ticksToHeal = Math.max(
-                        1, (int) (ratio * 20 / Math.max(0.01F, ModConfig.get().gradualHealthRegenerationSpeed))
-                );
-            } else {
-                this.ticksToHeal = Math.max(
-                        1, (int) (20 / Math.max(0.01F, ModConfig.get().gradualHealthRegenerationSpeed))
-                );
-            }
-        }
-
-        public int getFoodComponentId() {
-            return foodComponentId;
-        }
-
-        public boolean isFullyDigested() {
-            return digestedNutrition >= foodNutrition;
-        }
-
-        public boolean tick(float regenSpeedMultiplier) {
-            int effectiveTicksToHeal = Math.max(1, (int) (this.ticksToHeal / Math.max(0.01F, regenSpeedMultiplier)));
-            if (ticksCounter < effectiveTicksToHeal) {
-                ticksCounter++;
-                return false;
-            }
-            digestedNutrition++;
-            ticksCounter = 0;
-            return true;
-        }
-    }
-
-    private static final TypeToken<HashSet<ConsumedFood>> CONSUMED_FOOD_SET_TYPE = new TypeToken<>() {};
+    private static final TypeToken<HashSet<ConsumedFood>> CONSUMED_FOOD_SET_TYPE = new TypeToken<>() {
+    };
     private static final Gson GSON = new Gson();
-
     private final Player player;
     private HashSet<ConsumedFood> consumedFoods = new HashSet<>();
     private int consumedNutrition = 0;
-
     public PlayerHealthRegen(Player player) {
         this.player = player;
     }
@@ -102,6 +60,9 @@ public class PlayerHealthRegen {
 
     public void serverTick() {
         if (!ModConfig.get().disableHunger || !ModConfig.get().gradualHealthRegeneration) {
+            return;
+        }
+        if (player.hasEffect(ModMobEffects.HEALTH_NO_REGEN)) {
             return;
         }
         if (consumedFoods.isEmpty()) {
@@ -203,5 +164,47 @@ public class PlayerHealthRegen {
         consumedFoods.clear();
         consumedNutrition = 0;
         sync();
+    }
+
+    public static class ConsumedFood {
+        private final int foodComponentId;
+        private final int foodNutrition;
+        private final int ticksToHeal;
+        private int digestedNutrition = 0;
+        private int ticksCounter = 0;
+
+        public ConsumedFood(int foodNutrition, float foodSaturation, int foodComponentId) {
+            this.foodComponentId = foodComponentId;
+            this.foodNutrition = foodNutrition;
+            if (ModConfig.get().saturationBasedRegeneration) {
+                float ratio = Math.min(5.0F, foodNutrition / Math.max(0.1F, foodSaturation));
+                this.ticksToHeal = Math.max(
+                        1, (int) (ratio * 20 / Math.max(0.01F, ModConfig.get().gradualHealthRegenerationSpeed))
+                );
+            } else {
+                this.ticksToHeal = Math.max(
+                        1, (int) (20 / Math.max(0.01F, ModConfig.get().gradualHealthRegenerationSpeed))
+                );
+            }
+        }
+
+        public int getFoodComponentId() {
+            return foodComponentId;
+        }
+
+        public boolean isFullyDigested() {
+            return digestedNutrition >= foodNutrition;
+        }
+
+        public boolean tick(float regenSpeedMultiplier) {
+            int effectiveTicksToHeal = Math.max(1, (int) (this.ticksToHeal / Math.max(0.01F, regenSpeedMultiplier)));
+            if (ticksCounter < effectiveTicksToHeal) {
+                ticksCounter++;
+                return false;
+            }
+            digestedNutrition++;
+            ticksCounter = 0;
+            return true;
+        }
     }
 }

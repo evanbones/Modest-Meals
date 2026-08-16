@@ -1,0 +1,179 @@
+{
+  "entries": [
+    {
+      "target": "#c:foods/raw_meat",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "#c:foods/cooked_meat",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        }
+      ]
+    },
+    {
+      "target": "#minecraft:meat",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minecraft:beef",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minecraft:cooked_beef",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        }
+      ]
+    },
+    {
+      "target": "minecraft:porkchop",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minecraft:cooked_porkchop",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        }
+      ]
+    },
+    {
+      "target": "minecraft:mutton",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minecraft:cooked_mutton",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        }
+      ]
+    },
+    {
+      "target": "minecraft:chicken",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minecraft:cooked_chicken",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        }
+      ]
+    },
+    {
+      "target": "#minecraft:fishes",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:cod",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 3.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:cooked_cod",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 5.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:salmon",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:cooked_salmon",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 6.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:rotten_flesh",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_depletion",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minecraft:spider_eye",
+      "traits": [
+        {
+          "type": "modest_meals:health_depletion",
+          "value": 2.0,
+          "duration": 200
+        }
+      ]
+    }
+  ]
+}

@@ -113,6 +113,21 @@ public class ModConfig {
     @SerializedName("show_food_regeneration_tooltips")
     public boolean showFoodRegenerationTooltips = false;
 
+    @SerializedName("show_food_trait_tooltips")
+    public boolean showFoodTraitTooltips = true;
+
+    @SerializedName("trait_global_value_multiplier")
+    public float traitGlobalValueMultiplier = 1.0f;
+
+    @SerializedName("trait_global_duration_multiplier")
+    public float traitGlobalDurationMultiplier = 1.0f;
+
+    @SerializedName("smelting_multiplier")
+    public float smeltingMultiplier = 1.25f;
+
+    @SerializedName("smelting_duration_multiplier")
+    public float smeltingDurationMultiplier = 1.25f;
+
     @SerializedName("hide_hunger_bar")
     public boolean hideHungerBar = true;
 

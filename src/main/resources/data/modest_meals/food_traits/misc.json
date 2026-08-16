@@ -1,0 +1,108 @@
+{
+  "entries": [
+    {
+      "target": "minecraft:milk_bucket",
+      "traits": [
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": true
+        }
+      ]
+    },
+    {
+      "target": "#c:milks",
+      "traits": [
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": true
+        }
+      ]
+    },
+    {
+      "target": "minecraft:dried_kelp",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 150
+        }
+      ]
+    },
+    {
+      "target": "minecraft:kelp",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/cabbage",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cabbage",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cabbage_leaf",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 0.5,
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/onion",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:onion",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/tomato",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:tomato",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0
+        }
+      ]
+    }
+  ]
+}

@@ -2,6 +2,8 @@ package com.evandev.modest_meals.client.tooltip;
 
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.EdibleBlockFoods;
+import com.evandev.modest_meals.trait.FoodTrait;
+import com.evandev.modest_meals.trait.FoodTraitManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
@@ -27,7 +29,80 @@ import java.util.List;
 public class FoodItemTooltips {
     private static final String CONFIG_PREFIX = "gui.modest_meals.regeneration_tooltip.";
 
+    public static void onTooltip(ItemTooltipEvent event) {
+        ItemStack stack = event.getItemStack();
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        List<Component> lines = event.getToolTip();
+
+        if (ModConfig.get().disableHunger && ModConfig.get().showFoodItemTooltips) {
+            FoodProperties foodProperties = stack.get(DataComponents.FOOD);
+            if (foodProperties == null) {
+                var foodPropertiesOptional = EdibleBlockFoods.getFoodProperties(stack.getItem());
+                if (foodPropertiesOptional.isPresent()) {
+                    foodProperties = foodPropertiesOptional.get();
+                }
+            }
+
+            if (foodProperties != null) {
+                int foodNutrition = ModConfig.getFoodHealth(stack, foodProperties);
+                if (foodNutrition > 0) {
+                    lines.add(new FoodHealthTextComponent(foodNutrition));
+
+                    if (ModConfig.get().showFoodRegenerationTooltips && ModConfig.get().gradualHealthRegeneration && ModConfig.get().saturationBasedRegeneration) {
+                        float saturation = Math.max(0.01F, foodProperties.saturation());
+                        float regenerationRatio = (float) foodNutrition / saturation;
+                        String regenerationRate;
+                        ChatFormatting formatting;
+
+                        if (regenerationRatio <= 0.5F) {
+                            regenerationRate = CONFIG_PREFIX + "super_fast";
+                            formatting = ChatFormatting.DARK_PURPLE;
+                        } else if (regenerationRatio <= 0.8F) {
+                            regenerationRate = CONFIG_PREFIX + "very_fast";
+                            formatting = ChatFormatting.DARK_GREEN;
+                        } else if (regenerationRatio <= 1.6F) {
+                            regenerationRate = CONFIG_PREFIX + "fast";
+                            formatting = ChatFormatting.GREEN;
+                        } else if (regenerationRatio <= 2.5F) {
+                            regenerationRate = CONFIG_PREFIX + "slow";
+                            formatting = ChatFormatting.RED;
+                        } else {
+                            regenerationRate = CONFIG_PREFIX + "very_slow";
+                            formatting = ChatFormatting.DARK_RED;
+                        }
+
+                        lines.add(
+                                Component.translatable(CONFIG_PREFIX + "template", Component.translatable(regenerationRate))
+                                        .setStyle(Style.EMPTY.withColor(formatting.getColor()))
+                        );
+                    }
+                }
+            }
+        }
+
+        if (ModConfig.get().showFoodTraitTooltips) {
+            List<FoodTrait> traits = FoodTraitManager.getTraits(stack);
+            if (!traits.isEmpty()) {
+                if (stack.has(DataComponents.FOOD) || EdibleBlockFoods.getFoodProperties(stack.getItem()).isPresent()) {
+                    lines.add(Component.translatable("modest_meals.trait.header.consumed").withStyle(ChatFormatting.GRAY));
+                } else {
+                    lines.add(Component.translatable("modest_meals.trait.header.ingredient").withStyle(ChatFormatting.GRAY));
+                }
+                double valMult = ModConfig.get().traitGlobalValueMultiplier;
+                double durMult = ModConfig.get().traitGlobalDurationMultiplier;
+                for (FoodTrait trait : traits) {
+                    lines.add(trait.getTooltipComponent(valMult, durMult));
+                }
+            }
+        }
+    }
+
     public record FoodHealthTextComponent(int foodNutrition) implements Component, FormattedCharSequence {
+        private static final List<Component> EMPTY_SIBLINGS = new ArrayList<>();
+
         @Override
         public Style getStyle() {
             return Style.EMPTY;
@@ -37,8 +112,6 @@ public class FoodItemTooltips {
         public ComponentContents getContents() {
             return PlainTextContents.EMPTY;
         }
-
-        private static final List<Component> EMPTY_SIBLINGS = new ArrayList<>();
 
         @Override
         public List<Component> getSiblings() {
@@ -109,59 +182,5 @@ public class FoodItemTooltips {
             context.blitSprite(Gui.HeartType.CONTAINER.getSprite(false, lastHeartIsHalf, false), textureX, y, 9, 9);
             context.blitSprite(Gui.HeartType.NORMAL.getSprite(false, lastHeartIsHalf, false), textureX, y, 9, 9);
         }
-    }
-
-    public static void onTooltip(ItemTooltipEvent event) {
-        if (!ModConfig.get().disableHunger || !ModConfig.get().showFoodItemTooltips) {
-            return;
-        }
-        ItemStack stack = event.getItemStack();
-        FoodProperties foodProperties = stack.get(DataComponents.FOOD);
-        if (foodProperties == null) {
-            var foodPropertiesOptional = EdibleBlockFoods.getFoodProperties(stack.getItem());
-            if (foodPropertiesOptional.isEmpty()) {
-                return;
-            }
-            foodProperties = foodPropertiesOptional.get();
-        }
-
-        int foodNutrition = ModConfig.getFoodHealth(stack, foodProperties);
-        if (foodNutrition <= 0) {
-            return;
-        }
-
-        List<Component> lines = event.getToolTip();
-        lines.add(new FoodHealthTextComponent(foodNutrition));
-
-        if (!ModConfig.get().showFoodRegenerationTooltips || !ModConfig.get().gradualHealthRegeneration || !ModConfig.get().saturationBasedRegeneration) {
-            return;
-        }
-
-        float saturation = Math.max(0.01F, foodProperties.saturation());
-        float regenerationRatio = (float) foodNutrition / saturation;
-        String regenerationRate;
-        ChatFormatting formatting;
-
-        if (regenerationRatio <= 0.5F) {
-            regenerationRate = CONFIG_PREFIX + "super_fast";
-            formatting = ChatFormatting.DARK_PURPLE;
-        } else if (regenerationRatio <= 0.8F) {
-            regenerationRate = CONFIG_PREFIX + "very_fast";
-            formatting = ChatFormatting.DARK_GREEN;
-        } else if (regenerationRatio <= 1.6F) {
-            regenerationRate = CONFIG_PREFIX + "fast";
-            formatting = ChatFormatting.GREEN;
-        } else if (regenerationRatio <= 2.5F) {
-            regenerationRate = CONFIG_PREFIX + "slow";
-            formatting = ChatFormatting.RED;
-        } else {
-            regenerationRate = CONFIG_PREFIX + "very_slow";
-            formatting = ChatFormatting.DARK_RED;
-        }
-
-        lines.add(
-                Component.translatable(CONFIG_PREFIX + "template", Component.translatable(regenerationRate))
-                        .setStyle(Style.EMPTY.withColor(formatting.getColor()))
-        );
     }
 }

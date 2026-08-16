@@ -13,7 +13,10 @@
 
 Art by [Baisylia](https://modrinth.com/user/Baisylia)!
 
-Based heavily on Nostalgic Tweaks and Melancholic Hunger.
+Stamina and health system adapted from Nostalgic
+Tweaks ([LGPL-3.0-only](https://github.com/Nostalgica-Reverie/Nostalgic-Tweaks/blob/main/LICENSE.txt)) and Melancholic Hunger & HUD ([LGPL-3.0-only](https://github.com/antigers/melancholic_hunger/blob/1.21.1/LICENSE)).
+
+Contains code adapted from [FoodAttributes](https://modrinth.com/mod/foodattributes), used under the MIT license.
 
 ---
 

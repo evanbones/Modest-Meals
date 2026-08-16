@@ -8,7 +8,10 @@
     "FoodDataMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "AbstractCookingRecipeMixin",
+    "compat.CookingPotRecipeMixin",
+    "compat.CuttingBoardRecipeMixin"
   ],
   "client": [
     "GuiMixin",
