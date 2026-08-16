@@ -3,6 +3,7 @@ package com.evandev.modest_meals.event;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
+import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.stamina.StaminaHolder;
@@ -35,12 +36,17 @@ public class CommonEventHandler {
                 }
             }
         }
+
+        if (!player.level().isClientSide()) {
+            HealthRegenHelper.get(player).serverTick();
+        }
     }
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
+            HealthRegenHelper.get(serverPlayer).sync();
         }
     }
 
@@ -62,6 +68,7 @@ public class CommonEventHandler {
 
         if (player instanceof ServerPlayer serverPlayer) {
             ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
+            HealthRegenHelper.get(serverPlayer).sync();
         }
     }
 
@@ -70,7 +77,9 @@ public class CommonEventHandler {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             PlayerStamina stamina = StaminaHelper.get(serverPlayer);
             stamina.reset();
+            HealthRegenHelper.get(serverPlayer).reset();
             ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
+            HealthRegenHelper.get(serverPlayer).sync();
         }
     }
 }

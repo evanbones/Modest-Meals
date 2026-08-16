@@ -1,6 +1,8 @@
 package com.evandev.modest_meals.client;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.client.hud.TextureHelper;
+import com.evandev.modest_meals.client.tooltip.FoodItemTooltips;
 import com.evandev.modest_meals.config.ModConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -12,14 +14,17 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.nio.file.Path;
 import java.util.Optional;
@@ -159,6 +164,16 @@ public class ClientEventHandler {
         }
     }
 
+    @SubscribeEvent
+    public static void onRegisterClientReloadListeners(RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener((ResourceManagerReloadListener) resourceManager -> {
+            try {
+                new TextureHelper().generateHeartTextures();
+            } catch (Exception ignored) {
+            }
+        });
+    }
+
     public static class GameEvents {
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         public static void onRenderGuiLayerPre(RenderGuiLayerEvent.Pre event) {
@@ -172,6 +187,11 @@ public class ClientEventHandler {
                     event.setCanceled(true);
                 }
             }
+        }
+
+        @SubscribeEvent
+        public static void onItemTooltip(ItemTooltipEvent event) {
+            FoodItemTooltips.onTooltip(event);
         }
     }
 }

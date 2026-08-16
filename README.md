@@ -4,7 +4,7 @@
 
 ## License
 
-* **Code**: Licensed under the [MIT License](https://github.com/evanbones/Modest-Meals/blob/1.21.1/LICENSE).
+* **Code**: Licensed under the [LGPL-3.0 License](https://github.com/evanbones/Modest-Meals/blob/1.21.1/LICENSE).
 * **Assets**: All Rights Reserved (ARR).
 
 ---
@@ -12,6 +12,8 @@
 ## Credits
 
 Art by [Baisylia](https://modrinth.com/user/Baisylia)!
+
+Based heavily on Nostalgic Tweaks and Melancholic Hunger.
 
 ---
 

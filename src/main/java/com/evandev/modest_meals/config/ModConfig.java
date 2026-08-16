@@ -6,16 +6,47 @@ import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.stamina.StaminaRegain;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Optional;
 
 public class ModConfig {
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final TypeAdapter<Color> COLOR_ADAPTER = new TypeAdapter<>() {
+        @Override
+        public void write(JsonWriter out, Color value) throws IOException {
+            if (value == null) {
+                out.nullValue();
+            } else {
+                out.value(value.getRGB());
+            }
+        }
+
+        @Override
+        public Color read(JsonReader in) throws IOException {
+            return new Color(in.nextInt(), true);
+        }
+    };
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting()
+            .registerTypeAdapter(Color.class, COLOR_ADAPTER)
+            .create();
     private static final File CONFIG_FILE = FMLPaths.CONFIGDIR.get().resolve(Constants.MOD_ID + ".json").toFile();
     private static ModConfig INSTANCE;
 
@@ -45,6 +76,42 @@ public class ModConfig {
 
     @SerializedName("disable_hunger")
     public boolean disableHunger = true;
+
+    @SerializedName("hunger_effect")
+    public HungerEffectOption hungerEffect = HungerEffectOption.REPLACED_WITH_OTHER;
+
+    @SerializedName("hunger_replacement_effect")
+    public String hungerReplacementEffect = "minecraft:poison";
+
+    @SerializedName("hunger_replacement_duration_multiplier")
+    public float hungerReplacementDurationMultiplier = 0.5f;
+
+    @SerializedName("instant_eating")
+    public boolean instantEating = false;
+
+    @SerializedName("gradual_health_regeneration")
+    public boolean gradualHealthRegeneration = true;
+
+    @SerializedName("gradual_health_regeneration_speed")
+    public float gradualHealthRegenerationSpeed = 1.0f;
+
+    @SerializedName("saturation_based_regeneration")
+    public boolean saturationBasedRegeneration = true;
+
+    @SerializedName("regeneration_at_full_health")
+    public RegenerationAtFullHealthOption regenerationAtFullHealth = RegenerationAtFullHealthOption.CONTINUED;
+
+    @SerializedName("sprinting")
+    public SprintingOption sprinting = SprintingOption.LIMITED_BY_HEALTH;
+
+    @SerializedName("sprinting_health_limit")
+    public int sprintingHealthLimit = 6;
+
+    @SerializedName("show_food_item_tooltips")
+    public boolean showFoodItemTooltips = true;
+
+    @SerializedName("show_food_regeneration_tooltips")
+    public boolean showFoodRegenerationTooltips = false;
 
     @SerializedName("hide_hunger_bar")
     public boolean hideHungerBar = true;
@@ -94,6 +161,48 @@ public class ModConfig {
     @SerializedName("alt_stamina_text")
     public String altStaminaText = "Stamina: %v%";
 
+    @SerializedName("highlight_restored_hearts")
+    public boolean highlightRestoredHearts = true;
+
+    @SerializedName("restored_hearts_texture")
+    public HeartTextureOption restoredHeartsTexture = HeartTextureOption.BLINKING;
+
+    @SerializedName("restored_hearts_overlay_color")
+    public Color restoredHeartsOverlayColor = new Color(120, 0, 20);
+
+    @SerializedName("highlight_regenerated_hearts")
+    public boolean highlightRegeneratedHearts = true;
+
+    @SerializedName("regenerated_hearts_texture")
+    public HeartTextureOption regeneratedHeartsTexture = HeartTextureOption.BLINKING;
+
+    @SerializedName("regenerated_hearts_overlay_color")
+    public Color regeneratedHeartsOverlayColor = new Color(255, 135, 135);
+
+    @SerializedName("regenerated_hearts_opacity_min")
+    public float regeneratedHeartsOpacityMin = 0.1f;
+
+    @SerializedName("regenerated_hearts_opacity_max")
+    public float regeneratedHeartsOpacityMax = 1.0f;
+
+    @SerializedName("regenerated_hearts_blinking_period")
+    public int regeneratedHeartsBlinkingPeriod = 1500;
+
+    @SerializedName("use_custom_food_stack_sizes")
+    public boolean useCustomFoodStackSizes = false;
+
+    @SerializedName("custom_food_stack_sizes")
+    public LinkedHashMap<String, Integer> customFoodStackSizes = DefaultFoodStackSizes.getDefaultVanillaStackSizes();
+
+    @SerializedName("farmers_delight_food_stack_sizes")
+    public LinkedHashMap<String, Integer> farmersDelightFoodStackSizes = DefaultFoodStackSizes.getDefaultFarmersDelightStackSizes();
+
+    @SerializedName("nourishment_health_boost_hearts_count")
+    public int nourishmentHealthBoostHeartsCount = 3;
+
+    @SerializedName("nourishment_regen_speed_multiplier")
+    public float nourishmentRegenSpeedMultiplier = 1.5f;
+
     public static ModConfig get() {
         if (INSTANCE == null) {
             load();
@@ -108,6 +217,7 @@ public class ModConfig {
                 if (INSTANCE == null) {
                     INSTANCE = new ModConfig();
                 }
+                INSTANCE.validateDefaults();
             } catch (Exception e) {
                 Constants.LOG.error("Failed to load " + Constants.MOD_ID + ".json", e);
                 INSTANCE = new ModConfig();
@@ -125,6 +235,46 @@ public class ModConfig {
             StaminaHelper.reset();
         } catch (IOException e) {
             Constants.LOG.error("Failed to save " + Constants.MOD_ID + ".json", e);
+        }
+    }
+
+    public static int getFoodHealth(ItemStack itemStack, FoodProperties foodProperties) {
+        return foodProperties.nutrition();
+    }
+
+    public static Holder<MobEffect> getHungerReplacementEffect() {
+        Optional<Holder.Reference<MobEffect>> effectHolder = BuiltInRegistries.MOB_EFFECT.getHolder(
+                ResourceLocation.parse(get().hungerReplacementEffect)
+        );
+        return effectHolder.map(h -> (Holder<MobEffect>) h).orElse(MobEffects.POISON);
+    }
+
+    public static Integer getItemStackSize(ItemStack itemStack) {
+        if (!get().useCustomFoodStackSizes) {
+            return null;
+        }
+        String itemId = BuiltInRegistries.ITEM.getKey(itemStack.getItem()).toString();
+        if (get().customFoodStackSizes != null && get().customFoodStackSizes.containsKey(itemId)) {
+            return get().customFoodStackSizes.get(itemId);
+        }
+        if (ModList.get().isLoaded("farmersdelight") && get().farmersDelightFoodStackSizes != null && get().farmersDelightFoodStackSizes.containsKey(itemId)) {
+            return get().farmersDelightFoodStackSizes.get(itemId);
+        }
+        return null;
+    }
+
+    public void validateDefaults() {
+        if (customFoodStackSizes == null || customFoodStackSizes.isEmpty()) {
+            customFoodStackSizes = DefaultFoodStackSizes.getDefaultVanillaStackSizes();
+        }
+        if (farmersDelightFoodStackSizes == null || farmersDelightFoodStackSizes.isEmpty()) {
+            farmersDelightFoodStackSizes = DefaultFoodStackSizes.getDefaultFarmersDelightStackSizes();
+        }
+        if (restoredHeartsOverlayColor == null) {
+            restoredHeartsOverlayColor = new Color(120, 0, 20);
+        }
+        if (regeneratedHeartsOverlayColor == null) {
+            regeneratedHeartsOverlayColor = new Color(255, 135, 135);
         }
     }
 }

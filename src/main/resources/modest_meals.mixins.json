@@ -4,11 +4,17 @@
   "package": "com.evandev.modest_meals.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "CakeBlockMixin",
     "FoodDataMixin",
+    "ItemStackMixin",
+    "LivingEntityMixin",
     "PlayerMixin"
   ],
   "client": [
-    "LocalPlayerMixin"
+    "GuiMixin",
+    "LocalPlayerMixin",
+    "MinecraftMixin",
+    "TooltipComponentMixin"
   ],
   "server": [],
   "injectors": {

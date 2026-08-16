@@ -2,89 +2,212 @@
   "config.modest_meals.title": "Modest Meals Configuration",
   
   "config.modest_meals.category.gameplay": "Gameplay",
-  "config.modest_meals.category.gameplay.tooltip": "Configure stamina mechanics, durations, recharge rates, and status effects.",
+  "config.modest_meals.category.gameplay.tooltip": "Configure hunger mechanics, health regeneration, stamina, and status effects.",
+  "config.modest_meals.group.hunger": "Hunger & Eating",
+  "config.modest_meals.group.hunger.tooltip": "Settings related to hunger elimination, hunger effect replacement, and eating speed.",
+  "config.modest_meals.group.health_regeneration": "Health Regeneration",
+  "config.modest_meals.group.health_regeneration.tooltip": "Settings related to gradual food digestion and healing over time.",
   "config.modest_meals.group.mechanics": "Stamina Mechanics",
+  "config.modest_meals.group.mechanics.tooltip": "Configure stamina sprint duration, recharge delays, and movement recovery.",
   "config.modest_meals.group.effects": "Stamina Status Effects",
+  "config.modest_meals.group.effects.tooltip": "Status effect interactions with the stamina system.",
   
   "config.modest_meals.category.hud": "HUD & Display",
-  "config.modest_meals.category.hud.tooltip": "Configure stamina HUD bar visibility, highlight animations, and alternative text overlay.",
+  "config.modest_meals.category.hud.tooltip": "Configure stamina bar, heart overlays, and item tooltips.",
   "config.modest_meals.group.stamina_bar": "Stamina Bar",
+  "config.modest_meals.group.stamina_bar.tooltip": "Configure stamina bar visibility and flashing animations.",
+  "config.modest_meals.group.hud_restored_health": "Potentially Restorable Hearts",
+  "config.modest_meals.group.hud_restored_health.tooltip": "Visual highlight of hearts restored by held food items on the health bar.",
+  "config.modest_meals.group.hud_regenerated_health": "Regenerating Hearts",
+  "config.modest_meals.group.hud_regenerated_health.tooltip": "Visual pulsing animation of hearts currently being digested and regenerated.",
+  "config.modest_meals.group.hud_tooltips": "Item Tooltips",
+  "config.modest_meals.group.hud_tooltips.tooltip": "Settings for food health icons and digestion speed tooltips.",
   "config.modest_meals.group.stamina_text": "Alternative Stamina Text",
-  
+  "config.modest_meals.group.stamina_text.tooltip": "Numerical on-screen stamina percentage display.",
+
+  "config.modest_meals.category.food_stacks": "Food Stacks",
+  "config.modest_meals.category.food_stacks.tooltip": "Configure custom maximum stack sizes for food items.",
+
+  "config.modest_meals.category.farmers_delight": "Farmer's Delight",
+  "config.modest_meals.category.farmers_delight.tooltip": "Compatibility settings for Farmer's Delight mod.",
+
+  "config.modest_meals.option.disable_hunger": "Disable Hunger System",
+  "config.modest_meals.option.disable_hunger.tooltip": "When enabled, removes the hunger system. Food directly restores health or starts gradual regeneration.",
+
+  "config.modest_meals.option.hunger_effect": "Hunger Status Effect",
+  "config.modest_meals.option.hunger_effect.tooltip": "Vanilla: Hunger effect behaves normally.\nDisabled: Hunger effect cannot be applied to players.\nReplaced with other effect: Instead of Hunger, players receive a replacement effect (e.g. Poison) with modified duration.",
+
+  "config.modest_meals.option.hunger_replacement_effect": "Hunger Replacement Effect",
+  "config.modest_meals.option.hunger_replacement_effect.tooltip": "Resource ID of the effect that replaces the Hunger effect (e.g. minecraft:poison).",
+
+  "config.modest_meals.option.hunger_replacement_duration_multiplier": "Replacement Duration Multiplier",
+  "config.modest_meals.option.hunger_replacement_duration_multiplier.tooltip": "Duration multiplier for the replacement effect (0.5 means half duration).",
+
+  "config.modest_meals.option.instant_eating": "Disable Eating Animation",
+  "config.modest_meals.option.instant_eating.tooltip": "When enabled, removes the eating animation, making food consumption instantaneous.",
+
+  "config.modest_meals.option.gradual_health_regeneration": "Gradual Health Regeneration",
+  "config.modest_meals.option.gradual_health_regeneration.tooltip": "When enabled, health regenerates gradually over time after eating food instead of instantly.",
+
+  "config.modest_meals.option.gradual_health_regeneration_speed": "Regeneration Speed",
+  "config.modest_meals.option.gradual_health_regeneration_speed.tooltip": "Overall speed multiplier at which health is restored from digested food.",
+
+  "config.modest_meals.option.saturation_based_regeneration": "Saturation-Based Regeneration",
+  "config.modest_meals.option.saturation_based_regeneration.tooltip": "When enabled, digestion speed scales with the saturation ratio of the consumed food item.",
+
+  "config.modest_meals.option.regeneration_at_full_health": "Regeneration at Full Health",
+  "config.modest_meals.option.regeneration_at_full_health.tooltip": "Stopped: Remaining regeneration is discarded when reaching full health.\nContinued: Digestion continues in the background if damage is taken during the digestion period.\nStored: Digestion pauses at full health and resumes upon taking damage.",
+
+  "config.modest_meals.option.sprinting": "Sprinting Restriction",
+  "config.modest_meals.option.sprinting.tooltip": "Controls sprinting rules when Stamina Sprint is disabled:\nVanilla: Standard behavior.\nDisabled: Sprinting is disabled.\nLimited by Health: Sprinting is only permitted above the health threshold.",
+
+  "config.modest_meals.option.sprinting_health_limit": "Sprint Health Limit",
+  "config.modest_meals.option.sprinting_health_limit.tooltip": "Minimum health points required to sprint when Limited by Health is selected (6 = 3 hearts).",
+
   "config.modest_meals.option.stamina_sprint": "Stamina Sprinting",
   "config.modest_meals.option.stamina_sprint.tooltip": "When enabled, players have a dedicated stamina pool for sprinting. Depleting it completely triggers exhaustion until refilled.",
-  
-  "config.modest_meals.option.disable_hunger": "Disable Hunger System",
-  "config.modest_meals.option.disable_hunger.tooltip": "When enabled, food directly restores health instead of filling the hunger bar, and starvation damage is eliminated.",
 
   "config.modest_meals.option.stamina_infinite_peaceful": "Infinite Stamina on Peaceful",
   "config.modest_meals.option.stamina_infinite_peaceful.tooltip": "When enabled, stamina never depletes on Peaceful difficulty.",
-  
+
   "config.modest_meals.option.stamina_regain_when_moving": "Movement Regain Rate",
   "config.modest_meals.option.stamina_regain_when_moving.tooltip": "Controls how quickly stamina recovers while walking or moving: Normal, Half rate, or None (idle only).",
-  
+
   "config.modest_meals.option.stamina_duration": "Sprint Duration (Seconds)",
   "config.modest_meals.option.stamina_duration.tooltip": "The continuous sprint time in seconds before stamina is completely depleted.",
-  
+
   "config.modest_meals.option.stamina_recharge": "Exhaustion Recharge Time (Seconds)",
   "config.modest_meals.option.stamina_recharge.tooltip": "The time in seconds required to recharge from 0% back to 100% capacity when exhausted.",
-  
+
   "config.modest_meals.option.stamina_cooldown": "Recharge Cooldown Delay (Seconds)",
   "config.modest_meals.option.stamina_cooldown.tooltip": "The delay in seconds after stopping sprinting before stamina begins to naturally recover.",
-  
+
   "config.modest_meals.option.stamina_saturation_effect": "Saturation Effect Boost",
   "config.modest_meals.option.stamina_saturation_effect.tooltip": "When enabled, having the Saturation effect doubles stamina recovery and cooldown speed.",
-  
+
   "config.modest_meals.option.stamina_hunger_effect": "Hunger Effect Penalty",
   "config.modest_meals.option.stamina_hunger_effect.tooltip": "When enabled, having the Hunger effect cuts stamina recovery speed in half.",
-  
+
   "config.modest_meals.option.hide_hunger_bar": "Hide Hunger Bar",
   "config.modest_meals.option.hide_hunger_bar.tooltip": "Removes the hunger bar from the HUD and restores the classic HUD layout with air bubbles above hearts on the left and armor on the right.",
 
   "config.modest_meals.option.hide_stamina_bar": "Hide Stamina Bar",
   "config.modest_meals.option.hide_stamina_bar.tooltip": "Hides the stamina bar icon display from the HUD.",
-  
+
   "config.modest_meals.option.hide_stamina_bar_moving": "Hide Moving Indicator",
   "config.modest_meals.option.hide_stamina_bar_moving.tooltip": "Disables the red indicator icons shown when stamina cannot recover while moving.",
-  
+
   "config.modest_meals.option.hide_stamina_bar_cooldown": "Hide Cooldown Indicator",
   "config.modest_meals.option.hide_stamina_bar_cooldown.tooltip": "Disables the blue indicator icons shown while stamina is on recharge delay cooldown.",
-  
+
   "config.modest_meals.option.hide_stamina_bar_inactive": "Hide Bar When Full / Inactive",
   "config.modest_meals.option.hide_stamina_bar_inactive.tooltip": "Only displays the stamina bar when stamina is depleted, depleting, or exhausted.",
-  
+
   "config.modest_meals.option.highlight_stamina_bar": "Highlight While Draining",
   "config.modest_meals.option.highlight_stamina_bar.tooltip": "Renders a white outline over the stamina icons while sprinting.",
-  
+
   "config.modest_meals.option.flash_stamina_bar_when_full": "Flash When Full",
   "config.modest_meals.option.flash_stamina_bar_when_full.tooltip": "Flashes the stamina bar icons briefly when stamina reaches 100% full capacity.",
-  
+
   "config.modest_meals.option.flash_stamina_bar_at": "Flash at Low Stamina Threshold",
   "config.modest_meals.option.flash_stamina_bar_at.tooltip": "Pulses the stamina bar when stamina drops below this amount (0-20, 0 to disable).",
-  
+
+  "config.modest_meals.option.highlight_restored_hearts": "Highlight Restorable Hearts",
+  "config.modest_meals.option.highlight_restored_hearts.tooltip": "Highlights the number of hearts that will be healed when holding a food item.",
+
+  "config.modest_meals.option.restored_hearts_texture": "Restorable Hearts Texture",
+  "config.modest_meals.option.restored_hearts_texture.tooltip": "Texture style used to render potentially restorable hearts.",
+
+  "config.modest_meals.option.restored_hearts_overlay_color": "Restorable Hearts Color",
+  "config.modest_meals.option.restored_hearts_overlay_color.tooltip": "Color tint applied to restorable hearts on the health bar.",
+
+  "config.modest_meals.option.highlight_regenerated_hearts": "Highlight Regenerating Hearts",
+  "config.modest_meals.option.highlight_regenerated_hearts.tooltip": "Renders a pulsing animation for hearts currently being regenerated by digested food.",
+
+  "config.modest_meals.option.regenerated_hearts_texture": "Regenerating Hearts Texture",
+  "config.modest_meals.option.regenerated_hearts_texture.tooltip": "Texture style used to render currently regenerating hearts.",
+
+  "config.modest_meals.option.regenerated_hearts_overlay_color": "Regenerating Hearts Color",
+  "config.modest_meals.option.regenerated_hearts_overlay_color.tooltip": "Color tint applied to regenerating hearts on the health bar.",
+
+  "config.modest_meals.option.regenerated_hearts_opacity_min": "Regen Opacity Minimum",
+  "config.modest_meals.option.regenerated_hearts_opacity_min.tooltip": "Minimum opacity level during heart pulsing animation.",
+
+  "config.modest_meals.option.regenerated_hearts_opacity_max": "Regen Opacity Maximum",
+  "config.modest_meals.option.regenerated_hearts_opacity_max.tooltip": "Maximum opacity level during heart pulsing animation.",
+
+  "config.modest_meals.option.regenerated_hearts_blinking_period": "Regen Blinking Period (ms)",
+  "config.modest_meals.option.regenerated_hearts_blinking_period.tooltip": "Pulsing animation period length in milliseconds.",
+
+  "config.modest_meals.option.show_food_item_tooltips": "Show Food Nutrition Tooltips",
+  "config.modest_meals.option.show_food_item_tooltips.tooltip": "Displays heart icons in food item tooltips showing the amount of health restored.",
+
+  "config.modest_meals.option.show_food_regeneration_tooltips": "Show Food Digestion Rate Tooltips",
+  "config.modest_meals.option.show_food_regeneration_tooltips.tooltip": "Displays the digestion speed (e.g. Fast Regeneration) on food item tooltips.",
+
   "config.modest_meals.option.show_stamina_text": "Show Stamina Text",
   "config.modest_meals.option.show_stamina_text.tooltip": "Displays an on-screen numerical text overlay showing remaining stamina percentage.",
-  
+
   "config.modest_meals.option.use_dynamic_stamina_color": "Dynamic Text Color",
   "config.modest_meals.option.use_dynamic_stamina_color.tooltip": "Dynamically color-codes stamina text according to current percentage and state.",
-  
+
   "config.modest_meals.option.alt_stamina_show_on_active": "Show Text Only When Active",
   "config.modest_meals.option.alt_stamina_show_on_active.tooltip": "Only renders the stamina text when stamina is depleted or exhausted.",
-  
+
   "config.modest_meals.option.alt_stamina_corner": "Screen Corner",
   "config.modest_meals.option.alt_stamina_corner.tooltip": "The screen corner where stamina text is positioned.",
-  
+
   "config.modest_meals.option.alt_stamina_offset_x": "Horizontal Offset",
   "config.modest_meals.option.alt_stamina_offset_x.tooltip": "X-axis pixel offset for stamina text.",
-  
+
   "config.modest_meals.option.alt_stamina_offset_y": "Vertical Offset",
   "config.modest_meals.option.alt_stamina_offset_y.tooltip": "Y-axis pixel offset for stamina text.",
-  
+
   "config.modest_meals.option.alt_stamina_shadow": "Text Shadow",
   "config.modest_meals.option.alt_stamina_shadow.tooltip": "Enables drop shadow behind stamina text.",
-  
+
   "config.modest_meals.option.alt_stamina_text": "Text Template",
   "config.modest_meals.option.alt_stamina_text.tooltip": "Format template for stamina text. Use %v for stamina value, and % followed by a color code (e.g. %a, %c).",
+
+  "config.modest_meals.option.use_custom_food_stack_sizes": "Use Custom Food Stack Sizes",
+  "config.modest_meals.option.use_custom_food_stack_sizes.tooltip": "When enabled, items use custom maximum stack sizes defined in the list below.",
+
+  "config.modest_meals.option.custom_food_stack_sizes": "Custom Food Stack Sizes",
+  "config.modest_meals.option.custom_food_stack_sizes.tooltip": "Configures maximum stack size for specific food items (item_id: max_size).",
+
+  "config.modest_meals.option.farmers_delight_food_stack_sizes": "Farmer's Delight Food Stack Sizes",
+  "config.modest_meals.option.farmers_delight_food_stack_sizes.tooltip": "Configures maximum stack sizes for Farmer's Delight food items.",
+
+  "config.modest_meals.button.set_all_food_stack_sizes_to_1.name": "Set All Food Stacks to 1",
+  "config.modest_meals.button.set_all_food_stack_sizes_to_1.description": "Sets all food items in the configuration to stack size 1 (unstackable).",
+
+  "config.modest_meals.button.set_all_food_stack_sizes_to_64.name": "Set All Food Stacks to 64",
+  "config.modest_meals.button.set_all_food_stack_sizes_to_64.description": "Sets all food items in the configuration to stack size 64 (full stacks).",
+
+  "config.modest_meals.button.reset_food_stack_sizes_to_default.name": "Reset Food Stacks to Default",
+  "config.modest_meals.button.reset_food_stack_sizes_to_default.description": "Resets food stack sizes back to Modest Meals recommended defaults.",
+
+  "config.modest_meals.option.nourishment_health_boost_hearts_count": "Nourishment Extra Hearts",
+  "config.modest_meals.option.nourishment_health_boost_hearts_count.tooltip": "Number of extra max health hearts granted by Farmer's Delight Nourishment effect (0 to disable).",
+
+  "config.modest_meals.option.nourishment_regen_speed_multiplier": "Nourishment Regen Multiplier",
+  "config.modest_meals.option.nourishment_regen_speed_multiplier.tooltip": "Digestion/regeneration speed multiplier while under the Nourishment effect.",
+
+  "config.modest_meals.enum.heart_texture.single_color": "Single Color",
+  "config.modest_meals.enum.heart_texture.original": "Original",
+  "config.modest_meals.enum.heart_texture.blinking": "Blinking",
+
+  "config.modest_meals.enum.hunger_effect.vanilla": "Vanilla",
+  "config.modest_meals.enum.hunger_effect.disabled": "Disabled",
+  "config.modest_meals.enum.hunger_effect.replaced_with_other": "Replaced with Other",
+
+  "config.modest_meals.enum.regeneration_at_full_health.stopped": "Stopped",
+  "config.modest_meals.enum.regeneration_at_full_health.continued": "Continued",
+  "config.modest_meals.enum.regeneration_at_full_health.stored": "Stored",
+
+  "config.modest_meals.enum.sprinting.vanilla": "Vanilla",
+  "config.modest_meals.enum.sprinting.disabled": "Disabled",
+  "config.modest_meals.enum.sprinting.limited_by_health": "Limited by Health",
 
   "config.modest_meals.enum.stamina_regain.normal": "Normal",
   "config.modest_meals.enum.stamina_regain.half": "Half Rate",
@@ -94,6 +217,15 @@
   "config.modest_meals.enum.corner.top_right": "Top Right",
   "config.modest_meals.enum.corner.bottom_left": "Bottom Left",
   "config.modest_meals.enum.corner.bottom_right": "Bottom Right",
+
+  "gui.modest_meals.regeneration_tooltip.template": "%s Regeneration",
+  "gui.modest_meals.regeneration_tooltip.super_fast": "Super Fast",
+  "gui.modest_meals.regeneration_tooltip.very_fast": "Very Fast",
+  "gui.modest_meals.regeneration_tooltip.fast": "Fast",
+  "gui.modest_meals.regeneration_tooltip.slow": "Slow",
+  "gui.modest_meals.regeneration_tooltip.very_slow": "Very Slow",
+
+  "effect.modest_meals.nourishment_health_boost": "Nourishment",
 
   "pack.modest_meals.baisylia_hud.title": "Baisylia's Custom HUD"
 }
