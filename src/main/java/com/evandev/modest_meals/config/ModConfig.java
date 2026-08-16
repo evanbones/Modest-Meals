@@ -60,19 +60,19 @@ public class ModConfig {
     public StaminaRegain staminaRegainWhenMoving = StaminaRegain.NORMAL;
 
     @SerializedName("stamina_duration")
-    public int staminaDuration = 5;
+    public int staminaDuration = 7;
 
     @SerializedName("stamina_recharge")
     public int staminaRecharge = 7;
 
     @SerializedName("stamina_cooldown")
-    public int staminaCooldown = 1;
+    public int staminaCooldown = 2;
 
     @SerializedName("stamina_saturation_effect")
-    public boolean staminaSaturationEffect = false;
+    public boolean staminaSaturationEffect = true;
 
     @SerializedName("stamina_hunger_effect")
-    public boolean staminaHungerEffect = false;
+    public boolean staminaHungerEffect = true;
 
     @SerializedName("disable_hunger")
     public boolean disableHunger = true;
@@ -123,7 +123,7 @@ public class ModConfig {
     public boolean hideStaminaBarMoving = false;
 
     @SerializedName("hide_stamina_bar_cooldown")
-    public boolean hideStaminaBarCooldown = false;
+    public boolean hideStaminaBarCooldown = true;
 
     @SerializedName("hide_stamina_bar_inactive")
     public boolean hideStaminaBarInactive = false;
@@ -135,7 +135,7 @@ public class ModConfig {
     public boolean flashStaminaBarWhenFull = true;
 
     @SerializedName("flash_stamina_bar_at")
-    public int flashStaminaBarAt = 7;
+    public int flashStaminaBarAt = 0;
 
     @SerializedName("show_stamina_text")
     public boolean showStaminaText = false;
