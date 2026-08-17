@@ -51,7 +51,6 @@ public class ClientConfigScreen {
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.health_regeneration.tooltip")))
                 .option(createBoolOption("gradual_health_regeneration", defaults.gradualHealthRegeneration, () -> config.gradualHealthRegeneration, val -> config.gradualHealthRegeneration = val))
                 .option(createFloatOption("gradual_health_regeneration_speed", defaults.gradualHealthRegenerationSpeed, 0.1F, 10.0F, 0.1F, () -> config.gradualHealthRegenerationSpeed, val -> config.gradualHealthRegenerationSpeed = val))
-                .option(createBoolOption("saturation_based_regeneration", defaults.saturationBasedRegeneration, () -> config.saturationBasedRegeneration, val -> config.saturationBasedRegeneration = val))
                 .option(createEnumOption("regeneration_at_full_health", RegenerationAtFullHealthOption.class, defaults.regenerationAtFullHealth, () -> config.regenerationAtFullHealth, val -> config.regenerationAtFullHealth = val, RegenerationAtFullHealthOption::getTitle))
                 .build());
 
@@ -92,6 +91,8 @@ public class ClientConfigScreen {
                 .option(createBoolOption("highlight_stamina_bar", defaults.highlightStaminaBar, () -> config.highlightStaminaBar, val -> config.highlightStaminaBar = val))
                 .option(createBoolOption("flash_stamina_bar_when_full", defaults.flashStaminaBarWhenFull, () -> config.flashStaminaBarWhenFull, val -> config.flashStaminaBarWhenFull = val))
                 .option(createIntOption("flash_stamina_bar_at", defaults.flashStaminaBarAt, 0, 20, 1, () -> config.flashStaminaBarAt, val -> config.flashStaminaBarAt = val))
+                .option(createBoolOption("highlight_restored_stamina", defaults.highlightRestoredStamina, () -> config.highlightRestoredStamina, val -> config.highlightRestoredStamina = val))
+                .option(createColorOption("restored_stamina_overlay_color", defaults.restoredStaminaOverlayColor, () -> config.restoredStaminaOverlayColor, val -> config.restoredStaminaOverlayColor = val))
                 .build());
 
         hudCategoryBuilder.group(OptionGroup.createBuilder()

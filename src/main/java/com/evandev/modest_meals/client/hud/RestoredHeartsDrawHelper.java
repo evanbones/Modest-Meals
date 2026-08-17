@@ -4,17 +4,15 @@ import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.config.HeartTextureOption;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.config.SprintingOption;
-import com.evandev.modest_meals.food.EdibleBlockFoods;
+import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
@@ -53,24 +51,14 @@ public class RestoredHeartsDrawHelper {
     private Function<Boolean, RenderedHeart> restoredHeartGetter;
     private Supplier<RenderedHeart> restoredRightHalfHeartGetter;
     private Function<Boolean, RenderedHeart> regeneratedHeartGetter;
+
     public RestoredHeartsDrawHelper(Player player, RandomSource random) {
         this.heartType = getHeartTypeForPlayer(player);
         this.isHardcore = player.level().getLevelData().isHardcore();
         this.playerHealth = Mth.ceil(player.getHealth());
         this.absorption = Mth.ceil(player.getAbsorptionAmount());
 
-        ItemStack heldItemStack = player.getMainHandItem();
-        FoodProperties foodComponent = heldItemStack.get(DataComponents.FOOD);
-        if (foodComponent == null) {
-            foodComponent = EdibleBlockFoods.getFoodProperties(heldItemStack.getItem()).orElse(null);
-        }
-        if (foodComponent == null) {
-            heldItemStack = player.getOffhandItem();
-            foodComponent = heldItemStack.get(DataComponents.FOOD);
-            if (foodComponent == null) {
-                foodComponent = EdibleBlockFoods.getFoodProperties(heldItemStack.getItem()).orElse(null);
-            }
-        }
+        ItemStack heldItemStack = FoodValues.resolveHeldFood(player);
 
         this.currentHeart = Mth.ceil(player.getMaxHealth());
         this.random = random;
@@ -117,7 +105,7 @@ public class RestoredHeartsDrawHelper {
         }
 
         this.consumedNutrition = disableHunger ? HealthRegenHelper.get(player).getConsumedNutrition() : 0;
-        this.heldFoodNutrition = (foodComponent != null && disableHunger) ? ModConfig.getFoodHealth(heldItemStack, foodComponent) : 0;
+        this.heldFoodNutrition = disableHunger ? Mth.ceil(FoodValues.healthPoints(heldItemStack)) : 0;
         this.totalNutritionToDraw = this.highlightRegeneratedHearts ? (this.consumedNutrition + this.heldFoodNutrition) : this.heldFoodNutrition;
     }
 

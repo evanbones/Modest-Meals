@@ -1,7 +1,8 @@
 package com.evandev.modest_meals.mixin;
 
 import com.evandev.modest_meals.config.ModConfig;
-import com.evandev.modest_meals.regen.HealthRegenHelper;
+import com.evandev.modest_meals.food.FoodConsumption;
+import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.regen.HealthRegenHolder;
 import com.evandev.modest_meals.regen.PlayerHealthRegen;
 import com.evandev.modest_meals.stamina.StaminaCodec;
@@ -10,7 +11,6 @@ import com.evandev.modest_meals.stamina.StaminaHolder;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +18,6 @@ import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
@@ -88,11 +87,8 @@ public abstract class PlayerMixin extends LivingEntity implements StaminaHolder,
                     target = "Lnet/minecraft/world/food/FoodData;eat(Lnet/minecraft/world/food/FoodProperties;)V"
             )
     )
-    private void mm$playerEatFood(
-            FoodData foodData, FoodProperties foodProperties, Operation<Void> original, @Local(argsOnly = true) ItemStack itemStack
-    ) {
-        boolean didConsume = HealthRegenHelper.get((Player) (Object) this).eat(itemStack, foodProperties);
-        if (!didConsume) {
+    private void mm$playerEatFood(FoodData foodData, FoodProperties foodProperties, Operation<Void> original) {
+        if (!ModConfig.get().disableHunger) {
             original.call(foodData, foodProperties);
         }
     }
@@ -103,7 +99,8 @@ public abstract class PlayerMixin extends LivingEntity implements StaminaHolder,
             return true;
         }
         if (ModConfig.get().disableHunger) {
-            return HealthRegenHelper.get((Player) (Object) this).canEat();
+            Player player = (Player) (Object) this;
+            return FoodConsumption.canConsume(player, FoodValues.resolveHeldFood(player));
         }
         return original.call(ignoreHunger);
     }

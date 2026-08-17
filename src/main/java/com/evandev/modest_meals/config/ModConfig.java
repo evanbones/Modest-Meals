@@ -15,7 +15,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
@@ -95,9 +94,6 @@ public class ModConfig {
     @SerializedName("gradual_health_regeneration_speed")
     public float gradualHealthRegenerationSpeed = 1.0f;
 
-    @SerializedName("saturation_based_regeneration")
-    public boolean saturationBasedRegeneration = true;
-
     @SerializedName("regeneration_at_full_health")
     public RegenerationAtFullHealthOption regenerationAtFullHealth = RegenerationAtFullHealthOption.CONTINUED;
 
@@ -176,6 +172,12 @@ public class ModConfig {
     @SerializedName("alt_stamina_text")
     public String altStaminaText = "Stamina: %v%";
 
+    @SerializedName("highlight_restored_stamina")
+    public boolean highlightRestoredStamina = true;
+
+    @SerializedName("restored_stamina_overlay_color")
+    public Color restoredStaminaOverlayColor = new Color(90, 140, 60);
+
     @SerializedName("highlight_restored_hearts")
     public boolean highlightRestoredHearts = true;
 
@@ -253,10 +255,6 @@ public class ModConfig {
         }
     }
 
-    public static int getFoodHealth(ItemStack itemStack, FoodProperties foodProperties) {
-        return foodProperties.nutrition();
-    }
-
     public static Holder<MobEffect> getHungerReplacementEffect() {
         Optional<Holder.Reference<MobEffect>> effectHolder = BuiltInRegistries.MOB_EFFECT.getHolder(
                 ResourceLocation.parse(get().hungerReplacementEffect)
@@ -290,6 +288,9 @@ public class ModConfig {
         }
         if (regeneratedHeartsOverlayColor == null) {
             regeneratedHeartsOverlayColor = new Color(255, 135, 135);
+        }
+        if (restoredStaminaOverlayColor == null) {
+            restoredStaminaOverlayColor = new Color(90, 140, 60);
         }
     }
 }

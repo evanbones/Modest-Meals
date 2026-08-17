@@ -1,10 +1,8 @@
 package com.evandev.modest_meals.mixin;
 
 import com.evandev.modest_meals.config.ModConfig;
-import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,8 +32,7 @@ public abstract class FoodDataMixin {
 
     @WrapMethod(method = "add")
     private void mm$consumeFoodProperties(int foodLevel, float saturationLevel, Operation<Void> original) {
-        if (mm$player instanceof ServerPlayer && ModConfig.get().disableHunger) {
-            HealthRegenHelper.get(mm$player).eat(foodLevel, saturationLevel, 0);
+        if (ModConfig.get().disableHunger) {
             return;
         }
         original.call(foodLevel, saturationLevel);

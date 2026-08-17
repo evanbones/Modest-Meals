@@ -13,6 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public record HealthNoRegenTrait(int duration) implements FoodTrait {
     public static final MapCodec<HealthNoRegenTrait> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -38,7 +39,7 @@ public record HealthNoRegenTrait(int duration) implements FoodTrait {
     }
 
     @Override
-    public void apply(LivingEntity entity, float valueMultiplier, float durationMultiplier) {
+    public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int dur = (int) (this.duration * durationMultiplier);
         if (dur > 0) {
             entity.addEffect(new MobEffectInstance(ModMobEffects.HEALTH_NO_REGEN, dur, 0));

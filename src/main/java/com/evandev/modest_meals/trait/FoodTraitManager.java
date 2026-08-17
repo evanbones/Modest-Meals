@@ -2,9 +2,11 @@ package com.evandev.modest_meals.trait;
 
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.component.ModDataComponents;
+import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.food.FoodValues;
+import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
 import com.google.gson.*;
 import com.mojang.serialization.JsonOps;
-import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -13,6 +15,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -80,6 +83,22 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
 
     public static boolean hasTraits(ItemStack stack) {
         return !getTraits(stack).isEmpty();
+    }
+
+    public static void applyAll(LivingEntity entity, ItemStack stack) {
+        applyAll(entity, stack, 1.0F);
+    }
+
+    public static void applyAll(LivingEntity entity, ItemStack stack, float valueScale) {
+        List<FoodTrait> traits = FoodValues.effectiveTraits(stack);
+        if (traits.isEmpty()) {
+            return;
+        }
+        float valMult = ModConfig.get().traitGlobalValueMultiplier * valueScale;
+        float durMult = ModConfig.get().traitGlobalDurationMultiplier;
+        for (FoodTrait trait : traits) {
+            trait.apply(entity, stack, valMult, durMult);
+        }
     }
 
     @Override

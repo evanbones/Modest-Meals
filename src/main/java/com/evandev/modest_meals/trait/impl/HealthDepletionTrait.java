@@ -13,6 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public record HealthDepletionTrait(float value, int duration) implements FoodTrait {
     public static final MapCodec<HealthDepletionTrait> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -43,7 +44,7 @@ public record HealthDepletionTrait(float value, int duration) implements FoodTra
     }
 
     @Override
-    public void apply(LivingEntity entity, float valueMultiplier, float durationMultiplier) {
+    public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         float finalVal = this.value * valueMultiplier;
         int dur = (int) (this.duration * durationMultiplier);
         if (dur > 0) {

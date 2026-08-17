@@ -13,6 +13,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +35,14 @@ public record EffectRemovalTrait(boolean clearAll) implements FoodTrait {
 
     @Override
     public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof EffectRemovalTrait o) {
-            return new EffectRemovalTrait(this.clearAll || o.clearAll);
+        if (other instanceof EffectRemovalTrait(boolean all)) {
+            return new EffectRemovalTrait(this.clearAll || all);
         }
         return this;
     }
 
     @Override
-    public void apply(LivingEntity entity, float valueMultiplier, float durationMultiplier) {
+    public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         if (this.clearAll) {
             entity.removeAllEffects();
         } else {

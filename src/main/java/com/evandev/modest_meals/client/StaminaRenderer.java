@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.client;
 
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
@@ -9,8 +10,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+
+import java.awt.*;
 
 public abstract class StaminaRenderer {
     private static boolean hasBegunToDrain = false;
@@ -115,6 +120,31 @@ public abstract class StaminaRenderer {
         return shouldHighlight;
     }
 
+    public static int getPreviewLevel(Player player, PlayerStamina stamina) {
+        int level = stamina.getData().getStamina();
+        if (!ModConfig.get().highlightRestoredStamina) {
+            return level;
+        }
+
+        ItemStack heldFood = FoodValues.resolveHeldFood(player);
+        float addedSeconds = FoodValues.staminaSeconds(heldFood);
+        if (addedSeconds <= 0.0F) {
+            return level;
+        }
+
+        int durationInTicks = ModConfig.get().staminaDuration * 20;
+        if (durationInTicks <= 0) {
+            return level;
+        }
+
+        int previewTicks = Math.min(durationInTicks, stamina.getData().getRemaining() + (int) (addedSeconds * 20));
+        int previewLevel = Mth.clamp(
+                (int) Math.ceil((double) previewTicks / durationInTicks * StaminaData.MAX_STAMINA_LEVEL),
+                0, StaminaData.MAX_STAMINA_LEVEL
+        );
+        return Math.max(level, previewLevel);
+    }
+
     public static void render(GuiGraphics graphics, int rightHeight, int offsetLeft) {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer player = minecraft.player;
@@ -129,6 +159,7 @@ public abstract class StaminaRenderer {
         int left = width / 2 + 91 + offsetLeft;
         int top = height - rightHeight;
         int level = stamina.getData().getStamina();
+        int previewLevel = getPreviewLevel(player, stamina);
 
         if (ModConfig.get().flashStaminaBarWhenFull && level < StaminaData.MAX_STAMINA_LEVEL) {
             hasBegunToDrain = true;
@@ -145,6 +176,10 @@ public abstract class StaminaRenderer {
             graphics.blitSprite(ModSprites.STAMINA_EMPTY, x, top, 9, 9);
             graphics.blitSprite(sprite, x, top, 9, 9);
 
+            if (icon > level && icon <= previewLevel) {
+                renderPreviewIcon(graphics, x, top, icon == previewLevel && previewLevel % 2 != 0);
+            }
+
             if (shouldHighlight(stamina)) {
                 graphics.pose().pushPose();
                 graphics.pose().translate(0.0F, 0.0F, 1.0F);
@@ -154,5 +189,13 @@ public abstract class StaminaRenderer {
         }
 
         RenderSystem.disableBlend();
+    }
+
+    private static void renderPreviewIcon(GuiGraphics graphics, int x, int y, boolean isHalf) {
+        Color color = ModConfig.get().restoredStaminaOverlayColor;
+        float[] rgba = color.getRGBComponents(null);
+        graphics.setColor(rgba[0], rgba[1], rgba[2], rgba[3]);
+        graphics.blitSprite(isHalf ? ModSprites.STAMINA_LEVEL_HALF : ModSprites.STAMINA_LEVEL, x, y, 9, 9);
+        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 }

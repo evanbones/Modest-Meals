@@ -1,25 +1,21 @@
 package com.evandev.modest_meals.event;
 
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.stamina.StaminaHolder;
-import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-
-import java.util.List;
 
 public class CommonEventHandler {
 
@@ -94,19 +90,11 @@ public class CommonEventHandler {
     @SubscribeEvent
     public static void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(FoodTraitManager.INSTANCE);
+        event.addListener(FoodProfileManager.INSTANCE);
     }
 
     @SubscribeEvent
     public static void onItemConsumed(LivingEntityUseItemEvent.Finish event) {
-        ItemStack stack = event.getItem();
-        LivingEntity entity = event.getEntity();
-        List<FoodTrait> traits = FoodTraitManager.getTraits(stack);
-        if (!traits.isEmpty()) {
-            float valMult = ModConfig.get().traitGlobalValueMultiplier;
-            float durMult = ModConfig.get().traitGlobalDurationMultiplier;
-            for (FoodTrait trait : traits) {
-                trait.apply(entity, valMult, durMult);
-            }
-        }
+        FoodTraitManager.applyAll(event.getEntity(), event.getItem());
     }
 }

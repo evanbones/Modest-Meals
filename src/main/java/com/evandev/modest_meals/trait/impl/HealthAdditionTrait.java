@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.trait.impl;
 
+import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
 import com.evandev.modest_meals.trait.TraitTooltipHelper;
@@ -10,9 +11,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public record HealthAdditionTrait(float value, int duration) implements FoodTrait {
     public static final MapCodec<HealthAdditionTrait> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -43,14 +44,13 @@ public record HealthAdditionTrait(float value, int duration) implements FoodTrai
     }
 
     @Override
-    public void apply(LivingEntity entity, float valueMultiplier, float durationMultiplier) {
-        float finalVal = this.value * valueMultiplier;
-        int dur = (int) (this.duration * durationMultiplier);
-        if (dur > 0) {
-            int amp = Math.max(0, (int) Math.floor(finalVal / 4.0f) - 1);
-            entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, dur, amp));
+    public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
+        float points = this.value * valueMultiplier;
+        int digestTicks = (int) (this.duration * durationMultiplier);
+        if (entity instanceof Player player) {
+            HealthRegenHelper.get(player).addHealth(points, digestTicks, stack.getItem().hashCode());
         } else {
-            entity.heal(finalVal);
+            entity.heal(points);
         }
     }
 

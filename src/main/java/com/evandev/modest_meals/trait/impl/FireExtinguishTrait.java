@@ -8,6 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public record FireExtinguishTrait() implements FoodTrait {
     public static final FireExtinguishTrait INSTANCE = new FireExtinguishTrait();
@@ -25,7 +26,7 @@ public record FireExtinguishTrait() implements FoodTrait {
     }
 
     @Override
-    public void apply(LivingEntity entity, float valueMultiplier, float durationMultiplier) {
+    public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         entity.clearFire();
     }
 

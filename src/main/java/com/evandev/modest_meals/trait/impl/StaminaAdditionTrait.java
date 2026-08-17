@@ -1,8 +1,9 @@
 package com.evandev.modest_meals.trait.impl;
 
+import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
-import com.evandev.modest_meals.stamina.PlayerStamina;
+import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
@@ -17,6 +18,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public record StaminaAdditionTrait(float value) implements FoodTrait {
     public static final MapCodec<StaminaAdditionTrait> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -42,14 +44,18 @@ public record StaminaAdditionTrait(float value) implements FoodTrait {
     }
 
     @Override
-    public void apply(LivingEntity entity, float valueMultiplier, float durationMultiplier) {
+    public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         if (entity instanceof Player player) {
-            PlayerStamina stamina = StaminaHelper.get(player);
+            StaminaData data = StaminaHelper.get(player).getData();
+            int durationInTicks = ModConfig.get().staminaDuration * 20;
             int addTicks = (int) (this.value * valueMultiplier * 20);
-            stamina.getData().setRemaining(stamina.getData().getRemaining() + addTicks);
-            if (stamina.getData().getRemaining() > 0) {
-                stamina.getData().setExhausted(false);
+
+            data.setRemaining(Math.min(durationInTicks, data.getRemaining() + addTicks));
+            if (data.getRemaining() > 0) {
+                data.setExhausted(false);
             }
+            data.setStaminaUsingTicks(durationInTicks);
+
             if (player instanceof ServerPlayer serverPlayer) {
                 ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
             }

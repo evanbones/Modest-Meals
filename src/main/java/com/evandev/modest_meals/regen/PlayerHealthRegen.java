@@ -10,9 +10,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.HashSet;
 
@@ -24,6 +23,7 @@ public class PlayerHealthRegen {
     private final Player player;
     private HashSet<ConsumedFood> consumedFoods = new HashSet<>();
     private int consumedNutrition = 0;
+
     public PlayerHealthRegen(Player player) {
         this.player = player;
     }
@@ -124,7 +124,7 @@ public class PlayerHealthRegen {
         }
     }
 
-    public boolean canEat() {
+    public boolean hasHealthRoom() {
         if (!ModConfig.get().disableHunger) {
             return player.getFoodData().needsFood();
         }
@@ -134,23 +134,21 @@ public class PlayerHealthRegen {
         return player.getHealth() + consumedNutrition < player.getMaxHealth();
     }
 
-    public void eat(int foodHealth, float foodSaturation, int foodComponentId) {
-        if (ModConfig.get().gradualHealthRegeneration) {
-            consumedNutrition += foodHealth;
-            consumedFoods.add(new ConsumedFood(foodHealth, foodSaturation, foodComponentId));
+    public void addHealth(float points, int digestTicks, int foodId) {
+        if (player.level().isClientSide()) {
+            return;
+        }
+        int wholePoints = Mth.ceil(points);
+        if (wholePoints <= 0) {
+            return;
+        }
+        if (ModConfig.get().disableHunger && ModConfig.get().gradualHealthRegeneration && digestTicks > 0) {
+            consumedNutrition += wholePoints;
+            consumedFoods.add(new ConsumedFood(wholePoints, digestTicks, foodId));
             sync();
         } else {
-            player.heal(foodHealth);
+            player.heal(points);
         }
-    }
-
-    public boolean eat(ItemStack itemStack, FoodProperties foodComponent) {
-        if (!(player instanceof ServerPlayer) || !ModConfig.get().disableHunger) {
-            return false;
-        }
-        int foodHealth = ModConfig.getFoodHealth(itemStack, foodComponent);
-        eat(foodHealth, foodComponent.saturation(), foodComponent.hashCode());
-        return true;
     }
 
     public int getConsumedNutrition() {
@@ -173,19 +171,11 @@ public class PlayerHealthRegen {
         private int digestedNutrition = 0;
         private int ticksCounter = 0;
 
-        public ConsumedFood(int foodNutrition, float foodSaturation, int foodComponentId) {
+        public ConsumedFood(int foodNutrition, int digestTicks, int foodComponentId) {
             this.foodComponentId = foodComponentId;
             this.foodNutrition = foodNutrition;
-            if (ModConfig.get().saturationBasedRegeneration) {
-                float ratio = Math.min(5.0F, foodNutrition / Math.max(0.1F, foodSaturation));
-                this.ticksToHeal = Math.max(
-                        1, (int) (ratio * 20 / Math.max(0.01F, ModConfig.get().gradualHealthRegenerationSpeed))
-                );
-            } else {
-                this.ticksToHeal = Math.max(
-                        1, (int) (20 / Math.max(0.01F, ModConfig.get().gradualHealthRegenerationSpeed))
-                );
-            }
+            float speed = Math.max(0.01F, ModConfig.get().gradualHealthRegenerationSpeed);
+            this.ticksToHeal = Math.max(1, (int) (digestTicks / (float) foodNutrition / speed));
         }
 
         public int getFoodComponentId() {

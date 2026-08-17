@@ -1,0 +1,140 @@
+{
+  "profiles": [
+    {
+      "id": "food_poisoning",
+      "match": "#c:foods/food_poisoning",
+      "priority": 200,
+      "health_per_nutrition": 0.25,
+      "health_ticks_per_point": 80.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "golden",
+      "match": "#c:foods/golden",
+      "priority": 190,
+      "health_per_nutrition": 1.5,
+      "health_ticks_per_point": 15.0,
+      "stamina_per_nutrition": 0.5
+    },
+    {
+      "id": "cooked_meat",
+      "match": "#c:foods/cooked_meat",
+      "priority": 150,
+      "health_per_nutrition": 1.0,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "cooked_fish",
+      "match": "#c:foods/cooked_fish",
+      "priority": 150,
+      "health_per_nutrition": 1.0,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "raw_meat",
+      "match": "#c:foods/raw_meat",
+      "priority": 140,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 60.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "raw_fish",
+      "match": "#c:foods/raw_fish",
+      "priority": 140,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 60.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "soup",
+      "match": "#c:foods/soup",
+      "priority": 130,
+      "health_per_nutrition": 0.75,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.3
+    },
+    {
+      "id": "pie",
+      "match": "#c:foods/pie",
+      "priority": 130,
+      "health_per_nutrition": 0.75,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.25
+    },
+    {
+      "id": "bread",
+      "match": "#c:foods/bread",
+      "priority": 120,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 40.0,
+      "stamina_per_nutrition": 0.4
+    },
+    {
+      "id": "cookie",
+      "match": "#c:foods/cookie",
+      "priority": 120,
+      "health_per_nutrition": 0.4,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.3
+    },
+    {
+      "id": "candy",
+      "match": "#c:foods/candy",
+      "priority": 120,
+      "health_per_nutrition": 0.2,
+      "health_ticks_per_point": 20.0,
+      "stamina_per_nutrition": 0.5
+    },
+    {
+      "id": "vegetable",
+      "match": "#c:foods/vegetable",
+      "priority": 110,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 40.0,
+      "stamina_per_nutrition": 0.4
+    },
+    {
+      "id": "fruit",
+      "match": "#c:foods/fruit",
+      "priority": 110,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.3
+    },
+    {
+      "id": "berry",
+      "match": "#c:foods/berry",
+      "priority": 110,
+      "health_per_nutrition": 0.3,
+      "health_ticks_per_point": 20.0,
+      "stamina_per_nutrition": 0.4
+    },
+    {
+      "id": "dough",
+      "match": "#c:foods/dough",
+      "priority": 100,
+      "health_per_nutrition": 0.25,
+      "health_ticks_per_point": 60.0,
+      "stamina_per_nutrition": 0.1
+    },
+    {
+      "id": "edible_when_placed",
+      "match": "#c:foods/edible_when_placed",
+      "priority": 50,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.3
+    },
+    {
+      "id": "fallback",
+      "match": "*",
+      "priority": 0,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 40.0,
+      "stamina_per_nutrition": 0.2
+    }
+  ]
+}

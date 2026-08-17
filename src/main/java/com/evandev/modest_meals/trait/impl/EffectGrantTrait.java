@@ -19,8 +19,10 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
-public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int amplifier, boolean showParticles, boolean ambient) implements FoodTrait {
+public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int amplifier, boolean showParticles,
+                               boolean ambient) implements FoodTrait {
     public static final MapCodec<EffectGrantTrait> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.MOB_EFFECT.holderByNameCodec().fieldOf("effect").forGetter(EffectGrantTrait::effect),
             Codec.INT.fieldOf("duration").forGetter(EffectGrantTrait::duration),
@@ -45,16 +47,18 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
 
     @Override
     public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof EffectGrantTrait o && this.effect.equals(o.effect)) {
-            int newAmp = Math.max(this.amplifier, o.amplifier);
-            int newDur = (int) ((this.duration + o.duration) * durationMultiplier);
-            return new EffectGrantTrait(this.effect, newDur, newAmp, this.showParticles || o.showParticles, this.ambient && o.ambient);
+        if (other instanceof EffectGrantTrait(
+                Holder<MobEffect> effect1, int duration1, int amplifier1, boolean particles, boolean ambient1
+        ) && this.effect.equals(effect1)) {
+            int newAmp = Math.max(this.amplifier, amplifier1);
+            int newDur = (int) ((this.duration + duration1) * durationMultiplier);
+            return new EffectGrantTrait(this.effect, newDur, newAmp, this.showParticles || particles, this.ambient && ambient1);
         }
         return this;
     }
 
     @Override
-    public void apply(LivingEntity entity, float valueMultiplier, float durationMultiplier) {
+    public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int dur = (int) (this.duration * durationMultiplier);
         if (dur > 0) {
             entity.addEffect(new MobEffectInstance(this.effect, dur, this.amplifier, this.ambient, this.showParticles));

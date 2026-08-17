@@ -115,7 +115,8 @@
       "traits": [
         {
           "type": "modest_meals:health_addition",
-          "value": 4.0
+          "value": 4.0,
+          "duration": 120
         }
       ]
     },
@@ -124,7 +125,8 @@
       "traits": [
         {
           "type": "modest_meals:health_addition",
-          "value": 3.0
+          "value": 3.0,
+          "duration": 90
         }
       ]
     },
@@ -133,7 +135,8 @@
       "traits": [
         {
           "type": "modest_meals:health_addition",
-          "value": 5.0
+          "value": 5.0,
+          "duration": 150
         }
       ]
     },
@@ -142,7 +145,8 @@
       "traits": [
         {
           "type": "modest_meals:health_addition",
-          "value": 4.0
+          "value": 4.0,
+          "duration": 120
         }
       ]
     },
@@ -151,7 +155,8 @@
       "traits": [
         {
           "type": "modest_meals:health_addition",
-          "value": 6.0
+          "value": 6.0,
+          "duration": 180
         }
       ]
     },

@@ -1,33 +1,35 @@
 package com.evandev.modest_meals.client.tooltip;
 
+import com.evandev.modest_meals.client.ModSprites;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.EdibleBlockFoods;
+import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.trait.FoodTrait;
-import com.evandev.modest_meals.trait.FoodTraitManager;
+import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
+import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTextTooltip;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.contents.PlainTextContents;
-import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.util.FormattedCharSink;
-import net.minecraft.util.StringDecomposer;
-import net.minecraft.world.food.FoodProperties;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-import org.joml.Matrix4f;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FoodItemTooltips {
     private static final String CONFIG_PREFIX = "gui.modest_meals.regeneration_tooltip.";
+
+    private static final IconRowTooltip.Sprites HEART_SPRITES = new IconRowTooltip.Sprites(
+            Gui.HeartType.CONTAINER.getSprite(false, false, false),
+            Gui.HeartType.NORMAL.getSprite(false, false, false),
+            Gui.HeartType.NORMAL.getSprite(false, true, false)
+    );
+
+    private static final IconRowTooltip.Sprites STAMINA_SPRITES = new IconRowTooltip.Sprites(
+            ModSprites.STAMINA_EMPTY, ModSprites.STAMINA_LEVEL, ModSprites.STAMINA_LEVEL_HALF
+    );
 
     public static void onTooltip(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
@@ -37,150 +39,101 @@ public class FoodItemTooltips {
 
         List<Component> lines = event.getToolTip();
 
-        if (ModConfig.get().disableHunger && ModConfig.get().showFoodItemTooltips) {
-            FoodProperties foodProperties = stack.get(DataComponents.FOOD);
-            if (foodProperties == null) {
-                var foodPropertiesOptional = EdibleBlockFoods.getFoodProperties(stack.getItem());
-                if (foodPropertiesOptional.isPresent()) {
-                    foodProperties = foodPropertiesOptional.get();
-                }
-            }
-
-            if (foodProperties != null) {
-                int foodNutrition = ModConfig.getFoodHealth(stack, foodProperties);
-                if (foodNutrition > 0) {
-                    lines.add(new FoodHealthTextComponent(foodNutrition));
-
-                    if (ModConfig.get().showFoodRegenerationTooltips && ModConfig.get().gradualHealthRegeneration && ModConfig.get().saturationBasedRegeneration) {
-                        float saturation = Math.max(0.01F, foodProperties.saturation());
-                        float regenerationRatio = (float) foodNutrition / saturation;
-                        String regenerationRate;
-                        ChatFormatting formatting;
-
-                        if (regenerationRatio <= 0.5F) {
-                            regenerationRate = CONFIG_PREFIX + "super_fast";
-                            formatting = ChatFormatting.DARK_PURPLE;
-                        } else if (regenerationRatio <= 0.8F) {
-                            regenerationRate = CONFIG_PREFIX + "very_fast";
-                            formatting = ChatFormatting.DARK_GREEN;
-                        } else if (regenerationRatio <= 1.6F) {
-                            regenerationRate = CONFIG_PREFIX + "fast";
-                            formatting = ChatFormatting.GREEN;
-                        } else if (regenerationRatio <= 2.5F) {
-                            regenerationRate = CONFIG_PREFIX + "slow";
-                            formatting = ChatFormatting.RED;
-                        } else {
-                            regenerationRate = CONFIG_PREFIX + "very_slow";
-                            formatting = ChatFormatting.DARK_RED;
-                        }
-
-                        lines.add(
-                                Component.translatable(CONFIG_PREFIX + "template", Component.translatable(regenerationRate))
-                                        .setStyle(Style.EMPTY.withColor(formatting.getColor()))
-                        );
-                    }
-                }
-            }
+        if (ModConfig.get().showFoodItemTooltips) {
+            addHealthRow(lines, stack);
+            addStaminaRow(lines, stack);
+            addDigestionRateLine(lines, stack);
         }
 
         if (ModConfig.get().showFoodTraitTooltips) {
-            List<FoodTrait> traits = FoodTraitManager.getTraits(stack);
-            if (!traits.isEmpty()) {
-                if (stack.has(DataComponents.FOOD) || EdibleBlockFoods.getFoodProperties(stack.getItem()).isPresent()) {
-                    lines.add(Component.translatable("modest_meals.trait.header.consumed").withStyle(ChatFormatting.GRAY));
-                } else {
-                    lines.add(Component.translatable("modest_meals.trait.header.ingredient").withStyle(ChatFormatting.GRAY));
-                }
-                double valMult = ModConfig.get().traitGlobalValueMultiplier;
-                double durMult = ModConfig.get().traitGlobalDurationMultiplier;
-                for (FoodTrait trait : traits) {
-                    lines.add(trait.getTooltipComponent(valMult, durMult));
-                }
-            }
+            addTraitLines(lines, stack);
         }
     }
 
-    public record FoodHealthTextComponent(int foodNutrition) implements Component, FormattedCharSequence {
-        private static final List<Component> EMPTY_SIBLINGS = new ArrayList<>();
-
-        @Override
-        public Style getStyle() {
-            return Style.EMPTY;
-        }
-
-        @Override
-        public ComponentContents getContents() {
-            return PlainTextContents.EMPTY;
-        }
-
-        @Override
-        public List<Component> getSiblings() {
-            return EMPTY_SIBLINGS;
-        }
-
-        @Override
-        public FormattedCharSequence getVisualOrderText() {
-            return this;
-        }
-
-        @Override
-        public boolean accept(FormattedCharSink visitor) {
-            return StringDecomposer.iterateFormatted(this, getStyle(), visitor);
-        }
-
-        public FoodHealthTooltipComponent getComponent() {
-            return FoodHealthTooltipComponent.init(foodNutrition);
+    private static void addHealthRow(List<Component> lines, ItemStack stack) {
+        int halfHearts = Mth.ceil(FoodValues.healthPoints(stack));
+        if (halfHearts > 0) {
+            lines.add(new IconRowTooltip.Marker(HEART_SPRITES, halfHearts));
         }
     }
 
-    public static class FoodHealthTooltipComponent extends ClientTextTooltip {
-        private final int heartsCount;
-        private final boolean lastHeartIsHalf;
+    private static void addStaminaRow(List<Component> lines, ItemStack stack) {
+        if (!ModConfig.get().staminaSprint) {
+            return;
+        }
+        float seconds = FoodValues.staminaSeconds(stack);
+        if (seconds <= 0.0F) {
+            return;
+        }
+        int duration = Math.max(1, ModConfig.get().staminaDuration);
+        int halfIcons = Mth.ceil(seconds / duration * IconRowTooltip.MAX_ICONS * 2);
+        if (halfIcons > 0) {
+            lines.add(new IconRowTooltip.Marker(STAMINA_SPRITES, halfIcons));
+        }
+    }
 
-        FoodHealthTooltipComponent(String text, int foodNutrition) {
-            super(Component.literal(text).getVisualOrderText());
-            heartsCount = (int) Math.ceil(foodNutrition / 2.0F);
-            lastHeartIsHalf = foodNutrition % 2 != 0;
+    private static void addDigestionRateLine(List<Component> lines, ItemStack stack) {
+        if (!ModConfig.get().showFoodRegenerationTooltips || !ModConfig.get().gradualHealthRegeneration) {
+            return;
+        }
+        float halfHearts = FoodValues.healthPoints(stack);
+        int digestTicks = FoodValues.healthDigestTicks(stack);
+        if (halfHearts <= 0.0F || digestTicks <= 0) {
+            return;
         }
 
-        public static FoodHealthTooltipComponent init(int foodNutrition) {
-            String text = "";
-            if (foodNutrition > 20) {
-                text = "x%d".formatted(foodNutrition / 2);
-                if (foodNutrition % 2 > 0) {
-                    text += ".5";
-                }
-                foodNutrition = 2;
+        float secondsPerHeart = digestTicks / halfHearts / 20.0F;
+        String rate;
+        ChatFormatting formatting;
+
+        if (secondsPerHeart <= 0.5F) {
+            rate = CONFIG_PREFIX + "super_fast";
+            formatting = ChatFormatting.DARK_PURPLE;
+        } else if (secondsPerHeart <= 0.8F) {
+            rate = CONFIG_PREFIX + "very_fast";
+            formatting = ChatFormatting.DARK_GREEN;
+        } else if (secondsPerHeart <= 1.6F) {
+            rate = CONFIG_PREFIX + "fast";
+            formatting = ChatFormatting.GREEN;
+        } else if (secondsPerHeart <= 2.5F) {
+            rate = CONFIG_PREFIX + "slow";
+            formatting = ChatFormatting.RED;
+        } else {
+            rate = CONFIG_PREFIX + "very_slow";
+            formatting = ChatFormatting.DARK_RED;
+        }
+
+        lines.add(
+                Component.translatable(CONFIG_PREFIX + "template", Component.translatable(rate))
+                        .setStyle(Style.EMPTY.withColor(formatting.getColor()))
+        );
+    }
+
+    private static void addTraitLines(List<Component> lines, ItemStack stack) {
+        List<FoodTrait> traits = FoodValues.effectiveTraits(stack);
+        if (traits.isEmpty()) {
+            return;
+        }
+
+        double valMult = ModConfig.get().traitGlobalValueMultiplier;
+        double durMult = ModConfig.get().traitGlobalDurationMultiplier;
+        boolean headerAdded = false;
+
+        for (FoodTrait trait : traits) {
+            if (trait instanceof HealthAdditionTrait || trait instanceof StaminaAdditionTrait) {
+                continue;
             }
-            return new FoodHealthTooltipComponent(text, foodNutrition);
-        }
-
-        @Override
-        public int getHeight() {
-            return 14;
-        }
-
-        @Override
-        public int getWidth(Font font) {
-            return heartsCount * 9 + super.getWidth(font);
-        }
-
-        @Override
-        public void renderText(Font font, int mouseX, int mouseY, Matrix4f matrix, MultiBufferSource.BufferSource bufferSource) {
-            super.renderText(font, mouseX + 12, mouseY + 2, matrix, bufferSource);
-        }
-
-        @Override
-        public void renderImage(Font font, int x, int y, GuiGraphics context) {
-            y += 2;
-            for (int i = 0; i < heartsCount - 1; i++) {
-                int textureX = x + i * 9;
-                context.blitSprite(Gui.HeartType.CONTAINER.getSprite(false, false, false), textureX, y, 9, 9);
-                context.blitSprite(Gui.HeartType.NORMAL.getSprite(false, false, false), textureX, y, 9, 9);
+            if (!headerAdded) {
+                lines.add(Component.translatable(headerKey(stack)).withStyle(ChatFormatting.GRAY));
+                headerAdded = true;
             }
-            int textureX = x + (heartsCount - 1) * 9;
-            context.blitSprite(Gui.HeartType.CONTAINER.getSprite(false, lastHeartIsHalf, false), textureX, y, 9, 9);
-            context.blitSprite(Gui.HeartType.NORMAL.getSprite(false, lastHeartIsHalf, false), textureX, y, 9, 9);
+            lines.add(trait.getTooltipComponent(valMult, durMult));
         }
+    }
+
+    private static String headerKey(ItemStack stack) {
+        boolean edible = stack.has(DataComponents.FOOD)
+                || EdibleBlockFoods.getFoodProperties(stack.getItem()).isPresent();
+        return edible ? "modest_meals.trait.header.consumed" : "modest_meals.trait.header.ingredient";
     }
 }

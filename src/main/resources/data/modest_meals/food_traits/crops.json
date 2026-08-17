@@ -94,7 +94,8 @@
       "traits": [
         {
           "type": "modest_meals:health_addition",
-          "value": 2.0
+          "value": 2.0,
+          "duration": 60
         }
       ]
     },
@@ -103,7 +104,8 @@
       "traits": [
         {
           "type": "modest_meals:health_addition",
-          "value": 2.0
+          "value": 2.0,
+          "duration": 60
         }
       ]
     },

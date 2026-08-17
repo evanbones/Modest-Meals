@@ -52,9 +52,6 @@
   "config.modest_meals.option.gradual_health_regeneration_speed": "Regeneration Speed",
   "config.modest_meals.option.gradual_health_regeneration_speed.tooltip": "Overall speed multiplier at which health is restored from digested food.",
 
-  "config.modest_meals.option.saturation_based_regeneration": "Saturation-Based Regeneration",
-  "config.modest_meals.option.saturation_based_regeneration.tooltip": "When enabled, digestion speed scales with the saturation ratio of the consumed food item.",
-
   "config.modest_meals.option.regeneration_at_full_health": "Regeneration at Full Health",
   "config.modest_meals.option.regeneration_at_full_health.tooltip": "Stopped: Remaining regeneration is discarded when reaching full health.\nContinued: Digestion continues in the background if damage is taken during the digestion period.\nStored: Digestion pauses at full health and resumes upon taking damage.",
 
@@ -111,6 +108,12 @@
 
   "config.modest_meals.option.flash_stamina_bar_at": "Flash at Low Stamina Threshold",
   "config.modest_meals.option.flash_stamina_bar_at.tooltip": "Pulses the stamina bar when stamina drops below this amount (0-20, 0 to disable).",
+
+  "config.modest_meals.option.highlight_restored_stamina": "Highlight Restorable Stamina",
+  "config.modest_meals.option.highlight_restored_stamina.tooltip": "Highlights the amount of stamina that will be restored when holding a food item.",
+
+  "config.modest_meals.option.restored_stamina_overlay_color": "Restorable Stamina Color",
+  "config.modest_meals.option.restored_stamina_overlay_color.tooltip": "Color tint applied to restorable stamina on the stamina bar.",
 
   "config.modest_meals.option.highlight_restored_hearts": "Highlight Restorable Hearts",
   "config.modest_meals.option.highlight_restored_hearts.tooltip": "Highlights the number of hearts that will be healed when holding a food item.",
@@ -248,11 +251,9 @@
   "modest_meals.trait.simple.take": "-%s",
 
   "modest_meals.trait.stamina_regen": "Stamina Regeneration",
-  "modest_meals.trait.stamina_addition": "Stamina Restored",
   "modest_meals.trait.stamina_depletion": "Stamina Depletion",
   "modest_meals.trait.stamina_no_regen": "No Stamina Regeneration",
   "modest_meals.trait.health_regen": "Health Regeneration",
-  "modest_meals.trait.health_addition": "Health Restored",
   "modest_meals.trait.health_depletion": "Health Depletion",
   "modest_meals.trait.health_no_regen": "No Health Regeneration",
   "modest_meals.trait.clear_all_effects": "Clear All Status Effects",

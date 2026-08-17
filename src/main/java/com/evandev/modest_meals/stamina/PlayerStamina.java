@@ -141,6 +141,10 @@ public class PlayerStamina {
         return this.data.isTiring() || this.data.isExhausted() || this.isAtFullSprint();
     }
 
+    public boolean hasStaminaRoom() {
+        return this.data.isExhausted() || this.data.getRemaining() < this.durationInTicks;
+    }
+
     public boolean isCoolingDown() {
         if (!ModConfig.get().staminaSprint) {
             return false;

@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public record AirBubblesTrait(int value) implements FoodTrait {
     public static final MapCodec<AirBubblesTrait> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -36,7 +37,7 @@ public record AirBubblesTrait(int value) implements FoodTrait {
     }
 
     @Override
-    public void apply(LivingEntity entity, float valueMultiplier, float durationMultiplier) {
+    public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int addAir = (int) (this.value * valueMultiplier);
         entity.setAirSupply(Math.min(entity.getMaxAirSupply(), entity.getAirSupply() + addAir));
     }
