@@ -12,7 +12,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.RegistryBuilder;
 
 public record FoodTraitType<T extends FoodTrait>(MapCodec<T> codec,
                                                  StreamCodec<RegistryFriendlyByteBuf, T> streamCodec) {
@@ -34,9 +33,7 @@ public record FoodTraitType<T extends FoodTrait>(MapCodec<T> codec,
     public static final FoodTraitType<TeleportTrait> TELEPORT = register("teleport_randomly", TeleportTrait.MAP_CODEC, TeleportTrait.STREAM_CODEC);
     public static final FoodTraitType<AirBubblesTrait> AIR_BUBBLES = register("air_bubbles", AirBubblesTrait.MAP_CODEC, AirBubblesTrait.STREAM_CODEC);
     public static final FoodTraitType<FireExtinguishTrait> FIRE_EXTINGUISH = register("fire_extinguish", FireExtinguishTrait.MAP_CODEC, FireExtinguishTrait.STREAM_CODEC);
-    public static final Registry<FoodTraitType<?>> REGISTRY = new RegistryBuilder<>(REGISTRY_KEY)
-            .sync(true)
-            .create();
+    public static final Registry<FoodTraitType<?>> REGISTRY = TRAIT_TYPES.makeRegistry(builder -> builder.sync(true));
     public static final Codec<FoodTrait> CODEC = Codec.lazyInitialized(() ->
             REGISTRY.byNameCodec().dispatch("type", FoodTrait::getType, FoodTraitType::codec)
     );

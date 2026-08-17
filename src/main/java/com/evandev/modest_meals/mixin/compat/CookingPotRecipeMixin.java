@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CookingPotRecipeMixin {
 
     @Inject(method = "assemble(Lnet/neoforged/neoforge/items/wrapper/RecipeWrapper;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/ItemStack;", at = @At("RETURN"), remap = false)
-    private void mm$inheritCookingPotTraits(RecipeWrapper input, HolderLookup.Provider registries, CallbackInfoReturnable<ItemStack> cir) {
-        FoodCompounding.apply(cir.getReturnValue(), input, true);
+    private void mm$inheritCookingPotTraits(RecipeWrapper inv, HolderLookup.Provider provider, CallbackInfoReturnable<ItemStack> cir) {
+        FoodCompounding.apply(cir.getReturnValue(), inv, true);
     }
 }
