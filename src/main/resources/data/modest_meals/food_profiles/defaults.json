@@ -1,6 +1,11 @@
 {
   "profiles": [
     {
+      "id": "ominous_bottle",
+      "match": "minecraft:ominous_bottle",
+      "priority": 300
+    },
+    {
       "id": "food_poisoning",
       "match": "#c:foods/food_poisoning",
       "priority": 200,

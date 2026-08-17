@@ -59,10 +59,10 @@ public class ModConfig {
     public StaminaRegain staminaRegainWhenMoving = StaminaRegain.NORMAL;
 
     @SerializedName("stamina_duration")
-    public int staminaDuration = 7;
+    public int staminaDuration = 33;
 
     @SerializedName("stamina_recharge")
-    public int staminaRecharge = 7;
+    public int staminaRecharge = 33;
 
     @SerializedName("stamina_cooldown")
     public int staminaCooldown = 2;
@@ -98,7 +98,7 @@ public class ModConfig {
     public RegenerationAtFullHealthOption regenerationAtFullHealth = RegenerationAtFullHealthOption.CONTINUED;
 
     @SerializedName("sprinting")
-    public SprintingOption sprinting = SprintingOption.LIMITED_BY_HEALTH;
+    public SprintingOption sprinting = SprintingOption.VANILLA;
 
     @SerializedName("sprinting_health_limit")
     public int sprintingHealthLimit = 6;
@@ -176,7 +176,7 @@ public class ModConfig {
     public boolean highlightRestoredStamina = true;
 
     @SerializedName("restored_stamina_overlay_color")
-    public Color restoredStaminaOverlayColor = new Color(90, 140, 60);
+    public Color restoredStaminaOverlayColor = new Color(177, 155, 63);
 
     @SerializedName("highlight_restored_hearts")
     public boolean highlightRestoredHearts = true;
@@ -206,7 +206,7 @@ public class ModConfig {
     public int regeneratedHeartsBlinkingPeriod = 1500;
 
     @SerializedName("use_custom_food_stack_sizes")
-    public boolean useCustomFoodStackSizes = false;
+    public boolean useCustomFoodStackSizes = true;
 
     @SerializedName("custom_food_stack_sizes")
     public LinkedHashMap<String, Integer> customFoodStackSizes = DefaultFoodStackSizes.getDefaultVanillaStackSizes();
