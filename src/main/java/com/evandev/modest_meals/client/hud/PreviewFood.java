@@ -14,8 +14,8 @@ public class PreviewFood {
         return scaled(player, FoodValues::healthPoints);
     }
 
-    public static float staminaSeconds(Player player) {
-        return scaled(player, FoodValues::staminaSeconds);
+    public static float staminaLevels(Player player) {
+        return scaled(player, FoodValues::staminaLevels);
     }
 
     private static float scaled(Player player, java.util.function.ToDoubleFunction<ItemStack> value) {

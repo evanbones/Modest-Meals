@@ -67,12 +67,6 @@ public class ModConfig {
     @SerializedName("stamina_cooldown")
     public int staminaCooldown = 2;
 
-    @SerializedName("stamina_saturation_effect")
-    public boolean staminaSaturationEffect = true;
-
-    @SerializedName("stamina_hunger_effect")
-    public boolean staminaHungerEffect = true;
-
     @SerializedName("disable_hunger")
     public boolean disableHunger = true;
 
@@ -213,12 +207,6 @@ public class ModConfig {
 
     @SerializedName("farmers_delight_food_stack_sizes")
     public LinkedHashMap<String, Integer> farmersDelightFoodStackSizes = DefaultFoodStackSizes.getDefaultFarmersDelightStackSizes();
-
-    @SerializedName("nourishment_health_boost_hearts_count")
-    public int nourishmentHealthBoostHeartsCount = 3;
-
-    @SerializedName("nourishment_regen_speed_multiplier")
-    public float nourishmentRegenSpeedMultiplier = 1.5f;
 
     public static ModConfig get() {
         if (INSTANCE == null) {

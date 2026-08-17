@@ -1,7 +1,5 @@
 package com.evandev.modest_meals.regen;
 
-import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
-import com.evandev.modest_meals.compat.farmers_delight.NourishmentEffectHandler;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.network.ClientboundHealthRegenSyncPayload;
@@ -92,10 +90,6 @@ public class PlayerHealthRegen {
 
         HashSet<Integer> digestingFoods = new HashSet<>();
         boolean needsSync = false;
-        float regenSpeedMultiplier = 1.0F;
-        if (FarmersDelightCompat.isLoaded() && NourishmentEffectHandler.playerHasEffect(player)) {
-            regenSpeedMultiplier = ModConfig.get().nourishmentRegenSpeedMultiplier;
-        }
 
         var iterator = consumedFoods.iterator();
         while (iterator.hasNext()) {
@@ -106,7 +100,7 @@ public class PlayerHealthRegen {
                 continue;
             }
             digestingFoods.add(consumedFoodId);
-            if (!consumedFood.tick(regenSpeedMultiplier)) {
+            if (!consumedFood.tick()) {
                 continue;
             }
             if (consumedNutrition > 0) {
@@ -183,9 +177,8 @@ public class PlayerHealthRegen {
             return digestedNutrition >= foodNutrition;
         }
 
-        public boolean tick(float regenSpeedMultiplier) {
-            int effectiveTicksToHeal = Math.max(1, (int) (this.ticksToHeal / Math.max(0.01F, regenSpeedMultiplier)));
-            if (ticksCounter < effectiveTicksToHeal) {
+        public boolean tick() {
+            if (ticksCounter < this.ticksToHeal) {
                 ticksCounter++;
                 return false;
             }

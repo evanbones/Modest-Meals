@@ -9,9 +9,6 @@
   "config.modest_meals.group.health_regeneration.tooltip": "Settings related to gradual food digestion and healing over time.",
   "config.modest_meals.group.mechanics": "Stamina Mechanics",
   "config.modest_meals.group.mechanics.tooltip": "Configure stamina sprint duration, recharge delays, and movement recovery.",
-  "config.modest_meals.group.effects": "Stamina Status Effects",
-  "config.modest_meals.group.effects.tooltip": "Status effect interactions with the stamina system.",
-  
   "config.modest_meals.category.hud": "HUD & Display",
   "config.modest_meals.category.hud.tooltip": "Configure stamina bar, heart overlays, and item tooltips.",
   "config.modest_meals.group.stamina_bar": "Stamina Bar",
@@ -35,7 +32,7 @@
   "config.modest_meals.option.disable_hunger.tooltip": "When enabled, removes the hunger system. Food directly restores health or starts gradual regeneration.",
 
   "config.modest_meals.option.hunger_effect": "Hunger Status Effect",
-  "config.modest_meals.option.hunger_effect.tooltip": "Vanilla: Hunger effect behaves normally.\nDisabled: Hunger effect cannot be applied to players.\nReplaced with other effect: Instead of Hunger, players receive a replacement effect (e.g. Poison) with modified duration.",
+  "config.modest_meals.option.hunger_effect.tooltip": "What the Hunger effect does once the hunger system is disabled.\nVanilla: Hunger becomes Stamina Depletion, halving stamina recovery for the same duration.\nDisabled: Hunger effect cannot be applied to players.\nReplaced with other effect: Instead of Hunger, players receive a replacement effect (e.g. Poison) with modified duration.",
 
   "config.modest_meals.option.hunger_replacement_effect": "Hunger Replacement Effect",
   "config.modest_meals.option.hunger_replacement_effect.tooltip": "Resource ID of the effect that replaces the Hunger effect (e.g. minecraft:poison).",
@@ -78,12 +75,6 @@
 
   "config.modest_meals.option.stamina_cooldown": "Recharge Cooldown Delay (Seconds)",
   "config.modest_meals.option.stamina_cooldown.tooltip": "The delay in seconds after stopping sprinting before stamina begins to naturally recover.",
-
-  "config.modest_meals.option.stamina_saturation_effect": "Saturation Effect Boost",
-  "config.modest_meals.option.stamina_saturation_effect.tooltip": "When enabled, having the Saturation effect doubles stamina recovery and cooldown speed.",
-
-  "config.modest_meals.option.stamina_hunger_effect": "Hunger Effect Penalty",
-  "config.modest_meals.option.stamina_hunger_effect.tooltip": "When enabled, having the Hunger effect cuts stamina recovery speed in half.",
 
   "config.modest_meals.option.hide_hunger_bar": "Hide Hunger Bar",
   "config.modest_meals.option.hide_hunger_bar.tooltip": "Removes the hunger bar from the HUD and restores the classic HUD layout with air bubbles above hearts on the left and armor on the right.",
@@ -190,12 +181,6 @@
   "config.modest_meals.button.reset_food_stack_sizes_to_default.name": "Reset Food Stacks to Default",
   "config.modest_meals.button.reset_food_stack_sizes_to_default.description": "Resets food stack sizes back to Modest Meals recommended defaults.",
 
-  "config.modest_meals.option.nourishment_health_boost_hearts_count": "Nourishment Extra Hearts",
-  "config.modest_meals.option.nourishment_health_boost_hearts_count.tooltip": "Number of extra max health hearts granted by Farmer's Delight Nourishment effect (0 to disable).",
-
-  "config.modest_meals.option.nourishment_regen_speed_multiplier": "Nourishment Regen Multiplier",
-  "config.modest_meals.option.nourishment_regen_speed_multiplier.tooltip": "Digestion/regeneration speed multiplier while under the Nourishment effect.",
-
   "config.modest_meals.enum.heart_texture.single_color": "Single Color",
   "config.modest_meals.enum.heart_texture.original": "Original",
   "config.modest_meals.enum.heart_texture.blinking": "Blinking",
@@ -228,8 +213,8 @@
   "gui.modest_meals.regeneration_tooltip.slow": "Slow",
   "gui.modest_meals.regeneration_tooltip.very_slow": "Very Slow",
 
-  "effect.modest_meals.nourishment_health_boost": "Nourishment",
-  "effect.modest_meals.nourishment_health_boost.description": "Increases maximum health while active.",
+  "effect.modest_meals.stamina_nourishment": "Nourishment",
+  "effect.modest_meals.stamina_nourishment.description": "Prevents stamina loss while active.",
   "effect.modest_meals.stamina_boost": "Endurance",
   "effect.modest_meals.stamina_boost.description": "Extends the stamina bar.",
   "effect.modest_meals.stamina_regen": "Invigorated",
@@ -252,9 +237,12 @@
   "modest_meals.trait.simple.plus": "+%s",
   "modest_meals.trait.simple.take": "-%s",
 
+  "modest_meals.trait.stamina_addition": "Stamina",
   "modest_meals.trait.stamina_regen": "Stamina Regeneration",
+  "modest_meals.trait.stamina_capacity": "Max Stamina",
   "modest_meals.trait.stamina_depletion": "Stamina Depletion",
   "modest_meals.trait.stamina_no_regen": "No Stamina Regeneration",
+  "modest_meals.trait.health_addition": "Health",
   "modest_meals.trait.health_regen": "Health Regeneration",
   "modest_meals.trait.health_depletion": "Health Depletion",
   "modest_meals.trait.health_no_regen": "No Health Regeneration",

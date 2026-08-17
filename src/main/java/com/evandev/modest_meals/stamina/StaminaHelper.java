@@ -29,11 +29,10 @@ public abstract class StaminaHelper {
     }
 
     public static PlayerStamina get(Player player) {
-        if (player.level().isClientSide()) {
-            return CLIENT_DATA.computeIfAbsent(player.getUUID(), uuid -> PlayerStamina.create(player));
-        } else {
-            return SERVER_DATA.computeIfAbsent(player.getUUID(), uuid -> PlayerStamina.create(player));
-        }
+        Map<UUID, PlayerStamina> data = player.level().isClientSide() ? CLIENT_DATA : SERVER_DATA;
+        return data.compute(player.getUUID(), (uuid, existing) ->
+                existing != null && existing.getPlayer() == player ? existing : PlayerStamina.create(player)
+        );
     }
 
     public static Optional<PlayerStamina> find(UUID uuid) {

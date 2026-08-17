@@ -49,13 +49,22 @@ public record StaminaAdditionTrait(float value) implements FoodTrait {
             PlayerStamina stamina = StaminaHelper.get(player);
             StaminaData data = stamina.getData();
             int durationInTicks = stamina.getDurationInTicks();
-            int addTicks = (int) (this.value * valueMultiplier * 20);
+            int addTicks = stamina.levelsToTicks(this.value * valueMultiplier);
 
-            data.setRemaining(Math.min(durationInTicks, data.getRemaining() + addTicks));
-            if (data.getRemaining() > 0) {
-                data.setExhausted(false);
+            if (data.isExhausted()) {
+                int rechargeInTicks = stamina.getRechargeInTicks();
+                int newRemaining = data.getRemaining() + addTicks;
+                if (newRemaining >= rechargeInTicks) {
+                    data.setRemaining(durationInTicks);
+                    data.setExhausted(false);
+                } else {
+                    data.setRemaining(newRemaining);
+                }
+            } else {
+                data.setRemaining(Math.min(durationInTicks, data.getRemaining() + addTicks));
             }
-            data.setStaminaUsingTicks(durationInTicks, stamina.getMaxLevel());
+
+            data.setStaminaUsingTicks(data.isExhausted() ? stamina.getRechargeInTicks() : durationInTicks, stamina.getMaxLevel());
 
             if (player instanceof ServerPlayer serverPlayer) {
                 ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));

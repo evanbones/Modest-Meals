@@ -21,7 +21,6 @@
     "GuiMixin",
     "LocalPlayerMixin",
     "MinecraftMixin",
-    "MobEffectTextureManagerMixin",
     "TooltipComponentMixin"
   ],
   "server": [],

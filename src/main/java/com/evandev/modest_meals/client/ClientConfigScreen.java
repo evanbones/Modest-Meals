@@ -67,13 +67,6 @@ public class ClientConfigScreen {
                 .option(createIntOption("sprinting_health_limit", defaults.sprintingHealthLimit, 1, 20, 1, () -> config.sprintingHealthLimit, val -> config.sprintingHealthLimit = val))
                 .build());
 
-        gameplayCategoryBuilder.group(OptionGroup.createBuilder()
-                .name(Component.translatable("config.modest_meals.group.effects"))
-                .description(OptionDescription.of(Component.translatable("config.modest_meals.group.effects.tooltip")))
-                .option(createBoolOption("stamina_saturation_effect", defaults.staminaSaturationEffect, () -> config.staminaSaturationEffect, val -> config.staminaSaturationEffect = val))
-                .option(createBoolOption("stamina_hunger_effect", defaults.staminaHungerEffect, () -> config.staminaHungerEffect, val -> config.staminaHungerEffect = val))
-                .build());
-
         builder.category(gameplayCategoryBuilder.build());
 
         ConfigCategory.Builder hudCategoryBuilder = ConfigCategory.createBuilder()
@@ -190,17 +183,6 @@ public class ClientConfigScreen {
         }
 
         builder.category(foodStacksCategoryBuilder.build());
-
-        if (FarmersDelightCompat.isLoaded()) {
-            ConfigCategory farmersDelightCategory = ConfigCategory.createBuilder()
-                    .name(Component.translatable("config.modest_meals.category.farmers_delight"))
-                    .tooltip(Component.translatable("config.modest_meals.category.farmers_delight.tooltip"))
-                    .option(createIntOption("nourishment_health_boost_hearts_count", defaults.nourishmentHealthBoostHeartsCount, 0, 10, 1, () -> config.nourishmentHealthBoostHeartsCount, val -> config.nourishmentHealthBoostHeartsCount = val))
-                    .option(createFloatOption("nourishment_regen_speed_multiplier", defaults.nourishmentRegenSpeedMultiplier, 1.0F, 5.0F, 0.1F, () -> config.nourishmentRegenSpeedMultiplier, val -> config.nourishmentRegenSpeedMultiplier = val))
-                    .build();
-
-            builder.category(farmersDelightCategory);
-        }
 
         return builder.build().generateScreen(parent);
     }

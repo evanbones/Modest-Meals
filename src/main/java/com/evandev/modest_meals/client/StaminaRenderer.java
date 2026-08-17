@@ -143,18 +143,18 @@ public abstract class StaminaRenderer {
             return level;
         }
 
-        float addedSeconds = PreviewFood.staminaSeconds(player);
-        if (addedSeconds <= 0.0F) {
+        float addedLevels = PreviewFood.staminaLevels(player);
+        if (addedLevels <= 0.0F) {
             return level;
         }
 
-        int fullBarInTicks = stamina.getData().isExhausted() ? stamina.getRechargeInTicks() : stamina.getDurationInTicks();
+        int fullBarInTicks = stamina.getActiveBarInTicks();
         if (fullBarInTicks <= 0) {
             return level;
         }
 
         int maxLevel = stamina.getMaxLevel();
-        int previewTicks = Math.min(fullBarInTicks, stamina.getData().getRemaining() + (int) (addedSeconds * 20));
+        int previewTicks = Math.min(fullBarInTicks, stamina.getData().getRemaining() + stamina.levelsToTicks(addedLevels));
         int previewLevel = Mth.clamp(
                 (int) Math.ceil((double) previewTicks / fullBarInTicks * maxLevel),
                 0, maxLevel

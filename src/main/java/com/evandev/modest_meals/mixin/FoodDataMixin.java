@@ -71,4 +71,12 @@ public abstract class FoodDataMixin implements FoodDataOwner {
         }
         original.call(foodLevel, saturationLevel);
     }
+
+    @WrapMethod(method = "addExhaustion")
+    private void mm$addExhaustion(float exhaustion, Operation<Void> original) {
+        if (ModConfig.get().disableHunger) {
+            return;
+        }
+        original.call(exhaustion);
+    }
 }

@@ -20,7 +20,7 @@ public class FoodCompounding {
         List<ItemStack> inputs = new ArrayList<>(input.size());
         for (int i = 0; i < input.size(); i++) {
             ItemStack in = input.getItem(i);
-            if (in != null && !in.isEmpty()) {
+            if (!in.isEmpty()) {
                 inputs.add(in);
             }
         }
@@ -101,6 +101,9 @@ public class FoodCompounding {
         }
         if (trait instanceof StaminaNoRegenTrait(int duration3)) {
             return new StaminaNoRegenTrait((int) (duration3 * durationMult));
+        }
+        if (trait instanceof StaminaCapacityTrait(float value5, int duration5)) {
+            return new StaminaCapacityTrait(value5 * valueMult, (int) (duration5 * durationMult));
         }
         if (trait instanceof HealthRegenTrait(float value2, int duration2)) {
             return new HealthRegenTrait(value2 * valueMult, (int) (duration2 * durationMult));

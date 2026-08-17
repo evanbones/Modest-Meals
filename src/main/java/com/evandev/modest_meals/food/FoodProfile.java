@@ -40,7 +40,7 @@ public record FoodProfile(
     }
 
     /**
-     * Stamina restored, in seconds of sprint time, for a food of the given nutrition.
+     * Stamina restored, in half-bolts, for a food of the given nutrition.
      */
     public float staminaFor(int nutrition) {
         return staminaPerNutrition * nutrition;

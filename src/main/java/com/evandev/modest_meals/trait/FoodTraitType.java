@@ -24,6 +24,7 @@ public record FoodTraitType<T extends FoodTrait>(MapCodec<T> codec,
     public static final FoodTraitType<StaminaAdditionTrait> STAMINA_ADDITION = register("stamina_addition", StaminaAdditionTrait.MAP_CODEC, StaminaAdditionTrait.STREAM_CODEC);
     public static final FoodTraitType<StaminaDepletionTrait> STAMINA_DEPLETION = register("stamina_depletion", StaminaDepletionTrait.MAP_CODEC, StaminaDepletionTrait.STREAM_CODEC);
     public static final FoodTraitType<StaminaNoRegenTrait> STAMINA_NO_REGEN = register("stamina_no_regen", StaminaNoRegenTrait.MAP_CODEC, StaminaNoRegenTrait.STREAM_CODEC);
+    public static final FoodTraitType<StaminaCapacityTrait> STAMINA_CAPACITY = register("stamina_capacity", StaminaCapacityTrait.MAP_CODEC, StaminaCapacityTrait.STREAM_CODEC);
     public static final FoodTraitType<HealthRegenTrait> HEALTH_REGEN = register("health_regen", HealthRegenTrait.MAP_CODEC, HealthRegenTrait.STREAM_CODEC);
     public static final FoodTraitType<HealthAdditionTrait> HEALTH_ADDITION = register("health_addition", HealthAdditionTrait.MAP_CODEC, HealthAdditionTrait.STREAM_CODEC);
     public static final FoodTraitType<HealthDepletionTrait> HEALTH_DEPLETION = register("health_depletion", HealthDepletionTrait.MAP_CODEC, HealthDepletionTrait.STREAM_CODEC);

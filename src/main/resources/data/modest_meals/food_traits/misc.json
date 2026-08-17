@@ -19,11 +19,29 @@
       ]
     },
     {
+      "target": "farmersdelight:milk_bottle",
+      "traits": [
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        },
+        {
+          "type": "modest_meals:health_regen",
+          "value": 0.5,
+          "duration": 200
+        }
+      ]
+    },
+    {
       "target": "minecraft:dried_kelp",
       "traits": [
         {
           "type": "modest_meals:air_bubbles",
           "value": 150
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
         }
       ]
     },
@@ -37,8 +55,50 @@
       ]
     },
     {
-      "target": "#c:crops/cabbage",
+      "target": "farmersdelight:nether_salad",
       "traits": [
+        {
+          "type": "modest_meals:teleport_randomly",
+          "range": 8.0
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:mixed_salad",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 400
+        },
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 500
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:gleaming_salad",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:glowing",
+          "duration": 800,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 800,
+          "amplifier": 0
+        },
         {
           "type": "modest_meals:health_regen",
           "value": 1.0,
@@ -47,62 +107,12 @@
       ]
     },
     {
-      "target": "farmersdelight:cabbage",
+      "target": "farmersdelight:dog_food",
       "traits": [
         {
-          "type": "modest_meals:health_regen",
+          "type": "modest_meals:stamina_depletion",
           "value": 1.0,
-          "duration": 400
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:cabbage_leaf",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 0.5,
           "duration": 200
-        }
-      ]
-    },
-    {
-      "target": "#c:crops/onion",
-      "traits": [
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 1.5,
-          "duration": 400
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:onion",
-      "traits": [
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 1.5,
-          "duration": 400
-        }
-      ]
-    },
-    {
-      "target": "#c:crops/tomato",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 60
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:tomato",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 60
         }
       ]
     }

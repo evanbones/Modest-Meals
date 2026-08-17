@@ -21,29 +21,16 @@
       ]
     },
     {
-      "target": "minecraft:carrot",
+      "target": "minecraft:bread",
       "traits": [
         {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:night_vision",
-          "duration": 900,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:golden_carrot",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:night_vision",
-          "duration": 1800,
-          "amplifier": 0
+          "type": "modest_meals:stamina_regen",
+          "value": 2.0,
+          "duration": 600
         },
         {
-          "type": "modest_meals:health_addition",
-          "value": 4.0,
-          "duration": 600
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
         }
       ]
     },
@@ -86,6 +73,42 @@
         {
           "type": "modest_meals:stamina_addition",
           "value": 3.0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:poisonous_potato",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minecraft:carrot",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 900,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minecraft:golden_carrot",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 1800,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:health_addition",
+          "value": 4.0,
+          "duration": 600
         }
       ]
     },
@@ -134,6 +157,162 @@
         {
           "type": "modest_meals:stamina_addition",
           "value": 1.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:rice_panicle",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cooked_rice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.5,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:wheat_dough",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:raw_pasta",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:stuffed_potato",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 5.0
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/cabbage",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cabbage",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cabbage_leaf",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 0.5,
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/onion",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 400
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:onion",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 400
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "#c:crops/tomato",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:tomato",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:tomato_sauce",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 3.0,
+          "duration": 120
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:rotten_tomato",
+      "traits": [
+        {
+          "type": "modest_meals:health_depletion",
+          "value": 1.0,
+          "duration": 100
         }
       ]
     }

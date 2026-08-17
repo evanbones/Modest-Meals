@@ -73,23 +73,14 @@ public class FoodItemTooltips {
         if (!ModConfig.get().staminaSprint) {
             return;
         }
-        float seconds = FoodValues.staminaSeconds(stack);
-        if (seconds <= 0.0F) {
+        float levels = FoodValues.staminaLevels(stack);
+        if (levels <= 0.0F) {
             return;
         }
-        float durationInSeconds = staminaDurationSeconds();
-        int halfIcons = Mth.ceil(seconds / durationInSeconds * staminaMaxLevel());
+        int halfIcons = Math.min(Mth.ceil(levels), staminaMaxLevel());
         if (halfIcons > 0) {
             lines.add(new IconRowTooltip.Marker(staminaSprites(), halfIcons));
         }
-    }
-
-    private static float staminaDurationSeconds() {
-        LocalPlayer player = Minecraft.getInstance().player;
-        if (player == null) {
-            return Math.max(1, ModConfig.get().staminaDuration);
-        }
-        return Math.max(1.0F, StaminaHelper.get(player).getDurationInTicks() / 20.0F);
     }
 
     private static int staminaMaxLevel() {

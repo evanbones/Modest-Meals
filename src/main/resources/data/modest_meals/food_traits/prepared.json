@@ -1,0 +1,577 @@
+{
+  "entries": [
+    {
+      "target": "minecraft:mushroom_stew",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 400
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "minecraft:beetroot_soup",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 6.0,
+          "duration": 200
+        },
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minecraft:rabbit_stew",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 6.0,
+          "duration": 300
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "minecraft:suspicious_stew",
+      "traits": [
+        {
+          "type": "modest_meals:health_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:bone_broth",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:beef_stew",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 2.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:chicken_soup",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:vegetable_soup",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:onion_soup",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:pumpkin_soup",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 5.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:fish_stew",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 6.0,
+          "duration": 200
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:baked_cod_stew",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 6.0,
+          "duration": 250
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 120
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:fried_rice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.5,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 3.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:mushroom_rice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.5,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:noodle_soup",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 3.0,
+          "duration": 800
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 3.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:vegetable_noodles",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 3.0,
+          "duration": 700
+        },
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:pasta_with_meatballs",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:pasta_with_mutton_chop",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.5,
+          "duration": 700
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:squid_ink_pasta",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 200
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:water_breathing",
+          "duration": 600,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:bacon_and_eggs",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:roasted_mutton_chops",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.5,
+          "duration": 700
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:steak_and_potatoes",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 2.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 5.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:ratatouille",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:grilled_salmon",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 8.0,
+          "duration": 250
+        },
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:dumplings",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
+          "duration": 400
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cabbage_rolls",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:salmon_roll",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 4.0,
+          "duration": 150
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 60
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cod_roll",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 3.0,
+          "duration": 120
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 60
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:kelp_roll",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 200
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:kelp_roll_slice",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 80
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:barbecue_stick",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:egg_sandwich",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:chicken_sandwich",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 5.0
+        },
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:hamburger",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 2.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:bacon_sandwich",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:mutton_wrap",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 400
+        },
+        {
+          "type": "modest_meals:stamina_regen",
+          "value": 2.5,
+          "duration": 700
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:roast_chicken",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 6.0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:stuffed_pumpkin",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 6.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:honey_glazed_ham",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 2.0,
+          "duration": 700
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:shepherds_pie",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 2.0,
+          "duration": 700
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    }
+  ]
+}

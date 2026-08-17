@@ -19,8 +19,6 @@ import java.util.Optional;
 /**
  * Source of truth for what a food restores. Everything that needs to know how many hearts or how
  * much stamina an item gives reads it from here.
- * <p>
- * Health is measured in half-hearts and stamina in seconds of sprint time.
  */
 public class FoodValues {
 
@@ -97,9 +95,9 @@ public class FoodValues {
     }
 
     /**
-     * Total stamina, in seconds of sprint time, that eating this stack restores.
+     * Total stamina, in half-bolts, that eating this stack restores.
      */
-    public static float staminaSeconds(ItemStack stack) {
+    public static float staminaLevels(ItemStack stack) {
         float total = 0.0F;
         for (FoodTrait trait : effectiveTraits(stack)) {
             if (trait instanceof StaminaAdditionTrait(float value)) {
