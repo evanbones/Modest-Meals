@@ -39,7 +39,9 @@ public class FoodCompounding {
     }
 
     public static boolean isFood(ItemStack stack) {
-        return stack.has(DataComponents.FOOD) || EdibleBlockFoods.getFoodProperties(stack.getItem()).isPresent();
+        return stack.has(DataComponents.FOOD)
+                || EdibleBlockFoods.getFoodProperties(stack.getItem()).isPresent()
+                || FoodTraitManager.hasTraits(stack);
     }
 
     public static List<FoodTrait> compute(List<ItemStack> inputs, boolean isCooking) {
@@ -78,10 +80,7 @@ public class FoodCompounding {
     }
 
     private static Object getMergeKey(FoodTrait trait) {
-        if (trait instanceof EffectGrantTrait effectGrant) {
-            return "effect_grant:" + effectGrant.effect().getRegisteredName();
-        }
-        return trait.getType();
+        return FoodTraitManager.getMergeKey(trait);
     }
 
     private static FoodTrait scaleWithCooking(FoodTrait trait, float valueMult, float durationMult) {

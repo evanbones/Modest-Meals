@@ -10,8 +10,11 @@
     "LivingEntityMixin",
     "PlayerMixin",
     "AbstractCookingRecipeMixin",
+    "ShapedRecipeMixin",
+    "ShapelessRecipeMixin",
     "compat.CookingPotRecipeMixin",
-    "compat.CuttingBoardRecipeMixin"
+    "compat.CuttingBoardRecipeMixin",
+    "compat.DoughRecipeMixin"
   ],
   "client": [
     "GuiMixin",

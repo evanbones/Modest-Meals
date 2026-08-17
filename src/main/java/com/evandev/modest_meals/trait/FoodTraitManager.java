@@ -4,6 +4,7 @@ import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.component.ModDataComponents;
 import com.google.gson.*;
 import com.mojang.serialization.JsonOps;
+import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -15,10 +16,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FoodTraitManager extends SimpleJsonResourceReloadListener {
@@ -51,22 +49,33 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     }
 
     public static List<FoodTrait> getTraits(Item item, ItemStack stack) {
-        List<FoodTrait> result = new ArrayList<>();
+        Map<Object, FoodTrait> resolved = new LinkedHashMap<>();
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
 
         List<FoodTrait> direct = INSTANCE.itemTraits.get(itemId);
         if (direct != null) {
-            result.addAll(direct);
+            for (FoodTrait trait : direct) {
+                resolved.putIfAbsent(getMergeKey(trait), trait);
+            }
         }
 
         Holder<Item> itemHolder = item.builtInRegistryHolder();
         for (Map.Entry<TagKey<Item>, List<FoodTrait>> entry : INSTANCE.tagTraits.entrySet()) {
             if (itemHolder.is(entry.getKey())) {
-                result.addAll(entry.getValue());
+                for (FoodTrait trait : entry.getValue()) {
+                    resolved.putIfAbsent(getMergeKey(trait), trait);
+                }
             }
         }
 
-        return result;
+        return new ArrayList<>(resolved.values());
+    }
+
+    public static Object getMergeKey(FoodTrait trait) {
+        if (trait instanceof EffectGrantTrait effectGrant) {
+            return "effect_grant:" + effectGrant.effect().getRegisteredName();
+        }
+        return trait.getType();
     }
 
     public static boolean hasTraits(ItemStack stack) {
