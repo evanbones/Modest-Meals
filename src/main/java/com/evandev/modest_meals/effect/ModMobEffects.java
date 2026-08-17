@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.effect;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.attribute.ModAttributes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -26,6 +27,21 @@ public class ModMobEffects {
                     Attributes.MAX_HEALTH,
                     ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effect.nourishment_health_boost"),
                     2.0,
+                    AttributeModifier.Operation.ADD_VALUE
+            )
+    );
+
+    public static final DeferredHolder<MobEffect, MobEffect> STAMINA_BOOST = MOB_EFFECTS.register(
+            "stamina_boost",
+            () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xECD613) {
+                @Override
+                public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+                    return false;
+                }
+            }.addAttributeModifier(
+                    ModAttributes.STAMINA_CAPACITY,
+                    ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "effect.stamina_boost"),
+                    4.0,
                     AttributeModifier.Operation.ADD_VALUE
             )
     );

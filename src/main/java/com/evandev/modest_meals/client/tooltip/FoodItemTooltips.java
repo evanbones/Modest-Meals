@@ -1,14 +1,19 @@
 package com.evandev.modest_meals.client.tooltip;
 
 import com.evandev.modest_meals.client.ModSprites;
+import com.evandev.modest_meals.client.hud.StaminaSprites;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.EdibleBlockFoods;
 import com.evandev.modest_meals.food.FoodValues;
+import com.evandev.modest_meals.stamina.StaminaData;
+import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
 import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -27,9 +32,16 @@ public class FoodItemTooltips {
             Gui.HeartType.NORMAL.getSprite(false, true, false)
     );
 
-    private static final IconRowTooltip.Sprites STAMINA_SPRITES = new IconRowTooltip.Sprites(
-            ModSprites.STAMINA_EMPTY, ModSprites.STAMINA_LEVEL, ModSprites.STAMINA_LEVEL_HALF
-    );
+    private static IconRowTooltip.Sprites staminaSprites() {
+        IconRowTooltip.Icon half = StaminaSprites.isOtherHalfAvailable()
+                ? IconRowTooltip.Icon.texture(StaminaSprites.STAMINA_LEVEL_OTHER_HALF)
+                : IconRowTooltip.Icon.sprite(ModSprites.STAMINA_LEVEL_HALF);
+        return new IconRowTooltip.Sprites(
+                IconRowTooltip.Icon.sprite(ModSprites.STAMINA_EMPTY),
+                IconRowTooltip.Icon.sprite(ModSprites.STAMINA_LEVEL),
+                half
+        );
+    }
 
     public static void onTooltip(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
@@ -65,11 +77,27 @@ public class FoodItemTooltips {
         if (seconds <= 0.0F) {
             return;
         }
-        int duration = Math.max(1, ModConfig.get().staminaDuration);
-        int halfIcons = Mth.ceil(seconds / duration * IconRowTooltip.MAX_ICONS * 2);
+        float durationInSeconds = staminaDurationSeconds();
+        int halfIcons = Mth.ceil(seconds / durationInSeconds * staminaMaxLevel());
         if (halfIcons > 0) {
-            lines.add(new IconRowTooltip.Marker(STAMINA_SPRITES, halfIcons));
+            lines.add(new IconRowTooltip.Marker(staminaSprites(), halfIcons));
         }
+    }
+
+    private static float staminaDurationSeconds() {
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player == null) {
+            return Math.max(1, ModConfig.get().staminaDuration);
+        }
+        return Math.max(1.0F, StaminaHelper.get(player).getDurationInTicks() / 20.0F);
+    }
+
+    private static int staminaMaxLevel() {
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player == null) {
+            return StaminaData.MAX_STAMINA_LEVEL;
+        }
+        return StaminaHelper.get(player).getMaxLevel();
     }
 
     private static void addDigestionRateLine(List<Component> lines, ItemStack stack) {

@@ -1,8 +1,8 @@
 package com.evandev.modest_meals.trait.impl;
 
-import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
+import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
@@ -46,15 +46,16 @@ public record StaminaAdditionTrait(float value) implements FoodTrait {
     @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         if (entity instanceof Player player) {
-            StaminaData data = StaminaHelper.get(player).getData();
-            int durationInTicks = ModConfig.get().staminaDuration * 20;
+            PlayerStamina stamina = StaminaHelper.get(player);
+            StaminaData data = stamina.getData();
+            int durationInTicks = stamina.getDurationInTicks();
             int addTicks = (int) (this.value * valueMultiplier * 20);
 
             data.setRemaining(Math.min(durationInTicks, data.getRemaining() + addTicks));
             if (data.getRemaining() > 0) {
                 data.setExhausted(false);
             }
-            data.setStaminaUsingTicks(durationInTicks);
+            data.setStaminaUsingTicks(durationInTicks, stamina.getMaxLevel());
 
             if (player instanceof ServerPlayer serverPlayer) {
                 ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));

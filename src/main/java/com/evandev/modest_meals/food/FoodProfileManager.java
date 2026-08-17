@@ -42,6 +42,15 @@ public class FoodProfileManager extends SimpleJsonResourceReloadListener {
         return Optional.empty();
     }
 
+    public static Optional<FoodProfile> resolveDefault() {
+        for (FoodProfile profile : INSTANCE.profiles) {
+            if (FoodProfile.MATCH_ANY.equals(profile.match())) {
+                return Optional.of(profile);
+            }
+        }
+        return Optional.empty();
+    }
+
     private static boolean matches(FoodProfile profile, ItemStack stack, Holder<Item> holder) {
         String match = profile.match();
         if (FoodProfile.MATCH_ANY.equals(match)) {

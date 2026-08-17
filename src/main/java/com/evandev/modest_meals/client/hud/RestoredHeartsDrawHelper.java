@@ -4,7 +4,6 @@ import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.config.HeartTextureOption;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.config.SprintingOption;
-import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
@@ -13,7 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
 import java.util.function.Function;
@@ -57,8 +55,6 @@ public class RestoredHeartsDrawHelper {
         this.isHardcore = player.level().getLevelData().isHardcore();
         this.playerHealth = Mth.ceil(player.getHealth());
         this.absorption = Mth.ceil(player.getAbsorptionAmount());
-
-        ItemStack heldItemStack = FoodValues.resolveHeldFood(player);
 
         this.currentHeart = Mth.ceil(player.getMaxHealth());
         this.random = random;
@@ -105,7 +101,7 @@ public class RestoredHeartsDrawHelper {
         }
 
         this.consumedNutrition = disableHunger ? HealthRegenHelper.get(player).getConsumedNutrition() : 0;
-        this.heldFoodNutrition = disableHunger ? Mth.ceil(FoodValues.healthPoints(heldItemStack)) : 0;
+        this.heldFoodNutrition = disableHunger ? Mth.ceil(PreviewFood.healthPoints(player)) : 0;
         this.totalNutritionToDraw = this.highlightRegeneratedHearts ? (this.consumedNutrition + this.heldFoodNutrition) : this.heldFoodNutrition;
     }
 

@@ -1,10 +1,12 @@
 package com.evandev.modest_meals.stamina;
 
+import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -12,19 +14,12 @@ import net.minecraft.world.entity.player.Player;
 public class PlayerStamina {
     public final Player player;
     public final StaminaData data;
-    protected int durationInTicks;
-    protected int cooldownInTicks;
-    protected int rechargeInTicks;
     protected int halfRateInTicks;
     protected boolean tickAgain = false;
 
     protected PlayerStamina(Player player, StaminaData data) {
         this.player = player;
         this.data = data;
-
-        this.durationInTicks = ModConfig.get().staminaDuration * 20;
-        this.cooldownInTicks = ModConfig.get().staminaCooldown * 20;
-        this.rechargeInTicks = ModConfig.get().staminaRecharge * 20;
         this.halfRateInTicks = 0;
     }
 
@@ -44,37 +39,63 @@ public class PlayerStamina {
         return this.data;
     }
 
-    public void reset() {
-        int duration = ModConfig.get().staminaDuration * 20;
-        int cooldown = ModConfig.get().staminaCooldown * 20;
-        int recharge = ModConfig.get().staminaRecharge * 20;
+    public int getMaxLevel() {
+        double capacity = this.player.getAttributes().hasAttribute(ModAttributes.STAMINA_CAPACITY)
+                ? this.player.getAttributeValue(ModAttributes.STAMINA_CAPACITY)
+                : StaminaData.MAX_STAMINA_LEVEL;
+        return Mth.clamp(
+                (int) capacity,
+                (int) ModAttributes.MIN_STAMINA_CAPACITY,
+                (int) ModAttributes.MAX_STAMINA_CAPACITY
+        );
+    }
 
-        this.durationInTicks = duration;
-        this.cooldownInTicks = cooldown;
-        this.rechargeInTicks = recharge;
+    public int getDurationInTicks() {
+        return scaleToCapacity(ModConfig.get().staminaDuration * 20);
+    }
+
+    public int getRechargeInTicks() {
+        return scaleToCapacity(ModConfig.get().staminaRecharge * 20);
+    }
+
+    public int getCooldownInTicks() {
+        return ModConfig.get().staminaCooldown * 20;
+    }
+
+    private int scaleToCapacity(int baseTicks) {
+        return Math.max(1, (int) ((long) baseTicks * getMaxLevel() / (double) StaminaData.MAX_STAMINA_LEVEL));
+    }
+
+    public void reset() {
+        int duration = getDurationInTicks();
+
         this.halfRateInTicks = 0;
 
         this.data.setCooldown(0);
         this.data.setRemaining(duration);
-        this.data.setStaminaUsingTicks(duration);
+        this.data.setStaminaUsingTicks(duration, getMaxLevel());
         this.data.setExhausted(false);
     }
 
     public void tick() {
         Difficulty difficulty = this.player.level().getDifficulty();
+        int maxLevel = this.getMaxLevel();
 
         if (ModConfig.get().staminaInfinitePeaceful && Difficulty.PEACEFUL == difficulty) {
-            this.data.setStaminaRaw(StaminaData.MAX_STAMINA_LEVEL);
+            this.data.setStaminaRaw(maxLevel);
             return;
         }
+
+        int durationInTicks = this.getDurationInTicks();
+        int rechargeInTicks = this.getRechargeInTicks();
 
         if (this.data.isExhausted()) {
             if (this.isRegainable() && this.isTrackerNotHalved()) {
                 this.data.remaining++;
             }
 
-            if (this.data.remaining >= this.rechargeInTicks) {
-                this.data.remaining = this.durationInTicks;
+            if (this.data.remaining >= rechargeInTicks) {
+                this.data.remaining = durationInTicks;
                 this.data.cooldown = 0;
                 this.data.setExhausted(false);
 
@@ -83,10 +104,10 @@ public class PlayerStamina {
                 }
             }
 
-            this.data.setStaminaUsingTicks(this.data.isExhausted() ? this.rechargeInTicks : this.durationInTicks);
+            this.data.setStaminaUsingTicks(this.data.isExhausted() ? rechargeInTicks : durationInTicks, maxLevel);
         } else if (this.isAtFullSprint()) {
             this.data.remaining--;
-            this.data.cooldown = this.cooldownInTicks;
+            this.data.cooldown = this.getCooldownInTicks();
 
             if (this.data.remaining <= 0) {
                 this.data.remaining = 0;
@@ -97,17 +118,20 @@ public class PlayerStamina {
                 }
             }
 
-            this.data.setStaminaUsingTicks(this.durationInTicks);
+            this.data.setStaminaUsingTicks(durationInTicks, maxLevel);
         } else {
-            if (this.data.remaining < this.durationInTicks) {
+            if (this.data.remaining < durationInTicks) {
                 if (this.data.cooldown <= 0 && this.isRegainable() && this.isTrackerNotHalved()) {
                     this.data.remaining++;
                 } else if (this.data.cooldown > 0) {
                     this.data.cooldown--;
                 }
+            } else if (this.data.remaining > durationInTicks) {
+                // The capacity attribute or the config shrank underneath us.
+                this.data.remaining = durationInTicks;
             }
 
-            this.data.setStaminaUsingTicks(this.durationInTicks);
+            this.data.setStaminaUsingTicks(durationInTicks, maxLevel);
         }
 
         boolean shouldTickAgain = this.hasPositiveEffect();
@@ -138,18 +162,18 @@ public class PlayerStamina {
         if (!ModConfig.get().staminaSprint) {
             return false;
         }
-        return this.data.isTiring() || this.data.isExhausted() || this.isAtFullSprint();
+        return this.data.isTiring(this.getMaxLevel()) || this.data.isExhausted() || this.isAtFullSprint();
     }
 
     public boolean hasStaminaRoom() {
-        return this.data.isExhausted() || this.data.getRemaining() < this.durationInTicks;
+        return this.data.isExhausted() || this.data.getRemaining() < this.getDurationInTicks();
     }
 
     public boolean isCoolingDown() {
         if (!ModConfig.get().staminaSprint) {
             return false;
         }
-        return this.data.cooldown > 0 && this.data.cooldown < this.cooldownInTicks;
+        return this.data.cooldown > 0 && this.data.cooldown < this.getCooldownInTicks();
     }
 
     public boolean isRegainable() {
@@ -163,7 +187,7 @@ public class PlayerStamina {
     }
 
     public boolean isNotRegainable() {
-        return !this.isRegainable() && !this.isAtFullSprint() && this.data.isTiring();
+        return !this.isRegainable() && !this.isAtFullSprint() && this.data.isTiring(this.getMaxLevel());
     }
 
     public boolean isTrackerNotHalved() {
@@ -171,7 +195,7 @@ public class PlayerStamina {
         boolean isHungry = false;
 
         if (ModConfig.get().staminaRegainWhenMoving == StaminaRegain.HALF && this.isMoving()) {
-            isHalved = !this.isAtFullSprint() && this.data.isTiring();
+            isHalved = !this.isAtFullSprint() && this.data.isTiring(this.getMaxLevel());
         }
 
         if (this.player.hasEffect(ModMobEffects.STAMINA_DEPLETION)) {

@@ -4,7 +4,7 @@
   "package": "com.evandev.modest_meals.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "CakeBlockMixin",
+    "BlockStateBaseMixin",
     "FoodDataMixin",
     "ItemMixin",
     "ItemStackMixin",
@@ -21,6 +21,7 @@
     "GuiMixin",
     "LocalPlayerMixin",
     "MinecraftMixin",
+    "MobEffectTextureManagerMixin",
     "TooltipComponentMixin"
   ],
   "server": [],

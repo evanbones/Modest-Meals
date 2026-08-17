@@ -24,7 +24,7 @@ public abstract class MinecraftMixin {
         }
         try {
             TextureHelper textureHelper = new TextureHelper();
-            textureHelper.generateHeartTextures();
+            textureHelper.generateHudTextures();
         } catch (Exception ignored) {
         }
     }

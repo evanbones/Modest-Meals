@@ -110,7 +110,7 @@ public class ClientEventHandler {
                     RenderSystem.disableDepthTest();
 
                     StaminaRenderer.render(graphics, minecraft.gui.rightHeight, 0);
-                    minecraft.gui.rightHeight += 10;
+                    minecraft.gui.rightHeight += StaminaRenderer.occupiedHeight();
 
                     RenderSystem.disableBlend();
                 }
@@ -130,7 +130,7 @@ public class ClientEventHandler {
                     RenderSystem.disableDepthTest();
 
                     StaminaRenderer.render(graphics, minecraft.gui.rightHeight, 0);
-                    minecraft.gui.rightHeight += 10;
+                    minecraft.gui.rightHeight += StaminaRenderer.occupiedHeight();
 
                     RenderSystem.disableBlend();
                 }
@@ -168,7 +168,7 @@ public class ClientEventHandler {
     public static void onRegisterClientReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener((ResourceManagerReloadListener) resourceManager -> {
             try {
-                new TextureHelper().generateHeartTextures();
+                new TextureHelper().generateHudTextures();
             } catch (Exception ignored) {
             }
         });

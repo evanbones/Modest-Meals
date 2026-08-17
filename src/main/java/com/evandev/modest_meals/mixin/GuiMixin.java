@@ -1,18 +1,13 @@
 package com.evandev.modest_meals.mixin;
 
 import com.evandev.modest_meals.client.hud.RestoredHeartsDrawHelper;
-import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
-import com.evandev.modest_meals.compat.farmers_delight.NourishmentEffectHandler;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.MobEffectTextureManager;
-import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -30,15 +25,15 @@ public abstract class GuiMixin {
     private Minecraft minecraft;
 
     @Shadow
-    @Nullable
-    protected abstract Player getCameraPlayer();
-
-    @Shadow
     @Final
     private RandomSource random;
 
     @Unique
     private RestoredHeartsDrawHelper mm$restoredHeartsDrawHelper = null;
+
+    @Shadow
+    @Nullable
+    protected abstract Player getCameraPlayer();
 
     @Inject(method = "renderHearts", at = @At("HEAD"))
     private void mm$prepareRestoredHeartsHelper(
@@ -109,21 +104,5 @@ public abstract class GuiMixin {
             original.call(inGameHud, drawContext, type, x, y, hardcore, blinking, half);
         }
         mm$restoredHeartsDrawHelper.updateCurrentHeart();
-    }
-
-    @WrapOperation(
-            method = "renderEffects",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/resources/MobEffectTextureManager;get(Lnet/minecraft/core/Holder;)Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;"
-            )
-    )
-    private TextureAtlasSprite mm$getEffectSprite(
-            MobEffectTextureManager instance, Holder<MobEffect> effect, Operation<TextureAtlasSprite> original
-    ) {
-        if (FarmersDelightCompat.isLoaded()) {
-            effect = NourishmentEffectHandler.getEffectForSprite(effect);
-        }
-        return original.call(instance, effect);
     }
 }

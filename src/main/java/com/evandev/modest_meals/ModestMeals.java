@@ -1,5 +1,6 @@
 package com.evandev.modest_meals;
 
+import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.client.ClientConfigSetup;
 import com.evandev.modest_meals.client.ClientEventHandler;
 import com.evandev.modest_meals.component.ModDataComponents;
@@ -18,6 +19,7 @@ import net.neoforged.neoforge.common.NeoForge;
 @Mod(Constants.MOD_ID)
 public class ModestMeals {
     public ModestMeals(IEventBus modEventBus, ModContainer modContainer) {
+        ModAttributes.register(modEventBus);
         ModMobEffects.register(modEventBus);
         FoodTraitType.register(modEventBus);
         ModDataComponents.register(modEventBus);

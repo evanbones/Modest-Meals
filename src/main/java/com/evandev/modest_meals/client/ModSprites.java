@@ -11,8 +11,6 @@ public class ModSprites {
     public static final ResourceLocation STAMINA_RECHARGE_HALF = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_recharge_half");
     public static final ResourceLocation STAMINA_COOLING = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_cooling");
     public static final ResourceLocation STAMINA_COOLING_HALF = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_cooling_half");
-    public static final ResourceLocation STAMINA_POSITIVE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_positive");
-    public static final ResourceLocation STAMINA_POSITIVE_HALF = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_positive_half");
     public static final ResourceLocation STAMINA_NEGATIVE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_negative");
     public static final ResourceLocation STAMINA_NEGATIVE_HALF = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_negative_half");
     public static final ResourceLocation STAMINA_HIGHLIGHT = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_highlight");

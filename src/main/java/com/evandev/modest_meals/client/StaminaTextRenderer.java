@@ -2,7 +2,6 @@ package com.evandev.modest_meals.client;
 
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.stamina.PlayerStamina;
-import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -12,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 
 public abstract class StaminaTextRenderer {
     public static String getStaminaColor(PlayerStamina stamina) {
-        int level = (int) Math.floor(((double) stamina.getData().getStamina() / StaminaData.MAX_STAMINA_LEVEL) * 100);
+        int level = (int) Math.floor(((double) stamina.getData().getStamina() / Math.max(1, stamina.getMaxLevel())) * 100);
 
         if (!ModConfig.get().useDynamicStaminaColor) {
             return String.valueOf(level);

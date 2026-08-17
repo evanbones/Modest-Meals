@@ -128,10 +128,7 @@ public class PlayerHealthRegen {
         if (!ModConfig.get().disableHunger) {
             return player.getFoodData().needsFood();
         }
-        if (!ModConfig.get().gradualHealthRegeneration) {
-            return player.getHealth() < player.getMaxHealth();
-        }
-        return player.getHealth() + consumedNutrition < player.getMaxHealth();
+        return player.getHealth() < player.getMaxHealth();
     }
 
     public void addHealth(float points, int digestTicks, int foodId) {

@@ -230,6 +230,8 @@
 
   "effect.modest_meals.nourishment_health_boost": "Nourishment",
   "effect.modest_meals.nourishment_health_boost.description": "Increases maximum health while active.",
+  "effect.modest_meals.stamina_boost": "Endurance",
+  "effect.modest_meals.stamina_boost.description": "Extends the stamina bar.",
   "effect.modest_meals.stamina_regen": "Invigorated",
   "effect.modest_meals.stamina_regen.description": "Steadily restores stamina over time.",
   "effect.modest_meals.stamina_depletion": "Drained",
@@ -262,5 +264,6 @@
   "modest_meals.trait.air_bubbles": "Air Bubbles",
   "modest_meals.trait.fire_extinguish": "Extinguish Fire",
 
+  "attribute.name.modest_meals.stamina_capacity": "Stamina Capacity",
   "pack.modest_meals.baisylia_hud.title": "Baisylia's Custom HUD"
 }

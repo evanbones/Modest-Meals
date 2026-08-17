@@ -18,7 +18,7 @@ import java.util.List;
 
 public class IconRowTooltip extends ClientTextTooltip {
     public static final int MAX_ICONS = 10;
-    private static final int ICON_WIDTH = 9;
+    public static final int ICON_WIDTH = 9;
 
     private final Sprites sprites;
     private final int iconCount;
@@ -46,6 +46,14 @@ public class IconRowTooltip extends ClientTextTooltip {
         return new IconRowTooltip(text, sprites, (int) Math.ceil(halfUnits / 2.0F), halfUnits % 2 != 0);
     }
 
+    private static void draw(GuiGraphics context, Icon icon, int x, int y) {
+        if (icon.isAtlasSprite()) {
+            context.blitSprite(icon.location(), x, y, ICON_WIDTH, ICON_WIDTH);
+        } else {
+            context.blit(icon.location(), x, y, 0.0F, 0.0F, ICON_WIDTH, ICON_WIDTH, ICON_WIDTH, ICON_WIDTH);
+        }
+    }
+
     @Override
     public int getHeight() {
         return 14;
@@ -58,7 +66,7 @@ public class IconRowTooltip extends ClientTextTooltip {
 
     @Override
     public void renderText(Font font, int mouseX, int mouseY, org.joml.Matrix4f matrix, MultiBufferSource.BufferSource bufferSource) {
-        super.renderText(font, mouseX + 12, mouseY + 2, matrix, bufferSource);
+        super.renderText(font, mouseX + iconCount * ICON_WIDTH, mouseY + 2, matrix, bufferSource);
     }
 
     @Override
@@ -68,12 +76,25 @@ public class IconRowTooltip extends ClientTextTooltip {
             boolean isLast = i == iconCount - 1;
             boolean isHalf = isLast && lastIconIsHalf;
             int iconX = x + i * ICON_WIDTH;
-            context.blitSprite(sprites.background(), iconX, y, ICON_WIDTH, ICON_WIDTH);
-            context.blitSprite(isHalf ? sprites.half() : sprites.full(), iconX, y, ICON_WIDTH, ICON_WIDTH);
+            draw(context, sprites.background(), iconX, y);
+            draw(context, isHalf ? sprites.half() : sprites.full(), iconX, y);
         }
     }
 
-    public record Sprites(ResourceLocation background, ResourceLocation full, ResourceLocation half) {
+    public record Icon(ResourceLocation location, boolean isAtlasSprite) {
+        public static Icon sprite(ResourceLocation location) {
+            return new Icon(location, true);
+        }
+
+        public static Icon texture(ResourceLocation location) {
+            return new Icon(location, false);
+        }
+    }
+
+    public record Sprites(Icon background, Icon full, Icon half) {
+        public Sprites(ResourceLocation background, ResourceLocation full, ResourceLocation half) {
+            this(Icon.sprite(background), Icon.sprite(full), Icon.sprite(half));
+        }
     }
 
     public record Marker(Sprites sprites, int halfUnits) implements Component, FormattedCharSequence {

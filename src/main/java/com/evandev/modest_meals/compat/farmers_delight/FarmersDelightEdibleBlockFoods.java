@@ -1,8 +1,10 @@
 package com.evandev.modest_meals.compat.farmers_delight;
 
+import com.evandev.modest_meals.food.EdibleBlockFoods;
 import com.evandev.modest_meals.food.FoodPropertiesAdder;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.common.block.PieBlock;
@@ -29,6 +31,16 @@ public class FarmersDelightEdibleBlockFoods {
                 return Optional.of(totalFoodProperties.getResult());
             }
             default -> {
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<EdibleBlockFoods.EdibleBlock> resolve(Block block) {
+        if (block instanceof PieBlock pieBlock) {
+            ItemStack slice = pieBlock.getPieSliceItem();
+            if (!slice.isEmpty()) {
+                return Optional.of(new EdibleBlockFoods.EdibleBlock(slice, 1.0F));
             }
         }
         return Optional.empty();
