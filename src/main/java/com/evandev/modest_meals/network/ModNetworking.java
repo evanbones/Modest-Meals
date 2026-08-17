@@ -18,6 +18,11 @@ public class ModNetworking {
                 ClientboundHealthRegenSyncPayload.STREAM_CODEC,
                 ClientboundHealthRegenSyncPayload::handle
         );
+        registrar.playToClient(
+                ClientboundFoodDataSyncPayload.TYPE,
+                ClientboundFoodDataSyncPayload.STREAM_CODEC,
+                ClientboundFoodDataSyncPayload::handle
+        );
     }
 
     public static void sendToPlayer(ServerPlayer player, ClientboundStaminaSyncPayload payload) {
@@ -25,6 +30,10 @@ public class ModNetworking {
     }
 
     public static void sendToPlayer(ServerPlayer player, ClientboundHealthRegenSyncPayload payload) {
+        PacketDistributor.sendToPlayer(player, payload);
+    }
+
+    public static void sendToPlayer(ServerPlayer player, ClientboundFoodDataSyncPayload payload) {
         PacketDistributor.sendToPlayer(player, payload);
     }
 }

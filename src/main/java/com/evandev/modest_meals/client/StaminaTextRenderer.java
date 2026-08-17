@@ -49,7 +49,6 @@ public abstract class StaminaTextRenderer {
 
     public static String formatText(String template, String value) {
         String parsed = template.replace("%v", value);
-        // Convert color format codes like %4 to §4, but keep %% as literal %
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < parsed.length(); i++) {
             char c = parsed.charAt(i);
@@ -91,7 +90,8 @@ public abstract class StaminaTextRenderer {
             }
 
             String text = formatText(ModConfig.get().altStaminaText, getStaminaColor(stamina));
-            ModConfig.get().altStaminaCorner.drawText(
+            CornerTextRenderer.drawText(
+                    ModConfig.get().altStaminaCorner,
                     graphics,
                     text,
                     ModConfig.get().altStaminaOffsetX,

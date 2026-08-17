@@ -23,8 +23,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FoodTraitManager extends SimpleJsonResourceReloadListener {
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     public static final FoodTraitManager INSTANCE = new FoodTraitManager();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private final Map<ResourceLocation, List<FoodTrait>> itemTraits = new ConcurrentHashMap<>();
     private final Map<TagKey<Item>, List<FoodTrait>> tagTraits = new ConcurrentHashMap<>();
 
@@ -79,6 +79,21 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
             return "effect_grant:" + effectGrant.effect().getRegisteredName();
         }
         return trait.getType();
+    }
+
+    public static Map<ResourceLocation, List<FoodTrait>> snapshotItemTraits() {
+        return Map.copyOf(INSTANCE.itemTraits);
+    }
+
+    public static Map<TagKey<Item>, List<FoodTrait>> snapshotTagTraits() {
+        return Map.copyOf(INSTANCE.tagTraits);
+    }
+
+    public static void applyFromNetwork(Map<ResourceLocation, List<FoodTrait>> itemTraits, Map<TagKey<Item>, List<FoodTrait>> tagTraits) {
+        INSTANCE.itemTraits.clear();
+        INSTANCE.itemTraits.putAll(itemTraits);
+        INSTANCE.tagTraits.clear();
+        INSTANCE.tagTraits.putAll(tagTraits);
     }
 
     public static boolean hasTraits(ItemStack stack) {

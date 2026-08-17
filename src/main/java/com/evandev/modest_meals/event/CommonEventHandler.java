@@ -2,6 +2,7 @@ package com.evandev.modest_meals.event;
 
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodProfileManager;
+import com.evandev.modest_meals.network.ClientboundFoodDataSyncPayload;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
@@ -13,6 +14,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -91,6 +93,12 @@ public class CommonEventHandler {
     public static void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(FoodTraitManager.INSTANCE);
         event.addListener(FoodProfileManager.INSTANCE);
+    }
+
+    @SubscribeEvent
+    public static void onDatapackSync(OnDatapackSyncEvent event) {
+        ClientboundFoodDataSyncPayload payload = ClientboundFoodDataSyncPayload.create();
+        event.getRelevantPlayers().forEach(player -> ModNetworking.sendToPlayer(player, payload));
     }
 
     @SubscribeEvent

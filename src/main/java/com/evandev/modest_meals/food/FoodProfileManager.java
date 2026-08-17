@@ -21,8 +21,8 @@ import java.util.*;
  * a given food.
  */
 public class FoodProfileManager extends SimpleJsonResourceReloadListener {
-    public static final FoodProfileManager INSTANCE = new FoodProfileManager();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+    public static final FoodProfileManager INSTANCE = new FoodProfileManager();
     private volatile List<FoodProfile> profiles = List.of();
 
     public FoodProfileManager() {
@@ -53,6 +53,14 @@ public class FoodProfileManager extends SimpleJsonResourceReloadListener {
         }
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
         return itemId.toString().equals(match);
+    }
+
+    public static List<FoodProfile> snapshotProfiles() {
+        return INSTANCE.profiles;
+    }
+
+    public static void applyFromNetwork(List<FoodProfile> profiles) {
+        INSTANCE.profiles = List.copyOf(profiles);
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.evandev.modest_meals.network;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -24,10 +23,8 @@ public record ClientboundHealthRegenSyncPayload(int consumedNutrition) implement
 
     public static void handle(ClientboundHealthRegenSyncPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            Player player = Minecraft.getInstance().player;
-            if (player != null) {
-                HealthRegenHelper.get(player).setClientConsumedNutrition(payload.consumedNutrition());
-            }
+            Player player = context.player();
+            HealthRegenHelper.get(player).setClientConsumedNutrition(payload.consumedNutrition());
         });
     }
 
