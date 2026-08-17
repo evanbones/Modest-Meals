@@ -77,7 +77,7 @@ public class ModConfig {
     public boolean disableHunger = true;
 
     @SerializedName("hunger_effect")
-    public HungerEffectOption hungerEffect = HungerEffectOption.REPLACED_WITH_OTHER;
+    public HungerEffectOption hungerEffect = HungerEffectOption.VANILLA;
 
     @SerializedName("hunger_replacement_effect")
     public String hungerReplacementEffect = "minecraft:poison";
