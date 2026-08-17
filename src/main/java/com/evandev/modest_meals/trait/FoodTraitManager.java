@@ -23,8 +23,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FoodTraitManager extends SimpleJsonResourceReloadListener {
-    public static final FoodTraitManager INSTANCE = new FoodTraitManager();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+    public static final FoodTraitManager INSTANCE = new FoodTraitManager();
     private final Map<ResourceLocation, List<FoodTrait>> itemTraits = new ConcurrentHashMap<>();
     private final Map<TagKey<Item>, List<FoodTrait>> tagTraits = new ConcurrentHashMap<>();
 
