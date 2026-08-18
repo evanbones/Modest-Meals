@@ -1,7 +1,6 @@
 package com.evandev.modest_meals.trait;
 
 import com.evandev.modest_meals.Constants;
-import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
@@ -37,21 +36,10 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
             return Collections.emptyList();
         }
 
-        if (stack.has(ModDataComponents.FOOD_TRAITS.get())) {
-            FoodTraitsData data = stack.get(ModDataComponents.FOOD_TRAITS.get());
-            if (data != null) {
-                return data.traits();
-            }
-        }
-
-        return getTraits(stack.getItem(), stack);
+        return getTraits(stack.getItem());
     }
 
     public static List<FoodTrait> getTraits(Item item) {
-        return getTraits(item, new ItemStack(item));
-    }
-
-    public static List<FoodTrait> getTraits(Item item, ItemStack stack) {
         Map<Object, FoodTrait> resolved = new LinkedHashMap<>();
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
 

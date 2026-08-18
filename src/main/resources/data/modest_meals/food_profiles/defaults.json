@@ -14,14 +14,6 @@
       "stamina_per_nutrition": 0.0
     },
     {
-      "id": "golden",
-      "match": "#c:foods/golden",
-      "priority": 190,
-      "health_per_nutrition": 1.5,
-      "health_ticks_per_point": 15.0,
-      "stamina_per_nutrition": 0.5
-    },
-    {
       "id": "cooked_meat",
       "match": "#c:foods/cooked_meat",
       "priority": 150,
@@ -73,9 +65,9 @@
       "id": "bread",
       "match": "#c:foods/bread",
       "priority": 120,
-      "health_per_nutrition": 0.5,
+      "health_per_nutrition": 0.3,
       "health_ticks_per_point": 40.0,
-      "stamina_per_nutrition": 0.4
+      "stamina_per_nutrition": 0.6
     },
     {
       "id": "cookie",
@@ -97,17 +89,17 @@
       "id": "vegetable",
       "match": "#c:foods/vegetable",
       "priority": 110,
-      "health_per_nutrition": 0.5,
+      "health_per_nutrition": 0.3,
       "health_ticks_per_point": 40.0,
-      "stamina_per_nutrition": 0.4
+      "stamina_per_nutrition": 0.6
     },
     {
       "id": "fruit",
       "match": "#c:foods/fruit",
       "priority": 110,
-      "health_per_nutrition": 0.5,
+      "health_per_nutrition": 0.3,
       "health_ticks_per_point": 30.0,
-      "stamina_per_nutrition": 0.3
+      "stamina_per_nutrition": 0.6
     },
     {
       "id": "berry",
@@ -121,9 +113,9 @@
       "id": "dough",
       "match": "#c:foods/dough",
       "priority": 100,
-      "health_per_nutrition": 0.25,
+      "health_per_nutrition": 0.15,
       "health_ticks_per_point": 60.0,
-      "stamina_per_nutrition": 0.1
+      "stamina_per_nutrition": 0.35
     },
     {
       "id": "edible_when_placed",
@@ -134,12 +126,36 @@
       "stamina_per_nutrition": 0.3
     },
     {
+      "id": "meal",
+      "match": "#farmersdelight:meals",
+      "priority": 90,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.4
+    },
+    {
+      "id": "snack",
+      "match": "#farmersdelight:snacks",
+      "priority": 90,
+      "health_per_nutrition": 0.35,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.5
+    },
+    {
+      "id": "sweet",
+      "match": "#farmersdelight:sweets",
+      "priority": 90,
+      "health_per_nutrition": 0.3,
+      "health_ticks_per_point": 20.0,
+      "stamina_per_nutrition": 0.55
+    },
+    {
       "id": "fallback",
       "match": "*",
       "priority": 0,
-      "health_per_nutrition": 0.5,
+      "health_per_nutrition": 0.25,
       "health_ticks_per_point": 40.0,
-      "stamina_per_nutrition": 0.2
+      "stamina_per_nutrition": 0.5
     }
   ]
 }

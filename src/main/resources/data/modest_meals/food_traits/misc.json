@@ -70,21 +70,6 @@
       ]
     },
     {
-      "target": "farmersdelight:mixed_salad",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 400
-        },
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 1.5,
-          "duration": 500
-        }
-      ]
-    },
-    {
       "target": "farmersdelight:gleaming_salad",
       "traits": [
         {
@@ -100,8 +85,8 @@
           "amplifier": 0
         },
         {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
+          "type": "modest_meals:stamina_regen",
+          "value": 1.5,
           "duration": 400
         }
       ]
@@ -113,6 +98,51 @@
           "type": "modest_meals:stamina_depletion",
           "value": 1.0,
           "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:hot_cocoa",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 350,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:apple_cider",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 100
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:melon_juice",
+      "traits": [
+        {
+          "type": "modest_meals:fire_extinguish"
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 250,
+          "amplifier": 0
         }
       ]
     }

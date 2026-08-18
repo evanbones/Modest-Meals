@@ -22,9 +22,6 @@
   "config.modest_meals.group.stamina_text": "Alternative Stamina Text",
   "config.modest_meals.group.stamina_text.tooltip": "Numerical on-screen stamina percentage display.",
 
-  "config.modest_meals.category.food_stacks": "Food Stacks",
-  "config.modest_meals.category.food_stacks.tooltip": "Configure custom maximum stack sizes for food items.",
-
   "config.modest_meals.category.farmers_delight": "Farmer's Delight",
   "config.modest_meals.category.farmers_delight.tooltip": "Compatibility settings for Farmer's Delight mod.",
 
@@ -162,24 +159,6 @@
 
   "config.modest_meals.option.alt_stamina_text": "Text Template",
   "config.modest_meals.option.alt_stamina_text.tooltip": "Format template for stamina text. Use %v for stamina value, and % followed by a color code (e.g. %a, %c).",
-
-  "config.modest_meals.option.use_custom_food_stack_sizes": "Use Custom Food Stack Sizes",
-  "config.modest_meals.option.use_custom_food_stack_sizes.tooltip": "When enabled, items use custom maximum stack sizes defined in the list below.",
-
-  "config.modest_meals.option.custom_food_stack_sizes": "Custom Food Stack Sizes",
-  "config.modest_meals.option.custom_food_stack_sizes.tooltip": "Configures maximum stack size for specific food items (item_id: max_size).",
-
-  "config.modest_meals.option.farmers_delight_food_stack_sizes": "Farmer's Delight Food Stack Sizes",
-  "config.modest_meals.option.farmers_delight_food_stack_sizes.tooltip": "Configures maximum stack sizes for Farmer's Delight food items.",
-
-  "config.modest_meals.button.set_all_food_stack_sizes_to_1.name": "Set All Food Stacks to 1",
-  "config.modest_meals.button.set_all_food_stack_sizes_to_1.description": "Sets all food items in the configuration to stack size 1 (unstackable).",
-
-  "config.modest_meals.button.set_all_food_stack_sizes_to_64.name": "Set All Food Stacks to 64",
-  "config.modest_meals.button.set_all_food_stack_sizes_to_64.description": "Sets all food items in the configuration to stack size 64 (full stacks).",
-
-  "config.modest_meals.button.reset_food_stack_sizes_to_default.name": "Reset Food Stacks to Default",
-  "config.modest_meals.button.reset_food_stack_sizes_to_default.description": "Resets food stack sizes back to Modest Meals recommended defaults.",
 
   "config.modest_meals.enum.heart_texture.single_color": "Single Color",
   "config.modest_meals.enum.heart_texture.original": "Original",

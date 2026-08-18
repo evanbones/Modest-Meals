@@ -1,22 +1,14 @@
 package com.evandev.modest_meals.client;
 
-import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.config.*;
 import com.evandev.modest_meals.stamina.Corner;
 import com.evandev.modest_meals.stamina.StaminaRegain;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.*;
-import dev.isxander.yacl3.impl.controller.StringControllerBuilderImpl;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -129,61 +121,6 @@ public class ClientConfigScreen {
 
         builder.category(hudCategoryBuilder.build());
 
-        ConfigCategory.Builder foodStacksCategoryBuilder = ConfigCategory.createBuilder()
-                .name(Component.translatable("config.modest_meals.category.food_stacks"))
-                .tooltip(Component.translatable("config.modest_meals.category.food_stacks.tooltip"))
-                .option(createBoolOption("use_custom_food_stack_sizes", defaults.useCustomFoodStackSizes, () -> config.useCustomFoodStackSizes, val -> config.useCustomFoodStackSizes = val))
-                .option(ButtonOption.createBuilder()
-                        .name(Component.translatable("config.modest_meals.button.set_all_food_stack_sizes_to_1.name"))
-                        .description(OptionDescription.of(Component.translatable("config.modest_meals.button.set_all_food_stack_sizes_to_1.description")))
-                        .action((screen, button) -> {
-                            if (config.customFoodStackSizes != null) {
-                                config.customFoodStackSizes.replaceAll((k, v) -> 1);
-                            }
-                            if (config.farmersDelightFoodStackSizes != null) {
-                                config.farmersDelightFoodStackSizes.replaceAll((k, v) -> 1);
-                            }
-                        })
-                        .build())
-                .option(ButtonOption.createBuilder()
-                        .name(Component.translatable("config.modest_meals.button.set_all_food_stack_sizes_to_64.name"))
-                        .description(OptionDescription.of(Component.translatable("config.modest_meals.button.set_all_food_stack_sizes_to_64.description")))
-                        .action((screen, button) -> {
-                            if (config.customFoodStackSizes != null) {
-                                config.customFoodStackSizes.replaceAll((k, v) -> 64);
-                                config.customFoodStackSizes.put("minecraft:suspicious_stew", 1);
-                            }
-                            if (config.farmersDelightFoodStackSizes != null) {
-                                config.farmersDelightFoodStackSizes.replaceAll((k, v) -> 64);
-                            }
-                        })
-                        .build())
-                .option(ButtonOption.createBuilder()
-                        .name(Component.translatable("config.modest_meals.button.reset_food_stack_sizes_to_default.name"))
-                        .description(OptionDescription.of(Component.translatable("config.modest_meals.button.reset_food_stack_sizes_to_default.description")))
-                        .action((screen, button) -> {
-                            config.customFoodStackSizes = DefaultFoodStackSizes.getDefaultVanillaStackSizes();
-                            config.farmersDelightFoodStackSizes = DefaultFoodStackSizes.getDefaultFarmersDelightStackSizes();
-                        })
-                        .build())
-                .option(createMapListOption(
-                        "custom_food_stack_sizes",
-                        defaults.customFoodStackSizes,
-                        () -> config.customFoodStackSizes,
-                        val -> config.customFoodStackSizes = val
-                ));
-
-        if (FarmersDelightCompat.isLoaded()) {
-            foodStacksCategoryBuilder.option(createMapListOption(
-                    "farmers_delight_food_stack_sizes",
-                    defaults.farmersDelightFoodStackSizes,
-                    () -> config.farmersDelightFoodStackSizes,
-                    val -> config.farmersDelightFoodStackSizes = val
-            ));
-        }
-
-        builder.category(foodStacksCategoryBuilder.build());
-
         return builder.build().generateScreen(parent);
     }
 
@@ -243,72 +180,4 @@ public class ClientConfigScreen {
                 .build();
     }
 
-    private static ListOption<String> createMapListOption(
-            String name,
-            LinkedHashMap<String, Integer> defaultValue,
-            Supplier<LinkedHashMap<String, Integer>> getter,
-            Consumer<LinkedHashMap<String, Integer>> setter
-    ) {
-        return ListOption.<String>createBuilder()
-                .name(Component.translatable("config.modest_meals.option." + name))
-                .description(OptionDescription.of(Component.translatable("config.modest_meals.option." + name + ".tooltip")))
-                .binding(
-                        convertMapToList(defaultValue),
-                        () -> convertMapToList(getter.get()),
-                        list -> setter.accept(convertListToMap(list))
-                )
-                .controller(StringControllerBuilderImpl::new)
-                .initial("minecraft:apple: 16")
-                .build();
-    }
-
-    private static List<String> convertMapToList(Map<String, Integer> map) {
-        if (map == null) {
-            return new ArrayList<>();
-        }
-        List<String> list = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            String itemId = entry.getKey();
-            ResourceLocation rl = ResourceLocation.tryParse(itemId);
-            String label = itemId;
-            if (rl != null && BuiltInRegistries.ITEM.containsKey(rl)) {
-                String translated = Component.translatable(BuiltInRegistries.ITEM.get(rl).getDescriptionId()).getString();
-                label = translated + " (" + itemId + ")";
-            }
-            list.add(label + ": " + entry.getValue());
-        }
-        return list;
-    }
-
-    private static LinkedHashMap<String, Integer> convertListToMap(List<String> list) {
-        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
-        if (list == null) {
-            return map;
-        }
-        for (String line : list) {
-            if (!line.contains(":")) {
-                continue;
-            }
-            try {
-                String[] parts = line.split(":");
-                int value = Integer.parseInt(parts[parts.length - 1].trim());
-                String idPart = line.substring(0, line.lastIndexOf(':')).trim();
-
-                int startParen = idPart.indexOf('(');
-                int endParen = idPart.indexOf(')', startParen);
-                String itemId;
-                if (startParen != -1 && endParen != -1 && endParen > startParen) {
-                    itemId = idPart.substring(startParen + 1, endParen).trim();
-                } else {
-                    itemId = idPart;
-                }
-
-                if (!itemId.isEmpty()) {
-                    map.put(itemId, value);
-                }
-            } catch (Exception ignored) {
-            }
-        }
-        return map;
-    }
 }

@@ -104,8 +104,9 @@
       "target": "minecraft:chicken",
       "traits": [
         {
-          "type": "modest_meals:stamina_addition",
-          "value": 2.0
+          "type": "modest_meals:health_addition",
+          "value": 1.5,
+          "duration": 150
         },
         {
           "type": "modest_meals:stamina_no_regen",
@@ -117,13 +118,13 @@
       "target": "minecraft:cooked_chicken",
       "traits": [
         {
-          "type": "modest_meals:stamina_addition",
-          "value": 4.0
+          "type": "modest_meals:health_regen",
+          "value": 2.0,
+          "duration": 400
         },
         {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
         }
       ]
     },
@@ -256,13 +257,13 @@
       "target": "minecraft:rotten_flesh",
       "traits": [
         {
-          "type": "modest_meals:stamina_depletion",
+          "type": "modest_meals:health_depletion",
           "value": 1.0,
-          "duration": 300
+          "duration": 250
         },
         {
-          "type": "modest_meals:stamina_no_regen",
-          "duration": 200
+          "type": "modest_meals:health_no_regen",
+          "duration": 300
         }
       ]
     },
@@ -287,39 +288,16 @@
       ]
     },
     {
-      "target": "farmersdelight:beef_patty",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 400
-        }
-      ]
-    },
-    {
       "target": "farmersdelight:chicken_cuts",
       "traits": [
         {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.5
+          "type": "modest_meals:health_addition",
+          "value": 1.0,
+          "duration": 150
         },
         {
           "type": "modest_meals:stamina_no_regen",
           "duration": 150
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:cooked_chicken_cuts",
-      "traits": [
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 3.0
-        },
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 250
         }
       ]
     },
@@ -339,21 +317,6 @@
       ]
     },
     {
-      "target": "farmersdelight:cooked_bacon",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 500
-        },
-        {
-          "type": "modest_meals:stamina_capacity",
-          "value": 1.0,
-          "duration": 900
-        }
-      ]
-    },
-    {
       "target": "farmersdelight:ham",
       "traits": [
         {
@@ -365,21 +328,6 @@
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
           "duration": 900
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:smoked_ham",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 600
-        },
-        {
-          "type": "modest_meals:stamina_capacity",
-          "value": 2.0,
-          "duration": 1200
         }
       ]
     },
@@ -399,6 +347,103 @@
       ]
     },
     {
+      "target": "farmersdelight:cod_slice",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 90
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:salmon_slice",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.5,
+          "duration": 100
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:fried_egg",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        },
+        {
+          "type": "modest_meals:health_regen",
+          "value": 0.5,
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:beef_patty",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cooked_chicken_cuts",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 350
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cooked_bacon",
+      "traits": [
+        {
+          "type": "modest_meals:health_regen",
+          "value": 1.5,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cooked_cod_slice",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 3.0,
+          "duration": 130
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 40
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:cooked_salmon_slice",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 3.75,
+          "duration": 145
+        }
+      ]
+    },
+    {
       "target": "farmersdelight:cooked_mutton_chops",
       "traits": [
         {
@@ -414,60 +459,17 @@
       ]
     },
     {
-      "target": "farmersdelight:cod_slice",
+      "target": "farmersdelight:smoked_ham",
       "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 90
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:cooked_cod_slice",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 3.0,
-          "duration": 120
-        },
-        {
-          "type": "modest_meals:air_bubbles",
-          "value": 40
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:salmon_slice",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 2.5,
-          "duration": 100
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:cooked_salmon_slice",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 4.0,
-          "duration": 150
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:fried_egg",
-      "traits": [
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 2.0
-        },
         {
           "type": "modest_meals:health_regen",
-          "value": 0.5,
-          "duration": 200
+          "value": 1.5,
+          "duration": 500
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1300
         }
       ]
     }

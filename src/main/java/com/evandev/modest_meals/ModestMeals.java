@@ -3,7 +3,6 @@ package com.evandev.modest_meals;
 import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.client.ClientConfigSetup;
 import com.evandev.modest_meals.client.ClientEventHandler;
-import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.event.CommonEventHandler;
@@ -22,7 +21,6 @@ public class ModestMeals {
         ModAttributes.register(modEventBus);
         ModMobEffects.register(modEventBus);
         FoodTraitType.register(modEventBus);
-        ModDataComponents.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModNetworking::registerPayloads);
 

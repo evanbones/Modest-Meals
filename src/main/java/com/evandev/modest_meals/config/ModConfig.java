@@ -15,8 +15,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
 
 import java.awt.*;
@@ -24,7 +22,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.Optional;
 
 public class ModConfig {
@@ -199,15 +196,6 @@ public class ModConfig {
     @SerializedName("regenerated_hearts_blinking_period")
     public int regeneratedHeartsBlinkingPeriod = 1500;
 
-    @SerializedName("use_custom_food_stack_sizes")
-    public boolean useCustomFoodStackSizes = true;
-
-    @SerializedName("custom_food_stack_sizes")
-    public LinkedHashMap<String, Integer> customFoodStackSizes = DefaultFoodStackSizes.getDefaultVanillaStackSizes();
-
-    @SerializedName("farmers_delight_food_stack_sizes")
-    public LinkedHashMap<String, Integer> farmersDelightFoodStackSizes = DefaultFoodStackSizes.getDefaultFarmersDelightStackSizes();
-
     public static ModConfig get() {
         if (INSTANCE == null) {
             load();
@@ -250,27 +238,7 @@ public class ModConfig {
         return effectHolder.map(h -> (Holder<MobEffect>) h).orElse(MobEffects.POISON);
     }
 
-    public static Integer getItemStackSize(ItemStack itemStack) {
-        if (!get().useCustomFoodStackSizes) {
-            return null;
-        }
-        String itemId = BuiltInRegistries.ITEM.getKey(itemStack.getItem()).toString();
-        if (get().customFoodStackSizes != null && get().customFoodStackSizes.containsKey(itemId)) {
-            return get().customFoodStackSizes.get(itemId);
-        }
-        if (ModList.get().isLoaded("farmersdelight") && get().farmersDelightFoodStackSizes != null && get().farmersDelightFoodStackSizes.containsKey(itemId)) {
-            return get().farmersDelightFoodStackSizes.get(itemId);
-        }
-        return null;
-    }
-
     public void validateDefaults() {
-        if (customFoodStackSizes == null || customFoodStackSizes.isEmpty()) {
-            customFoodStackSizes = DefaultFoodStackSizes.getDefaultVanillaStackSizes();
-        }
-        if (farmersDelightFoodStackSizes == null || farmersDelightFoodStackSizes.isEmpty()) {
-            farmersDelightFoodStackSizes = DefaultFoodStackSizes.getDefaultFarmersDelightStackSizes();
-        }
         if (restoredHeartsOverlayColor == null) {
             restoredHeartsOverlayColor = new Color(120, 0, 20);
         }
