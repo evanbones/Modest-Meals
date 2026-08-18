@@ -152,6 +152,10 @@ dependencies {
     // EMI
     runtimeOnly "maven.modrinth:emi:1.1.22+1.21.1+neoforge"
 
+    // Raised
+    compileOnly "maven.modrinth:raised:NeoForge-${raised_version}"
+    runtimeOnly "maven.modrinth:raised:NeoForge-${raised_version}"
+
     // Farmer's Delight
     compileOnly "maven.modrinth:farmers-delight:1.21.1-1.3.2"
     runtimeOnly "maven.modrinth:farmers-delight:1.21.1-1.3.2"

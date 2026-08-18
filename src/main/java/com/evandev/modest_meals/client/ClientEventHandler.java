@@ -3,6 +3,8 @@ package com.evandev.modest_meals.client;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.client.hud.TextureHelper;
 import com.evandev.modest_meals.client.tooltip.FoodItemTooltips;
+import com.evandev.modest_meals.compat.raised.RaisedCompat;
+import com.evandev.modest_meals.compat.raised.RaisedLayerSync;
 import com.evandev.modest_meals.config.ModConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -71,6 +73,10 @@ public class ClientEventHandler {
                 }
         );
 
+        if (RaisedCompat.isLoaded()) {
+            RaisedLayerSync.linkToHotbarIfUnconfigured(AIR_LAYER);
+        }
+
         event.registerAbove(
                 VanillaGuiLayers.EXPERIENCE_BAR,
                 ARMOR_LAYER,
@@ -96,6 +102,10 @@ public class ClientEventHandler {
                 }
         );
 
+        if (RaisedCompat.isLoaded()) {
+            RaisedLayerSync.linkToHotbarIfUnconfigured(ARMOR_LAYER);
+        }
+
         event.registerAbove(
                 ARMOR_LAYER,
                 STAMINA_ARMOR_LAYER,
@@ -116,6 +126,10 @@ public class ClientEventHandler {
                 }
         );
 
+        if (RaisedCompat.isLoaded()) {
+            RaisedLayerSync.linkToHotbarIfUnconfigured(STAMINA_ARMOR_LAYER);
+        }
+
         event.registerAbove(
                 VanillaGuiLayers.FOOD_LEVEL,
                 STAMINA_FOOD_LAYER,
@@ -135,6 +149,10 @@ public class ClientEventHandler {
                     RenderSystem.disableBlend();
                 }
         );
+
+        if (RaisedCompat.isLoaded()) {
+            RaisedLayerSync.linkToHotbarIfUnconfigured(STAMINA_FOOD_LAYER);
+        }
 
         event.registerAbove(
                 VanillaGuiLayers.CHAT,
