@@ -65,9 +65,9 @@
       "id": "bread",
       "match": "#c:foods/bread",
       "priority": 120,
-      "health_per_nutrition": 0.3,
+      "health_per_nutrition": 0.2,
       "health_ticks_per_point": 40.0,
-      "stamina_per_nutrition": 0.6
+      "stamina_per_nutrition": 0.8
     },
     {
       "id": "cookie",
@@ -89,9 +89,189 @@
       "id": "vegetable",
       "match": "#c:foods/vegetable",
       "priority": 110,
-      "health_per_nutrition": 0.3,
+      "health_per_nutrition": 0.0,
       "health_ticks_per_point": 40.0,
-      "stamina_per_nutrition": 0.6
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_tomato",
+      "match": "#c:crops/tomato",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_onion",
+      "match": "#c:crops/onion",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_cabbage",
+      "match": "#c:crops/cabbage",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_rice",
+      "match": "#c:crops/rice",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_potato",
+      "match": "#c:crops/potato",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_beetroot",
+      "match": "#c:crops/beetroot",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "potato",
+      "match": "minecraft:potato",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "baked_potato",
+      "match": "minecraft:baked_potato",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "poisonous_potato",
+      "match": "minecraft:poisonous_potato",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "carrot",
+      "match": "minecraft:carrot",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "golden_carrot",
+      "match": "minecraft:golden_carrot",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "beetroot",
+      "match": "minecraft:beetroot",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "rice_panicle",
+      "match": "farmersdelight:rice_panicle",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "wheat_dough",
+      "match": "farmersdelight:wheat_dough",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "raw_pasta",
+      "match": "farmersdelight:raw_pasta",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "pie_crust",
+      "match": "farmersdelight:pie_crust",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "ham",
+      "match": "farmersdelight:ham",
+      "priority": 145,
+      "health_per_nutrition": 1.0,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "smoked_ham",
+      "match": "farmersdelight:smoked_ham",
+      "priority": 145,
+      "health_per_nutrition": 1.0,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "fried_egg",
+      "match": "farmersdelight:fried_egg",
+      "priority": 145,
+      "health_per_nutrition": 1.0,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "rabbit",
+      "match": "minecraft:rabbit",
+      "priority": 145,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 60.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "cooked_rabbit",
+      "match": "minecraft:cooked_rabbit",
+      "priority": 145,
+      "health_per_nutrition": 1.0,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "tropical_fish",
+      "match": "minecraft:tropical_fish",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "pufferfish",
+      "match": "minecraft:pufferfish",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "rotten_flesh",
+      "match": "minecraft:rotten_flesh",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "spider_eye",
+      "match": "minecraft:spider_eye",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.0
     },
     {
       "id": "fruit",

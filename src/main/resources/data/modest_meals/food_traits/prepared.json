@@ -332,6 +332,12 @@
           "type": "modest_meals:stamina_regen",
           "value": 2.0,
           "duration": 500
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 250,
+          "amplifier": 0
         }
       ]
     },
@@ -347,6 +353,12 @@
           "type": "modest_meals:stamina_regen",
           "value": 2.0,
           "duration": 500
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 250,
+          "amplifier": 0
         }
       ]
     },
@@ -439,6 +451,12 @@
         {
           "type": "modest_meals:effect_removal",
           "clear_all": false
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 250,
+          "amplifier": 0
         }
       ]
     },
@@ -678,8 +696,8 @@
         },
         {
           "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 250,
+          "effect": "minecraft:dolphins_grace",
+          "duration": 300,
           "amplifier": 0
         },
         {

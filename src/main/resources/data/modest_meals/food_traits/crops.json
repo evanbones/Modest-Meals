@@ -123,6 +123,12 @@
           "type": "modest_meals:stamina_regen",
           "value": 1.5,
           "duration": 300
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:strength",
+          "duration": 200,
+          "amplifier": 0
         }
       ]
     },
@@ -133,6 +139,12 @@
           "type": "modest_meals:stamina_regen",
           "value": 1.5,
           "duration": 300
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:strength",
+          "duration": 200,
+          "amplifier": 0
         }
       ]
     },
@@ -256,9 +268,8 @@
       "target": "#c:crops/tomato",
       "traits": [
         {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 60
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
         }
       ]
     },
@@ -266,9 +277,8 @@
       "target": "farmersdelight:tomato",
       "traits": [
         {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 60
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
         }
       ]
     },
@@ -276,9 +286,9 @@
       "target": "farmersdelight:rotten_tomato",
       "traits": [
         {
-          "type": "modest_meals:health_depletion",
+          "type": "modest_meals:stamina_depletion",
           "value": 1.0,
-          "duration": 100
+          "duration": 150
         }
       ]
     },
@@ -286,9 +296,8 @@
       "target": "farmersdelight:tomato_sauce",
       "traits": [
         {
-          "type": "modest_meals:health_addition",
-          "value": 2.5,
-          "duration": 70
+          "type": "modest_meals:stamina_addition",
+          "value": 2.5
         }
       ]
     },

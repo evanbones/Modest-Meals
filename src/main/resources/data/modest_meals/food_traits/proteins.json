@@ -47,11 +47,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.0,
           "duration": 300
-        },
-        {
-          "type": "modest_meals:stamina_capacity",
-          "value": 1.0,
-          "duration": 900
         }
       ]
     },
@@ -62,11 +57,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.5,
           "duration": 500
-        },
-        {
-          "type": "modest_meals:stamina_capacity",
-          "value": 2.0,
-          "duration": 1200
         }
       ]
     },
@@ -77,11 +67,6 @@
           "type": "modest_meals:health_regen",
           "value": 0.5,
           "duration": 300
-        },
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 1.5,
-          "duration": 400
         }
       ]
     },
@@ -92,11 +77,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.0,
           "duration": 500
-        },
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 2.0,
-          "duration": 600
         }
       ]
     },
@@ -119,12 +99,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
+          "value": 2.5,
           "duration": 400
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
         }
       ]
     },
@@ -167,6 +143,12 @@
           "type": "modest_meals:health_addition",
           "value": 3.0,
           "duration": 120
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 150,
+          "amplifier": 0
         }
       ]
     },
@@ -177,6 +159,12 @@
           "type": "modest_meals:health_addition",
           "value": 5.0,
           "duration": 150
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 300,
+          "amplifier": 0
         }
       ]
     },
@@ -187,6 +175,12 @@
           "type": "modest_meals:health_addition",
           "value": 3.0,
           "duration": 90
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 150,
+          "amplifier": 0
         }
       ]
     },
@@ -201,6 +195,12 @@
         {
           "type": "modest_meals:air_bubbles",
           "value": 60
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 300,
+          "amplifier": 0
         }
       ]
     },
@@ -211,6 +211,12 @@
           "type": "modest_meals:health_addition",
           "value": 4.0,
           "duration": 120
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 200,
+          "amplifier": 0
         }
       ]
     },
@@ -221,6 +227,12 @@
           "type": "modest_meals:health_addition",
           "value": 6.0,
           "duration": 180
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 350,
+          "amplifier": 0
         }
       ]
     },
@@ -234,6 +246,12 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:water_breathing",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
           "duration": 300,
           "amplifier": 0
         }
@@ -308,11 +326,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.0,
           "duration": 300
-        },
-        {
-          "type": "modest_meals:stamina_capacity",
-          "value": 1.0,
-          "duration": 600
         }
       ]
     },
@@ -323,11 +336,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.0,
           "duration": 300
-        },
-        {
-          "type": "modest_meals:stamina_capacity",
-          "value": 1.0,
-          "duration": 900
         }
       ]
     },
@@ -338,11 +346,6 @@
           "type": "modest_meals:health_regen",
           "value": 0.5,
           "duration": 300
-        },
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 1.5,
-          "duration": 400
         }
       ]
     },
@@ -353,6 +356,12 @@
           "type": "modest_meals:health_addition",
           "value": 2.0,
           "duration": 90
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 120,
+          "amplifier": 0
         }
       ]
     },
@@ -363,6 +372,12 @@
           "type": "modest_meals:health_addition",
           "value": 2.5,
           "duration": 100
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 150,
+          "amplifier": 0
         }
       ]
     },
@@ -370,13 +385,9 @@
       "target": "farmersdelight:fried_egg",
       "traits": [
         {
-          "type": "modest_meals:stamina_addition",
-          "value": 2.0
-        },
-        {
           "type": "modest_meals:health_regen",
-          "value": 0.5,
-          "duration": 200
+          "value": 1.5,
+          "duration": 300
         }
       ]
     },
@@ -395,12 +406,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 1.5,
+          "value": 2.0,
           "duration": 350
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
         }
       ]
     },
@@ -411,11 +418,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.5,
           "duration": 500
-        },
-        {
-          "type": "modest_meals:stamina_capacity",
-          "value": 2.0,
-          "duration": 900
         }
       ]
     },
@@ -430,6 +432,12 @@
         {
           "type": "modest_meals:air_bubbles",
           "value": 40
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 200,
+          "amplifier": 0
         }
       ]
     },
@@ -440,6 +448,12 @@
           "type": "modest_meals:health_addition",
           "value": 3.75,
           "duration": 145
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 250,
+          "amplifier": 0
         }
       ]
     },
@@ -450,11 +464,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.0,
           "duration": 500
-        },
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 2.0,
-          "duration": 600
         }
       ]
     },
@@ -465,11 +474,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.5,
           "duration": 500
-        },
-        {
-          "type": "modest_meals:stamina_capacity",
-          "value": 2.0,
-          "duration": 1300
         }
       ]
     }
