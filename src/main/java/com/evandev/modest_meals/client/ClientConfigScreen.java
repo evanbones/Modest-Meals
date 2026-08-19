@@ -68,6 +68,7 @@ public class ClientConfigScreen {
         hudCategoryBuilder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("config.modest_meals.group.stamina_bar"))
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.stamina_bar.tooltip")))
+                .option(createEnumOption("hud_layout", HudLayoutOption.class, defaults.hudLayout, () -> config.hudLayout, val -> config.hudLayout = val, HudLayoutOption::getTitle))
                 .option(createBoolOption("hide_hunger_bar", defaults.hideHungerBar, () -> config.hideHungerBar, val -> config.hideHungerBar = val))
                 .option(createBoolOption("hide_stamina_bar", defaults.hideStaminaBar, () -> config.hideStaminaBar, val -> config.hideStaminaBar = val))
                 .option(createBoolOption("hide_stamina_bar_moving", defaults.hideStaminaBarMoving, () -> config.hideStaminaBarMoving, val -> config.hideStaminaBarMoving = val))

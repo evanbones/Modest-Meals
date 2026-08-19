@@ -115,6 +115,9 @@ public class ModConfig {
     @SerializedName("smelting_duration_multiplier")
     public float smeltingDurationMultiplier = 1.25f;
 
+    @SerializedName("hud_layout")
+    public HudLayoutOption hudLayout = HudLayoutOption.DEFAULT;
+
     @SerializedName("hide_hunger_bar")
     public boolean hideHungerBar = true;
 
@@ -239,6 +242,9 @@ public class ModConfig {
     }
 
     public void validateDefaults() {
+        if (hudLayout == null) {
+            hudLayout = HudLayoutOption.DEFAULT;
+        }
         if (restoredHeartsOverlayColor == null) {
             restoredHeartsOverlayColor = new Color(120, 0, 20);
         }

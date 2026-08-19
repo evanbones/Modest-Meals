@@ -73,8 +73,11 @@
   "config.modest_meals.option.stamina_cooldown": "Recharge Cooldown Delay (Seconds)",
   "config.modest_meals.option.stamina_cooldown.tooltip": "The delay in seconds after stopping sprinting before stamina begins to naturally recover.",
 
+  "config.modest_meals.option.hud_layout": "HUD Layout",
+  "config.modest_meals.option.hud_layout.tooltip": "Default: Standard layout with armor above hearts on the left, stamina in place of hunger on the right, and air bubbles above stamina.\nClassic: Beta-style layout with air bubbles above hearts on the left, armor on the right, and stamina above armor.",
+
   "config.modest_meals.option.hide_hunger_bar": "Hide Hunger Bar",
-  "config.modest_meals.option.hide_hunger_bar.tooltip": "Removes the hunger bar from the HUD and restores the classic HUD layout with air bubbles above hearts on the left and armor on the right.",
+  "config.modest_meals.option.hide_hunger_bar.tooltip": "Removes the hunger bar from the HUD, allowing stamina to take its place.",
 
   "config.modest_meals.option.hide_stamina_bar": "Hide Stamina Bar",
   "config.modest_meals.option.hide_stamina_bar.tooltip": "Hides the stamina bar icon display from the HUD.",
@@ -184,6 +187,9 @@
   "config.modest_meals.enum.corner.top_right": "Top Right",
   "config.modest_meals.enum.corner.bottom_left": "Bottom Left",
   "config.modest_meals.enum.corner.bottom_right": "Bottom Right",
+
+  "config.modest_meals.enum.hud_layout.default": "Default",
+  "config.modest_meals.enum.hud_layout.classic": "Classic (Beta)",
 
   "gui.modest_meals.regeneration_tooltip.template": "%s Regeneration",
   "gui.modest_meals.regeneration_tooltip.super_fast": "Super Fast",

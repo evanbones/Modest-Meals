@@ -5,6 +5,7 @@ import com.evandev.modest_meals.client.hud.TextureHelper;
 import com.evandev.modest_meals.client.tooltip.FoodItemTooltips;
 import com.evandev.modest_meals.compat.raised.RaisedCompat;
 import com.evandev.modest_meals.compat.raised.RaisedLayerSync;
+import com.evandev.modest_meals.config.HudLayoutOption;
 import com.evandev.modest_meals.config.ModConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -46,7 +47,7 @@ public class ClientEventHandler {
                 AIR_LAYER,
                 (graphics, deltaTracker) -> {
                     Minecraft minecraft = Minecraft.getInstance();
-                    if (!ModConfig.get().hideHungerBar || minecraft.options.hideGui || (minecraft.gameMode != null && !minecraft.gameMode.canHurtPlayer())) {
+                    if (ModConfig.get().hudLayout != HudLayoutOption.CLASSIC || !ModConfig.get().hideHungerBar || minecraft.options.hideGui || (minecraft.gameMode != null && !minecraft.gameMode.canHurtPlayer())) {
                         return;
                     }
 
@@ -82,7 +83,7 @@ public class ClientEventHandler {
                 ARMOR_LAYER,
                 (graphics, deltaTracker) -> {
                     Minecraft minecraft = Minecraft.getInstance();
-                    if (!ModConfig.get().hideHungerBar || minecraft.options.hideGui || (minecraft.gameMode != null && !minecraft.gameMode.canHurtPlayer())) {
+                    if (ModConfig.get().hudLayout != HudLayoutOption.CLASSIC || !ModConfig.get().hideHungerBar || minecraft.options.hideGui || (minecraft.gameMode != null && !minecraft.gameMode.canHurtPlayer())) {
                         return;
                     }
 
@@ -110,7 +111,7 @@ public class ClientEventHandler {
                 ARMOR_LAYER,
                 STAMINA_ARMOR_LAYER,
                 (graphics, deltaTracker) -> {
-                    if (!StaminaRenderer.isVisible() || !ModConfig.get().hideHungerBar) {
+                    if (!StaminaRenderer.isVisible() || ModConfig.get().hudLayout != HudLayoutOption.CLASSIC || !ModConfig.get().hideHungerBar) {
                         return;
                     }
 
@@ -134,7 +135,7 @@ public class ClientEventHandler {
                 VanillaGuiLayers.FOOD_LEVEL,
                 STAMINA_FOOD_LAYER,
                 (graphics, deltaTracker) -> {
-                    if (!StaminaRenderer.isVisible() || ModConfig.get().hideHungerBar) {
+                    if (!StaminaRenderer.isVisible() || (ModConfig.get().hudLayout == HudLayoutOption.CLASSIC && ModConfig.get().hideHungerBar)) {
                         return;
                     }
 
@@ -197,11 +198,12 @@ public class ClientEventHandler {
         public static void onRenderGuiLayerPre(RenderGuiLayerEvent.Pre event) {
             ResourceLocation layer = event.getName();
             boolean isFoodOff = ModConfig.get().hideHungerBar;
+            HudLayoutOption layout = ModConfig.get().hudLayout;
 
             if (isFoodOff) {
-                if (layer.equals(VanillaGuiLayers.FOOD_LEVEL)
-                        || layer.equals(VanillaGuiLayers.ARMOR_LEVEL)
-                        || layer.equals(VanillaGuiLayers.AIR_LEVEL)) {
+                if (layer.equals(VanillaGuiLayers.FOOD_LEVEL)) {
+                    event.setCanceled(true);
+                } else if (layout == HudLayoutOption.CLASSIC && (layer.equals(VanillaGuiLayers.ARMOR_LEVEL) || layer.equals(VanillaGuiLayers.AIR_LEVEL))) {
                     event.setCanceled(true);
                 }
             }

@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.client;
 
+import com.evandev.modest_meals.config.HudLayoutOption;
 import com.evandev.modest_meals.config.ModConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -45,11 +46,16 @@ public abstract class HudHelper {
     public static int getHeightOffsetForStamina() {
         int heightOffset = 49;
         boolean isFoodOff = ModConfig.get().hideHungerBar;
+        HudLayoutOption layout = ModConfig.get().hudLayout;
         LocalPlayer player = Minecraft.getInstance().player;
 
         if (isFoodOff) {
-            int armorValue = player != null ? player.getArmorValue() : 0;
-            if (armorValue == 0) {
+            if (layout == HudLayoutOption.CLASSIC) {
+                int armorValue = player != null ? player.getArmorValue() : 0;
+                if (armorValue == 0) {
+                    heightOffset -= 10;
+                }
+            } else {
                 heightOffset -= 10;
             }
         }
