@@ -68,6 +68,10 @@ public abstract class StaminaRenderer {
     public static ResourceLocation getSprite(PlayerStamina stamina, int icon) {
         ResourceLocation sprite = stamina.getData().isExhausted() ? ModSprites.STAMINA_RECHARGE : ModSprites.STAMINA_LEVEL;
 
+        if (stamina.isCoolingDown() && !ModConfig.get().hideStaminaBarCooldown) {
+            sprite = ModSprites.STAMINA_COOLING;
+        }
+
         if (stamina.isNotRegainable() && !ModConfig.get().hideStaminaBarMoving) {
             sprite = ModSprites.STAMINA_NEGATIVE;
         }
@@ -76,14 +80,14 @@ public abstract class StaminaRenderer {
             sprite = ModSprites.STAMINA_NEGATIVE;
         }
 
-        if (stamina.isCoolingDown() && !ModConfig.get().hideStaminaBarCooldown) {
-            sprite = ModSprites.STAMINA_COOLING;
-        }
-
         int level = stamina.getData().getStamina();
 
         if (level % 2 != 0 && icon == level) {
             sprite = stamina.getData().isExhausted() ? ModSprites.STAMINA_RECHARGE_HALF : ModSprites.STAMINA_LEVEL_HALF;
+
+            if (stamina.isCoolingDown() && !ModConfig.get().hideStaminaBarCooldown) {
+                sprite = ModSprites.STAMINA_COOLING_HALF;
+            }
 
             if (stamina.isNotRegainable() && !ModConfig.get().hideStaminaBarMoving) {
                 sprite = ModSprites.STAMINA_NEGATIVE_HALF;
@@ -91,10 +95,6 @@ public abstract class StaminaRenderer {
 
             if (stamina.hasNegativeEffect()) {
                 sprite = ModSprites.STAMINA_NEGATIVE_HALF;
-            }
-
-            if (stamina.isCoolingDown() && !ModConfig.get().hideStaminaBarCooldown) {
-                sprite = ModSprites.STAMINA_COOLING_HALF;
             }
         } else if (icon > level) {
             sprite = ModSprites.STAMINA_EMPTY;
@@ -148,18 +148,8 @@ public abstract class StaminaRenderer {
             return level;
         }
 
-        int fullBarInTicks = stamina.getActiveBarInTicks();
-        if (fullBarInTicks <= 0) {
-            return level;
-        }
-
         int maxLevel = stamina.getMaxLevel();
-        int previewTicks = Math.min(fullBarInTicks, stamina.getData().getRemaining() + stamina.levelsToTicks(addedLevels));
-        int previewLevel = Mth.clamp(
-                (int) Math.ceil((double) previewTicks / fullBarInTicks * maxLevel),
-                0, maxLevel
-        );
-        return Math.max(level, previewLevel);
+        return Math.min(maxLevel, level + Mth.ceil(addedLevels));
     }
 
     public static void render(GuiGraphics graphics, int rightHeight, int offsetLeft) {

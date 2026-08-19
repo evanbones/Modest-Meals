@@ -3,7 +3,6 @@ package com.evandev.modest_meals.client.tooltip;
 import com.evandev.modest_meals.client.ModSprites;
 import com.evandev.modest_meals.client.hud.StaminaSprites;
 import com.evandev.modest_meals.config.ModConfig;
-import com.evandev.modest_meals.food.EdibleBlockFoods;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
@@ -14,7 +13,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.Mth;
@@ -31,6 +29,9 @@ public class FoodItemTooltips {
             Gui.HeartType.NORMAL.getSprite(false, false, false),
             Gui.HeartType.NORMAL.getSprite(false, true, false)
     );
+
+    // TODO: should this be configurable?
+    private static final int COMPACT_POINTS_THRESHOLD = 12;
 
     private static IconRowTooltip.Sprites staminaSprites() {
         IconRowTooltip.Icon half = StaminaSprites.isOtherHalfAvailable()
@@ -52,8 +53,7 @@ public class FoodItemTooltips {
         List<Component> lines = event.getToolTip();
 
         if (ModConfig.get().showFoodItemTooltips) {
-            addHealthRow(lines, stack);
-            addStaminaRow(lines, stack);
+            addStatRows(lines, stack);
             addDigestionRateLine(lines, stack);
         }
 
@@ -62,24 +62,30 @@ public class FoodItemTooltips {
         }
     }
 
-    private static void addHealthRow(List<Component> lines, ItemStack stack) {
+    private static void addStatRows(List<Component> lines, ItemStack stack) {
         int halfHearts = Mth.ceil(FoodValues.healthPoints(stack));
-        if (halfHearts > 0) {
-            lines.add(new IconRowTooltip.Marker(HEART_SPRITES, halfHearts));
+        int halfStamina = 0;
+        if (ModConfig.get().staminaSprint) {
+            float levels = FoodValues.staminaLevels(stack);
+            if (levels > 0.0F) {
+                halfStamina = Math.min(Mth.ceil(levels), staminaMaxLevel());
+            }
         }
-    }
 
-    private static void addStaminaRow(List<Component> lines, ItemStack stack) {
-        if (!ModConfig.get().staminaSprint) {
-            return;
-        }
-        float levels = FoodValues.staminaLevels(stack);
-        if (levels <= 0.0F) {
-            return;
-        }
-        int halfIcons = Math.min(Mth.ceil(levels), staminaMaxLevel());
-        if (halfIcons > 0) {
-            lines.add(new IconRowTooltip.Marker(staminaSprites(), halfIcons));
+        if (halfHearts > 0 && halfStamina > 0) {
+            if (halfHearts + halfStamina <= COMPACT_POINTS_THRESHOLD) {
+                lines.add(new IconRowTooltip.Marker(
+                        new IconRowTooltip.Entry(HEART_SPRITES, halfHearts),
+                        new IconRowTooltip.Entry(staminaSprites(), halfStamina)
+                ));
+            } else {
+                lines.add(new IconRowTooltip.Marker(HEART_SPRITES, halfHearts));
+                lines.add(new IconRowTooltip.Marker(staminaSprites(), halfStamina));
+            }
+        } else if (halfHearts > 0) {
+            lines.add(new IconRowTooltip.Marker(HEART_SPRITES, halfHearts));
+        } else if (halfStamina > 0) {
+            lines.add(new IconRowTooltip.Marker(staminaSprites(), halfStamina));
         }
     }
 
@@ -129,6 +135,10 @@ public class FoodItemTooltips {
     }
 
     private static void addTraitLines(List<Component> lines, ItemStack stack) {
+        if (!FoodValues.isFood(stack)) {
+            return;
+        }
+
         List<FoodTrait> traits = FoodValues.effectiveTraits(stack);
         if (traits.isEmpty()) {
             return;
@@ -143,16 +153,10 @@ public class FoodItemTooltips {
                 continue;
             }
             if (!headerAdded) {
-                lines.add(Component.translatable(headerKey(stack)).withStyle(ChatFormatting.GRAY));
+                lines.add(Component.translatable("modest_meals.trait.header.consumed").withStyle(ChatFormatting.GRAY));
                 headerAdded = true;
             }
             lines.add(trait.getTooltipComponent(valMult, durMult));
         }
-    }
-
-    private static String headerKey(ItemStack stack) {
-        boolean edible = stack.has(DataComponents.FOOD)
-                || EdibleBlockFoods.getFoodProperties(stack.getItem()).isPresent();
-        return edible ? "modest_meals.trait.header.consumed" : "modest_meals.trait.header.ingredient";
     }
 }

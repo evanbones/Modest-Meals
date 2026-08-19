@@ -8,6 +8,7 @@ import com.evandev.modest_meals.network.ModNetworking;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 
 public class PlayerStamina {
@@ -106,7 +107,8 @@ public class PlayerStamina {
 
         this.regainThisTick = this.isRegainable() && this.isTrackerNotHalved();
 
-        boolean doubleStep = this.hasPositiveEffect();
+        boolean doubleStep = this.hasPositiveEffect() && !this.isAtFullSprint()
+                || this.hasNegativeEffect() && this.isAtFullSprint();
 
         this.step(maxLevel);
         if (doubleStep) {
@@ -248,13 +250,12 @@ public class PlayerStamina {
     }
 
     public boolean hasPositiveEffect() {
-        return this.isTiringOrExhausted()
-                && !this.isAtFullSprint()
-                && this.player.hasEffect(ModMobEffects.STAMINA_REGEN);
+        return this.player.hasEffect(ModMobEffects.STAMINA_REGEN)
+                || this.player.hasEffect(MobEffects.SATURATION);
     }
 
     public boolean hasNegativeEffect() {
-        return this.isTiringOrExhausted()
-                && this.player.hasEffect(ModMobEffects.STAMINA_DEPLETION);
+        return this.player.hasEffect(ModMobEffects.STAMINA_DEPLETION)
+                || this.player.hasEffect(MobEffects.HUNGER);
     }
 }

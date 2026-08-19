@@ -75,13 +75,10 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
             effectName = Component.translatable("potion.withAmplifier", effectName, Component.translatable("potion.potency." + this.amplifier));
         }
 
-        MutableComponent line = Component.translatable(isHarmful ? "modest_meals.trait.simple.take" : "modest_meals.trait.simple.plus", effectName.withStyle(color))
-                .withStyle(color);
-
         long dur = (long) (this.duration * durationMultiplier);
         if (dur > 0) {
-            line.append(Component.literal(" (" + TraitTooltipHelper.formatDuration(dur) + ")").withStyle(ChatFormatting.GRAY));
+            effectName = Component.translatable("potion.withDuration", effectName, TraitTooltipHelper.formatDuration(dur));
         }
-        return line;
+        return effectName.withStyle(color);
     }
 }

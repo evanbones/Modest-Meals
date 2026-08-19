@@ -30,7 +30,7 @@ public abstract class LivingEntityMixin {
         if (!(((LivingEntity) (Object) this) instanceof Player)) {
             return original.call(effect, source);
         }
-        if (ModConfig.get().disableHunger && effect.getEffect() == MobEffects.HUNGER) {
+        if (ModConfig.get().disableHunger && effect.is(MobEffects.HUNGER)) {
             HungerEffectOption hungerEffect = ModConfig.get().hungerEffect;
             if (hungerEffect == HungerEffectOption.DISABLED) {
                 return false;
@@ -44,7 +44,7 @@ public abstract class LivingEntityMixin {
                             : effect.getDuration(),
                     effect.getAmplifier()
             );
-        } else if (ModConfig.get().disableHunger && effect.getEffect() == MobEffects.SATURATION) {
+        } else if (ModConfig.get().disableHunger && effect.is(MobEffects.SATURATION)) {
             effect = new MobEffectInstance(
                     ModMobEffects.STAMINA_REGEN, effect.getDuration(), effect.getAmplifier()
             );

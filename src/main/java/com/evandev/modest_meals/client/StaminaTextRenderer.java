@@ -19,10 +19,10 @@ public abstract class StaminaTextRenderer {
 
         if (stamina.getData().isExhausted()) {
             return "§7" + level + "§r";
+        } else if (stamina.hasNegativeEffect() || stamina.isNotRegainable()) {
+            return "§4" + level + "§r";
         } else if (stamina.isCoolingDown()) {
             return "§b" + level + "§r";
-        } else if (stamina.isNotRegainable() || stamina.hasNegativeEffect()) {
-            return "§4" + level + "§r";
         } else if (stamina.hasPositiveEffect()) {
             return "§2" + level + "§r";
         } else {

@@ -9,16 +9,15 @@ public class TraitTooltipHelper {
 
     public static String formatDuration(long durationInTicks) {
         if (durationInTicks <= 0) return "";
-        double seconds = durationInTicks / 20.0;
-        if (seconds >= 60) {
-            int mins = (int) (seconds / 60);
-            int remSecs = (int) (seconds % 60);
-            if (remSecs > 0) {
-                return mins + "m " + remSecs + "s";
-            }
-            return mins + "m";
+        long totalSeconds = durationInTicks / 20;
+        long minutes = totalSeconds / 60;
+        long seconds = totalSeconds % 60;
+        if (minutes >= 60) {
+            long hours = minutes / 60;
+            minutes = minutes % 60;
+            return String.format("%d:%02d:%02d", hours, minutes, seconds);
         }
-        return ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(seconds) + "s";
+        return String.format("%d:%02d", minutes, seconds);
     }
 
     public static MutableComponent formatPlusTrait(String translationKey, double value, long duration) {
