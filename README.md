@@ -13,6 +13,8 @@
 
 Art by [Baisylia](https://modrinth.com/user/Baisylia)!
 
+Mod logo by [Raspmary](https://www.curseforge.com/members/raspmary/projects)!
+
 Stamina and health system adapted from Nostalgic
 Tweaks ([LGPL-3.0-only](https://github.com/Nostalgica-Reverie/Nostalgic-Tweaks/blob/main/LICENSE.txt)) and Melancholic Hunger & HUD ([LGPL-3.0-only](https://github.com/antigers/melancholic_hunger/blob/1.21.1/LICENSE)).
 
