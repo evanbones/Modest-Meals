@@ -25,18 +25,32 @@ import java.util.*;
  */
 public class FoodProfileManager extends SimpleJsonResourceReloadListener {
     public static final FoodProfileManager INSTANCE = new FoodProfileManager();
+
+    private static final ResourceLocation CUSTOM_FILE_ID =
+            ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "custom_profiles");
+
     private volatile List<FoodProfile> profiles = List.of();
+
+    private volatile List<FoodProfile> baselineProfiles = List.of();
 
     public FoodProfileManager() {
         super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "food_profiles");
     }
 
     public static Optional<FoodProfile> resolve(ItemStack stack) {
+        return resolve(stack, INSTANCE.profiles);
+    }
+
+    public static Optional<FoodProfile> resolveBaseline(ItemStack stack) {
+        return resolve(stack, INSTANCE.baselineProfiles);
+    }
+
+    private static Optional<FoodProfile> resolve(ItemStack stack, List<FoodProfile> source) {
         if (stack == null || stack.isEmpty()) {
             return Optional.empty();
         }
         Holder<Item> holder = stack.getItem().builtInRegistryHolder();
-        for (FoodProfile profile : INSTANCE.profiles) {
+        for (FoodProfile profile : source) {
             if (matches(profile, stack, holder)) {
                 return Optional.of(profile);
             }
@@ -70,8 +84,15 @@ public class FoodProfileManager extends SimpleJsonResourceReloadListener {
         return INSTANCE.profiles;
     }
 
-    public static void applyFromNetwork(List<FoodProfile> profiles) {
+    public static void applyFromNetwork(List<FoodProfile> profiles, boolean updateBaseline) {
         INSTANCE.profiles = List.copyOf(profiles);
+        if (updateBaseline) {
+            INSTANCE.baselineProfiles = INSTANCE.profiles;
+        }
+    }
+
+    public static void restoreBaseline() {
+        INSTANCE.profiles = INSTANCE.baselineProfiles;
     }
 
     public static void upsertProfile(FoodProfile profile) {
@@ -92,6 +113,7 @@ public class FoodProfileManager extends SimpleJsonResourceReloadListener {
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> resources, ResourceManager resourceManager, ProfilerFiller profiler) {
         List<FoodProfile> loaded = new ArrayList<>();
+        List<FoodProfile> baseline = new ArrayList<>();
 
         for (var entry : resources.entrySet()) {
             ResourceLocation fileId = entry.getKey();
@@ -108,17 +130,24 @@ public class FoodProfileManager extends SimpleJsonResourceReloadListener {
                 continue;
             }
 
+            boolean isBaseline = !fileId.equals(CUSTOM_FILE_ID);
             JsonArray array = obj.getAsJsonArray("profiles");
             for (JsonElement element : array) {
                 FoodProfile.CODEC.parse(JsonOps.INSTANCE, element)
                         .resultOrPartial(err -> Constants.LOG.error("Failed to parse food profile in {}: {}", fileId, err))
-                        .ifPresent(loaded::add);
+                        .ifPresent(profile -> {
+                            loaded.add(profile);
+                            if (isBaseline) baseline.add(profile);
+                        });
             }
         }
 
-        loaded.sort(Comparator.comparingInt(FoodProfile::priority).reversed()
-                .thenComparing(FoodProfile::id));
+        Comparator<FoodProfile> order = Comparator.comparingInt(FoodProfile::priority).reversed()
+                .thenComparing(FoodProfile::id);
+        loaded.sort(order);
+        baseline.sort(order);
         this.profiles = List.copyOf(loaded);
+        this.baselineProfiles = List.copyOf(baseline);
 
         Constants.LOG.info("Loaded {} food profiles", this.profiles.size());
     }

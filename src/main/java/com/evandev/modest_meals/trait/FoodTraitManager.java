@@ -26,8 +26,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     public static final FoodTraitManager INSTANCE = new FoodTraitManager();
+
+    private static final ResourceLocation CUSTOM_FILE_ID =
+            ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "custom_traits");
+
     private final Map<ResourceLocation, List<FoodTrait>> itemTraits = new ConcurrentHashMap<>();
     private final Map<TagKey<Item>, List<FoodTrait>> tagTraits = new ConcurrentHashMap<>();
+
+    private final Map<ResourceLocation, List<FoodTrait>> baselineItemTraits = new ConcurrentHashMap<>();
+    private final Map<TagKey<Item>, List<FoodTrait>> baselineTagTraits = new ConcurrentHashMap<>();
 
     public FoodTraitManager() {
         super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "food_traits");
@@ -42,10 +49,19 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     }
 
     public static List<FoodTrait> getTraits(Item item) {
+        return merge(item, INSTANCE.itemTraits, INSTANCE.tagTraits);
+    }
+
+    public static List<FoodTrait> getBaselineTraits(Item item) {
+        return merge(item, INSTANCE.baselineItemTraits, INSTANCE.baselineTagTraits);
+    }
+
+    private static List<FoodTrait> merge(Item item, Map<ResourceLocation, List<FoodTrait>> itemSource,
+                                         Map<TagKey<Item>, List<FoodTrait>> tagSource) {
         Map<Object, FoodTrait> resolved = new LinkedHashMap<>();
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
 
-        List<FoodTrait> direct = INSTANCE.itemTraits.get(itemId);
+        List<FoodTrait> direct = itemSource.get(itemId);
         if (direct != null) {
             for (FoodTrait trait : direct) {
                 resolved.putIfAbsent(getMergeKey(trait), trait);
@@ -53,7 +69,7 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         }
 
         Holder<Item> itemHolder = item.builtInRegistryHolder();
-        for (Map.Entry<TagKey<Item>, List<FoodTrait>> entry : INSTANCE.tagTraits.entrySet()) {
+        for (Map.Entry<TagKey<Item>, List<FoodTrait>> entry : tagSource.entrySet()) {
             if (itemHolder.is(entry.getKey())) {
                 for (FoodTrait trait : entry.getValue()) {
                     resolved.putIfAbsent(getMergeKey(trait), trait);
@@ -79,11 +95,24 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         return Map.copyOf(INSTANCE.tagTraits);
     }
 
-    public static void applyFromNetwork(Map<ResourceLocation, List<FoodTrait>> itemTraits, Map<TagKey<Item>, List<FoodTrait>> tagTraits) {
+    public static void applyFromNetwork(Map<ResourceLocation, List<FoodTrait>> itemTraits, Map<TagKey<Item>, List<FoodTrait>> tagTraits, boolean updateBaseline) {
         INSTANCE.itemTraits.clear();
         INSTANCE.itemTraits.putAll(itemTraits);
         INSTANCE.tagTraits.clear();
         INSTANCE.tagTraits.putAll(tagTraits);
+        if (updateBaseline) {
+            INSTANCE.baselineItemTraits.clear();
+            INSTANCE.baselineItemTraits.putAll(itemTraits);
+            INSTANCE.baselineTagTraits.clear();
+            INSTANCE.baselineTagTraits.putAll(tagTraits);
+        }
+    }
+
+    public static void restoreBaseline() {
+        INSTANCE.itemTraits.clear();
+        INSTANCE.itemTraits.putAll(INSTANCE.baselineItemTraits);
+        INSTANCE.tagTraits.clear();
+        INSTANCE.tagTraits.putAll(INSTANCE.baselineTagTraits);
     }
 
     public static void setItemTraits(ResourceLocation itemId, List<FoodTrait> traits) {
@@ -122,6 +151,8 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, JsonElement> resources, ResourceManager resourceManager, ProfilerFiller profiler) {
         itemTraits.clear();
         tagTraits.clear();
+        baselineItemTraits.clear();
+        baselineTagTraits.clear();
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : resources.entrySet()) {
             ResourceLocation fileId = entry.getKey();
@@ -142,7 +173,7 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
                         JsonArray traitsArr = entryObj.has("traits") && entryObj.get("traits").isJsonArray()
                                 ? entryObj.getAsJsonArray("traits") : null;
                         if (target != null && traitsArr != null) {
-                            parseAndAdd(target, traitsArr);
+                            parseAndAdd(target, traitsArr, !fileId.equals(CUSTOM_FILE_ID));
                         }
                     }
                 }
@@ -150,7 +181,7 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
                 for (Map.Entry<String, JsonElement> prop : obj.entrySet()) {
                     String target = prop.getKey();
                     if (prop.getValue().isJsonArray()) {
-                        parseAndAdd(target, prop.getValue().getAsJsonArray());
+                        parseAndAdd(target, prop.getValue().getAsJsonArray(), !fileId.equals(CUSTOM_FILE_ID));
                     }
                 }
             }
@@ -159,7 +190,7 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         Constants.LOG.info("Loaded food traits for {} items and {} item tags", itemTraits.size(), tagTraits.size());
     }
 
-    private void parseAndAdd(String target, JsonArray traitsArray) {
+    private void parseAndAdd(String target, JsonArray traitsArray, boolean baseline) {
         List<FoodTrait> parsedList = new ArrayList<>();
         for (JsonElement traitEl : traitsArray) {
             if (traitEl.isJsonObject()) {
@@ -175,9 +206,15 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
             ResourceLocation tagLoc = ResourceLocation.parse(target.substring(1));
             TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagLoc);
             tagTraits.computeIfAbsent(tagKey, k -> new ArrayList<>()).addAll(parsedList);
+            if (baseline) {
+                baselineTagTraits.computeIfAbsent(tagKey, k -> new ArrayList<>()).addAll(parsedList);
+            }
         } else {
             ResourceLocation itemLoc = ResourceLocation.parse(target);
             itemTraits.computeIfAbsent(itemLoc, k -> new ArrayList<>()).addAll(parsedList);
+            if (baseline) {
+                baselineItemTraits.computeIfAbsent(itemLoc, k -> new ArrayList<>()).addAll(parsedList);
+            }
         }
     }
 }

@@ -258,7 +258,7 @@ public class FoodEditorScreen extends Screen {
 
     private List<FoodTrait> traitsFor(String itemId) {
         return customTraits.computeIfAbsent(itemId,
-                k -> new ArrayList<>(FoodTraitManager.getTraits(selectedItem)));
+                k -> new ArrayList<>(FoodTraitManager.getBaselineTraits(selectedItem)));
     }
 
     private int maxTraitScroll(int traitCount) {
@@ -298,14 +298,14 @@ public class FoodEditorScreen extends Screen {
         for (FoodProfile p : customProfiles) {
             if (p.match().equals(id) || p.id().equals(id + "_override")) return p;
         }
-        return FoodProfileManager.resolve(new ItemStack(item))
+        return FoodProfileManager.resolveBaseline(new ItemStack(item))
                 .orElse(new FoodProfile("default", "*", 0, 1.0f, 30.0f, 0.0f));
     }
 
     private List<FoodTrait> getEffectiveTraits(Item item) {
         String id = itemId(item);
         if (customTraits.containsKey(id)) return customTraits.get(id);
-        return FoodTraitManager.getTraits(item);
+        return FoodTraitManager.getBaselineTraits(item);
     }
 
     public void selectItem(Item item) {
@@ -327,6 +327,9 @@ public class FoodEditorScreen extends Screen {
     private void saveAndApply() {
         CustomFoodDatapack.saveCustomTraits(customTraits);
         CustomFoodDatapack.saveCustomProfiles(customProfiles);
+
+        FoodTraitManager.restoreBaseline();
+        FoodProfileManager.restoreBaseline();
 
         for (Map.Entry<String, List<FoodTrait>> entry : customTraits.entrySet()) {
             if (!entry.getKey().startsWith("#")) {

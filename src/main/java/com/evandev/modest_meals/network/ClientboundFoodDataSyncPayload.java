@@ -48,9 +48,10 @@ public record ClientboundFoodDataSyncPayload(
     }
 
     public static void handle(ClientboundFoodDataSyncPayload payload, IPayloadContext context) {
+        boolean updateBaseline = !context.connection().isMemoryConnection();
         context.enqueueWork(() -> {
-            FoodTraitManager.applyFromNetwork(payload.itemTraits(), payload.tagTraits());
-            FoodProfileManager.applyFromNetwork(payload.profiles());
+            FoodTraitManager.applyFromNetwork(payload.itemTraits(), payload.tagTraits(), updateBaseline);
+            FoodProfileManager.applyFromNetwork(payload.profiles(), updateBaseline);
         });
     }
 
