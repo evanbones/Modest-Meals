@@ -28,10 +28,10 @@ public class FoodValues {
         boolean hasHealth = false;
         boolean hasStamina = false;
         for (FoodTrait trait : authored) {
-            if (trait instanceof HealthAdditionTrait || trait instanceof HealthRegenTrait) {
+            if (trait instanceof HealthAdditionTrait) {
                 hasHealth = true;
             }
-            if (trait instanceof StaminaAdditionTrait || trait instanceof StaminaRegenTrait || trait instanceof StaminaCapacityTrait) {
+            if (trait instanceof StaminaAdditionTrait) {
                 hasStamina = true;
             }
         }
