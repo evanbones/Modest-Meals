@@ -1,7 +1,10 @@
 package com.evandev.modest_meals.food;
 
 import com.evandev.modest_meals.Constants;
-import com.google.gson.*;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,11 +25,10 @@ import java.util.*;
  */
 public class FoodProfileManager extends SimpleJsonResourceReloadListener {
     public static final FoodProfileManager INSTANCE = new FoodProfileManager();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private volatile List<FoodProfile> profiles = List.of();
 
     public FoodProfileManager() {
-        super(GSON, "food_profiles");
+        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "food_profiles");
     }
 
     public static Optional<FoodProfile> resolve(ItemStack stack) {

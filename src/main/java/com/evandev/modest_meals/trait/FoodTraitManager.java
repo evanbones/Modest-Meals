@@ -4,7 +4,10 @@ import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
-import com.google.gson.*;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,12 +26,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     public static final FoodTraitManager INSTANCE = new FoodTraitManager();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private final Map<ResourceLocation, List<FoodTrait>> itemTraits = new ConcurrentHashMap<>();
     private final Map<TagKey<Item>, List<FoodTrait>> tagTraits = new ConcurrentHashMap<>();
 
     public FoodTraitManager() {
-        super(GSON, "food_traits");
+        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "food_traits");
     }
 
     public static List<FoodTrait> getTraits(ItemStack stack) {
