@@ -2,8 +2,6 @@ package com.evandev.modest_meals.trait.impl;
 
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
-import com.evandev.modest_meals.stamina.PlayerStamina;
-import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
@@ -46,25 +44,7 @@ public record StaminaAdditionTrait(float value) implements FoodTrait {
     @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         if (entity instanceof Player player) {
-            PlayerStamina stamina = StaminaHelper.get(player);
-            StaminaData data = stamina.getData();
-            int durationInTicks = stamina.getDurationInTicks();
-            int addTicks = stamina.levelsToTicks(this.value * valueMultiplier);
-
-            if (data.isExhausted()) {
-                int rechargeInTicks = stamina.getRechargeInTicks();
-                int newRemaining = data.getRemaining() + addTicks;
-                if (newRemaining >= rechargeInTicks) {
-                    data.setRemaining(durationInTicks);
-                    data.setExhausted(false);
-                } else {
-                    data.setRemaining(newRemaining);
-                }
-            } else {
-                data.setRemaining(Math.min(durationInTicks, data.getRemaining() + addTicks));
-            }
-
-            data.setStaminaUsingTicks(data.isExhausted() ? stamina.getRechargeInTicks() : durationInTicks, stamina.getMaxLevel());
+            StaminaHelper.get(player).addLevels(this.value * valueMultiplier);
 
             if (player instanceof ServerPlayer serverPlayer) {
                 ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));

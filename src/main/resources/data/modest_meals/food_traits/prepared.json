@@ -5,8 +5,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 400
+          "value": 1.0,
+          "duration": 300
         },
         {
           "type": "modest_meals:effect_removal",

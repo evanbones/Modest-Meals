@@ -23,6 +23,10 @@ public class FoodConsumption {
             return player.getFoodData().needsFood();
         }
 
+        if (FoodValues.hasUtility(stack)) {
+            return true;
+        }
+
         boolean touchesHealth = FoodValues.touchesHealth(stack);
         boolean touchesStamina = FoodValues.touchesStamina(stack);
 

@@ -8,8 +8,10 @@ import com.evandev.modest_meals.network.ModNetworking;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
 
 public class PlayerStamina {
     private static final int SYNC_INTERVAL_TICKS = 20;
@@ -19,6 +21,7 @@ public class PlayerStamina {
     protected int halfRateInTicks;
     protected boolean regainThisTick = false;
     private int ticksSinceSync = 0;
+    private int naturalRegenTickTimer = 0;
 
     protected PlayerStamina(Player player, StaminaData data) {
         this.player = player;
@@ -77,6 +80,32 @@ public class PlayerStamina {
         return Math.round(levels * this.getActiveBarInTicks() / (float) maxLevel);
     }
 
+    public void addLevels(float levels) {
+        Gain gain = gain(levels);
+        this.data.setRemaining(gain.remaining());
+        this.data.setExhausted(gain.exhausted());
+        this.data.setStaminaUsingTicks(gain.exhausted() ? this.getRechargeInTicks() : this.getDurationInTicks(), this.getMaxLevel());
+    }
+
+    public int levelAfterGain(float levels) {
+        Gain gain = gain(levels);
+        return StaminaData.levelFor(gain.remaining(),
+                gain.exhausted() ? this.getRechargeInTicks() : this.getDurationInTicks(),
+                this.getMaxLevel());
+    }
+
+    private Gain gain(float levels) {
+        int newRemaining = this.data.getRemaining() + this.levelsToTicks(levels);
+
+        if (this.data.isExhausted()) {
+            if (newRemaining >= this.getRechargeInTicks()) {
+                return new Gain(this.getDurationInTicks(), false);
+            }
+            return new Gain(newRemaining, true);
+        }
+        return new Gain(Math.min(this.getDurationInTicks(), newRemaining), false);
+    }
+
     private int scaleToCapacity(int baseTicks) {
         return Math.max(1, (int) ((long) baseTicks * getMaxLevel() / (double) StaminaData.MAX_STAMINA_LEVEL));
     }
@@ -85,6 +114,7 @@ public class PlayerStamina {
         int duration = getDurationInTicks();
 
         this.halfRateInTicks = 0;
+        this.naturalRegenTickTimer = 0;
 
         this.data.setCooldown(0);
         this.data.setRemaining(duration);
@@ -107,11 +137,21 @@ public class PlayerStamina {
 
         this.regainThisTick = this.isRegainable() && this.isTrackerNotHalved();
 
-        boolean doubleStep = this.hasPositiveEffect() && !this.isAtFullSprint()
-                || this.hasNegativeEffect() && this.isAtFullSprint();
+        int extraSteps = 0;
+        if (!this.isAtFullSprint()) {
+            int posAmp = this.getPositiveEffectAmplifier();
+            if (posAmp >= 0) {
+                extraSteps += (posAmp + 1);
+            }
+        } else {
+            int negAmp = this.getNegativeEffectAmplifier();
+            if (negAmp >= 0) {
+                extraSteps += (negAmp + 1);
+            }
+        }
 
         this.step(maxLevel);
-        if (doubleStep) {
+        for (int i = 0; i < extraSteps; i++) {
             this.step(maxLevel);
         }
 
@@ -250,12 +290,92 @@ public class PlayerStamina {
     }
 
     public boolean hasPositiveEffect() {
-        return this.player.hasEffect(ModMobEffects.STAMINA_REGEN)
-                || this.player.hasEffect(MobEffects.SATURATION);
+        return getPositiveEffectAmplifier() >= 0;
+    }
+
+    public int getPositiveEffectAmplifier() {
+        MobEffectInstance regen = this.player.getEffect(ModMobEffects.STAMINA_REGEN);
+        if (regen != null) {
+            return regen.getAmplifier();
+        }
+        MobEffectInstance sat = this.player.getEffect(MobEffects.SATURATION);
+        if (sat != null) {
+            return sat.getAmplifier();
+        }
+        return -1;
     }
 
     public boolean hasNegativeEffect() {
-        return this.player.hasEffect(ModMobEffects.STAMINA_DEPLETION)
-                || this.player.hasEffect(MobEffects.HUNGER);
+        return getNegativeEffectAmplifier() >= 0;
+    }
+
+    public int getNegativeEffectAmplifier() {
+        MobEffectInstance deplet = this.player.getEffect(ModMobEffects.STAMINA_DEPLETION);
+        if (deplet != null) {
+            return deplet.getAmplifier();
+        }
+        MobEffectInstance hunger = this.player.getEffect(MobEffects.HUNGER);
+        if (hunger != null) {
+            return hunger.getAmplifier();
+        }
+        return -1;
+    }
+
+    public void tickNaturalRegeneration() {
+        if (!ModConfig.get().staminaNaturalRegeneration) {
+            this.naturalRegenTickTimer = 0;
+            return;
+        }
+        if (this.player.level().isClientSide()) {
+            return;
+        }
+        boolean naturalRegenRule = this.player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
+        if (!naturalRegenRule) {
+            this.naturalRegenTickTimer = 0;
+            return;
+        }
+        if (this.player.hasEffect(ModMobEffects.HEALTH_NO_REGEN)) {
+            this.naturalRegenTickTimer = 0;
+            return;
+        }
+        if (this.data.isExhausted() || this.player.hasEffect(ModMobEffects.STAMINA_NO_REGEN)) {
+            this.naturalRegenTickTimer = 0;
+            return;
+        }
+        if (!this.player.isHurt() || this.player.getHealth() >= this.player.getMaxHealth()) {
+            this.naturalRegenTickTimer = 0;
+            return;
+        }
+        int currentStamina = this.data.getStamina();
+        int maxLevel = this.getMaxLevel();
+        if (currentStamina < ModConfig.get().staminaNaturalRegenerationThreshold) {
+            this.naturalRegenTickTimer = 0;
+            return;
+        }
+
+        boolean isFullStamina = currentStamina >= maxLevel;
+        int interval = isFullStamina
+                ? Math.max(1, ModConfig.get().staminaNaturalRegenerationFastInterval)
+                : Math.max(1, ModConfig.get().staminaNaturalRegenerationInterval);
+
+        this.naturalRegenTickTimer++;
+        if (this.naturalRegenTickTimer >= interval) {
+            this.naturalRegenTickTimer = 0;
+            this.player.heal(1.0F);
+
+            float drain = ModConfig.get().staminaNaturalRegenerationDrain;
+            if (drain > 0.0F) {
+                int drainTicks = this.levelsToTicks(drain);
+                if (drainTicks > 0) {
+                    this.data.remaining = Math.max(0, this.data.remaining - drainTicks);
+                    int durationInTicks = this.getDurationInTicks();
+                    this.data.setStaminaUsingTicks(durationInTicks, maxLevel);
+                    this.syncNow();
+                }
+            }
+        }
+    }
+
+    private record Gain(int remaining, boolean exhausted) {
     }
 }

@@ -22,8 +22,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FoodTraitManager extends SimpleJsonResourceReloadListener {
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     public static final FoodTraitManager INSTANCE = new FoodTraitManager();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private final Map<ResourceLocation, List<FoodTrait>> itemTraits = new ConcurrentHashMap<>();
     private final Map<TagKey<Item>, List<FoodTrait>> tagTraits = new ConcurrentHashMap<>();
 
@@ -82,6 +82,18 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         INSTANCE.itemTraits.putAll(itemTraits);
         INSTANCE.tagTraits.clear();
         INSTANCE.tagTraits.putAll(tagTraits);
+    }
+
+    public static void setItemTraits(ResourceLocation itemId, List<FoodTrait> traits) {
+        if (traits == null || traits.isEmpty()) {
+            INSTANCE.itemTraits.remove(itemId);
+        } else {
+            INSTANCE.itemTraits.put(itemId, new ArrayList<>(traits));
+        }
+    }
+
+    public static void removeItemTraits(ResourceLocation itemId) {
+        INSTANCE.itemTraits.remove(itemId);
     }
 
     public static boolean hasTraits(ItemStack stack) {

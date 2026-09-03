@@ -88,6 +88,21 @@ public class ModConfig {
     @SerializedName("regeneration_at_full_health")
     public RegenerationAtFullHealthOption regenerationAtFullHealth = RegenerationAtFullHealthOption.CONTINUED;
 
+    @SerializedName("stamina_natural_regeneration")
+    public boolean staminaNaturalRegeneration = false;
+
+    @SerializedName("stamina_natural_regeneration_fast_interval")
+    public int staminaNaturalRegenerationFastInterval = 10;
+
+    @SerializedName("stamina_natural_regeneration_interval")
+    public int staminaNaturalRegenerationInterval = 80;
+
+    @SerializedName("stamina_natural_regeneration_threshold")
+    public int staminaNaturalRegenerationThreshold = 18;
+
+    @SerializedName("stamina_natural_regeneration_drain")
+    public float staminaNaturalRegenerationDrain = 1.5f;
+
     @SerializedName("sprinting")
     public SprintingOption sprinting = SprintingOption.VANILLA;
 

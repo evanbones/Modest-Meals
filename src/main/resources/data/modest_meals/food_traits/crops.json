@@ -25,12 +25,12 @@
       "traits": [
         {
           "type": "modest_meals:stamina_regen",
-          "value": 2.0,
-          "duration": 600
+          "value": 1.0,
+          "duration": 400
         },
         {
           "type": "modest_meals:stamina_addition",
-          "value": 4.0
+          "value": 3.0
         }
       ]
     },
@@ -40,11 +40,11 @@
         {
           "type": "modest_meals:stamina_regen",
           "value": 1.0,
-          "duration": 400
+          "duration": 200
         },
         {
           "type": "modest_meals:stamina_addition",
-          "value": 2.0
+          "value": 1.5
         }
       ]
     },
@@ -54,11 +54,11 @@
         {
           "type": "modest_meals:stamina_regen",
           "value": 1.0,
-          "duration": 400
+          "duration": 200
         },
         {
           "type": "modest_meals:stamina_addition",
-          "value": 2.0
+          "value": 1.5
         }
       ]
     },
@@ -67,12 +67,12 @@
       "traits": [
         {
           "type": "modest_meals:stamina_regen",
-          "value": 1.5,
-          "duration": 600
+          "value": 1.0,
+          "duration": 300
         },
         {
           "type": "modest_meals:stamina_addition",
-          "value": 3.0
+          "value": 2.5
         }
       ]
     },
@@ -111,8 +111,12 @@
         },
         {
           "type": "modest_meals:stamina_capacity",
-          "value": 2.0,
-          "duration": 900
+          "value": 1.0,
+          "duration": 1200
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
         }
       ]
     },

@@ -96,7 +96,7 @@
         },
         {
           "type": "modest_meals:stamina_addition",
-          "value": 1.5
+          "value": 1.0
         }
       ]
     },
@@ -148,6 +148,10 @@
       "traits": [
         {
           "type": "modest_meals:fire_extinguish"
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
         }
       ]
     },
@@ -184,13 +188,13 @@
       "traits": [
         {
           "type": "modest_meals:stamina_capacity",
-          "value": 7.0,
-          "duration": 4200
+          "value": 2.0,
+          "duration": 2400
         },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:speed",
-          "duration": 2800,
+          "duration": 1800,
           "amplifier": 0
         }
       ]

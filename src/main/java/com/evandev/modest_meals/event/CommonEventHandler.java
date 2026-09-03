@@ -44,6 +44,7 @@ public class CommonEventHandler {
         }
 
         if (!player.level().isClientSide()) {
+            StaminaHelper.get(player).tickNaturalRegeneration();
             HealthRegenHelper.get(player).serverTick();
         }
     }

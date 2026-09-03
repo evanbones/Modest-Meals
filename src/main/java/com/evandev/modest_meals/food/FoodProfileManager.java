@@ -21,8 +21,8 @@ import java.util.*;
  * a given food.
  */
 public class FoodProfileManager extends SimpleJsonResourceReloadListener {
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     public static final FoodProfileManager INSTANCE = new FoodProfileManager();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private volatile List<FoodProfile> profiles = List.of();
 
     public FoodProfileManager() {
@@ -70,6 +70,21 @@ public class FoodProfileManager extends SimpleJsonResourceReloadListener {
 
     public static void applyFromNetwork(List<FoodProfile> profiles) {
         INSTANCE.profiles = List.copyOf(profiles);
+    }
+
+    public static void upsertProfile(FoodProfile profile) {
+        List<FoodProfile> list = new ArrayList<>(INSTANCE.profiles);
+        list.removeIf(p -> p.id().equals(profile.id()) || p.match().equals(profile.match()));
+        list.add(profile);
+        list.sort(Comparator.comparingInt(FoodProfile::priority).reversed()
+                .thenComparing(FoodProfile::id));
+        INSTANCE.profiles = List.copyOf(list);
+    }
+
+    public static void removeProfile(String idOrMatch) {
+        List<FoodProfile> list = new ArrayList<>(INSTANCE.profiles);
+        list.removeIf(p -> p.id().equals(idOrMatch) || p.match().equals(idOrMatch));
+        INSTANCE.profiles = List.copyOf(list);
     }
 
     @Override

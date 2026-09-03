@@ -148,8 +148,7 @@ public abstract class StaminaRenderer {
             return level;
         }
 
-        int maxLevel = stamina.getMaxLevel();
-        return Math.min(maxLevel, level + Mth.ceil(addedLevels));
+        return Math.max(level, stamina.levelAfterGain(addedLevels));
     }
 
     public static void render(GuiGraphics graphics, int rightHeight, int offsetLeft) {

@@ -44,6 +44,11 @@ public class ClientConfigScreen {
                 .option(createBoolOption("gradual_health_regeneration", defaults.gradualHealthRegeneration, () -> config.gradualHealthRegeneration, val -> config.gradualHealthRegeneration = val))
                 .option(createFloatOption("gradual_health_regeneration_speed", defaults.gradualHealthRegenerationSpeed, 0.1F, 10.0F, 0.1F, () -> config.gradualHealthRegenerationSpeed, val -> config.gradualHealthRegenerationSpeed = val))
                 .option(createEnumOption("regeneration_at_full_health", RegenerationAtFullHealthOption.class, defaults.regenerationAtFullHealth, () -> config.regenerationAtFullHealth, val -> config.regenerationAtFullHealth = val, RegenerationAtFullHealthOption::getTitle))
+                .option(createBoolOption("stamina_natural_regeneration", defaults.staminaNaturalRegeneration, () -> config.staminaNaturalRegeneration, val -> config.staminaNaturalRegeneration = val))
+                .option(createIntOption("stamina_natural_regeneration_fast_interval", defaults.staminaNaturalRegenerationFastInterval, 1, 40, 1, () -> config.staminaNaturalRegenerationFastInterval, val -> config.staminaNaturalRegenerationFastInterval = val))
+                .option(createIntOption("stamina_natural_regeneration_interval", defaults.staminaNaturalRegenerationInterval, 10, 200, 5, () -> config.staminaNaturalRegenerationInterval, val -> config.staminaNaturalRegenerationInterval = val))
+                .option(createIntOption("stamina_natural_regeneration_threshold", defaults.staminaNaturalRegenerationThreshold, 1, 20, 1, () -> config.staminaNaturalRegenerationThreshold, val -> config.staminaNaturalRegenerationThreshold = val))
+                .option(createFloatOption("stamina_natural_regeneration_drain", defaults.staminaNaturalRegenerationDrain, 0.0F, 5.0F, 0.1F, () -> config.staminaNaturalRegenerationDrain, val -> config.staminaNaturalRegenerationDrain = val))
                 .build());
 
         gameplayCategoryBuilder.group(OptionGroup.createBuilder()
@@ -121,6 +126,32 @@ public class ClientConfigScreen {
                 .build());
 
         builder.category(hudCategoryBuilder.build());
+
+        ConfigCategory.Builder foodEffectsCategoryBuilder = ConfigCategory.createBuilder()
+                .name(Component.translatable("config.modest_meals.category.food_effects"))
+                .tooltip(Component.translatable("config.modest_meals.category.food_effects.tooltip"));
+
+        foodEffectsCategoryBuilder.group(OptionGroup.createBuilder()
+                .name(Component.translatable("config.modest_meals.group.food_editor"))
+                .description(OptionDescription.of(Component.translatable("config.modest_meals.group.food_editor.tooltip")))
+                .option(ButtonOption.createBuilder()
+                        .name(Component.translatable("config.modest_meals.option.open_food_editor"))
+                        .description(OptionDescription.of(Component.translatable("config.modest_meals.option.open_food_editor.tooltip")))
+                        .action((yaclScreen, opt) -> net.minecraft.client.Minecraft.getInstance().setScreen(new com.evandev.modest_meals.client.gui.FoodEditorScreen(yaclScreen)))
+                        .build())
+                .option(createBoolOption("show_food_trait_tooltips", defaults.showFoodTraitTooltips, () -> config.showFoodTraitTooltips, val -> config.showFoodTraitTooltips = val))
+                .build());
+
+        foodEffectsCategoryBuilder.group(OptionGroup.createBuilder()
+                .name(Component.translatable("config.modest_meals.group.food_multipliers"))
+                .description(OptionDescription.of(Component.translatable("config.modest_meals.group.food_multipliers.tooltip")))
+                .option(createFloatOption("trait_global_value_multiplier", defaults.traitGlobalValueMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalValueMultiplier, val -> config.traitGlobalValueMultiplier = val))
+                .option(createFloatOption("trait_global_duration_multiplier", defaults.traitGlobalDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalDurationMultiplier, val -> config.traitGlobalDurationMultiplier = val))
+                .option(createFloatOption("smelting_multiplier", defaults.smeltingMultiplier, 0.1F, 10.0F, 0.1F, () -> config.smeltingMultiplier, val -> config.smeltingMultiplier = val))
+                .option(createFloatOption("smelting_duration_multiplier", defaults.smeltingDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.smeltingDurationMultiplier, val -> config.smeltingDurationMultiplier = val))
+                .build());
+
+        builder.category(foodEffectsCategoryBuilder.build());
 
         return builder.build().generateScreen(parent);
     }

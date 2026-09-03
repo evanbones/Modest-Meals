@@ -3,10 +3,7 @@ package com.evandev.modest_meals.food;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
-import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
-import com.evandev.modest_meals.trait.impl.HealthRegenTrait;
-import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
-import com.evandev.modest_meals.trait.impl.StaminaRegenTrait;
+import com.evandev.modest_meals.trait.impl.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -31,9 +28,10 @@ public class FoodValues {
         boolean hasHealth = false;
         boolean hasStamina = false;
         for (FoodTrait trait : authored) {
-            if (trait instanceof HealthAdditionTrait) {
+            if (trait instanceof HealthAdditionTrait || trait instanceof HealthRegenTrait) {
                 hasHealth = true;
-            } else if (trait instanceof StaminaAdditionTrait) {
+            }
+            if (trait instanceof StaminaAdditionTrait || trait instanceof StaminaRegenTrait || trait instanceof StaminaCapacityTrait) {
                 hasStamina = true;
             }
         }
@@ -125,6 +123,23 @@ public class FoodValues {
         }
         for (FoodTrait trait : effectiveTraits(stack)) {
             if (trait instanceof StaminaAdditionTrait || trait instanceof StaminaRegenTrait) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether this stack provides non-bar-filling utility traits (e.g. effects, cures, air, fire extinguishment...).
+     */
+    public static boolean hasUtility(ItemStack stack) {
+        for (FoodTrait trait : effectiveTraits(stack)) {
+            if (trait instanceof EffectGrantTrait
+                    || trait instanceof EffectRemovalTrait
+                    || trait instanceof FireExtinguishTrait
+                    || trait instanceof AirBubblesTrait
+                    || trait instanceof TeleportTrait
+                    || trait instanceof StaminaCapacityTrait) {
                 return true;
             }
         }

@@ -26,6 +26,13 @@ public class StaminaData {
         return new StaminaData(MAX_STAMINA_LEVEL, duration, cooldown, false);
     }
 
+    public static int levelFor(int remaining, int ticks, int maxLevel) {
+        if (ticks <= 0) {
+            return 0;
+        }
+        return Mth.clamp((int) Math.ceil(((double) remaining / ticks) * maxLevel), 0, maxLevel);
+    }
+
     public boolean isTiring(int maxLevel) {
         return this.stamina < maxLevel;
     }
@@ -39,11 +46,7 @@ public class StaminaData {
     }
 
     public void setStaminaUsingTicks(int ticks, int maxLevel) {
-        if (ticks <= 0) {
-            this.stamina = 0;
-            return;
-        }
-        this.stamina = Mth.clamp((int) Math.ceil(((double) this.remaining / ticks) * maxLevel), 0, maxLevel);
+        this.stamina = levelFor(this.remaining, ticks, maxLevel);
     }
 
     public int getRemaining() {

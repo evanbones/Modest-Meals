@@ -6,6 +6,7 @@ import com.evandev.modest_meals.client.ClientEventHandler;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.event.CommonEventHandler;
+import com.evandev.modest_meals.food.CustomFoodDatapack;
 import com.evandev.modest_meals.network.ModNetworking;
 import com.evandev.modest_meals.trait.FoodTraitType;
 import net.neoforged.bus.api.IEventBus;
@@ -23,6 +24,7 @@ public class ModestMeals {
         FoodTraitType.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModNetworking::registerPayloads);
+        modEventBus.addListener(CustomFoodDatapack::onAddPackFinders);
 
         NeoForge.EVENT_BUS.register(CommonEventHandler.class);
 

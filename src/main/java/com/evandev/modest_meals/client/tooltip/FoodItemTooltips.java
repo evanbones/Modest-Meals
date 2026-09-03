@@ -134,6 +134,10 @@ public class FoodItemTooltips {
         );
     }
 
+    public static boolean hasTooltipLine(FoodTrait trait) {
+        return !(trait instanceof HealthAdditionTrait || trait instanceof StaminaAdditionTrait);
+    }
+
     private static void addTraitLines(List<Component> lines, ItemStack stack) {
         if (!FoodValues.isFood(stack)) {
             return;
@@ -149,7 +153,7 @@ public class FoodItemTooltips {
         boolean headerAdded = false;
 
         for (FoodTrait trait : traits) {
-            if (trait instanceof HealthAdditionTrait || trait instanceof StaminaAdditionTrait) {
+            if (!hasTooltipLine(trait)) {
                 continue;
             }
             if (!headerAdded) {
