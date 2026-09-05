@@ -119,7 +119,8 @@ public class TraitEditDialog extends Screen {
 
         List<String> typeIds = availableTypes.stream().map(TraitEditDialog::typeId).toList();
         this.typeDropdown = new DropdownWidget(contentX, panelY + TITLE_H + GAP, contentW, ROW_H,
-                Component.empty(), typeIds, TraitEditDialog::typeLabel, this::onTypeSelected).searchable();
+                Component.empty(), typeIds, TraitEditDialog::typeLabel, this::onTypeSelected)
+                .searchable("gui.modest_meals.search.traits");
         this.typeDropdown.setSelectedValue(currentType != null ? typeId(currentType) : null);
         this.addRenderableWidget(this.typeDropdown);
 

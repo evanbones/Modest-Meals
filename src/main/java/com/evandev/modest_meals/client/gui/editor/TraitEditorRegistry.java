@@ -131,7 +131,8 @@ public class TraitEditorRegistry {
 
         @Override
         public void buildForm(FormBuilder form) {
-            form.choice("gui.modest_meals.field.effect", effectIds, EffectGrantEditor::labelFor, effectId, v -> effectId = v);
+            form.choice("gui.modest_meals.field.effect", effectIds, EffectGrantEditor::labelFor, effectId, v -> effectId = v,
+                    "gui.modest_meals.search.effects");
             form.decimal("gui.modest_meals.field.duration", 0, MAX_SECONDS, durationSeconds, v -> durationSeconds = v);
             form.integer("gui.modest_meals.field.level", 1, 255, level, v -> level = (int) v);
             form.toggle("gui.modest_meals.field.particles", showParticles, v -> showParticles = v);

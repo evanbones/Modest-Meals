@@ -34,6 +34,7 @@ public class DropdownWidget extends AbstractWidget {
     private String selectedValue;
     private boolean open = false;
     private boolean searchable = false;
+    private Component searchPlaceholder = Component.translatable("gui.modest_meals.search.generic");
     private String filter = "";
     private double scrollAmount = 0;
 
@@ -48,8 +49,9 @@ public class DropdownWidget extends AbstractWidget {
         refilter();
     }
 
-    public DropdownWidget searchable() {
+    public DropdownWidget searchable(String placeholderKey) {
         this.searchable = true;
+        this.searchPlaceholder = Component.translatable(placeholderKey);
         return this;
     }
 
@@ -274,7 +276,7 @@ public class DropdownWidget extends AbstractWidget {
             guiGraphics.blitSprite(GuiUtil.TEXT_FIELD_HIGHLIGHTED, cx, cy, cw, SEARCH_H);
             RenderSystem.disableBlend();
             boolean empty = filter.isEmpty();
-            String shown = empty ? Component.translatable("gui.modest_meals.search").getString() : filter + "_";
+            String shown = empty ? searchPlaceholder.getString() : filter + "_";
             guiGraphics.drawString(font, GuiUtil.trim(font, shown, cw - 8),
                     cx + 4, cy + (SEARCH_H - 8) / 2, empty ? 0xFF808080 : GuiUtil.WHITE);
         }
@@ -307,8 +309,7 @@ public class DropdownWidget extends AbstractWidget {
             guiGraphics.disableScissor();
         }
 
-        GuiUtil.drawVanillaScrollbar(guiGraphics, cx + cw, rowsY, rowsH, scrollAmount, maxScroll());
-
+        GuiUtil.drawVanillaScrollbar(guiGraphics, cx + cw, cy, ch, scrollAmount, maxScroll());
         guiGraphics.pose().popPose();
     }
 

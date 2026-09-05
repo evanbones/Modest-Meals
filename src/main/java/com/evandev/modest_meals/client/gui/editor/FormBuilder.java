@@ -135,7 +135,7 @@ public class FormBuilder {
     }
 
     public FormBuilder choice(String labelKey, List<String> choices, Function<String, Component> labeller,
-                              String selected, Consumer<String> sink) {
+                              String selected, Consumer<String> sink, String searchPlaceholderKey) {
         addLabel(Component.translatable(labelKey));
 
         String start = selected;
@@ -150,7 +150,7 @@ public class FormBuilder {
             this.values.put(labelKey, v);
             sink.accept(v);
             changed();
-        }).searchable();
+        }).searchable(searchPlaceholderKey);
         dropdown.setSelectedValue(start);
         dropdowns.add(dropdown);
         placed.add(new Placed(dropdown, cursorY));

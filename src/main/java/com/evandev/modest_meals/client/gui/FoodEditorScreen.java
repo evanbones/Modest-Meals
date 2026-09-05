@@ -13,7 +13,7 @@ import com.evandev.modest_meals.trait.FoodTraitManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,34 +36,41 @@ public class FoodEditorScreen extends Screen {
     private static final int TRAIT_ROW_H = 20;
     private static final int BUTTON_H = 18;
 
+    private static final int PANE_PAD = 3;
+    private static final int VY_NUTRITION = 26;
+    private static final int VY_PROFILE_HEADER = 46;
+    private static final int VY_PROFILE_SUMMARY = 62;
+    private static final int PROFILE_SUMMARY_MAX_LINES = 4;
+    private static final int EMPTY_TRAITS_H = 20;
+
     private final Screen parent;
     private final Map<String, List<FoodTrait>> customTraits;
+    private final Map<String, Set<String>> customSuppressions;
     private final List<FoodProfile> customProfiles;
 
     private final List<Candidate> candidates = new ArrayList<>();
-
+    private final List<AbstractWidget> paneWidgets = new ArrayList<>();
     private ModEditBox searchBox;
     private DropdownWidget filterDropdown;
     private FoodItemList itemList;
-
     private Item selectedItem;
     private FilterMode filterMode = FilterMode.FOODS_ONLY;
-
     private Component statusMessage = null;
     private int statusMessageTicks = 0;
-
+    private boolean dirty = false;
     private String pendingSearch = "";
     private double pendingListScroll = 0;
-
-    private double traitScroll = 0;
-    private boolean draggingTraitScrollbar = false;
-
+    private double paneScroll = 0;
+    private boolean draggingPaneScrollbar = false;
     private int leftX, leftW, rightX, rightW, contentTop, contentBottom;
 
     public FoodEditorScreen(Screen parent) {
         super(Component.translatable("gui.modest_meals.food_editor.title"));
         this.parent = parent;
         this.customTraits = new LinkedHashMap<>(CustomFoodDatapack.readCustomTraits());
+        this.customSuppressions = new LinkedHashMap<>();
+        CustomFoodDatapack.readCustomSuppressions().forEach((id, keys) ->
+                this.customSuppressions.put(id, new LinkedHashSet<>(keys)));
         this.customProfiles = new ArrayList<>(CustomFoodDatapack.readCustomProfiles());
 
         for (Item item : BuiltInRegistries.ITEM) {
@@ -114,7 +121,9 @@ public class FoodEditorScreen extends Screen {
     }
 
     private void layoutWidgets() {
+        if (this.itemList != null) this.pendingListScroll = this.itemList.getScrollAmount();
         this.clearWidgets();
+        this.paneWidgets.clear();
 
         this.searchBox = new ModEditBox(this.font, leftX, searchY(), leftW, SEARCH_H,
                 Component.translatable("gui.modest_meals.search"));
@@ -123,6 +132,8 @@ public class FoodEditorScreen extends Screen {
         this.searchBox.setResponder(s -> {
             this.pendingSearch = s;
             refreshItemList();
+            this.itemList.setScrollAmount(0);
+            this.pendingListScroll = 0;
         });
         this.addRenderableWidget(this.searchBox);
 
@@ -146,12 +157,14 @@ public class FoodEditorScreen extends Screen {
 
         int footerY = this.height - FOOTER_H + 6;
         this.addRenderableWidget(new ModButton(GUTTER, footerY, 70, 20, CommonComponents.GUI_DONE,
-                b -> this.minecraft.setScreen(this.parent)));
+                b -> this.onClose()));
 
         int saveW = 110;
         int saveX = this.width - GUTTER - saveW;
-        this.addRenderableWidget(new ModButton(saveX, footerY, saveW, 20,
-                Component.translatable("gui.modest_meals.save_and_apply"), b -> saveAndApply()));
+        ModButton saveButton = new ModButton(saveX, footerY, saveW, 20,
+                Component.translatable("gui.modest_meals.save_and_apply"), b -> saveAndApply());
+        saveButton.active = dirty;
+        this.addRenderableWidget(saveButton);
 
         if (selectedItem != null && isCustomized(itemId(selectedItem))) {
             int resetW = 90;
@@ -164,105 +177,155 @@ public class FoodEditorScreen extends Screen {
         }
     }
 
-    private int sectionY(int preferredY) {
-        return Mth.clamp(preferredY, contentTop, Math.max(contentTop, contentBottom - BUTTON_H));
+    private int paneContentX() {
+        return rightX + PANE_PAD;
     }
 
-    private int scalingHeaderY() {
-        return sectionY(contentTop + 46);
+    private int paneContentWidth() {
+        return Math.max(1, rightW - GuiUtil.SCROLLBAR_EXTRA_WIDTH - PANE_PAD * 2);
     }
 
-    private int traitsHeaderY() {
-        return sectionY(scalingHeaderY() + 38);
+    private int paneTop() {
+        return contentTop + PANE_PAD;
     }
 
-    private int traitsTop() {
-        return traitsHeaderY() + 14;
+    private int paneViewHeight() {
+        return Math.max(0, contentBottom - PANE_PAD - paneTop());
     }
 
-    private int traitsViewHeight() {
-        return Math.max(0, contentBottom - traitsTop());
+    private int paneY(int virtualY) {
+        return paneTop() + virtualY - (int) paneScroll;
     }
 
-    private int traitRowWidth() {
-        return rightW - GuiUtil.SCROLLBAR_EXTRA_WIDTH;
+    private int scrollbarX() {
+        return rightX + rightW - GuiUtil.SCROLLBAR_EXTRA_WIDTH;
+    }
+
+    private int scrollTrackHeight() {
+        return Math.max(0, contentBottom - contentTop);
+    }
+
+    private Component profileSummary() {
+        FoodProfile profile = getResolvedProfile(selectedItem);
+        return Component.translatable("gui.modest_meals.profile_summary",
+                fmt(profile.healthPerNutrition()), fmt(profile.healthTicksPerPoint()),
+                fmt(profile.staminaPerNutrition()));
+    }
+
+    private int profileSummaryLines() {
+        if (selectedItem == null) return 1;
+        return Math.max(1, GuiUtil.wrap(this.font, profileSummary().getString(),
+                paneContentWidth(), PROFILE_SUMMARY_MAX_LINES).size());
+    }
+
+    private int vyTraitsHeader() {
+        return VY_PROFILE_SUMMARY + profileSummaryLines() * GuiUtil.LINE_H + 8;
+    }
+
+    private int vyTraitsTop() {
+        return vyTraitsHeader() + 14;
+    }
+
+    private int paneContentHeight() {
+        if (selectedItem == null) return 0;
+        int rows = getEffectiveTraits(selectedItem).size();
+        return vyTraitsTop() + (rows == 0 ? EMPTY_TRAITS_H : rows * TRAIT_ROW_H);
+    }
+
+    private int maxPaneScroll() {
+        return Math.max(0, paneContentHeight() - paneViewHeight());
+    }
+
+    private void addPaneWidget(AbstractWidget widget) {
+        if (widget.getY() + widget.getHeight() <= contentTop || widget.getY() >= contentBottom) return;
+        this.paneWidgets.add(widget);
+        this.addWidget(widget);
+    }
+
+    private void renderPaneWidgets(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        int hoverY = mouseY >= contentTop && mouseY < contentBottom ? mouseY : -1;
+        for (AbstractWidget widget : paneWidgets) {
+            widget.render(graphics, mouseX, hoverY, partialTick);
+        }
     }
 
     private void rebuildRightPane() {
         String itemId = itemId(selectedItem);
+        this.paneScroll = Mth.clamp(this.paneScroll, 0, maxPaneScroll());
 
-        int editW = Math.min(90, Math.max(50, rightW / 3));
-        this.addRenderableWidget(new ModButton(rightX + rightW - editW, scalingHeaderY() - 4, editW, BUTTON_H,
+        int contentW = paneContentWidth();
+
+        int editW = Math.min(90, Math.max(50, contentW / 3));
+        addPaneWidget(new PaneButton(paneContentX() + contentW - editW, paneY(VY_PROFILE_HEADER - 4), editW, BUTTON_H,
                 Component.translatable("gui.modest_meals.edit_profile"), b -> {
             FoodProfile prof = getResolvedProfile(selectedItem);
             this.minecraft.setScreen(new ProfileEditDialog(this, selectedItem, prof, newProf -> {
                 customProfiles.removeIf(p -> p.match().equals(itemId) || p.id().equals(itemId + "_override"));
                 customProfiles.add(newProf);
+                dirty = true;
                 layoutWidgets();
                 setStatus("gui.modest_meals.profile_updated");
             }));
         }));
 
-        int addW = Math.min(90, Math.max(50, rightW / 3));
-        this.addRenderableWidget(new ModButton(rightX + rightW - addW, traitsHeaderY() - 4, addW, BUTTON_H,
+        addPaneWidget(new PaneButton(paneContentX() + contentW - editW, paneY(vyTraitsHeader() - 4), editW, BUTTON_H,
                 Component.translatable("gui.modest_meals.add_trait"), b ->
                 this.minecraft.setScreen(new TraitEditDialog(this, newTrait -> {
-                    traitsFor(itemId).add(newTrait);
-                    this.traitScroll = 0;
+                    putTrait(itemId, newTrait);
+                    dirty = true;
+                    this.paneScroll = 0;
                     layoutWidgets();
                     setStatus("gui.modest_meals.trait_added");
                 }, null))));
 
         List<FoodTrait> traits = getEffectiveTraits(selectedItem);
-        this.traitScroll = Mth.clamp(this.traitScroll, 0, maxTraitScroll(traits.size()));
-
-        int viewTop = traitsTop();
-        int viewBottom = viewTop + traitsViewHeight();
         int delW = 18;
         int editBtnW = 34;
-        int delX = rightX + traitRowWidth() - delW - 2;
+        int delX = paneContentX() + contentW - delW - 2;
         int editBtnX = delX - editBtnW - 3;
+        int rowsTop = vyTraitsTop();
 
         for (int i = 0; i < traits.size(); i++) {
-            final int traitIndex = i;
             final FoodTrait trait = traits.get(i);
+            int rowY = paneY(rowsTop + i * TRAIT_ROW_H);
 
-            int rowY = viewTop + i * TRAIT_ROW_H - (int) traitScroll;
-            if (rowY + TRAIT_ROW_H <= viewTop || rowY >= viewBottom) continue;
-
-            Button edit = new ModButton(editBtnX, rowY + 1, editBtnW, 16,
+            addPaneWidget(new PaneButton(editBtnX, rowY + 1, editBtnW, 16,
                     Component.translatable("gui.modest_meals.edit"), b ->
                     this.minecraft.setScreen(new TraitEditDialog(this, editedTrait -> {
-                        List<FoodTrait> list = traitsFor(itemId);
-                        if (traitIndex < list.size()) {
-                            list.set(traitIndex, editedTrait);
-                        } else {
-                            list.add(editedTrait);
-                        }
+                        removeTrait(itemId, trait);
+                        putTrait(itemId, editedTrait);
+                        dirty = true;
                         layoutWidgets();
                         setStatus("gui.modest_meals.trait_updated");
-                    }, trait)));
+                    }, trait))));
 
-            Button delete = new ModButton(delX, rowY + 1, delW, 16,
+            addPaneWidget(new PaneButton(delX, rowY + 1, delW, 16,
                     Component.literal("x").withStyle(ChatFormatting.RED), b -> {
-                List<FoodTrait> list = traitsFor(itemId);
-                if (traitIndex < list.size()) list.remove(traitIndex);
+                removeTrait(itemId, trait);
+                dirty = true;
                 layoutWidgets();
                 setStatus("gui.modest_meals.trait_removed");
-            });
-
-            this.addRenderableWidget(edit);
-            this.addRenderableWidget(delete);
+            }));
         }
     }
 
     private List<FoodTrait> traitsFor(String itemId) {
         return customTraits.computeIfAbsent(itemId,
-                k -> new ArrayList<>(FoodTraitManager.getBaselineTraits(selectedItem)));
+                k -> new ArrayList<>(FoodTraitManager.getBaselineItemTraits(selectedItem)));
     }
 
-    private int maxTraitScroll(int traitCount) {
-        return Math.max(0, traitCount * TRAIT_ROW_H - traitsViewHeight());
+    private void putTrait(String itemId, FoodTrait trait) {
+        String key = FoodTraitManager.getMergeKey(trait);
+        List<FoodTrait> list = traitsFor(itemId);
+        list.removeIf(t -> FoodTraitManager.getMergeKey(t).equals(key));
+        list.add(trait);
+        suppressionsFor(itemId).remove(key);
+    }
+
+    private void removeTrait(String itemId, FoodTrait trait) {
+        String key = FoodTraitManager.getMergeKey(trait);
+        traitsFor(itemId).removeIf(t -> FoodTraitManager.getMergeKey(t).equals(key));
+        suppressionsFor(itemId).add(key);
     }
 
     private void refreshItemList() {
@@ -283,7 +346,11 @@ public class FoodEditorScreen extends Screen {
     }
 
     private boolean isCustomized(String itemId) {
-        return customTraits.containsKey(itemId) || hasCustomProfile(itemId);
+        return customTraits.containsKey(itemId) || !suppressionsFor(itemId).isEmpty() || hasCustomProfile(itemId);
+    }
+
+    private Set<String> suppressionsFor(String itemId) {
+        return customSuppressions.computeIfAbsent(itemId, k -> new LinkedHashSet<>());
     }
 
     private boolean hasCustomProfile(String itemId) {
@@ -304,13 +371,27 @@ public class FoodEditorScreen extends Screen {
 
     private List<FoodTrait> getEffectiveTraits(Item item) {
         String id = itemId(item);
-        if (customTraits.containsKey(id)) return customTraits.get(id);
-        return FoodTraitManager.getBaselineTraits(item);
+        Set<String> suppressed = suppressionsFor(id);
+
+        Map<String, FoodTrait> merged = new LinkedHashMap<>();
+        List<FoodTrait> own = customTraits.containsKey(id)
+                ? customTraits.get(id)
+                : FoodTraitManager.getBaselineItemTraits(item);
+        for (FoodTrait trait : own) {
+            merged.putIfAbsent(FoodTraitManager.getMergeKey(trait), trait);
+        }
+        for (FoodTrait trait : FoodTraitManager.getBaselineTagTraits(item)) {
+            merged.putIfAbsent(FoodTraitManager.getMergeKey(trait), trait);
+        }
+        merged.keySet().removeAll(suppressed);
+
+        return FoodValues.withDerived(new ItemStack(item), new ArrayList<>(merged.values()),
+                getResolvedProfile(item), suppressed);
     }
 
     public void selectItem(Item item) {
         this.selectedItem = item;
-        this.traitScroll = 0;
+        this.paneScroll = 0;
         if (this.itemList != null) this.pendingListScroll = this.itemList.getScrollAmount();
         layoutWidgets();
     }
@@ -319,13 +400,20 @@ public class FoodEditorScreen extends Screen {
         if (selectedItem == null) return;
         String id = itemId(selectedItem);
         customTraits.remove(id);
+        customSuppressions.remove(id);
         customProfiles.removeIf(p -> p.match().equals(id) || p.id().equals(id + "_override"));
+        dirty = true;
         layoutWidgets();
         setStatus("gui.modest_meals.item_reset");
     }
 
     private void saveAndApply() {
-        CustomFoodDatapack.saveCustomTraits(customTraits);
+        if (!dirty) return;
+
+        customTraits.values().removeIf(List::isEmpty);
+        customSuppressions.values().removeIf(Set::isEmpty);
+
+        CustomFoodDatapack.saveCustomTraits(customTraits, customSuppressions);
         CustomFoodDatapack.saveCustomProfiles(customProfiles);
 
         FoodTraitManager.restoreBaseline();
@@ -336,16 +424,41 @@ public class FoodEditorScreen extends Screen {
                 FoodTraitManager.setItemTraits(ResourceLocation.parse(entry.getKey()), entry.getValue());
             }
         }
+        for (Map.Entry<String, Set<String>> entry : customSuppressions.entrySet()) {
+            if (!entry.getKey().startsWith("#")) {
+                ResourceLocation id = ResourceLocation.parse(entry.getKey());
+                Set<String> keys = new LinkedHashSet<>(FoodTraitManager.getBaselineSuppressions(id));
+                keys.addAll(entry.getValue());
+                FoodTraitManager.setSuppressions(id, keys);
+            }
+        }
         for (FoodProfile p : customProfiles) {
             FoodProfileManager.upsertProfile(p);
         }
 
+        dirty = false;
+        layoutWidgets();
         setStatus("gui.modest_meals.saved_and_applied");
     }
 
     private void setStatus(String translationKey) {
         this.statusMessage = Component.translatable(translationKey).withStyle(ChatFormatting.GREEN);
         this.statusMessageTicks = 60;
+    }
+
+    @Override
+    public void onClose() {
+        if (this.minecraft == null) return;
+        if (!dirty) {
+            this.minecraft.setScreen(this.parent);
+            return;
+        }
+        this.minecraft.setScreen(new UnsavedChangesModal(this,
+                () -> {
+                    saveAndApply();
+                    this.minecraft.setScreen(this.parent);
+                },
+                () -> this.minecraft.setScreen(this.parent)));
     }
 
     @Override
@@ -361,35 +474,29 @@ public class FoodEditorScreen extends Screen {
             this.setFocused(filterDropdown);
             return true;
         }
-        if (button == 0 && isOverTraitScrollbar(mouseX, mouseY)) {
-            this.draggingTraitScrollbar = true;
-            updateTraitScroll(mouseY);
+        if (button == 0 && isOverPaneScrollbar(mouseX, mouseY)) {
+            this.draggingPaneScrollbar = true;
+            updatePaneScroll(mouseY);
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    private int currentMaxTraitScroll() {
-        return selectedItem == null ? 0 : maxTraitScroll(getEffectiveTraits(selectedItem).size());
+    private boolean isOverPaneScrollbar(double mouseX, double mouseY) {
+        if (maxPaneScroll() <= 0) return false;
+        return mouseX >= scrollbarX() && mouseX < scrollbarX() + GuiUtil.SCROLLBAR_WIDTH
+                && mouseY >= contentTop && mouseY < contentBottom;
     }
 
-    private boolean isOverTraitScrollbar(double mouseX, double mouseY) {
-        if (currentMaxTraitScroll() <= 0) return false;
-        int barX = rightX + traitRowWidth();
-        return mouseX >= barX && mouseX < barX + GuiUtil.SCROLLBAR_WIDTH
-                && mouseY >= traitsTop() && mouseY < traitsTop() + traitsViewHeight();
-    }
-
-    private void updateTraitScroll(double mouseY) {
-        this.traitScroll = GuiUtil.scrollAmountFromMouse(mouseY, traitsTop(), traitsViewHeight(),
-                currentMaxTraitScroll());
+    private void updatePaneScroll(double mouseY) {
+        this.paneScroll = GuiUtil.scrollAmountFromMouse(mouseY, contentTop, scrollTrackHeight(), maxPaneScroll());
         layoutWidgets();
     }
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
-        if (draggingTraitScrollbar) {
-            updateTraitScroll(mouseY);
+        if (draggingPaneScrollbar) {
+            updatePaneScroll(mouseY);
             return true;
         }
         return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
@@ -397,7 +504,7 @@ public class FoodEditorScreen extends Screen {
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        this.draggingTraitScrollbar = false;
+        this.draggingPaneScrollbar = false;
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
@@ -407,10 +514,10 @@ public class FoodEditorScreen extends Screen {
                 && filterDropdown.mouseScrolled(mouseX, mouseY, scrollX, scrollY)) {
             return true;
         }
-        int max = currentMaxTraitScroll();
-        if (max > 0 && mouseX >= rightX && mouseX < rightX + rightW
-                && mouseY >= traitsTop() && mouseY < traitsTop() + traitsViewHeight()) {
-            this.traitScroll = Mth.clamp(this.traitScroll - scrollY * TRAIT_ROW_H, 0, max);
+        int max = maxPaneScroll();
+        if (max > 0 && mouseX >= rightX && mouseX < rightX + rightW + GuiUtil.SCROLLBAR_EXTRA_WIDTH
+                && mouseY >= contentTop && mouseY < contentBottom) {
+            this.paneScroll = Mth.clamp(this.paneScroll - scrollY * TRAIT_ROW_H, 0, max);
             layoutWidgets();
             return true;
         }
@@ -450,7 +557,7 @@ public class FoodEditorScreen extends Screen {
         }
 
         if (selectedItem != null) {
-            renderDetailPane(graphics);
+            renderDetailPane(graphics, mouseX, mouseY, partialTick);
         } else {
             GuiUtil.drawWrappedCentered(graphics, this.font, Component.translatable("gui.modest_meals.no_item_selected"),
                     rightX + rightW / 2, contentTop + (contentBottom - contentTop) / 2, rightW,
@@ -460,80 +567,78 @@ public class FoodEditorScreen extends Screen {
         if (filterDropdown != null) filterDropdown.renderOverlay(graphics, mouseX, mouseY);
     }
 
-    private void renderDetailPane(GuiGraphics graphics) {
+    private void renderDetailPane(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         ItemStack stack = new ItemStack(selectedItem);
         String id = itemId(selectedItem);
+        int contentX = paneContentX();
+        int contentW = paneContentWidth();
 
-        GuiUtil.drawSlot(graphics, rightX, contentTop);
-        graphics.renderFakeItem(stack, rightX + 1, contentTop + 1);
-        graphics.renderItemDecorations(this.font, stack, rightX + 1, contentTop + 1);
+        graphics.enableScissor(rightX, contentTop, rightX + rightW, contentBottom);
 
-        int textX = rightX + 24;
-        int textW = rightW - 24;
-        GuiUtil.drawTrimmed(graphics, this.font, stack.getHoverName(), textX, contentTop + 1, textW, GuiUtil.WHITE);
-        GuiUtil.drawTrimmed(graphics, this.font, Component.literal(id), textX, contentTop + 11, textW, GuiUtil.DIM);
+        int slotY = paneY(0);
+        GuiUtil.drawSlot(graphics, contentX, slotY);
+        graphics.renderFakeItem(stack, contentX + 1, slotY + 1);
+        graphics.renderItemDecorations(this.font, stack, contentX + 1, slotY + 1);
+
+        int textX = contentX + 24;
+        int textW = contentW - 24;
+        GuiUtil.drawTrimmed(graphics, this.font, stack.getHoverName(), textX, slotY + 1, textW, GuiUtil.WHITE);
+        GuiUtil.drawTrimmed(graphics, this.font, Component.literal(id), textX, slotY + 11, textW, GuiUtil.DIM);
 
         int nutrition = FoodValues.nutritionOf(stack);
         boolean isFood = FoodValues.isFood(stack);
         Component nutrText = isFood
                 ? Component.translatable("gui.modest_meals.nutrition_value", nutrition).withStyle(ChatFormatting.GOLD)
                 : Component.translatable("gui.modest_meals.not_food").withStyle(ChatFormatting.GRAY);
-        GuiUtil.drawTrimmed(graphics, this.font, nutrText, rightX, contentTop + 26, rightW, GuiUtil.WHITE);
+        GuiUtil.drawTrimmed(graphics, this.font, nutrText, contentX, paneY(VY_NUTRITION), contentW, GuiUtil.WHITE);
 
-        int scalingY = scalingHeaderY();
-        GuiUtil.drawSeparator(graphics, rightX, scalingY - 8, rightW);
-        int editW = Math.min(90, Math.max(50, rightW / 3));
+        int profileY = paneY(VY_PROFILE_HEADER);
+        GuiUtil.drawSeparator(graphics, contentX, profileY - 8, contentW);
+        int editW = Math.min(90, Math.max(50, contentW / 3));
         GuiUtil.drawTrimmed(graphics, this.font,
                 Component.translatable("gui.modest_meals.food_profile_header").withStyle(ChatFormatting.YELLOW),
-                rightX, scalingY, rightW - editW - 6, 0xFFFF55);
+                contentX, profileY, contentW - editW - 6, 0xFFFF55);
 
-        FoodProfile profile = getResolvedProfile(selectedItem);
-        Component profInfo = Component.translatable("gui.modest_meals.profile_summary",
-                fmt(profile.healthPerNutrition()), fmt(profile.healthTicksPerPoint()), fmt(profile.staminaPerNutrition()));
-        int summaryTop = scalingY + 16;
-        GuiUtil.drawWrapped(graphics, this.font, profInfo, rightX, summaryTop, rightW,
-                Math.max(1, (traitsHeaderY() - 8 - summaryTop) / GuiUtil.LINE_H), GuiUtil.LABEL);
+        GuiUtil.drawWrapped(graphics, this.font, profileSummary(), contentX, paneY(VY_PROFILE_SUMMARY), contentW,
+                PROFILE_SUMMARY_MAX_LINES, GuiUtil.LABEL);
 
-        int traitsY = traitsHeaderY();
-        GuiUtil.drawSeparator(graphics, rightX, traitsY - 8, rightW);
-        int addW = Math.min(90, Math.max(50, rightW / 3));
+        int traitsY = paneY(vyTraitsHeader());
+        GuiUtil.drawSeparator(graphics, contentX, traitsY - 8, contentW);
         GuiUtil.drawTrimmed(graphics, this.font,
                 Component.translatable("gui.modest_meals.traits_header").withStyle(ChatFormatting.YELLOW),
-                rightX, traitsY, rightW - addW - 6, 0xFFFF55);
+                contentX, traitsY, contentW - editW - 6, 0xFFFF55);
 
-        renderTraitRows(graphics);
+        renderTraitRows(graphics, contentX, contentW);
+        renderPaneWidgets(graphics, mouseX, mouseY, partialTick);
+
+        graphics.disableScissor();
+
+        if (maxPaneScroll() > 0) {
+            GuiUtil.drawVanillaScrollbar(graphics, scrollbarX(), contentTop, scrollTrackHeight(),
+                    paneScroll, maxPaneScroll());
+        }
     }
 
-    private void renderTraitRows(GuiGraphics graphics) {
+    private void renderTraitRows(GuiGraphics graphics, int contentX, int contentW) {
         List<FoodTrait> traits = getEffectiveTraits(selectedItem);
-        int viewTop = traitsTop();
-        int viewH = traitsViewHeight();
-        if (viewH <= 0) return;
+        int rowsTop = vyTraitsTop();
 
         if (traits.isEmpty()) {
             GuiUtil.drawWrapped(graphics, this.font,
                     Component.translatable("gui.modest_meals.no_traits")
                             .withStyle(ChatFormatting.ITALIC, ChatFormatting.DARK_GRAY),
-                    rightX, viewTop + 4, rightW, Math.max(1, (viewH - 4) / GuiUtil.LINE_H), GuiUtil.DIM);
+                    contentX, paneY(rowsTop) + 4, contentW, EMPTY_TRAITS_H / GuiUtil.LINE_H, GuiUtil.DIM);
             return;
         }
 
-        int textWidth = traitRowWidth() - 34 - 18 - 10;
-
-        graphics.enableScissor(rightX, viewTop, rightX + rightW, viewTop + viewH);
+        int textWidth = contentW - 34 - 18 - 10;
         for (int i = 0; i < traits.size(); i++) {
-            int rowY = viewTop + i * TRAIT_ROW_H - (int) traitScroll;
-            if (rowY + TRAIT_ROW_H <= viewTop || rowY >= viewTop + viewH) continue;
+            int rowY = paneY(rowsTop + i * TRAIT_ROW_H);
+            if (rowY + TRAIT_ROW_H <= contentTop || rowY >= contentBottom) continue;
 
             Component tooltip = traits.get(i).getTooltipComponent(1.0, 1.0);
             if (tooltip == null) continue;
-            GuiUtil.drawTrimmed(graphics, this.font, tooltip, rightX, rowY + 5, textWidth, GuiUtil.WHITE);
-        }
-        graphics.disableScissor();
-
-        int max = maxTraitScroll(traits.size());
-        if (max > 0) {
-            GuiUtil.drawVanillaScrollbar(graphics, rightX + traitRowWidth(), viewTop, viewH, traitScroll, max);
+            GuiUtil.drawTrimmed(graphics, this.font, tooltip, contentX, rowY + 5, textWidth, GuiUtil.WHITE);
         }
     }
 
@@ -696,6 +801,26 @@ public class FoodEditorScreen extends Screen {
             public @NotNull Component getNarration() {
                 return new ItemStack(item).getHoverName();
             }
+        }
+    }
+
+    private class PaneButton extends ModButton {
+        PaneButton(int x, int y, int width, int height, Component message, OnPress onPress) {
+            super(x, y, width, height, message, onPress);
+        }
+
+        private boolean withinPane(double mouseY) {
+            return mouseY >= contentTop && mouseY < contentBottom;
+        }
+
+        @Override
+        protected boolean clicked(double mouseX, double mouseY) {
+            return withinPane(mouseY) && super.clicked(mouseX, mouseY);
+        }
+
+        @Override
+        public boolean isMouseOver(double mouseX, double mouseY) {
+            return withinPane(mouseY) && super.isMouseOver(mouseX, mouseY);
         }
     }
 }

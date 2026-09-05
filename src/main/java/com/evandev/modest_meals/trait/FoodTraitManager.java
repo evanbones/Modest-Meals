@@ -32,9 +32,11 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
 
     private final Map<ResourceLocation, List<FoodTrait>> itemTraits = new ConcurrentHashMap<>();
     private final Map<TagKey<Item>, List<FoodTrait>> tagTraits = new ConcurrentHashMap<>();
+    private final Map<ResourceLocation, Set<String>> itemSuppressions = new ConcurrentHashMap<>();
 
     private final Map<ResourceLocation, List<FoodTrait>> baselineItemTraits = new ConcurrentHashMap<>();
     private final Map<TagKey<Item>, List<FoodTrait>> baselineTagTraits = new ConcurrentHashMap<>();
+    private final Map<ResourceLocation, Set<String>> baselineSuppressions = new ConcurrentHashMap<>();
 
     public FoodTraitManager() {
         super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "food_traits");
@@ -49,16 +51,21 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     }
 
     public static List<FoodTrait> getTraits(Item item) {
-        return merge(item, INSTANCE.itemTraits, INSTANCE.tagTraits);
+        return merge(item, INSTANCE.itemTraits, INSTANCE.tagTraits, suppressionsFor(item));
     }
 
-    public static List<FoodTrait> getBaselineTraits(Item item) {
-        return merge(item, INSTANCE.baselineItemTraits, INSTANCE.baselineTagTraits);
+    public static List<FoodTrait> getBaselineItemTraits(Item item) {
+        List<FoodTrait> direct = INSTANCE.baselineItemTraits.get(BuiltInRegistries.ITEM.getKey(item));
+        return direct == null ? List.of() : List.copyOf(direct);
+    }
+
+    public static List<FoodTrait> getBaselineTagTraits(Item item) {
+        return merge(item, Map.of(), INSTANCE.baselineTagTraits, Set.of());
     }
 
     private static List<FoodTrait> merge(Item item, Map<ResourceLocation, List<FoodTrait>> itemSource,
-                                         Map<TagKey<Item>, List<FoodTrait>> tagSource) {
-        Map<Object, FoodTrait> resolved = new LinkedHashMap<>();
+                                         Map<TagKey<Item>, List<FoodTrait>> tagSource, Set<String> suppressed) {
+        Map<String, FoodTrait> resolved = new LinkedHashMap<>();
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
 
         List<FoodTrait> direct = itemSource.get(itemId);
@@ -77,14 +84,46 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
             }
         }
 
+        resolved.keySet().removeAll(suppressed);
         return new ArrayList<>(resolved.values());
     }
 
-    public static Object getMergeKey(FoodTrait trait) {
+    public static String getMergeKey(FoodTrait trait) {
         if (trait instanceof EffectGrantTrait effectGrant) {
             return "effect_grant:" + effectGrant.effect().getRegisteredName();
         }
-        return trait.getType();
+        return mergeKeyOf(trait.getType());
+    }
+
+    public static String mergeKeyOf(FoodTraitType<?> type) {
+        ResourceLocation key = FoodTraitType.REGISTRY.getKey(type);
+        return key == null ? String.valueOf(type) : key.toString();
+    }
+
+    public static Set<String> suppressionsFor(Item item) {
+        return suppressionsFor(BuiltInRegistries.ITEM.getKey(item));
+    }
+
+    public static Set<String> suppressionsFor(ResourceLocation itemId) {
+        return INSTANCE.itemSuppressions.getOrDefault(itemId, Set.of());
+    }
+
+    public static Set<String> getBaselineSuppressions(ResourceLocation itemId) {
+        return INSTANCE.baselineSuppressions.getOrDefault(itemId, Set.of());
+    }
+
+    public static void setSuppressions(ResourceLocation itemId, Collection<String> mergeKeys) {
+        if (mergeKeys == null || mergeKeys.isEmpty()) {
+            INSTANCE.itemSuppressions.remove(itemId);
+        } else {
+            INSTANCE.itemSuppressions.put(itemId, Set.copyOf(mergeKeys));
+        }
+    }
+
+    public static Map<ResourceLocation, List<String>> snapshotSuppressions() {
+        Map<ResourceLocation, List<String>> copy = new LinkedHashMap<>();
+        INSTANCE.itemSuppressions.forEach((id, keys) -> copy.put(id, List.copyOf(keys)));
+        return copy;
     }
 
     public static Map<ResourceLocation, List<FoodTrait>> snapshotItemTraits() {
@@ -95,16 +134,21 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         return Map.copyOf(INSTANCE.tagTraits);
     }
 
-    public static void applyFromNetwork(Map<ResourceLocation, List<FoodTrait>> itemTraits, Map<TagKey<Item>, List<FoodTrait>> tagTraits, boolean updateBaseline) {
+    public static void applyFromNetwork(Map<ResourceLocation, List<FoodTrait>> itemTraits, Map<TagKey<Item>, List<FoodTrait>> tagTraits,
+                                        Map<ResourceLocation, List<String>> suppressions, boolean updateBaseline) {
         INSTANCE.itemTraits.clear();
         INSTANCE.itemTraits.putAll(itemTraits);
         INSTANCE.tagTraits.clear();
         INSTANCE.tagTraits.putAll(tagTraits);
+        INSTANCE.itemSuppressions.clear();
+        suppressions.forEach((id, keys) -> INSTANCE.itemSuppressions.put(id, Set.copyOf(keys)));
         if (updateBaseline) {
             INSTANCE.baselineItemTraits.clear();
             INSTANCE.baselineItemTraits.putAll(itemTraits);
             INSTANCE.baselineTagTraits.clear();
             INSTANCE.baselineTagTraits.putAll(tagTraits);
+            INSTANCE.baselineSuppressions.clear();
+            INSTANCE.baselineSuppressions.putAll(INSTANCE.itemSuppressions);
         }
     }
 
@@ -113,6 +157,8 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         INSTANCE.itemTraits.putAll(INSTANCE.baselineItemTraits);
         INSTANCE.tagTraits.clear();
         INSTANCE.tagTraits.putAll(INSTANCE.baselineTagTraits);
+        INSTANCE.itemSuppressions.clear();
+        INSTANCE.itemSuppressions.putAll(INSTANCE.baselineSuppressions);
     }
 
     public static void setItemTraits(ResourceLocation itemId, List<FoodTrait> traits) {
@@ -151,8 +197,10 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, JsonElement> resources, ResourceManager resourceManager, ProfilerFiller profiler) {
         itemTraits.clear();
         tagTraits.clear();
+        itemSuppressions.clear();
         baselineItemTraits.clear();
         baselineTagTraits.clear();
+        baselineSuppressions.clear();
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : resources.entrySet()) {
             ResourceLocation fileId = entry.getKey();
@@ -172,8 +220,12 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
                         String target = entryObj.has("target") ? entryObj.get("target").getAsString() : null;
                         JsonArray traitsArr = entryObj.has("traits") && entryObj.get("traits").isJsonArray()
                                 ? entryObj.getAsJsonArray("traits") : null;
+                        boolean baseline = !fileId.equals(CUSTOM_FILE_ID);
                         if (target != null && traitsArr != null) {
-                            parseAndAdd(target, traitsArr, !fileId.equals(CUSTOM_FILE_ID));
+                            parseAndAdd(target, traitsArr, baseline);
+                        }
+                        if (target != null && entryObj.has("suppress") && entryObj.get("suppress").isJsonArray()) {
+                            parseSuppressions(target, entryObj.getAsJsonArray("suppress"), baseline);
                         }
                     }
                 }
@@ -188,6 +240,25 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         }
 
         Constants.LOG.info("Loaded food traits for {} items and {} item tags", itemTraits.size(), tagTraits.size());
+    }
+
+    private void parseSuppressions(String target, JsonArray keys, boolean baseline) {
+        if (target.startsWith("#")) {
+            Constants.LOG.warn("'suppress' is only supported on item targets, ignoring it for {}", target);
+            return;
+        }
+
+        Set<String> parsed = new LinkedHashSet<>();
+        for (JsonElement key : keys) {
+            if (key.isJsonPrimitive()) parsed.add(key.getAsString());
+        }
+        if (parsed.isEmpty()) return;
+
+        ResourceLocation itemLoc = ResourceLocation.parse(target);
+        itemSuppressions.computeIfAbsent(itemLoc, k -> ConcurrentHashMap.newKeySet()).addAll(parsed);
+        if (baseline) {
+            baselineSuppressions.computeIfAbsent(itemLoc, k -> ConcurrentHashMap.newKeySet()).addAll(parsed);
+        }
     }
 
     private void parseAndAdd(String target, JsonArray traitsArray, boolean baseline) {

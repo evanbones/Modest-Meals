@@ -1,6 +1,9 @@
 {
   "config.modest_meals.title": "Modest Meals Configuration",
-  
+
+  "key.categories.modest_meals": "Modest Meals",
+  "key.modest_meals.open_food_editor": "Open Food Editor",
+
   "config.modest_meals.category.gameplay": "Gameplay",
   "config.modest_meals.category.gameplay.tooltip": "Configure hunger mechanics, health regeneration, stamina, and status effects.",
   "config.modest_meals.group.hunger": "Hunger & Eating",
@@ -280,6 +283,13 @@
 
   "gui.modest_meals.food_editor.title": "Food Effect & Profile Editor",
   "gui.modest_meals.search": "Search foods...",
+  "gui.modest_meals.unsaved.title": "Unsaved Changes",
+  "gui.modest_meals.unsaved.message": "Your edits haven't been written to the food pack yet. Closing now will discard them.",
+  "gui.modest_meals.unsaved.save": "Save & Close",
+  "gui.modest_meals.unsaved.discard": "Discard",
+  "gui.modest_meals.search.generic": "Search...",
+  "gui.modest_meals.search.effects": "Search effects...",
+  "gui.modest_meals.search.traits": "Search traits...",
   "gui.modest_meals.filter.all": "Filter: All",
   "gui.modest_meals.filter.foods": "Filter: Foods",
   "gui.modest_meals.filter.customized": "Filter: Custom",
@@ -294,7 +304,7 @@
   "gui.modest_meals.traits_header": "Food Traits & Effects:",
   "gui.modest_meals.no_traits": "No special traits assigned.",
   "gui.modest_meals.no_item_selected": "Select an item from the list to view and edit its food effects.",
-  "gui.modest_meals.saved_and_applied": "Saved to custom datapack and applied!",
+  "gui.modest_meals.saved_and_applied": "Saved to datapack and applied!",
   "gui.modest_meals.item_reset": "Reset item to default datapack definitions.",
   "gui.modest_meals.trait_added": "Trait added!",
   "gui.modest_meals.profile_updated": "Profile scaling updated!",

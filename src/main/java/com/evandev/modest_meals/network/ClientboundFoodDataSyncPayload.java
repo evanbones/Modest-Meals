@@ -24,6 +24,7 @@ import java.util.Map;
 public record ClientboundFoodDataSyncPayload(
         Map<ResourceLocation, List<FoodTrait>> itemTraits,
         Map<TagKey<Item>, List<FoodTrait>> tagTraits,
+        Map<ResourceLocation, List<String>> suppressions,
         List<FoodProfile> profiles
 ) implements CustomPacketPayload {
     public static final Type<ClientboundFoodDataSyncPayload> TYPE =
@@ -34,6 +35,8 @@ public record ClientboundFoodDataSyncPayload(
                     .forGetter(ClientboundFoodDataSyncPayload::itemTraits),
             Codec.unboundedMap(TagKey.codec(Registries.ITEM), FoodTraitType.CODEC.listOf()).fieldOf("tag_traits")
                     .forGetter(ClientboundFoodDataSyncPayload::tagTraits),
+            Codec.unboundedMap(ResourceLocation.CODEC, Codec.STRING.listOf()).fieldOf("suppressions")
+                    .forGetter(ClientboundFoodDataSyncPayload::suppressions),
             FoodProfile.CODEC.listOf().fieldOf("profiles").forGetter(ClientboundFoodDataSyncPayload::profiles)
     ).apply(instance, ClientboundFoodDataSyncPayload::new));
 
@@ -43,6 +46,7 @@ public record ClientboundFoodDataSyncPayload(
         return new ClientboundFoodDataSyncPayload(
                 FoodTraitManager.snapshotItemTraits(),
                 FoodTraitManager.snapshotTagTraits(),
+                FoodTraitManager.snapshotSuppressions(),
                 FoodProfileManager.snapshotProfiles()
         );
     }
@@ -50,7 +54,7 @@ public record ClientboundFoodDataSyncPayload(
     public static void handle(ClientboundFoodDataSyncPayload payload, IPayloadContext context) {
         boolean updateBaseline = !context.connection().isMemoryConnection();
         context.enqueueWork(() -> {
-            FoodTraitManager.applyFromNetwork(payload.itemTraits(), payload.tagTraits(), updateBaseline);
+            FoodTraitManager.applyFromNetwork(payload.itemTraits(), payload.tagTraits(), payload.suppressions(), updateBaseline);
             FoodProfileManager.applyFromNetwork(payload.profiles(), updateBaseline);
         });
     }

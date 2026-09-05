@@ -3,15 +3,17 @@ package com.evandev.modest_meals.food;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
+import com.evandev.modest_meals.trait.FoodTraitType;
 import com.evandev.modest_meals.trait.impl.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 /**
  * Source of truth for what a food restores. Everything that needs to know how many hearts or how
@@ -23,10 +25,21 @@ public class FoodValues {
      * The traits a food actually applies.
      */
     public static List<FoodTrait> effectiveTraits(ItemStack stack) {
-        List<FoodTrait> authored = FoodTraitManager.getTraits(stack);
+        if (stack == null || stack.isEmpty()) {
+            return List.of();
+        }
+        return withDerived(stack, FoodTraitManager.getTraits(stack),
+                FoodProfileManager.resolve(stack).orElse(null),
+                FoodTraitManager.suppressionsFor(stack.getItem()));
+    }
 
-        boolean hasHealth = false;
-        boolean hasStamina = false;
+    /**
+     * The authored traits plus the health and stamina a food's profile gives it.
+     */
+    public static List<FoodTrait> withDerived(ItemStack stack, List<FoodTrait> authored,
+                                              @Nullable FoodProfile profile, Set<String> suppressed) {
+        boolean hasHealth = suppressed.contains(FoodTraitManager.mergeKeyOf(FoodTraitType.HEALTH_ADDITION));
+        boolean hasStamina = suppressed.contains(FoodTraitManager.mergeKeyOf(FoodTraitType.STAMINA_ADDITION));
         for (FoodTrait trait : authored) {
             if (trait instanceof HealthAdditionTrait) {
                 hasHealth = true;
@@ -40,15 +53,9 @@ public class FoodValues {
         }
 
         int nutrition = nutritionOf(stack);
-        if (nutrition <= 0) {
+        if (nutrition <= 0 || profile == null) {
             return authored;
         }
-
-        Optional<FoodProfile> resolved = FoodProfileManager.resolve(stack);
-        if (resolved.isEmpty()) {
-            return authored;
-        }
-        FoodProfile profile = resolved.get();
 
         List<FoodTrait> effective = new ArrayList<>(authored);
         if (!hasHealth) {

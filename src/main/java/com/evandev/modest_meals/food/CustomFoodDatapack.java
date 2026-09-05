@@ -115,25 +115,72 @@ public class CustomFoodDatapack {
         return map;
     }
 
-    public static void saveCustomTraits(Map<String, List<FoodTrait>> traitsMap) {
+    public static Map<String, Set<String>> readCustomSuppressions() {
+        Map<String, Set<String>> map = new LinkedHashMap<>();
+        if (!Files.exists(TRAITS_FILE)) {
+            return map;
+        }
+
+        try (FileReader reader = new FileReader(TRAITS_FILE.toFile())) {
+            JsonObject json = GSON.fromJson(reader, JsonObject.class);
+            if (json != null && json.has("entries") && json.get("entries").isJsonArray()) {
+                for (JsonElement element : json.getAsJsonArray("entries")) {
+                    if (element.isJsonObject()) {
+                        JsonObject obj = element.getAsJsonObject();
+                        if (obj.has("target") && obj.has("suppress") && obj.get("suppress").isJsonArray()) {
+                            Set<String> keys = new LinkedHashSet<>();
+                            for (JsonElement key : obj.getAsJsonArray("suppress")) {
+                                if (key.isJsonPrimitive()) keys.add(key.getAsString());
+                            }
+                            if (!keys.isEmpty()) {
+                                map.put(obj.get("target").getAsString(), keys);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Constants.LOG.error("Failed to read custom trait suppressions from {}", TRAITS_FILE, e);
+        }
+        return map;
+    }
+
+    public static void saveCustomTraits(Map<String, List<FoodTrait>> traitsMap, Map<String, Set<String>> suppressionsMap) {
         ensurePackExists();
         try {
             JsonObject root = new JsonObject();
             JsonArray entries = new JsonArray();
 
-            for (Map.Entry<String, List<FoodTrait>> entry : traitsMap.entrySet()) {
-                if (entry.getValue() == null || entry.getValue().isEmpty()) {
+            Set<String> targets = new LinkedHashSet<>(traitsMap.keySet());
+            targets.addAll(suppressionsMap.keySet());
+
+            for (String target : targets) {
+                List<FoodTrait> traits = traitsMap.get(target);
+                Set<String> suppressed = suppressionsMap.get(target);
+                boolean hasTraits = traits != null && !traits.isEmpty();
+                boolean hasSuppressions = suppressed != null && !suppressed.isEmpty();
+                if (!hasTraits && !hasSuppressions) {
                     continue;
                 }
+
                 JsonObject entryObj = new JsonObject();
-                entryObj.addProperty("target", entry.getKey());
-                JsonArray traitsArr = new JsonArray();
-                for (FoodTrait trait : entry.getValue()) {
-                    FoodTraitType.CODEC.encodeStart(JsonOps.INSTANCE, trait)
-                            .resultOrPartial(err -> Constants.LOG.error("Failed to encode custom trait: {}", err))
-                            .ifPresent(traitsArr::add);
+                entryObj.addProperty("target", target);
+                if (hasTraits) {
+                    JsonArray traitsArr = new JsonArray();
+                    for (FoodTrait trait : traits) {
+                        FoodTraitType.CODEC.encodeStart(JsonOps.INSTANCE, trait)
+                                .resultOrPartial(err -> Constants.LOG.error("Failed to encode custom trait: {}", err))
+                                .ifPresent(traitsArr::add);
+                    }
+                    entryObj.add("traits", traitsArr);
                 }
-                entryObj.add("traits", traitsArr);
+                if (hasSuppressions) {
+                    JsonArray suppressArr = new JsonArray();
+                    for (String key : suppressed) {
+                        suppressArr.add(key);
+                    }
+                    entryObj.add("suppress", suppressArr);
+                }
                 entries.add(entryObj);
             }
             root.add("entries", entries);
