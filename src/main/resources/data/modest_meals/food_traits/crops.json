@@ -2,6 +2,7 @@
   "entries": [
     {
       "target": "#c:crops/wheat",
+      "priority": 145,
       "traits": [
         {
           "type": "modest_meals:stamina_regen",
@@ -36,6 +37,7 @@
     },
     {
       "target": "#c:crops/potato",
+      "priority": 145,
       "traits": [
         {
           "type": "modest_meals:stamina_regen",
@@ -122,6 +124,7 @@
     },
     {
       "target": "#c:crops/beetroot",
+      "priority": 145,
       "traits": [
         {
           "type": "modest_meals:stamina_regen",
@@ -142,6 +145,7 @@
     },
     {
       "target": "#c:crops/rice",
+      "priority": 145,
       "traits": [
         {
           "type": "modest_meals:stamina_regen",
@@ -179,27 +183,8 @@
       ]
     },
     {
-      "target": "farmersdelight:wheat_dough",
-      "traits": [
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:raw_pasta",
-      "traits": [
-        {
-          "type": "modest_meals:stamina_regen",
-          "value": 1.5,
-          "duration": 400
-        }
-      ]
-    },
-    {
       "target": "#c:crops/cabbage",
+      "priority": 145,
       "traits": [
         {
           "type": "modest_meals:stamina_regen",
@@ -230,15 +215,12 @@
     },
     {
       "target": "#c:crops/onion",
+      "priority": 145,
       "traits": [
         {
           "type": "modest_meals:stamina_regen",
           "value": 1.5,
           "duration": 400
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
@@ -249,15 +231,12 @@
           "type": "modest_meals:stamina_regen",
           "value": 1.5,
           "duration": 400
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
     {
       "target": "#c:crops/tomato",
+      "priority": 145,
       "traits": [
         {
           "type": "modest_meals:stamina_addition",
@@ -299,10 +278,6 @@
         {
           "type": "modest_meals:stamina_addition",
           "value": 1.5
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     }

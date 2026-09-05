@@ -8,6 +8,13 @@ public interface FoodTrait {
     FoodTraitType<?> getType();
 
     /**
+     * What this trait offers the eater. Defaults to {@link TraitBenefit#NONE}.
+     */
+    default TraitBenefit benefit() {
+        return TraitBenefit.NONE;
+    }
+
+    /**
      * Compounds this trait with another trait of the same type (from multiple ingredients).
      */
     FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier);

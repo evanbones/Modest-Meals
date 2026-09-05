@@ -28,7 +28,7 @@ public class TraitTooltipHelper {
         ).withStyle(ChatFormatting.BLUE);
 
         if (duration > 0) {
-            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.GRAY));
+            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.BLUE));
         }
         return line;
     }
@@ -41,7 +41,16 @@ public class TraitTooltipHelper {
         ).withStyle(ChatFormatting.RED);
 
         if (duration > 0) {
-            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.GRAY));
+            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.RED));
+        }
+        return line;
+    }
+
+    public static MutableComponent formatSimple(String translationKey, long duration) {
+        MutableComponent line = Component.translatable(translationKey).withStyle(ChatFormatting.BLUE);
+
+        if (duration > 0) {
+            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.BLUE));
         }
         return line;
     }
@@ -52,7 +61,7 @@ public class TraitTooltipHelper {
         ).withStyle(ChatFormatting.BLUE);
 
         if (duration > 0) {
-            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.GRAY));
+            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.BLUE));
         }
         return line;
     }
@@ -63,7 +72,7 @@ public class TraitTooltipHelper {
         ).withStyle(ChatFormatting.RED);
 
         if (duration > 0) {
-            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.GRAY));
+            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.RED));
         }
         return line;
     }

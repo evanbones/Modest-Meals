@@ -3,6 +3,7 @@ package com.evandev.modest_meals.trait.impl;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
+import com.evandev.modest_meals.trait.TraitBenefit;
 import com.evandev.modest_meals.trait.TraitTooltipHelper;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -30,6 +31,11 @@ public record HealthAdditionTrait(float value, int duration) implements FoodTrai
     @Override
     public FoodTraitType<?> getType() {
         return FoodTraitType.HEALTH_ADDITION;
+    }
+
+    @Override
+    public TraitBenefit benefit() {
+        return TraitBenefit.HEALTH;
     }
 
     @Override

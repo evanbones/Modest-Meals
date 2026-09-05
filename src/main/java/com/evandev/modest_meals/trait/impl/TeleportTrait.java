@@ -2,6 +2,7 @@ package com.evandev.modest_meals.trait.impl;
 
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
+import com.evandev.modest_meals.trait.TraitBenefit;
 import com.evandev.modest_meals.trait.TraitTooltipHelper;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -32,6 +33,11 @@ public record TeleportTrait(float range) implements FoodTrait {
     @Override
     public FoodTraitType<?> getType() {
         return FoodTraitType.TELEPORT;
+    }
+
+    @Override
+    public TraitBenefit benefit() {
+        return TraitBenefit.UTILITY;
     }
 
     @Override
@@ -69,6 +75,6 @@ public record TeleportTrait(float range) implements FoodTrait {
 
     @Override
     public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
-        return TraitTooltipHelper.formatSimplePlus("modest_meals.trait.teleport_randomly", 0);
+        return TraitTooltipHelper.formatSimple("modest_meals.trait.teleport_randomly", 0);
     }
 }

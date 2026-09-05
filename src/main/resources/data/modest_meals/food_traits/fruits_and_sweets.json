@@ -29,10 +29,6 @@
           "effect": "minecraft:speed",
           "duration": 400,
           "amplifier": 0
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
@@ -355,10 +351,6 @@
           "effect": "minecraft:speed",
           "duration": 300,
           "amplifier": 0
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },

@@ -2,6 +2,7 @@ package com.evandev.modest_meals.trait.impl;
 
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
+import com.evandev.modest_meals.trait.TraitBenefit;
 import com.evandev.modest_meals.trait.TraitTooltipHelper;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -34,6 +35,11 @@ public record EffectRemovalTrait(boolean clearAll) implements FoodTrait {
     }
 
     @Override
+    public TraitBenefit benefit() {
+        return TraitBenefit.UTILITY;
+    }
+
+    @Override
     public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
         if (other instanceof EffectRemovalTrait(boolean all)) {
             return new EffectRemovalTrait(this.clearAll || all);
@@ -60,7 +66,7 @@ public record EffectRemovalTrait(boolean clearAll) implements FoodTrait {
 
     @Override
     public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
-        return TraitTooltipHelper.formatSimplePlus(
+        return TraitTooltipHelper.formatSimple(
                 this.clearAll ? "modest_meals.trait.clear_all_effects" : "modest_meals.trait.clear_negative_effects",
                 0
         );

@@ -11,6 +11,7 @@
     },
     {
       "target": "#c:milks",
+      "priority": 100,
       "traits": [
         {
           "type": "modest_meals:effect_removal",

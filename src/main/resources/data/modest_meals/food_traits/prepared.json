@@ -7,10 +7,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.0,
           "duration": 300
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
@@ -197,10 +193,6 @@
           "type": "modest_meals:stamina_regen",
           "value": 1.5,
           "duration": 400
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
@@ -265,10 +257,6 @@
           "type": "modest_meals:stamina_regen",
           "value": 2.0,
           "duration": 500
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
@@ -298,10 +286,6 @@
           "type": "modest_meals:health_regen",
           "value": 1.0,
           "duration": 200
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
@@ -449,10 +433,6 @@
           "duration": 500
         },
         {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
-        },
-        {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
           "duration": 250,
@@ -488,10 +468,6 @@
         {
           "type": "modest_meals:stamina_addition",
           "value": 2.0
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
@@ -530,10 +506,6 @@
           "type": "modest_meals:stamina_regen",
           "value": 3.0,
           "duration": 700
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },
@@ -670,10 +642,6 @@
           "type": "modest_meals:stamina_regen",
           "value": 2.5,
           "duration": 500
-        },
-        {
-          "type": "modest_meals:effect_removal",
-          "clear_all": false
         }
       ]
     },

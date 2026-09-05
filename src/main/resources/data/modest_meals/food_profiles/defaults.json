@@ -198,20 +198,7 @@
       "health_per_nutrition": 0.0,
       "stamina_per_nutrition": 0.9
     },
-    {
-      "id": "wheat_dough",
-      "match": "farmersdelight:wheat_dough",
-      "priority": 145,
-      "health_per_nutrition": 0.0,
-      "stamina_per_nutrition": 0.9
-    },
-    {
-      "id": "raw_pasta",
-      "match": "farmersdelight:raw_pasta",
-      "priority": 145,
-      "health_per_nutrition": 0.0,
-      "stamina_per_nutrition": 0.9
-    },
+
     {
       "id": "pie_crust",
       "match": "farmersdelight:pie_crust",

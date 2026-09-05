@@ -6,16 +6,14 @@ import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import com.evandev.modest_meals.trait.FoodTraitType;
+import com.evandev.modest_meals.trait.TagTraitEntry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.List;
@@ -23,7 +21,7 @@ import java.util.Map;
 
 public record ClientboundFoodDataSyncPayload(
         Map<ResourceLocation, List<FoodTrait>> itemTraits,
-        Map<TagKey<Item>, List<FoodTrait>> tagTraits,
+        List<TagTraitEntry> tagTraits,
         Map<ResourceLocation, List<String>> suppressions,
         List<FoodProfile> profiles
 ) implements CustomPacketPayload {
@@ -33,7 +31,7 @@ public record ClientboundFoodDataSyncPayload(
     private static final Codec<ClientboundFoodDataSyncPayload> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.unboundedMap(ResourceLocation.CODEC, FoodTraitType.CODEC.listOf()).fieldOf("item_traits")
                     .forGetter(ClientboundFoodDataSyncPayload::itemTraits),
-            Codec.unboundedMap(TagKey.codec(Registries.ITEM), FoodTraitType.CODEC.listOf()).fieldOf("tag_traits")
+            TagTraitEntry.CODEC.listOf().fieldOf("tag_traits")
                     .forGetter(ClientboundFoodDataSyncPayload::tagTraits),
             Codec.unboundedMap(ResourceLocation.CODEC, Codec.STRING.listOf()).fieldOf("suppressions")
                     .forGetter(ClientboundFoodDataSyncPayload::suppressions),

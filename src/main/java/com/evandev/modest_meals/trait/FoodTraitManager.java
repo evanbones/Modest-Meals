@@ -31,12 +31,11 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
             ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "custom_traits");
 
     private final Map<ResourceLocation, List<FoodTrait>> itemTraits = new ConcurrentHashMap<>();
-    private final Map<TagKey<Item>, List<FoodTrait>> tagTraits = new ConcurrentHashMap<>();
     private final Map<ResourceLocation, Set<String>> itemSuppressions = new ConcurrentHashMap<>();
-
     private final Map<ResourceLocation, List<FoodTrait>> baselineItemTraits = new ConcurrentHashMap<>();
-    private final Map<TagKey<Item>, List<FoodTrait>> baselineTagTraits = new ConcurrentHashMap<>();
     private final Map<ResourceLocation, Set<String>> baselineSuppressions = new ConcurrentHashMap<>();
+    private volatile List<TagTraitEntry> tagTraits = List.of();
+    private volatile List<TagTraitEntry> baselineTagTraits = List.of();
 
     public FoodTraitManager() {
         super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "food_traits");
@@ -64,7 +63,7 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     }
 
     private static List<FoodTrait> merge(Item item, Map<ResourceLocation, List<FoodTrait>> itemSource,
-                                         Map<TagKey<Item>, List<FoodTrait>> tagSource, Set<String> suppressed) {
+                                         List<TagTraitEntry> tagSource, Set<String> suppressed) {
         Map<String, FoodTrait> resolved = new LinkedHashMap<>();
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
 
@@ -76,11 +75,12 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         }
 
         Holder<Item> itemHolder = item.builtInRegistryHolder();
-        for (Map.Entry<TagKey<Item>, List<FoodTrait>> entry : tagSource.entrySet()) {
-            if (itemHolder.is(entry.getKey())) {
-                for (FoodTrait trait : entry.getValue()) {
-                    resolved.putIfAbsent(getMergeKey(trait), trait);
-                }
+        for (TagTraitEntry entry : tagSource) {
+            if (!itemHolder.is(entry.tag())) {
+                continue;
+            }
+            for (FoodTrait trait : entry.traits()) {
+                resolved.putIfAbsent(getMergeKey(trait), trait);
             }
         }
 
@@ -130,23 +130,21 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         return Map.copyOf(INSTANCE.itemTraits);
     }
 
-    public static Map<TagKey<Item>, List<FoodTrait>> snapshotTagTraits() {
-        return Map.copyOf(INSTANCE.tagTraits);
+    public static List<TagTraitEntry> snapshotTagTraits() {
+        return INSTANCE.tagTraits;
     }
 
-    public static void applyFromNetwork(Map<ResourceLocation, List<FoodTrait>> itemTraits, Map<TagKey<Item>, List<FoodTrait>> tagTraits,
+    public static void applyFromNetwork(Map<ResourceLocation, List<FoodTrait>> itemTraits, List<TagTraitEntry> tagTraits,
                                         Map<ResourceLocation, List<String>> suppressions, boolean updateBaseline) {
         INSTANCE.itemTraits.clear();
         INSTANCE.itemTraits.putAll(itemTraits);
-        INSTANCE.tagTraits.clear();
-        INSTANCE.tagTraits.putAll(tagTraits);
+        INSTANCE.tagTraits = sorted(tagTraits);
         INSTANCE.itemSuppressions.clear();
         suppressions.forEach((id, keys) -> INSTANCE.itemSuppressions.put(id, Set.copyOf(keys)));
         if (updateBaseline) {
             INSTANCE.baselineItemTraits.clear();
             INSTANCE.baselineItemTraits.putAll(itemTraits);
-            INSTANCE.baselineTagTraits.clear();
-            INSTANCE.baselineTagTraits.putAll(tagTraits);
+            INSTANCE.baselineTagTraits = INSTANCE.tagTraits;
             INSTANCE.baselineSuppressions.clear();
             INSTANCE.baselineSuppressions.putAll(INSTANCE.itemSuppressions);
         }
@@ -155,10 +153,15 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     public static void restoreBaseline() {
         INSTANCE.itemTraits.clear();
         INSTANCE.itemTraits.putAll(INSTANCE.baselineItemTraits);
-        INSTANCE.tagTraits.clear();
-        INSTANCE.tagTraits.putAll(INSTANCE.baselineTagTraits);
+        INSTANCE.tagTraits = INSTANCE.baselineTagTraits;
         INSTANCE.itemSuppressions.clear();
         INSTANCE.itemSuppressions.putAll(INSTANCE.baselineSuppressions);
+    }
+
+    private static List<TagTraitEntry> sorted(List<TagTraitEntry> entries) {
+        List<TagTraitEntry> copy = new ArrayList<>(entries);
+        copy.sort(TagTraitEntry.ORDER);
+        return List.copyOf(copy);
     }
 
     public static void setItemTraits(ResourceLocation itemId, List<FoodTrait> traits) {
@@ -182,7 +185,10 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     }
 
     public static void applyAll(LivingEntity entity, ItemStack stack, float valueScale) {
-        List<FoodTrait> traits = FoodValues.effectiveTraits(stack);
+        applyTraits(entity, stack, FoodValues.effectiveTraits(stack), valueScale);
+    }
+
+    public static void applyTraits(LivingEntity entity, ItemStack stack, List<FoodTrait> traits, float valueScale) {
         if (traits.isEmpty()) {
             return;
         }
@@ -193,16 +199,27 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         }
     }
 
+    private static List<TagTraitEntry> buildTagEntries(Map<TagPriority, List<FoodTrait>> accumulated) {
+        List<TagTraitEntry> entries = new ArrayList<>(accumulated.size());
+        accumulated.forEach((key, traits) -> entries.add(new TagTraitEntry(key.tag(), key.priority(), traits)));
+        entries.sort(TagTraitEntry.ORDER);
+        return List.copyOf(entries);
+    }
+
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> resources, ResourceManager resourceManager, ProfilerFiller profiler) {
         itemTraits.clear();
-        tagTraits.clear();
         itemSuppressions.clear();
         baselineItemTraits.clear();
-        baselineTagTraits.clear();
         baselineSuppressions.clear();
 
-        for (Map.Entry<ResourceLocation, JsonElement> entry : resources.entrySet()) {
+        Map<TagPriority, List<FoodTrait>> tags = new LinkedHashMap<>();
+        Map<TagPriority, List<FoodTrait>> baselineTags = new LinkedHashMap<>();
+
+        List<Map.Entry<ResourceLocation, JsonElement>> files = new ArrayList<>(resources.entrySet());
+        files.sort(Map.Entry.comparingByKey(Comparator.comparing(ResourceLocation::toString)));
+
+        for (Map.Entry<ResourceLocation, JsonElement> entry : files) {
             ResourceLocation fileId = entry.getKey();
             JsonElement json = entry.getValue();
 
@@ -220,9 +237,10 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
                         String target = entryObj.has("target") ? entryObj.get("target").getAsString() : null;
                         JsonArray traitsArr = entryObj.has("traits") && entryObj.get("traits").isJsonArray()
                                 ? entryObj.getAsJsonArray("traits") : null;
+                        int priority = entryObj.has("priority") ? entryObj.get("priority").getAsInt() : 0;
                         boolean baseline = !fileId.equals(CUSTOM_FILE_ID);
                         if (target != null && traitsArr != null) {
-                            parseAndAdd(target, traitsArr, baseline);
+                            parseAndAdd(target, traitsArr, priority, baseline, tags, baselineTags);
                         }
                         if (target != null && entryObj.has("suppress") && entryObj.get("suppress").isJsonArray()) {
                             parseSuppressions(target, entryObj.getAsJsonArray("suppress"), baseline);
@@ -233,11 +251,15 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
                 for (Map.Entry<String, JsonElement> prop : obj.entrySet()) {
                     String target = prop.getKey();
                     if (prop.getValue().isJsonArray()) {
-                        parseAndAdd(target, prop.getValue().getAsJsonArray(), !fileId.equals(CUSTOM_FILE_ID));
+                        parseAndAdd(target, prop.getValue().getAsJsonArray(), 0,
+                                !fileId.equals(CUSTOM_FILE_ID), tags, baselineTags);
                     }
                 }
             }
         }
+
+        this.tagTraits = buildTagEntries(tags);
+        this.baselineTagTraits = buildTagEntries(baselineTags);
 
         Constants.LOG.info("Loaded food traits for {} items and {} item tags", itemTraits.size(), tagTraits.size());
     }
@@ -261,7 +283,8 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         }
     }
 
-    private void parseAndAdd(String target, JsonArray traitsArray, boolean baseline) {
+    private void parseAndAdd(String target, JsonArray traitsArray, int priority, boolean baseline,
+                             Map<TagPriority, List<FoodTrait>> tags, Map<TagPriority, List<FoodTrait>> baselineTags) {
         List<FoodTrait> parsedList = new ArrayList<>();
         for (JsonElement traitEl : traitsArray) {
             if (traitEl.isJsonObject()) {
@@ -275,10 +298,10 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
 
         if (target.startsWith("#")) {
             ResourceLocation tagLoc = ResourceLocation.parse(target.substring(1));
-            TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagLoc);
-            tagTraits.computeIfAbsent(tagKey, k -> new ArrayList<>()).addAll(parsedList);
+            TagPriority key = new TagPriority(TagKey.create(Registries.ITEM, tagLoc), priority);
+            tags.computeIfAbsent(key, k -> new ArrayList<>()).addAll(parsedList);
             if (baseline) {
-                baselineTagTraits.computeIfAbsent(tagKey, k -> new ArrayList<>()).addAll(parsedList);
+                baselineTags.computeIfAbsent(key, k -> new ArrayList<>()).addAll(parsedList);
             }
         } else {
             ResourceLocation itemLoc = ResourceLocation.parse(target);
@@ -287,5 +310,8 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
                 baselineItemTraits.computeIfAbsent(itemLoc, k -> new ArrayList<>()).addAll(parsedList);
             }
         }
+    }
+
+    private record TagPriority(TagKey<Item> tag, int priority) {
     }
 }

@@ -3,6 +3,7 @@ package com.evandev.modest_meals.trait.impl;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
+import com.evandev.modest_meals.trait.TraitBenefit;
 import com.evandev.modest_meals.trait.TraitTooltipHelper;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -30,6 +31,11 @@ public record StaminaRegenTrait(float value, int duration) implements FoodTrait 
     @Override
     public FoodTraitType<?> getType() {
         return FoodTraitType.STAMINA_REGEN;
+    }
+
+    @Override
+    public TraitBenefit benefit() {
+        return TraitBenefit.STAMINA;
     }
 
     @Override

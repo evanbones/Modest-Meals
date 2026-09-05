@@ -4,10 +4,11 @@ import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTraitManager;
-import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
-import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Decides whether a player is allowed to eat a given food. A food may only be eaten when a bar it actually fills has room.
@@ -16,6 +17,11 @@ public class FoodConsumption {
 
     public static boolean canConsume(Player player, ItemStack stack) {
         if (player.getAbilities().invulnerable) {
+            return true;
+        }
+
+        FoodProperties food = stack.get(DataComponents.FOOD);
+        if (food != null && food.canAlwaysEat()) {
             return true;
         }
 
@@ -45,30 +51,17 @@ public class FoodConsumption {
             if (food != null) {
                 FoodTraitManager.applyAll(player, food.stack(), food.biteScale());
             } else {
-                applyFromNutrition(player, nutrition);
+                applyFromNutrition(player, context.state(), nutrition);
             }
         });
     }
 
-    private static void applyFromNutrition(Player player, int nutrition) {
+    private static void applyFromNutrition(Player player, BlockState state, int nutrition) {
         if (nutrition <= 0) {
             return;
         }
-        FoodProfileManager.resolveDefault().ifPresent(profile -> {
-            float valueMultiplier = ModConfig.get().traitGlobalValueMultiplier;
-            float durationMultiplier = ModConfig.get().traitGlobalDurationMultiplier;
-
-            float health = profile.healthFor(nutrition);
-            if (health > 0.0F) {
-                new HealthAdditionTrait(health, profile.digestTicksFor(health))
-                        .apply(player, ItemStack.EMPTY, valueMultiplier, durationMultiplier);
-            }
-
-            float stamina = profile.staminaFor(nutrition);
-            if (stamina > 0.0F) {
-                new StaminaAdditionTrait(stamina).apply(player, ItemStack.EMPTY, valueMultiplier, durationMultiplier);
-            }
-        });
+        ItemStack stack = state.getBlock().asItem().getDefaultInstance();
+        FoodTraitManager.applyTraits(player, stack, FoodValues.effectiveTraits(stack, nutrition), 1.0F);
     }
 
     public static boolean canConsumeUnknown(Player player) {

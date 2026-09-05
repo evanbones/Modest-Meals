@@ -4,7 +4,9 @@ import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import com.evandev.modest_meals.trait.FoodTraitType;
-import com.evandev.modest_meals.trait.impl.*;
+import com.evandev.modest_meals.trait.TraitBenefit;
+import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
+import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -28,7 +30,19 @@ public class FoodValues {
         if (stack == null || stack.isEmpty()) {
             return List.of();
         }
-        return withDerived(stack, FoodTraitManager.getTraits(stack),
+        return effectiveTraits(stack, nutritionOf(stack));
+    }
+
+    /**
+     * The traits a food applies when its nutrition is known independently of the stack, (e.g. an edible block being bitten).
+     */
+    public static List<FoodTrait> effectiveTraits(ItemStack stack, int nutrition) {
+        if (stack == null || stack.isEmpty()) {
+            return FoodProfileManager.resolveDefault()
+                    .map(profile -> withDerived(ItemStack.EMPTY, nutrition, List.of(), profile, Set.of()))
+                    .orElseGet(List::of);
+        }
+        return withDerived(stack, nutrition, FoodTraitManager.getTraits(stack),
                 FoodProfileManager.resolve(stack).orElse(null),
                 FoodTraitManager.suppressionsFor(stack.getItem()));
     }
@@ -37,6 +51,11 @@ public class FoodValues {
      * The authored traits plus the health and stamina a food's profile gives it.
      */
     public static List<FoodTrait> withDerived(ItemStack stack, List<FoodTrait> authored,
+                                              @Nullable FoodProfile profile, Set<String> suppressed) {
+        return withDerived(stack, nutritionOf(stack), authored, profile, suppressed);
+    }
+
+    public static List<FoodTrait> withDerived(ItemStack stack, int nutrition, List<FoodTrait> authored,
                                               @Nullable FoodProfile profile, Set<String> suppressed) {
         boolean hasHealth = suppressed.contains(FoodTraitManager.mergeKeyOf(FoodTraitType.HEALTH_ADDITION));
         boolean hasStamina = suppressed.contains(FoodTraitManager.mergeKeyOf(FoodTraitType.STAMINA_ADDITION));
@@ -48,11 +67,11 @@ public class FoodValues {
                 hasStamina = true;
             }
         }
+
         if (hasHealth && hasStamina) {
             return authored;
         }
 
-        int nutrition = nutritionOf(stack);
         if (nutrition <= 0 || profile == null) {
             return authored;
         }
@@ -113,40 +132,26 @@ public class FoodValues {
     }
 
     public static boolean touchesHealth(ItemStack stack) {
-        for (FoodTrait trait : effectiveTraits(stack)) {
-            if (trait instanceof HealthAdditionTrait || trait instanceof HealthRegenTrait) {
-                return true;
-            }
-        }
-        return false;
+        return hasBenefit(stack, TraitBenefit.HEALTH);
     }
 
     /**
      * Whether this stack restores or regenerates stamina, and so should be gated on the stamina bar.
      */
     public static boolean touchesStamina(ItemStack stack) {
-        if (!ModConfig.get().staminaSprint) {
-            return false;
-        }
-        for (FoodTrait trait : effectiveTraits(stack)) {
-            if (trait instanceof StaminaAdditionTrait || trait instanceof StaminaRegenTrait) {
-                return true;
-            }
-        }
-        return false;
+        return ModConfig.get().staminaSprint && hasBenefit(stack, TraitBenefit.STAMINA);
     }
 
     /**
      * Whether this stack provides non-bar-filling utility traits (e.g. effects, cures, air, fire extinguishment...).
      */
     public static boolean hasUtility(ItemStack stack) {
+        return hasBenefit(stack, TraitBenefit.UTILITY);
+    }
+
+    private static boolean hasBenefit(ItemStack stack, TraitBenefit benefit) {
         for (FoodTrait trait : effectiveTraits(stack)) {
-            if (trait instanceof EffectGrantTrait
-                    || trait instanceof EffectRemovalTrait
-                    || trait instanceof FireExtinguishTrait
-                    || trait instanceof AirBubblesTrait
-                    || trait instanceof TeleportTrait
-                    || trait instanceof StaminaCapacityTrait) {
+            if (trait.benefit() == benefit) {
                 return true;
             }
         }

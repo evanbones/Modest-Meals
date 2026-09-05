@@ -2,6 +2,7 @@ package com.evandev.modest_meals.trait.impl;
 
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
+import com.evandev.modest_meals.trait.TraitBenefit;
 import com.evandev.modest_meals.trait.TraitTooltipHelper;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -18,6 +19,11 @@ public record FireExtinguishTrait() implements FoodTrait {
     @Override
     public FoodTraitType<?> getType() {
         return FoodTraitType.FIRE_EXTINGUISH;
+    }
+
+    @Override
+    public TraitBenefit benefit() {
+        return TraitBenefit.UTILITY;
     }
 
     @Override

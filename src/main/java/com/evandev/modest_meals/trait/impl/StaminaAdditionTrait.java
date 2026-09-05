@@ -5,6 +5,7 @@ import com.evandev.modest_meals.network.ModNetworking;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
+import com.evandev.modest_meals.trait.TraitBenefit;
 import com.evandev.modest_meals.trait.TraitTooltipHelper;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -31,6 +32,11 @@ public record StaminaAdditionTrait(float value) implements FoodTrait {
     @Override
     public FoodTraitType<?> getType() {
         return FoodTraitType.STAMINA_ADDITION;
+    }
+
+    @Override
+    public TraitBenefit benefit() {
+        return TraitBenefit.STAMINA;
     }
 
     @Override

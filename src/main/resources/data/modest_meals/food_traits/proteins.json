@@ -38,6 +38,7 @@
     },
     {
       "target": "#c:foods/raw_fish",
+      "priority": 140,
       "traits": [
         {
           "type": "modest_meals:health_addition",
@@ -54,6 +55,7 @@
     },
     {
       "target": "#c:foods/cooked_fish",
+      "priority": 150,
       "traits": [
         {
           "type": "modest_meals:health_addition",
