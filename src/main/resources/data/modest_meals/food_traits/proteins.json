@@ -1,86 +1,6 @@
 {
   "entries": [
     {
-      "target": "#c:foods/raw_meat",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "#c:foods/cooked_meat",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "minecraft:beef",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "minecraft:cooked_beef",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "minecraft:porkchop",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "minecraft:cooked_porkchop",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "minecraft:mutton",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 0.5,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "minecraft:cooked_mutton",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
       "target": "minecraft:chicken",
       "traits": [
         {
@@ -95,23 +15,8 @@
       ]
     },
     {
-      "target": "minecraft:cooked_chicken",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 250
-        }
-      ]
-    },
-    {
       "target": "minecraft:rabbit",
       "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:jump_boost",
@@ -123,11 +28,6 @@
     {
       "target": "minecraft:cooked_rabbit",
       "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:jump_boost",
@@ -296,16 +196,6 @@
       ]
     },
     {
-      "target": "farmersdelight:minced_beef",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
       "target": "farmersdelight:chicken_cuts",
       "traits": [
         {
@@ -316,36 +206,6 @@
         {
           "type": "modest_meals:stamina_no_regen",
           "duration": 150
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:bacon",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:ham",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:mutton_chops",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 0.5,
-          "duration": 300
         }
       ]
     },
@@ -382,46 +242,6 @@
       ]
     },
     {
-      "target": "farmersdelight:fried_egg",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:beef_patty",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 300
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:cooked_chicken_cuts",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 350
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:cooked_bacon",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 500
-        }
-      ]
-    },
-    {
       "target": "farmersdelight:cooked_cod_slice",
       "traits": [
         {
@@ -454,26 +274,6 @@
           "effect": "minecraft:dolphins_grace",
           "duration": 250,
           "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:cooked_mutton_chops",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.0,
-          "duration": 500
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:smoked_ham",
-      "traits": [
-        {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 500
         }
       ]
     }

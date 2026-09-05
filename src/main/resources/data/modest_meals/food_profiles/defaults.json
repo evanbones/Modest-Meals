@@ -171,6 +171,20 @@
       "stamina_per_nutrition": 0.9
     },
     {
+      "id": "golden_apple",
+      "match": "minecraft:golden_apple",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "enchanted_golden_apple",
+      "match": "minecraft:enchanted_golden_apple",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
       "id": "beetroot",
       "match": "minecraft:beetroot",
       "priority": 145,

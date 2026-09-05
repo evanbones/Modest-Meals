@@ -84,8 +84,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 600
+          "value": 1.5,
+          "duration": 300
         },
         {
           "type": "modest_meals:stamina_addition",
@@ -124,8 +124,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 700
+          "value": 1.5,
+          "duration": 300
         },
         {
           "type": "modest_meals:stamina_capacity",
@@ -145,8 +145,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 700
+          "value": 1.5,
+          "duration": 300
         },
         {
           "type": "modest_meals:stamina_capacity",
@@ -223,8 +223,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 350
+          "value": 1.0,
+          "duration": 200
         },
         {
           "type": "modest_meals:effect_grant",
@@ -243,8 +243,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 400
+          "value": 1.0,
+          "duration": 200
         },
         {
           "type": "modest_meals:stamina_regen",
@@ -296,8 +296,8 @@
         },
         {
           "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 500
+          "value": 1.0,
+          "duration": 200
         },
         {
           "type": "modest_meals:effect_removal",
@@ -377,8 +377,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 600
+          "value": 1.0,
+          "duration": 200
         },
         {
           "type": "modest_meals:effect_grant",
@@ -393,8 +393,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 600
+          "value": 1.5,
+          "duration": 200
         },
         {
           "type": "modest_meals:stamina_capacity",
@@ -408,8 +408,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 500
+          "value": 1.5,
+          "duration": 200
         },
         {
           "type": "modest_meals:effect_grant",
@@ -518,8 +518,8 @@
         },
         {
           "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 400
+          "value": 1.0,
+          "duration": 200
         }
       ]
     },
@@ -542,8 +542,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 550
+          "value": 1.5,
+          "duration": 200
         },
         {
           "type": "modest_meals:stamina_capacity",
@@ -556,9 +556,10 @@
       "target": "farmersdelight:pasta_with_meatballs",
       "traits": [
         {
-          "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 450
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:strength",
+          "duration": 350,
+          "amplifier": 0
         },
         {
           "type": "modest_meals:health_addition",
@@ -606,8 +607,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 1.5,
-          "duration": 550
+          "value": 1.0,
+          "duration": 200
         },
         {
           "type": "modest_meals:stamina_regen",
@@ -642,8 +643,8 @@
       "traits": [
         {
           "type": "modest_meals:health_regen",
-          "value": 2.0,
-          "duration": 600
+          "value": 1.5,
+          "duration": 200
         },
         {
           "type": "modest_meals:stamina_addition",
@@ -654,6 +655,12 @@
     {
       "target": "farmersdelight:ratatouille",
       "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:strength",
+          "duration": 300,
+          "amplifier": 0
+        },
         {
           "type": "modest_meals:health_addition",
           "value": 2.5,

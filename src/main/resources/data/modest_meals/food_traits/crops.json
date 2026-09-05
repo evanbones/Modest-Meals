@@ -127,12 +127,6 @@
           "type": "modest_meals:stamina_regen",
           "value": 1.5,
           "duration": 300
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:strength",
-          "duration": 200,
-          "amplifier": 0
         }
       ]
     },
@@ -143,12 +137,6 @@
           "type": "modest_meals:stamina_regen",
           "value": 1.5,
           "duration": 300
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:strength",
-          "duration": 200,
-          "amplifier": 0
         }
       ]
     },
