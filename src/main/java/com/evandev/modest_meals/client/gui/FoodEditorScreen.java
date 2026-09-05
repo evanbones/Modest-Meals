@@ -16,6 +16,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -44,6 +45,7 @@ public class FoodEditorScreen extends Screen {
     private static final int EMPTY_TRAITS_H = 20;
 
     private final Screen parent;
+    private final boolean readOnly;
     private final Map<String, List<FoodTrait>> customTraits;
     private final Map<String, Set<String>> customSuppressions;
     private final List<FoodProfile> customProfiles;
@@ -67,11 +69,17 @@ public class FoodEditorScreen extends Screen {
     public FoodEditorScreen(Screen parent) {
         super(Component.translatable("gui.modest_meals.food_editor.title"));
         this.parent = parent;
-        this.customTraits = new LinkedHashMap<>(CustomFoodDatapack.readCustomTraits());
+        this.readOnly = isRemoteServer();
+        this.customTraits = new LinkedHashMap<>();
         this.customSuppressions = new LinkedHashMap<>();
-        CustomFoodDatapack.readCustomSuppressions().forEach((id, keys) ->
-                this.customSuppressions.put(id, new LinkedHashSet<>(keys)));
-        this.customProfiles = new ArrayList<>(CustomFoodDatapack.readCustomProfiles());
+        this.customProfiles = new ArrayList<>();
+
+        if (!readOnly) {
+            this.customTraits.putAll(CustomFoodDatapack.readCustomTraits());
+            CustomFoodDatapack.readCustomSuppressions().forEach((id, keys) ->
+                    this.customSuppressions.put(id, new LinkedHashSet<>(keys)));
+            this.customProfiles.addAll(CustomFoodDatapack.readCustomProfiles());
+        }
 
         for (Item item : BuiltInRegistries.ITEM) {
             ItemStack stack = new ItemStack(item);
@@ -81,6 +89,11 @@ public class FoodEditorScreen extends Screen {
                     id.toLowerCase(Locale.ROOT),
                     FoodValues.isFood(stack)));
         }
+    }
+
+    private static boolean isRemoteServer() {
+        ClientPacketListener connection = Minecraft.getInstance().getConnection();
+        return connection != null && !connection.getConnection().isMemoryConnection();
     }
 
     private static String itemId(Item item) {
@@ -159,17 +172,19 @@ public class FoodEditorScreen extends Screen {
         this.addRenderableWidget(new ModButton(GUTTER, footerY, 70, 20, CommonComponents.GUI_DONE,
                 b -> this.onClose()));
 
-        int saveW = 110;
-        int saveX = this.width - GUTTER - saveW;
-        ModButton saveButton = new ModButton(saveX, footerY, saveW, 20,
-                Component.translatable("gui.modest_meals.save_and_apply"), b -> saveAndApply());
-        saveButton.active = dirty;
-        this.addRenderableWidget(saveButton);
+        if (!readOnly) {
+            int saveW = 110;
+            int saveX = this.width - GUTTER - saveW;
+            ModButton saveButton = new ModButton(saveX, footerY, saveW, 20,
+                    Component.translatable("gui.modest_meals.save_and_apply"), b -> saveAndApply());
+            saveButton.active = dirty;
+            this.addRenderableWidget(saveButton);
 
-        if (selectedItem != null && isCustomized(itemId(selectedItem))) {
-            int resetW = 90;
-            this.addRenderableWidget(new ModButton(saveX - GUTTER - resetW, footerY, resetW, 20,
-                    Component.translatable("gui.modest_meals.reset_item"), b -> resetSelectedItem()));
+            if (selectedItem != null && isCustomized(itemId(selectedItem))) {
+                int resetW = 90;
+                this.addRenderableWidget(new ModButton(saveX - GUTTER - resetW, footerY, resetW, 20,
+                        Component.translatable("gui.modest_meals.reset_item"), b -> resetSelectedItem()));
+            }
         }
 
         if (selectedItem != null) {
@@ -250,9 +265,10 @@ public class FoodEditorScreen extends Screen {
     }
 
     private void rebuildRightPane() {
-        String itemId = itemId(selectedItem);
         this.paneScroll = Mth.clamp(this.paneScroll, 0, maxPaneScroll());
+        if (readOnly) return;
 
+        String itemId = itemId(selectedItem);
         int contentW = paneContentWidth();
 
         int editW = Math.min(90, Math.max(50, contentW / 3));
@@ -397,7 +413,7 @@ public class FoodEditorScreen extends Screen {
     }
 
     private void resetSelectedItem() {
-        if (selectedItem == null) return;
+        if (readOnly || selectedItem == null) return;
         String id = itemId(selectedItem);
         customTraits.remove(id);
         customSuppressions.remove(id);
@@ -408,7 +424,7 @@ public class FoodEditorScreen extends Screen {
     }
 
     private void saveAndApply() {
-        if (!dirty) return;
+        if (readOnly || !dirty) return;
 
         customTraits.values().removeIf(List::isEmpty);
         customSuppressions.values().removeIf(Set::isEmpty);
@@ -551,9 +567,19 @@ public class FoodEditorScreen extends Screen {
         String status = showStatus ? GuiUtil.trim(this.font, statusMessage.getString(), this.width / 2 - 12) : "";
         int statusW = status.isEmpty() ? 0 : this.font.width(status) + 8;
 
-        GuiUtil.drawTrimmed(graphics, this.font, this.title, 8, 10, this.width - 16 - statusW, GuiUtil.WHITE);
+        Component titleText = readOnly
+                ? Component.translatable("gui.modest_meals.food_editor.title_read_only", this.title)
+                : this.title;
+        GuiUtil.drawTrimmed(graphics, this.font, titleText, 8, 10, this.width - 16 - statusW, GuiUtil.WHITE);
         if (!status.isEmpty()) {
             graphics.drawString(this.font, status, this.width - 8 - this.font.width(status), 10, GuiUtil.STATUS_GREEN);
+        }
+
+        if (readOnly) {
+            String hint = GuiUtil.trim(this.font, Component.translatable(
+                    "gui.modest_meals.food_editor.read_only_hint").getString(), this.width / 2);
+            graphics.drawString(this.font, hint, this.width - GUTTER - this.font.width(hint),
+                    this.height - FOOTER_H + 12, GuiUtil.SUBTEXT);
         }
 
         if (selectedItem != null) {

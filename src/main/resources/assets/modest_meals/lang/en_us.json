@@ -279,6 +279,8 @@
   "modest_meals.trait.unknown": "Unknown Trait",
 
   "gui.modest_meals.food_editor.title": "Food Effect & Profile Editor",
+  "gui.modest_meals.food_editor.title_read_only": "%s (Read-only)",
+  "gui.modest_meals.food_editor.read_only_hint": "Showing this server's food data",
   "gui.modest_meals.search": "Search foods...",
   "gui.modest_meals.unsaved.title": "Unsaved Changes",
   "gui.modest_meals.unsaved.message": "Your edits haven't been written to the food pack yet. Closing now will discard them.",
