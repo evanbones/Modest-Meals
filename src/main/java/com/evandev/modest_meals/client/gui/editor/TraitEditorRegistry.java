@@ -25,15 +25,14 @@ public class TraitEditorRegistry {
     static {
         register(FoodTraitType.EFFECT_GRANT, EffectGrantEditor::new);
         register(FoodTraitType.HEALTH_ADDITION, HealthAdditionEditor::new);
-        register(FoodTraitType.HEALTH_REGEN, HealthRegenEditor::new);
         register(FoodTraitType.STAMINA_ADDITION, StaminaAdditionEditor::new);
-        register(FoodTraitType.STAMINA_REGEN, StaminaRegenEditor::new);
+        register(FoodTraitType.TEMPORARY_HEALTH, TemporaryHealthEditor::new);
+        register(FoodTraitType.TEMPORARY_STAMINA, TemporaryStaminaEditor::new);
         register(FoodTraitType.STAMINA_CAPACITY, StaminaCapacityEditor::new);
         register(FoodTraitType.EFFECT_REMOVAL, EffectRemovalEditor::new);
         register(FoodTraitType.AIR_BUBBLES, AirBubblesEditor::new);
         register(FoodTraitType.FIRE_EXTINGUISH, FireExtinguishEditor::new);
         register(FoodTraitType.TELEPORT, TeleportEditor::new);
-        register(FoodTraitType.HEALTH_DEPLETION, HealthDepletionEditor::new);
         register(FoodTraitType.STAMINA_DEPLETION, StaminaDepletionEditor::new);
         register(FoodTraitType.HEALTH_NO_REGEN, HealthNoRegenEditor::new);
         register(FoodTraitType.STAMINA_NO_REGEN, StaminaNoRegenEditor::new);
@@ -188,50 +187,6 @@ public class TraitEditorRegistry {
         }
     }
 
-    public static class HealthDepletionEditor extends ValueDurationEditor implements TraitEditor<HealthDepletionTrait> {
-        public HealthDepletionEditor() {
-            super(2.0f, 0.0);
-        }
-
-        @Override
-        public void initFrom(HealthDepletionTrait trait) {
-            this.value = trait.value();
-            this.durationSeconds = toSeconds(trait.duration());
-        }
-
-        @Override
-        public void buildForm(FormBuilder form) {
-            declare(form, "gui.modest_meals.field.health_loss", 0, 1024);
-        }
-
-        @Override
-        public HealthDepletionTrait createTrait() {
-            return new HealthDepletionTrait(value, toTicks(durationSeconds));
-        }
-    }
-
-    public static class HealthRegenEditor extends ValueDurationEditor implements TraitEditor<HealthRegenTrait> {
-        public HealthRegenEditor() {
-            super(2.0f, 30.0);
-        }
-
-        @Override
-        public void initFrom(HealthRegenTrait trait) {
-            this.value = trait.value();
-            this.durationSeconds = toSeconds(trait.duration());
-        }
-
-        @Override
-        public void buildForm(FormBuilder form) {
-            declare(form, "gui.modest_meals.field.potency", 0, 255);
-        }
-
-        @Override
-        public HealthRegenTrait createTrait() {
-            return new HealthRegenTrait(value, toTicks(durationSeconds));
-        }
-    }
-
     public static class HealthNoRegenEditor implements TraitEditor<HealthNoRegenTrait> {
         private double durationSeconds = 30;
 
@@ -251,6 +206,44 @@ public class TraitEditorRegistry {
         }
     }
 
+    public static class TemporaryHealthEditor implements TraitEditor<TemporaryHealthTrait> {
+        private float value = 2.0f;
+
+        @Override
+        public void initFrom(TemporaryHealthTrait trait) {
+            this.value = trait.value();
+        }
+
+        @Override
+        public void buildForm(FormBuilder form) {
+            form.decimal("gui.modest_meals.field.temporary_health", 0, 1024, value, v -> value = (float) v);
+        }
+
+        @Override
+        public TemporaryHealthTrait createTrait() {
+            return new TemporaryHealthTrait(value);
+        }
+    }
+
+    public static class TemporaryStaminaEditor implements TraitEditor<TemporaryStaminaTrait> {
+        private float value = 2.0f;
+
+        @Override
+        public void initFrom(TemporaryStaminaTrait trait) {
+            this.value = trait.value();
+        }
+
+        @Override
+        public void buildForm(FormBuilder form) {
+            form.decimal("gui.modest_meals.field.temporary_stamina", 0, 1024, value, v -> value = (float) v);
+        }
+
+        @Override
+        public TemporaryStaminaTrait createTrait() {
+            return new TemporaryStaminaTrait(value);
+        }
+    }
+
     public static class StaminaAdditionEditor implements TraitEditor<StaminaAdditionTrait> {
         private float value = 2.0f;
 
@@ -267,28 +260,6 @@ public class TraitEditorRegistry {
         @Override
         public StaminaAdditionTrait createTrait() {
             return new StaminaAdditionTrait(value);
-        }
-    }
-
-    public static class StaminaRegenEditor extends ValueDurationEditor implements TraitEditor<StaminaRegenTrait> {
-        public StaminaRegenEditor() {
-            super(2.0f, 30.0);
-        }
-
-        @Override
-        public void initFrom(StaminaRegenTrait trait) {
-            this.value = trait.value();
-            this.durationSeconds = toSeconds(trait.duration());
-        }
-
-        @Override
-        public void buildForm(FormBuilder form) {
-            declare(form, "gui.modest_meals.field.potency", 0, 255);
-        }
-
-        @Override
-        public StaminaRegenTrait createTrait() {
-            return new StaminaRegenTrait(value, toTicks(durationSeconds));
         }
     }
 

@@ -1,0 +1,112 @@
+{
+  "entries": [
+    {
+      "health": 2.0,
+      "priority": 140,
+      "stamina": 1.0,
+      "target": "#c:foods/raw_meat"
+    },
+    {
+      "health": 5.0,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:foods/cooked_meat"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 3.0,
+      "priority": 140,
+      "target": "#c:foods/raw_fish"
+    },
+    {
+      "digest_ticks": 150,
+      "health": 5.0,
+      "priority": 145,
+      "target": "#c:foods/cooked_fish"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "minecraft:beef"
+    },
+    {
+      "health": 6.0,
+      "stamina": 2.0,
+      "target": "minecraft:cooked_beef"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "minecraft:porkchop"
+    },
+    {
+      "health": 6.0,
+      "stamina": 2.0,
+      "target": "minecraft:cooked_porkchop"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "minecraft:mutton"
+    },
+    {
+      "health": 5.0,
+      "stamina": 2.0,
+      "target": "minecraft:cooked_mutton"
+    },
+    {
+      "digest_ticks": 150,
+      "health": 1.5,
+      "target": "minecraft:chicken"
+    },
+    {
+      "health": 4.0,
+      "stamina": 2.0,
+      "target": "minecraft:cooked_chicken"
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.0,
+      "target": "minecraft:rabbit"
+    },
+    {
+      "health": 4.0,
+      "stamina": 2.0,
+      "target": "minecraft:cooked_rabbit"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 4.0,
+      "target": "minecraft:salmon",
+      "temporary_health": 1.0
+    },
+    {
+      "digest_ticks": 180,
+      "health": 6.0,
+      "target": "minecraft:cooked_salmon",
+      "temporary_health": 2.0
+    },
+    {
+      "digest_ticks": 90,
+      "health": 3.0,
+      "target": "minecraft:cod"
+    },
+    {
+      "digest_ticks": 150,
+      "health": 5.0,
+      "target": "minecraft:cooked_cod"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 0.5,
+      "target": "minecraft:tropical_fish"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "minecraft:egg"
+    }
+  ]
+}

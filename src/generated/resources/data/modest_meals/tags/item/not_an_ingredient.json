@@ -1,0 +1,64 @@
+{
+  "values": [
+    "modest_meals:stew",
+    "modest_meals:soup",
+    "modest_meals:ramen",
+    "modest_meals:pasta",
+    "modest_meals:salad",
+    "modest_meals:curry",
+    "modest_meals:porridge",
+    "modest_meals:drink",
+    "modest_meals:jam",
+    "modest_meals:pickles",
+    "modest_meals:sandwich",
+    "modest_meals:toast",
+    "modest_meals:wrap",
+    "modest_meals:pizza",
+    "modest_meals:sushi",
+    "modest_meals:skewer",
+    "modest_meals:mochi",
+    "modest_meals:ice_cream",
+    "modest_meals:popsicle",
+    "modest_meals:pie",
+    "modest_meals:cake",
+    "minecraft:mushroom_stew",
+    "minecraft:rabbit_stew",
+    "minecraft:beetroot_soup",
+    "minecraft:suspicious_stew",
+    "minecraft:pumpkin_pie",
+    "minecraft:cake",
+    "minecraft:cookie",
+    {
+      "id": "#c:foods/soup",
+      "required": false
+    },
+    {
+      "id": "#c:foods/pie",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cookie",
+      "required": false
+    },
+    {
+      "id": "#c:foods/candy",
+      "required": false
+    },
+    {
+      "id": "#farmersdelight:meals",
+      "required": false
+    },
+    {
+      "id": "#farmersdelight:pies",
+      "required": false
+    },
+    {
+      "id": "#farmersdelight:sweets",
+      "required": false
+    },
+    {
+      "id": "#farmersdelight:snacks",
+      "required": false
+    }
+  ]
+}

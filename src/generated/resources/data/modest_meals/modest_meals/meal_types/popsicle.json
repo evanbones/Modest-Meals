@@ -1,0 +1,16 @@
+{
+  "id": "modest_meals:popsicle",
+  "item": "modest_meals:popsicle",
+  "max_ingredients": 1,
+  "priority": 10,
+  "shape": {
+    "key": {
+      "#": "modest_meals:any_ingredient",
+      "S": "minecraft:stick"
+    },
+    "pattern": [
+      "#",
+      "S"
+    ]
+  }
+}

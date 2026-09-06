@@ -1,0 +1,8 @@
+{
+  "container": "minecraft:glass_bottle",
+  "id": "modest_meals:drink",
+  "item": "modest_meals:drink",
+  "max_ingredients": 4,
+  "priority": 10,
+  "station": "cooking_pot"
+}

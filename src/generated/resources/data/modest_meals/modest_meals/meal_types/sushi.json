@@ -1,0 +1,17 @@
+{
+  "id": "modest_meals:sushi",
+  "item": "modest_meals:sushi",
+  "max_ingredients": 2,
+  "priority": 10,
+  "shape": {
+    "key": {
+      "#": "modest_meals:any_ingredient",
+      "K": "minecraft:dried_kelp"
+    },
+    "pattern": [
+      "K",
+      "#",
+      "#"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "base_seconds": 60,
+  "id": "modest_meals:night_vision",
+  "mob_effect": "minecraft:night_vision",
+  "name_prefix_key": "modest_meals.meal_prefix.night_vision"
+}

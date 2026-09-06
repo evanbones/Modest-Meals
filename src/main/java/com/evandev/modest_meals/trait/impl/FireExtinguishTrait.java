@@ -27,17 +27,12 @@ public record FireExtinguishTrait() implements FoodTrait {
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         entity.clearFire();
     }
 
     @Override
     public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
-        return TraitTooltipHelper.formatSimplePlus("modest_meals.trait.fire_extinguish", 0);
+        return TraitTooltipHelper.formatSimple("modest_meals.trait.fire_extinguish", 0);
     }
 }

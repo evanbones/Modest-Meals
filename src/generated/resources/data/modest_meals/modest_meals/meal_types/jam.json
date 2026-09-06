@@ -1,0 +1,15 @@
+{
+  "base": [
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "container": "minecraft:glass_bottle",
+  "id": "modest_meals:jam",
+  "item": "modest_meals:jam",
+  "max_ingredients": 3,
+  "priority": 30,
+  "station": "cooking_pot"
+}

@@ -47,8 +47,16 @@ public abstract class StaminaRenderer {
         return Mth.ceil(stamina.getMaxLevel() / 2.0F);
     }
 
+    public static int overchargeIconCount(PlayerStamina stamina) {
+        return Mth.ceil(stamina.getOverchargeLevel() / 2.0F);
+    }
+
+    public static int totalIconCount(PlayerStamina stamina) {
+        return iconCount(stamina) + overchargeIconCount(stamina);
+    }
+
     public static int rowCount(PlayerStamina stamina) {
-        return Mth.ceil(iconCount(stamina) / (float) ICONS_PER_ROW);
+        return Mth.ceil(totalIconCount(stamina) / (float) ICONS_PER_ROW);
     }
 
     private static int rowHeight(int rows) {
@@ -169,6 +177,8 @@ public abstract class StaminaRenderer {
         int previewLevel = getPreviewLevel(player, stamina);
 
         int icons = iconCount(stamina);
+        int overchargeIcons = overchargeIconCount(stamina);
+        int overchargeLevel = stamina.getOverchargeLevel();
         int rows = rowCount(stamina);
         int rowHeight = rowHeight(rows);
 
@@ -185,11 +195,20 @@ public abstract class StaminaRenderer {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
 
-        for (int i = 0; i < icons; i++) {
+        for (int i = 0; i < icons + overchargeIcons; i++) {
             int x = left - (i % ICONS_PER_ROW) * 8 - ICON_SIZE;
             int top = baseTop - (i / ICONS_PER_ROW) * rowHeight;
             if (i == bounceIcon) {
                 top -= 2;
+            }
+
+            if (i >= icons) {
+                int overchargeIcon = (i - icons) * 2 + 1;
+                boolean isHalf = overchargeIcon == overchargeLevel;
+                graphics.blitSprite(
+                        isHalf ? ModSprites.STAMINA_OVERCHARGE_HALF : ModSprites.STAMINA_OVERCHARGE,
+                        x, top, ICON_SIZE, ICON_SIZE);
+                continue;
             }
 
             int icon = i * 2 + 1;

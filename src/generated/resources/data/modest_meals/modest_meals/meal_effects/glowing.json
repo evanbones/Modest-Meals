@@ -1,0 +1,6 @@
+{
+  "base_seconds": 60,
+  "id": "modest_meals:glowing",
+  "mob_effect": "minecraft:glowing",
+  "name_prefix_key": "modest_meals.meal_prefix.glowing"
+}

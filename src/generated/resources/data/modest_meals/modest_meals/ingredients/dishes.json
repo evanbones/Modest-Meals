@@ -1,0 +1,60 @@
+{
+  "entries": [
+    {
+      "digest_ticks": 100,
+      "health": 2.0,
+      "target": "farmersdelight:apple_cider"
+    },
+    {
+      "digest_ticks": 150,
+      "health": 1.0,
+      "target": "farmersdelight:chicken_cuts"
+    },
+    {
+      "digest_ticks": 90,
+      "health": 2.0,
+      "target": "farmersdelight:cod_slice"
+    },
+    {
+      "digest_ticks": 130,
+      "health": 3.0,
+      "target": "farmersdelight:cooked_cod_slice"
+    },
+    {
+      "digest_ticks": 145,
+      "health": 3.75,
+      "target": "farmersdelight:cooked_salmon_slice"
+    },
+    {
+      "stamina": 1.5,
+      "target": "farmersdelight:pie_crust"
+    },
+    {
+      "stamina": 1.0,
+      "target": "farmersdelight:pumpkin_slice"
+    },
+    {
+      "stamina": 1.0,
+      "target": "farmersdelight:rice"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.5,
+      "target": "farmersdelight:salmon_slice"
+    },
+    {
+      "stamina": 2.0,
+      "target": "farmersdelight:tomato"
+    },
+    {
+      "stamina": 2.5,
+      "target": "farmersdelight:tomato_sauce"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 4.0,
+      "target": "minecraft:glistering_melon_slice",
+      "temporary_stamina": 1.0
+    }
+  ]
+}

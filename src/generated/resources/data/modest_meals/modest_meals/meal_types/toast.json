@@ -1,0 +1,16 @@
+{
+  "id": "modest_meals:toast",
+  "item": "modest_meals:toast",
+  "max_ingredients": 1,
+  "priority": 5,
+  "shape": {
+    "key": {
+      "#": "modest_meals:any_ingredient",
+      "B": "#c:foods/bread"
+    },
+    "pattern": [
+      "#",
+      "B"
+    ]
+  }
+}

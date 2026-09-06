@@ -4,7 +4,6 @@ import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTraitManager;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +19,7 @@ public class FoodConsumption {
             return true;
         }
 
-        FoodProperties food = stack.get(DataComponents.FOOD);
+        FoodProperties food = stack.getFoodProperties(player);
         if (food != null && food.canAlwaysEat()) {
             return true;
         }

@@ -1,0 +1,89 @@
+{
+  "entries": [
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "minecraft:sugar"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 2.0,
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "minecraft:honey_bottle"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "potency": 7,
+      "stamina": 2.0,
+      "target": "minecraft:honeycomb"
+    },
+    {
+      "effect": "modest_meals:haste",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "minecraft:cocoa_beans"
+    },
+    {
+      "effect": "modest_meals:haste",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.0,
+      "target": "minecraft:amethyst_shard"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "minecraft:melon_slice"
+    },
+    {
+      "effect": "modest_meals:glowing",
+      "health": 1.0,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "minecraft:glow_berries"
+    },
+    {
+      "stamina": 1.0,
+      "target": "minecraft:sweet_berries",
+      "temporary_health": 1.0
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.0,
+      "target": "minecraft:apple"
+    },
+    {
+      "health": 4.0,
+      "stamina": 4.0,
+      "target": "minecraft:golden_apple",
+      "temporary_health": 4.0,
+      "temporary_stamina": 4.0
+    },
+    {
+      "health": 8.0,
+      "stamina": 8.0,
+      "target": "minecraft:enchanted_golden_apple",
+      "temporary_health": 8.0,
+      "temporary_stamina": 8.0
+    },
+    {
+      "effect": "modest_meals:jump_boost",
+      "health": 2.0,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "minecraft:chorus_fruit"
+    },
+    {
+      "effect": "modest_meals:jump_boost",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.0,
+      "target": "minecraft:phantom_membrane"
+    }
+  ]
+}

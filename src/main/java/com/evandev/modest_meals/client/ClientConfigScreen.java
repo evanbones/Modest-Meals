@@ -140,6 +140,8 @@ public class ClientConfigScreen {
                         .action((yaclScreen, opt) -> net.minecraft.client.Minecraft.getInstance().setScreen(new com.evandev.modest_meals.client.gui.FoodEditorScreen(yaclScreen)))
                         .build())
                 .option(createBoolOption("show_food_trait_tooltips", defaults.showFoodTraitTooltips, () -> config.showFoodTraitTooltips, val -> config.showFoodTraitTooltips = val))
+                .option(createEnumOption("when_eaten_tooltip", TooltipVisibility.class, defaults.whenEatenTooltip, () -> config.whenEatenTooltip, val -> config.whenEatenTooltip = val, TooltipVisibility::getTitle))
+                .option(createEnumOption("ingredient_tooltip", TooltipVisibility.class, defaults.ingredientTooltip, () -> config.ingredientTooltip, val -> config.ingredientTooltip = val, TooltipVisibility::getTitle))
                 .build());
 
         foodEffectsCategoryBuilder.group(OptionGroup.createBuilder()
@@ -147,8 +149,6 @@ public class ClientConfigScreen {
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.food_multipliers.tooltip")))
                 .option(createFloatOption("trait_global_value_multiplier", defaults.traitGlobalValueMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalValueMultiplier, val -> config.traitGlobalValueMultiplier = val))
                 .option(createFloatOption("trait_global_duration_multiplier", defaults.traitGlobalDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalDurationMultiplier, val -> config.traitGlobalDurationMultiplier = val))
-                .option(createFloatOption("smelting_multiplier", defaults.smeltingMultiplier, 0.1F, 10.0F, 0.1F, () -> config.smeltingMultiplier, val -> config.smeltingMultiplier = val))
-                .option(createFloatOption("smelting_duration_multiplier", defaults.smeltingDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.smeltingDurationMultiplier, val -> config.smeltingDurationMultiplier = val))
                 .build());
 
         builder.category(foodEffectsCategoryBuilder.build());

@@ -222,7 +222,7 @@ public class ClientEventHandler {
             }
         }
 
-        @SubscribeEvent
+        @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void onItemTooltip(ItemTooltipEvent event) {
             FoodItemTooltips.onTooltip(event);
         }

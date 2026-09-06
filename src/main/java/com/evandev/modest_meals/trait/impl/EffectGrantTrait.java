@@ -52,18 +52,6 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof EffectGrantTrait(
-                Holder<MobEffect> effect1, int duration1, int amplifier1, boolean particles, boolean ambient1
-        ) && this.effect.equals(effect1)) {
-            int newAmp = Math.max(this.amplifier, amplifier1);
-            int newDur = (int) ((this.duration + duration1) * durationMultiplier);
-            return new EffectGrantTrait(this.effect, newDur, newAmp, this.showParticles || particles, this.ambient && ambient1);
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int dur = (int) (this.duration * durationMultiplier);
         if (dur > 0) {

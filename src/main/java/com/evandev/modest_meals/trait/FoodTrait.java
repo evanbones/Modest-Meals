@@ -15,11 +15,6 @@ public interface FoodTrait {
     }
 
     /**
-     * Compounds this trait with another trait of the same type (from multiple ingredients).
-     */
-    FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier);
-
-    /**
      * Applies this trait's effect when the food is consumed by an entity.
      */
     void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier);

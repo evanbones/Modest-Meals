@@ -1,0 +1,20 @@
+{
+  "base_seconds": 20,
+  "id": "modest_meals:resistance",
+  "mob_effect": "minecraft:resistance",
+  "name_prefix_key": "modest_meals.meal_prefix.resistance",
+  "tiers": [
+    {
+      "amplifier": 0,
+      "threshold": 0
+    },
+    {
+      "amplifier": 1,
+      "threshold": 30
+    },
+    {
+      "amplifier": 2,
+      "threshold": 45
+    }
+  ]
+}

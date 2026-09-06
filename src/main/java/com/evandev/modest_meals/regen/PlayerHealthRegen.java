@@ -1,23 +1,29 @@
 package com.evandev.modest_meals.regen;
 
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.network.ClientboundHealthRegenSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.HashSet;
+import java.util.List;
 
+@ApiStatus.Internal
 public class PlayerHealthRegen {
 
-    private static final TypeToken<HashSet<ConsumedFood>> CONSUMED_FOOD_SET_TYPE = new TypeToken<>() {
-    };
-    private static final Gson GSON = new Gson();
+    private static final String NBT_CONSUMED_FOODS = "consumedFoods";
+    private static final String NBT_CONSUMED_NUTRITION = "consumedNutrition";
+
     private final Player player;
     private HashSet<ConsumedFood> consumedFoods = new HashSet<>();
     private int consumedNutrition = 0;
@@ -27,23 +33,23 @@ public class PlayerHealthRegen {
     }
 
     public void readFromNbt(CompoundTag tag) {
-        this.consumedNutrition = Math.max(tag.getInt("consumedNutrition"), 0);
-        String consumedFoodsStr = tag.getString("consumedFoods");
-        if (!consumedFoodsStr.isEmpty()) {
-            try {
-                this.consumedFoods = GSON.fromJson(consumedFoodsStr, CONSUMED_FOOD_SET_TYPE.getType());
-                if (this.consumedFoods == null) {
-                    this.consumedFoods = new HashSet<>();
-                }
-            } catch (Exception ignored) {
-                this.consumedFoods = new HashSet<>();
-            }
+        this.consumedNutrition = Math.max(tag.getInt(NBT_CONSUMED_NUTRITION), 0);
+        this.consumedFoods = new HashSet<>();
+
+        Tag foods = tag.get(NBT_CONSUMED_FOODS);
+        if (foods == null) {
+            return;
         }
+        ConsumedFood.CODEC.listOf().parse(NbtOps.INSTANCE, foods)
+                .resultOrPartial(error -> Constants.LOG.error("Failed to parse digesting food: {}", error))
+                .ifPresent(this.consumedFoods::addAll);
     }
 
     public void writeToNbt(CompoundTag tag) {
-        tag.putInt("consumedNutrition", this.consumedNutrition);
-        tag.putString("consumedFoods", GSON.toJson(this.consumedFoods));
+        tag.putInt(NBT_CONSUMED_NUTRITION, this.consumedNutrition);
+        ConsumedFood.CODEC.listOf().encodeStart(NbtOps.INSTANCE, List.copyOf(this.consumedFoods))
+                .resultOrPartial(error -> Constants.LOG.error("Failed to serialize digesting food: {}", error))
+                .ifPresent(encoded -> tag.put(NBT_CONSUMED_FOODS, encoded));
     }
 
     public void sync() {
@@ -88,13 +94,13 @@ public class PlayerHealthRegen {
             }
         }
 
-        HashSet<Integer> digestingFoods = new HashSet<>();
+        HashSet<String> digestingFoods = new HashSet<>();
         boolean needsSync = false;
 
         var iterator = consumedFoods.iterator();
         while (iterator.hasNext()) {
             ConsumedFood consumedFood = iterator.next();
-            int consumedFoodId = consumedFood.getFoodComponentId();
+            String consumedFoodId = consumedFood.getFoodId();
             if (digestingFoods.contains(consumedFoodId)) {
                 // Parallel healing only with unique food types
                 continue;
@@ -125,7 +131,7 @@ public class PlayerHealthRegen {
         return player.getHealth() < player.getMaxHealth();
     }
 
-    public void addHealth(float points, int digestTicks, int foodId) {
+    public void addHealth(float points, int digestTicks, String foodId) {
         if (player.level().isClientSide()) {
             return;
         }
@@ -156,21 +162,40 @@ public class PlayerHealthRegen {
     }
 
     public static class ConsumedFood {
-        private final int foodComponentId;
+        public static final Codec<ConsumedFood> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.STRING.fieldOf("food_id").forGetter(food -> food.foodId),
+                Codec.INT.fieldOf("nutrition").forGetter(food -> food.foodNutrition),
+                Codec.INT.fieldOf("ticks_to_heal").forGetter(food -> food.ticksToHeal),
+                Codec.INT.optionalFieldOf("digested", 0).forGetter(food -> food.digestedNutrition),
+                Codec.INT.optionalFieldOf("counter", 0).forGetter(food -> food.ticksCounter)
+        ).apply(instance, ConsumedFood::new));
+
+        private final String foodId;
         private final int foodNutrition;
         private final int ticksToHeal;
-        private int digestedNutrition = 0;
-        private int ticksCounter = 0;
+        private int digestedNutrition;
+        private int ticksCounter;
 
-        public ConsumedFood(int foodNutrition, int digestTicks, int foodComponentId) {
-            this.foodComponentId = foodComponentId;
+        public ConsumedFood(int foodNutrition, int digestTicks, String foodId) {
+            this.foodId = foodId;
             this.foodNutrition = foodNutrition;
             float speed = Math.max(0.01F, ModConfig.get().gradualHealthRegenerationSpeed);
             this.ticksToHeal = Math.max(1, (int) (digestTicks / (float) foodNutrition / speed));
+            this.digestedNutrition = 0;
+            this.ticksCounter = 0;
         }
 
-        public int getFoodComponentId() {
-            return foodComponentId;
+        private ConsumedFood(String foodId, int foodNutrition, int ticksToHeal,
+                             int digestedNutrition, int ticksCounter) {
+            this.foodId = foodId;
+            this.foodNutrition = foodNutrition;
+            this.ticksToHeal = ticksToHeal;
+            this.digestedNutrition = digestedNutrition;
+            this.ticksCounter = ticksCounter;
+        }
+
+        public String getFoodId() {
+            return foodId;
         }
 
         public boolean isFullyDigested() {

@@ -128,7 +128,7 @@ public class TraitEditDialog extends Screen {
         if (currentEditor != null) {
             currentEditor.buildForm(this.form);
         }
-        this.form.widgets().forEach(this::addRenderableWidget);
+        this.form.widgets().forEach(this::addWidget);
 
         this.scroll = Mth.clamp(this.scroll, 0, maxScroll());
 
@@ -277,6 +277,7 @@ public class TraitEditDialog extends Screen {
 
         graphics.enableScissor(panelX + GuiUtil.PANEL_PADDING, viewTop,
                 panelX + GuiUtil.PANEL_PADDING + formWidth(), viewBottom);
+        form.renderWidgets(graphics, mouseX, mouseY, partialTick);
         form.renderLabels(graphics, scroll);
         graphics.disableScissor();
 

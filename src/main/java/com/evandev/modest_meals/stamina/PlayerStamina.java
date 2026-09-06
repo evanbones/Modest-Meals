@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.stamina;
 
+import com.evandev.modest_meals.api.StaminaEvent;
 import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
@@ -12,7 +13,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
+import net.neoforged.neoforge.common.NeoForge;
+import org.jetbrains.annotations.ApiStatus;
 
+@ApiStatus.Internal
 public class PlayerStamina {
     private static final int SYNC_INTERVAL_TICKS = 20;
 
@@ -87,6 +91,74 @@ public class PlayerStamina {
         this.data.setStaminaUsingTicks(gain.exhausted() ? this.getRechargeInTicks() : this.getDurationInTicks(), this.getMaxLevel());
     }
 
+    /**
+     * Grant temporary stamina on top of the bar. It's spent before normal stamina and never regenerates,
+     * so unlike {@link #addLevels} this can be given to a player whose bar is already full.
+     */
+    public void addOvercharge(float levels) {
+        int ticks = this.levelsToTicks(levels);
+        if (ticks > 0) {
+            this.data.setOvercharge(this.data.getOvercharge() + ticks);
+        }
+    }
+
+    /**
+     * Temporary stamina expressed in bar levels, for the HUD.
+     */
+    public int getOverchargeLevel() {
+        return StaminaData.levelFor(this.data.getOvercharge(), this.getDurationInTicks(), this.getMaxLevel());
+    }
+
+    public boolean hasOvercharge() {
+        return this.data.hasOvercharge();
+    }
+
+    /**
+     * Take stamina off the player. Temporary stamina goes first, then the bar; hitting zero exhausts them.
+     */
+    public void spend(float levels) {
+        int ticks = this.levelsToTicks(levels);
+        if (ticks <= 0) {
+            return;
+        }
+
+        int fromOvercharge = Math.min(this.data.getOvercharge(), ticks);
+        if (fromOvercharge > 0) {
+            this.data.setOvercharge(this.data.getOvercharge() - fromOvercharge);
+            ticks -= fromOvercharge;
+        }
+        if (ticks <= 0) {
+            return;
+        }
+
+        int remaining = this.data.getRemaining() - ticks;
+        if (remaining <= 0) {
+            this.data.setRemaining(0);
+            this.markExhausted();
+        } else {
+            this.data.setRemaining(remaining);
+        }
+        this.data.setStaminaUsingTicks(this.getActiveBarInTicks(), this.getMaxLevel());
+    }
+
+    /**
+     * Flip into the exhausted state.
+     */
+    private void markExhausted() {
+        if (this.data.isExhausted()) {
+            return;
+        }
+        this.data.setExhausted(true);
+        this.postServerSide(new StaminaEvent.Exhausted(this.player));
+        this.syncNow();
+    }
+
+    private void postServerSide(StaminaEvent event) {
+        if (!this.player.level().isClientSide()) {
+            NeoForge.EVENT_BUS.post(event);
+        }
+    }
+
     public int levelAfterGain(float levels) {
         Gain gain = gain(levels);
         return StaminaData.levelFor(gain.remaining(),
@@ -117,6 +189,7 @@ public class PlayerStamina {
         this.naturalRegenTickTimer = 0;
 
         this.data.setCooldown(0);
+        this.data.setOvercharge(0);
         this.data.setRemaining(duration);
         this.data.setStaminaUsingTicks(duration, getMaxLevel());
         this.data.setExhausted(false);
@@ -171,18 +244,22 @@ public class PlayerStamina {
                 this.data.remaining = durationInTicks;
                 this.data.cooldown = 0;
                 this.data.setExhausted(false);
+                this.postServerSide(new StaminaEvent.Recovered(this.player));
                 this.syncNow();
             }
 
             this.data.setStaminaUsingTicks(this.data.isExhausted() ? rechargeInTicks : durationInTicks, maxLevel);
         } else if (this.isAtFullSprint()) {
-            if (!this.isNourished()) {
-                this.data.remaining--;
+            if (!this.isNourished() && !this.isDrainCancelled()) {
+                if (this.data.hasOvercharge()) {
+                    this.data.setOvercharge(this.data.getOvercharge() - 1);
+                } else {
+                    this.data.remaining--;
+                }
 
                 if (this.data.remaining <= 0) {
                     this.data.remaining = 0;
-                    this.data.setExhausted(true);
-                    this.syncNow();
+                    this.markExhausted();
                 }
             }
             this.data.cooldown = this.getCooldownInTicks();
@@ -204,7 +281,19 @@ public class PlayerStamina {
         }
     }
 
-    private void syncNow() {
+    /**
+     * Ask whether anything wants to stop this tick's drain.
+     */
+    private boolean isDrainCancelled() {
+        if (this.player.level().isClientSide()) {
+            return false;
+        }
+        StaminaEvent.Drain event = new StaminaEvent.Drain(this.player);
+        NeoForge.EVENT_BUS.post(event);
+        return event.isCanceled();
+    }
+
+    public void syncNow() {
         if (this.player instanceof ServerPlayer serverPlayer) {
             this.ticksSinceSync = 0;
             ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
@@ -294,10 +383,6 @@ public class PlayerStamina {
     }
 
     public int getPositiveEffectAmplifier() {
-        MobEffectInstance regen = this.player.getEffect(ModMobEffects.STAMINA_REGEN);
-        if (regen != null) {
-            return regen.getAmplifier();
-        }
         MobEffectInstance sat = this.player.getEffect(MobEffects.SATURATION);
         if (sat != null) {
             return sat.getAmplifier();

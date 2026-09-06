@@ -3,7 +3,9 @@ package com.evandev.modest_meals.stamina;
 import com.evandev.modest_meals.config.ModConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.ApiStatus;
 
+@ApiStatus.Internal
 public class StaminaData {
     public static final int MAX_STAMINA_LEVEL = 20;
     public static final Codec<StaminaData> CODEC = StaminaCodec.create();
@@ -12,12 +14,18 @@ public class StaminaData {
     protected int remaining;
     protected int cooldown;
     protected boolean exhausted;
+    protected int overcharge;
 
     public StaminaData(int stamina, int remaining, int cooldown, boolean exhausted) {
+        this(stamina, remaining, cooldown, exhausted, 0);
+    }
+
+    public StaminaData(int stamina, int remaining, int cooldown, boolean exhausted, int overcharge) {
         this.stamina = stamina;
         this.remaining = remaining;
         this.cooldown = cooldown;
         this.exhausted = exhausted;
+        this.overcharge = overcharge;
     }
 
     public static StaminaData create() {
@@ -63,6 +71,18 @@ public class StaminaData {
 
     public void setCooldown(int cooldown) {
         this.cooldown = Mth.clamp(cooldown, 0, ModConfig.get().staminaCooldown * 20);
+    }
+
+    public int getOvercharge() {
+        return overcharge;
+    }
+
+    public void setOvercharge(int overchargeInTicks) {
+        this.overcharge = Math.max(0, overchargeInTicks);
+    }
+
+    public boolean hasOvercharge() {
+        return this.overcharge > 0;
     }
 
     public boolean isExhausted() {

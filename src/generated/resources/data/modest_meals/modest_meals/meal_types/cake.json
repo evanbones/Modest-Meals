@@ -1,0 +1,18 @@
+{
+  "id": "modest_meals:cake",
+  "item": "modest_meals:cake",
+  "max_ingredients": 3,
+  "priority": 10,
+  "shape": {
+    "key": {
+      "#": "modest_meals:any_ingredient",
+      "E": "minecraft:egg",
+      "M": "#c:drinks/milk"
+    },
+    "pattern": [
+      "MMM",
+      "###",
+      "EEE"
+    ]
+  }
+}

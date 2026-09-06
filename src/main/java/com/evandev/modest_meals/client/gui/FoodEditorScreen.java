@@ -8,6 +8,10 @@ import com.evandev.modest_meals.food.CustomFoodDatapack;
 import com.evandev.modest_meals.food.FoodProfile;
 import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.food.FoodValues;
+import com.evandev.modest_meals.food.ingredient.IngredientProfile;
+import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
+import com.evandev.modest_meals.food.ingredient.MealEffect;
+import com.evandev.modest_meals.food.ingredient.MealEffectManager;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import net.minecraft.ChatFormatting;
@@ -49,6 +53,7 @@ public class FoodEditorScreen extends Screen {
     private final Map<String, List<FoodTrait>> customTraits;
     private final Map<String, Set<String>> customSuppressions;
     private final List<FoodProfile> customProfiles;
+    private final Map<String, IngredientProfile> customIngredients;
 
     private final List<Candidate> candidates = new ArrayList<>();
     private final List<AbstractWidget> paneWidgets = new ArrayList<>();
@@ -73,12 +78,14 @@ public class FoodEditorScreen extends Screen {
         this.customTraits = new LinkedHashMap<>();
         this.customSuppressions = new LinkedHashMap<>();
         this.customProfiles = new ArrayList<>();
+        this.customIngredients = new LinkedHashMap<>();
 
         if (!readOnly) {
             this.customTraits.putAll(CustomFoodDatapack.readCustomTraits());
             CustomFoodDatapack.readCustomSuppressions().forEach((id, keys) ->
                     this.customSuppressions.put(id, new LinkedHashSet<>(keys)));
             this.customProfiles.addAll(CustomFoodDatapack.readCustomProfiles());
+            this.customIngredients.putAll(CustomFoodDatapack.readCustomIngredients());
         }
 
         for (Item item : BuiltInRegistries.ITEM) {
@@ -233,8 +240,48 @@ public class FoodEditorScreen extends Screen {
                 paneContentWidth(), PROFILE_SUMMARY_MAX_LINES).size());
     }
 
-    private int vyTraitsHeader() {
+    private int vyIngredientHeader() {
         return VY_PROFILE_SUMMARY + profileSummaryLines() * GuiUtil.LINE_H + 8;
+    }
+
+    private int vyIngredientSummary() {
+        return vyIngredientHeader() + 16;
+    }
+
+    private Component ingredientSummary() {
+        if (selectedItem != null && !customIngredients.containsKey(itemId(selectedItem))
+                && !IngredientProfileManager.isIngredient(new ItemStack(selectedItem))) {
+            return Component.translatable("gui.modest_meals.ingredient_excluded");
+        }
+        IngredientProfile profile = getResolvedIngredient(selectedItem);
+        if (profile == null) {
+            return Component.translatable("gui.modest_meals.ingredient_none");
+        }
+        Component effect = profile.effect()
+                .flatMap(MealEffectManager::get)
+                .map(MealEffect::displayName)
+                .orElseGet(() -> Component.translatable("gui.modest_meals.effect.none"));
+        return Component.translatable("gui.modest_meals.ingredient_summary",
+                effect, profile.potency(), fmt(profile.healthOrZero()), fmt(profile.staminaOrZero()),
+                fmt(profile.temporaryHealth()), fmt(profile.temporaryStamina()),
+                profile.timeBonusSeconds());
+    }
+
+    private int ingredientSummaryLines() {
+        if (selectedItem == null) return 1;
+        return Math.max(1, GuiUtil.wrap(this.font, ingredientSummary().getString(),
+                paneContentWidth(), PROFILE_SUMMARY_MAX_LINES).size());
+    }
+
+    private IngredientProfile getResolvedIngredient(Item item) {
+        if (item == null) return null;
+        IngredientProfile edited = customIngredients.get(itemId(item));
+        if (edited != null) return edited;
+        return IngredientProfileManager.authored(item).orElse(null);
+    }
+
+    private int vyTraitsHeader() {
+        return vyIngredientSummary() + ingredientSummaryLines() * GuiUtil.LINE_H + 8;
     }
 
     private int vyTraitsTop() {
@@ -283,6 +330,16 @@ public class FoodEditorScreen extends Screen {
                 setStatus("gui.modest_meals.profile_updated");
             }));
         }));
+
+        addPaneWidget(new PaneButton(paneContentX() + contentW - editW, paneY(vyIngredientHeader() - 4), editW, BUTTON_H,
+                Component.translatable("gui.modest_meals.edit_ingredient"), b ->
+                this.minecraft.setScreen(new IngredientEditDialog(this, selectedItem,
+                        getResolvedIngredient(selectedItem), newProfile -> {
+                    customIngredients.put(itemId, newProfile);
+                    dirty = true;
+                    layoutWidgets();
+                    setStatus("gui.modest_meals.ingredient_updated");
+                }))));
 
         addPaneWidget(new PaneButton(paneContentX() + contentW - editW, paneY(vyTraitsHeader() - 4), editW, BUTTON_H,
                 Component.translatable("gui.modest_meals.add_trait"), b ->
@@ -418,6 +475,7 @@ public class FoodEditorScreen extends Screen {
         customTraits.remove(id);
         customSuppressions.remove(id);
         customProfiles.removeIf(p -> p.match().equals(id) || p.id().equals(id + "_override"));
+        customIngredients.remove(id);
         dirty = true;
         layoutWidgets();
         setStatus("gui.modest_meals.item_reset");
@@ -431,9 +489,17 @@ public class FoodEditorScreen extends Screen {
 
         CustomFoodDatapack.saveCustomTraits(customTraits, customSuppressions);
         CustomFoodDatapack.saveCustomProfiles(customProfiles);
+        CustomFoodDatapack.saveCustomIngredients(customIngredients);
 
         FoodTraitManager.restoreBaseline();
         FoodProfileManager.restoreBaseline();
+        IngredientProfileManager.restoreBaseline();
+
+        customIngredients.forEach((target, profile) -> {
+            if (!target.startsWith("#")) {
+                IngredientProfileManager.setItemProfile(ResourceLocation.parse(target), profile);
+            }
+        });
 
         for (Map.Entry<String, List<FoodTrait>> entry : customTraits.entrySet()) {
             if (!entry.getKey().startsWith("#")) {
@@ -627,6 +693,14 @@ public class FoodEditorScreen extends Screen {
 
         GuiUtil.drawWrapped(graphics, this.font, profileSummary(), contentX, paneY(VY_PROFILE_SUMMARY), contentW,
                 PROFILE_SUMMARY_MAX_LINES, GuiUtil.LABEL);
+
+        int ingredientY = paneY(vyIngredientHeader());
+        GuiUtil.drawSeparator(graphics, contentX, ingredientY - 8, contentW);
+        GuiUtil.drawTrimmed(graphics, this.font,
+                Component.translatable("gui.modest_meals.ingredient_header").withStyle(ChatFormatting.YELLOW),
+                contentX, ingredientY, contentW - editW - 6, 0xFFFF55);
+        GuiUtil.drawWrapped(graphics, this.font, ingredientSummary(), contentX, paneY(vyIngredientSummary()),
+                contentW, PROFILE_SUMMARY_MAX_LINES, GuiUtil.LABEL);
 
         int traitsY = paneY(vyTraitsHeader());
         GuiUtil.drawSeparator(graphics, contentX, traitsY - 8, contentW);

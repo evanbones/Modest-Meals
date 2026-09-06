@@ -150,7 +150,8 @@ dependencies {
     implementation "maven.modrinth:yacl:${yacl_version}-neoforge"
 
     // EMI
-    runtimeOnly "maven.modrinth:emi:1.1.22+1.21.1+neoforge"
+    runtimeOnly "maven.modrinth:emi:${emi_version}+neoforge"
+    compileOnly "maven.modrinth:emi:${emi_version}+neoforge"
 
     // Raised
     compileOnly "maven.modrinth:raised:NeoForge-${raised_version}"

@@ -42,17 +42,6 @@ public record StaminaCapacityTrait(float value, int duration) implements FoodTra
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof StaminaCapacityTrait(float value1, int duration1)) {
-            return new StaminaCapacityTrait(
-                    (this.value + value1) * valueMultiplier,
-                    (int) ((this.duration + duration1) * durationMultiplier)
-            );
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int amp = Math.max(0, Math.round(this.value * valueMultiplier) - 1);
         int dur = (int) (this.duration * durationMultiplier);

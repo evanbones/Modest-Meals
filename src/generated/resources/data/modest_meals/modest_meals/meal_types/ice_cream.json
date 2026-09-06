@@ -1,0 +1,13 @@
+{
+  "base": [
+    {
+      "ingredient": {
+        "item": "minecraft:snowball"
+      }
+    }
+  ],
+  "id": "modest_meals:ice_cream",
+  "item": "modest_meals:ice_cream",
+  "max_ingredients": 3,
+  "priority": 30
+}

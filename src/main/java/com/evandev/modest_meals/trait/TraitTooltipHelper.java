@@ -55,21 +55,8 @@ public class TraitTooltipHelper {
         return line;
     }
 
-    public static MutableComponent formatSimplePlus(String translationKey, long duration) {
-        MutableComponent line = Component.translatable("modest_meals.trait.simple.plus",
-                Component.translatable(translationKey).withStyle(ChatFormatting.BLUE)
-        ).withStyle(ChatFormatting.BLUE);
-
-        if (duration > 0) {
-            line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.BLUE));
-        }
-        return line;
-    }
-
     public static MutableComponent formatSimpleTake(String translationKey, long duration) {
-        MutableComponent line = Component.translatable("modest_meals.trait.simple.take",
-                Component.translatable(translationKey).withStyle(ChatFormatting.RED)
-        ).withStyle(ChatFormatting.RED);
+        MutableComponent line = Component.translatable(translationKey).withStyle(ChatFormatting.RED);
 
         if (duration > 0) {
             line.append(Component.literal(" (" + formatDuration(duration) + ")").withStyle(ChatFormatting.RED));

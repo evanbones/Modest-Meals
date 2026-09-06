@@ -1,0 +1,108 @@
+{
+  "entries": [
+    {
+      "health": 1.0,
+      "priority": 145,
+      "stamina": 4.0,
+      "target": "#c:crops/wheat"
+    },
+    {
+      "health": 1.0,
+      "stamina": 4.0,
+      "target": "minecraft:wheat"
+    },
+    {
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:crops/potato"
+    },
+    {
+      "stamina": 1.5,
+      "target": "minecraft:potato"
+    },
+    {
+      "stamina": 2.5,
+      "target": "minecraft:baked_potato"
+    },
+    {
+      "effect": "modest_meals:strength",
+      "health": 2.0,
+      "potency": 14,
+      "priority": 145,
+      "stamina": 1.0,
+      "target": "#c:crops/beetroot"
+    },
+    {
+      "effect": "modest_meals:strength",
+      "health": 2.0,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "minecraft:beetroot"
+    },
+    {
+      "priority": 145,
+      "stamina": 1.0,
+      "target": "#c:crops/rice"
+    },
+    {
+      "effect": "modest_meals:night_vision",
+      "potency": 14,
+      "stamina": 1.5,
+      "target": "minecraft:carrot"
+    },
+    {
+      "effect": "modest_meals:night_vision",
+      "potency": 21,
+      "stamina": 4.0,
+      "target": "minecraft:golden_carrot",
+      "temporary_stamina": 2.0
+    },
+    {
+      "effect": "modest_meals:resistance",
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "minecraft:pumpkin"
+    },
+    {
+      "effect": "modest_meals:resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.0,
+      "target": "minecraft:turtle_scute"
+    },
+    {
+      "effect": "modest_meals:strength",
+      "potency": 14,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:crops/tomato"
+    },
+    {
+      "effect": "modest_meals:strength",
+      "health": 1.0,
+      "potency": 7,
+      "priority": 145,
+      "stamina": 1.0,
+      "target": "#c:crops/onion"
+    },
+    {
+      "health": 1.0,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:crops/cabbage"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "minecraft:dried_kelp"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 0.5,
+      "target": "minecraft:kelp"
+    }
+  ]
+}

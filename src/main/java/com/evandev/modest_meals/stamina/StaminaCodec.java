@@ -6,7 +6,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.ApiStatus;
 
+@ApiStatus.Internal
 public final class StaminaCodec {
     public static final String NBT_KEY = Constants.MOD_ID + "_stamina";
 
@@ -18,7 +20,8 @@ public final class StaminaCodec {
                 Codec.INT.fieldOf("stamina").forGetter(StaminaData::getStamina),
                 Codec.INT.fieldOf("remaining").forGetter(StaminaData::getRemaining),
                 Codec.INT.fieldOf("cooldown").forGetter(StaminaData::getCooldown),
-                Codec.BOOL.fieldOf("exhausted").forGetter(StaminaData::isExhausted)
+                Codec.BOOL.fieldOf("exhausted").forGetter(StaminaData::isExhausted),
+                Codec.INT.optionalFieldOf("overcharge", 0).forGetter(StaminaData::getOvercharge)
         ).apply(instance, StaminaData::new));
     }
 

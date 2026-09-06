@@ -2,19 +2,25 @@ package com.evandev.modest_meals.client.tooltip;
 
 import com.evandev.modest_meals.client.ModSprites;
 import com.evandev.modest_meals.client.hud.StaminaSprites;
+import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
+import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightSoupEffects;
+import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.config.TooltipVisibility;
 import com.evandev.modest_meals.food.EdibleBlockFoods;
 import com.evandev.modest_meals.food.FoodValues;
+import com.evandev.modest_meals.food.ingredient.IngredientProfile;
+import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
+import com.evandev.modest_meals.food.ingredient.MealEffectManager;
 import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
 import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
-import com.google.common.collect.Lists;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -26,12 +32,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.util.ArrayList;
@@ -71,8 +74,9 @@ public class FoodItemTooltips {
         List<Component> lines = event.getToolTip();
         float tickRate = event.getContext().tickRate();
 
+        List<FoodProperties.PossibleEffect> effects = foodEffects(stack);
         if (FoodValues.isFood(stack)) {
-            removePreExistingFoodEffects(lines, stack);
+            removePreExistingFoodEffects(lines, effects);
         }
 
         if (ModConfig.get().showFoodItemTooltips) {
@@ -80,7 +84,40 @@ public class FoodItemTooltips {
             addDigestionRateLine(lines, stack);
         }
 
-        addEffectsAndTraits(lines, stack, tickRate);
+        addEffectsAndTraits(lines, stack, effects, tickRate);
+        addIngredientHint(lines, stack);
+    }
+
+    /**
+     * On a raw ingredient, show the effect it would contribute to a meal.
+     */
+    private static void addIngredientHint(List<Component> lines, ItemStack stack) {
+        if (!isVisible(ModConfig.get().ingredientTooltip)
+                || stack.has(ModDataComponents.MEAL_CONTENTS.get())
+                || !IngredientProfileManager.isIngredient(stack)) {
+            return;
+        }
+
+        IngredientProfileManager.authored(stack)
+                .filter(IngredientProfile::hasEffect)
+                .flatMap(profile -> profile.effect().flatMap(MealEffectManager::get))
+                .ifPresent(effect -> {
+                    lines.add(Component.translatable("modest_meals.trait.header.ingredient")
+                            .withStyle(ChatFormatting.GRAY));
+                    lines.add(indent(effect.displayName().copy().withStyle(ChatFormatting.DARK_GRAY)));
+                });
+    }
+
+    private static boolean isVisible(TooltipVisibility visibility) {
+        return switch (visibility) {
+            case VISIBLE -> true;
+            case HIDDEN -> false;
+            case SHIFT -> Screen.hasShiftDown();
+        };
+    }
+
+    private static Component indent(Component line) {
+        return Component.literal(" ").append(line);
     }
 
     private static void addStatRows(List<Component> lines, ItemStack stack) {
@@ -159,21 +196,38 @@ public class FoodItemTooltips {
         return !(trait instanceof HealthAdditionTrait || trait instanceof StaminaAdditionTrait);
     }
 
-    private static void addEffectsAndTraits(List<Component> lines, ItemStack stack, float tickRate) {
-        if (!FoodValues.isFood(stack)) {
-            return;
-        }
-
-        List<Component> effectLines = new ArrayList<>();
-        List<Component> attributeLines = new ArrayList<>();
-        List<Component> traitLines = new ArrayList<>();
-
+    /**
+     * Every effect eating this stack applies, including the ones other mods grant outside its food component.
+     */
+    private static List<FoodProperties.PossibleEffect> foodEffects(ItemStack stack) {
         FoodProperties food = stack.get(DataComponents.FOOD);
         if (food == null) {
             food = EdibleBlockFoods.getFoodProperties(stack.getItem()).orElse(null);
         }
-        if (food != null && !food.effects().isEmpty()) {
-            collectFoodEffectTooltips(food.effects(), tickRate, effectLines, attributeLines);
+        List<FoodProperties.PossibleEffect> effects = food == null ? List.of() : food.effects();
+
+        if (FarmersDelightCompat.isLoaded()) {
+            List<FoodProperties.PossibleEffect> soupEffects = FarmersDelightSoupEffects.get(stack);
+            if (!soupEffects.isEmpty()) {
+                List<FoodProperties.PossibleEffect> combined = new ArrayList<>(effects);
+                combined.addAll(soupEffects);
+                return combined;
+            }
+        }
+        return effects;
+    }
+
+    private static void addEffectsAndTraits(List<Component> lines, ItemStack stack,
+                                            List<FoodProperties.PossibleEffect> effects, float tickRate) {
+        if (!FoodValues.isFood(stack) || !isVisible(ModConfig.get().whenEatenTooltip)) {
+            return;
+        }
+
+        List<Component> effectLines = new ArrayList<>();
+        List<Component> traitLines = new ArrayList<>();
+
+        if (!effects.isEmpty()) {
+            collectFoodEffectTooltips(effects, tickRate, effectLines);
         }
 
         if (ModConfig.get().showFoodTraitTooltips) {
@@ -187,27 +241,19 @@ public class FoodItemTooltips {
             }
         }
 
-        if (!effectLines.isEmpty() || !traitLines.isEmpty() || !attributeLines.isEmpty()) {
+        if (!effectLines.isEmpty() || !traitLines.isEmpty()) {
             boolean isDrink = stack.getUseAnimation() == UseAnim.DRINK;
             lines.add(Component.translatable(isDrink ? "potion.whenDrank" : "modest_meals.trait.header.consumed")
                     .withStyle(ChatFormatting.GRAY));
-            lines.addAll(effectLines);
-            lines.addAll(traitLines);
-            lines.addAll(attributeLines);
+            effectLines.forEach(line -> lines.add(indent(line)));
+            traitLines.forEach(line -> lines.add(indent(line)));
         }
     }
 
-    private static void removePreExistingFoodEffects(List<Component> lines, ItemStack stack) {
-        FoodProperties food = stack.get(DataComponents.FOOD);
-        if (food == null) {
-            food = EdibleBlockFoods.getFoodProperties(stack.getItem()).orElse(null);
-        }
-        if (food == null || food.effects().isEmpty()) {
-            return;
-        }
-
+    private static void removePreExistingFoodEffects(List<Component> lines,
+                                                     List<FoodProperties.PossibleEffect> effects) {
         Set<String> effectKeys = new HashSet<>();
-        for (FoodProperties.PossibleEffect pe : food.effects()) {
+        for (FoodProperties.PossibleEffect pe : effects) {
             effectKeys.add(pe.effect().getDescriptionId());
         }
         effectKeys.add("effect.farmersdelight.nourishment");
@@ -240,16 +286,12 @@ public class FoodItemTooltips {
     private static void collectFoodEffectTooltips(
             List<FoodProperties.PossibleEffect> effects,
             float tickRate,
-            List<Component> effectLines,
-            List<Component> attributeLines
+            List<Component> effectLines
     ) {
-        List<Pair<Holder<Attribute>, AttributeModifier>> attributeList = Lists.newArrayList();
-
         for (FoodProperties.PossibleEffect entry : effects) {
             MobEffectInstance instance = entry.effect();
             MutableComponent mutableComponent = Component.translatable(instance.getDescriptionId());
             Holder<MobEffect> holder = instance.getEffect();
-            holder.value().createModifiers(instance.getAmplifier(), (attr, mod) -> attributeList.add(new Pair<>(attr, mod)));
 
             if (instance.getAmplifier() > 0) {
                 mutableComponent = Component.translatable(
@@ -276,37 +318,6 @@ public class FoodItemTooltips {
             }
 
             effectLines.add(mutableComponent.withStyle(holder.value().getCategory().getTooltipFormatting()));
-        }
-
-        for (Pair<Holder<Attribute>, AttributeModifier> pair : attributeList) {
-            AttributeModifier attributemodifier = pair.getSecond();
-            double amount = attributemodifier.amount();
-            double formattedAmount;
-            if (attributemodifier.operation() != AttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                    && attributemodifier.operation() != AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL) {
-                formattedAmount = attributemodifier.amount();
-            } else {
-                formattedAmount = attributemodifier.amount() * 100.0;
-            }
-
-            if (amount > 0.0) {
-                attributeLines.add(
-                        Component.translatable(
-                                "attribute.modifier.plus." + attributemodifier.operation().id(),
-                                ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(formattedAmount),
-                                Component.translatable(pair.getFirst().value().getDescriptionId())
-                        ).withStyle(ChatFormatting.BLUE)
-                );
-            } else if (amount < 0.0) {
-                formattedAmount *= -1.0;
-                attributeLines.add(
-                        Component.translatable(
-                                "attribute.modifier.take." + attributemodifier.operation().id(),
-                                ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(formattedAmount),
-                                Component.translatable(pair.getFirst().value().getDescriptionId())
-                        ).withStyle(ChatFormatting.RED)
-                );
-            }
         }
     }
 

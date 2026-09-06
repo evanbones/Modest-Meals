@@ -2,6 +2,10 @@ package com.evandev.modest_meals.event;
 
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodProfileManager;
+import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
+import com.evandev.modest_meals.food.ingredient.MealEffectManager;
+import com.evandev.modest_meals.food.meal.MealFormulaManager;
+import com.evandev.modest_meals.food.meal.MealTypeManager;
 import com.evandev.modest_meals.network.ClientboundFoodDataSyncPayload;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
@@ -94,6 +98,10 @@ public class CommonEventHandler {
     public static void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(FoodTraitManager.INSTANCE);
         event.addListener(FoodProfileManager.INSTANCE);
+        event.addListener(MealEffectManager.INSTANCE);
+        event.addListener(IngredientProfileManager.INSTANCE);
+        event.addListener(MealTypeManager.INSTANCE);
+        event.addListener(MealFormulaManager.INSTANCE);
     }
 
     @SubscribeEvent

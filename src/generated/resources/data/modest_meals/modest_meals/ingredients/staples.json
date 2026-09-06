@@ -1,0 +1,44 @@
+{
+  "entries": [
+    {
+      "health": 0.0,
+      "stamina": 0.5,
+      "target": "minecraft:sugar_cane",
+      "time_bonus": 50
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.0,
+      "target": "minecraft:milk_bucket",
+      "time_bonus": 50
+    },
+    {
+      "health": 1.0,
+      "priority": 140,
+      "stamina": 1.0,
+      "target": "#c:drinks/milk",
+      "time_bonus": 50
+    },
+    {
+      "health": 1.0,
+      "priority": 140,
+      "stamina": 2.0,
+      "target": "#c:foods/dough",
+      "time_bonus": 30
+    },
+    {
+      "health": 1.0,
+      "priority": 140,
+      "stamina": 3.0,
+      "target": "#c:foods/pasta",
+      "time_bonus": 30
+    },
+    {
+      "health": 3.0,
+      "priority": 130,
+      "stamina": 5.0,
+      "target": "#c:foods/bread",
+      "time_bonus": 30
+    }
+  ]
+}

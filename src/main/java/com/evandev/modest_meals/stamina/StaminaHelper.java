@@ -6,12 +6,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+@ApiStatus.Internal
 public abstract class StaminaHelper {
     private static final Map<UUID, PlayerStamina> SERVER_DATA = new ConcurrentHashMap<>();
     private static final Map<UUID, PlayerStamina> CLIENT_DATA = new ConcurrentHashMap<>();

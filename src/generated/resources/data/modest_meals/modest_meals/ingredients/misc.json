@@ -1,0 +1,80 @@
+{
+  "entries": [
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "minecraft:brown_mushroom"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "minecraft:red_mushroom"
+    },
+    {
+      "effect": "modest_meals:invisibility",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minecraft:warped_fungus"
+    },
+    {
+      "effect": "modest_meals:invisibility",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.0,
+      "target": "minecraft:fermented_spider_eye"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 0.5,
+      "target": "minecraft:crimson_fungus"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 0.0,
+      "potency": 21,
+      "stamina": 0.5,
+      "target": "minecraft:magma_cream"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minecraft:blaze_powder"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "health": 0.5,
+      "potency": 21,
+      "stamina": 0.5,
+      "target": "minecraft:pufferfish"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.0,
+      "target": "minecraft:nautilus_shell"
+    },
+    {
+      "effect": "modest_meals:luck",
+      "health": 0.0,
+      "potency": 21,
+      "stamina": 0.0,
+      "target": "minecraft:rabbit_foot"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.0,
+      "target": "minecraft:spider_eye"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.0,
+      "target": "minecraft:rotten_flesh"
+    }
+  ]
+}

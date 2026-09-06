@@ -1,8 +1,6 @@
 package com.evandev.modest_meals.trait.impl;
 
-import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
-import com.evandev.modest_meals.network.ModNetworking;
-import com.evandev.modest_meals.stamina.StaminaHelper;
+import com.evandev.modest_meals.api.StaminaApi;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
 import com.evandev.modest_meals.trait.TraitBenefit;
@@ -14,7 +12,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,21 +37,9 @@ public record StaminaAdditionTrait(float value) implements FoodTrait {
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof StaminaAdditionTrait(float value1)) {
-            return new StaminaAdditionTrait((this.value + value1) * valueMultiplier);
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         if (entity instanceof Player player) {
-            StaminaHelper.get(player).addLevels(this.value * valueMultiplier);
-
-            if (player instanceof ServerPlayer serverPlayer) {
-                ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
-            }
+            StaminaApi.restore(player, this.value * valueMultiplier);
         }
     }
 

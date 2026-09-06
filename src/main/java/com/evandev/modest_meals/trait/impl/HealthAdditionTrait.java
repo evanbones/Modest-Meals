@@ -8,6 +8,7 @@ import com.evandev.modest_meals.trait.TraitTooltipHelper;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -39,22 +40,12 @@ public record HealthAdditionTrait(float value, int duration) implements FoodTrai
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof HealthAdditionTrait(float value1, int duration1)) {
-            return new HealthAdditionTrait(
-                    (this.value + value1) * valueMultiplier,
-                    (int) ((this.duration + duration1) * durationMultiplier)
-            );
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         float points = this.value * valueMultiplier;
         int digestTicks = (int) (this.duration * durationMultiplier);
         if (entity instanceof Player player) {
-            HealthRegenHelper.get(player).addHealth(points, digestTicks, stack.getItem().hashCode());
+            HealthRegenHelper.get(player).addHealth(points, digestTicks,
+                    BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
         } else {
             entity.heal(points);
         }

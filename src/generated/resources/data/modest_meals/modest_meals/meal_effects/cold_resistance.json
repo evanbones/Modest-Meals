@@ -1,0 +1,15 @@
+{
+  "base_seconds": 70,
+  "id": "modest_meals:cold_resistance",
+  "name_prefix_key": "modest_meals.meal_prefix.cold_resistance",
+  "tiers": [
+    {
+      "amplifier": 0,
+      "threshold": 0
+    },
+    {
+      "amplifier": 1,
+      "threshold": 30
+    }
+  ]
+}

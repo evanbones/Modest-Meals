@@ -1,0 +1,6 @@
+{
+  "base_seconds": 70,
+  "id": "modest_meals:fire_resistance",
+  "mob_effect": "minecraft:fire_resistance",
+  "name_prefix_key": "modest_meals.meal_prefix.fire_resistance"
+}

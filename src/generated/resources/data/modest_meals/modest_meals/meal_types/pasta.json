@@ -1,0 +1,19 @@
+{
+  "base": [
+    {
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "c:foods/pasta"
+      }
+    }
+  ],
+  "container": "minecraft:bowl",
+  "id": "modest_meals:pasta",
+  "item": "modest_meals:pasta",
+  "max_ingredients": 3,
+  "priority": 15
+}

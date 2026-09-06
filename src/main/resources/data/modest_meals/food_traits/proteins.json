@@ -4,35 +4,8 @@
       "target": "minecraft:chicken",
       "traits": [
         {
-          "type": "modest_meals:health_addition",
-          "value": 1.5,
-          "duration": 150
-        },
-        {
           "type": "modest_meals:stamina_no_regen",
           "duration": 200
-        }
-      ]
-    },
-    {
-      "target": "minecraft:rabbit",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:jump_boost",
-          "duration": 400,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:cooked_rabbit",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:jump_boost",
-          "duration": 800,
-          "amplifier": 0
         }
       ]
     },
@@ -40,11 +13,6 @@
       "target": "#c:foods/raw_fish",
       "priority": 140,
       "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 3.0,
-          "duration": 120
-        },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
@@ -58,30 +26,9 @@
       "priority": 150,
       "traits": [
         {
-          "type": "modest_meals:health_addition",
-          "value": 5.0,
-          "duration": 150
-        },
-        {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
           "duration": 300,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:cod",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 3.0,
-          "duration": 90
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:dolphins_grace",
-          "duration": 150,
           "amplifier": 0
         }
       ]
@@ -90,51 +37,8 @@
       "target": "minecraft:cooked_cod",
       "traits": [
         {
-          "type": "modest_meals:health_addition",
-          "value": 5.0,
-          "duration": 150
-        },
-        {
           "type": "modest_meals:air_bubbles",
           "value": 60
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:dolphins_grace",
-          "duration": 300,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:salmon",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 4.0,
-          "duration": 120
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:dolphins_grace",
-          "duration": 200,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:cooked_salmon",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 6.0,
-          "duration": 180
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:dolphins_grace",
-          "duration": 350,
-          "amplifier": 0
         }
       ]
     },
@@ -144,18 +48,6 @@
         {
           "type": "modest_meals:air_bubbles",
           "value": 120
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:water_breathing",
-          "duration": 300,
-          "amplifier": 0
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:dolphins_grace",
-          "duration": 300,
-          "amplifier": 0
         }
       ]
     },
@@ -165,11 +57,6 @@
         {
           "type": "modest_meals:health_no_regen",
           "duration": 400
-        },
-        {
-          "type": "modest_meals:health_depletion",
-          "value": 1.0,
-          "duration": 200
         }
       ]
     },
@@ -177,34 +64,14 @@
       "target": "minecraft:rotten_flesh",
       "traits": [
         {
-          "type": "modest_meals:health_depletion",
-          "value": 1.0,
-          "duration": 250
-        },
-        {
           "type": "modest_meals:health_no_regen",
           "duration": 300
         }
       ]
     },
     {
-      "target": "minecraft:spider_eye",
-      "traits": [
-        {
-          "type": "modest_meals:health_depletion",
-          "value": 2.0,
-          "duration": 200
-        }
-      ]
-    },
-    {
       "target": "farmersdelight:chicken_cuts",
       "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 1.0,
-          "duration": 150
-        },
         {
           "type": "modest_meals:stamina_no_regen",
           "duration": 150
@@ -214,11 +81,6 @@
     {
       "target": "farmersdelight:cod_slice",
       "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 90
-        },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
@@ -231,11 +93,6 @@
       "target": "farmersdelight:salmon_slice",
       "traits": [
         {
-          "type": "modest_meals:health_addition",
-          "value": 2.5,
-          "duration": 100
-        },
-        {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
           "duration": 150,
@@ -246,11 +103,6 @@
     {
       "target": "farmersdelight:cooked_cod_slice",
       "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 3.0,
-          "duration": 130
-        },
         {
           "type": "modest_meals:air_bubbles",
           "value": 40
@@ -266,11 +118,6 @@
     {
       "target": "farmersdelight:cooked_salmon_slice",
       "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 3.75,
-          "duration": 145
-        },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",

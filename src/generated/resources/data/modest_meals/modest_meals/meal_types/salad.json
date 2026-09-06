@@ -1,0 +1,15 @@
+{
+  "base": [
+    {
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    }
+  ],
+  "container": "minecraft:bowl",
+  "id": "modest_meals:salad",
+  "item": "modest_meals:salad",
+  "max_ingredients": 4,
+  "min_ingredients": 2,
+  "priority": 5
+}

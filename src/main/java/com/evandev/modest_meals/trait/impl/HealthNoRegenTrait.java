@@ -31,14 +31,6 @@ public record HealthNoRegenTrait(int duration) implements FoodTrait {
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof HealthNoRegenTrait(int duration1)) {
-            return new HealthNoRegenTrait((int) ((this.duration + duration1) * durationMultiplier));
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int dur = (int) (this.duration * durationMultiplier);
         if (dur > 0) {
