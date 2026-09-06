@@ -47,12 +47,8 @@ public abstract class StaminaRenderer {
         return Mth.ceil(stamina.getMaxLevel() / 2.0F);
     }
 
-    public static int overchargeIconCount(PlayerStamina stamina) {
-        return Mth.ceil(stamina.getOverchargeLevel() / 2.0F);
-    }
-
     public static int totalIconCount(PlayerStamina stamina) {
-        return iconCount(stamina) + overchargeIconCount(stamina);
+        return iconCount(stamina);
     }
 
     public static int rowCount(PlayerStamina stamina) {
@@ -156,7 +152,8 @@ public abstract class StaminaRenderer {
             return level;
         }
 
-        return Math.max(level, stamina.levelAfterGain(addedLevels));
+        int stepped = Math.min(stamina.getMaxLevel(), level + Mth.ceil(addedLevels));
+        return Math.max(stepped, stamina.levelAfterGain(addedLevels));
     }
 
     public static void render(GuiGraphics graphics, int rightHeight, int offsetLeft) {
@@ -177,8 +174,6 @@ public abstract class StaminaRenderer {
         int previewLevel = getPreviewLevel(player, stamina);
 
         int icons = iconCount(stamina);
-        int overchargeIcons = overchargeIconCount(stamina);
-        int overchargeLevel = stamina.getOverchargeLevel();
         int rows = rowCount(stamina);
         int rowHeight = rowHeight(rows);
 
@@ -195,20 +190,11 @@ public abstract class StaminaRenderer {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
 
-        for (int i = 0; i < icons + overchargeIcons; i++) {
+        for (int i = 0; i < icons; i++) {
             int x = left - (i % ICONS_PER_ROW) * 8 - ICON_SIZE;
             int top = baseTop - (i / ICONS_PER_ROW) * rowHeight;
             if (i == bounceIcon) {
                 top -= 2;
-            }
-
-            if (i >= icons) {
-                int overchargeIcon = (i - icons) * 2 + 1;
-                boolean isHalf = overchargeIcon == overchargeLevel;
-                graphics.blitSprite(
-                        isHalf ? ModSprites.STAMINA_OVERCHARGE_HALF : ModSprites.STAMINA_OVERCHARGE,
-                        x, top, ICON_SIZE, ICON_SIZE);
-                continue;
             }
 
             int icon = i * 2 + 1;

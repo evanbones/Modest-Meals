@@ -29,7 +29,7 @@ public class MealEffectProvider extends JsonDataProvider<MealEffect> {
     @Override
     protected void collect(Map<ResourceLocation, MealEffect> entries) {
         threeTier(entries, "strength", MobEffects.DAMAGE_BOOST, 20);
-        threeTier(entries, "resistance", MobEffects.DAMAGE_RESISTANCE, 20);
+        twoTier(entries, "resistance", MobEffects.DAMAGE_RESISTANCE, 20);
         threeTier(entries, "speed", MobEffects.MOVEMENT_SPEED, 30);
         threeTier(entries, "haste", MobEffects.DIG_SPEED, 30);
         threeTier(entries, "jump_boost", MobEffects.JUMP, 30);
@@ -51,6 +51,14 @@ public class MealEffectProvider extends JsonDataProvider<MealEffect> {
                 new MealEffect.Tier(0, 0),
                 new MealEffect.Tier(MID, 1),
                 new MealEffect.Tier(TOP, 2)
+        ));
+    }
+
+    private void twoTier(Map<ResourceLocation, MealEffect> entries, String name,
+                         Holder<MobEffect> effect, int baseSeconds) {
+        put(entries, name, Optional.of(idOf(effect)), baseSeconds, List.of(
+                new MealEffect.Tier(0, 0),
+                new MealEffect.Tier(MID, 1)
         ));
     }
 

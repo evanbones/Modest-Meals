@@ -27,7 +27,6 @@ public class TraitEditorRegistry {
         register(FoodTraitType.HEALTH_ADDITION, HealthAdditionEditor::new);
         register(FoodTraitType.STAMINA_ADDITION, StaminaAdditionEditor::new);
         register(FoodTraitType.TEMPORARY_HEALTH, TemporaryHealthEditor::new);
-        register(FoodTraitType.TEMPORARY_STAMINA, TemporaryStaminaEditor::new);
         register(FoodTraitType.STAMINA_CAPACITY, StaminaCapacityEditor::new);
         register(FoodTraitType.EFFECT_REMOVAL, EffectRemovalEditor::new);
         register(FoodTraitType.AIR_BUBBLES, AirBubblesEditor::new);
@@ -222,25 +221,6 @@ public class TraitEditorRegistry {
         @Override
         public TemporaryHealthTrait createTrait() {
             return new TemporaryHealthTrait(value);
-        }
-    }
-
-    public static class TemporaryStaminaEditor implements TraitEditor<TemporaryStaminaTrait> {
-        private float value = 2.0f;
-
-        @Override
-        public void initFrom(TemporaryStaminaTrait trait) {
-            this.value = trait.value();
-        }
-
-        @Override
-        public void buildForm(FormBuilder form) {
-            form.decimal("gui.modest_meals.field.temporary_stamina", 0, 1024, value, v -> value = (float) v);
-        }
-
-        @Override
-        public TemporaryStaminaTrait createTrait() {
-            return new TemporaryStaminaTrait(value);
         }
     }
 

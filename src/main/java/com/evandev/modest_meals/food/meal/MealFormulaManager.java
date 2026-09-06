@@ -56,7 +56,6 @@ public class MealFormulaManager extends SimpleJsonResourceReloadListener {
         }
 
         this.formula = resolved;
-        Constants.LOG.info("Loaded meal formula ({}s per ingredient, {}s cap)",
-                resolved.secondsPerIngredient(), resolved.maxDurationSeconds());
+        Constants.LOG.info("Loaded meal formula ({}s per ingredient)", resolved.secondsPerIngredient());
     }
 }

@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundStaminaSyncPayload(int stamina, int remaining, int cooldown,
-                                            boolean exhausted, int overcharge) implements CustomPacketPayload {
+                                            boolean exhausted) implements CustomPacketPayload {
     public static final Type<ClientboundStaminaSyncPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "stamina_sync"));
 
     public static final StreamCodec<FriendlyByteBuf, ClientboundStaminaSyncPayload> STREAM_CODEC = StreamCodec.composite(
@@ -21,14 +21,13 @@ public record ClientboundStaminaSyncPayload(int stamina, int remaining, int cool
             ByteBufCodecs.VAR_INT, ClientboundStaminaSyncPayload::remaining,
             ByteBufCodecs.VAR_INT, ClientboundStaminaSyncPayload::cooldown,
             ByteBufCodecs.BOOL, ClientboundStaminaSyncPayload::exhausted,
-            ByteBufCodecs.VAR_INT, ClientboundStaminaSyncPayload::overcharge,
             ClientboundStaminaSyncPayload::new
     );
 
     public static ClientboundStaminaSyncPayload create(ServerPlayer player) {
         StaminaData data = StaminaHelper.get(player).getData();
         return new ClientboundStaminaSyncPayload(data.getStamina(), data.getRemaining(), data.getCooldown(),
-                data.isExhausted(), data.getOvercharge());
+                data.isExhausted());
     }
 
     public static void handle(ClientboundStaminaSyncPayload payload, IPayloadContext context) {
@@ -39,7 +38,6 @@ public record ClientboundStaminaSyncPayload(int stamina, int remaining, int cool
             data.setRemaining(payload.remaining());
             data.setCooldown(payload.cooldown());
             data.setExhausted(payload.exhausted());
-            data.setOvercharge(payload.overcharge());
         });
     }
 

@@ -27,7 +27,6 @@ public record FoodTraitType<T extends FoodTrait>(MapCodec<T> codec,
     public static final FoodTraitType<HealthAdditionTrait> HEALTH_ADDITION = register("health_addition", HealthAdditionTrait.MAP_CODEC, HealthAdditionTrait.STREAM_CODEC);
     public static final FoodTraitType<HealthNoRegenTrait> HEALTH_NO_REGEN = register("health_no_regen", HealthNoRegenTrait.MAP_CODEC, HealthNoRegenTrait.STREAM_CODEC);
     public static final FoodTraitType<TemporaryHealthTrait> TEMPORARY_HEALTH = register("temporary_health", TemporaryHealthTrait.MAP_CODEC, TemporaryHealthTrait.STREAM_CODEC);
-    public static final FoodTraitType<TemporaryStaminaTrait> TEMPORARY_STAMINA = register("temporary_stamina", TemporaryStaminaTrait.MAP_CODEC, TemporaryStaminaTrait.STREAM_CODEC);
     public static final FoodTraitType<EffectGrantTrait> EFFECT_GRANT = register("effect_grant", EffectGrantTrait.MAP_CODEC, EffectGrantTrait.STREAM_CODEC);
     public static final FoodTraitType<EffectRemovalTrait> EFFECT_REMOVAL = register("effect_removal", EffectRemovalTrait.MAP_CODEC, EffectRemovalTrait.STREAM_CODEC);
     public static final FoodTraitType<TeleportTrait> TELEPORT = register("teleport_randomly", TeleportTrait.MAP_CODEC, TeleportTrait.STREAM_CODEC);

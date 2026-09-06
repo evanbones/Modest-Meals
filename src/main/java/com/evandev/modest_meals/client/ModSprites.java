@@ -7,8 +7,6 @@ public class ModSprites {
     public static final ResourceLocation STAMINA_EMPTY = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_empty");
     public static final ResourceLocation STAMINA_LEVEL = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_level");
     public static final ResourceLocation STAMINA_LEVEL_HALF = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_level_half");
-    public static final ResourceLocation STAMINA_OVERCHARGE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_overcharge");
-    public static final ResourceLocation STAMINA_OVERCHARGE_HALF = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_overcharge_half");
     public static final ResourceLocation STAMINA_RECHARGE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_recharge");
     public static final ResourceLocation STAMINA_RECHARGE_HALF = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_recharge_half");
     public static final ResourceLocation STAMINA_COOLING = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud/stamina_cooling");

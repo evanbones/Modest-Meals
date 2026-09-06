@@ -263,7 +263,7 @@ public class FoodEditorScreen extends Screen {
                 .orElseGet(() -> Component.translatable("gui.modest_meals.effect.none"));
         return Component.translatable("gui.modest_meals.ingredient_summary",
                 effect, profile.potency(), fmt(profile.healthOrZero()), fmt(profile.staminaOrZero()),
-                fmt(profile.temporaryHealth()), fmt(profile.temporaryStamina()),
+                fmt(profile.temporaryHealth()),
                 profile.timeBonusSeconds());
     }
 

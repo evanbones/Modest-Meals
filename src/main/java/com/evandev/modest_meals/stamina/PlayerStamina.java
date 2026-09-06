@@ -92,41 +92,10 @@ public class PlayerStamina {
     }
 
     /**
-     * Grant temporary stamina on top of the bar. It's spent before normal stamina and never regenerates,
-     * so unlike {@link #addLevels} this can be given to a player whose bar is already full.
-     */
-    public void addOvercharge(float levels) {
-        int ticks = this.levelsToTicks(levels);
-        if (ticks > 0) {
-            this.data.setOvercharge(this.data.getOvercharge() + ticks);
-        }
-    }
-
-    /**
-     * Temporary stamina expressed in bar levels, for the HUD.
-     */
-    public int getOverchargeLevel() {
-        return StaminaData.levelFor(this.data.getOvercharge(), this.getDurationInTicks(), this.getMaxLevel());
-    }
-
-    public boolean hasOvercharge() {
-        return this.data.hasOvercharge();
-    }
-
-    /**
-     * Take stamina off the player. Temporary stamina goes first, then the bar; hitting zero exhausts them.
+     * Take stamina off the player. Hitting zero exhausts them.
      */
     public void spend(float levels) {
         int ticks = this.levelsToTicks(levels);
-        if (ticks <= 0) {
-            return;
-        }
-
-        int fromOvercharge = Math.min(this.data.getOvercharge(), ticks);
-        if (fromOvercharge > 0) {
-            this.data.setOvercharge(this.data.getOvercharge() - fromOvercharge);
-            ticks -= fromOvercharge;
-        }
         if (ticks <= 0) {
             return;
         }
@@ -189,7 +158,6 @@ public class PlayerStamina {
         this.naturalRegenTickTimer = 0;
 
         this.data.setCooldown(0);
-        this.data.setOvercharge(0);
         this.data.setRemaining(duration);
         this.data.setStaminaUsingTicks(duration, getMaxLevel());
         this.data.setExhausted(false);
@@ -251,11 +219,7 @@ public class PlayerStamina {
             this.data.setStaminaUsingTicks(this.data.isExhausted() ? rechargeInTicks : durationInTicks, maxLevel);
         } else if (this.isAtFullSprint()) {
             if (!this.isNourished() && !this.isDrainCancelled()) {
-                if (this.data.hasOvercharge()) {
-                    this.data.setOvercharge(this.data.getOvercharge() - 1);
-                } else {
-                    this.data.remaining--;
-                }
+                this.data.remaining--;
 
                 if (this.data.remaining <= 0) {
                     this.data.remaining = 0;

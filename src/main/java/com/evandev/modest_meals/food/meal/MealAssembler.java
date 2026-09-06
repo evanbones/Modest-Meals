@@ -22,7 +22,7 @@ public final class MealAssembler {
     /**
      * Work out what a meal made from these ingredients does.
      */
-    public static Optional<MealContents> compute(List<ItemStack> ingredients) {
+    public static Optional<MealContents> compute(List<ItemStack> ingredients, List<ItemStack> base) {
         MealFormula formula = MealFormulaManager.get();
 
         List<Holder<Item>> used = new ArrayList<>();
@@ -42,24 +42,36 @@ public final class MealAssembler {
             return Optional.empty();
         }
 
-        float health = 0.0F;
-        float stamina = 0.0F;
-        float temporaryHealth = 0.0F;
-        float temporaryStaminaPoints = 0.0F;
-        for (IngredientProfile profile : profiles) {
-            health += profile.healthOrZero();
-            stamina += profile.staminaOrZero();
-            temporaryHealth += profile.temporaryHealth();
-            temporaryStaminaPoints += profile.temporaryStamina();
+        List<Holder<Item>> baseUsed = new ArrayList<>();
+        List<IngredientProfile> baseProfiles = new ArrayList<>();
+        for (ItemStack stack : base) {
+            if (stack == null || stack.isEmpty()) {
+                continue;
+            }
+            IngredientProfileManager.resolve(stack).ifPresent(profile -> {
+                baseProfiles.add(profile);
+                baseUsed.add(stack.getItem().builtInRegistryHolder());
+            });
         }
 
-        EffectResult effect = computeEffect(formula, used, profiles);
+        float health = 0.0F;
+        float stamina = 0.0F;
+        int digestTicks = 0;
+        float temporaryHealth = 0.0F;
+        for (IngredientProfile profile : concat(profiles, baseProfiles)) {
+            health += profile.healthOrZero();
+            stamina += profile.staminaOrZero();
+            digestTicks += profile.digestTicksOrZero();
+            temporaryHealth += profile.temporaryHealth();
+        }
+
+        EffectResult effect = computeEffect(formula, used, profiles, baseUsed, baseProfiles);
 
         MealContents contents = new MealContents(
                 health,
                 stamina,
+                digestTicks,
                 temporaryHealth,
-                formula.temporaryStaminaFor(temporaryStaminaPoints),
                 effect.effect(),
                 effect.amplifier(),
                 effect.durationTicks()
@@ -70,7 +82,7 @@ public final class MealAssembler {
     /**
      * Build the finished stack for a meal type from these ingredients.
      */
-    public static Optional<ItemStack> assemble(MealType type, List<ItemStack> ingredients) {
+    public static Optional<ItemStack> assemble(MealType type, List<ItemStack> ingredients, List<ItemStack> base) {
         Optional<Item> resultItem = type.resolveItem();
         if (resultItem.isEmpty()) {
             return Optional.empty();
@@ -79,7 +91,7 @@ public final class MealAssembler {
         if (count < type.minIngredients() || count > type.maxIngredients()) {
             return Optional.empty();
         }
-        return compute(ingredients).map(contents -> {
+        return compute(ingredients, base).map(contents -> {
             ItemStack result = new ItemStack(resultItem.get());
             result.set(ModDataComponents.MEAL_CONTENTS.get(), contents);
             return result;
@@ -90,7 +102,8 @@ public final class MealAssembler {
      * Decide the meal's effect axis, tier and duration.
      */
     private static EffectResult computeEffect(MealFormula formula, List<Holder<Item>> used,
-                                              List<IngredientProfile> profiles) {
+                                              List<IngredientProfile> profiles,
+                                              List<Holder<Item>> baseUsed, List<IngredientProfile> baseProfiles) {
         Set<ResourceLocation> axes = new LinkedHashSet<>();
         for (IngredientProfile profile : profiles) {
             if (profile.hasEffect()) {
@@ -124,8 +137,7 @@ public final class MealAssembler {
 
         int seconds = axis.baseSeconds() * contributing
                 + formula.secondsPerIngredient() * profiles.size()
-                + bonusSeconds(formula, used, profiles);
-        seconds = Math.min(seconds, formula.maxDurationSeconds());
+                + bonusSeconds(formula, concatItems(used, baseUsed), concat(profiles, baseProfiles));
 
         return new EffectResult(Optional.of(axisId), amplifier.get(), seconds * 20);
     }
@@ -145,6 +157,18 @@ public final class MealAssembler {
             bonus += profile.timeBonusSeconds();
         }
         return bonus;
+    }
+
+    private static List<Holder<Item>> concatItems(List<Holder<Item>> first, List<Holder<Item>> second) {
+        List<Holder<Item>> all = new ArrayList<>(first);
+        all.addAll(second);
+        return all;
+    }
+
+    private static List<IngredientProfile> concat(List<IngredientProfile> first, List<IngredientProfile> second) {
+        List<IngredientProfile> all = new ArrayList<>(first);
+        all.addAll(second);
+        return all;
     }
 
     private record EffectResult(Optional<ResourceLocation> effect, int amplifier, int durationTicks) {

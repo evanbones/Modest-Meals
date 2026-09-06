@@ -48,14 +48,6 @@ public final class StaminaApi {
     }
 
     /**
-     * Temporary stamina stacked on top of a full bar, in half-bolts. Spent before normal stamina and never
-     * regenerated.
-     */
-    public static int getTemporaryStamina(Player player) {
-        return stamina(player).getOverchargeLevel();
-    }
-
-    /**
      * Whether the player has run out of stamina and is recharging.
      */
     public static boolean isExhausted(Player player) {
@@ -81,28 +73,11 @@ public final class StaminaApi {
         PlayerStamina stamina = stamina(player);
         stamina.addLevels(amount);
         stamina.syncNow();
-        NeoForge.EVENT_BUS.post(new StaminaEvent.Restored(player, amount, false));
+        NeoForge.EVENT_BUS.post(new StaminaEvent.Restored(player, amount));
     }
 
     /**
-     * Grant temporary stamina on top of the bar. Unlike {@link #restore}, this works on a player who is
-     * already full, and the granted amount never regenerates.
-     *
-     * @param amount half-bolts to grant, zero or less does nothing
-     */
-    public static void grantTemporary(Player player, float amount) {
-        if (!canMutate(player, amount)) {
-            return;
-        }
-        PlayerStamina stamina = stamina(player);
-        stamina.addOvercharge(amount);
-        stamina.syncNow();
-        NeoForge.EVENT_BUS.post(new StaminaEvent.Restored(player, amount, true));
-    }
-
-    /**
-     * Take stamina off the player. Temporary stamina is spent first; emptying the bar exhausts them and
-     * fires {@link StaminaEvent.Exhausted}.
+     * Take stamina off the player. Emptying the bar exhausts them and fires {@link StaminaEvent.Exhausted}.
      *
      * @param amount half-bolts to spend, zero or less does nothing
      */

@@ -20,8 +20,7 @@ public final class StaminaCodec {
                 Codec.INT.fieldOf("stamina").forGetter(StaminaData::getStamina),
                 Codec.INT.fieldOf("remaining").forGetter(StaminaData::getRemaining),
                 Codec.INT.fieldOf("cooldown").forGetter(StaminaData::getCooldown),
-                Codec.BOOL.fieldOf("exhausted").forGetter(StaminaData::isExhausted),
-                Codec.INT.optionalFieldOf("overcharge", 0).forGetter(StaminaData::getOvercharge)
+                Codec.BOOL.fieldOf("exhausted").forGetter(StaminaData::isExhausted)
         ).apply(instance, StaminaData::new));
     }
 

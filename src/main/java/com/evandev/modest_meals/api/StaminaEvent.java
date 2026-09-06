@@ -50,24 +50,17 @@ public abstract class StaminaEvent extends PlayerEvent {
      * Fired after something gives a player stamina back.
      * <p>
      * amount       how much was granted, in half-bolts
-     * temporary    whether this was temporary stamina stacked on top of the bar rather than a refill
      */
     public static class Restored extends StaminaEvent {
         private final float amount;
-        private final boolean temporary;
 
-        public Restored(Player player, float amount, boolean temporary) {
+        public Restored(Player player, float amount) {
             super(player);
             this.amount = amount;
-            this.temporary = temporary;
         }
 
         public float getAmount() {
             return amount;
-        }
-
-        public boolean isTemporary() {
-            return temporary;
         }
     }
 }

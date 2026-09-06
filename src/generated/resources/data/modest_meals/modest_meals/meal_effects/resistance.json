@@ -11,10 +11,6 @@
     {
       "amplifier": 1,
       "threshold": 30
-    },
-    {
-      "amplifier": 2,
-      "threshold": 45
     }
   ]
 }

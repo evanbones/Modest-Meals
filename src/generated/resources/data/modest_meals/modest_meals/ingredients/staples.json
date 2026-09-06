@@ -34,6 +34,13 @@
       "time_bonus": 30
     },
     {
+      "health": 2.0,
+      "priority": 140,
+      "stamina": 3.0,
+      "target": "#c:foods/tortilla",
+      "time_bonus": 30
+    },
+    {
       "health": 3.0,
       "priority": 130,
       "stamina": 5.0,

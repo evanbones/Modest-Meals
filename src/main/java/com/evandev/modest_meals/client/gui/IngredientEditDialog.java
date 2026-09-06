@@ -44,7 +44,6 @@ public class IngredientEditDialog extends Screen {
     private int digestTicks;
     private float eatSeconds;
     private float temporaryHealth;
-    private float temporaryStamina;
     private int timeBonus;
 
     private FormBuilder form;
@@ -68,7 +67,6 @@ public class IngredientEditDialog extends Screen {
         this.digestTicks = profile.digestTicksOrZero();
         this.eatSeconds = profile.eatSecondsOrZero();
         this.temporaryHealth = profile.temporaryHealth();
-        this.temporaryStamina = profile.temporaryStamina();
         this.timeBonus = profile.timeBonusSeconds();
     }
 
@@ -170,8 +168,6 @@ public class IngredientEditDialog extends Screen {
         form.integer("gui.modest_meals.field.potency", 0, 255, potency, v -> potency = (int) v);
         form.decimal("gui.modest_meals.field.temporary_health", 0, 1024, temporaryHealth,
                 v -> temporaryHealth = (float) v);
-        form.decimal("gui.modest_meals.field.temporary_stamina", 0, 1024, temporaryStamina,
-                v -> temporaryStamina = (float) v);
         form.integer("gui.modest_meals.field.time_bonus", 0, 3600, timeBonus, v -> timeBonus = (int) v);
         return form;
     }
@@ -193,7 +189,7 @@ public class IngredientEditDialog extends Screen {
                 Optional.of(health), Optional.of(stamina),
                 digestTicks > 0 ? Optional.of(digestTicks) : Optional.empty(),
                 eatSeconds > 0.0F ? Optional.of(eatSeconds) : Optional.empty(),
-                effect, potency, temporaryHealth, temporaryStamina, timeBonus));
+                effect, potency, temporaryHealth, timeBonus));
         this.minecraft.setScreen(this.parent);
     }
 

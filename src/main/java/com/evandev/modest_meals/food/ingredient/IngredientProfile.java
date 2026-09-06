@@ -23,12 +23,11 @@ public record IngredientProfile(
         Optional<ResourceLocation> effect,
         int potency,
         float temporaryHealth,
-        float temporaryStamina,
         int timeBonusSeconds
 ) {
     public static final IngredientProfile EMPTY = new IngredientProfile(
             Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), 0, 0.0F, 0.0F, 0);
+            Optional.empty(), 0, 0.0F, 0);
 
     public static final MapCodec<IngredientProfile> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.FLOAT.optionalFieldOf("health").forGetter(IngredientProfile::health),
@@ -38,21 +37,20 @@ public record IngredientProfile(
             ResourceLocation.CODEC.optionalFieldOf("effect").forGetter(IngredientProfile::effect),
             Codec.INT.optionalFieldOf("potency", 0).forGetter(IngredientProfile::potency),
             Codec.FLOAT.optionalFieldOf("temporary_health", 0.0F).forGetter(IngredientProfile::temporaryHealth),
-            Codec.FLOAT.optionalFieldOf("temporary_stamina", 0.0F).forGetter(IngredientProfile::temporaryStamina),
             Codec.INT.optionalFieldOf("time_bonus", 0).forGetter(IngredientProfile::timeBonusSeconds)
     ).apply(instance, IngredientProfile::new));
 
     public static final Codec<IngredientProfile> CODEC = MAP_CODEC.codec();
 
     public static final StreamCodec<RegistryFriendlyByteBuf, IngredientProfile> STREAM_CODEC =
-            ByteBufCodecs.<IngredientProfile>fromCodec(CODEC).cast();
+            ByteBufCodecs.fromCodec(CODEC).cast();
 
     public IngredientProfile withDerived(float derivedHealth, float derivedStamina, int derivedDigestTicks) {
         return new IngredientProfile(
                 Optional.of(health.orElse(derivedHealth)),
                 Optional.of(stamina.orElse(derivedStamina)),
                 Optional.of(digestTicks.orElse(derivedDigestTicks)),
-                eatSeconds, effect, potency, temporaryHealth, temporaryStamina, timeBonusSeconds);
+                eatSeconds, effect, potency, temporaryHealth, timeBonusSeconds);
     }
 
     public float healthOrZero() {

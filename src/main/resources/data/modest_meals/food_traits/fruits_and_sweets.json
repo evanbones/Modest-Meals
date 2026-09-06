@@ -24,6 +24,31 @@
       "traits": [
         {
           "type": "modest_meals:fire_extinguish"
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "minecraft:golden_apple",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "minecraft:enchanted_golden_apple",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 3600
         }
       ]
     },

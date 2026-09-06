@@ -14,7 +14,7 @@
       "traits": [
         {
           "type": "modest_meals:stamina_capacity",
-          "value": 1.0,
+          "value": 2.0,
           "duration": 1200
         }
       ]

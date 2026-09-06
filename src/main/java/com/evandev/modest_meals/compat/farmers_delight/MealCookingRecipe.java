@@ -72,22 +72,22 @@ public class MealCookingRecipe extends CookingPotRecipe {
      * The flavor ingredients in the pot: everything in the input slots minus the stacks the meal type takes
      * as its base.
      */
-    private Optional<List<ItemStack>> ingredientsFor(RecipeWrapper inventory, MealType type) {
+    private Optional<MealType.Split> ingredientsFor(RecipeWrapper inventory, MealType type) {
         if (!containerMatches(inventory, type)) {
             return Optional.empty();
         }
 
-        Optional<List<ItemStack>> stripped = type.stripBase(inputsOf(inventory));
-        if (stripped.isEmpty()) {
+        Optional<MealType.Split> split = type.splitBase(inputsOf(inventory));
+        if (split.isEmpty()) {
             return Optional.empty();
         }
 
-        List<ItemStack> ingredients = stripped.get();
+        List<ItemStack> ingredients = split.get().ingredients();
         if (ingredients.isEmpty() || !type.withinBudget(ingredients)) {
             return Optional.empty();
         }
         return ingredients.stream().allMatch(IngredientProfileManager::isIngredient)
-                ? stripped
+                ? split
                 : Optional.empty();
     }
 
@@ -115,7 +115,7 @@ public class MealCookingRecipe extends CookingPotRecipe {
     public ItemStack assemble(RecipeWrapper inventory, HolderLookup.Provider registries) {
         return mealType()
                 .flatMap(type -> ingredientsFor(inventory, type)
-                        .flatMap(ingredients -> MealAssembler.assemble(type, ingredients)))
+                        .flatMap(split -> MealAssembler.assemble(type, split.ingredients(), split.base())))
                 .orElse(ItemStack.EMPTY);
     }
 

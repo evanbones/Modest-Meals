@@ -27,7 +27,7 @@ public class MealCraftingRecipe extends CustomRecipe {
     @Override
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
         return findMatch(input)
-                .flatMap(match -> MealAssembler.assemble(match.type(), match.ingredients()))
+                .flatMap(match -> MealAssembler.assemble(match.type(), match.ingredients(), match.base()))
                 .orElse(ItemStack.EMPTY);
     }
 
@@ -59,16 +59,18 @@ public class MealCraftingRecipe extends CustomRecipe {
             }
         }
 
-        Optional<List<ItemStack>> stripped = type.stripBase(present);
-        if (stripped.isEmpty()) {
+        Optional<MealType.Split> split = type.splitBase(present);
+        if (split.isEmpty()) {
             return Optional.empty();
         }
 
-        List<ItemStack> remaining = stripped.get();
+        List<ItemStack> remaining = split.get().ingredients();
         if (remaining.isEmpty() || !remaining.stream().allMatch(IngredientProfileManager::isIngredient)) {
             return Optional.empty();
         }
-        return type.withinBudget(remaining) ? Optional.of(new Match(type, remaining)) : Optional.empty();
+        return type.withinBudget(remaining)
+                ? Optional.of(new Match(type, remaining, split.get().base()))
+                : Optional.empty();
     }
 
     private Optional<Match> matchShaped(MealType type, CraftingInput input) {
@@ -82,9 +84,9 @@ public class MealCraftingRecipe extends CustomRecipe {
         for (int top = 0; top <= maxTop; top++) {
             for (int left = 0; left <= maxLeft; left++) {
                 for (boolean mirrored : new boolean[]{false, true}) {
-                    Optional<List<ItemStack>> ingredients = matchAt(shape, input, left, top, mirrored);
-                    if (ingredients.isPresent() && type.withinBudget(ingredients.get())) {
-                        return Optional.of(new Match(type, ingredients.get()));
+                    Optional<MealType.Split> matched = matchAt(shape, input, left, top, mirrored);
+                    if (matched.isPresent() && type.withinBudget(matched.get().ingredients())) {
+                        return Optional.of(new Match(type, matched.get().ingredients(), matched.get().base()));
                     }
                 }
             }
@@ -92,13 +94,14 @@ public class MealCraftingRecipe extends CustomRecipe {
         return Optional.empty();
     }
 
-    private Optional<List<ItemStack>> matchAt(MealType.Shape shape, CraftingInput input,
-                                              int left, int top, boolean mirrored) {
+    private Optional<MealType.Split> matchAt(MealType.Shape shape, CraftingInput input,
+                                             int left, int top, boolean mirrored) {
         List<ItemStack> ingredients = new ArrayList<>();
+        List<ItemStack> base = new ArrayList<>();
 
         for (int row = 0; row < input.height(); row++) {
             for (int column = 0; column < input.width(); column++) {
-                ItemStack stack = input.getItem(row, column);
+                ItemStack stack = input.getItem(column, row);
                 int patternRow = row - top;
                 int patternColumn = column - left;
 
@@ -130,13 +133,14 @@ public class MealCraftingRecipe extends CustomRecipe {
                     if (pinned.isEmpty() || !pinned.get().test(stack)) {
                         return Optional.empty();
                     }
+                    base.add(stack);
                 }
             }
         }
 
-        return Optional.of(ingredients);
+        return Optional.of(new MealType.Split(base, ingredients));
     }
 
-    private record Match(MealType type, List<ItemStack> ingredients) {
+    private record Match(MealType type, List<ItemStack> ingredients, List<ItemStack> base) {
     }
 }

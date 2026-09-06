@@ -54,8 +54,7 @@
       "effect": "modest_meals:night_vision",
       "potency": 21,
       "stamina": 4.0,
-      "target": "minecraft:golden_carrot",
-      "temporary_stamina": 2.0
+      "target": "minecraft:golden_carrot"
     },
     {
       "effect": "modest_meals:resistance",

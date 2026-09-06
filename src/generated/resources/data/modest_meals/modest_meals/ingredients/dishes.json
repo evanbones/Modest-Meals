@@ -53,8 +53,7 @@
     {
       "digest_ticks": 120,
       "health": 4.0,
-      "target": "minecraft:glistering_melon_slice",
-      "temporary_stamina": 1.0
+      "target": "minecraft:glistering_melon_slice"
     }
   ]
 }

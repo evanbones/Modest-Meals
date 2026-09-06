@@ -13,40 +13,5 @@
       "seconds": 2.4
     }
   ],
-  "max_duration_seconds": 1800,
-  "seconds_per_ingredient": 30,
-  "temporary_stamina_steps": [
-    {
-      "points": 1,
-      "stamina": 2.0
-    },
-    {
-      "points": 2,
-      "stamina": 4.0
-    },
-    {
-      "points": 3,
-      "stamina": 7.0
-    },
-    {
-      "points": 4,
-      "stamina": 10.0
-    },
-    {
-      "points": 6,
-      "stamina": 15.0
-    },
-    {
-      "points": 8,
-      "stamina": 20.0
-    },
-    {
-      "points": 9,
-      "stamina": 24.0
-    },
-    {
-      "points": 11,
-      "stamina": 28.0
-    }
-  ]
+  "seconds_per_ingredient": 30
 }

@@ -58,18 +58,22 @@ public record MealType(
         return shape.isPresent();
     }
 
-    public Optional<List<ItemStack>> stripBase(List<ItemStack> stacks) {
+    /**
+     * Separates the stacks the type takes as its base from the free ingredients.
+     */
+    public Optional<Split> splitBase(List<ItemStack> stacks) {
         List<ItemStack> remaining = new ArrayList<>(stacks);
+        List<ItemStack> taken = new ArrayList<>();
         for (BaseEntry entry : base) {
             for (int consumed = 0; consumed < entry.count(); consumed++) {
                 int index = indexMatching(remaining, entry.ingredient());
                 if (index < 0) {
                     return Optional.empty();
                 }
-                remaining.remove(index);
+                taken.add(remaining.remove(index));
             }
         }
-        return Optional.of(remaining);
+        return Optional.of(new Split(taken, remaining));
     }
 
     public boolean withinBudget(List<ItemStack> ingredients) {
@@ -103,6 +107,12 @@ public record MealType(
         public String getSerializedName() {
             return name;
         }
+    }
+
+    /**
+     * A matched input split into the type's base stacks and the free ingredients chosen by the player.
+     */
+    public record Split(List<ItemStack> base, List<ItemStack> ingredients) {
     }
 
     public record BaseEntry(Ingredient ingredient, int count) {

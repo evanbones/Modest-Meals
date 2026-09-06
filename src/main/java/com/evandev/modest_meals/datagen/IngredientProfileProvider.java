@@ -30,23 +30,23 @@ public class IngredientProfileProvider implements DataProvider {
     }
 
     private static IngredientProfile food(Float health, Float stamina) {
-        return build(health, stamina, 0, Optional.empty(), 0, 0.0F, 0.0F, 0);
+        return build(health, stamina, 0, Optional.empty(), 0, 0.0F, 0);
     }
 
     private static IngredientProfile effect(Float health, Float stamina, String axis, int potency) {
         return build(health, stamina, 0,
                 Optional.of(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, axis)), potency,
-                0.0F, 0.0F, 0);
+                0.0F, 0);
     }
 
     private static IngredientProfile temporary(Float health, Float stamina, int digestTicks,
-                                               float temporaryHealth, float temporaryStamina) {
+                                               float temporaryHealth) {
         return build(health, stamina, digestTicks, Optional.empty(), 0,
-                temporaryHealth, temporaryStamina, 0);
+                temporaryHealth, 0);
     }
 
     private static IngredientProfile timeBoost(Float health, Float stamina, int seconds) {
-        return build(health, stamina, 0, Optional.empty(), 0, 0.0F, 0.0F, seconds);
+        return build(health, stamina, 0, Optional.empty(), 0, 0.0F, seconds);
     }
 
     private static IngredientProfile dish(Float health, Float stamina) {
@@ -54,17 +54,17 @@ public class IngredientProfileProvider implements DataProvider {
     }
 
     private static IngredientProfile dish(Float health, Float stamina, int digestTicks) {
-        return build(health, stamina, digestTicks, Optional.empty(), 0, 0.0F, 0.0F, 0);
+        return build(health, stamina, digestTicks, Optional.empty(), 0, 0.0F, 0);
     }
 
     private static IngredientProfile build(Float health, Float stamina, int digestTicks,
                                            Optional<ResourceLocation> effect, int potency,
-                                           float temporaryHealth, float temporaryStamina, int timeBonus) {
+                                           float temporaryHealth, int timeBonus) {
         return new IngredientProfile(
                 Optional.ofNullable(health), Optional.ofNullable(stamina),
                 digestTicks > 0 ? Optional.of(digestTicks) : Optional.empty(),
                 Optional.empty(),
-                effect, potency, temporaryHealth, temporaryStamina, timeBonus);
+                effect, potency, temporaryHealth, timeBonus);
     }
 
     private static String id(Item item) {
@@ -123,7 +123,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(id(Items.CARROT), effect(null, 1.5F, "night_vision", MEDIUM));
         builder.add(id(Items.GOLDEN_CARROT), build(null, 4.0F, 0,
                 Optional.of(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "night_vision")), STRONG,
-                0.0F, 2.0F, 0));
+                0.0F, 0));
 
         builder.add(id(Items.PUMPKIN), effect(null, 2.0F, "resistance", MEDIUM));
         builder.add(id(Items.TURTLE_SCUTE), effect(0.0F, 0.0F, "resistance", MEDIUM));
@@ -152,8 +152,8 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(id(Items.RABBIT), food(1.0F, 1.0F));
         builder.add(id(Items.COOKED_RABBIT), food(4.0F, 2.0F));
 
-        builder.add(id(Items.SALMON), temporary(4.0F, null, 120, 1.0F, 0.0F));
-        builder.add(id(Items.COOKED_SALMON), temporary(6.0F, null, 180, 2.0F, 0.0F));
+        builder.add(id(Items.SALMON), temporary(4.0F, null, 120, 1.0F));
+        builder.add(id(Items.COOKED_SALMON), temporary(6.0F, null, 180, 2.0F));
         builder.add(id(Items.COD), dish(3.0F, null, 90));
         builder.add(id(Items.COOKED_COD), dish(5.0F, null, 150));
         builder.add(id(Items.TROPICAL_FISH), effect(0.5F, 0.5F, "water_breathing", WEAK));
@@ -172,10 +172,10 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(id(Items.MELON_SLICE), effect(null, 1.0F, "fire_resistance", MEDIUM));
         builder.add(id(Items.GLOW_BERRIES), effect(1.0F, 1.0F, "glowing", MEDIUM));
 
-        builder.add(id(Items.SWEET_BERRIES), temporary(null, 1.0F, 0, 1.0F, 0.0F));
+        builder.add(id(Items.SWEET_BERRIES), temporary(null, 1.0F, 0, 1.0F));
         builder.add(id(Items.APPLE), dish(2.0F, null, 100));
-        builder.add(id(Items.GOLDEN_APPLE), temporary(4.0F, 4.0F, 0, 4.0F, 4.0F));
-        builder.add(id(Items.ENCHANTED_GOLDEN_APPLE), temporary(8.0F, 8.0F, 0, 8.0F, 8.0F));
+        builder.add(id(Items.GOLDEN_APPLE), temporary(4.0F, 4.0F, 0, 4.0F));
+        builder.add(id(Items.ENCHANTED_GOLDEN_APPLE), temporary(8.0F, 8.0F, 0, 8.0F));
 
         builder.add(id(Items.CHORUS_FRUIT), effect(2.0F, 1.0F, "jump_boost", MEDIUM));
         builder.add(id(Items.PHANTOM_MEMBRANE), effect(0.0F, 0.0F, "jump_boost", MEDIUM));
@@ -187,6 +187,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.addTag("c:drinks/milk", 140, timeBoost(1.0F, 1.0F, 50));
         builder.addTag("c:foods/dough", 140, timeBoost(1.0F, 2.0F, 30));
         builder.addTag("c:foods/pasta", 140, timeBoost(1.0F, 3.0F, 30));
+        builder.addTag("c:foods/tortilla", 140, timeBoost(2.0F, 3.0F, 30));
         builder.addTag("c:foods/bread", 130, timeBoost(3.0F, 5.0F, 30));
     }
 
@@ -221,7 +222,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add("farmersdelight:tomato", dish(null, 2F));
         builder.add("farmersdelight:tomato_sauce", dish(null, 2.5F));
         builder.add(id(Items.GLISTERING_MELON_SLICE), build(4F, null, 120,
-                Optional.empty(), 0, 0.0F, 1.0F, 0));
+                Optional.empty(), 0, 0.0F, 0));
     }
 
     @Override

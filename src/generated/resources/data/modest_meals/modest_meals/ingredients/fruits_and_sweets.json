@@ -61,15 +61,13 @@
       "health": 4.0,
       "stamina": 4.0,
       "target": "minecraft:golden_apple",
-      "temporary_health": 4.0,
-      "temporary_stamina": 4.0
+      "temporary_health": 4.0
     },
     {
       "health": 8.0,
       "stamina": 8.0,
       "target": "minecraft:enchanted_golden_apple",
-      "temporary_health": 8.0,
-      "temporary_stamina": 8.0
+      "temporary_health": 8.0
     },
     {
       "effect": "modest_meals:jump_boost",
