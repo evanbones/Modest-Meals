@@ -1,16 +1,19 @@
 {
   "id": "modest_meals:pie",
   "item": "modest_meals:pie",
-  "max_ingredients": 3,
+  "max_ingredients": 6,
+  "min_ingredients": 2,
   "priority": 10,
   "shape": {
     "key": {
       "#": "modest_meals:any_ingredient",
-      "D": "#c:foods/dough"
+      "O": "farmersdelight:pie_crust",
+      "S": "minecraft:sugar"
     },
     "pattern": [
       "###",
-      "DDD"
+      "###",
+      "SOS"
     ]
   }
 }

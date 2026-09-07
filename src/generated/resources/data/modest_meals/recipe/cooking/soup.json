@@ -7,5 +7,5 @@
   ],
   "type": "modest_meals:meal_cooking",
   "cookingtime": 200,
-  "meal_type": "modest_meals:stew"
+  "meal_type": "modest_meals:soup"
 }

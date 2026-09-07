@@ -20,8 +20,6 @@ import java.util.List;
 
 public abstract class MealEmiRecipe implements EmiRecipe {
 
-    protected static final int TEXT_COLOR = -1;
-
     protected final EmiRecipeCategory category;
     protected final ResourceLocation id;
     protected final MealType type;

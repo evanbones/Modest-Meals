@@ -71,6 +71,10 @@ public class IngredientProfileProvider implements DataProvider {
         return BuiltInRegistries.ITEM.getKey(item).toString();
     }
 
+    private static String cd(String path) {
+        return "culturaldelights:" + path;
+    }
+
     @Override
     public CompletableFuture<?> run(CachedOutput output) {
         Map<String, Builder> files = new LinkedHashMap<>();
@@ -80,6 +84,7 @@ public class IngredientProfileProvider implements DataProvider {
         staples(files.computeIfAbsent("staples", key -> new Builder()));
         misc(files.computeIfAbsent("misc", key -> new Builder()));
         dishes(files.computeIfAbsent("dishes", key -> new Builder()));
+        culturalDelights(files.computeIfAbsent("cultural_delights", key -> new Builder()));
 
         List<CompletableFuture<?>> futures = new ArrayList<>();
         files.forEach((name, builder) -> {
@@ -223,6 +228,41 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add("farmersdelight:tomato_sauce", dish(null, 2.5F));
         builder.add(id(Items.GLISTERING_MELON_SLICE), build(4F, null, 120,
                 Optional.empty(), 0, 0.0F, 0));
+    }
+
+    private void culturalDelights(Builder builder) {
+        builder.addTag("c:crops/avocado", 145, food(2.0F, 2.0F));
+        builder.add(cd("avocado"), food(2.0F, 2.0F));
+        builder.add(cd("cut_avocado"), food(1.0F, 1.0F));
+
+        builder.addTag("c:crops/cucumber", 145, food(0.5F, 1.5F));
+        builder.add(cd("cucumber"), food(0.5F, 1.5F));
+        builder.add(cd("cut_cucumber"), food(0.5F, 0.5F));
+        builder.add(cd("pickle"), effect(1.0F, 2.0F, "speed", WEAK));
+        builder.add(cd("cut_pickle"), effect(0.5F, 1.0F, "speed", WEAK));
+
+        builder.addTag("c:crops/eggplant", 145, food(1.0F, 1.5F));
+        builder.add(cd("eggplant"), food(1.0F, 1.5F));
+        builder.add(cd("cut_eggplant"), food(0.5F, 0.5F));
+        builder.add(cd("white_eggplant"), food(0.5F, 0.5F));
+        builder.add(cd("smoked_eggplant"), food(3.0F, 2.5F));
+        builder.add(cd("smoked_cut_eggplant"), food(1.5F, 1.0F));
+        builder.add(cd("smoked_white_eggplant"), food(1.0F, 1.0F));
+        builder.add(cd("smoked_tomato"), effect(1.0F, 2.5F, "strength", MEDIUM));
+
+        builder.addTag("c:crops/corn", 145, food(0.5F, 2.0F));
+        builder.add(cd("corn_cob"), food(0.5F, 2.0F));
+        builder.add(cd("popcorn"), food(null, 1.0F));
+        builder.add(cd("tortilla_chips"), food(0.5F, 1.5F));
+        builder.add(cd("corn_dough"), timeBoost(1.0F, 2.0F, 30));
+
+        builder.add(cd("ginger"), effect(0.5F, 1.0F, "cold_resistance", MEDIUM));
+
+        builder.add(cd("squid"), dish(1.0F, null, 120));
+        builder.add(cd("cooked_squid"), food(3.0F, 2.0F));
+        builder.add(cd("glow_squid"), effect(1.0F, 0.5F, "glowing", MEDIUM));
+        builder.add(cd("raw_calamari"), dish(0.5F, null, 110));
+        builder.add(cd("cooked_calamari"), food(1.5F, 1.0F));
     }
 
     @Override

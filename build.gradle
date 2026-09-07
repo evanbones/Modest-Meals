@@ -161,6 +161,9 @@ dependencies {
     compileOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
     runtimeOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
 
+    // Cultural Delights - integrated purely through data (tags and ingredient profiles), so runtime only
+    runtimeOnly "maven.modrinth:cultural-delights:${cultural_delights_version}"
+
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     compileOnly group: 'org.ow2.asm', name: 'asm-tree', version: '9.6'
     compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.5.0'

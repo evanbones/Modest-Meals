@@ -18,7 +18,6 @@ public class ModItems {
 
     public static final Set<Supplier<Item>> CREATIVE_TAB_ITEMS = new LinkedHashSet<>();
 
-    public static final Supplier<Item> STEW = registerBowlMeal("stew");
     public static final Supplier<Item> SOUP = registerBowlMeal("soup");
     public static final Supplier<Item> RAMEN = registerBowlMeal("ramen");
     public static final Supplier<Item> PASTA = registerBowlMeal("pasta");

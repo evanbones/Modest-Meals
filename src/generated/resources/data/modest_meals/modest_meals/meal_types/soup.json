@@ -1,14 +1,7 @@
 {
-  "base": [
-    {
-      "ingredient": {
-        "item": "minecraft:bowl"
-      }
-    }
-  ],
   "container": "minecraft:bowl",
   "id": "modest_meals:soup",
   "item": "modest_meals:soup",
-  "max_ingredients": 3,
-  "min_ingredients": 2
+  "min_ingredients": 2,
+  "station": "cooking_pot"
 }

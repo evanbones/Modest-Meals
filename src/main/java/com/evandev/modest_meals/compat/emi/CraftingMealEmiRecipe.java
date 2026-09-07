@@ -45,12 +45,12 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
 
     @Override
     public int getDisplayWidth() {
-        return 134;
+        return 118;
     }
 
     @Override
     public int getDisplayHeight() {
-        return 68;
+        return 54;
     }
 
     @Override
@@ -65,10 +65,11 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
 
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 60, 18);
         if (shapeless) {
-            widgets.addTexture(EmiTexture.SHAPELESS, 116, 0);
+            widgets.addTexture(EmiTexture.SHAPELESS, 97, 0);
         }
 
-        decorateOutput(widgets.addSlot(output, 92, 14).large(true).recipeContext(this));
-        widgets.addText(ingredientCountLine(), 0, 57, TEXT_COLOR, true);
+        SlotWidget result = widgets.addSlot(output, 92, 14).large(true).recipeContext(this);
+        result.appendTooltip(ingredientCountLine());
+        decorateOutput(result);
     }
 }

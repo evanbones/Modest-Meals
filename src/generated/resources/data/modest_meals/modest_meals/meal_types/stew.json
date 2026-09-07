@@ -1,7 +1,0 @@
-{
-  "container": "minecraft:bowl",
-  "id": "modest_meals:stew",
-  "item": "modest_meals:stew",
-  "min_ingredients": 2,
-  "station": "cooking_pot"
-}

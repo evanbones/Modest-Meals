@@ -1,7 +1,8 @@
 {
   "id": "modest_meals:wrap",
   "item": "modest_meals:wrap",
-  "max_ingredients": 2,
+  "max_ingredients": 3,
+  "min_ingredients": 2,
   "priority": 10,
   "shape": {
     "key": {
@@ -9,9 +10,8 @@
       "T": "#c:foods/tortilla"
     },
     "pattern": [
-      "T",
-      "#",
-      "#"
+      "###",
+      " T "
     ]
   }
 }

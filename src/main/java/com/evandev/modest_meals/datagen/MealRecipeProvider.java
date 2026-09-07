@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class MealRecipeProvider implements DataProvider {
 
-    private static final List<String> POT_MEAL_TYPES = List.of("stew", "drink", "curry", "jam");
+    private static final List<String> POT_MEAL_TYPES = List.of("soup", "drink", "curry", "jam");
 
     private final PackOutput.PathProvider pathProvider;
 

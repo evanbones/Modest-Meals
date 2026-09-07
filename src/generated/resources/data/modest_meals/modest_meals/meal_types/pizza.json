@@ -1,16 +1,16 @@
 {
   "id": "modest_meals:pizza",
   "item": "modest_meals:pizza",
-  "max_ingredients": 6,
   "priority": 10,
   "shape": {
     "key": {
       "#": "modest_meals:any_ingredient",
-      "D": "#c:foods/dough"
+      "D": "#c:foods/dough",
+      "S": "#c:foods/tomato_sauce"
     },
     "pattern": [
       "###",
-      "###",
+      "#S#",
       "DDD"
     ]
   }

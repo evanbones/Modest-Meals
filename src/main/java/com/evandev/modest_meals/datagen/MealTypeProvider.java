@@ -23,6 +23,7 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
     private static final TagKey<Item> DOUGHS = itemTag("c", "foods/dough");
     private static final TagKey<Item> PASTAS = itemTag("c", "foods/pasta");
     private static final TagKey<Item> TORTILLAS = itemTag("c", "foods/tortilla");
+    private static final TagKey<Item> SAUCES = itemTag("c", "foods/tomato_sauce");
     private static final TagKey<Item> MILKS = itemTag("c", "drinks/milk");
     private static final TagKey<Item> WHEATS = itemTag("c", "crops/wheat");
 
@@ -48,14 +49,13 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
 
     @Override
     protected void collect(Map<ResourceLocation, MealType> entries) {
-        potMeal(entries, "stew", ModItems.STEW, Items.BOWL, 2, 5, 0);
         potMeal(entries, "drink", ModItems.DRINK, Items.GLASS_BOTTLE, 1, 4, 10);
         potMeal(entries, "curry", ModItems.CURRY, Items.BOWL, 4, 6, 25);
         put(entries, "jam", ModItems.JAM, MealType.Station.COOKING_POT,
                 List.of(new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
                 Optional.empty(), 1, 3, Optional.of(itemId(Items.GLASS_BOTTLE)), 30);
 
-        bowlMeal(entries, "soup", ModItems.SOUP, 2, 3, 0);
+        potMeal(entries, "soup", ModItems.SOUP, Items.BOWL, 2, 5, 0);
         bowlMeal(entries, "salad", ModItems.SALAD, 2, 4, 5);
         noodleMeal(entries, "ramen", ModItems.RAMEN, 2, 4, 20);
         noodleMeal(entries, "pasta", ModItems.PASTA, 1, 3, 15);
@@ -70,16 +70,19 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
 
         shaped(entries, "sandwich", ModItems.SANDWICH, 1, 1, 10,
                 List.of("B", "#", "B"), Map.of("B", "#" + BREADS.location(), "#", any()));
-        shaped(entries, "wrap", ModItems.WRAP, 1, 2, 10,
-                List.of("T", "#", "#"), Map.of("T", "#" + TORTILLAS.location(), "#", any()));
-        shaped(entries, "pizza", ModItems.PIZZA, 1, 6, 10,
-                List.of("###", "###", "DDD"), Map.of("D", "#" + DOUGHS.location(), "#", any()));
-        shaped(entries, "pie", ModItems.PIE, 1, 3, 10,
-                List.of("###", "DDD"), Map.of("D", "#" + DOUGHS.location(), "#", any()));
+        shaped(entries, "wrap", ModItems.WRAP, 2, 3, 10,
+                List.of("###", " T "), Map.of("T", "#" + TORTILLAS.location(), "#", any()));
+        shaped(entries, "pizza", ModItems.PIZZA, 1, 5, 10,
+                List.of("###", "#S#", "DDD"),
+                Map.of("D", "#" + DOUGHS.location(), "S", "#" + SAUCES.location(), "#", any()));
+        shaped(entries, "pie", ModItems.PIE, 2, 6, 10,
+                List.of("###", "###", "SOS"),
+                Map.of("O", "farmersdelight:pie_crust", "S", id(Items.SUGAR), "#", any()));
         shaped(entries, "sushi", ModItems.SUSHI, 1, 2, 10,
                 List.of("K", "#", "#"), Map.of("K", id(Items.DRIED_KELP), "#", any()));
         shaped(entries, "popsicle", ModItems.POPSICLE, 1, 1, 10,
-                List.of("#", "S"), Map.of("S", id(Items.STICK), "#", any()));
+                List.of("#", "N", "S"),
+                Map.of("N", id(Items.SNOWBALL), "S", id(Items.STICK), "#", any()));
         shaped(entries, "cake", ModItems.CAKE, 1, 3, 10,
                 List.of("MMM", "###", "EEE"),
                 Map.of("M", "#" + MILKS.location(), "E", id(Items.EGG), "#", any()));

@@ -6,10 +6,12 @@
   "shape": {
     "key": {
       "#": "modest_meals:any_ingredient",
+      "N": "minecraft:snowball",
       "S": "minecraft:stick"
     },
     "pattern": [
       "#",
+      "N",
       "S"
     ]
   }

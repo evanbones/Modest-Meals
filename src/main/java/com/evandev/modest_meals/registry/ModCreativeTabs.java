@@ -16,7 +16,7 @@ public class ModCreativeTabs {
 
     public static final Supplier<CreativeModeTab> MAIN = CREATIVE_TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.modest_meals"))
-            .icon(() -> new ItemStack(ModItems.STEW.get()))
+            .icon(() -> new ItemStack(ModItems.SOUP.get()))
             .displayItems((params, output) -> ModItems.CREATIVE_TAB_ITEMS.forEach(
                     item -> output.accept(new ItemStack(item.get()))))
             .build());
