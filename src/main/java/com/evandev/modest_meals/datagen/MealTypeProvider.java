@@ -91,8 +91,6 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 List.of("#", "#", "S"), Map.of("S", id(Items.STICK), "#", any()));
         shaped(entries, "mochi", ModItems.MOCHI, 1, 1, 12,
                 List.of("D#D"), Map.of("D", "#" + DOUGHS.location(), "#", any()));
-        shaped(entries, "toast", ModItems.TOAST, 1, 1, 5,
-                List.of("#", "B"), Map.of("B", "#" + BREADS.location(), "#", any()));
     }
 
     private void baseBowlMeal(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,

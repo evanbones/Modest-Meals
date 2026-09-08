@@ -31,7 +31,6 @@ public class ModItems {
     public static final Supplier<Item> PICKLES = registerBottleMeal("pickles");
 
     public static final Supplier<Item> SANDWICH = registerMeal("sandwich");
-    public static final Supplier<Item> TOAST = registerMeal("toast");
     public static final Supplier<Item> WRAP = registerMeal("wrap");
     public static final Supplier<Item> PIZZA = registerMeal("pizza");
     public static final Supplier<Item> SUSHI = registerMeal("sushi");
