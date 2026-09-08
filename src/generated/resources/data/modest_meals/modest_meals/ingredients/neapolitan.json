@@ -1,0 +1,143 @@
+{
+  "entries": [
+    {
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:foods/strawberry",
+      "temporary_health": 1.0
+    },
+    {
+      "stamina": 1.5,
+      "target": "neapolitan:strawberries",
+      "temporary_health": 1.0
+    },
+    {
+      "stamina": 2.0,
+      "target": "neapolitan:white_strawberries",
+      "temporary_health": 2.0
+    },
+    {
+      "effect": "modest_meals:climbing",
+      "health": 1.0,
+      "potency": 14,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:foods/banana"
+    },
+    {
+      "effect": "modest_meals:climbing",
+      "health": 1.0,
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "neapolitan:banana"
+    },
+    {
+      "effect": "modest_meals:climbing",
+      "health": 1.5,
+      "potency": 14,
+      "stamina": 2.5,
+      "target": "neapolitan:dried_banana"
+    },
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "priority": 145,
+      "target": "#c:crops/mango"
+    },
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "target": "neapolitan:mango"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.0,
+      "target": "neapolitan:dried_mango"
+    },
+    {
+      "digest_ticks": 110,
+      "health": 2.0,
+      "target": "neapolitan:mango_fish"
+    },
+    {
+      "digest_ticks": 140,
+      "health": 4.0,
+      "target": "neapolitan:cooked_mango_fish"
+    },
+    {
+      "effect": "modest_meals:heat_resistance",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.5,
+      "target": "neapolitan:mint_leaves"
+    },
+    {
+      "effect": "modest_meals:cold_resistance",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "neapolitan:cinnamon_sticks"
+    },
+    {
+      "effect": "modest_meals:heat_resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "neapolitan:ice_cubes"
+    },
+    {
+      "effect": "modest_meals:harmony",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.5,
+      "target": "neapolitan:adzuki_beans"
+    },
+    {
+      "effect": "modest_meals:harmony",
+      "health": 1.5,
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "neapolitan:roasted_adzuki_beans"
+    },
+    {
+      "effect": "modest_meals:haste",
+      "health": 1.0,
+      "potency": 14,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:foods/chocolate_bar"
+    },
+    {
+      "effect": "modest_meals:haste",
+      "health": 1.0,
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "neapolitan:chocolate_bar"
+    },
+    {
+      "effect": "modest_meals:invisibility",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "neapolitan:chocolate_spider_eye"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "neapolitan:vanilla_pods"
+    },
+    {
+      "effect": "modest_meals:luck",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.0,
+      "target": "neapolitan:dried_vanilla_pods"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.5,
+      "target": "neapolitan:waffle_cone",
+      "time_bonus": 25
+    }
+  ]
+}

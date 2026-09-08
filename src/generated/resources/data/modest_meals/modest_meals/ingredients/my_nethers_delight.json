@@ -1,0 +1,115 @@
+{
+  "entries": [
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "mynethersdelight:bullet_pepper"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "mynethersdelight:pepper_powder"
+    },
+    {
+      "health": 2.0,
+      "priority": 140,
+      "stamina": 1.0,
+      "target": "#c:foods/raw_hoglin"
+    },
+    {
+      "health": 6.0,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:foods/cooked_hoglin"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "mynethersdelight:hoglin_loin"
+    },
+    {
+      "health": 6.0,
+      "stamina": 2.0,
+      "target": "mynethersdelight:cooked_loin"
+    },
+    {
+      "health": 1.0,
+      "priority": 140,
+      "stamina": 1.0,
+      "target": "#c:foods/raw_sausage"
+    },
+    {
+      "health": 3.0,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:foods/cooked_sausage"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 2.0,
+      "potency": 7,
+      "priority": 140,
+      "stamina": 1.0,
+      "target": "#c:foods/raw_strider"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 2.0,
+      "potency": 7,
+      "stamina": 1.0,
+      "target": "mynethersdelight:strider_slice"
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.0,
+      "target": "mynethersdelight:minced_strider"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 1.0,
+      "potency": 7,
+      "stamina": 1.5,
+      "target": "mynethersdelight:strider_egg"
+    },
+    {
+      "health": 1.5,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:foods/boiled_egg"
+    },
+    {
+      "health": 1.5,
+      "stamina": 2.0,
+      "target": "mynethersdelight:boiled_egg"
+    },
+    {
+      "effect": "modest_meals:resistance",
+      "health": 2.0,
+      "potency": 14,
+      "stamina": 3.0,
+      "target": "mynethersdelight:golden_egg"
+    },
+    {
+      "effect": "modest_meals:resistance",
+      "health": 4.0,
+      "potency": 21,
+      "stamina": 4.0,
+      "target": "mynethersdelight:enchanted_golden_egg"
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "mynethersdelight:ghast_sourdough",
+      "time_bonus": 30
+    },
+    {
+      "health": 1.0,
+      "stamina": 0.5,
+      "target": "mynethersdelight:roast_ear"
+    }
+  ]
+}

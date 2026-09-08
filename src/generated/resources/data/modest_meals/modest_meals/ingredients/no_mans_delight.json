@@ -1,0 +1,60 @@
+{
+  "entries": [
+    {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "no_mans_delight:horse_loin"
+    },
+    {
+      "health": 4.0,
+      "stamina": 1.5,
+      "target": "no_mans_delight:cooked_horse_loin"
+    },
+    {
+      "health": 1.0,
+      "stamina": 0.5,
+      "target": "no_mans_delight:venison_medallions"
+    },
+    {
+      "health": 3.0,
+      "stamina": 1.5,
+      "target": "no_mans_delight:cooked_venison_medallions"
+    },
+    {
+      "health": 1.5,
+      "stamina": 1.0,
+      "target": "no_mans_delight:venison_muscle"
+    },
+    {
+      "health": 3.5,
+      "stamina": 1.5,
+      "target": "no_mans_delight:cooked_venison_muscle"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 1.5,
+      "target": "no_mans_delight:billhook_bass_slice"
+    },
+    {
+      "digest_ticks": 130,
+      "health": 3.0,
+      "target": "no_mans_delight:cooked_billhook_bass_slice"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.5,
+      "priority": 145,
+      "target": "#c:crops/orange"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.5,
+      "target": "no_mans_delight:orange"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.5,
+      "target": "no_mans_delight:orange_juice"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "entries": [
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:crops/lemon"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.5,
+      "target": "cookscollection:lemon"
+    },
+    {
+      "health": 0.0,
+      "stamina": 0.5,
+      "target": "cookscollection:salt",
+      "time_bonus": 60
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "cookscollection:cooking_oil",
+      "time_bonus": 40
+    },
+    {
+      "stamina": 1.5,
+      "target": "cookscollection:fried_potato"
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "cookscollection:rustic_loaf_slice",
+      "time_bonus": 25
+    }
+  ]
+}

@@ -46,6 +46,34 @@
       "target": "minecraft:blaze_powder"
     },
     {
+      "effect": "modest_meals:cold_resistance",
+      "health": 0.0,
+      "potency": 21,
+      "stamina": 0.5,
+      "target": "minecraft:blaze_rod"
+    },
+    {
+      "effect": "modest_meals:cold_resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minecraft:nether_wart"
+    },
+    {
+      "effect": "modest_meals:heat_resistance",
+      "health": 0.0,
+      "potency": 21,
+      "stamina": 0.5,
+      "target": "minecraft:blue_ice"
+    },
+    {
+      "effect": "modest_meals:heat_resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minecraft:snowball"
+    },
+    {
       "effect": "modest_meals:water_breathing",
       "health": 0.5,
       "potency": 21,

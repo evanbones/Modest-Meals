@@ -49,7 +49,7 @@ public abstract class StaminaEvent extends PlayerEvent {
     /**
      * Fired after something gives a player stamina back.
      * <p>
-     * amount       how much was granted, in half-bolts
+     * {@code amount} is how much stamina was granted, in half-bolts
      */
     public static class Restored extends StaminaEvent {
         private final float amount;

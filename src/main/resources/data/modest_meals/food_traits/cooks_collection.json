@@ -1,0 +1,57 @@
+{
+  "entries": [
+    {
+      "target": "cookscollection:lemonade",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "cookscollection:lemon_muffin",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "cookscollection:chocolate_muffin",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "cookscollection:fish_and_chips",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    }
+  ]
+}

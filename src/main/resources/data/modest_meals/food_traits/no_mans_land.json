@@ -1,0 +1,210 @@
+{
+  "entries": [
+    {
+      "target": "#c:foods/cooked_venison",
+      "priority": 145,
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "nomansland:cave_carp",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 80
+        }
+      ]
+    },
+    {
+      "target": "nomansland:awkward_residue",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "nomansland:maple_syrup_bottle",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansland:pear_juice",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansland:trail_mix",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "nomansland:hardtack",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "nomansland:pancake",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "nomansland:honeyed_apple",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansland:syruped_pear",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansland:maple_tart",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 350,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansland:sweet_tart",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansland:fruit_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 160
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "nomansland:pear_cobbler_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "nomansland:mashed_potatoes_with_mushrooms",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "nomansland:witch_stew",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 600,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansland:seared_venison",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "nomansland:salmon_and_pesto_gnocchi",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "nomansland:pasta_with_pesto",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "entries": [
+    {
+      "target": "#c:foods/raw_strider",
+      "priority": 140,
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 150,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:hoglin_loin",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:hoglin_sausage",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 150
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:golden_egg",
+      "traits": [
+        {
+          "type": "modest_meals:temporary_health",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:enchanted_golden_egg",
+      "traits": [
+        {
+          "type": "modest_meals:temporary_health",
+          "value": 8.0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 3600
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:bleeding_tartar",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 200,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:strider_stew",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 800,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:crimson_stroganoff",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 600,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:spicy_cotton",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:stuffed_pepper",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:spicy_skewer",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:spicy_hoglin_stew",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 600,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:spicy_curry",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 900,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:hot_wings",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:hot_wings_bucket",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 900,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:rock_soup",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:burnt_roll",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:magma_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:chilidog",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:tear_popsicle",
+      "traits": [
+        {
+          "type": "modest_meals:fire_extinguish"
+        },
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 100
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:ghast_salad",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:dried_ghast_with_milk",
+      "traits": [
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:hot_cream",
+      "traits": [
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:breakfast_sampler",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:scotch_eggs",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:spicy_noodle_soup",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 600,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:plate_of_stuffed_hoglin_snout",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "mynethersdelight:plate_of_stuffed_hoglin_ham",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    }
+  ]
+}

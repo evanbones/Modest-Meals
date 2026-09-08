@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.neoforged.fml.ModList;
 
 import java.util.Comparator;
 import java.util.List;
@@ -20,14 +21,16 @@ public record MealEffect(
         Optional<ResourceLocation> mobEffect,
         int baseSeconds,
         List<Tier> tiers,
-        Optional<String> namePrefixKey
+        Optional<String> namePrefixKey,
+        List<String> requiredMods
 ) {
     public static final Codec<MealEffect> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ResourceLocation.CODEC.fieldOf("id").forGetter(MealEffect::id),
             ResourceLocation.CODEC.optionalFieldOf("mob_effect").forGetter(MealEffect::mobEffect),
             Codec.INT.optionalFieldOf("base_seconds", 30).forGetter(MealEffect::baseSeconds),
             Tier.CODEC.listOf().optionalFieldOf("tiers", List.of(new Tier(0, 0))).forGetter(MealEffect::tiers),
-            Codec.STRING.optionalFieldOf("name_prefix_key").forGetter(MealEffect::namePrefixKey)
+            Codec.STRING.optionalFieldOf("name_prefix_key").forGetter(MealEffect::namePrefixKey),
+            Codec.STRING.listOf().optionalFieldOf("required_mods", List.of()).forGetter(MealEffect::requiredMods)
     ).apply(instance, MealEffect::new));
 
     public Optional<Integer> amplifierFor(int potency) {
@@ -45,7 +48,11 @@ public record MealEffect(
      * Whether this axis can currently be applied to anything.
      */
     public boolean isUsable() {
-        return resolveMobEffect().isPresent();
+        return resolveMobEffect().isPresent() && requiredModsPresent();
+    }
+
+    private boolean requiredModsPresent() {
+        return requiredMods.stream().allMatch(modId -> ModList.get().isLoaded(modId));
     }
 
     /**

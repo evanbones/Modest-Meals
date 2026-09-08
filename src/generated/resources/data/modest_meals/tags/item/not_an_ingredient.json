@@ -173,6 +173,690 @@
     {
       "id": "culturaldelights:rice_ball",
       "required": false
+    },
+    {
+      "id": "#c:foods/ice_cream",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cake",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/milkshake",
+      "required": false
+    },
+    {
+      "id": "#brewinandchewin:fermented_drinks",
+      "required": false
+    },
+    {
+      "id": "#brewinandchewin:wines",
+      "required": false
+    },
+    {
+      "id": "#brewinandchewin:distillates",
+      "required": false
+    },
+    {
+      "id": "cookscollection:lemonade",
+      "required": false
+    },
+    {
+      "id": "cookscollection:chocolate_muffin",
+      "required": false
+    },
+    {
+      "id": "cookscollection:lemon_muffin",
+      "required": false
+    },
+    {
+      "id": "cookscollection:fish_and_chips",
+      "required": false
+    },
+    {
+      "id": "cookscollection:rustic_loaf",
+      "required": false
+    },
+    {
+      "id": "abundantdelight:rabbit_sandwich",
+      "required": false
+    },
+    {
+      "id": "abundantdelight:poreshroom_on_log",
+      "required": false
+    },
+    {
+      "id": "abundantdelight:cooked_poreshroom_on_log",
+      "required": false
+    },
+    {
+      "id": "abundantdelight:wisp_cheesecake",
+      "required": false
+    },
+    {
+      "id": "abundantdelight:wisp_cheesecake_slice",
+      "required": false
+    },
+    {
+      "id": "minersdelight:bat_rolls",
+      "required": false
+    },
+    {
+      "id": "minersdelight:cave_hamburger",
+      "required": false
+    },
+    {
+      "id": "minersdelight:improvised_barbecue_stick",
+      "required": false
+    },
+    {
+      "id": "minersdelight:insect_sandwich",
+      "required": false
+    },
+    {
+      "id": "minersdelight:insect_wrap",
+      "required": false
+    },
+    {
+      "id": "minersdelight:squid_sandwich",
+      "required": false
+    },
+    {
+      "id": "minersdelight:tentacles_on_a_stick",
+      "required": false
+    },
+    {
+      "id": "minersdelight:takoyaki",
+      "required": false
+    },
+    {
+      "id": "minersdelight:weird_caviar",
+      "required": false
+    },
+    {
+      "id": "minersdelight:crunchy_bar",
+      "required": false
+    },
+    {
+      "id": "minersdelight:nutritional_bar",
+      "required": false
+    },
+    {
+      "id": "minersdelight:golden_nutritional_bar",
+      "required": false
+    },
+    {
+      "id": "minersdelight:vegan_hamburger",
+      "required": false
+    },
+    {
+      "id": "minersdelight:vegan_wrap",
+      "required": false
+    },
+    {
+      "id": "minersdelight:fake_meatloaf",
+      "required": false
+    },
+    {
+      "id": "minersdelight:stuffed_squid",
+      "required": false
+    },
+    {
+      "id": "minersdelight:glazed_arachnid_limbs",
+      "required": false
+    },
+    {
+      "id": "minersdelight:beetroot_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:mushroom_stew_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:rabbit_stew_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:baked_cod_stew_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:noodle_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:beef_stew_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:chicken_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:fish_stew_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:pumpkin_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:vegetable_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:bone_broth_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:onion_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:cave_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:bat_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:insect_stew_cup",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:deviled_egg",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:scotch_eggs",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:bleeding_tartar",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:strider_with_grilled_fungus",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:strider_stew",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:crimson_stroganoff",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:plate_of_striderloaf",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:plate_of_cold_striderloaf",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:hotdog",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:hotdog_with_mixed_salad",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:hotdog_with_nether_salad",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:sausage_and_potatoes",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:breakfast_sampler",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:nether_burger",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:blue_tenderloin_steak",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:red_loin_on_a_stick",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:fried_hoglin_chop",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:twisted_ghasta",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:giant_takoyaki",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:fries_ghasta",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:ghast_salad",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:dried_ghast_with_milk",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:sizzling_pudding",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:tear_popsicle",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:spicy_cotton",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:stuffed_pepper",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:spicy_skewer",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:chilidog",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:spicy_hoglin_stew",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:hot_wings",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:hot_wings_bucket",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:spicy_curry",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:burnt_roll",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:magma_cake_slice",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:hot_cream",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:hot_cream_cone",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:raw_stuffed_hoglin",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:plate_of_stuffed_hoglin",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:plate_of_stuffed_hoglin_ham",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:plate_of_stuffed_hoglin_snout",
+      "required": false
+    },
+    {
+      "id": "nomansland:pancake",
+      "required": false
+    },
+    {
+      "id": "nomansland:honeyed_apple",
+      "required": false
+    },
+    {
+      "id": "nomansland:syruped_pear",
+      "required": false
+    },
+    {
+      "id": "nomansland:trail_mix",
+      "required": false
+    },
+    {
+      "id": "nomansland:hardtack",
+      "required": false
+    },
+    {
+      "id": "nomansland:awkward_residue",
+      "required": false
+    },
+    {
+      "id": "nomansland:stallion_strip",
+      "required": false
+    },
+    {
+      "id": "nomansland:stallion_strips",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:horse_soup",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:horse_soup_pot",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:horse_wrap",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:mushrooms_with_tomato",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:sweet_frog_legs",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:venison_tart",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:shroomburger",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:plated_venison_roulade",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:venison_roulade_block",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:stuffed_shelf_mushroom",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:stuffed_shelf_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:billhook_bass_roll",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:plated_pickled_brains",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:pickled_brains_block",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:boiled_cave_weeds",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:river_meal",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:choco_glazed_orange",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:chocolate_cake",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:chocolate_cake_slice",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:chocolate_tart",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:kozinak",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:escargot",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:maple_glazed_bacon",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:slabdish",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:cherry_cream_soda",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:passion_aloe_nectar",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:pickerelweed_juice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:vanilla_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:chocolate_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:strawberry_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:banana_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:mint_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:adzuki_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:yucca_gateau_slice",
+      "required": false
+    },
+    {
+      "id": "neapolitan:strawberry_scones",
+      "required": false
+    },
+    {
+      "id": "neapolitan:banana_bread",
+      "required": false
+    },
+    {
+      "id": "neapolitan:adzuki_bun",
+      "required": false
+    },
+    {
+      "id": "neapolitan:adzuki_curry",
+      "required": false
+    },
+    {
+      "id": "neapolitan:vanilla_pudding",
+      "required": false
+    },
+    {
+      "id": "neapolitan:vanilla_fudge",
+      "required": false
+    },
+    {
+      "id": "neapolitan:vanilla_chocolate_fingers",
+      "required": false
+    },
+    {
+      "id": "neapolitan:chocolate_strawberries",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mint_chocolate",
+      "required": false
+    },
+    {
+      "id": "neapolitan:strawberry_bean_bonbons",
+      "required": false
+    },
+    {
+      "id": "neapolitan:strawberry_banana_smoothie",
+      "required": false
+    },
+    {
+      "id": "neapolitan:cinnamon_bagel",
+      "required": false
+    },
+    {
+      "id": "neapolitan:cinnamon_roll",
+      "required": false
+    },
+    {
+      "id": "neapolitan:berry_strudel",
+      "required": false
+    },
+    {
+      "id": "neapolitan:bubblegum",
+      "required": false
+    },
+    {
+      "id": "neapolitan:strawberry_bubblegum",
+      "required": false
+    },
+    {
+      "id": "neapolitan:banana_bubblegum",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mint_bubblegum",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mango_bubblegum",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:pizza",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:pizza_slice",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:quiche",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:quiche_slice",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:vegetable_omelet",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:cheesy_pasta",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:scarlet_pierogi",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:horror_lasagna",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:fiery_fondue_pot",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:croissant",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:raw_croissant",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:raw_muffin",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:corn_muffin",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:jam_sandwich",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:cocoa_fudge",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:maple_fudge",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:glow_brownie",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:apple_turnover",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:rice_pudding",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:rich_chocolate_cake",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:pumpkin_roll",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:glow_berry_meringue_pie",
+      "required": false
     }
   ]
 }

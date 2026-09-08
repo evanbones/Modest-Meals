@@ -1,0 +1,457 @@
+{
+  "entries": [
+    {
+      "target": "#brewinandchewin:fermented_drinks",
+      "priority": 120,
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 300
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "#brewinandchewin:wines",
+      "priority": 120,
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 3.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:withering_dross",
+      "traits": [
+        {
+          "type": "modest_meals:health_no_regen",
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_depletion",
+          "value": 3.0,
+          "duration": 400
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:steel_toe_stout",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:resistance",
+          "duration": 600,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:strongroot_ale",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:resistance",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:salty_folly",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 250
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:water_breathing",
+          "duration": 600,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:glittering_grenadine",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 600,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:glowing",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:egg_grog",
+      "traits": [
+        {
+          "type": "modest_meals:temporary_health",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:kombucha",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 600,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:innards",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:raw_croissant",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:raw_muffin",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "#brewinandchewin:foods/cheese_wedge",
+      "priority": 145,
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:kimchi",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:pickled_pickles",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:kippers",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:glow_berry_marmalade",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:glowing",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:creamy_onion_soup",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:strength",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:cheesy_pasta",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:horror_lasagna",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:scarlet_pierogi",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:fiery_fondue",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:fire_resistance",
+          "duration": 400,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:vegetable_omelet",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:chopped_liver",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:haggis",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:grits",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:rice_pudding",
+      "traits": [
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:ham_and_cheese_sandwich",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:jam_sandwich",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:glow_brownie",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 400,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:glowing",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:cocoa_fudge",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:maple_fudge",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:apple_turnover",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:slice_of_rich_chocolate_cake",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:slice_of_glow_berry_meringue_pie",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:glowing",
+          "duration": 400,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:slice_of_pumpkin_roll",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 160
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:pizza_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "brewinandchewin:quiche_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    }
+  ]
+}

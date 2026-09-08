@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "#c:foods/raw_venison",
+      "required": false
+    },
+    {
+      "id": "#c:foods/raw_horse",
+      "required": false
+    },
+    {
+      "id": "#c:foods/raw_duck",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:duck_fillet",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:venison_shanks",
+      "required": false
+    }
+  ]
+}

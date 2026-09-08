@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "culturaldelights:tortilla",
+      "id": "cookscollection:rustic_loaf_slice",
       "required": false
     },
     {
-      "id": "brewinandchewin:tortilla",
+      "id": "nomansland:hardtack",
       "required": false
     }
   ]

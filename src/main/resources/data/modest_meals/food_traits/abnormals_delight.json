@@ -1,0 +1,321 @@
+{
+  "entries": [
+    {
+      "target": "#c:foods/raw_duck",
+      "priority": 140,
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "#c:foods/raw_pike",
+      "priority": 140,
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 120,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "#c:foods/raw_perch",
+      "priority": 140,
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 120,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "#c:foods/cooked_pike",
+      "priority": 145,
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 60
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 200,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "#c:foods/cooked_perch",
+      "priority": 145,
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 200,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:cherry_cream_soda",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:slow_falling",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:pickerelweed_juice",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 200
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:water_breathing",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:passion_aloe_nectar",
+      "traits": [
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        },
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:maple_glazed_bacon",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:resistance",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:escargot",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:slabdish",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:seared_venison",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:passion_fruit_glazed_duck",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:dune_platter",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:duck_noodles",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:perch_with_mushrooms",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 400,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:pike_with_beetroot",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:strength",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:venison_with_bamboo_shoots",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:vanilla_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:chocolate_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:strawberry_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:temporary_health",
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:banana_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:jump_boost",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:mint_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:strength",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:adzuki_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    },
+    {
+      "target": "abnormals_delight:yucca_gateau_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    }
+  ]
+}

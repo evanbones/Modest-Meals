@@ -1,0 +1,126 @@
+{
+  "entries": [
+    {
+      "effect": "modest_meals:night_vision",
+      "potency": 7,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:crops/cave_carrot"
+    },
+    {
+      "effect": "modest_meals:night_vision",
+      "potency": 7,
+      "stamina": 1.5,
+      "target": "minersdelight:cave_carrot"
+    },
+    {
+      "effect": "modest_meals:night_vision",
+      "potency": 14,
+      "stamina": 2.5,
+      "target": "minersdelight:baked_cave_carrot"
+    },
+    {
+      "effect": "modest_meals:haste",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.5,
+      "target": "minersdelight:copper_carrot"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "minersdelight:moss"
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "minersdelight:vegan_patty"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 1.0,
+      "target": "minersdelight:bat_wing"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "minersdelight:smoked_bat_wing"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 1.0,
+      "priority": 140,
+      "target": "#c:foods/raw_insect_meat"
+    },
+    {
+      "health": 2.5,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:foods/cooked_insect_meat"
+    },
+    {
+      "health": 1.0,
+      "stamina": 0.5,
+      "target": "minersdelight:spider_leg"
+    },
+    {
+      "health": 3.0,
+      "stamina": 1.0,
+      "target": "minersdelight:baked_spider_leg"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 1.0,
+      "target": "minersdelight:arthropod"
+    },
+    {
+      "health": 2.5,
+      "stamina": 1.5,
+      "target": "minersdelight:cooked_arthropod"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "minersdelight:silverfish_eggs"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 1.0,
+      "priority": 140,
+      "target": "#c:foods/raw_squid"
+    },
+    {
+      "health": 3.0,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:foods/cooked_squid"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 1.0,
+      "target": "minersdelight:squid"
+    },
+    {
+      "health": 3.0,
+      "stamina": 2.0,
+      "target": "minersdelight:baked_squid"
+    },
+    {
+      "effect": "modest_meals:glowing",
+      "health": 1.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minersdelight:glow_squid"
+    },
+    {
+      "digest_ticks": 110,
+      "health": 0.5,
+      "target": "minersdelight:tentacles"
+    },
+    {
+      "health": 1.5,
+      "stamina": 1.0,
+      "target": "minersdelight:baked_tentacles"
+    }
+  ]
+}

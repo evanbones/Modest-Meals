@@ -1,0 +1,218 @@
+{
+  "entries": [
+    {
+      "target": "no_mans_delight:venison_muscle",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:horse_soup",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:mushrooms_with_tomato",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:sweet_frog_legs",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:jump_boost",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:venison_tart",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:plated_venison_roulade",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:stuffed_shelf_mushroom",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 600,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:billhook_bass_roll",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 150
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:plated_pickled_brains",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:boiled_cave_weeds",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:river_meal",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:orange_juice",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:choco_glazed_orange",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:chocolate_cake_slice",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:chocolate_tart",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:kozinak",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:horse_wrap",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "no_mans_delight:shroomburger",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    }
+  ]
+}

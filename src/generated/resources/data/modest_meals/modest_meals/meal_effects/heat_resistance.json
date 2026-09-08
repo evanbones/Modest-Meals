@@ -1,7 +1,11 @@
 {
   "base_seconds": 70,
   "id": "modest_meals:heat_resistance",
+  "mob_effect": "modest_meals:heat_resistance",
   "name_prefix_key": "modest_meals.meal_prefix.heat_resistance",
+  "required_mods": [
+    "thermoo"
+  ],
   "tiers": [
     {
       "amplifier": 0,

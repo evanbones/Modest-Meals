@@ -1,0 +1,6 @@
+{
+  "base_seconds": 45,
+  "id": "modest_meals:climbing",
+  "mob_effect": "neapolitan:agility",
+  "name_prefix_key": "modest_meals.meal_prefix.climbing"
+}

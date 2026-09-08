@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "#c:foods/cooked_venison",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_horse",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_duck",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_insect_meat",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:cooked_duck_fillet",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:cooked_venison_shanks",
+      "required": false
+    }
+  ]
+}

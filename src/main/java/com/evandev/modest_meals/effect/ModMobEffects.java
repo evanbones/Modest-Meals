@@ -2,6 +2,7 @@ package com.evandev.modest_meals.effect;
 
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.attribute.ModAttributes;
+import com.evandev.modest_meals.compat.thermoo.ThermooCompat;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -67,6 +68,34 @@ public class ModMobEffects {
                     return false;
                 }
             }
+    );
+
+    // TODO: these should also probably be configurable
+    private static final double THERMAL_RESISTANCE_PER_LEVEL = 2.0;
+    private static final double ENVIRONMENT_RESISTANCE_PER_LEVEL = 0.5;
+
+    public static final DeferredHolder<MobEffect, MobEffect> COLD_RESISTANCE = MOB_EFFECTS.register(
+            "cold_resistance",
+            () -> new ThermalResistanceEffect(
+                    "cold_resistance",
+                    ThermooCompat::frostResistance,
+                    ThermooCompat::environmentFrostResistance,
+                    THERMAL_RESISTANCE_PER_LEVEL,
+                    ENVIRONMENT_RESISTANCE_PER_LEVEL,
+                    0xE08A3C
+            )
+    );
+
+    public static final DeferredHolder<MobEffect, MobEffect> HEAT_RESISTANCE = MOB_EFFECTS.register(
+            "heat_resistance",
+            () -> new ThermalResistanceEffect(
+                    "heat_resistance",
+                    ThermooCompat::heatResistance,
+                    ThermooCompat::environmentHeatResistance,
+                    THERMAL_RESISTANCE_PER_LEVEL,
+                    ENVIRONMENT_RESISTANCE_PER_LEVEL,
+                    0x6EC6E8
+            )
     );
 
     public static void register(IEventBus modBus) {

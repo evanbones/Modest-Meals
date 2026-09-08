@@ -3,6 +3,10 @@
     {
       "id": "culturaldelights:corn_dough",
       "required": false
+    },
+    {
+      "id": "mynethersdelight:ghast_sourdough",
+      "required": false
     }
   ]
 }

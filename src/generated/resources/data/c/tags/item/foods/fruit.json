@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "cookscollection:lemon",
+      "required": false
+    },
+    {
+      "id": "no_mans_delight:orange",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mango",
+      "required": false
+    },
+    {
+      "id": "neapolitan:dried_mango",
+      "required": false
+    }
+  ]
+}

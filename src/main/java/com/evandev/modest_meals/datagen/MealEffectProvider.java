@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.compat.thermoo.ThermooCompat;
 import com.evandev.modest_meals.food.ingredient.MealEffect;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -41,8 +42,26 @@ public class MealEffectProvider extends JsonDataProvider<MealEffect> {
         singleTier(entries, "invisibility", MobEffects.INVISIBILITY, 60);
         singleTier(entries, "luck", MobEffects.LUCK, 60);
 
-        stub(entries, "cold_resistance", 70);
-        stub(entries, "heat_resistance", 70);
+        thermal(entries, "cold_resistance", 70);
+        thermal(entries, "heat_resistance", 70);
+
+        modded(entries, "climbing", "neapolitan", "agility", 45);
+        modded(entries, "harmony", "neapolitan", "harmony", 40);
+    }
+
+    private void modded(Map<ResourceLocation, MealEffect> entries, String name,
+                        String namespace, String path, int baseSeconds) {
+        put(entries, name, Optional.of(ResourceLocation.fromNamespaceAndPath(namespace, path)), baseSeconds,
+                List.of(new MealEffect.Tier(0, 0)), List.of());
+    }
+
+    private void thermal(Map<ResourceLocation, MealEffect> entries, String name, int baseSeconds) {
+        put(entries, name, Optional.of(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name)), baseSeconds,
+                List.of(
+                        new MealEffect.Tier(0, 0),
+                        new MealEffect.Tier(MID, 1)
+                ),
+                List.of(ThermooCompat.MOD_ID));
     }
 
     private void threeTier(Map<ResourceLocation, MealEffect> entries, String name,
@@ -51,7 +70,7 @@ public class MealEffectProvider extends JsonDataProvider<MealEffect> {
                 new MealEffect.Tier(0, 0),
                 new MealEffect.Tier(MID, 1),
                 new MealEffect.Tier(TOP, 2)
-        ));
+        ), List.of());
     }
 
     private void twoTier(Map<ResourceLocation, MealEffect> entries, String name,
@@ -59,27 +78,20 @@ public class MealEffectProvider extends JsonDataProvider<MealEffect> {
         put(entries, name, Optional.of(idOf(effect)), baseSeconds, List.of(
                 new MealEffect.Tier(0, 0),
                 new MealEffect.Tier(MID, 1)
-        ));
+        ), List.of());
     }
 
     private void singleTier(Map<ResourceLocation, MealEffect> entries, String name,
                             Holder<MobEffect> effect, int baseSeconds) {
         put(entries, name, Optional.of(idOf(effect)), baseSeconds, List.of(
                 new MealEffect.Tier(0, 0)
-        ));
-    }
-
-    private void stub(Map<ResourceLocation, MealEffect> entries, String name, int baseSeconds) {
-        put(entries, name, Optional.empty(), baseSeconds, List.of(
-                new MealEffect.Tier(0, 0),
-                new MealEffect.Tier(MID, 1)
-        ));
+        ), List.of());
     }
 
     private void put(Map<ResourceLocation, MealEffect> entries, String name, Optional<ResourceLocation> mobEffect,
-                     int baseSeconds, List<MealEffect.Tier> tiers) {
+                     int baseSeconds, List<MealEffect.Tier> tiers, List<String> requiredMods) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
         entries.put(id, new MealEffect(id, mobEffect, baseSeconds, tiers,
-                Optional.of("modest_meals.meal_prefix." + name)));
+                Optional.of("modest_meals.meal_prefix." + name), requiredMods));
     }
 }

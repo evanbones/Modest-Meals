@@ -1,0 +1,237 @@
+{
+  "entries": [
+    {
+      "target": "minersdelight:copper_carrot",
+      "traits": [
+        {
+          "type": "modest_meals:health_no_regen",
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:bat_wing",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:arthropod",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:squid",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:glow_squid",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:glowing",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:silverfish_eggs",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 150
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:weird_caviar",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:cave_soup",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 600,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:bat_soup",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:night_vision",
+          "duration": 800,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:insect_stew",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:seasoned_arthropods",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:plate_of_glazed_arachnid_limbs",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:pasta_with_veggieballs",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:vegan_steak_and_potatoes",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:plate_of_fake_meatloaf",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:glow_ink_pasta",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:glowing",
+          "duration": 1200,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:squid_sandwich",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:takoyaki",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 120
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:bowl_of_stuffed_squid",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 200
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:tentacles_on_a_stick",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 60
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:nutritional_bar",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "minersdelight:golden_nutritional_bar",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 2400
+        },
+        {
+          "type": "modest_meals:temporary_health",
+          "value": 2.0
+        }
+      ]
+    }
+  ]
+}

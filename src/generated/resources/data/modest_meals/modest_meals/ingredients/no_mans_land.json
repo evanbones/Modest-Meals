@@ -1,0 +1,105 @@
+{
+  "entries": [
+    {
+      "health": 2.0,
+      "priority": 140,
+      "stamina": 1.0,
+      "target": "#c:foods/raw_venison"
+    },
+    {
+      "health": 5.0,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:foods/cooked_venison"
+    },
+    {
+      "health": 2.0,
+      "priority": 140,
+      "stamina": 1.0,
+      "target": "#c:foods/raw_horse"
+    },
+    {
+      "health": 5.0,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:foods/cooked_horse"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 3.0,
+      "priority": 140,
+      "target": "#c:foods/raw_billhook_bass"
+    },
+    {
+      "digest_ticks": 150,
+      "health": 5.0,
+      "priority": 145,
+      "target": "#c:foods/cooked_billhook_bass"
+    },
+    {
+      "health": 1.5,
+      "stamina": 1.0,
+      "target": "nomansland:frog_leg"
+    },
+    {
+      "health": 4.0,
+      "stamina": 2.0,
+      "target": "nomansland:cooked_frog_leg"
+    },
+    {
+      "digest_ticks": 110,
+      "health": 3.0,
+      "target": "nomansland:cave_carp"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "nomansland:field_mushroom"
+    },
+    {
+      "health": 1.5,
+      "stamina": 1.5,
+      "target": "nomansland:grilled_mushrooms"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.0,
+      "priority": 145,
+      "target": "#c:foods/pear"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.0,
+      "target": "nomansland:pear"
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.0,
+      "target": "nomansland:pear_juice"
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.5,
+      "target": "nomansland:pine_nuts"
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.5,
+      "target": "nomansland:walnuts"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 1.0,
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "nomansland:maple_syrup_bottle"
+    },
+    {
+      "effect": "modest_meals:strength",
+      "health": 1.0,
+      "potency": 7,
+      "stamina": 2.0,
+      "target": "nomansland:pesto_bottle"
+    }
+  ]
+}
