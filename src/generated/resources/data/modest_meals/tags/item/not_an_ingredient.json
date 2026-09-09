@@ -8,7 +8,6 @@
     "modest_meals:porridge",
     "modest_meals:drink",
     "modest_meals:jam",
-    "modest_meals:pickles",
     "modest_meals:sandwich",
     "modest_meals:wrap",
     "modest_meals:pizza",
@@ -72,6 +71,10 @@
     },
     {
       "id": "farmersdelight:dog_food",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:debug_pumpkin_pie",
       "required": false
     },
     {
@@ -367,6 +370,26 @@
       "required": false
     },
     {
+      "id": "minersdelight:rock_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:egg_soup_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:strider_stew_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:spicy_hoglin_stew_cup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:spicy_noodle_soup_cup",
+      "required": false
+    },
+    {
       "id": "mynethersdelight:deviled_egg",
       "required": false
     },
@@ -527,6 +550,14 @@
       "required": false
     },
     {
+      "id": "mynethersdelight:bacon-wrapped_sausage_on_a_stick",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:plate_of_ghasta_with_cream",
+      "required": false
+    },
+    {
       "id": "nomansland:pancake",
       "required": false
     },
@@ -559,87 +590,87 @@
       "required": false
     },
     {
-      "id": "no_mans_delight:horse_soup",
+      "id": "nomansdelight:horse_wrap",
       "required": false
     },
     {
-      "id": "no_mans_delight:horse_soup_pot",
+      "id": "nomansdelight:shroomburger",
       "required": false
     },
     {
-      "id": "no_mans_delight:horse_wrap",
+      "id": "nomansdelight:venison_roulade",
       "required": false
     },
     {
-      "id": "no_mans_delight:mushrooms_with_tomato",
+      "id": "nomansdelight:venison_roulade_block",
       "required": false
     },
     {
-      "id": "no_mans_delight:sweet_frog_legs",
+      "id": "nomansdelight:billhook_bass_roll",
       "required": false
     },
     {
-      "id": "no_mans_delight:venison_tart",
+      "id": "nomansdelight:billhook_bass_with_eggs",
       "required": false
     },
     {
-      "id": "no_mans_delight:shroomburger",
+      "id": "nomansdelight:cooked_weeds",
       "required": false
     },
     {
-      "id": "no_mans_delight:plated_venison_roulade",
+      "id": "nomansdelight:frog_sandwich",
       "required": false
     },
     {
-      "id": "no_mans_delight:venison_roulade_block",
+      "id": "nomansdelight:living_soup",
       "required": false
     },
     {
-      "id": "no_mans_delight:stuffed_shelf_mushroom",
+      "id": "nomansdelight:living_soup_bowl",
       "required": false
     },
     {
-      "id": "no_mans_delight:stuffed_shelf_mushroom_block",
+      "id": "nomansdelight:pesto_pizza",
       "required": false
     },
     {
-      "id": "no_mans_delight:billhook_bass_roll",
+      "id": "nomansdelight:pesto_pizza_slice",
       "required": false
     },
     {
-      "id": "no_mans_delight:plated_pickled_brains",
+      "id": "nomansdelight:meat_pie",
       "required": false
     },
     {
-      "id": "no_mans_delight:pickled_brains_block",
+      "id": "nomansdelight:meat_pie_slice",
       "required": false
     },
     {
-      "id": "no_mans_delight:boiled_cave_weeds",
+      "id": "nomansdelight:fruit_tart",
       "required": false
     },
     {
-      "id": "no_mans_delight:river_meal",
+      "id": "nomansdelight:nut_bun",
       "required": false
     },
     {
-      "id": "no_mans_delight:choco_glazed_orange",
+      "id": "nomansdelight:rice_bomb",
       "required": false
     },
     {
-      "id": "no_mans_delight:chocolate_cake",
+      "id": "nomansdelight:lavender_tea",
       "required": false
     },
     {
-      "id": "no_mans_delight:chocolate_cake_slice",
+      "id": "nomansdelight:smore",
       "required": false
     },
     {
-      "id": "no_mans_delight:chocolate_tart",
+      "id": "nomansdelight:spore_salad",
       "required": false
     },
     {
-      "id": "no_mans_delight:kozinak",
+      "id": "nomansdelight:venison_tartare",
       "required": false
     },
     {

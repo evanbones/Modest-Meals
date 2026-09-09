@@ -39,7 +39,7 @@ public record StaminaNoRegenTrait(int duration) implements FoodTrait {
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
-        return TraitTooltipHelper.formatSimpleTake("modest_meals.trait.stamina_no_regen", (long) (this.duration * durationMultiplier));
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
+        return TraitTooltipHelper.formatSimpleTake("modest_meals.trait.stamina_no_regen", (long) (this.duration * durationMultiplier), tickRate);
     }
 }

@@ -59,25 +59,8 @@
       ]
     },
     {
-      "target": "mynethersdelight:bleeding_tartar",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 200,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
       "target": "mynethersdelight:strider_stew",
       "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 800,
-          "amplifier": 0
-        },
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
@@ -89,26 +72,9 @@
       "target": "mynethersdelight:crimson_stroganoff",
       "traits": [
         {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 600,
-          "amplifier": 0
-        },
-        {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
           "duration": 1800
-        }
-      ]
-    },
-    {
-      "target": "mynethersdelight:spicy_cotton",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 300,
-          "amplifier": 0
         }
       ]
     },
@@ -227,17 +193,6 @@
       ]
     },
     {
-      "target": "mynethersdelight:chilidog",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 300,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
       "target": "mynethersdelight:tear_popsicle",
       "traits": [
         {
@@ -275,12 +230,6 @@
         {
           "type": "modest_meals:effect_removal",
           "clear_all": false
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 300,
-          "amplifier": 0
         }
       ]
     },

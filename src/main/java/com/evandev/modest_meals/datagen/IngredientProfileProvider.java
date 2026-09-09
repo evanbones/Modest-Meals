@@ -92,7 +92,7 @@ public class IngredientProfileProvider implements DataProvider {
     }
 
     private static String nmd(String path) {
-        return "no_mans_delight:" + path;
+        return "nomansdelight:" + path;
     }
 
     private static String ad(String path) {
@@ -125,7 +125,7 @@ public class IngredientProfileProvider implements DataProvider {
         minersDelight(files.computeIfAbsent("miners_delight", key -> new Builder()));
         myNethersDelight(files.computeIfAbsent("my_nethers_delight", key -> new Builder()));
         noMansLand(files.computeIfAbsent("no_mans_land", key -> new Builder()));
-        noMansDelight(files.computeIfAbsent("no_mans_delight", key -> new Builder()));
+        noMansDelight(files.computeIfAbsent("nomansdelight", key -> new Builder()));
         abnormalsDelight(files.computeIfAbsent("abnormals_delight", key -> new Builder()));
         environmental(files.computeIfAbsent("environmental", key -> new Builder()));
         neapolitan(files.computeIfAbsent("neapolitan", key -> new Builder()));
@@ -339,8 +339,8 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(md("bat_wing"), dish(1.0F, null, 120));
         builder.add(md("smoked_bat_wing"), food(2.0F, 1.0F));
 
-        builder.addTag("c:foods/raw_insect_meat", 140, dish(1.0F, null, 120));
-        builder.addTag("c:foods/cooked_insect_meat", 145, food(2.5F, 1.5F));
+        builder.addTag("minersdelight:raw_insect_meat", 140, dish(1.0F, null, 120));
+        builder.addTag("minersdelight:cooked_insect_meat", 145, food(2.5F, 1.5F));
         builder.add(md("spider_leg"), food(1.0F, 0.5F));
         builder.add(md("baked_spider_leg"), food(3.0F, 1.0F));
         builder.add(md("arthropod"), dish(1.0F, null, 120));
@@ -391,7 +391,6 @@ public class IngredientProfileProvider implements DataProvider {
 
         builder.add(nml("frog_leg"), food(1.5F, 1.0F));
         builder.add(nml("cooked_frog_leg"), food(4.0F, 2.0F));
-        builder.add(nml("cave_carp"), dish(3.0F, null, 110));
         builder.add(nml("field_mushroom"), food(0.5F, 1.0F));
         builder.add(nml("grilled_mushrooms"), food(1.5F, 1.5F));
 
@@ -407,18 +406,13 @@ public class IngredientProfileProvider implements DataProvider {
     }
 
     private void noMansDelight(Builder builder) {
-        builder.add(nmd("horse_loin"), food(2.0F, 1.0F));
-        builder.add(nmd("cooked_horse_loin"), food(4.0F, 1.5F));
-        builder.add(nmd("venison_medallions"), food(1.0F, 0.5F));
-        builder.add(nmd("cooked_venison_medallions"), food(3.0F, 1.5F));
-        builder.add(nmd("venison_muscle"), food(1.5F, 1.0F));
-        builder.add(nmd("cooked_venison_muscle"), food(3.5F, 1.5F));
+        builder.add(nmd("horse_cuts"), food(2.0F, 1.0F));
+        builder.add(nmd("cooked_horse_cuts"), food(4.0F, 1.5F));
+        builder.add(nmd("venison_chop"), food(1.5F, 1.0F));
+        builder.add(nmd("cooked_venison_chop"), food(3.5F, 1.5F));
         builder.add(nmd("billhook_bass_slice"), dish(1.5F, null, 100));
         builder.add(nmd("cooked_billhook_bass_slice"), dish(3.0F, null, 130));
 
-        builder.addTag("c:crops/orange", 145, dish(2.5F, null, 100));
-        builder.add(nmd("orange"), dish(2.5F, null, 100));
-        builder.add(nmd("orange_juice"), dish(2.5F, null, 100));
     }
 
     private void abnormalsDelight(Builder builder) {

@@ -28,7 +28,6 @@ public class ModItems {
             () -> new MealItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16),
                     UseAnim.DRINK));
     public static final Supplier<Item> JAM = registerBottleMeal("jam");
-    public static final Supplier<Item> PICKLES = registerBottleMeal("pickles");
 
     public static final Supplier<Item> SANDWICH = registerMeal("sandwich");
     public static final Supplier<Item> WRAP = registerMeal("wrap");

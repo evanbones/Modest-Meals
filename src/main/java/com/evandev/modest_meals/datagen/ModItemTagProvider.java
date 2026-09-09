@@ -24,11 +24,12 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private static final String MINERS_DELIGHT = "minersdelight";
     private static final String MY_NETHERS_DELIGHT = "mynethersdelight";
     private static final String NO_MANS_LAND = "nomansland";
-    private static final String NO_MANS_DELIGHT = "no_mans_delight";
+    private static final String NO_MANS_DELIGHT = "nomansdelight";
     private static final String ABNORMALS_DELIGHT = "abnormals_delight";
     private static final String NEAPOLITAN = "neapolitan";
     private static final String BREWIN_AND_CHEWIN = "brewinandchewin";
 
+    private static final TagKey<Item> CAKES = itemTag("c", "foods/cake");
     private static final TagKey<Item> TORTILLAS = itemTag("c", "foods/tortilla");
     private static final TagKey<Item> TOMATO_SAUCES = itemTag("c", "foods/tomato_sauce");
     private static final TagKey<Item> DOUGHS = itemTag("c", "foods/dough");
@@ -38,7 +39,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private static final TagKey<Item> RAW_MEATS = itemTag("c", "foods/raw_meat");
     private static final TagKey<Item> CORN = itemTag("c", "crops/corn");
     private static final TagKey<Item> LEMONS = itemTag("c", "crops/lemon");
-    private static final TagKey<Item> ORANGES = itemTag("c", "crops/orange");
     private static final TagKey<Item> MANGOES = itemTag("c", "crops/mango");
     private static final TagKey<Item> PEARS = itemTag("c", "foods/pear");
     private static final TagKey<Item> FRUITS = itemTag("c", "foods/fruit");
@@ -111,7 +111,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         addOptional(notAnIngredient, FARMERS_DELIGHT,
                 "nether_salad",
-                "dog_food");
+                "dog_food",
+                "debug_pumpkin_pie");
 
         addOptional(notAnIngredient, CULTURAL_DELIGHTS,
                 "elote",
@@ -195,7 +196,12 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "onion_soup_cup",
                 "cave_soup_cup",
                 "bat_soup_cup",
-                "insect_stew_cup");
+                "insect_stew_cup",
+                "rock_soup_cup",
+                "egg_soup_cup",
+                "strider_stew_cup",
+                "spicy_hoglin_stew_cup",
+                "spicy_noodle_soup_cup");
 
         addOptional(notAnIngredient, MY_NETHERS_DELIGHT,
                 "deviled_egg",
@@ -237,7 +243,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "raw_stuffed_hoglin",
                 "plate_of_stuffed_hoglin",
                 "plate_of_stuffed_hoglin_ham",
-                "plate_of_stuffed_hoglin_snout");
+                "plate_of_stuffed_hoglin_snout",
+                "bacon-wrapped_sausage_on_a_stick",
+                "plate_of_ghasta_with_cream");
 
         addOptional(notAnIngredient, NO_MANS_LAND,
                 "pancake",
@@ -250,27 +258,27 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "stallion_strips");
 
         addOptional(notAnIngredient, NO_MANS_DELIGHT,
-                "horse_soup",
-                "horse_soup_pot",
                 "horse_wrap",
-                "mushrooms_with_tomato",
-                "sweet_frog_legs",
-                "venison_tart",
                 "shroomburger",
-                "plated_venison_roulade",
+                "venison_roulade",
                 "venison_roulade_block",
-                "stuffed_shelf_mushroom",
-                "stuffed_shelf_mushroom_block",
                 "billhook_bass_roll",
-                "plated_pickled_brains",
-                "pickled_brains_block",
-                "boiled_cave_weeds",
-                "river_meal",
-                "choco_glazed_orange",
-                "chocolate_cake",
-                "chocolate_cake_slice",
-                "chocolate_tart",
-                "kozinak");
+                "billhook_bass_with_eggs",
+                "cooked_weeds",
+                "frog_sandwich",
+                "living_soup",
+                "living_soup_bowl",
+                "pesto_pizza",
+                "pesto_pizza_slice",
+                "meat_pie",
+                "meat_pie_slice",
+                "fruit_tart",
+                "nut_bun",
+                "rice_bomb",
+                "lavender_tea",
+                "smore",
+                "spore_salad",
+                "venison_tartare");
 
         addOptional(notAnIngredient, ABNORMALS_DELIGHT,
                 "escargot",
@@ -334,6 +342,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
     }
 
     private void seedConventionFoods() {
+        tag(CAKES).add(Items.CAKE);
+
         var tortillas = tag(TORTILLAS);
         tortillas.addOptional(cd("tortilla"));
         addOptional(tortillas, BREWIN_AND_CHEWIN, "tortilla");
@@ -354,8 +364,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptionalTags(cookedMeats, "c",
                 "foods/cooked_venison",
                 "foods/cooked_horse",
-                "foods/cooked_duck",
-                "foods/cooked_insect_meat");
+                "foods/cooked_duck");
+        addOptionalTags(cookedMeats, MINERS_DELIGHT, "cooked_insect_meat");
         addOptional(cookedMeats, ABNORMALS_DELIGHT, "cooked_duck_fillet", "cooked_venison_shanks");
 
         var rawMeats = tag(RAW_MEATS);
@@ -364,13 +374,11 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         addOptional(tag(CORN), BREWIN_AND_CHEWIN, "corn");
         addOptional(tag(LEMONS), COOKS_COLLECTION, "lemon");
-        addOptional(tag(ORANGES), NO_MANS_DELIGHT, "orange");
         addOptional(tag(MANGOES), NEAPOLITAN, "mango");
         addOptional(tag(PEARS), NO_MANS_LAND, "pear");
 
         var fruits = tag(FRUITS);
         addOptional(fruits, COOKS_COLLECTION, "lemon");
-        addOptional(fruits, NO_MANS_DELIGHT, "orange");
         addOptional(fruits, NEAPOLITAN, "mango", "dried_mango");
     }
 }

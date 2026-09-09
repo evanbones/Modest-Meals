@@ -47,11 +47,6 @@
       "target": "nomansland:cooked_frog_leg"
     },
     {
-      "digest_ticks": 110,
-      "health": 3.0,
-      "target": "nomansland:cave_carp"
-    },
-    {
       "health": 0.5,
       "stamina": 1.0,
       "target": "nomansland:field_mushroom"

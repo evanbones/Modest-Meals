@@ -22,7 +22,8 @@ public record MealEffect(
         int baseSeconds,
         List<Tier> tiers,
         Optional<String> namePrefixKey,
-        List<String> requiredMods
+        List<String> requiredMods,
+        List<String> anyOfMods
 ) {
     public static final Codec<MealEffect> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ResourceLocation.CODEC.fieldOf("id").forGetter(MealEffect::id),
@@ -30,7 +31,8 @@ public record MealEffect(
             Codec.INT.optionalFieldOf("base_seconds", 30).forGetter(MealEffect::baseSeconds),
             Tier.CODEC.listOf().optionalFieldOf("tiers", List.of(new Tier(0, 0))).forGetter(MealEffect::tiers),
             Codec.STRING.optionalFieldOf("name_prefix_key").forGetter(MealEffect::namePrefixKey),
-            Codec.STRING.listOf().optionalFieldOf("required_mods", List.of()).forGetter(MealEffect::requiredMods)
+            Codec.STRING.listOf().optionalFieldOf("required_mods", List.of()).forGetter(MealEffect::requiredMods),
+            Codec.STRING.listOf().optionalFieldOf("any_of_mods", List.of()).forGetter(MealEffect::anyOfMods)
     ).apply(instance, MealEffect::new));
 
     public Optional<Integer> amplifierFor(int potency) {
@@ -48,11 +50,15 @@ public record MealEffect(
      * Whether this axis can currently be applied to anything.
      */
     public boolean isUsable() {
-        return resolveMobEffect().isPresent() && requiredModsPresent();
+        return resolveMobEffect().isPresent() && requiredModsPresent() && anyOfModsPresent();
     }
 
     private boolean requiredModsPresent() {
         return requiredMods.stream().allMatch(modId -> ModList.get().isLoaded(modId));
+    }
+
+    private boolean anyOfModsPresent() {
+        return anyOfMods.isEmpty() || anyOfMods.stream().anyMatch(modId -> ModList.get().isLoaded(modId));
     }
 
     /**

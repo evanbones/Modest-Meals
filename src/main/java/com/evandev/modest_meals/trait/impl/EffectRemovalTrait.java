@@ -57,10 +57,10 @@ public record EffectRemovalTrait(boolean clearAll) implements FoodTrait {
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         return TraitTooltipHelper.formatSimple(
                 this.clearAll ? "modest_meals.trait.clear_all_effects" : "modest_meals.trait.clear_negative_effects",
                 0
-        );
+        , tickRate);
     }
 }

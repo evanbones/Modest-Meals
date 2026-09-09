@@ -60,7 +60,7 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         boolean isHarmful = this.effect.value().getCategory() == MobEffectCategory.HARMFUL;
         ChatFormatting color = isHarmful ? ChatFormatting.RED : ChatFormatting.BLUE;
 
@@ -71,7 +71,7 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
 
         long dur = (long) (this.duration * durationMultiplier);
         if (dur > 0) {
-            effectName = Component.translatable("potion.withDuration", effectName, TraitTooltipHelper.formatDuration(dur));
+            effectName = Component.translatable("potion.withDuration", effectName, TraitTooltipHelper.formatDuration(dur, tickRate));
         }
         return effectName.withStyle(color);
     }

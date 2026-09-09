@@ -44,8 +44,8 @@ public record StaminaAdditionTrait(float value) implements FoodTrait {
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         return TraitTooltipHelper.formatPlusTrait("modest_meals.trait.stamina_addition",
-                this.value * valueMultiplier, 0);
+                this.value * valueMultiplier, 0, tickRate);
     }
 }

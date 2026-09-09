@@ -66,7 +66,7 @@ public record TeleportTrait(float range) implements FoodTrait {
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
-        return TraitTooltipHelper.formatSimple("modest_meals.trait.teleport_randomly", 0);
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
+        return TraitTooltipHelper.formatSimple("modest_meals.trait.teleport_randomly", 0, tickRate);
     }
 }

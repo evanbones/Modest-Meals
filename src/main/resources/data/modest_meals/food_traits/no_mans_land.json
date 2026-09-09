@@ -12,15 +12,6 @@
       ]
     },
     {
-      "target": "nomansland:cave_carp",
-      "traits": [
-        {
-          "type": "modest_meals:air_bubbles",
-          "value": 80
-        }
-      ]
-    },
-    {
       "target": "nomansland:awkward_residue",
       "traits": [
         {

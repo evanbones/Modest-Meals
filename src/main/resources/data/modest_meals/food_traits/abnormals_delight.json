@@ -63,28 +63,11 @@
       ]
     },
     {
-      "target": "abnormals_delight:cherry_cream_soda",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:slow_falling",
-          "duration": 300,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
       "target": "abnormals_delight:pickerelweed_juice",
       "traits": [
         {
           "type": "modest_meals:air_bubbles",
           "value": 200
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:water_breathing",
-          "duration": 300,
-          "amplifier": 0
         }
       ]
     },
@@ -99,17 +82,6 @@
           "type": "modest_meals:health_addition",
           "value": 2.0,
           "duration": 200
-        }
-      ]
-    },
-    {
-      "target": "abnormals_delight:maple_glazed_bacon",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:resistance",
-          "duration": 300,
-          "amplifier": 0
         }
       ]
     },
@@ -216,12 +188,6 @@
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
           "duration": 600
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 400,
-          "amplifier": 0
         }
       ]
     },
@@ -308,12 +274,6 @@
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
           "duration": 600
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 400,
-          "amplifier": 0
         }
       ]
     }

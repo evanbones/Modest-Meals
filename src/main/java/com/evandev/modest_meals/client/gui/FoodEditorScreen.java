@@ -736,7 +736,7 @@ public class FoodEditorScreen extends Screen {
             int rowY = paneY(rowsTop + i * TRAIT_ROW_H);
             if (rowY + TRAIT_ROW_H <= contentTop || rowY >= contentBottom) continue;
 
-            Component tooltip = traits.get(i).getTooltipComponent(1.0, 1.0);
+            Component tooltip = traits.get(i).getTooltipComponent(1.0, 1.0, GuiUtil.tickRate());
             if (tooltip == null) continue;
             GuiUtil.drawTrimmed(graphics, this.font, tooltip, contentX, rowY + 5, textWidth, GuiUtil.WHITE);
         }

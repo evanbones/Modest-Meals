@@ -52,8 +52,8 @@ public record HealthAdditionTrait(float value, int duration) implements FoodTrai
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         return TraitTooltipHelper.formatPlusTrait("modest_meals.trait.health_addition",
-                this.value * valueMultiplier, (long) (this.duration * durationMultiplier));
+                this.value * valueMultiplier, (long) (this.duration * durationMultiplier), tickRate);
     }
 }

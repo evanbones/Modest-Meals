@@ -184,16 +184,16 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         applyAll(entity, stack, 1.0F);
     }
 
-    public static void applyAll(LivingEntity entity, ItemStack stack, float valueScale) {
-        applyTraits(entity, stack, FoodValues.effectiveTraits(stack), valueScale);
+    public static void applyAll(LivingEntity entity, ItemStack stack, float biteScale) {
+        applyTraits(entity, stack, FoodValues.effectiveTraits(stack), biteScale);
     }
 
-    public static void applyTraits(LivingEntity entity, ItemStack stack, List<FoodTrait> traits, float valueScale) {
+    public static void applyTraits(LivingEntity entity, ItemStack stack, List<FoodTrait> traits, float biteScale) {
         if (traits.isEmpty()) {
             return;
         }
-        float valMult = ModConfig.get().traitGlobalValueMultiplier * valueScale;
-        float durMult = ModConfig.get().traitGlobalDurationMultiplier;
+        float valMult = ModConfig.get().traitGlobalValueMultiplier * biteScale;
+        float durMult = ModConfig.get().traitGlobalDurationMultiplier * biteScale;
         for (FoodTrait trait : traits) {
             trait.apply(entity, stack, valMult, durMult);
         }

@@ -42,8 +42,8 @@ public record StaminaDepletionTrait(float value, int duration) implements FoodTr
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         return TraitTooltipHelper.formatTakeTrait("modest_meals.trait.stamina_depletion",
-                this.value * valueMultiplier, (long) (this.duration * durationMultiplier));
+                this.value * valueMultiplier, (long) (this.duration * durationMultiplier), tickRate);
     }
 }

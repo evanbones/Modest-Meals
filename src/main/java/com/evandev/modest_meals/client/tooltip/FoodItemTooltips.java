@@ -15,6 +15,7 @@ import com.evandev.modest_meals.food.ingredient.MealEffectManager;
 import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
+import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
 import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
 import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
 import net.minecraft.ChatFormatting;
@@ -37,10 +38,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FoodItemTooltips {
     private static final String CONFIG_PREFIX = "gui.modest_meals.regeneration_tooltip.";
@@ -226,19 +224,27 @@ public class FoodItemTooltips {
         List<Component> effectLines = new ArrayList<>();
         List<Component> traitLines = new ArrayList<>();
 
-        if (!effects.isEmpty()) {
-            collectFoodEffectTooltips(effects, tickRate, effectLines);
-        }
+        List<FoodProperties.PossibleEffect> shownEffects = new ArrayList<>(effects);
+        List<FoodTrait> traits = new ArrayList<>();
+        double valMult = ModConfig.get().traitGlobalValueMultiplier;
+        double durMult = ModConfig.get().traitGlobalDurationMultiplier;
 
         if (ModConfig.get().showFoodTraitTooltips) {
-            List<FoodTrait> traits = FoodValues.effectiveTraits(stack);
-            double valMult = ModConfig.get().traitGlobalValueMultiplier;
-            double durMult = ModConfig.get().traitGlobalDurationMultiplier;
-            for (FoodTrait trait : traits) {
+            for (FoodTrait trait : FoodValues.effectiveTraits(stack)) {
                 if (hasTooltipLine(trait)) {
-                    traitLines.add(trait.getTooltipComponent(valMult, durMult));
+                    traits.add(trait);
                 }
             }
+        }
+
+        dropRedundantEffectGrants(shownEffects, traits, durMult);
+
+        if (!shownEffects.isEmpty()) {
+            collectFoodEffectTooltips(shownEffects, tickRate, effectLines);
+        }
+
+        for (FoodTrait trait : traits) {
+            traitLines.add(trait.getTooltipComponent(valMult, durMult, tickRate));
         }
 
         if (!effectLines.isEmpty() || !traitLines.isEmpty()) {
@@ -247,6 +253,31 @@ public class FoodItemTooltips {
                     .withStyle(ChatFormatting.GRAY));
             effectLines.forEach(line -> lines.add(indent(line)));
             traitLines.forEach(line -> lines.add(indent(line)));
+        }
+    }
+
+    private static void dropRedundantEffectGrants(List<FoodProperties.PossibleEffect> effects,
+                                                  List<FoodTrait> traits, double durationMultiplier) {
+        for (Iterator<FoodTrait> it = traits.iterator(); it.hasNext(); ) {
+            if (!(it.next() instanceof EffectGrantTrait grant)) {
+                continue;
+            }
+            long grantDuration = (long) (grant.duration() * durationMultiplier);
+            for (int i = 0; i < effects.size(); i++) {
+                FoodProperties.PossibleEffect entry = effects.get(i);
+                MobEffectInstance instance = entry.effect();
+                if (entry.probability() < 1.0F
+                        || !instance.getEffect().equals(grant.effect())
+                        || instance.getAmplifier() != grant.amplifier()) {
+                    continue;
+                }
+                if (grantDuration > instance.getDuration()) {
+                    effects.remove(i);
+                } else {
+                    it.remove();
+                }
+                break;
+            }
         }
     }
 

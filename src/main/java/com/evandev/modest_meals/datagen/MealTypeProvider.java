@@ -64,10 +64,6 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         put(entries, "ice_cream", ModItems.ICE_CREAM, MealType.Station.CRAFTING_TABLE,
                 List.of(new MealType.BaseEntry(Ingredient.of(Items.SNOWBALL), 1)),
                 Optional.empty(), 1, 3, Optional.empty(), 30);
-        put(entries, "pickles", ModItems.PICKLES, MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(Items.GLASS_BOTTLE), 1)),
-                Optional.empty(), 1, 3, Optional.of(itemId(Items.GLASS_BOTTLE)), 28);
-
         shaped(entries, "sandwich", ModItems.SANDWICH, 1, 1, 10,
                 List.of("B", "#", "B"), Map.of("B", "#" + BREADS.location(), "#", any()));
         shaped(entries, "wrap", ModItems.WRAP, 2, 3, 10,

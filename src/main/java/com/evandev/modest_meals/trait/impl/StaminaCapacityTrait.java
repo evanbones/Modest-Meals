@@ -51,9 +51,9 @@ public record StaminaCapacityTrait(float value, int duration) implements FoodTra
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         double levels = Math.max(1, Math.round(this.value * valueMultiplier));
         return TraitTooltipHelper.formatPlusTrait("modest_meals.trait.stamina_capacity",
-                levels * CAPACITY_PER_LEVEL, (long) (this.duration * durationMultiplier));
+                levels * CAPACITY_PER_LEVEL, (long) (this.duration * durationMultiplier), tickRate);
     }
 }

@@ -22,5 +22,5 @@ public interface FoodTrait {
     /**
      * Produces a formatted tooltip line.
      */
-    Component getTooltipComponent(double valueMultiplier, double durationMultiplier);
+    Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate);
 }

@@ -21,28 +21,6 @@
       ]
     },
     {
-      "target": "abundantdelight:mossy_pancakes",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:glowing",
-          "duration": 400,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "abundantdelight:rust_mossy_pancakes",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:glowing",
-          "duration": 300,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
       "target": "abundantdelight:rabbit_sandwich",
       "traits": [
         {
@@ -78,12 +56,6 @@
         {
           "type": "modest_meals:temporary_health",
           "value": 2.0
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 200,
-          "amplifier": 0
         },
         {
           "type": "modest_meals:effect_removal",

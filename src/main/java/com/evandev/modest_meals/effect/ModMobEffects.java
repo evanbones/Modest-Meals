@@ -71,8 +71,8 @@ public class ModMobEffects {
     );
 
     // TODO: these should also probably be configurable
-    private static final double THERMAL_RESISTANCE_PER_LEVEL = 2.0;
-    private static final double ENVIRONMENT_RESISTANCE_PER_LEVEL = 0.5;
+    private static final double THERMAL_RESISTANCE_PER_LEVEL = 2.5;
+    private static final double ENVIRONMENT_RESISTANCE_PER_LEVEL = 1.0;
 
     public static final DeferredHolder<MobEffect, MobEffect> COLD_RESISTANCE = MOB_EFFECTS.register(
             "cold_resistance",

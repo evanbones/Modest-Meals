@@ -37,17 +37,6 @@
       ]
     },
     {
-      "target": "minersdelight:glow_squid",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:glowing",
-          "duration": 400,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
       "target": "minersdelight:silverfish_eggs",
       "traits": [
         {
@@ -159,12 +148,6 @@
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
           "duration": 1800
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:glowing",
-          "duration": 1200,
-          "amplifier": 0
         }
       ]
     },

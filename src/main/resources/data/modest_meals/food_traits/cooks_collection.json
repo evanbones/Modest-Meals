@@ -4,12 +4,6 @@
       "target": "cookscollection:lemonade",
       "traits": [
         {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 300,
-          "amplifier": 0
-        },
-        {
           "type": "modest_meals:effect_removal",
           "clear_all": false
         }

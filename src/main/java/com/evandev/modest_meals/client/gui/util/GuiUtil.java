@@ -2,6 +2,7 @@ package com.evandev.modest_meals.client.gui.util;
 
 import com.evandev.modest_meals.Constants;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.locale.Language;
@@ -26,10 +27,8 @@ public class GuiUtil {
 
     public static final ResourceLocation ROW = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "widget/tabs/vertical_vanilla");
     public static final ResourceLocation ROW_SELECTED = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "widget/tabs/vertical_vanilla_selected");
-
     public static final int PANEL_PADDING = 9;
     public static final int SCROLLBAR_WIDTH = 16;
-
     public static final int SCROLLBAR_EXTRA_WIDTH = SCROLLBAR_WIDTH - PANEL_PADDING;
     public static final int ROW_INSET = 4;
     public static final int LINE_H = 10;
@@ -49,6 +48,11 @@ public class GuiUtil {
     public static final int ERROR_RED = 0xFF5555;
     public static final int WHITE = 0xFFFFFF;
     private static final int TRACK_PADDING = 2;
+
+    public static float tickRate() {
+        Minecraft minecraft = Minecraft.getInstance();
+        return minecraft.level == null ? 20.0F : minecraft.level.tickRateManager().tickrate();
+    }
 
     public static void drawNinePatch(GuiGraphics context, ResourceLocation texture, int x, int y, int w, int h, int u, int v, int cornerLength, int centerLength) {
         int corcen = cornerLength + centerLength;

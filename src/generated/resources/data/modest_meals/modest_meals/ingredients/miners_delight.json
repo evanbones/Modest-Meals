@@ -50,13 +50,13 @@
       "digest_ticks": 120,
       "health": 1.0,
       "priority": 140,
-      "target": "#c:foods/raw_insect_meat"
+      "target": "#minersdelight:raw_insect_meat"
     },
     {
       "health": 2.5,
       "priority": 145,
       "stamina": 1.5,
-      "target": "#c:foods/cooked_insect_meat"
+      "target": "#minersdelight:cooked_insect_meat"
     },
     {
       "health": 1.0,

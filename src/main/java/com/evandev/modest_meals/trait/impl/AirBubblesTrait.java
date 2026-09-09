@@ -41,8 +41,8 @@ public record AirBubblesTrait(int value) implements FoodTrait {
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         int bubbles = (int) Math.round((this.value * valueMultiplier) / 30.0);
-        return TraitTooltipHelper.formatPlusTrait("modest_meals.trait.air_bubbles", bubbles > 0 ? bubbles : 1, 0);
+        return TraitTooltipHelper.formatPlusTrait("modest_meals.trait.air_bubbles", bubbles > 0 ? bubbles : 1, 0, tickRate);
     }
 }

@@ -310,7 +310,7 @@ public class TraitEditDialog extends Screen {
                     contentX + 4, boxY + 6, contentW - 8, GuiUtil.ERROR_RED);
         } else if (previewTrait != null) {
             Component tooltip = FoodItemTooltips.hasTooltipLine(previewTrait)
-                    ? previewTrait.getTooltipComponent(1.0, 1.0)
+                    ? previewTrait.getTooltipComponent(1.0, 1.0, GuiUtil.tickRate())
                     : null;
             if (tooltip != null) {
                 GuiUtil.drawTrimmed(graphics, this.font, tooltip, contentX + 4, boxY + 6, contentW - 8, GuiUtil.WHITE);
