@@ -15,9 +15,7 @@
     "modest_meals:skewer",
     "modest_meals:mochi",
     "modest_meals:ice_cream",
-    "modest_meals:popsicle",
     "modest_meals:pie",
-    "modest_meals:cake",
     "minecraft:mushroom_stew",
     "minecraft:rabbit_stew",
     "minecraft:beetroot_soup",
@@ -175,6 +173,142 @@
     },
     {
       "id": "culturaldelights:rice_ball",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:snag",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:sausages_and_mash",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:popcorn_bucket",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:corn_dog",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:hot_dog",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cheesy_chip_wrap",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cheese_cracker",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:chips_with_cheese",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cinnamon_mint_curry",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cinnamon_cracker",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:butterscotch_cinnamon_pie",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:butterscotch_cinnamon_pie_slice",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:buttered_toast",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:pickled_egg",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cheese_wheel",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:beer",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:wine",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:glow_wine",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:mead",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:apple_cider",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:mojito",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:margarita",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:bloody_mary",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:lemon_liqueur",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:butterbeer",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cola",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:tequila",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:gin",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:brandy",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:vodka",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:whiskey",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:rum",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:acid",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:vinegar",
       "required": false
     },
     {

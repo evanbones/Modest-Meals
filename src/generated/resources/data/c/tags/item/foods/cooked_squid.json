@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "culturaldelights:cooked_squid",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cooked_calamari",
+      "required": false
+    },
+    {
+      "id": "minersdelight:baked_squid",
+      "required": false
+    },
+    {
+      "id": "minersdelight:baked_tentacles",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:glow_berries",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/glow_berries_0",
+      "modest_meals:item/meal/sandwich/glow_berries_1",
+      "modest_meals:item/meal/sandwich/glow_berries_2"
+    ]
+  }
+}

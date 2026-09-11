@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:beetroot",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/beetroot_0",
+      "modest_meals:item/meal/sandwich/beetroot_1",
+      "modest_meals:item/meal/sandwich/beetroot_2"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "item": "farmersdelight:cooked_rice",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/cooked_rice_0",
+      "modest_meals:item/meal/sandwich/cooked_rice_1",
+      "modest_meals:item/meal/sandwich/cooked_rice_2"
+    ]
+  }
+}

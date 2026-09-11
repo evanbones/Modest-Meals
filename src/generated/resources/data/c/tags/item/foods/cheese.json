@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "culturaldelights:cheese_wedge",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:cheese_wedge",
+      "required": false
+    }
+  ]
+}

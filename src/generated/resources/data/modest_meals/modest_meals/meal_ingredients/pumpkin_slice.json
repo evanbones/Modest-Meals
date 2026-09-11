@@ -1,0 +1,10 @@
+{
+  "item": "farmersdelight:pumpkin_slice",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/pumpkin_0",
+      "modest_meals:item/meal/sandwich/pumpkin_1",
+      "modest_meals:item/meal/sandwich/pumpkin_2"
+    ]
+  }
+}

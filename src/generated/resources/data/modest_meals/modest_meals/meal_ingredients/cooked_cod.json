@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:cooked_cod",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/cod_0",
+      "modest_meals:item/meal/sandwich/cod_1",
+      "modest_meals:item/meal/sandwich/cod_2"
+    ]
+  }
+}

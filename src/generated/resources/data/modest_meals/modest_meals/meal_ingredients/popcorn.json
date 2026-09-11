@@ -1,0 +1,10 @@
+{
+  "item": "culturaldelights:popcorn",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/popcorn_0",
+      "modest_meals:item/meal/sandwich/popcorn_1",
+      "modest_meals:item/meal/sandwich/popcorn_2"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "item": "farmersdelight:onion",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/onion_0",
+      "modest_meals:item/meal/sandwich/onion_1",
+      "modest_meals:item/meal/sandwich/onion_2"
+    ]
+  }
+}

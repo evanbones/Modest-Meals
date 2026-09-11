@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:cooked_salmon",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/salmon_0",
+      "modest_meals:item/meal/sandwich/salmon_1",
+      "modest_meals:item/meal/sandwich/salmon_2"
+    ]
+  }
+}

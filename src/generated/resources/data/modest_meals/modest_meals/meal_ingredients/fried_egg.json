@@ -1,0 +1,10 @@
+{
+  "item": "farmersdelight:fried_egg",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/fried_egg_0",
+      "modest_meals:item/meal/sandwich/fried_egg_1",
+      "modest_meals:item/meal/sandwich/fried_egg_2"
+    ]
+  }
+}

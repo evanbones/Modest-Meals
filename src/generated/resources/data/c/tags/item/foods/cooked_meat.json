@@ -23,6 +23,10 @@
     {
       "id": "abnormals_delight:cooked_venison_shanks",
       "required": false
+    },
+    {
+      "id": "culturaldelights:cooked_sausage",
+      "required": false
     }
   ]
 }

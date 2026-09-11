@@ -283,6 +283,14 @@
       "stamina_per_nutrition": 0.6
     },
     {
+      "id": "cheese_wedge_cd",
+      "match": "culturaldelights:cheese_wedge",
+      "priority": 145,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 40.0,
+      "stamina_per_nutrition": 0.6
+    },
+    {
       "id": "crop_cave_carrot",
       "match": "#c:crops/cave_carrot",
       "priority": 145,
@@ -295,6 +303,42 @@
       "priority": 145,
       "health_per_nutrition": 0.0,
       "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_avocado",
+      "match": "#c:crops/avocado",
+      "priority": 145,
+      "health_per_nutrition": 0.2,
+      "stamina_per_nutrition": 0.8
+    },
+    {
+      "id": "crop_cucumber",
+      "match": "#c:crops/cucumber",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_eggplant",
+      "match": "#c:crops/eggplant",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_beans",
+      "match": "culturaldelights:beans",
+      "priority": 145,
+      "health_per_nutrition": 0.1,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "tofu",
+      "match": "culturaldelights:tofu",
+      "priority": 145,
+      "health_per_nutrition": 0.8,
+      "health_ticks_per_point": 35.0,
+      "stamina_per_nutrition": 0.2
     },
     {
       "id": "ice_cream",

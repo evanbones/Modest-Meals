@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:cooked_rabbit",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/rabbit_0",
+      "modest_meals:item/meal/sandwich/rabbit_1",
+      "modest_meals:item/meal/sandwich/rabbit_2"
+    ]
+  }
+}

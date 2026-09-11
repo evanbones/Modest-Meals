@@ -1,0 +1,20 @@
+{
+  "values": [
+    "modest_meals:soup",
+    "modest_meals:ramen",
+    "modest_meals:pasta",
+    "modest_meals:salad",
+    "modest_meals:curry",
+    "modest_meals:porridge",
+    "modest_meals:drink",
+    "modest_meals:jam",
+    "modest_meals:sandwich",
+    "modest_meals:wrap",
+    "modest_meals:pizza",
+    "modest_meals:sushi",
+    "modest_meals:skewer",
+    "modest_meals:mochi",
+    "modest_meals:ice_cream",
+    "modest_meals:pie"
+  ]
+}

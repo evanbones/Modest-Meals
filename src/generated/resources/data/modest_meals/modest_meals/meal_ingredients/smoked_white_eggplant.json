@@ -1,0 +1,10 @@
+{
+  "item": "culturaldelights:smoked_white_eggplant",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/eggplant_0",
+      "modest_meals:item/meal/sandwich/eggplant_1",
+      "modest_meals:item/meal/sandwich/eggplant_2"
+    ]
+  }
+}

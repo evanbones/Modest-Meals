@@ -116,11 +116,77 @@
       "time_bonus": 30
     },
     {
-      "effect": "modest_meals:cold_resistance",
+      "health": 0.5,
+      "priority": 145,
+      "stamina": 1.0,
+      "target": "#c:crops/bean"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:beans"
+    },
+    {
+      "health": 1.5,
+      "stamina": 1.5,
+      "target": "culturaldelights:bean_pod"
+    },
+    {
+      "health": 3.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:tofu"
+    },
+    {
+      "effect": "modest_meals:heat_resistance",
       "health": 0.5,
       "potency": 14,
+      "stamina": 1.5,
+      "target": "culturaldelights:mint"
+    },
+    {
+      "health": 0.5,
       "stamina": 1.0,
-      "target": "culturaldelights:ginger"
+      "target": "culturaldelights:agave",
+      "time_bonus": 40
+    },
+    {
+      "digest_ticks": 100,
+      "health": 2.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:refried_beans"
+    },
+    {
+      "health": 0.0,
+      "stamina": 0.5,
+      "target": "culturaldelights:cinnamon",
+      "time_bonus": 50
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:butter"
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:cheese_wedge"
+    },
+    {
+      "digest_ticks": 90,
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "culturaldelights:raw_sausage"
+    },
+    {
+      "health": 2.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:cooked_sausage"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 3.0,
+      "stamina": 3.0,
+      "target": "culturaldelights:creamed_corn"
     },
     {
       "digest_ticks": 120,

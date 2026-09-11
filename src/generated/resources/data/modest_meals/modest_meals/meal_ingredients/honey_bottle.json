@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:honey_bottle",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/honey_0",
+      "modest_meals:item/meal/sandwich/honey_1",
+      "modest_meals:item/meal/sandwich/honey_2"
+    ]
+  }
+}

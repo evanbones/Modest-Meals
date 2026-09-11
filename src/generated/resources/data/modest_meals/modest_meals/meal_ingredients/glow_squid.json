@@ -1,0 +1,10 @@
+{
+  "item": "culturaldelights:glow_squid",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/squid_0",
+      "modest_meals:item/meal/sandwich/squid_1",
+      "modest_meals:item/meal/sandwich/squid_2"
+    ]
+  }
+}

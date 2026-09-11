@@ -1,0 +1,10 @@
+{
+  "item": "farmersdelight:cabbage_leaf",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/cabbage_0",
+      "modest_meals:item/meal/sandwich/cabbage_1",
+      "modest_meals:item/meal/sandwich/cabbage_2"
+    ]
+  }
+}

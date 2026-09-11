@@ -1,0 +1,606 @@
+{
+  "entries": [
+    {
+      "target": "culturaldelights:hearty_salad",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:eggplant_parmesan",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:eggplant_parmesan_block",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:poached_eggplants",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:sausages_and_mash",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:spicy_curry",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:beef_burrito",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:pork_wrap",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:mutton_sandwich",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:eggplant_burger",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.5,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:cinnamon_mint_curry",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:chicken_taco",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.5,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:fish_taco",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:elote",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:empanada",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1500
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:snag",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1500
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:corn_dog",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.5,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:hot_dog",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.5,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:cheesy_chip_wrap",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1500
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:chips_with_cheese",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.5,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:cheese_cracker",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:cinnamon_cracker",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:buttered_toast",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:pickled_egg",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:popcorn_bucket",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:butterscotch_cinnamon_pie_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:avocado_toast",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:creamed_corn",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:midori_roll",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:midori_roll_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:chicken_roll",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:chicken_roll_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.5,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:calamari_roll",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 900
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 150
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:tropical_roll",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:water_breathing",
+          "duration": 300,
+          "amplifier": 0
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 150
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:egg_roll",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:rice_ball",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:exotic_roll_medley",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:beer",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 250
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:wine",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 3.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:glow_wine",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 3.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:mead",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 3.0
+        },
+        {
+          "type": "modest_meals:temporary_health",
+          "value": 2.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:apple_cider",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.5
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:butterbeer",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.5
+        },
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:cola",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:mojito",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.5
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:margarita",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.5
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:bloody_mary",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.5
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:lemon_liqueur",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.5
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:tequila",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 350
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:gin",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 350
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:brandy",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 350
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:vodka",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 350
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:whiskey",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 350
+        }
+      ]
+    },
+    {
+      "target": "culturaldelights:rum",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 4.0
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 350
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "item": "culturaldelights:cucumber",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/cucumber_0",
+      "modest_meals:item/meal/sandwich/cucumber_1",
+      "modest_meals:item/meal/sandwich/cucumber_2"
+    ]
+  }
+}

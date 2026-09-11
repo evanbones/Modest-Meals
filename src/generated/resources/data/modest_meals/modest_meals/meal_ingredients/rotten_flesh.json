@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:rotten_flesh",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/rotten_flesh_0",
+      "modest_meals:item/meal/sandwich/rotten_flesh_1",
+      "modest_meals:item/meal/sandwich/rotten_flesh_2"
+    ]
+  }
+}

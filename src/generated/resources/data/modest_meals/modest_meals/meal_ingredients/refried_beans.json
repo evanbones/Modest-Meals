@@ -1,0 +1,10 @@
+{
+  "item": "culturaldelights:refried_beans",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/refried_beans_0",
+      "modest_meals:item/meal/sandwich/refried_beans_1",
+      "modest_meals:item/meal/sandwich/refried_beans_2"
+    ]
+  }
+}

@@ -1,6 +1,10 @@
 {
   "values": [
     {
+      "id": "culturaldelights:corn_cob",
+      "required": false
+    },
+    {
       "id": "brewinandchewin:corn",
       "required": false
     }

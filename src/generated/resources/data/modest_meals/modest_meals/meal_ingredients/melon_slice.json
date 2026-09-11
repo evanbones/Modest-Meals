@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:melon_slice",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/melon_0",
+      "modest_meals:item/meal/sandwich/melon_1",
+      "modest_meals:item/meal/sandwich/melon_2"
+    ]
+  }
+}

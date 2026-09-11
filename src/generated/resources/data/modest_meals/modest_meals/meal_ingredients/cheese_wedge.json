@@ -1,0 +1,10 @@
+{
+  "item": "culturaldelights:cheese_wedge",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/cheese_0",
+      "modest_meals:item/meal/sandwich/cheese_1",
+      "modest_meals:item/meal/sandwich/cheese_2"
+    ]
+  }
+}

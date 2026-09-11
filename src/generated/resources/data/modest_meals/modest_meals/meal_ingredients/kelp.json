@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:kelp",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/kelp_0",
+      "modest_meals:item/meal/sandwich/kelp_1",
+      "modest_meals:item/meal/sandwich/kelp_2"
+    ]
+  }
+}

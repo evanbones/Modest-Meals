@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "culturaldelights:squid",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:glow_squid",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:raw_calamari",
+      "required": false
+    },
+    {
+      "id": "minersdelight:squid",
+      "required": false
+    },
+    {
+      "id": "minersdelight:glow_squid",
+      "required": false
+    },
+    {
+      "id": "minersdelight:tentacles",
+      "required": false
+    }
+  ]
+}

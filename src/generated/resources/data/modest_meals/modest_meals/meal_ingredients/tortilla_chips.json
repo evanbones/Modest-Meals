@@ -1,0 +1,10 @@
+{
+  "item": "culturaldelights:tortilla_chips",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/tortilla_chips_0",
+      "modest_meals:item/meal/sandwich/tortilla_chips_1",
+      "modest_meals:item/meal/sandwich/tortilla_chips_2"
+    ]
+  }
+}

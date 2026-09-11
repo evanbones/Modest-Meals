@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:sweet_berries",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/sweet_berries_0",
+      "modest_meals:item/meal/sandwich/sweet_berries_1",
+      "modest_meals:item/meal/sandwich/sweet_berries_2"
+    ]
+  }
+}

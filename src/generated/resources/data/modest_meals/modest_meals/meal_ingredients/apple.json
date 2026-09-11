@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:apple",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/apple_0",
+      "modest_meals:item/meal/sandwich/apple_1",
+      "modest_meals:item/meal/sandwich/apple_2"
+    ]
+  }
+}

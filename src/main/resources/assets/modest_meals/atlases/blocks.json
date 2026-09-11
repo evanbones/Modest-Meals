@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "item/meal",
+      "prefix": "item/meal/"
+    }
+  ]
+}
