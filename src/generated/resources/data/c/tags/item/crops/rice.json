@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "#c:grain/rice",
+      "required": false
+    },
+    {
+      "id": "#c:foods/rice",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_rice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:rice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cooked_rice",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:wild_rice",
+      "required": false
+    }
+  ]
+}

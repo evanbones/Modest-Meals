@@ -1,15 +1,14 @@
 package com.evandev.modest_meals.compat.emi;
 
-import com.evandev.modest_meals.food.ingredient.IngredientProfile;
-import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
-import com.evandev.modest_meals.food.ingredient.MealEffect;
-import com.evandev.modest_meals.food.ingredient.MealEffectManager;
+import com.evandev.modest_meals.food.ingredient.*;
+import com.evandev.modest_meals.food.meal.MealType;
 import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.*;
 
@@ -28,6 +27,25 @@ public final class MealEmiIngredients {
                 .sorted(Comparator.comparingInt(MealEmiIngredients::interest))
                 .map(EmiStack::of)
                 .toList();
+    }
+
+    public static List<EmiStack> poolFor(MealType type, List<EmiStack> defaultPool) {
+        if (!type.requiresSupportedIngredients()) {
+            return defaultPool;
+        }
+        return defaultPool.stream()
+                .filter(stack -> MealIngredientManager.isSupported(type.id(), stack.getItemStack()))
+                .toList();
+    }
+
+    public static List<EmiStack> unsupportedPoolFor(MealType type, List<EmiStack> defaultPool) {
+        List<EmiStack> list = defaultPool.stream()
+                .filter(stack -> !MealIngredientManager.isSupported(type.id(), stack.getItemStack()))
+                .toList();
+        if (list.isEmpty()) {
+            return List.of(EmiStack.of(Items.ROTTEN_FLESH));
+        }
+        return list;
     }
 
     private static int interest(ItemStack stack) {

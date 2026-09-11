@@ -1,0 +1,26 @@
+{
+  "values": [
+    "minecraft:water_bucket",
+    "minecraft:potion",
+    {
+      "id": "#c:drinks/water",
+      "required": false
+    },
+    {
+      "id": "#c:foods/broth",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/milk",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:bone_broth",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:milk_bottle",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "values": [
+    "minecraft:beetroot",
+    {
+      "id": "farmersdelight:cabbage",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cabbage_leaf",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cut_cabbage",
+      "required": false
+    }
+  ]
+}

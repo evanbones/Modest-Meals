@@ -1,0 +1,24 @@
+{
+  "values": [
+    "minecraft:water_bucket",
+    "minecraft:potion",
+    "minecraft:sugar",
+    "minecraft:honey_bottle",
+    {
+      "id": "#c:drinks/water",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/milk",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/honey",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:milk_bottle",
+      "required": false
+    }
+  ]
+}

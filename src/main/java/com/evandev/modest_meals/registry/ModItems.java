@@ -36,9 +36,8 @@ public class ModItems {
     public static final Supplier<Item> SKEWER = registerMeal("skewer");
     public static final Supplier<Item> MOCHI = registerMeal("mochi");
     public static final Supplier<Item> ICE_CREAM = registerMeal("ice_cream");
-    public static final Supplier<Item> POPSICLE = registerMeal("popsicle");
     public static final Supplier<Item> PIE = registerMeal("pie");
-    public static final Supplier<Item> CAKE = registerMeal("cake");
+    // public static final Supplier<Item> CAKE = registerMeal("cake");
 
     private static Supplier<Item> registerBowlMeal(String name) {
         return registerMeal(name,

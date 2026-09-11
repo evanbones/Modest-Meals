@@ -2,10 +2,12 @@ package com.evandev.modest_meals.food.meal;
 
 import com.evandev.modest_meals.component.MealContents;
 import com.evandev.modest_meals.component.ModDataComponents;
-import com.evandev.modest_meals.food.ingredient.IngredientProfile;
-import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
-import com.evandev.modest_meals.food.ingredient.MealEffect;
-import com.evandev.modest_meals.food.ingredient.MealEffectManager;
+import com.evandev.modest_meals.food.FoodValues;
+import com.evandev.modest_meals.food.ingredient.*;
+import com.evandev.modest_meals.trait.FoodTrait;
+import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
+import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
+import com.evandev.modest_meals.trait.impl.TemporaryHealthTrait;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -23,27 +25,37 @@ public final class MealAssembler {
      * Work out what a meal made from these ingredients does.
      */
     public static Optional<MealContents> compute(List<ItemStack> ingredients, List<ItemStack> base) {
+        return compute(ingredients, base, false);
+    }
+
+    public static Optional<MealContents> compute(List<ItemStack> ingredients, List<ItemStack> base, boolean dubious) {
         MealFormula formula = MealFormulaManager.get();
 
         List<Holder<Item>> used = new ArrayList<>();
         List<IngredientProfile> profiles = new ArrayList<>();
+        List<ResourceLocation> ingredientIds = new ArrayList<>();
         for (ItemStack stack : ingredients) {
             if (stack == null || stack.isEmpty()) {
                 continue;
             }
             Optional<IngredientProfile> profile = IngredientProfileManager.resolve(stack);
             if (profile.isEmpty()) {
-                return Optional.empty();
+                if (!dubious) {
+                    return Optional.empty();
+                }
+            } else {
+                profiles.add(profile.get());
             }
-            profiles.add(profile.get());
             used.add(stack.getItem().builtInRegistryHolder());
+            ingredientIds.add(BuiltInRegistries.ITEM.getKey(stack.getItem()));
         }
-        if (profiles.isEmpty()) {
+        if (used.isEmpty() || (profiles.isEmpty() && !dubious)) {
             return Optional.empty();
         }
 
         List<Holder<Item>> baseUsed = new ArrayList<>();
         List<IngredientProfile> baseProfiles = new ArrayList<>();
+        List<ResourceLocation> baseIds = new ArrayList<>();
         for (ItemStack stack : base) {
             if (stack == null || stack.isEmpty()) {
                 continue;
@@ -51,6 +63,7 @@ public final class MealAssembler {
             IngredientProfileManager.resolve(stack).ifPresent(profile -> {
                 baseProfiles.add(profile);
                 baseUsed.add(stack.getItem().builtInRegistryHolder());
+                baseIds.add(BuiltInRegistries.ITEM.getKey(stack.getItem()));
             });
         }
 
@@ -58,14 +71,35 @@ public final class MealAssembler {
         float stamina = 0.0F;
         int digestTicks = 0;
         float temporaryHealth = 0.0F;
-        for (IngredientProfile profile : concat(profiles, baseProfiles)) {
-            health += profile.healthOrZero();
-            stamina += profile.staminaOrZero();
-            digestTicks += profile.digestTicksOrZero();
-            temporaryHealth += profile.temporaryHealth();
+
+        if (dubious) {
+            for (ItemStack stack : concat(ingredients, base)) {
+                if (stack == null || stack.isEmpty()) {
+                    continue;
+                }
+                for (FoodTrait trait : FoodValues.effectiveTraits(stack)) {
+                    if (trait instanceof HealthAdditionTrait(float value, int duration)) {
+                        health += value;
+                        digestTicks += duration;
+                    } else if (trait instanceof StaminaAdditionTrait(float value)) {
+                        stamina += value;
+                    } else if (trait instanceof TemporaryHealthTrait(float value)) {
+                        temporaryHealth += value;
+                    }
+                }
+            }
+        } else {
+            for (IngredientProfile profile : concat(profiles, baseProfiles)) {
+                health += profile.healthOrZero();
+                stamina += profile.staminaOrZero();
+                digestTicks += profile.digestTicksOrZero();
+                temporaryHealth += profile.temporaryHealth();
+            }
         }
 
-        EffectResult effect = computeEffect(formula, used, profiles, baseUsed, baseProfiles);
+        EffectResult effect = dubious
+                ? EffectResult.NONE
+                : computeEffect(formula, used, profiles, baseUsed, baseProfiles);
 
         MealContents contents = new MealContents(
                 health,
@@ -74,7 +108,10 @@ public final class MealAssembler {
                 temporaryHealth,
                 effect.effect(),
                 effect.amplifier(),
-                effect.durationTicks()
+                effect.durationTicks(),
+                ingredientIds,
+                baseIds,
+                dubious
         );
         return contents.isMeaningful() ? Optional.of(contents) : Optional.empty();
     }
@@ -91,7 +128,26 @@ public final class MealAssembler {
         if (count < type.minIngredients() || count > type.maxIngredients()) {
             return Optional.empty();
         }
-        return compute(ingredients, base).map(contents -> {
+
+        for (MealType.ItemOverride override : type.itemOverrides()) {
+            if (override.matches(ingredients)) {
+                return BuiltInRegistries.ITEM.getOptional(override.result())
+                        .map(item -> new ItemStack(item, override.count()));
+            }
+        }
+
+        boolean hasUnsupported = false;
+        if (type.requiresSupportedIngredients()) {
+            for (ItemStack ingredient : ingredients) {
+                if (ingredient != null && !ingredient.isEmpty()
+                        && !MealIngredientManager.isSupported(type.id(), ingredient)) {
+                    hasUnsupported = true;
+                    break;
+                }
+            }
+        }
+
+        return compute(ingredients, base, hasUnsupported).map(contents -> {
             ItemStack result = new ItemStack(resultItem.get());
             result.set(ModDataComponents.MEAL_CONTENTS.get(), contents);
             return result;
@@ -137,7 +193,7 @@ public final class MealAssembler {
 
         int seconds = axis.baseSeconds() * contributing
                 + formula.secondsPerIngredient() * profiles.size()
-                + bonusSeconds(formula, concatItems(used, baseUsed), concat(profiles, baseProfiles));
+                + bonusSeconds(concat(used, baseUsed), concat(profiles, baseProfiles));
 
         return new EffectResult(Optional.of(axisId), amplifier.get(), seconds * 20);
     }
@@ -145,7 +201,7 @@ public final class MealAssembler {
     /**
      * Duration from time-boosting ingredients.
      */
-    private static int bonusSeconds(MealFormula formula, List<Holder<Item>> used, List<IngredientProfile> profiles) {
+    private static int bonusSeconds(List<Holder<Item>> used, List<IngredientProfile> profiles) {
         Set<ResourceLocation> counted = new HashSet<>();
         int bonus = 0;
         for (int i = 0; i < profiles.size(); i++) {
@@ -159,14 +215,9 @@ public final class MealAssembler {
         return bonus;
     }
 
-    private static List<Holder<Item>> concatItems(List<Holder<Item>> first, List<Holder<Item>> second) {
-        List<Holder<Item>> all = new ArrayList<>(first);
-        all.addAll(second);
-        return all;
-    }
 
-    private static List<IngredientProfile> concat(List<IngredientProfile> first, List<IngredientProfile> second) {
-        List<IngredientProfile> all = new ArrayList<>(first);
+    private static <T> List<T> concat(List<T> first, List<T> second) {
+        List<T> all = new ArrayList<>(first);
         all.addAll(second);
         return all;
     }

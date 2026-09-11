@@ -7,7 +7,7 @@
   "shape": {
     "key": {
       "#": "modest_meals:any_ingredient",
-      "O": "farmersdelight:pie_crust",
+      "O": "#c:foods/pie_crust",
       "S": "minecraft:sugar"
     },
     "pattern": [

@@ -6,12 +6,12 @@
   "shape": {
     "key": {
       "#": "modest_meals:any_ingredient",
-      "K": "minecraft:dried_kelp"
+      "K": "minecraft:dried_kelp",
+      "R": "#c:crops/rice"
     },
     "pattern": [
-      "K",
-      "#",
-      "#"
+      "K#",
+      "R#"
     ]
   }
 }

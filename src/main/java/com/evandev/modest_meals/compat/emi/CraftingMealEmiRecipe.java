@@ -1,11 +1,14 @@
 package com.evandev.modest_meals.compat.emi;
 
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
+import com.evandev.modest_meals.item.MealItem;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.SlotWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,14 +22,30 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
     private final boolean shapeless;
 
     private CraftingMealEmiRecipe(MealType type, EmiIngredient any, List<EmiIngredient> slots) {
-        super(MealEmiCategories.MEAL_CRAFTING, syntheticId("meal_crafting", type), type, any, slots);
+        this(type, any, slots, syntheticId("meal_crafting", type),
+                type.resolveItem().map(EmiStack::of).orElse(EmiStack.EMPTY));
+    }
+
+    private CraftingMealEmiRecipe(MealType type, EmiIngredient any, List<EmiIngredient> slots, ResourceLocation id, EmiStack output) {
+        super(MealEmiCategories.MEAL_CRAFTING, id, type, any, slots, output);
         this.shapeless = !type.isShaped();
     }
 
     public static CraftingMealEmiRecipe of(MealType type, List<EmiStack> pool) {
-        EmiIngredient any = pool.isEmpty() ? EmiStack.EMPTY : EmiIngredient.of(pool);
+        List<EmiStack> typePool = MealEmiIngredients.poolFor(type, pool);
+        EmiIngredient any = typePool.isEmpty() ? EmiStack.EMPTY : EmiIngredient.of(typePool);
         return new CraftingMealEmiRecipe(type, any,
                 type.isShaped() ? shapedSlots(type, any) : flatSlots(type, any, SLOTS));
+    }
+
+    public static CraftingMealEmiRecipe dubiousOf(MealType type, List<EmiStack> pool) {
+        List<EmiStack> unsupported = MealEmiIngredients.unsupportedPoolFor(type, pool);
+        EmiIngredient any = unsupported.isEmpty() ? EmiStack.EMPTY : EmiIngredient.of(unsupported);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID,
+                "/meal_crafting_dubious/" + type.id().getNamespace() + "/" + type.id().getPath());
+        EmiStack output = type.resolveItem().map(item -> EmiStack.of(MealItem.makeDubious(item))).orElse(EmiStack.EMPTY);
+        return new CraftingMealEmiRecipe(type, any,
+                type.isShaped() ? shapedSlots(type, any) : flatSlots(type, any, SLOTS), id, output);
     }
 
     private static List<EmiIngredient> shapedSlots(MealType type, EmiIngredient any) {
@@ -70,6 +89,5 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
 
         SlotWidget result = widgets.addSlot(output, 92, 14).large(true).recipeContext(this);
         result.appendTooltip(ingredientCountLine());
-        decorateOutput(result);
     }
 }

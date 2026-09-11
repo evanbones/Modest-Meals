@@ -1,4 +1,11 @@
 {
+  "base": [
+    {
+      "ingredient": {
+        "tag": "c:foods/soup_base"
+      }
+    }
+  ],
   "container": "minecraft:bowl",
   "id": "modest_meals:soup",
   "item": "modest_meals:soup",

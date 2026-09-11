@@ -3,6 +3,7 @@ package com.evandev.modest_meals.datagen;
 import com.evandev.modest_meals.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagsProvider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -22,10 +23,11 @@ public class ModDataGenerators {
         generator.addProvider(server, new MealTypeProvider(output));
         generator.addProvider(server, new MealFormulaProvider(output));
         generator.addProvider(server, new IngredientProfileProvider(output));
+        generator.addProvider(server, new MealIngredientProvider(output));
         generator.addProvider(server, new MealRecipeProvider(output));
 
         generator.addProvider(server, new ModItemTagProvider(output, event.getLookupProvider(),
-                CompletableFuture.completedFuture(net.minecraft.data.tags.TagsProvider.TagLookup.empty()),
+                CompletableFuture.completedFuture(TagsProvider.TagLookup.empty()),
                 event.getExistingFileHelper()));
 
         generator.addProvider(event.includeClient(),

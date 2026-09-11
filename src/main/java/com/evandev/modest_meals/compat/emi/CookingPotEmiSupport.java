@@ -48,6 +48,10 @@ public final class CookingPotEmiSupport {
             backing.add(holder.id());
             registry.addRecipe(CookingMealEmiRecipe.of(
                     type.get(), cooking.getCookTime(), cooking.getExperience(), pool));
+            if (type.get().requiresSupportedIngredients()) {
+                registry.addRecipe(CookingMealEmiRecipe.dubiousOf(
+                        type.get(), cooking.getCookTime(), cooking.getExperience(), pool));
+            }
         }
 
         if (!backing.isEmpty()) {

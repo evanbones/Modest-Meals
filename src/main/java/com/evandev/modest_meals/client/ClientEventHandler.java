@@ -3,15 +3,20 @@ package com.evandev.modest_meals.client;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.client.gui.FoodEditorScreen;
 import com.evandev.modest_meals.client.hud.TextureHelper;
+import com.evandev.modest_meals.client.model.DynamicMealBakedModel;
 import com.evandev.modest_meals.client.tooltip.FoodItemTooltips;
 import com.evandev.modest_meals.compat.raised.RaisedCompat;
 import com.evandev.modest_meals.compat.raised.RaisedLayerSync;
 import com.evandev.modest_meals.config.HudLayoutOption;
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.registry.ModItems;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackLocationInfo;
@@ -204,6 +209,20 @@ public class ClientEventHandler {
             } catch (Exception ignored) {
             }
         });
+    }
+
+    @SubscribeEvent
+    public static void onModifyBakingResult(ModelEvent.ModifyBakingResult event) {
+        for (var mealSupplier : ModItems.CREATIVE_TAB_ITEMS) {
+            ResourceLocation itemLoc = BuiltInRegistries.ITEM.getKey(mealSupplier.get());
+            ModelResourceLocation modelLoc =
+                    ModelResourceLocation.inventory(itemLoc);
+            BakedModel original = event.getModels().get(modelLoc);
+            if (original != null) {
+                event.getModels().put(modelLoc,
+                        new DynamicMealBakedModel(original, itemLoc));
+            }
+        }
     }
 
     public static class GameEvents {

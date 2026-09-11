@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
+import java.util.function.ToDoubleFunction;
 
 public class PreviewFood {
 
@@ -18,7 +19,7 @@ public class PreviewFood {
         return scaled(player, FoodValues::staminaLevels);
     }
 
-    private static float scaled(Player player, java.util.function.ToDoubleFunction<ItemStack> value) {
+    private static float scaled(Player player, ToDoubleFunction<ItemStack> value) {
         ItemStack held = FoodValues.resolveHeldFood(player);
         if (!held.isEmpty()) {
             return (float) value.applyAsDouble(held);

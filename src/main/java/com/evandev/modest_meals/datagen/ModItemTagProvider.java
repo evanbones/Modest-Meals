@@ -11,6 +11,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
@@ -42,9 +44,24 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private static final TagKey<Item> MANGOES = itemTag("c", "crops/mango");
     private static final TagKey<Item> PEARS = itemTag("c", "foods/pear");
     private static final TagKey<Item> FRUITS = itemTag("c", "foods/fruit");
+    private static final TagKey<Item> ICE_CREAMS = itemTag("c", "foods/ice_cream");
+    private static final TagKey<Item> PIES = itemTag("c", "foods/pie");
+    private static final TagKey<Item> CHEESES = itemTag("c", "foods/cheese");
+    private static final TagKey<Item> RAW_SAUSAGES = itemTag("c", "foods/raw_sausage");
+    private static final TagKey<Item> COOKED_SAUSAGES = itemTag("c", "foods/cooked_sausage");
+    private static final TagKey<Item> RAW_SQUID = itemTag("c", "foods/raw_squid");
+    private static final TagKey<Item> COOKED_SQUID = itemTag("c", "foods/cooked_squid");
+    private static final TagKey<Item> RAW_FISH = itemTag("c", "foods/raw_fish");
+    private static final TagKey<Item> COOKED_FISH = itemTag("c", "foods/cooked_fish");
+    private static final TagKey<Item> BEANS = itemTag("c", "crops/bean");
+    private static final TagKey<Item> RICES = itemTag("c", "crops/rice");
+    private static final TagKey<Item> LEAFY_GREENS = itemTag("c", "foods/leafy_green");
+    private static final TagKey<Item> SOUP_BASES = itemTag("c", "foods/soup_base");
+    private static final TagKey<Item> DRINK_BASES = itemTag("c", "drinks/drink_base");
+    private static final TagKey<Item> PIE_CRUSTS = itemTag("c", "foods/pie_crust");
 
     public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries,
-                              CompletableFuture<TagLookup<net.minecraft.world.level.block.Block>> blockTags,
+                              CompletableFuture<TagLookup<Block>> blockTags,
                               ExistingFileHelper existingFileHelper) {
         super(output, registries, blockTags, Constants.MOD_ID, existingFileHelper);
     }
@@ -79,8 +96,22 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider registries) {
+        modestMealsTags();
         notAnIngredient();
         seedConventionFoods();
+    }
+
+    private void modestMealsTags() {
+        var foods = tag(Tags.Items.FOODS);
+        ModItems.CREATIVE_TAB_ITEMS.forEach(item -> foods.add(item.get()));
+
+        tag(Tags.Items.FOODS_SOUP).add(ModItems.SOUP.get(), ModItems.RAMEN.get());
+        tag(Tags.Items.FOODS_PIE).add(ModItems.PIE.get());
+        // tag(CAKES).add(ModItems.CAKE.get());
+        tag(ICE_CREAMS).add(ModItems.ICE_CREAM.get());
+
+        tag(Tags.Items.DRINKS).add(ModItems.DRINK.get());
+        tag(Tags.Items.DRINK_CONTAINING_BOTTLE).add(ModItems.DRINK.get());
     }
 
     private void notAnIngredient() {
@@ -139,7 +170,41 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "tropical_roll",
                 "calamari_roll",
                 "egg_roll",
-                "rice_ball");
+                "rice_ball",
+                "snag",
+                "sausages_and_mash",
+                "popcorn_bucket",
+                "corn_dog",
+                "hot_dog",
+                "cheesy_chip_wrap",
+                "cheese_cracker",
+                "chips_with_cheese",
+                "cinnamon_mint_curry",
+                "cinnamon_cracker",
+                "butterscotch_cinnamon_pie",
+                "butterscotch_cinnamon_pie_slice",
+                "buttered_toast",
+                "pickled_egg",
+                "cheese_wheel",
+                "beer",
+                "wine",
+                "glow_wine",
+                "mead",
+                "apple_cider",
+                "mojito",
+                "margarita",
+                "bloody_mary",
+                "lemon_liqueur",
+                "butterbeer",
+                "cola",
+                "tequila",
+                "gin",
+                "brandy",
+                "vodka",
+                "whiskey",
+                "rum",
+                "acid",
+                "vinegar");
 
         notAnIngredient.addOptionalTag(convention("foods/ice_cream"));
         notAnIngredient.addOptionalTag(convention("foods/cake"));
@@ -372,6 +437,40 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptionalTags(rawMeats, "c", "foods/raw_venison", "foods/raw_horse", "foods/raw_duck");
         addOptional(rawMeats, ABNORMALS_DELIGHT, "duck_fillet", "venison_shanks");
 
+        tag(PIES).addOptional(cd("butterscotch_cinnamon_pie_slice"));
+
+        var cheeses = tag(CHEESES);
+        cheeses.addOptional(cd("cheese_wedge"));
+        addOptional(cheeses, BREWIN_AND_CHEWIN, "cheese_wedge");
+        tag(itemTag(BREWIN_AND_CHEWIN, "foods/cheese_wedge")).addOptional(cd("cheese_wedge"));
+
+        var rawSausages = tag(RAW_SAUSAGES);
+        rawSausages.addOptional(cd("raw_sausage"));
+        addOptional(rawSausages, MY_NETHERS_DELIGHT, "raw_sausage");
+
+        var cookedSausages = tag(COOKED_SAUSAGES);
+        cookedSausages.addOptional(cd("cooked_sausage"));
+        addOptional(cookedSausages, MY_NETHERS_DELIGHT, "cooked_sausage");
+        cookedMeats.addOptional(cd("cooked_sausage"));
+
+        var rawSquid = tag(RAW_SQUID);
+        addOptional(rawSquid, CULTURAL_DELIGHTS, "squid", "glow_squid", "raw_calamari");
+        addOptional(rawSquid, MINERS_DELIGHT, "squid", "glow_squid", "tentacles");
+
+        var cookedSquid = tag(COOKED_SQUID);
+        addOptional(cookedSquid, CULTURAL_DELIGHTS, "cooked_squid", "cooked_calamari");
+        addOptional(cookedSquid, MINERS_DELIGHT, "baked_squid", "baked_tentacles");
+
+        var rawFish = tag(RAW_FISH);
+        rawFish.addOptionalTag(convention("foods/raw_squid"));
+
+        var cookedFish = tag(COOKED_FISH);
+        cookedFish.addOptionalTag(convention("foods/cooked_squid"));
+
+        var beans = tag(BEANS);
+        beans.addOptional(cd("beans"));
+
+        addOptional(tag(CORN), CULTURAL_DELIGHTS, "corn_cob");
         addOptional(tag(CORN), BREWIN_AND_CHEWIN, "corn");
         addOptional(tag(LEMONS), COOKS_COLLECTION, "lemon");
         addOptional(tag(MANGOES), NEAPOLITAN, "mango");
@@ -380,5 +479,35 @@ public class ModItemTagProvider extends ItemTagsProvider {
         var fruits = tag(FRUITS);
         addOptional(fruits, COOKS_COLLECTION, "lemon");
         addOptional(fruits, NEAPOLITAN, "mango", "dried_mango");
+
+        var rices = tag(RICES);
+        rices.addOptionalTag(convention("grain/rice"));
+        rices.addOptionalTag(convention("foods/rice"));
+        rices.addOptionalTag(convention("foods/cooked_rice"));
+        addOptional(rices, FARMERS_DELIGHT, "rice", "cooked_rice");
+        addOptional(rices, CULTURAL_DELIGHTS, "wild_rice");
+
+        var leafyGreens = tag(LEAFY_GREENS);
+        leafyGreens.add(Items.BEETROOT);
+        addOptional(leafyGreens, FARMERS_DELIGHT, "cabbage", "cabbage_leaf");
+        addOptional(leafyGreens, CULTURAL_DELIGHTS, "cut_cabbage");
+
+        var soupBases = tag(SOUP_BASES);
+        soupBases.add(Items.WATER_BUCKET, Items.POTION);
+        soupBases.addOptionalTag(convention("drinks/water"));
+        soupBases.addOptionalTag(convention("foods/broth"));
+        soupBases.addOptionalTag(convention("drinks/milk"));
+        addOptional(soupBases, FARMERS_DELIGHT, "bone_broth", "milk_bottle");
+
+        var drinkBases = tag(DRINK_BASES);
+        drinkBases.add(Items.WATER_BUCKET, Items.POTION, Items.SUGAR, Items.HONEY_BOTTLE);
+        drinkBases.addOptionalTag(convention("drinks/water"));
+        drinkBases.addOptionalTag(convention("drinks/milk"));
+        drinkBases.addOptionalTag(convention("drinks/honey"));
+        addOptional(drinkBases, FARMERS_DELIGHT, "milk_bottle");
+
+        var pieCrusts = tag(PIE_CRUSTS);
+        addOptional(pieCrusts, FARMERS_DELIGHT, "pie_crust");
+        pieCrusts.addOptionalTag(convention("foods/dough"));
     }
 }

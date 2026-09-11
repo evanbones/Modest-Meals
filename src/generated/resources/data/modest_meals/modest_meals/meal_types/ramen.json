@@ -2,12 +2,12 @@
   "base": [
     {
       "ingredient": {
-        "item": "minecraft:bowl"
+        "tag": "c:foods/pasta"
       }
     },
     {
       "ingredient": {
-        "tag": "c:foods/pasta"
+        "tag": "c:foods/soup_base"
       }
     }
   ],
@@ -15,6 +15,6 @@
   "id": "modest_meals:ramen",
   "item": "modest_meals:ramen",
   "max_ingredients": 4,
-  "min_ingredients": 2,
-  "priority": 20
+  "priority": 20,
+  "station": "cooking_pot"
 }

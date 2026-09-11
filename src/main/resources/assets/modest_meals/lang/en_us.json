@@ -403,8 +403,6 @@
   "emi.modest_meals.ingredient_count.range": "Uses %1$s-%2$s ingredients",
   "emi.modest_meals.ingredient_count.exact": "Uses exactly %s",
   "emi.modest_meals.pool_size": "%s items qualify",
-  "emi.modest_meals.effect_rule": "Ingredients with effects must all share one. The base does not count.",
-  "emi.modest_meals.result_varies": "Health, stamina and effect come from the ingredients used.",
   "emi.modest_meals.container": "Served in this",
   "emi.modest_meals.ingredient.health": "Health %s",
   "emi.modest_meals.ingredient.stamina": "Stamina %s",

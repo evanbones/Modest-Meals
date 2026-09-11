@@ -28,8 +28,14 @@ public record MealType(
         int minIngredients,
         int maxIngredients,
         Optional<ResourceLocation> container,
-        int priority
+        int priority,
+        boolean requiresSupportedIngredients,
+        Optional<ResourceLocation> dubiousSprite,
+        Optional<BaseSprites> baseSprites,
+        List<SpecialSprite> specialSprites,
+        List<ItemOverride> itemOverrides
 ) {
+
     public static final ResourceLocation ANY_INGREDIENT =
             ResourceLocation.fromNamespaceAndPath("modest_meals", "any_ingredient");
 
@@ -42,8 +48,47 @@ public record MealType(
             Codec.INT.optionalFieldOf("min_ingredients", 1).forGetter(MealType::minIngredients),
             Codec.INT.optionalFieldOf("max_ingredients", 5).forGetter(MealType::maxIngredients),
             ResourceLocation.CODEC.optionalFieldOf("container").forGetter(MealType::container),
-            Codec.INT.optionalFieldOf("priority", 0).forGetter(MealType::priority)
+            Codec.INT.optionalFieldOf("priority", 0).forGetter(MealType::priority),
+            Codec.BOOL.optionalFieldOf("requires_supported_ingredients", false).forGetter(MealType::requiresSupportedIngredients),
+            ResourceLocation.CODEC.optionalFieldOf("dubious_sprite").forGetter(MealType::dubiousSprite),
+            BaseSprites.CODEC.optionalFieldOf("base_sprites").forGetter(MealType::baseSprites),
+            SpecialSprite.CODEC.listOf().optionalFieldOf("special_sprites", List.of()).forGetter(MealType::specialSprites),
+            ItemOverride.CODEC.listOf().optionalFieldOf("item_overrides", List.of()).forGetter(MealType::itemOverrides)
     ).apply(instance, MealType::new));
+
+    public MealType(
+            ResourceLocation id,
+            ResourceLocation item,
+            Station station,
+            List<BaseEntry> base,
+            Optional<Shape> shape,
+            int minIngredients,
+            int maxIngredients,
+            Optional<ResourceLocation> container,
+            int priority
+    ) {
+        this(id, item, station, base, shape, minIngredients, maxIngredients, container, priority,
+                false, Optional.empty(), Optional.empty(), List.of(), List.of());
+    }
+
+    public MealType(
+            ResourceLocation id,
+            ResourceLocation item,
+            Station station,
+            List<BaseEntry> base,
+            Optional<Shape> shape,
+            int minIngredients,
+            int maxIngredients,
+            Optional<ResourceLocation> container,
+            int priority,
+            boolean requiresSupportedIngredients,
+            Optional<ResourceLocation> dubiousSprite,
+            Optional<BaseSprites> baseSprites,
+            List<SpecialSprite> specialSprites
+    ) {
+        this(id, item, station, base, shape, minIngredients, maxIngredients, container, priority,
+                requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, List.of());
+    }
 
     private static int indexMatching(List<ItemStack> stacks, Ingredient ingredient) {
         for (int i = 0; i < stacks.size(); i++) {
@@ -161,6 +206,94 @@ public record MealType(
                         Registries.ITEM, ResourceLocation.parse(value.substring(1)))));
             }
             return BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(value)).map(Ingredient::of);
+        }
+    }
+
+    public record BaseSprites(
+            Optional<ResourceLocation> bottom,
+            Optional<ResourceLocation> top,
+            Optional<Integer> layerSlots
+    ) {
+        public static final Codec<BaseSprites> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ResourceLocation.CODEC.optionalFieldOf("bottom").forGetter(BaseSprites::bottom),
+                ResourceLocation.CODEC.optionalFieldOf("top").forGetter(BaseSprites::top),
+                Codec.INT.optionalFieldOf("layer_slots").forGetter(BaseSprites::layerSlots)
+        ).apply(instance, BaseSprites::new));
+
+        public BaseSprites(ResourceLocation bottom, ResourceLocation top) {
+            this(Optional.of(bottom), Optional.of(top), Optional.empty());
+        }
+
+        public BaseSprites(ResourceLocation bottom, ResourceLocation top, int layerSlots) {
+            this(Optional.of(bottom), Optional.of(top), Optional.of(layerSlots));
+        }
+
+        public int getEffectiveLayerSlots(int fallback) {
+            return layerSlots.orElse(fallback);
+        }
+    }
+
+    public record SpecialSprite(ResourceLocation sprite, List<ResourceLocation> ingredients) {
+        public static final Codec<SpecialSprite> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ResourceLocation.CODEC.fieldOf("sprite").forGetter(SpecialSprite::sprite),
+                ResourceLocation.CODEC.listOf().fieldOf("ingredients").forGetter(SpecialSprite::ingredients)
+        ).apply(instance, SpecialSprite::new));
+
+        public boolean matches(List<ResourceLocation> mealIngredients) {
+            if (mealIngredients.size() != ingredients.size()) {
+                return false;
+            }
+            List<String> sortedRequired = ingredients.stream().map(ResourceLocation::toString).sorted().toList();
+            List<String> sortedGiven = mealIngredients.stream().map(ResourceLocation::toString).sorted().toList();
+            return sortedRequired.equals(sortedGiven);
+        }
+    }
+
+    public record ItemOverride(ResourceLocation result, int count, List<String> ingredients) {
+        public static final Codec<ItemOverride> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ResourceLocation.CODEC.fieldOf("result").forGetter(ItemOverride::result),
+                Codec.INT.optionalFieldOf("count", 1).forGetter(ItemOverride::count),
+                Codec.STRING.listOf().fieldOf("ingredients").forGetter(ItemOverride::ingredients)
+        ).apply(instance, ItemOverride::new));
+
+        public ItemOverride(ResourceLocation result, List<String> ingredients) {
+            this(result, 1, ingredients);
+        }
+
+        private static Ingredient parseIngredient(String spec) {
+            if (spec.startsWith("#")) {
+                return Ingredient.of(TagKey.create(Registries.ITEM, ResourceLocation.parse(spec.substring(1))));
+            }
+            return BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(spec))
+                    .map(Ingredient::of)
+                    .orElse(Ingredient.EMPTY);
+        }
+
+        public boolean matches(List<ItemStack> mealIngredients) {
+            List<ItemStack> nonNull = mealIngredients.stream()
+                    .filter(stack -> stack != null && !stack.isEmpty())
+                    .toList();
+            if (nonNull.size() != ingredients.size()) {
+                return false;
+            }
+            List<Ingredient> matchers = ingredients.stream()
+                    .map(ItemOverride::parseIngredient)
+                    .toList();
+            List<ItemStack> remaining = new ArrayList<>(nonNull);
+            for (Ingredient matcher : matchers) {
+                int found = -1;
+                for (int i = 0; i < remaining.size(); i++) {
+                    if (matcher.test(remaining.get(i))) {
+                        found = i;
+                        break;
+                    }
+                }
+                if (found < 0) {
+                    return false;
+                }
+                remaining.remove(found);
+            }
+            return true;
         }
     }
 }

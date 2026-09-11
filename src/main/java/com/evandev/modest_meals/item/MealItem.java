@@ -25,6 +25,7 @@ public class MealItem extends Item {
 
     public static final String NAME_PREFIXED_KEY = "modest_meals.meal.name.prefixed";
     public static final String NAME_PLAIN_KEY = "modest_meals.meal.name.plain";
+    public static final String NAME_DUBIOUS_KEY = "modest_meals.meal.name.dubious";
     private static final float SATURATION_MODIFIER = 0.6F;
     private final UseAnim useAnimation;
 
@@ -40,6 +41,19 @@ public class MealItem extends Item {
     public static MealContents contentsOf(ItemStack stack) {
         MealContents contents = stack.get(ModDataComponents.MEAL_CONTENTS.get());
         return contents == null ? MealContents.EMPTY : contents;
+    }
+
+    public static ItemStack makeDubious(Item item) {
+        ItemStack stack = new ItemStack(item);
+        MealContents contents = new MealContents(
+                0.0F, 0.0F, 0, 0.0F,
+                Optional.empty(), 0, 0,
+                List.of(),
+                List.of(),
+                true
+        );
+        stack.set(ModDataComponents.MEAL_CONTENTS.get(), contents);
+        return stack;
     }
 
     @Override
@@ -69,8 +83,12 @@ public class MealItem extends Item {
 
     @Override
     public Component getName(ItemStack stack) {
+        MealContents contents = contentsOf(stack);
         Component base = Component.translatable(this.getDescriptionId(stack));
-        Optional<Component> prefix = contentsOf(stack).effect()
+        if (contents.dubious()) {
+            return Component.translatable(NAME_DUBIOUS_KEY, base);
+        }
+        Optional<Component> prefix = contents.effect()
                 .flatMap(MealEffectManager::get)
                 .map(MealEffect::namePrefixKeyOrDefault)
                 .map(Component::translatable);

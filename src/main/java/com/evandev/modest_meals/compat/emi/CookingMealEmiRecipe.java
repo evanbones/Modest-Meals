@@ -1,6 +1,8 @@
 package com.evandev.modest_meals.compat.emi;
 
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
+import com.evandev.modest_meals.item.MealItem;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.SlotWidget;
@@ -37,10 +39,29 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
         this.container = containerStack();
     }
 
+    private CookingMealEmiRecipe(ResourceLocation id, MealType type, EmiIngredient any,
+                                 List<EmiIngredient> slots, int cookTicks, float experience, EmiStack output) {
+        super(CookingPotEmiSupport.MEAL_COOKING, id, type, any, slots, output);
+        this.cookTicks = cookTicks;
+        this.experience = experience;
+        this.container = containerStack();
+    }
+
     public static CookingMealEmiRecipe of(MealType type, int cookTicks, float experience, List<EmiStack> pool) {
-        EmiIngredient any = pool.isEmpty() ? EmiStack.EMPTY : EmiIngredient.of(pool);
+        List<EmiStack> typePool = MealEmiIngredients.poolFor(type, pool);
+        EmiIngredient any = typePool.isEmpty() ? EmiStack.EMPTY : EmiIngredient.of(typePool);
         return new CookingMealEmiRecipe(syntheticId("meal_cooking", type), type, any,
                 flatSlots(type, any, POT_SLOTS), cookTicks, experience);
+    }
+
+    public static CookingMealEmiRecipe dubiousOf(MealType type, int cookTicks, float experience, List<EmiStack> pool) {
+        List<EmiStack> unsupported = MealEmiIngredients.unsupportedPoolFor(type, pool);
+        EmiIngredient any = unsupported.isEmpty() ? EmiStack.EMPTY : EmiIngredient.of(unsupported);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID,
+                "/meal_cooking_dubious/" + type.id().getNamespace() + "/" + type.id().getPath());
+        EmiStack output = type.resolveItem().map(item -> EmiStack.of(MealItem.makeDubious(item))).orElse(EmiStack.EMPTY);
+        return new CookingMealEmiRecipe(id, type, any,
+                flatSlots(type, any, POT_SLOTS), cookTicks, experience, output);
     }
 
     @Override
@@ -70,13 +91,13 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
             }
         }
 
-        decorateOutput(addSlot(widgets, output, 94, 9));
+        addSlot(widgets, output, 94, 9);
         SlotWidget containerSlot = addSlot(widgets, container, 62, 38);
         if (!container.isEmpty()) {
             containerSlot.appendTooltip(Component.translatable("emi.modest_meals.container")
                     .withStyle(ChatFormatting.GRAY));
         }
-        decorateOutput(addSlot(widgets, output, 94, 38).recipeContext(this));
+        addSlot(widgets, output, 94, 38).recipeContext(this);
 
         widgets.addAnimatedTexture(WIDGETS, 60, 9, 24, 17, 176, 15, 1000 * 10, true, false, false);
         widgets.addTexture(WIDGETS, 18, 39, 17, 15, 176, 0);

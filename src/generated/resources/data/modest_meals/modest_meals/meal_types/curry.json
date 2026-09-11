@@ -1,9 +1,15 @@
 {
+  "base": [
+    {
+      "ingredient": {
+        "tag": "c:crops/rice"
+      }
+    }
+  ],
   "container": "minecraft:bowl",
   "id": "modest_meals:curry",
   "item": "modest_meals:curry",
-  "max_ingredients": 6,
-  "min_ingredients": 4,
+  "min_ingredients": 2,
   "priority": 25,
   "station": "cooking_pot"
 }

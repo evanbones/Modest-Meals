@@ -4,6 +4,16 @@
       "ingredient": {
         "item": "minecraft:snowball"
       }
+    },
+    {
+      "ingredient": {
+        "tag": "c:drinks/milk"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
     }
   ],
   "id": "modest_meals:ice_cream",

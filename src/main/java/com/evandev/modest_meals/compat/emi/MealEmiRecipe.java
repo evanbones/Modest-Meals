@@ -2,6 +2,7 @@ package com.evandev.modest_meals.compat.emi;
 
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
+import com.evandev.modest_meals.item.MealItem;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -31,12 +32,17 @@ public abstract class MealEmiRecipe implements EmiRecipe {
 
     protected MealEmiRecipe(EmiRecipeCategory category, ResourceLocation id, MealType type,
                             EmiIngredient any, List<EmiIngredient> slots) {
+        this(category, id, type, any, slots, type.resolveItem().map(EmiStack::of).orElse(EmiStack.EMPTY));
+    }
+
+    protected MealEmiRecipe(EmiRecipeCategory category, ResourceLocation id, MealType type,
+                            EmiIngredient any, List<EmiIngredient> slots, EmiStack output) {
         this.category = category;
         this.id = id;
         this.type = type;
         this.any = any;
         this.slots = List.copyOf(slots);
-        this.output = type.resolveItem().map(EmiStack::of).orElse(EmiStack.EMPTY);
+        this.output = output;
 
         List<EmiIngredient> collected = new ArrayList<>();
         boolean pooled = false;
@@ -102,15 +108,19 @@ public abstract class MealEmiRecipe implements EmiRecipe {
         return any.isEmpty() ? 0 : any.getEmiStacks().size();
     }
 
-    protected SlotWidget decorateFreeSlot(SlotWidget slot) {
-        slot.appendTooltip(Component.translatable("emi.modest_meals.any_ingredient")
+    protected boolean isDubious() {
+        return MealItem.contentsOf(output.getItemStack()).dubious();
+    }
+
+    protected void decorateFreeSlot(SlotWidget slot) {
+        String titleKey = isDubious()
+                ? "emi.modest_meals.unsupported_ingredient"
+                : (type.requiresSupportedIngredients()
+                ? "emi.modest_meals.supported_ingredient"
+                : "emi.modest_meals.any_ingredient");
+        slot.appendTooltip(Component.translatable(titleKey)
                 .withStyle(ChatFormatting.YELLOW));
         slot.appendTooltip(ingredientCountLine());
-        slot.appendTooltip(Component.translatable("emi.modest_meals.pool_size", poolSize())
-                .withStyle(ChatFormatting.DARK_GRAY));
-        slot.appendTooltip(Component.translatable("emi.modest_meals.effect_rule")
-                .withStyle(ChatFormatting.DARK_GRAY));
-        return slot;
     }
 
     protected Component ingredientCountLine() {
@@ -120,12 +130,6 @@ public abstract class MealEmiRecipe implements EmiRecipe {
         }
         return Component.translatable("emi.modest_meals.ingredient_count.range",
                 type.minIngredients(), type.maxIngredients()).withStyle(ChatFormatting.GRAY);
-    }
-
-    protected SlotWidget decorateOutput(SlotWidget slot) {
-        slot.appendTooltip(Component.translatable("emi.modest_meals.result_varies")
-                .withStyle(ChatFormatting.DARK_GRAY));
-        return slot;
     }
 
     protected EmiStack containerStack() {

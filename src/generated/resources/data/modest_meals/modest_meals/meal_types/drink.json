@@ -1,4 +1,11 @@
 {
+  "base": [
+    {
+      "ingredient": {
+        "tag": "c:drinks/drink_base"
+      }
+    }
+  ],
   "container": "minecraft:glass_bottle",
   "id": "modest_meals:drink",
   "item": "modest_meals:drink",

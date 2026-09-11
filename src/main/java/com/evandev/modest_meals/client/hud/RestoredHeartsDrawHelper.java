@@ -11,6 +11,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 
 import java.awt.*;
@@ -106,9 +107,9 @@ public class RestoredHeartsDrawHelper {
     }
 
     public static Gui.HeartType getHeartTypeForPlayer(Player player) {
-        if (player.hasEffect(net.minecraft.world.effect.MobEffects.POISON)) {
+        if (player.hasEffect(MobEffects.POISON)) {
             return Gui.HeartType.POISIONED;
-        } else if (player.hasEffect(net.minecraft.world.effect.MobEffects.WITHER)) {
+        } else if (player.hasEffect(MobEffects.WITHER)) {
             return Gui.HeartType.WITHERED;
         } else if (player.isFullyFrozen()) {
             return Gui.HeartType.FROZEN;

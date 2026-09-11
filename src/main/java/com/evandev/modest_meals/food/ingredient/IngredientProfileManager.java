@@ -8,7 +8,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -234,10 +236,10 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
     }
 
     public record TagEntry(TagKey<Item> tag, int priority, IngredientProfile profile) {
-        public static final com.mojang.serialization.Codec<TagEntry> CODEC =
-                com.mojang.serialization.codecs.RecordCodecBuilder.create(instance -> instance.group(
+        public static final Codec<TagEntry> CODEC =
+                RecordCodecBuilder.create(instance -> instance.group(
                         TagKey.codec(Registries.ITEM).fieldOf("tag").forGetter(TagEntry::tag),
-                        com.mojang.serialization.Codec.INT.optionalFieldOf("priority", 0).forGetter(TagEntry::priority),
+                        Codec.INT.optionalFieldOf("priority", 0).forGetter(TagEntry::priority),
                         IngredientProfile.CODEC.fieldOf("profile").forGetter(TagEntry::profile)
                 ).apply(instance, TagEntry::new));
 

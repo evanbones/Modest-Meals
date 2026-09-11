@@ -27,6 +27,9 @@ public class ModestMealsEmiPlugin implements EmiPlugin {
         for (MealType type : MealTypeManager.craftingTable()) {
             if (type.resolveItem().isPresent()) {
                 registry.addRecipe(CraftingMealEmiRecipe.of(type, pool));
+                if (type.requiresSupportedIngredients()) {
+                    registry.addRecipe(CraftingMealEmiRecipe.dubiousOf(type, pool));
+                }
             }
         }
 

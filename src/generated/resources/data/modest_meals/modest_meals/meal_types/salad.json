@@ -4,12 +4,16 @@
       "ingredient": {
         "item": "minecraft:bowl"
       }
+    },
+    {
+      "ingredient": {
+        "tag": "c:foods/leafy_green"
+      }
     }
   ],
   "container": "minecraft:bowl",
   "id": "modest_meals:salad",
   "item": "modest_meals:salad",
-  "max_ingredients": 4,
-  "min_ingredients": 2,
+  "max_ingredients": 3,
   "priority": 5
 }

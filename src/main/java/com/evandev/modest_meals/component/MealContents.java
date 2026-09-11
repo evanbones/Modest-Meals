@@ -7,6 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,11 +20,13 @@ public record MealContents(
         float temporaryHealth,
         Optional<ResourceLocation> effect,
         int amplifier,
-        int durationTicks
+        int durationTicks,
+        List<ResourceLocation> ingredients,
+        List<ResourceLocation> base,
+        boolean dubious
 ) {
     public static final MealContents EMPTY = new MealContents(
-            0.0F, 0.0F, 0, 0.0F, Optional.empty(), 0, 0);
-
+            0.0F, 0.0F, 0, 0.0F, Optional.empty(), 0, 0, List.of(), List.of(), false);
     public static final Codec<MealContents> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.FLOAT.optionalFieldOf("health", 0.0F).forGetter(MealContents::health),
             Codec.FLOAT.optionalFieldOf("stamina", 0.0F).forGetter(MealContents::stamina),
@@ -31,11 +34,25 @@ public record MealContents(
             Codec.FLOAT.optionalFieldOf("temporary_health", 0.0F).forGetter(MealContents::temporaryHealth),
             ResourceLocation.CODEC.optionalFieldOf("effect").forGetter(MealContents::effect),
             Codec.INT.optionalFieldOf("amplifier", 0).forGetter(MealContents::amplifier),
-            Codec.INT.optionalFieldOf("duration", 0).forGetter(MealContents::durationTicks)
+            Codec.INT.optionalFieldOf("duration", 0).forGetter(MealContents::durationTicks),
+            ResourceLocation.CODEC.listOf().optionalFieldOf("ingredients", List.of()).forGetter(MealContents::ingredients),
+            ResourceLocation.CODEC.listOf().optionalFieldOf("base", List.of()).forGetter(MealContents::base),
+            Codec.BOOL.optionalFieldOf("dubious", false).forGetter(MealContents::dubious)
     ).apply(instance, MealContents::new));
-
     public static final StreamCodec<RegistryFriendlyByteBuf, MealContents> STREAM_CODEC =
             ByteBufCodecs.<MealContents>fromCodec(CODEC).cast();
+
+    public MealContents(
+            float health,
+            float stamina,
+            int digestTicks,
+            float temporaryHealth,
+            Optional<ResourceLocation> effect,
+            int amplifier,
+            int durationTicks
+    ) {
+        this(health, stamina, digestTicks, temporaryHealth, effect, amplifier, durationTicks, List.of(), List.of(), false);
+    }
 
     /**
      * Whether this meal grants an effect at all.
@@ -48,7 +65,8 @@ public record MealContents(
      * Whether this meal restores or grants anything. A meal that does nothing should not have been cooked.
      */
     public boolean isMeaningful() {
-        return health > 0.0F || stamina > 0.0F
+        return dubious
+                || health > 0.0F || stamina > 0.0F
                 || temporaryHealth > 0.0F
                 || hasEffect();
     }

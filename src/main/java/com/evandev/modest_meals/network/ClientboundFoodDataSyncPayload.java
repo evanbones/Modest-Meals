@@ -3,10 +3,7 @@ package com.evandev.modest_meals.network;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.FoodProfile;
 import com.evandev.modest_meals.food.FoodProfileManager;
-import com.evandev.modest_meals.food.ingredient.IngredientProfile;
-import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
-import com.evandev.modest_meals.food.ingredient.MealEffect;
-import com.evandev.modest_meals.food.ingredient.MealEffectManager;
+import com.evandev.modest_meals.food.ingredient.*;
 import com.evandev.modest_meals.food.meal.MealFormula;
 import com.evandev.modest_meals.food.meal.MealFormulaManager;
 import com.evandev.modest_meals.food.meal.MealType;
@@ -36,7 +33,9 @@ public record ClientboundFoodDataSyncPayload(
         List<IngredientProfileManager.TagEntry> ingredientTags,
         Map<ResourceLocation, MealEffect> mealEffects,
         Map<ResourceLocation, MealType> mealTypes,
-        MealFormula formula
+        MealFormula formula,
+        Map<ResourceLocation, MealIngredientVisual> mealIngredients,
+        List<MealIngredientManager.TagEntry> mealIngredientTags
 ) implements CustomPacketPayload {
     public static final Type<ClientboundFoodDataSyncPayload> TYPE =
             new Type<>(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "food_data_sync"));
@@ -57,7 +56,11 @@ public record ClientboundFoodDataSyncPayload(
                     .forGetter(ClientboundFoodDataSyncPayload::mealEffects),
             Codec.unboundedMap(ResourceLocation.CODEC, MealType.CODEC).fieldOf("meal_types")
                     .forGetter(ClientboundFoodDataSyncPayload::mealTypes),
-            MealFormula.CODEC.fieldOf("formula").forGetter(ClientboundFoodDataSyncPayload::formula)
+            MealFormula.CODEC.fieldOf("formula").forGetter(ClientboundFoodDataSyncPayload::formula),
+            Codec.unboundedMap(ResourceLocation.CODEC, MealIngredientVisual.CODEC)
+                    .optionalFieldOf("meal_ingredients", Map.of()).forGetter(ClientboundFoodDataSyncPayload::mealIngredients),
+            MealIngredientManager.TagEntry.CODEC.listOf()
+                    .optionalFieldOf("meal_ingredient_tags", List.of()).forGetter(ClientboundFoodDataSyncPayload::mealIngredientTags)
     ).apply(instance, ClientboundFoodDataSyncPayload::new));
 
     public static final StreamCodec<ByteBuf, ClientboundFoodDataSyncPayload> STREAM_CODEC = ByteBufCodecs.fromCodec(CODEC);
@@ -72,7 +75,9 @@ public record ClientboundFoodDataSyncPayload(
                 IngredientProfileManager.snapshotTagProfiles(),
                 MealEffectManager.snapshot(),
                 MealTypeManager.snapshot(),
-                MealFormulaManager.get()
+                MealFormulaManager.get(),
+                MealIngredientManager.snapshotItemVisuals(),
+                MealIngredientManager.snapshotTagVisuals()
         );
     }
 
@@ -85,6 +90,7 @@ public record ClientboundFoodDataSyncPayload(
             MealEffectManager.applyFromNetwork(payload.mealEffects(), updateBaseline);
             MealTypeManager.applyFromNetwork(payload.mealTypes());
             MealFormulaManager.applyFromNetwork(payload.formula());
+            MealIngredientManager.applyFromNetwork(payload.mealIngredients(), payload.mealIngredientTags());
         });
     }
 

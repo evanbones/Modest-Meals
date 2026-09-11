@@ -26,6 +26,11 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
     private static final TagKey<Item> SAUCES = itemTag("c", "foods/tomato_sauce");
     private static final TagKey<Item> MILKS = itemTag("c", "drinks/milk");
     private static final TagKey<Item> WHEATS = itemTag("c", "crops/wheat");
+    private static final TagKey<Item> RICES = itemTag("c", "crops/rice");
+    private static final TagKey<Item> LEAFY_GREENS = itemTag("c", "foods/leafy_green");
+    private static final TagKey<Item> SOUP_BASES = itemTag("c", "foods/soup_base");
+    private static final TagKey<Item> DRINK_BASES = itemTag("c", "drinks/drink_base");
+    private static final TagKey<Item> PIE_CRUSTS = itemTag("c", "foods/pie_crust");
 
     public MealTypeProvider(PackOutput output) {
         super(output, "modest_meals/meal_types", MealType.CODEC, "Modest Meals meal types");
@@ -49,23 +54,54 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
 
     @Override
     protected void collect(Map<ResourceLocation, MealType> entries) {
-        potMeal(entries, "drink", ModItems.DRINK, Items.GLASS_BOTTLE, 1, 4, 10);
-        potMeal(entries, "curry", ModItems.CURRY, Items.BOWL, 4, 6, 25);
+        put(entries, "drink", ModItems.DRINK, MealType.Station.COOKING_POT,
+                List.of(new MealType.BaseEntry(Ingredient.of(DRINK_BASES), 1)),
+                Optional.empty(), 1, 4, Optional.of(itemId(Items.GLASS_BOTTLE)), 10);
+        put(entries, "curry", ModItems.CURRY, MealType.Station.COOKING_POT,
+                List.of(new MealType.BaseEntry(Ingredient.of(RICES), 1)),
+                Optional.empty(), 2, 5, Optional.of(itemId(Items.BOWL)), 25);
         put(entries, "jam", ModItems.JAM, MealType.Station.COOKING_POT,
                 List.of(new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
                 Optional.empty(), 1, 3, Optional.of(itemId(Items.GLASS_BOTTLE)), 30);
 
-        potMeal(entries, "soup", ModItems.SOUP, Items.BOWL, 2, 5, 0);
-        bowlMeal(entries, "salad", ModItems.SALAD, 2, 4, 5);
-        noodleMeal(entries, "ramen", ModItems.RAMEN, 2, 4, 20);
+        put(entries, "soup", ModItems.SOUP, MealType.Station.COOKING_POT,
+                List.of(new MealType.BaseEntry(Ingredient.of(SOUP_BASES), 1)),
+                Optional.empty(), 2, 5, Optional.of(itemId(Items.BOWL)), 0);
+        put(entries, "salad", ModItems.SALAD, MealType.Station.CRAFTING_TABLE,
+                List.of(new MealType.BaseEntry(Ingredient.of(Items.BOWL), 1),
+                        new MealType.BaseEntry(Ingredient.of(LEAFY_GREENS), 1)),
+                Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 5);
+        put(entries, "ramen", ModItems.RAMEN, MealType.Station.COOKING_POT,
+                List.of(new MealType.BaseEntry(Ingredient.of(PASTAS), 1),
+                        new MealType.BaseEntry(Ingredient.of(SOUP_BASES), 1)),
+                Optional.empty(), 1, 4, Optional.of(itemId(Items.BOWL)), 20);
         noodleMeal(entries, "pasta", ModItems.PASTA, 1, 3, 15);
 
         baseBowlMeal(entries, "porridge", ModItems.PORRIDGE, Ingredient.of(WHEATS), 1, 3, 25);
         put(entries, "ice_cream", ModItems.ICE_CREAM, MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(Items.SNOWBALL), 1)),
+                List.of(new MealType.BaseEntry(Ingredient.of(Items.SNOWBALL), 1),
+                        new MealType.BaseEntry(Ingredient.of(MILKS), 1),
+                        new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
                 Optional.empty(), 1, 3, Optional.empty(), 30);
-        shaped(entries, "sandwich", ModItems.SANDWICH, 1, 1, 10,
-                List.of("B", "#", "B"), Map.of("B", "#" + BREADS.location(), "#", any()));
+        ResourceLocation sandwichId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sandwich");
+        entries.put(sandwichId, new MealType(
+                sandwichId,
+                itemId(ModItems.SANDWICH.get()),
+                MealType.Station.CRAFTING_TABLE,
+                List.of(),
+                Optional.of(new MealType.Shape(List.of(" B ", "###", " B "), Map.of("B", "#" + BREADS.location(), "#", any()))),
+                3,
+                3,
+                Optional.empty(),
+                10,
+                true,
+                Optional.of(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/sandwich/dubious")),
+                Optional.of(new MealType.BaseSprites(
+                        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/sandwich/sandwich_bottom"),
+                        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/sandwich/sandwich_top")
+                )),
+                List.of()
+        ));
         shaped(entries, "wrap", ModItems.WRAP, 2, 3, 10,
                 List.of("###", " T "), Map.of("T", "#" + TORTILLAS.location(), "#", any()));
         shaped(entries, "pizza", ModItems.PIZZA, 1, 5, 10,
@@ -73,15 +109,36 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 Map.of("D", "#" + DOUGHS.location(), "S", "#" + SAUCES.location(), "#", any()));
         shaped(entries, "pie", ModItems.PIE, 2, 6, 10,
                 List.of("###", "###", "SOS"),
-                Map.of("O", "farmersdelight:pie_crust", "S", id(Items.SUGAR), "#", any()));
+                Map.of("O", "#" + PIE_CRUSTS.location(), "S", id(Items.SUGAR), "#", any()));
         shaped(entries, "sushi", ModItems.SUSHI, 1, 2, 10,
-                List.of("K", "#", "#"), Map.of("K", id(Items.DRIED_KELP), "#", any()));
-        shaped(entries, "popsicle", ModItems.POPSICLE, 1, 1, 10,
-                List.of("#", "N", "S"),
-                Map.of("N", id(Items.SNOWBALL), "S", id(Items.STICK), "#", any()));
-        shaped(entries, "cake", ModItems.CAKE, 1, 3, 10,
-                List.of("MMM", "###", "EEE"),
-                Map.of("M", "#" + MILKS.location(), "E", id(Items.EGG), "#", any()));
+                List.of("K#", "R#"),
+                Map.of("K", id(Items.DRIED_KELP), "R", "#" + RICES.location(), "#", any()));
+        /*
+        ResourceLocation cakeId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "cake");
+        entries.put(cakeId, new MealType(
+                cakeId,
+                itemId(ModItems.CAKE.get()),
+                MealType.Station.CRAFTING_TABLE,
+                List.of(),
+                Optional.of(new MealType.Shape(
+                        List.of("MMM", "SES", "###"),
+                        Map.of("M", "#" + MILKS.location(), "S", id(Items.SUGAR), "E", id(Items.EGG), "#", any())
+                )),
+                3,
+                3,
+                Optional.empty(),
+                10,
+                false,
+                Optional.empty(),
+                Optional.empty(),
+                List.of(),
+                List.of(new MealType.ItemOverride(
+                        itemId(Items.CAKE),
+                        1,
+                        List.of("#" + WHEATS.location(), "#" + WHEATS.location(), "#" + WHEATS.location())
+                ))
+        ));
+        */
 
         shaped(entries, "skewer", ModItems.SKEWER, 2, 2, 15,
                 List.of("#", "#", "S"), Map.of("S", id(Items.STICK), "#", any()));
@@ -97,18 +154,6 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 Optional.empty(), min, max, Optional.of(itemId(Items.BOWL)), priority);
     }
 
-    private void potMeal(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
-                         Item container, int min, int max, int priority) {
-        put(entries, name, item, MealType.Station.COOKING_POT, List.of(),
-                Optional.empty(), min, max, Optional.of(itemId(container)), priority);
-    }
-
-    private void bowlMeal(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
-                          int min, int max, int priority) {
-        put(entries, name, item, MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(Items.BOWL), 1)),
-                Optional.empty(), min, max, Optional.of(itemId(Items.BOWL)), priority);
-    }
 
     private void noodleMeal(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
                             int min, int max, int priority) {

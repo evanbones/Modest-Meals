@@ -306,8 +306,21 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(cd("popcorn"), food(null, 1.0F));
         builder.add(cd("tortilla_chips"), food(0.5F, 1.5F));
         builder.add(cd("corn_dough"), timeBoost(1.0F, 2.0F, 30));
+        builder.addTag("c:crops/bean", 145, food(0.5F, 1.0F));
+        builder.add(cd("beans"), food(0.5F, 1.0F));
+        builder.add(cd("bean_pod"), food(1.5F, 1.5F));
+        builder.add(cd("tofu"), food(3.0F, 2.0F));
 
-        builder.add(cd("ginger"), effect(0.5F, 1.0F, "cold_resistance", MEDIUM));
+        builder.add(cd("mint"), effect(0.5F, 1.5F, "heat_resistance", MEDIUM));
+        builder.add(cd("agave"), timeBoost(0.5F, 1.0F, 40));
+
+        builder.add(cd("refried_beans"), dish(2.0F, 2.0F, 100));
+        builder.add(cd("cinnamon"), timeBoost(0.0F, 0.5F, 50));
+        builder.add(cd("butter"), food(0.5F, 1.0F));
+        builder.add(cd("cheese_wedge"), food(1.0F, 2.0F));
+        builder.add(cd("raw_sausage"), dish(0.5F, 0.5F, 90));
+        builder.add(cd("cooked_sausage"), food(2.0F, 2.0F));
+        builder.add(cd("creamed_corn"), dish(3.0F, 3.0F, 120));
 
         builder.add(cd("squid"), dish(1.0F, null, 120));
         builder.add(cd("cooked_squid"), food(3.0F, 2.0F));
