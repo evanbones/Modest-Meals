@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:cooked_egg",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/fried_egg_0",
+      "modest_meals:item/meal/sandwich/fried_egg_1",
+      "modest_meals:item/meal/sandwich/fried_egg_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/fried_egg_0",
+      "modest_meals:item/meal/wrap/fried_egg_1",
+      "modest_meals:item/meal/wrap/fried_egg_2"
+    ]
+  }
+}

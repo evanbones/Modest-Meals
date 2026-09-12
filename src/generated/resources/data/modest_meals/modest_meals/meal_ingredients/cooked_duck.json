@@ -1,0 +1,15 @@
+{
+  "item": "environmental:cooked_duck",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/chicken_0",
+      "modest_meals:item/meal/sandwich/chicken_1",
+      "modest_meals:item/meal/sandwich/chicken_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/chicken_0",
+      "modest_meals:item/meal/wrap/chicken_1",
+      "modest_meals:item/meal/wrap/chicken_2"
+    ]
+  }
+}

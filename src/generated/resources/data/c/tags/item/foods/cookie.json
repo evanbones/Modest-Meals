@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "cookscollection:lemon",
+      "id": "bountifulfares:artisan_cookie",
       "required": false
     },
     {
-      "id": "bountifulfares:lemon",
+      "id": "bountifulfares:walnut_cookie",
       "required": false
     }
   ]

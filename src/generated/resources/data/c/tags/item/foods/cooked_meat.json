@@ -25,6 +25,18 @@
       "required": false
     },
     {
+      "id": "environmental:cooked_duck",
+      "required": false
+    },
+    {
+      "id": "environmental:cooked_venison",
+      "required": false
+    },
+    {
+      "id": "neapolitan:cooked_mint_chops",
+      "required": false
+    },
+    {
       "id": "culturaldelights:cooked_sausage",
       "required": false
     }

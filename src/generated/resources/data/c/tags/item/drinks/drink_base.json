@@ -19,6 +19,18 @@
     {
       "id": "farmersdelight:milk_bottle",
       "required": false
+    },
+    {
+      "id": "neapolitan:milk_bottle",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:coconut_milk_bottle",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:water_cup",
+      "required": false
     }
   ]
 }

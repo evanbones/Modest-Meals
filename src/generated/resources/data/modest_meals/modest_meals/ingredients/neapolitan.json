@@ -138,6 +138,16 @@
       "stamina": 1.5,
       "target": "neapolitan:waffle_cone",
       "time_bonus": 25
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "neapolitan:mint_chops"
+    },
+    {
+      "health": 6.0,
+      "stamina": 2.0,
+      "target": "neapolitan:cooked_mint_chops"
     }
   ]
 }

@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "cookscollection:lemon",
+      "id": "farmersdelight:fried_egg",
       "required": false
     },
     {
-      "id": "bountifulfares:lemon",
+      "id": "bountifulfares:cooked_egg",
       "required": false
     }
   ]

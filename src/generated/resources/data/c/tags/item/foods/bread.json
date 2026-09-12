@@ -7,6 +7,26 @@
     {
       "id": "nomansland:hardtack",
       "required": false
+    },
+    {
+      "id": "neapolitan:banana_bread",
+      "required": false
+    },
+    {
+      "id": "neapolitan:adzuki_bun",
+      "required": false
+    },
+    {
+      "id": "neapolitan:cinnamon_bagel",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:maize_bread",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:artisan_bread",
+      "required": false
     }
   ]
 }

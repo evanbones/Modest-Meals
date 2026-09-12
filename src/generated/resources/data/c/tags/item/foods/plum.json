@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "cookscollection:lemon",
+      "id": "environmental:plum",
       "required": false
     },
     {
-      "id": "bountifulfares:lemon",
+      "id": "bountifulfares:plum",
       "required": false
     }
   ]

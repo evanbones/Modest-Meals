@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:popped_maize",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/popcorn_0",
+      "modest_meals:item/meal/sandwich/popcorn_1",
+      "modest_meals:item/meal/sandwich/popcorn_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/popcorn_0",
+      "modest_meals:item/meal/wrap/popcorn_1",
+      "modest_meals:item/meal/wrap/popcorn_2"
+    ]
+  }
+}

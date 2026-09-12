@@ -7,6 +7,10 @@
     {
       "id": "brewinandchewin:corn",
       "required": false
+    },
+    {
+      "id": "bountifulfares:maize",
+      "required": false
     }
   ]
 }

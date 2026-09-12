@@ -11,6 +11,50 @@
     {
       "id": "neapolitan:dried_mango",
       "required": false
+    },
+    {
+      "id": "neapolitan:strawberries",
+      "required": false
+    },
+    {
+      "id": "neapolitan:white_strawberries",
+      "required": false
+    },
+    {
+      "id": "neapolitan:banana",
+      "required": false
+    },
+    {
+      "id": "neapolitan:dried_banana",
+      "required": false
+    },
+    {
+      "id": "environmental:cherries",
+      "required": false
+    },
+    {
+      "id": "environmental:plum",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:orange",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:lemon",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:plum",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:hoary_apple",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:passion_fruit",
+      "required": false
     }
   ]
 }

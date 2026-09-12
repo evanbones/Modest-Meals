@@ -19,6 +19,18 @@
     {
       "id": "abnormals_delight:venison_shanks",
       "required": false
+    },
+    {
+      "id": "environmental:duck",
+      "required": false
+    },
+    {
+      "id": "environmental:venison",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mint_chops",
+      "required": false
     }
   ]
 }

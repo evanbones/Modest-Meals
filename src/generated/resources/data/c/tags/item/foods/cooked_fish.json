@@ -3,6 +3,10 @@
     {
       "id": "#c:foods/cooked_squid",
       "required": false
+    },
+    {
+      "id": "neapolitan:cooked_mango_fish",
+      "required": false
     }
   ]
 }

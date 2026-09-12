@@ -30,6 +30,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private static final String ABNORMALS_DELIGHT = "abnormals_delight";
     private static final String NEAPOLITAN = "neapolitan";
     private static final String BREWIN_AND_CHEWIN = "brewinandchewin";
+    private static final String ENVIRONMENTAL = "environmental";
+    private static final String BOUNTIFUL_FARES = "bountifulfares";
 
     private static final TagKey<Item> CAKES = itemTag("c", "foods/cake");
     private static final TagKey<Item> TORTILLAS = itemTag("c", "foods/tortilla");
@@ -381,7 +383,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "strawberry_bubblegum",
                 "banana_bubblegum",
                 "mint_bubblegum",
-                "mango_bubblegum");
+                "mango_bubblegum",
+                "mint_candies");
 
         addOptional(notAnIngredient, BREWIN_AND_CHEWIN,
                 "pizza",
@@ -406,6 +409,60 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "rich_chocolate_cake",
                 "pumpkin_roll",
                 "glow_berry_meringue_pie");
+
+        notAnIngredient.addOptionalTag(itemTag(BOUNTIFUL_FARES, "meals"));
+        addOptional(notAnIngredient, BOUNTIFUL_FARES,
+                "apple_compote_jar",
+                "orange_compote_jar",
+                "lemon_compote_jar",
+                "plum_compote_jar",
+                "hoary_compote_jar",
+                "apple_cider_jar",
+                "plum_cider_jar",
+                "hoary_cider_jar",
+                "green_tea_bottle",
+                "black_tea_bottle",
+                "chamomile_tea_bottle",
+                "honeysuckle_tea_bottle",
+                "bellflower_tea_bottle",
+                "torchflower_tea_bottle",
+                "elderberry_wine_bottle",
+                "lapisberry_wine_bottle",
+                "mead_bottle",
+                "candy",
+                "sour_candy",
+                "piquant_candy",
+                "bitter_candy",
+                "strange_candy",
+                "candied_orange",
+                "candied_lemon",
+                "candied_apple",
+                "candied_plum",
+                "artisan_cookie",
+                "walnut_cookie",
+                "passion_glazed_salmon",
+                "coconut_crusted_cod",
+                "bountiful_stew",
+                "crusted_beef",
+                "leek_stew",
+                "fish_stew",
+                "stone_stew",
+                "apple_stew",
+                "coconut_stew",
+                "sea_salad",
+                "forest_medley",
+                "arid_medley",
+                "meadow_medley",
+                "mire_medley",
+                "coastal_medley",
+                "tropical_medley",
+                "stuffed_hoary_apple",
+                "crimson_chow",
+                "warped_chow",
+                "mushroom_stuffed_potato",
+                "berry_stuffed_potato",
+                "maize_stuffed_potato",
+                "dirt_stew");
     }
 
     private void seedConventionFoods() {
@@ -424,6 +481,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         var breads = tag(BREADS);
         addOptional(breads, COOKS_COLLECTION, "rustic_loaf_slice");
         addOptional(breads, NO_MANS_LAND, "hardtack");
+        addOptional(breads, NEAPOLITAN, "banana_bread", "adzuki_bun", "cinnamon_bagel");
+        addOptional(breads, BOUNTIFUL_FARES, "maize_bread", "artisan_bread");
 
         addOptional(tag(PASTAS), MY_NETHERS_DELIGHT, "ghasta");
 
@@ -434,10 +493,14 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "foods/cooked_duck");
         addOptionalTags(cookedMeats, MINERS_DELIGHT, "cooked_insect_meat");
         addOptional(cookedMeats, ABNORMALS_DELIGHT, "cooked_duck_fillet", "cooked_venison_shanks");
+        addOptional(cookedMeats, ENVIRONMENTAL, "cooked_duck", "cooked_venison");
+        addOptional(cookedMeats, NEAPOLITAN, "cooked_mint_chops");
 
         var rawMeats = tag(RAW_MEATS);
         addOptionalTags(rawMeats, "c", "foods/raw_venison", "foods/raw_horse", "foods/raw_duck");
         addOptional(rawMeats, ABNORMALS_DELIGHT, "duck_fillet", "venison_shanks");
+        addOptional(rawMeats, ENVIRONMENTAL, "duck", "venison");
+        addOptional(rawMeats, NEAPOLITAN, "mint_chops");
 
         tag(PIES).addOptional(cd("butterscotch_cinnamon_pie_slice"));
 
@@ -465,22 +528,30 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         var rawFish = tag(RAW_FISH);
         rawFish.addOptionalTag(convention("foods/raw_squid"));
+        addOptional(rawFish, ENVIRONMENTAL, "koi");
+        addOptional(rawFish, NEAPOLITAN, "mango_fish");
 
         var cookedFish = tag(COOKED_FISH);
         cookedFish.addOptionalTag(convention("foods/cooked_squid"));
+        addOptional(cookedFish, NEAPOLITAN, "cooked_mango_fish");
 
         var beans = tag(BEANS);
         beans.addOptional(cd("beans"));
+        addOptional(beans, NEAPOLITAN, "adzuki_beans", "roasted_adzuki_beans");
 
         addOptional(tag(CORN), CULTURAL_DELIGHTS, "corn_cob");
         addOptional(tag(CORN), BREWIN_AND_CHEWIN, "corn");
+        addOptional(tag(CORN), BOUNTIFUL_FARES, "maize");
         addOptional(tag(LEMONS), COOKS_COLLECTION, "lemon");
+        addOptional(tag(LEMONS), BOUNTIFUL_FARES, "lemon");
         addOptional(tag(MANGOES), NEAPOLITAN, "mango");
         addOptional(tag(PEARS), NO_MANS_LAND, "pear");
 
         var fruits = tag(FRUITS);
         addOptional(fruits, COOKS_COLLECTION, "lemon");
-        addOptional(fruits, NEAPOLITAN, "mango", "dried_mango");
+        addOptional(fruits, NEAPOLITAN, "mango", "dried_mango", "strawberries", "white_strawberries", "banana", "dried_banana");
+        addOptional(fruits, ENVIRONMENTAL, "cherries", "plum");
+        addOptional(fruits, BOUNTIFUL_FARES, "orange", "lemon", "plum", "hoary_apple", "passion_fruit");
 
         var rices = tag(RICES);
         rices.addOptionalTag(convention("grain/rice"));
@@ -493,6 +564,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         leafyGreens.add(Items.BEETROOT);
         addOptional(leafyGreens, FARMERS_DELIGHT, "cabbage", "cabbage_leaf");
         addOptional(leafyGreens, CULTURAL_DELIGHTS, "cut_cabbage");
+        addOptional(leafyGreens, BOUNTIFUL_FARES, "leek");
 
         var soupBases = tag(SOUP_BASES);
         soupBases.add(Items.WATER_BUCKET, Items.POTION);
@@ -500,6 +572,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         soupBases.addOptionalTag(convention("foods/broth"));
         soupBases.addOptionalTag(convention("drinks/milk"));
         addOptional(soupBases, FARMERS_DELIGHT, "bone_broth", "milk_bottle");
+        addOptional(soupBases, NEAPOLITAN, "milk_bottle");
+        addOptional(soupBases, BOUNTIFUL_FARES, "coconut_milk_bottle", "water_cup");
 
         var drinkBases = tag(DRINK_BASES);
         drinkBases.add(Items.WATER_BUCKET, Items.POTION, Items.SUGAR, Items.HONEY_BOTTLE);
@@ -507,6 +581,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         drinkBases.addOptionalTag(convention("drinks/milk"));
         drinkBases.addOptionalTag(convention("drinks/honey"));
         addOptional(drinkBases, FARMERS_DELIGHT, "milk_bottle");
+        addOptional(drinkBases, NEAPOLITAN, "milk_bottle");
+        addOptional(drinkBases, BOUNTIFUL_FARES, "coconut_milk_bottle", "water_cup");
 
         var pieCrusts = tag(PIE_CRUSTS);
         addOptional(pieCrusts, FARMERS_DELIGHT, "pie_crust");
@@ -518,5 +594,46 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptional(wraps, FARMERS_DELIGHT, "mutton_wrap");
         addOptional(wraps, NO_MANS_DELIGHT, "horse_wrap");
         addOptional(wraps, MINERS_DELIGHT, "insect_wrap", "vegan_wrap");
+
+        var cherries = tag(itemTag("c", "foods/cherry"));
+        addOptional(cherries, ENVIRONMENTAL, "cherries");
+
+        var plums = tag(itemTag("c", "foods/plum"));
+        addOptional(plums, ENVIRONMENTAL, "plum");
+        addOptional(plums, BOUNTIFUL_FARES, "plum");
+
+        var oranges = tag(itemTag("c", "foods/orange"));
+        addOptional(oranges, BOUNTIFUL_FARES, "orange");
+
+        var walnuts = tag(itemTag("c", "foods/walnuts"));
+        addOptional(walnuts, BOUNTIFUL_FARES, "walnut");
+
+        var elderberries = tag(itemTag("c", "foods/elderberry"));
+        addOptional(elderberries, BOUNTIFUL_FARES, "elderberries");
+
+        var lapisberries = tag(itemTag("c", "foods/lapisberry"));
+        addOptional(lapisberries, BOUNTIFUL_FARES, "lapisberries");
+
+        var passionFruit = tag(itemTag("c", "foods/passion_fruit"));
+        addOptional(passionFruit, BOUNTIFUL_FARES, "passion_fruit");
+
+        var cookedEgg = tag(itemTag("c", "foods/cooked_egg"));
+        addOptional(cookedEgg, FARMERS_DELIGHT, "fried_egg");
+        addOptional(cookedEgg, BOUNTIFUL_FARES, "cooked_egg");
+
+        var soups = tag(itemTag("c", "foods/soup"));
+        addOptional(soups, NEAPOLITAN, "adzuki_stew");
+        addOptional(soups, BOUNTIFUL_FARES, "bountiful_stew", "leek_stew", "fish_stew", "stone_stew", "apple_stew", "coconut_stew", "crimson_chow", "warped_chow");
+
+        var cookies = tag(itemTag("c", "foods/cookie"));
+        addOptional(cookies, BOUNTIFUL_FARES, "artisan_cookie", "walnut_cookie");
+
+        var candies = tag(itemTag("c", "foods/candy"));
+        addOptional(candies, NEAPOLITAN, "mint_candies");
+        addOptional(candies, BOUNTIFUL_FARES, "candy", "sour_candy", "piquant_candy", "bitter_candy", "strange_candy", "candied_orange", "candied_lemon", "candied_apple", "candied_plum");
+
+        var teas = tag(itemTag("c", "drinks/tea"));
+        addOptional(teas, BOUNTIFUL_FARES, "green_tea_bottle", "black_tea_bottle", "chamomile_tea_bottle", "honeysuckle_tea_bottle", "bellflower_tea_bottle", "torchflower_tea_bottle");
+        tag(Tags.Items.DRINKS).addOptionalTag(convention("drinks/tea"));
     }
 }

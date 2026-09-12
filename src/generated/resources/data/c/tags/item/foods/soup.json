@@ -1,6 +1,42 @@
 {
   "values": [
     "modest_meals:soup",
-    "modest_meals:ramen"
+    "modest_meals:ramen",
+    {
+      "id": "neapolitan:adzuki_stew",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:bountiful_stew",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:leek_stew",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:fish_stew",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:stone_stew",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:apple_stew",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:coconut_stew",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:crimson_chow",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:warped_chow",
+      "required": false
+    }
   ]
 }

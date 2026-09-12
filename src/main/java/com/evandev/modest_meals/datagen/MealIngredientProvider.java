@@ -128,6 +128,21 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("glow_squid"), sandwich("culturaldelights:glow_squid", "squid"));
         entries.put(id("raw_calamari"), sandwich("culturaldelights:raw_calamari", "squid"));
         entries.put(id("cooked_calamari"), sandwich("culturaldelights:cooked_calamari", "squid"));
+
+        entries.put(id("duck"), sandwich("environmental:duck", "chicken"));
+        entries.put(id("cooked_duck"), sandwich("environmental:cooked_duck", "chicken"));
+        entries.put(id("venison"), sandwich("environmental:venison", "beef"));
+        entries.put(id("cooked_venison"), sandwich("environmental:cooked_venison", "beef"));
+
+        entries.put(id("cinnamon_sticks"), sandwich("neapolitan:cinnamon_sticks", "cinnamon"));
+        entries.put(id("mint_chops"), sandwich("neapolitan:mint_chops", "mutton"));
+        entries.put(id("cooked_mint_chops"), sandwich("neapolitan:cooked_mint_chops", "mutton"));
+        entries.put(id("mango_fish"), sandwich("neapolitan:mango_fish", "cod"));
+        entries.put(id("cooked_mango_fish"), sandwich("neapolitan:cooked_mango_fish", "cod"));
+
+        entries.put(id("cooked_egg"), sandwich("bountifulfares:cooked_egg", "fried_egg"));
+        entries.put(id("popped_maize"), sandwich("bountifulfares:popped_maize", "popcorn"));
+        entries.put(id("foul_flesh"), sandwich("bountifulfares:foul_flesh", "rotten_flesh"));
     }
 
     public static class Builder {

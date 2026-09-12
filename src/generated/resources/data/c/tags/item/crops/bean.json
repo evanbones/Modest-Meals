@@ -3,6 +3,14 @@
     {
       "id": "culturaldelights:beans",
       "required": false
+    },
+    {
+      "id": "neapolitan:adzuki_beans",
+      "required": false
+    },
+    {
+      "id": "neapolitan:roasted_adzuki_beans",
+      "required": false
     }
   ]
 }

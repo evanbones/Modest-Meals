@@ -111,6 +111,10 @@ public class IngredientProfileProvider implements DataProvider {
         return "brewinandchewin:" + path;
     }
 
+    private static String bf(String path) {
+        return "bountifulfares:" + path;
+    }
+
     @Override
     public CompletableFuture<?> run(CachedOutput output) {
         Map<String, Builder> files = new LinkedHashMap<>();
@@ -130,6 +134,7 @@ public class IngredientProfileProvider implements DataProvider {
         environmental(files.computeIfAbsent("environmental", key -> new Builder()));
         neapolitan(files.computeIfAbsent("neapolitan", key -> new Builder()));
         brewinAndChewin(files.computeIfAbsent("brewin_and_chewin", key -> new Builder()));
+        bountifulFares(files.computeIfAbsent("bountiful_fares", key -> new Builder()));
 
         List<CompletableFuture<?>> futures = new ArrayList<>();
         files.forEach((name, builder) -> {
@@ -492,6 +497,9 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(neo("vanilla_pods"), food(0.5F, 0.5F));
         builder.add(neo("dried_vanilla_pods"), effect(0.5F, 1.0F, "luck", WEAK));
         builder.add(neo("waffle_cone"), timeBoost(0.5F, 1.5F, 25));
+
+        builder.add(neo("mint_chops"), food(2.0F, 1.0F));
+        builder.add(neo("cooked_mint_chops"), food(6.0F, 2.0F));
     }
 
     private void brewinAndChewin(Builder builder) {
@@ -517,6 +525,48 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(bnc("sweet_berry_jam"), temporary(null, 2.0F, 0, 1.0F));
         builder.add(bnc("glow_berry_marmalade"), effect(1.0F, 2.0F, "glowing", MEDIUM));
         builder.add(bnc("apple_jelly"), dish(3.0F, null, 120));
+    }
+
+    private void bountifulFares(Builder builder) {
+        builder.addTag("c:foods/orange", 145, dish(2.0F, null, 90));
+        builder.add(bf("orange"), dish(2.0F, null, 90));
+
+        builder.addTag("c:foods/lemon", 145, dish(1.5F, null, 80));
+        builder.add(bf("lemon"), dish(1.5F, null, 80));
+
+        builder.add(bf("plum"), dish(2.5F, null, 110));
+
+        builder.addTag("c:foods/passion_fruit", 145, dish(1.5F, null, 80));
+        builder.add(bf("passion_fruit"), dish(1.5F, null, 80));
+
+        builder.addTag("c:foods/elderberry", 145, temporary(null, 1.5F, 0, 1.0F));
+        builder.add(bf("elderberries"), temporary(null, 1.5F, 0, 1.0F));
+
+        builder.addTag("c:foods/lapisberry", 145, effect(0.5F, 1.5F, "night_vision", WEAK));
+        builder.add(bf("lapisberries"), effect(0.5F, 1.5F, "night_vision", WEAK));
+
+        builder.add(bf("hoary_apple"), effect(1.5F, 2.0F, "cold_resistance", MEDIUM));
+
+        builder.addTag("c:foods/walnuts", 145, food(0.5F, 1.5F));
+        builder.add(bf("walnut"), food(0.5F, 1.5F));
+
+        builder.add(bf("coconut_half"), food(2.0F, 2.0F));
+        builder.add(bf("coconut_milk_bottle"), timeBoost(1.0F, 1.5F, 40));
+
+        builder.add(bf("maize"), food(1.0F, 2.0F));
+        builder.add(bf("popped_maize"), food(null, 1.0F));
+        builder.add(bf("leek"), food(0.5F, 2.0F));
+
+        builder.addTag("c:foods/cooked_egg", 145, food(2.0F, 1.5F));
+        builder.add(bf("cooked_egg"), food(2.0F, 1.5F));
+
+        builder.add(bf("spongekin_slice"), effect(0.5F, 1.0F, "water_breathing", WEAK));
+        builder.add(bf("pickled_spongekin"), effect(1.5F, 2.0F, "water_breathing", MEDIUM));
+        builder.add(bf("pickled_beetroot"), effect(1.0F, 2.0F, "speed", WEAK));
+
+        builder.add(bf("citrus_essence"), effect(0.5F, 1.0F, "haste", WEAK));
+        builder.add(bf("foul_flesh"), food(0.5F, 0.0F));
+        builder.add(bf("flour"), timeBoost(0.5F, 1.0F, 20));
     }
 
     @Override

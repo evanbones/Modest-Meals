@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "bountifulfares:green_tea_bottle",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:black_tea_bottle",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:chamomile_tea_bottle",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:honeysuckle_tea_bottle",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:bellflower_tea_bottle",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:torchflower_tea_bottle",
+      "required": false
+    }
+  ]
+}

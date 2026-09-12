@@ -349,6 +349,56 @@
       "stamina_per_nutrition": 0.2
     },
     {
+      "id": "crop_leek",
+      "match": "#c:crops/leek",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_leek_bf",
+      "match": "bountifulfares:leek",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "cooked_egg_bf",
+      "match": "bountifulfares:cooked_egg",
+      "priority": 145,
+      "health_per_nutrition": 1.0,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "walnut",
+      "match": "#c:foods/walnuts",
+      "priority": 145,
+      "health_per_nutrition": 0.2,
+      "stamina_per_nutrition": 0.8
+    },
+    {
+      "id": "walnut_bf",
+      "match": "bountifulfares:walnut",
+      "priority": 145,
+      "health_per_nutrition": 0.2,
+      "stamina_per_nutrition": 0.8
+    },
+    {
+      "id": "coconut_half",
+      "match": "#c:coconut_halves",
+      "priority": 145,
+      "health_per_nutrition": 0.3,
+      "stamina_per_nutrition": 0.6
+    },
+    {
+      "id": "coconut_half_bf",
+      "match": "bountifulfares:coconut_half",
+      "priority": 145,
+      "health_per_nutrition": 0.3,
+      "stamina_per_nutrition": 0.6
+    },
+    {
       "id": "ice_cream",
       "match": "#c:foods/ice_cream",
       "priority": 120,
