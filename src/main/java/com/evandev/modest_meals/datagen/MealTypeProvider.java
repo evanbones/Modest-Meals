@@ -123,9 +123,11 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         shaped(entries, "pizza", ModItems.PIZZA, 1, 5, 10,
                 List.of("###", "#S#", "DDD"),
                 Map.of("D", "#" + DOUGHS.location(), "S", "#" + SAUCES.location(), "#", any()));
+        /*
         shaped(entries, "pie", ModItems.PIE, 2, 6, 10,
                 List.of("###", "###", "SOS"),
                 Map.of("O", "#" + PIE_CRUSTS.location(), "S", id(Items.SUGAR), "#", any()));
+        */
         shaped(entries, "sushi", ModItems.SUSHI, 1, 2, 10,
                 List.of("K#", "R#"),
                 Map.of("K", id(Items.DRIED_KELP), "R", "#" + RICES.location(), "#", any()));

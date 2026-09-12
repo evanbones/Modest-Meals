@@ -109,7 +109,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         ModItems.CREATIVE_TAB_ITEMS.forEach(item -> foods.add(item.get()));
 
         tag(Tags.Items.FOODS_SOUP).add(ModItems.SOUP.get(), ModItems.RAMEN.get());
-        tag(Tags.Items.FOODS_PIE).add(ModItems.PIE.get());
+        // tag(Tags.Items.FOODS_PIE).add(ModItems.PIE.get());
         // tag(CAKES).add(ModItems.CAKE.get());
         tag(ICE_CREAMS).add(ModItems.ICE_CREAM.get());
 
