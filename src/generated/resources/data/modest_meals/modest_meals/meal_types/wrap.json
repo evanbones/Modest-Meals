@@ -13,7 +13,7 @@
   "id": "modest_meals:wrap",
   "item": "modest_meals:wrap",
   "max_ingredients": 3,
-  "min_ingredients": 2,
+  "min_ingredients": 3,
   "priority": 10,
   "requires_supported_ingredients": true
 }

@@ -132,9 +132,9 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
                 if (sprite.isPresent()) {
                     return sprite.get();
                 }
-            }
-            if (type.requiresSupportedIngredients()) {
-                return type.dubiousSprite().orElse(null);
+                if (type.requiresSupportedIngredients()) {
+                    return type.dubiousSprite().orElse(null);
+                }
             }
             return null;
         }

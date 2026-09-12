@@ -109,7 +109,7 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 MealType.Station.CRAFTING_TABLE,
                 List.of(new MealType.BaseEntry(Ingredient.of(TORTILLAS), 1)),
                 Optional.empty(),
-                2,
+                3,
                 3,
                 Optional.empty(),
                 10,
