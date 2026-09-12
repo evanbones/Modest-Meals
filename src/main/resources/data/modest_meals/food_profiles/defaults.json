@@ -46,6 +46,14 @@
       "stamina_per_nutrition": 0.0
     },
     {
+      "id": "wrap",
+      "match": "#c:foods/wrap",
+      "priority": 135,
+      "health_per_nutrition": 0.6,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.6
+    },
+    {
       "id": "soup",
       "match": "#c:foods/soup",
       "priority": 130,

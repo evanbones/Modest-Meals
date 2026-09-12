@@ -59,6 +59,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private static final TagKey<Item> SOUP_BASES = itemTag("c", "foods/soup_base");
     private static final TagKey<Item> DRINK_BASES = itemTag("c", "drinks/drink_base");
     private static final TagKey<Item> PIE_CRUSTS = itemTag("c", "foods/pie_crust");
+    private static final TagKey<Item> WRAPS = itemTag("c", "foods/wrap");
 
     public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries,
                               CompletableFuture<TagLookup<Block>> blockTags,
@@ -143,7 +144,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptional(notAnIngredient, FARMERS_DELIGHT,
                 "nether_salad",
                 "dog_food",
-                "debug_pumpkin_pie");
+                "debug_pumpkin_pie",
+                "mutton_wrap");
 
         addOptional(notAnIngredient, CULTURAL_DELIGHTS,
                 "elote",
@@ -509,5 +511,12 @@ public class ModItemTagProvider extends ItemTagsProvider {
         var pieCrusts = tag(PIE_CRUSTS);
         addOptional(pieCrusts, FARMERS_DELIGHT, "pie_crust");
         pieCrusts.addOptionalTag(convention("foods/dough"));
+
+        var wraps = tag(WRAPS);
+        wraps.add(ModItems.WRAP.get());
+        addOptional(wraps, CULTURAL_DELIGHTS, "cheesy_chip_wrap", "pork_wrap");
+        addOptional(wraps, FARMERS_DELIGHT, "mutton_wrap");
+        addOptional(wraps, NO_MANS_DELIGHT, "horse_wrap");
+        addOptional(wraps, MINERS_DELIGHT, "insect_wrap", "vegan_wrap");
     }
 }

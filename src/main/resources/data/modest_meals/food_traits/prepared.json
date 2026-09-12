@@ -102,6 +102,16 @@
       ]
     },
     {
+      "target": "farmersdelight:mutton_wrap",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        }
+      ]
+    },
+    {
       "target": "farmersdelight:chicken_sandwich",
       "traits": [
         {

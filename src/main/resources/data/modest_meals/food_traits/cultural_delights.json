@@ -190,8 +190,14 @@
       "traits": [
         {
           "type": "modest_meals:stamina_capacity",
-          "value": 2.0,
-          "duration": 1500
+          "value": 2.5,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "culturaldelights:cheesy",
+          "duration": 400,
+          "amplifier": 0
         }
       ]
     },
@@ -202,6 +208,12 @@
           "type": "modest_meals:stamina_capacity",
           "value": 1.5,
           "duration": 1200
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "culturaldelights:cheesy",
+          "duration": 300,
+          "amplifier": 0
         }
       ]
     },
@@ -211,6 +223,12 @@
         {
           "type": "modest_meals:stamina_addition",
           "value": 1.0
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "culturaldelights:cheesy",
+          "duration": 200,
+          "amplifier": 0
         }
       ]
     },

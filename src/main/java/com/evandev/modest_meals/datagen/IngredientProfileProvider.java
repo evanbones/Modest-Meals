@@ -314,13 +314,13 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(cd("mint"), effect(0.5F, 1.5F, "heat_resistance", MEDIUM));
         builder.add(cd("agave"), timeBoost(0.5F, 1.0F, 40));
 
-        builder.add(cd("refried_beans"), dish(2.0F, 2.0F, 100));
+        builder.add(cd("refried_beans"), food(2.0F, 2.0F));
         builder.add(cd("cinnamon"), timeBoost(0.0F, 0.5F, 50));
         builder.add(cd("butter"), food(0.5F, 1.0F));
         builder.add(cd("cheese_wedge"), food(1.0F, 2.0F));
         builder.add(cd("raw_sausage"), dish(0.5F, 0.5F, 90));
         builder.add(cd("cooked_sausage"), food(2.0F, 2.0F));
-        builder.add(cd("creamed_corn"), dish(3.0F, 3.0F, 120));
+        builder.add(cd("creamed_corn"), food(3.0F, 3.0F));
 
         builder.add(cd("squid"), dish(1.0F, null, 120));
         builder.add(cd("cooked_squid"), food(3.0F, 2.0F));
@@ -425,7 +425,6 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(nmd("cooked_venison_chop"), food(3.5F, 1.5F));
         builder.add(nmd("billhook_bass_slice"), dish(1.5F, null, 100));
         builder.add(nmd("cooked_billhook_bass_slice"), dish(3.0F, null, 130));
-
     }
 
     private void abnormalsDelight(Builder builder) {

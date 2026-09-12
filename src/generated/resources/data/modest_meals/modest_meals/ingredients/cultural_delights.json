@@ -150,7 +150,6 @@
       "time_bonus": 40
     },
     {
-      "digest_ticks": 100,
       "health": 2.0,
       "stamina": 2.0,
       "target": "culturaldelights:refried_beans"
@@ -183,7 +182,6 @@
       "target": "culturaldelights:cooked_sausage"
     },
     {
-      "digest_ticks": 120,
       "health": 3.0,
       "stamina": 3.0,
       "target": "culturaldelights:creamed_corn"
