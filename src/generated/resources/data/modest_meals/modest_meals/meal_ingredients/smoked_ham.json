@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/smoked_ham_0",
       "modest_meals:item/meal/sandwich/smoked_ham_1",
       "modest_meals:item/meal/sandwich/smoked_ham_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/smoked_ham_0",
+      "modest_meals:item/meal/wrap/smoked_ham_1",
+      "modest_meals:item/meal/wrap/smoked_ham_2"
     ]
   }
 }

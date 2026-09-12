@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/rabbit_0",
       "modest_meals:item/meal/sandwich/rabbit_1",
       "modest_meals:item/meal/sandwich/rabbit_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/rabbit_0",
+      "modest_meals:item/meal/wrap/rabbit_1",
+      "modest_meals:item/meal/wrap/rabbit_2"
     ]
   }
 }

@@ -220,6 +220,10 @@ public record MealType(
                 Codec.INT.optionalFieldOf("layer_slots").forGetter(BaseSprites::layerSlots)
         ).apply(instance, BaseSprites::new));
 
+        public BaseSprites(ResourceLocation bottom) {
+            this(Optional.of(bottom), Optional.empty(), Optional.empty());
+        }
+
         public BaseSprites(ResourceLocation bottom, ResourceLocation top) {
             this(Optional.of(bottom), Optional.of(top), Optional.empty());
         }

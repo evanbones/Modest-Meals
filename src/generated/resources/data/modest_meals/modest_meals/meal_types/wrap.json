@@ -1,17 +1,19 @@
 {
+  "base": [
+    {
+      "ingredient": {
+        "tag": "c:foods/tortilla"
+      }
+    }
+  ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/wrap/wrap_base"
+  },
+  "dubious_sprite": "modest_meals:item/meal/wrap/dubious",
   "id": "modest_meals:wrap",
   "item": "modest_meals:wrap",
   "max_ingredients": 3,
   "min_ingredients": 2,
   "priority": 10,
-  "shape": {
-    "key": {
-      "#": "modest_meals:any_ingredient",
-      "T": "#c:foods/tortilla"
-    },
-    "pattern": [
-      "###",
-      " T "
-    ]
-  }
+  "requires_supported_ingredients": true
 }

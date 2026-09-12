@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/avocado_0",
       "modest_meals:item/meal/sandwich/avocado_1",
       "modest_meals:item/meal/sandwich/avocado_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/avocado_0",
+      "modest_meals:item/meal/wrap/avocado_1",
+      "modest_meals:item/meal/wrap/avocado_2"
     ]
   }
 }

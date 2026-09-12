@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/spider_eye_0",
       "modest_meals:item/meal/sandwich/spider_eye_1",
       "modest_meals:item/meal/sandwich/spider_eye_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/spider_eye_0",
+      "modest_meals:item/meal/wrap/spider_eye_1",
+      "modest_meals:item/meal/wrap/spider_eye_2"
     ]
   }
 }

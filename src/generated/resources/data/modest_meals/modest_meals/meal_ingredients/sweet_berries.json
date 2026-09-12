@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/sweet_berries_0",
       "modest_meals:item/meal/sandwich/sweet_berries_1",
       "modest_meals:item/meal/sandwich/sweet_berries_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/sweet_berries_0",
+      "modest_meals:item/meal/wrap/sweet_berries_1",
+      "modest_meals:item/meal/wrap/sweet_berries_2"
     ]
   }
 }

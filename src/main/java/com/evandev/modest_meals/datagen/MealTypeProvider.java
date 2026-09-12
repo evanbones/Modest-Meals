@@ -102,8 +102,24 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 )),
                 List.of()
         ));
-        shaped(entries, "wrap", ModItems.WRAP, 2, 3, 10,
-                List.of("###", " T "), Map.of("T", "#" + TORTILLAS.location(), "#", any()));
+        ResourceLocation wrapId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "wrap");
+        entries.put(wrapId, new MealType(
+                wrapId,
+                itemId(ModItems.WRAP.get()),
+                MealType.Station.CRAFTING_TABLE,
+                List.of(new MealType.BaseEntry(Ingredient.of(TORTILLAS), 1)),
+                Optional.empty(),
+                2,
+                3,
+                Optional.empty(),
+                10,
+                true,
+                Optional.of(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/wrap/dubious")),
+                Optional.of(new MealType.BaseSprites(
+                        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/wrap/wrap_base")
+                )),
+                List.of()
+        ));
         shaped(entries, "pizza", ModItems.PIZZA, 1, 5, 10,
                 List.of("###", "#S#", "DDD"),
                 Map.of("D", "#" + DOUGHS.location(), "S", "#" + SAUCES.location(), "#", any()));

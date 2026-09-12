@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/baked_potato_0",
       "modest_meals:item/meal/sandwich/baked_potato_1",
       "modest_meals:item/meal/sandwich/baked_potato_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/baked_potato_0",
+      "modest_meals:item/meal/wrap/baked_potato_1",
+      "modest_meals:item/meal/wrap/baked_potato_2"
     ]
   }
 }

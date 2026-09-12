@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/eggplant_0",
       "modest_meals:item/meal/sandwich/eggplant_1",
       "modest_meals:item/meal/sandwich/eggplant_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/eggplant_0",
+      "modest_meals:item/meal/wrap/eggplant_1",
+      "modest_meals:item/meal/wrap/eggplant_2"
     ]
   }
 }

@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/pumpkin_0",
       "modest_meals:item/meal/sandwich/pumpkin_1",
       "modest_meals:item/meal/sandwich/pumpkin_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/pumpkin_0",
+      "modest_meals:item/meal/wrap/pumpkin_1",
+      "modest_meals:item/meal/wrap/pumpkin_2"
     ]
   }
 }

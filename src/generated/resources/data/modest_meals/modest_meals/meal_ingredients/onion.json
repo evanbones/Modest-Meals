@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/onion_0",
       "modest_meals:item/meal/sandwich/onion_1",
       "modest_meals:item/meal/sandwich/onion_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/onion_0",
+      "modest_meals:item/meal/wrap/onion_1",
+      "modest_meals:item/meal/wrap/onion_2"
     ]
   }
 }

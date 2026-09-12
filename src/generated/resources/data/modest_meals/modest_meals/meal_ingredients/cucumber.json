@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/cucumber_0",
       "modest_meals:item/meal/sandwich/cucumber_1",
       "modest_meals:item/meal/sandwich/cucumber_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/cucumber_0",
+      "modest_meals:item/meal/wrap/cucumber_1",
+      "modest_meals:item/meal/wrap/cucumber_2"
     ]
   }
 }

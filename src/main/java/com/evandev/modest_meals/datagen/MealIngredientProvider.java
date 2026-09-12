@@ -14,6 +14,8 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
 
     private static final ResourceLocation SANDWICH_ID =
             ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sandwich");
+    private static final ResourceLocation WRAP_ID =
+            ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "wrap");
 
     public MealIngredientProvider(PackOutput output) {
         super(output, "modest_meals/meal_ingredients", Entry.CODEC, "Modest Meals meal ingredients");
@@ -27,9 +29,15 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/sandwich/" + name);
     }
 
+    private static ResourceLocation wrapSprite(String name) {
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/wrap/" + name);
+    }
+
     private static Entry sandwich(String item, String baseSprite) {
-        ResourceLocation base = sandwichSprite(baseSprite);
-        return new Entry(item, Map.of(SANDWICH_ID, MealLayerVisual.triplet(base)));
+        return new Entry(item, Map.of(
+                SANDWICH_ID, MealLayerVisual.triplet(sandwichSprite(baseSprite)),
+                WRAP_ID, MealLayerVisual.triplet(wrapSprite(baseSprite))
+        ));
     }
 
     public static Builder builder(String item) {

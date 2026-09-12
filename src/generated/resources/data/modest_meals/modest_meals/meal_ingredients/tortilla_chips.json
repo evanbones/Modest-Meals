@@ -5,6 +5,11 @@
       "modest_meals:item/meal/sandwich/tortilla_chips_0",
       "modest_meals:item/meal/sandwich/tortilla_chips_1",
       "modest_meals:item/meal/sandwich/tortilla_chips_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/tortilla_chips_0",
+      "modest_meals:item/meal/wrap/tortilla_chips_1",
+      "modest_meals:item/meal/wrap/tortilla_chips_2"
     ]
   }
 }
