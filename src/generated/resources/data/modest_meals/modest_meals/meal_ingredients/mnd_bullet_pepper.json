@@ -1,0 +1,15 @@
+{
+  "item": "mynethersdelight:bullet_pepper",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/bullet_pepper_0",
+      "modest_meals:item/meal/sandwich/bullet_pepper_1",
+      "modest_meals:item/meal/sandwich/bullet_pepper_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/bullet_pepper_0",
+      "modest_meals:item/meal/wrap/bullet_pepper_1",
+      "modest_meals:item/meal/wrap/bullet_pepper_2"
+    ]
+  }
+}

@@ -133,16 +133,123 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("cooked_duck"), sandwich("environmental:cooked_duck", "chicken"));
         entries.put(id("venison"), sandwich("environmental:venison", "beef"));
         entries.put(id("cooked_venison"), sandwich("environmental:cooked_venison", "beef"));
+        entries.put(id("env_cherries"), sandwich("environmental:cherries", "cherry"));
+        entries.put(id("env_plum"), sandwich("environmental:plum", "plum"));
+        entries.put(id("env_truffle"), sandwich("environmental:truffle", "truffle"));
+        entries.put(id("env_duck_egg"), sandwich("environmental:duck_egg", "fried_egg"));
+        entries.put(id("env_koi"), sandwich("environmental:koi", "salmon"));
 
         entries.put(id("cinnamon_sticks"), sandwich("neapolitan:cinnamon_sticks", "cinnamon"));
         entries.put(id("mint_chops"), sandwich("neapolitan:mint_chops", "mutton"));
         entries.put(id("cooked_mint_chops"), sandwich("neapolitan:cooked_mint_chops", "mutton"));
         entries.put(id("mango_fish"), sandwich("neapolitan:mango_fish", "cod"));
         entries.put(id("cooked_mango_fish"), sandwich("neapolitan:cooked_mango_fish", "cod"));
+        entries.put(id("neo_strawberries"), sandwich("neapolitan:strawberries", "strawberry"));
+        entries.put(id("neo_white_strawberries"), sandwich("neapolitan:white_strawberries", "strawberry"));
+        entries.put(id("neo_banana"), sandwich("neapolitan:banana", "banana"));
+        entries.put(id("neo_dried_banana"), sandwich("neapolitan:dried_banana", "banana"));
+        entries.put(id("neo_chocolate_bar"), sandwich("neapolitan:chocolate_bar", "chocolate"));
+        entries.put(id("neo_vanilla_pods"), sandwich("neapolitan:vanilla_pods", "vanilla"));
+        entries.put(id("neo_dried_vanilla_pods"), sandwich("neapolitan:dried_vanilla_pods", "vanilla"));
+        entries.put(id("neo_adzuki_beans"), sandwich("neapolitan:adzuki_beans", "adzuki_beans"));
+        entries.put(id("neo_roasted_adzuki_beans"), sandwich("neapolitan:roasted_adzuki_beans", "adzuki_beans"));
+        entries.put(id("neo_mango"), sandwich("neapolitan:mango", "mango"));
+        entries.put(id("neo_dried_mango"), sandwich("neapolitan:dried_mango", "mango"));
+        entries.put(id("neo_mint_leaves"), sandwich("neapolitan:mint_leaves", "cabbage"));
+        entries.put(id("neo_chocolate_spider_eye"), sandwich("neapolitan:chocolate_spider_eye", "spider_eye"));
 
         entries.put(id("cooked_egg"), sandwich("bountifulfares:cooked_egg", "fried_egg"));
         entries.put(id("popped_maize"), sandwich("bountifulfares:popped_maize", "popcorn"));
         entries.put(id("foul_flesh"), sandwich("bountifulfares:foul_flesh", "rotten_flesh"));
+        entries.put(id("bf_orange"), sandwich("bountifulfares:orange", "orange"));
+        entries.put(id("bf_lemon"), sandwich("bountifulfares:lemon", "lemon"));
+        entries.put(id("bf_plum"), sandwich("bountifulfares:plum", "plum"));
+        entries.put(id("bf_passion_fruit"), sandwich("bountifulfares:passion_fruit", "passion_fruit"));
+        entries.put(id("bf_elderberries"), sandwich("bountifulfares:elderberries", "elderberry"));
+        entries.put(id("bf_lapisberries"), sandwich("bountifulfares:lapisberries", "lapisberry"));
+        entries.put(id("bf_walnut"), sandwich("bountifulfares:walnut", "walnut"));
+        entries.put(id("bf_coconut_half"), sandwich("bountifulfares:coconut_half", "coconut"));
+        entries.put(id("bf_maize"), sandwich("bountifulfares:maize", "creamed_corn"));
+        entries.put(id("bf_leek"), sandwich("bountifulfares:leek", "onion"));
+        entries.put(id("bf_hoary_apple"), sandwich("bountifulfares:hoary_apple", "apple"));
+        entries.put(id("bf_spongekin_slice"), sandwich("bountifulfares:spongekin_slice", "pumpkin"));
+        entries.put(id("bf_pickled_spongekin"), sandwich("bountifulfares:pickled_spongekin", "pickle"));
+        entries.put(id("bf_pickled_beetroot"), sandwich("bountifulfares:pickled_beetroot", "beetroot"));
+
+        entries.put(id("bnc_cheese_wedge"), sandwich("brewinandchewin:cheese_wedge", "cheese"));
+        entries.put(id("bnc_cooked_corn"), sandwich("brewinandchewin:cooked_corn", "creamed_corn"));
+        entries.put(id("bnc_popped_corn"), sandwich("brewinandchewin:popped_corn", "popcorn"));
+        entries.put(id("bnc_jerky"), sandwich("brewinandchewin:jerky", "beef"));
+        entries.put(id("bnc_kippers"), sandwich("brewinandchewin:kippers", "cod"));
+        entries.put(id("bnc_pickled_pickles"), sandwich("brewinandchewin:pickled_pickles", "pickle"));
+        entries.put(id("bnc_kimchi"), sandwich("brewinandchewin:kimchi", "cabbage"));
+        entries.put(id("bnc_sweet_berry_jam"), sandwich("brewinandchewin:sweet_berry_jam", "sweet_berries"));
+        entries.put(id("bnc_glow_berry_marmalade"), sandwich("brewinandchewin:glow_berry_marmalade", "glow_berries"));
+        entries.put(id("bnc_apple_jelly"), sandwich("brewinandchewin:apple_jelly", "apple"));
+        entries.put(id("bnc_innards"), sandwich("brewinandchewin:innards", "rotten_flesh"));
+        entries.put(id("bnc_aspic_cube"), sandwich("brewinandchewin:aspic_cube", "pork"));
+        entries.put(id("bnc_red_grapes"), sandwich("brewinandchewin:red_grapes", "red_grapes"));
+        entries.put(id("bnc_white_grapes"), sandwich("brewinandchewin:white_grapes", "white_grapes"));
+
+        entries.put(id("nml_raw_venison"), sandwich("nomansland:raw_venison", "beef"));
+        entries.put(id("nml_cooked_venison"), sandwich("nomansland:cooked_venison", "beef"));
+        entries.put(id("nml_raw_horse"), sandwich("nomansland:raw_horse", "beef"));
+        entries.put(id("nml_cooked_horse"), sandwich("nomansland:cooked_horse", "beef"));
+        entries.put(id("nml_raw_billhook_bass"), sandwich("nomansland:raw_billhook_bass", "salmon"));
+        entries.put(id("nml_cooked_billhook_bass"), sandwich("nomansland:cooked_billhook_bass", "salmon"));
+        entries.put(id("nml_frog_leg"), sandwich("nomansland:frog_leg", "chicken"));
+        entries.put(id("nml_cooked_frog_leg"), sandwich("nomansland:cooked_frog_leg", "chicken"));
+        entries.put(id("nml_maple_syrup_bottle"), sandwich("nomansland:maple_syrup_bottle", "honey"));
+        entries.put(id("nml_pine_nuts"), sandwich("nomansland:pine_nuts", "walnut"));
+        entries.put(id("nml_walnuts"), sandwich("nomansland:walnuts", "walnut"));
+        entries.put(id("nml_pear"), sandwich("nomansland:pear", "pear"));
+        entries.put(id("nml_field_mushroom"), sandwich("nomansland:field_mushroom", "mushroom"));
+        entries.put(id("nml_grilled_mushrooms"), sandwich("nomansland:grilled_mushrooms", "mushroom"));
+
+        entries.put(id("nmd_horse_cuts"), sandwich("nomansdelight:horse_cuts", "beef"));
+        entries.put(id("nmd_cooked_horse_cuts"), sandwich("nomansdelight:cooked_horse_cuts", "beef"));
+        entries.put(id("nmd_venison_chop"), sandwich("nomansdelight:venison_chop", "beef"));
+        entries.put(id("nmd_cooked_venison_chop"), sandwich("nomansdelight:cooked_venison_chop", "beef"));
+        entries.put(id("nmd_billhook_bass_slice"), sandwich("nomansdelight:billhook_bass_slice", "salmon"));
+        entries.put(id("nmd_cooked_billhook_bass_slice"), sandwich("nomansdelight:cooked_billhook_bass_slice", "salmon"));
+
+        entries.put(id("ad_duck_fillet"), sandwich("abnormals_delight:duck_fillet", "chicken"));
+        entries.put(id("ad_cooked_duck_fillet"), sandwich("abnormals_delight:cooked_duck_fillet", "chicken"));
+        entries.put(id("ad_venison_shanks"), sandwich("abnormals_delight:venison_shanks", "beef"));
+        entries.put(id("ad_cooked_venison_shanks"), sandwich("abnormals_delight:cooked_venison_shanks", "beef"));
+        entries.put(id("ad_pike_slice"), sandwich("abnormals_delight:pike_slice", "cod"));
+        entries.put(id("ad_cooked_pike_slice"), sandwich("abnormals_delight:cooked_pike_slice", "cod"));
+        entries.put(id("ad_perch_slice"), sandwich("abnormals_delight:perch_slice", "salmon"));
+        entries.put(id("ad_cooked_perch_slice"), sandwich("abnormals_delight:cooked_perch_slice", "salmon"));
+
+        entries.put(id("md_vegan_patty"), sandwich("minersdelight:vegan_patty", "beef"));
+        entries.put(id("md_cave_carrot"), sandwich("minersdelight:cave_carrot", "carrot"));
+        entries.put(id("md_baked_cave_carrot"), sandwich("minersdelight:baked_cave_carrot", "carrot"));
+        entries.put(id("md_copper_carrot"), sandwich("minersdelight:copper_carrot", "carrot"));
+        entries.put(id("md_bat_wing"), sandwich("minersdelight:bat_wing", "chicken"));
+        entries.put(id("md_smoked_bat_wing"), sandwich("minersdelight:smoked_bat_wing", "chicken"));
+        entries.put(id("md_spider_leg"), sandwich("minersdelight:spider_leg", "spider_eye"));
+        entries.put(id("md_baked_spider_leg"), sandwich("minersdelight:baked_spider_leg", "spider_eye"));
+        entries.put(id("md_arthropod"), sandwich("minersdelight:arthropod", "beef"));
+        entries.put(id("md_cooked_arthropod"), sandwich("minersdelight:cooked_arthropod", "beef"));
+        entries.put(id("md_squid"), sandwich("minersdelight:squid", "squid"));
+        entries.put(id("md_baked_squid"), sandwich("minersdelight:baked_squid", "squid"));
+        entries.put(id("md_glow_squid"), sandwich("minersdelight:glow_squid", "squid"));
+        entries.put(id("md_tentacles"), sandwich("minersdelight:tentacles", "squid"));
+        entries.put(id("md_baked_tentacles"), sandwich("minersdelight:baked_tentacles", "squid"));
+
+        entries.put(id("mnd_hoglin_loin"), sandwich("mynethersdelight:hoglin_loin", "pork"));
+        entries.put(id("mnd_cooked_loin"), sandwich("mynethersdelight:cooked_loin", "pork"));
+        entries.put(id("mnd_raw_sausage"), sandwich("mynethersdelight:raw_sausage", "sausage"));
+        entries.put(id("mnd_cooked_sausage"), sandwich("mynethersdelight:cooked_sausage", "sausage"));
+        entries.put(id("mnd_strider_slice"), sandwich("mynethersdelight:strider_slice", "beef"));
+        entries.put(id("mnd_minced_strider"), sandwich("mynethersdelight:minced_strider", "beef"));
+        entries.put(id("mnd_boiled_egg"), sandwich("mynethersdelight:boiled_egg", "fried_egg"));
+        entries.put(id("mnd_roast_ear"), sandwich("mynethersdelight:roast_ear", "creamed_corn"));
+        entries.put(id("mnd_bullet_pepper"), sandwich("mynethersdelight:bullet_pepper", "bullet_pepper"));
+
+        entries.put(id("cc_lemon"), sandwich("cookscollection:lemon", "lemon"));
+        entries.put(id("cc_fried_potato"), sandwich("cookscollection:fried_potato", "baked_potato"));
     }
 
     public static class Builder {

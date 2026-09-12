@@ -1,0 +1,15 @@
+{
+  "item": "environmental:truffle",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/truffle_0",
+      "modest_meals:item/meal/sandwich/truffle_1",
+      "modest_meals:item/meal/sandwich/truffle_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/truffle_0",
+      "modest_meals:item/meal/wrap/truffle_1",
+      "modest_meals:item/meal/wrap/truffle_2"
+    ]
+  }
+}

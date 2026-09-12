@@ -1,0 +1,15 @@
+{
+  "item": "neapolitan:dried_banana",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/banana_0",
+      "modest_meals:item/meal/sandwich/banana_1",
+      "modest_meals:item/meal/sandwich/banana_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/banana_0",
+      "modest_meals:item/meal/wrap/banana_1",
+      "modest_meals:item/meal/wrap/banana_2"
+    ]
+  }
+}

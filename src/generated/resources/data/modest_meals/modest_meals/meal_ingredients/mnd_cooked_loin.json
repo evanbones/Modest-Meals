@@ -1,0 +1,15 @@
+{
+  "item": "mynethersdelight:cooked_loin",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/pork_0",
+      "modest_meals:item/meal/sandwich/pork_1",
+      "modest_meals:item/meal/sandwich/pork_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/pork_0",
+      "modest_meals:item/meal/wrap/pork_1",
+      "modest_meals:item/meal/wrap/pork_2"
+    ]
+  }
+}

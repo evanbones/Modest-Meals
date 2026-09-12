@@ -1,0 +1,15 @@
+{
+  "item": "abnormals_delight:cooked_pike_slice",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/cod_0",
+      "modest_meals:item/meal/sandwich/cod_1",
+      "modest_meals:item/meal/sandwich/cod_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/cod_0",
+      "modest_meals:item/meal/wrap/cod_1",
+      "modest_meals:item/meal/wrap/cod_2"
+    ]
+  }
+}

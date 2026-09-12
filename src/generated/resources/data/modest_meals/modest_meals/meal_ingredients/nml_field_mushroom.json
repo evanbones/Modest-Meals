@@ -1,0 +1,15 @@
+{
+  "item": "nomansland:field_mushroom",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/mushroom_0",
+      "modest_meals:item/meal/sandwich/mushroom_1",
+      "modest_meals:item/meal/sandwich/mushroom_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/mushroom_0",
+      "modest_meals:item/meal/wrap/mushroom_1",
+      "modest_meals:item/meal/wrap/mushroom_2"
+    ]
+  }
+}

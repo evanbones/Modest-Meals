@@ -1,0 +1,15 @@
+{
+  "item": "nomansdelight:cooked_horse_cuts",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/beef_0",
+      "modest_meals:item/meal/sandwich/beef_1",
+      "modest_meals:item/meal/sandwich/beef_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/beef_0",
+      "modest_meals:item/meal/wrap/beef_1",
+      "modest_meals:item/meal/wrap/beef_2"
+    ]
+  }
+}

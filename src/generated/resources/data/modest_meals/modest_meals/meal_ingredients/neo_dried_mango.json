@@ -1,0 +1,15 @@
+{
+  "item": "neapolitan:dried_mango",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/mango_0",
+      "modest_meals:item/meal/sandwich/mango_1",
+      "modest_meals:item/meal/sandwich/mango_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/mango_0",
+      "modest_meals:item/meal/wrap/mango_1",
+      "modest_meals:item/meal/wrap/mango_2"
+    ]
+  }
+}

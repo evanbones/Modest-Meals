@@ -1,0 +1,15 @@
+{
+  "item": "neapolitan:chocolate_bar",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/chocolate_0",
+      "modest_meals:item/meal/sandwich/chocolate_1",
+      "modest_meals:item/meal/sandwich/chocolate_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/chocolate_0",
+      "modest_meals:item/meal/wrap/chocolate_1",
+      "modest_meals:item/meal/wrap/chocolate_2"
+    ]
+  }
+}

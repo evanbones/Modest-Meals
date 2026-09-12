@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:passion_fruit",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/passion_fruit_0",
+      "modest_meals:item/meal/sandwich/passion_fruit_1",
+      "modest_meals:item/meal/sandwich/passion_fruit_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/passion_fruit_0",
+      "modest_meals:item/meal/wrap/passion_fruit_1",
+      "modest_meals:item/meal/wrap/passion_fruit_2"
+    ]
+  }
+}
