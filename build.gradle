@@ -167,6 +167,7 @@ dependencies {
 
     // Raised
     compileOnly "maven.modrinth:raised:NeoForge-${raised_version}"
+    runtimeOnly "maven.modrinth:raised:NeoForge-${raised_version}"
 
     // Farmer's Delight
     compileOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"

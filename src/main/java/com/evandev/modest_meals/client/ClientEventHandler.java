@@ -93,7 +93,7 @@ public class ClientEventHandler {
         );
 
         if (RaisedCompat.isLoaded()) {
-            RaisedLayerSync.linkToHotbarIfUnconfigured(AIR_LAYER);
+            RaisedLayerSync.registerAndLinkToHotbar(AIR_LAYER);
         }
 
         event.registerAbove(
@@ -122,7 +122,7 @@ public class ClientEventHandler {
         );
 
         if (RaisedCompat.isLoaded()) {
-            RaisedLayerSync.linkToHotbarIfUnconfigured(ARMOR_LAYER);
+            RaisedLayerSync.registerAndLinkToHotbar(ARMOR_LAYER);
         }
 
         event.registerAbove(
@@ -146,7 +146,7 @@ public class ClientEventHandler {
         );
 
         if (RaisedCompat.isLoaded()) {
-            RaisedLayerSync.linkToHotbarIfUnconfigured(STAMINA_ARMOR_LAYER);
+            RaisedLayerSync.registerAndLinkToHotbar(STAMINA_ARMOR_LAYER);
         }
 
         event.registerAbove(
@@ -170,7 +170,7 @@ public class ClientEventHandler {
         );
 
         if (RaisedCompat.isLoaded()) {
-            RaisedLayerSync.linkToHotbarIfUnconfigured(STAMINA_FOOD_LAYER);
+            RaisedLayerSync.registerAndLinkToHotbar(STAMINA_FOOD_LAYER);
         }
 
         event.registerAbove(
