@@ -11,9 +11,6 @@ public final class MealEmiCategories {
     public static final EmiRecipeCategory MEAL_CRAFTING = new EmiRecipeCategory(
             id("meal_crafting"), EmiStack.of(ModItems.SANDWICH.get()));
 
-    public static final EmiRecipeCategory MEAL_INGREDIENT = new EmiRecipeCategory(
-            id("meal_ingredient"), EmiStack.of(ModItems.SKEWER.get()));
-
     private MealEmiCategories() {
     }
 

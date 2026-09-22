@@ -396,18 +396,11 @@
   "tag.item.modest_meals.not_an_ingredient": "Not a Meal Ingredient",
   "emi.category.modest_meals.meal_crafting": "Meal Crafting",
   "emi.category.modest_meals.meal_cooking": "Meal Cooking",
-  "emi.category.modest_meals.meal_ingredient": "Meal Ingredients",
   "emi.modest_meals.any_ingredient": "Any Ingredient",
   "emi.modest_meals.supported_ingredient": "Supported Ingredient",
   "emi.modest_meals.unsupported_ingredient": "Unsupported Ingredient",
   "emi.modest_meals.ingredient_count.range": "Uses %1$s-%2$s ingredients",
   "emi.modest_meals.ingredient_count.exact": "Uses exactly %s",
   "emi.modest_meals.pool_size": "%s items qualify",
-  "emi.modest_meals.container": "Served in this",
-  "emi.modest_meals.ingredient.health": "Health %s",
-  "emi.modest_meals.ingredient.stamina": "Stamina %s",
-  "emi.modest_meals.ingredient.temporary_health": "Temporary hearts %s",
-  "emi.modest_meals.ingredient.effect": "%1$s (potency %2$s)",
-  "emi.modest_meals.ingredient.time_bonus": "+%ss effect time",
-  "emi.modest_meals.ingredient.plain": "Adds only what it restores."
+  "emi.modest_meals.container": "Served in this"
 }

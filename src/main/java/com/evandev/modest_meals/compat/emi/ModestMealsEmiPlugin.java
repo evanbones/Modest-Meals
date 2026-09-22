@@ -33,15 +33,10 @@ public class ModestMealsEmiPlugin implements EmiPlugin {
             }
         }
 
-        registry.addCategory(MealEmiCategories.MEAL_INGREDIENT);
-        for (EmiStack stack : pool) {
-            registry.addRecipe(new MealIngredientEmiRecipe(stack));
-        }
-
         if (FarmersDelightCompat.isLoaded()) {
             CookingPotEmiSupport.register(registry, pool);
         }
 
-        Constants.LOG.debug("Registered {} meal ingredients with EMI", pool.size());
+        Constants.LOG.debug("Registered EMI recipes for Modest Meals ({} pool ingredients)", pool.size());
     }
 }
