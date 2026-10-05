@@ -155,10 +155,11 @@
       "target": "culturaldelights:refried_beans"
     },
     {
-      "health": 0.0,
-      "stamina": 0.5,
-      "target": "culturaldelights:cinnamon",
-      "time_bonus": 50
+      "effect": "modest_meals:cold_resistance",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "culturaldelights:cinnamon"
     },
     {
       "health": 0.5,
@@ -212,6 +213,50 @@
       "health": 1.5,
       "stamina": 1.0,
       "target": "culturaldelights:cooked_calamari"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:crops/lemon"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.5,
+      "target": "culturaldelights:lemon"
+    },
+    {
+      "health": 0.0,
+      "stamina": 0.5,
+      "target": "culturaldelights:salt",
+      "time_bonus": 60
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:cooking_oil",
+      "time_bonus": 40
+    },
+    {
+      "stamina": 1.5,
+      "target": "culturaldelights:fried_potato"
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:rustic_loaf_slice",
+      "time_bonus": 25
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.0,
+      "target": "culturaldelights:marshmallow"
     }
   ]
 }

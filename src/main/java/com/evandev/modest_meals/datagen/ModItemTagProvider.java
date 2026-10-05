@@ -21,7 +21,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     private static final String FARMERS_DELIGHT = "farmersdelight";
     private static final String CULTURAL_DELIGHTS = "culturaldelights";
-    private static final String COOKS_COLLECTION = "cookscollection";
     private static final String ABUNDANT_DELIGHT = "abundantdelight";
     private static final String MINERS_DELIGHT = "minersdelight";
     private static final String MY_NETHERS_DELIGHT = "mynethersdelight";
@@ -208,7 +207,15 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "whiskey",
                 "rum",
                 "acid",
-                "vinegar");
+                "vinegar",
+                "lemonade",
+                "chocolate_muffin",
+                "lemon_muffin",
+                "fish_and_chips",
+                "rustic_loaf",
+                "marshmallow_on_a_stick",
+                "caramelized_marshmallow_on_a_stick",
+                "charred_marshmallow_on_a_stick");
 
         notAnIngredient.addOptionalTag(convention("foods/ice_cream"));
         notAnIngredient.addOptionalTag(convention("foods/cake"));
@@ -218,13 +225,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "fermented_drinks",
                 "wines",
                 "distillates");
-
-        addOptional(notAnIngredient, COOKS_COLLECTION,
-                "lemonade",
-                "chocolate_muffin",
-                "lemon_muffin",
-                "fish_and_chips",
-                "rustic_loaf");
 
         addOptional(notAnIngredient, ABUNDANT_DELIGHT,
                 "rabbit_sandwich",
@@ -479,7 +479,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptional(doughs, MY_NETHERS_DELIGHT, "ghast_sourdough");
 
         var breads = tag(BREADS);
-        addOptional(breads, COOKS_COLLECTION, "rustic_loaf_slice");
+        addOptional(breads, CULTURAL_DELIGHTS, "rustic_loaf_slice");
         addOptional(breads, NO_MANS_LAND, "hardtack");
         addOptional(breads, NEAPOLITAN, "banana_bread", "adzuki_bun", "cinnamon_bagel");
         addOptional(breads, BOUNTIFUL_FARES, "maize_bread", "artisan_bread");
@@ -542,13 +542,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptional(tag(CORN), CULTURAL_DELIGHTS, "corn_cob");
         addOptional(tag(CORN), BREWIN_AND_CHEWIN, "corn");
         addOptional(tag(CORN), BOUNTIFUL_FARES, "maize");
-        addOptional(tag(LEMONS), COOKS_COLLECTION, "lemon");
+        addOptional(tag(LEMONS), CULTURAL_DELIGHTS, "lemon");
         addOptional(tag(LEMONS), BOUNTIFUL_FARES, "lemon");
         addOptional(tag(MANGOES), NEAPOLITAN, "mango");
         addOptional(tag(PEARS), NO_MANS_LAND, "pear");
 
         var fruits = tag(FRUITS);
-        addOptional(fruits, COOKS_COLLECTION, "lemon");
+        addOptional(fruits, CULTURAL_DELIGHTS, "lemon");
         addOptional(fruits, NEAPOLITAN, "mango", "dried_mango", "strawberries", "white_strawberries", "banana", "dried_banana");
         addOptional(fruits, ENVIRONMENTAL, "cherries", "plum");
         addOptional(fruits, BOUNTIFUL_FARES, "orange", "lemon", "plum", "hoary_apple", "passion_fruit");

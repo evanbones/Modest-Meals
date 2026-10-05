@@ -104,6 +104,8 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("butter"), sandwich("culturaldelights:butter", "butter"));
         entries.put(id("cheese_wedge"), sandwich("culturaldelights:cheese_wedge", "cheese"));
         entries.put(id("cooked_sausage"), sandwich("culturaldelights:cooked_sausage", "sausage"));
+        entries.put(id("lemon"), sandwich("culturaldelights:lemon", "lemon"));
+        entries.put(id("fried_potato"), sandwich("culturaldelights:fried_potato", "baked_potato"));
         entries.put(id("raw_sausage"), sandwich("culturaldelights:raw_sausage", "sausage"));
         entries.put(id("popcorn"), sandwich("culturaldelights:popcorn", "popcorn"));
         entries.put(id("creamed_corn"), sandwich("culturaldelights:creamed_corn", "creamed_corn"));
@@ -247,9 +249,6 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("mnd_boiled_egg"), sandwich("mynethersdelight:boiled_egg", "fried_egg"));
         entries.put(id("mnd_roast_ear"), sandwich("mynethersdelight:roast_ear", "creamed_corn"));
         entries.put(id("mnd_bullet_pepper"), sandwich("mynethersdelight:bullet_pepper", "bullet_pepper"));
-
-        entries.put(id("cc_lemon"), sandwich("cookscollection:lemon", "lemon"));
-        entries.put(id("cc_fried_potato"), sandwich("cookscollection:fried_potato", "baked_potato"));
     }
 
     public static class Builder {

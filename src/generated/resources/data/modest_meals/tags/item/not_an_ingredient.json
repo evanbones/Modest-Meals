@@ -315,6 +315,38 @@
       "required": false
     },
     {
+      "id": "culturaldelights:lemonade",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:chocolate_muffin",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:lemon_muffin",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:fish_and_chips",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:rustic_loaf",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:marshmallow_on_a_stick",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:caramelized_marshmallow_on_a_stick",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:charred_marshmallow_on_a_stick",
+      "required": false
+    },
+    {
       "id": "#c:foods/ice_cream",
       "required": false
     },
@@ -336,26 +368,6 @@
     },
     {
       "id": "#brewinandchewin:distillates",
-      "required": false
-    },
-    {
-      "id": "cookscollection:lemonade",
-      "required": false
-    },
-    {
-      "id": "cookscollection:chocolate_muffin",
-      "required": false
-    },
-    {
-      "id": "cookscollection:lemon_muffin",
-      "required": false
-    },
-    {
-      "id": "cookscollection:fish_and_chips",
-      "required": false
-    },
-    {
-      "id": "cookscollection:rustic_loaf",
       "required": false
     },
     {

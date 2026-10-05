@@ -75,10 +75,6 @@ public class IngredientProfileProvider implements DataProvider {
         return "culturaldelights:" + path;
     }
 
-    private static String cc(String path) {
-        return "cookscollection:" + path;
-    }
-
     private static String md(String path) {
         return "minersdelight:" + path;
     }
@@ -125,7 +121,6 @@ public class IngredientProfileProvider implements DataProvider {
         misc(files.computeIfAbsent("misc", key -> new Builder()));
         dishes(files.computeIfAbsent("dishes", key -> new Builder()));
         culturalDelights(files.computeIfAbsent("cultural_delights", key -> new Builder()));
-        cooksCollection(files.computeIfAbsent("cooks_collection", key -> new Builder()));
         minersDelight(files.computeIfAbsent("miners_delight", key -> new Builder()));
         myNethersDelight(files.computeIfAbsent("my_nethers_delight", key -> new Builder()));
         noMansLand(files.computeIfAbsent("no_mans_land", key -> new Builder()));
@@ -320,7 +315,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(cd("agave"), timeBoost(0.5F, 1.0F, 40));
 
         builder.add(cd("refried_beans"), food(2.0F, 2.0F));
-        builder.add(cd("cinnamon"), timeBoost(0.0F, 0.5F, 50));
+        builder.add(cd("cinnamon"), effect(0.5F, 1.0F, "cold_resistance", MEDIUM));
         builder.add(cd("butter"), food(0.5F, 1.0F));
         builder.add(cd("cheese_wedge"), food(1.0F, 2.0F));
         builder.add(cd("raw_sausage"), dish(0.5F, 0.5F, 90));
@@ -332,17 +327,17 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(cd("glow_squid"), effect(1.0F, 0.5F, "glowing", MEDIUM));
         builder.add(cd("raw_calamari"), dish(0.5F, null, 110));
         builder.add(cd("cooked_calamari"), food(1.5F, 1.0F));
-    }
 
-    private void cooksCollection(Builder builder) {
         builder.addTag("c:crops/lemon", 145, effect(0.5F, 1.5F, "speed", WEAK));
-        builder.add(cc("lemon"), effect(0.5F, 1.5F, "speed", WEAK));
+        builder.add(cd("lemon"), effect(0.5F, 1.5F, "speed", WEAK));
 
-        builder.add(cc("salt"), timeBoost(0.0F, 0.5F, 60));
-        builder.add(cc("cooking_oil"), timeBoost(0.5F, 1.0F, 40));
+        builder.add(cd("salt"), timeBoost(0.0F, 0.5F, 60));
+        builder.add(cd("cooking_oil"), timeBoost(0.5F, 1.0F, 40));
 
-        builder.add(cc("fried_potato"), dish(null, 1.5F));
-        builder.add(cc("rustic_loaf_slice"), timeBoost(1.0F, 2.0F, 25));
+        builder.add(cd("fried_potato"), dish(null, 1.5F));
+        builder.add(cd("rustic_loaf_slice"), timeBoost(1.0F, 2.0F, 25));
+
+        builder.add(cd("marshmallow"), effect(0.5F, 1.0F, "speed", WEAK));
     }
 
     private void minersDelight(Builder builder) {
@@ -375,8 +370,8 @@ public class IngredientProfileProvider implements DataProvider {
     }
 
     private void myNethersDelight(Builder builder) {
-        builder.add(mnd("bullet_pepper"), effect(0.5F, 1.0F, "fire_resistance", MEDIUM));
-        builder.add(mnd("pepper_powder"), effect(0.0F, 0.5F, "fire_resistance", MEDIUM));
+        builder.add(mnd("bullet_pepper"), effect(0.5F, 1.0F, "cold_resistance", MEDIUM));
+        builder.add(mnd("pepper_powder"), effect(0.0F, 0.5F, "cold_resistance", MEDIUM));
 
         builder.addTag("c:foods/raw_hoglin", 140, food(2.0F, 1.0F));
         builder.addTag("c:foods/cooked_hoglin", 145, food(6.0F, 2.0F));

@@ -83,8 +83,8 @@
       "traits": [
         {
           "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 300,
+          "effect": "modest_meals:cold_resistance",
+          "duration": 1200,
           "amplifier": 0
         }
       ]
@@ -94,8 +94,8 @@
       "traits": [
         {
           "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 400,
+          "effect": "modest_meals:cold_resistance",
+          "duration": 1600,
           "amplifier": 0
         }
       ]
@@ -105,8 +105,8 @@
       "traits": [
         {
           "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 600,
+          "effect": "modest_meals:cold_resistance",
+          "duration": 2400,
           "amplifier": 0
         },
         {
@@ -121,8 +121,8 @@
       "traits": [
         {
           "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 900,
+          "effect": "modest_meals:cold_resistance",
+          "duration": 3600,
           "amplifier": 0
         },
         {
@@ -137,8 +137,8 @@
       "traits": [
         {
           "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 300,
+          "effect": "modest_meals:cold_resistance",
+          "duration": 1200,
           "amplifier": 0
         }
       ]
@@ -148,8 +148,8 @@
       "traits": [
         {
           "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 900,
+          "effect": "modest_meals:cold_resistance",
+          "duration": 3600,
           "amplifier": 0
         },
         {
@@ -258,8 +258,8 @@
       "traits": [
         {
           "type": "modest_meals:effect_grant",
-          "effect": "minecraft:fire_resistance",
-          "duration": 600,
+          "effect": "modest_meals:cold_resistance",
+          "duration": 2400,
           "amplifier": 0
         },
         {
