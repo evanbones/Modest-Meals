@@ -53,6 +53,15 @@ public abstract class StaminaHelper {
         }
     }
 
+    public static void forget(Player player) {
+        Map<UUID, PlayerStamina> data = player.level().isClientSide() ? CLIENT_DATA : SERVER_DATA;
+        data.computeIfPresent(player.getUUID(), (uuid, existing) -> existing.getPlayer() == player ? null : existing);
+    }
+
+    public static void clearClient() {
+        CLIENT_DATA.clear();
+    }
+
     public static void clear() {
         SERVER_DATA.clear();
         CLIENT_DATA.clear();

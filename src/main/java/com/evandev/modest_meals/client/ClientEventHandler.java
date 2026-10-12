@@ -10,6 +10,7 @@ import com.evandev.modest_meals.compat.raised.RaisedLayerSync;
 import com.evandev.modest_meals.config.HudLayoutOption;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.registry.ModItems;
+import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.KeyMapping;
@@ -33,6 +34,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.nio.file.Path;
@@ -244,6 +246,18 @@ public class ClientEventHandler {
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void onItemTooltip(ItemTooltipEvent event) {
             FoodItemTooltips.onTooltip(event);
+        }
+
+        @SubscribeEvent
+        public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
+            StaminaHelper.clearClient();
+        }
+
+        @SubscribeEvent
+        public static void onEntityLeaveLevel(EntityLeaveLevelEvent event) {
+            if (event.getLevel().isClientSide() && event.getEntity() instanceof Player player) {
+                StaminaHelper.forget(player);
+            }
         }
 
         @SubscribeEvent
