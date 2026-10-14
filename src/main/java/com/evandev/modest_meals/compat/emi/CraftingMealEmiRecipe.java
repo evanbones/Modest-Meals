@@ -12,7 +12,10 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 public class CraftingMealEmiRecipe extends MealEmiRecipe {
 
@@ -48,15 +51,35 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
                 type.isShaped() ? shapedSlots(type, any) : flatSlots(type, any, SLOTS), id, output);
     }
 
+    public static Optional<CraftingMealEmiRecipe> overrideOf(MealType type, MealType.ItemOverride override, int index) {
+        EmiStack output = overrideOutput(override);
+        if (output.isEmpty()) {
+            return Optional.empty();
+        }
+        return overrideFillings(override).map(fillings -> new CraftingMealEmiRecipe(type, null,
+                type.isShaped() ? shapedSlots(type, fillings) : fixedSlots(type, fillings, SLOTS),
+                overrideId("meal_crafting", type, index), output));
+    }
+
     private static List<EmiIngredient> shapedSlots(MealType type, EmiIngredient any) {
+        return shapedSlots(type, symbol -> any);
+    }
+
+    private static List<EmiIngredient> shapedSlots(MealType type, List<EmiIngredient> fillings) {
+        Iterator<EmiIngredient> next = fillings.iterator();
+        return shapedSlots(type, symbol -> next.hasNext() ? next.next() : EmiStack.EMPTY);
+    }
+
+    private static List<EmiIngredient> shapedSlots(MealType type, Function<Character, EmiIngredient> free) {
         MealType.Shape shape = type.shape().orElseThrow();
         List<EmiIngredient> laid = new ArrayList<>(Collections.nCopies(SLOTS, (EmiIngredient) EmiStack.EMPTY));
         for (int row = 0; row < Math.min(GRID, shape.height()); row++) {
             for (int column = 0; column < Math.min(GRID, shape.width()); column++) {
                 char symbol = shape.symbolAt(row, column);
-                if (symbol != ' ') {
-                    laid.set(row * GRID + column, keyIngredient(shape, symbol, any));
+                if (symbol == ' ') {
+                    continue;
                 }
+                laid.set(row * GRID + column, shape.isAny(symbol) ? free.apply(symbol) : keyIngredient(shape, symbol, EmiStack.EMPTY));
             }
         }
         return laid;
@@ -88,6 +111,8 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
         }
 
         SlotWidget result = widgets.addSlot(output, 92, 14).large(true).recipeContext(this);
-        result.appendTooltip(ingredientCountLine());
+        if (!isOverride()) {
+            result.appendTooltip(ingredientCountLine());
+        }
     }
 }

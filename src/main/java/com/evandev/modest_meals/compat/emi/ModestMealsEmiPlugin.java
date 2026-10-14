@@ -30,6 +30,9 @@ public class ModestMealsEmiPlugin implements EmiPlugin {
                 if (type.requiresSupportedIngredients()) {
                     registry.addRecipe(CraftingMealEmiRecipe.dubiousOf(type, pool));
                 }
+                for (int i = 0; i < type.itemOverrides().size(); i++) {
+                    CraftingMealEmiRecipe.overrideOf(type, type.itemOverrides().get(i), i).ifPresent(registry::addRecipe);
+                }
             }
         }
 

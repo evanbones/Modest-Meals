@@ -18,6 +18,7 @@ import net.minecraft.tags.TagKey;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class MealEmiRecipe implements EmiRecipe {
 
@@ -90,6 +91,36 @@ public abstract class MealEmiRecipe implements EmiRecipe {
         return BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(value))
                 .<EmiIngredient>map(EmiStack::of)
                 .orElse(EmiStack.EMPTY);
+    }
+
+    protected static ResourceLocation overrideId(String kind, MealType type, int index) {
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID,
+                "/" + kind + "_override/" + type.id().getNamespace() + "/" + type.id().getPath() + "/" + index);
+    }
+
+    protected static Optional<List<EmiIngredient>> overrideFillings(MealType.ItemOverride override) {
+        List<EmiIngredient> fillings = override.matchers().stream().map(EmiIngredient::of).toList();
+        return fillings.stream().anyMatch(EmiIngredient::isEmpty) ? Optional.empty() : Optional.of(fillings);
+    }
+
+    protected static EmiStack overrideOutput(MealType.ItemOverride override) {
+        return BuiltInRegistries.ITEM.getOptional(override.result())
+                .map(item -> EmiStack.of(item, override.count()))
+                .orElse(EmiStack.EMPTY);
+    }
+
+    protected static List<EmiIngredient> fixedSlots(MealType type, List<EmiIngredient> fillings, int capacity) {
+        List<EmiIngredient> laid = new ArrayList<>(baseSlots(type));
+        laid.addAll(fillings);
+        while (laid.size() > capacity) {
+            laid.removeLast();
+        }
+        laid.addAll(Collections.nCopies(capacity - laid.size(), EmiStack.EMPTY));
+        return laid;
+    }
+
+    protected boolean isOverride() {
+        return any == null;
     }
 
     protected static List<EmiIngredient> flatSlots(MealType type, EmiIngredient any, int capacity) {

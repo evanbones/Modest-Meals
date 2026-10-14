@@ -90,6 +90,11 @@ public record MealType(
                 requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, List.of());
     }
 
+    public MealType withItemOverrides(List<ItemOverride> overrides) {
+        return new MealType(id, item, station, base, shape, minIngredients, maxIngredients, container, priority,
+                requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, overrides);
+    }
+
     private static int indexMatching(List<ItemStack> stacks, Ingredient ingredient) {
         for (int i = 0; i < stacks.size(); i++) {
             if (ingredient.test(stacks.get(i))) {
@@ -253,24 +258,37 @@ public record MealType(
         }
     }
 
-    public record ItemOverride(ResourceLocation result, int count, List<String> ingredients) {
+    public record ItemOverride(ResourceLocation result, int count, List<String> ingredients, boolean replaceRecipes) {
         public static final Codec<ItemOverride> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ResourceLocation.CODEC.fieldOf("result").forGetter(ItemOverride::result),
                 Codec.INT.optionalFieldOf("count", 1).forGetter(ItemOverride::count),
-                Codec.STRING.listOf().fieldOf("ingredients").forGetter(ItemOverride::ingredients)
+                Codec.STRING.listOf().fieldOf("ingredients").forGetter(ItemOverride::ingredients),
+                Codec.BOOL.optionalFieldOf("replace_recipes", false).forGetter(ItemOverride::replaceRecipes)
         ).apply(instance, ItemOverride::new));
+
+        public ItemOverride(ResourceLocation result, int count, List<String> ingredients) {
+            this(result, count, ingredients, false);
+        }
 
         public ItemOverride(ResourceLocation result, List<String> ingredients) {
             this(result, 1, ingredients);
         }
 
-        private static Ingredient parseIngredient(String spec) {
-            if (spec.startsWith("#")) {
-                return Ingredient.of(TagKey.create(Registries.ITEM, ResourceLocation.parse(spec.substring(1))));
+        public static Ingredient parseIngredient(String spec) {
+            List<Ingredient.Value> values = new ArrayList<>();
+            for (String option : spec.split("\\|")) {
+                if (option.startsWith("#")) {
+                    values.add(new Ingredient.TagValue(TagKey.create(Registries.ITEM, ResourceLocation.parse(option.substring(1)))));
+                } else {
+                    BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(option))
+                            .ifPresent(item -> values.add(new Ingredient.ItemValue(new ItemStack(item))));
+                }
             }
-            return BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(spec))
-                    .map(Ingredient::of)
-                    .orElse(Ingredient.EMPTY);
+            return values.isEmpty() ? Ingredient.EMPTY : Ingredient.fromValues(values.stream());
+        }
+
+        public List<Ingredient> matchers() {
+            return ingredients.stream().map(ItemOverride::parseIngredient).toList();
         }
 
         public boolean matches(List<ItemStack> mealIngredients) {
@@ -280,24 +298,24 @@ public record MealType(
             if (nonNull.size() != ingredients.size()) {
                 return false;
             }
-            List<Ingredient> matchers = ingredients.stream()
-                    .map(ItemOverride::parseIngredient)
-                    .toList();
-            List<ItemStack> remaining = new ArrayList<>(nonNull);
-            for (Ingredient matcher : matchers) {
-                int found = -1;
-                for (int i = 0; i < remaining.size(); i++) {
-                    if (matcher.test(remaining.get(i))) {
-                        found = i;
-                        break;
-                    }
-                }
-                if (found < 0) {
-                    return false;
-                }
-                remaining.remove(found);
+            return assign(matchers(), 0, nonNull, new boolean[nonNull.size()]);
+        }
+
+        private static boolean assign(List<Ingredient> matchers, int index, List<ItemStack> stacks, boolean[] used) {
+            if (index == matchers.size()) {
+                return true;
             }
-            return true;
+            Ingredient matcher = matchers.get(index);
+            for (int i = 0; i < stacks.size(); i++) {
+                if (!used[i] && matcher.test(stacks.get(i))) {
+                    used[i] = true;
+                    if (assign(matchers, index + 1, stacks, used)) {
+                        return true;
+                    }
+                    used[i] = false;
+                }
+            }
+            return false;
         }
     }
 }

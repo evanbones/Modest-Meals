@@ -1,6 +1,94 @@
 {
   "id": "modest_meals:sushi",
   "item": "modest_meals:sushi",
+  "item_overrides": [
+    {
+      "count": 2,
+      "ingredients": [
+        "farmersdelight:salmon_slice",
+        "farmersdelight:salmon_slice"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:salmon_roll"
+    },
+    {
+      "count": 2,
+      "ingredients": [
+        "farmersdelight:cod_slice",
+        "farmersdelight:cod_slice"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:cod_roll"
+    },
+    {
+      "ingredients": [
+        "#c:foods/vegetable"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:kelp_roll"
+    },
+    {
+      "ingredients": [
+        "#culturaldelights:cucumbers",
+        "#culturaldelights:avocados"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:midori_roll"
+    },
+    {
+      "count": 4,
+      "ingredients": [
+        "#c:foods/cooked_egg",
+        "#c:foods/cooked_egg"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:egg_roll"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_chicken",
+        "#c:crops/beetroot"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:chicken_roll"
+    },
+    {
+      "count": 2,
+      "ingredients": [
+        "minecraft:pufferfish",
+        "minecraft:pufferfish"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:pufferfish_roll"
+    },
+    {
+      "count": 2,
+      "ingredients": [
+        "minecraft:tropical_fish",
+        "minecraft:tropical_fish"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:tropical_roll"
+    },
+    {
+      "count": 2,
+      "ingredients": [
+        "culturaldelights:raw_calamari",
+        "culturaldelights:raw_calamari"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:calamari_roll"
+    },
+    {
+      "count": 2,
+      "ingredients": [
+        "nomansdelight:billhook_bass_slice",
+        "nomansdelight:billhook_bass_slice"
+      ],
+      "replace_recipes": true,
+      "result": "nomansdelight:billhook_bass_roll"
+    }
+  ],
   "max_ingredients": 2,
   "priority": 10,
   "shape": {

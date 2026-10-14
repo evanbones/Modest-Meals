@@ -9,6 +9,178 @@
   "container": "minecraft:bowl",
   "id": "modest_meals:soup",
   "item": "modest_meals:soup",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "#c:foods/raw_beef",
+        "#c:crops/carrot",
+        "#c:crops/potato"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:beef_stew"
+    },
+    {
+      "ingredients": [
+        "#c:foods/raw_chicken",
+        "#c:crops/carrot",
+        "#c:foods/leafy_green",
+        "#c:foods/vegetable"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:chicken_soup"
+    },
+    {
+      "ingredients": [
+        "#c:crops/carrot",
+        "#c:crops/potato",
+        "#c:crops/beetroot",
+        "#c:foods/leafy_green"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:vegetable_soup"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_fish",
+        "minecraft:dried_kelp",
+        "minecraft:dried_kelp"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:fish_stew"
+    },
+    {
+      "ingredients": [
+        "#c:foods/safe_raw_fish",
+        "farmersdelight:tomato_sauce",
+        "#c:crops/onion"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:fish_stew"
+    },
+    {
+      "ingredients": [
+        "farmersdelight:pumpkin_slice",
+        "#c:foods/leafy_green",
+        "#c:foods/raw_pork|culturaldelights:tofu"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:pumpkin_soup"
+    },
+    {
+      "ingredients": [
+        "#c:foods/raw_cod",
+        "#c:crops/potato",
+        "#c:eggs",
+        "#c:crops/tomato"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:baked_cod_stew"
+    },
+    {
+      "ingredients": [
+        "#c:crops/onion",
+        "#c:crops/onion",
+        "#c:foods/bread"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:onion_soup"
+    },
+    {
+      "ingredients": [
+        "minecraft:cooked_porkchop",
+        "#c:crops/carrot",
+        "#c:foods/corn|bountifulfares:maize"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:bountiful_stew"
+    },
+    {
+      "ingredients": [
+        "bountifulfares:leek",
+        "bountifulfares:leek",
+        "bountifulfares:leek"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:leek_stew"
+    },
+    {
+      "ingredients": [
+        "minecraft:apple",
+        "#c:foods/elderberries",
+        "#c:foods/elderberries"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:apple_stew"
+    },
+    {
+      "ingredients": [
+        "bountifulfares:leek",
+        "#c:coconut_halves",
+        "#c:coconut_halves"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:coconut_stew"
+    },
+    {
+      "ingredients": [
+        "#c:foods/boiled_egg",
+        "#c:foods/cooked_egg",
+        "#c:foods/cooked_egg",
+        "#c:foods/onion"
+      ],
+      "replace_recipes": true,
+      "result": "mynethersdelight:egg_soup"
+    },
+    {
+      "ingredients": [
+        "mynethersdelight:hoglin_loin|mynethersdelight:hoglin_sausage|mynethersdelight:roasted_sausage|mynethersdelight:cooked_loin",
+        "#c:crops/potato",
+        "#c:crops/carrot",
+        "mynethersdelight:bullet_pepper|mynethersdelight:pepper_powder"
+      ],
+      "replace_recipes": true,
+      "result": "mynethersdelight:spicy_hoglin_stew"
+    },
+    {
+      "ingredients": [
+        "#c:foods/puffball_mushrooms",
+        "#c:crops/onion",
+        "minecraft:egg"
+      ],
+      "replace_recipes": true,
+      "result": "abundantdelight:puffball_soup"
+    },
+    {
+      "ingredients": [
+        "neapolitan:adzuki_beans",
+        "neapolitan:adzuki_beans",
+        "#c:crops/beetroot",
+        "#c:crops/tomato",
+        "minecraft:brown_mushroom"
+      ],
+      "replace_recipes": true,
+      "result": "neapolitan:adzuki_stew"
+    },
+    {
+      "ingredients": [
+        "autumnity:foul_berries",
+        "autumnity:foul_berries",
+        "minecraft:spider_eye",
+        "#c:crops/onion"
+      ],
+      "replace_recipes": true,
+      "result": "autumnity:foul_soup"
+    },
+    {
+      "ingredients": [
+        "infernalexp:blindsight_tongue",
+        "minecraft:crimson_fungus",
+        "minecraft:warped_fungus"
+      ],
+      "replace_recipes": true,
+      "result": "infernalexp:blindsight_tongue_stew"
+    }
+  ],
   "min_ingredients": 2,
   "station": "cooking_pot"
 }

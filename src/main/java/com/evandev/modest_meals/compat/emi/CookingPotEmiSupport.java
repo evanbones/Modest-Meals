@@ -52,6 +52,11 @@ public final class CookingPotEmiSupport {
                 registry.addRecipe(CookingMealEmiRecipe.dubiousOf(
                         type.get(), cooking.getCookTime(), cooking.getExperience(), pool));
             }
+            List<MealType.ItemOverride> overrides = type.get().itemOverrides();
+            for (int i = 0; i < overrides.size(); i++) {
+                CookingMealEmiRecipe.overrideOf(type.get(), overrides.get(i), i,
+                        cooking.getCookTime(), cooking.getExperience()).ifPresent(registry::addRecipe);
+            }
         }
 
         if (!backing.isEmpty()) {

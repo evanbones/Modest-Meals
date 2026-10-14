@@ -88,6 +88,11 @@
       "target": "minecraft:nautilus_shell"
     },
     {
+      "health": 0.0,
+      "stamina": 0.5,
+      "target": "minecraft:ink_sac"
+    },
+    {
       "effect": "modest_meals:luck",
       "health": 0.0,
       "potency": 21,

@@ -16,6 +16,7 @@ import vectorwing.farmersdelight.common.utility.RecipeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CookingMealEmiRecipe extends MealEmiRecipe {
 
@@ -62,6 +63,17 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
         EmiStack output = type.resolveItem().map(item -> EmiStack.of(MealItem.makeDubious(item))).orElse(EmiStack.EMPTY);
         return new CookingMealEmiRecipe(id, type, any,
                 flatSlots(type, any, POT_SLOTS), cookTicks, experience, output);
+    }
+
+    public static Optional<CookingMealEmiRecipe> overrideOf(MealType type, MealType.ItemOverride override, int index,
+                                                            int cookTicks, float experience) {
+        EmiStack output = overrideOutput(override);
+        if (output.isEmpty()) {
+            return Optional.empty();
+        }
+        return overrideFillings(override).map(fillings -> new CookingMealEmiRecipe(
+                overrideId("meal_cooking", type, index), type, null,
+                fixedSlots(type, fillings, POT_SLOTS), cookTicks, experience, output));
     }
 
     @Override
@@ -126,7 +138,9 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
         if (experience > 0) {
             lines.add(Component.translatable("emi.cooking.experience", experience));
         }
-        lines.add(ingredientCountLine());
+        if (!isOverride()) {
+            lines.add(ingredientCountLine());
+        }
         return lines.stream()
                 .map(line -> ClientTooltipComponent.create(line.getVisualOrderText()))
                 .toList();

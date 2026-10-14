@@ -14,6 +14,33 @@
   "container": "minecraft:bowl",
   "id": "modest_meals:salad",
   "item": "modest_meals:salad",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "#c:crops/tomato",
+        "#c:foods/leafy_green|#c:crops/beetroot"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:mixed_salad"
+    },
+    {
+      "ingredients": [
+        "minecraft:kelp",
+        "minecraft:kelp",
+        "bountifulfares:citrus_essence"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:sea_salad"
+    },
+    {
+      "ingredients": [
+        "#c:foods/raw_ghast",
+        "#c:crops/carrot"
+      ],
+      "replace_recipes": true,
+      "result": "mynethersdelight:ghast_salad"
+    }
+  ],
   "max_ingredients": 3,
   "priority": 5
 }

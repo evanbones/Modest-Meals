@@ -14,6 +14,50 @@
   "container": "minecraft:bowl",
   "id": "modest_meals:pasta",
   "item": "modest_meals:pasta",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "farmersdelight:minced_beef|culturaldelights:tofu",
+        "farmersdelight:tomato_sauce"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:pasta_with_meatballs"
+    },
+    {
+      "ingredients": [
+        "#c:foods/raw_mutton|#c:foods/cooked_mutton",
+        "farmersdelight:tomato_sauce"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:pasta_with_mutton_chop"
+    },
+    {
+      "ingredients": [
+        "#c:foods/safe_raw_fish",
+        "#c:crops/tomato",
+        "minecraft:ink_sac"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:squid_ink_pasta"
+    },
+    {
+      "ingredients": [
+        "#c:crops/carrot",
+        "#c:mushrooms",
+        "#c:foods/leafy_green"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:vegetable_noodles"
+    },
+    {
+      "ingredients": [
+        "nomansland:pesto_bottle",
+        "#nomansland:edible_mushrooms"
+      ],
+      "replace_recipes": true,
+      "result": "nomansland:pasta_with_pesto"
+    }
+  ],
   "max_ingredients": 3,
   "priority": 15
 }

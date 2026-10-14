@@ -14,6 +14,26 @@
   "container": "minecraft:bowl",
   "id": "modest_meals:ramen",
   "item": "modest_meals:ramen",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "#c:eggs|#c:foods/cooked_egg",
+        "minecraft:dried_kelp",
+        "#c:foods/raw_pork|culturaldelights:tofu"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:noodle_soup"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_egg",
+        "#mynethersdelight:hot_spice",
+        "#c:foods/raw_hoglin"
+      ],
+      "replace_recipes": true,
+      "result": "mynethersdelight:spicy_noodle_soup"
+    }
+  ],
   "max_ingredients": 4,
   "priority": 20,
   "station": "cooking_pot"

@@ -259,6 +259,7 @@ public class IngredientProfileProvider implements DataProvider {
 
         builder.add(id(Items.PUFFERFISH), effect(0.5F, 0.5F, "water_breathing", STRONG));
         builder.add(id(Items.NAUTILUS_SHELL), effect(0.0F, 0.0F, "water_breathing", MEDIUM));
+        builder.add(id(Items.INK_SAC), food(0.0F, 0.5F));
 
         builder.add(id(Items.RABBIT_FOOT), effect(0.0F, 0.0F, "luck", STRONG));
         builder.add(id(Items.SPIDER_EYE), food(0.5F, 0.0F));
