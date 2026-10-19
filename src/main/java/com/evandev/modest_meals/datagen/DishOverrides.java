@@ -56,7 +56,6 @@ public final class DishOverrides {
         table.sandwiches();
         table.wraps();
         table.sushi();
-        table.skewers();
         table.curries();
         table.iceCream();
         table.drinks();
@@ -142,11 +141,6 @@ public final class DishOverrides {
         add("sushi", CD + "tropical_roll", 2, "minecraft:tropical_fish", "minecraft:tropical_fish");
         add("sushi", CD + "calamari_roll", 2, CD + "raw_calamari", CD + "raw_calamari");
         add("sushi", NMD + "billhook_bass_roll", 2, NMD + "billhook_bass_slice", NMD + "billhook_bass_slice");
-    }
-
-    private void skewers() {
-        add("skewer", MND + "spicy_skewer", MND + "bullet_pepper", "#c:foods/raw_strider");
-        add("skewer", MND + "bacon-wrapped_sausage_on_a_stick", MND + "roasted_sausage", FD + "cooked_bacon");
     }
 
     private void curries() {

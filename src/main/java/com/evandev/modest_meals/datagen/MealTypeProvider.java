@@ -158,8 +158,6 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         ));
         */
 
-        shaped(entries, "skewer", ModItems.SKEWER, 2, 2, 15,
-                List.of("#", "#", "S"), Map.of("S", id(Items.STICK), "#", any()));
         shaped(entries, "mochi", ModItems.MOCHI, 1, 1, 12,
                 List.of("D#D"), Map.of("D", "#" + DOUGHS.location(), "#", any()));
 
