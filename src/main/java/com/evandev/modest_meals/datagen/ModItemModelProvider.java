@@ -19,7 +19,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ModItems.CREATIVE_TAB_ITEMS.forEach(this::flatItem);
+        ModItems.MEALS.forEach(this::flatItem);
     }
 
     private void flatItem(Supplier<Item> item) {

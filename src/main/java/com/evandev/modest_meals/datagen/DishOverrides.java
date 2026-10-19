@@ -17,6 +17,8 @@ public final class DishOverrides {
     private static final String NMD = "nomansdelight:";
     private static final String NML = "nomansland:";
     private static final String NEA = "neapolitan:";
+    private static final String AD = "abnormals_delight:";
+    private static final String UA = "upgrade_aquatic:";
 
     private static final String RAW_BEEF = "#c:foods/raw_beef";
     private static final String RAW_CHICKEN = "#c:foods/raw_chicken";
@@ -92,13 +94,16 @@ public final class DishOverrides {
     private void ramen() {
         add("ramen", FD + "noodle_soup", "#c:eggs|" + COOKED_EGG, "minecraft:dried_kelp", "#c:foods/raw_pork|" + TOFU);
         add("ramen", MND + "spicy_noodle_soup", COOKED_EGG, "#mynethersdelight:hot_spice", "#c:foods/raw_hoglin");
+        add("ramen", MND + "crimson_stroganoff", MND + "minced_strider", "minecraft:crimson_fungus",
+                "minecraft:crimson_fungus");
     }
 
     private void pasta() {
         add("pasta", FD + "pasta_with_meatballs", FD + "minced_beef|" + TOFU, TOMATO_SAUCE);
         add("pasta", FD + "pasta_with_mutton_chop", "#c:foods/raw_mutton|" + COOKED_MUTTON, TOMATO_SAUCE);
         add("pasta", FD + "squid_ink_pasta", "#c:foods/safe_raw_fish", TOMATO, "minecraft:ink_sac");
-        add("pasta", FD + "vegetable_noodles", CARROT, "#c:mushrooms", GREENS);
+        add("pasta", FD + "vegetable_noodles", CARROT, "#c:mushrooms", GREENS, VEGETABLE);
+        add("pasta", AD + "duck_noodles", "#c:foods/raw_duck", CARROT, VEGETABLE);
         add("pasta", NML + "pasta_with_pesto", NML + "pesto_bottle", "#nomansland:edible_mushrooms");
     }
 
@@ -133,13 +138,10 @@ public final class DishOverrides {
     private void sushi() {
         add("sushi", FD + "salmon_roll", 2, FD + "salmon_slice", FD + "salmon_slice");
         add("sushi", FD + "cod_roll", 2, FD + "cod_slice", FD + "cod_slice");
-        add("sushi", FD + "kelp_roll", VEGETABLE);
-        add("sushi", CD + "midori_roll", "#culturaldelights:cucumbers", AVOCADO);
-        add("sushi", CD + "egg_roll", 4, COOKED_EGG, COOKED_EGG);
-        add("sushi", CD + "chicken_roll", COOKED_CHICKEN, BEETROOT);
+        add("sushi", CD + "egg_roll", 4, "minecraft:dried_kelp", COOKED_EGG, COOKED_EGG, COOKED_EGG);
         add("sushi", CD + "pufferfish_roll", 2, "minecraft:pufferfish", "minecraft:pufferfish");
-        add("sushi", CD + "tropical_roll", 2, "minecraft:tropical_fish", "minecraft:tropical_fish");
-        add("sushi", CD + "calamari_roll", 2, CD + "raw_calamari", CD + "raw_calamari");
+        add("sushi", CD + "tropical_roll", 2, "minecraft:dried_kelp", "minecraft:tropical_fish", "minecraft:tropical_fish");
+        add("sushi", CD + "calamari_roll", 2, "minecraft:dried_kelp", CD + "raw_calamari", CD + "raw_calamari");
         add("sushi", NMD + "billhook_bass_roll", 2, NMD + "billhook_bass_slice", NMD + "billhook_bass_slice");
     }
 
@@ -173,6 +175,7 @@ public final class DishOverrides {
     private void jams() {
         add("jam", "abundant_atmosphere:squashberry_jam", 2, "abundant_atmosphere:roasted_gourdnut",
                 "#abundant_atmosphere:squashberry_jam_fruits", "minecraft:sweet_berries");
+        add("jam", UA + "mulberry_jam_bottle", UA + "mulberry");
     }
 
     private void add(String type, String result, String... ingredients) {

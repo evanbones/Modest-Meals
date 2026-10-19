@@ -1,6 +1,8 @@
 package com.evandev.modest_meals.food.ingredient;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.component.MealContents;
+import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.tag.ModItemTags;
@@ -73,6 +75,10 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
             return Optional.empty();
         }
 
+        if (stack.is(ModItemTags.INGREDIENT_MEALS)) {
+            return fromMeal(stack);
+        }
+
         Optional<IngredientProfile> authored = authored(stack.getItem());
         Optional<Derived> derived = derive(stack);
 
@@ -82,6 +88,31 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
 
         Derived d = derived.orElse(Derived.NONE);
         return authored.map(profile -> profile.withDerived(d.health(), d.stamina(), d.digestTicks()));
+    }
+
+    /**
+     * A finished meal used as an ingredient is worth what it restores, and carries its effect at the potency its
+     * own ingredients gave it.
+     */
+    private static Optional<IngredientProfile> fromMeal(ItemStack stack) {
+        MealContents contents = stack.get(ModDataComponents.MEAL_CONTENTS.get());
+        if (contents == null || contents.dubious() || !contents.isMeaningful()) {
+            return Optional.empty();
+        }
+        int potency = 0;
+        if (contents.effect().isPresent()) {
+            for (ResourceLocation ingredient : contents.ingredients()) {
+                Optional<IngredientProfile> profile = BuiltInRegistries.ITEM.getOptional(ingredient)
+                        .flatMap(IngredientProfileManager::authored);
+                if (profile.isPresent() && profile.get().effect().equals(contents.effect())) {
+                    potency += profile.get().potency();
+                }
+            }
+        }
+        return Optional.of(new IngredientProfile(
+                Optional.of(contents.health()), Optional.of(contents.stamina()), Optional.of(contents.digestTicks()),
+                Optional.empty(), potency > 0 ? contents.effect() : Optional.empty(), potency,
+                contents.temporaryHealth(), 0));
     }
 
     private static Optional<Derived> derive(ItemStack stack) {

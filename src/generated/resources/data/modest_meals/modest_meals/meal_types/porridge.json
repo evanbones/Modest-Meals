@@ -2,18 +2,30 @@
   "base": [
     {
       "ingredient": {
-        "item": "minecraft:bowl"
+        "tag": "c:crops/wheat"
       }
     },
     {
-      "ingredient": {
-        "tag": "c:crops/wheat"
-      }
+      "ingredient": [
+        {
+          "tag": "c:foods/soup_base"
+        },
+        {
+          "type": "neoforge:components",
+          "components": {
+            "minecraft:potion_contents": {
+              "potion": "minecraft:water"
+            }
+          },
+          "items": "minecraft:potion"
+        }
+      ]
     }
   ],
   "container": "minecraft:bowl",
   "id": "modest_meals:porridge",
   "item": "modest_meals:porridge",
   "max_ingredients": 3,
-  "priority": 25
+  "priority": 25,
+  "station": "cooking_pot"
 }

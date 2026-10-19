@@ -33,7 +33,8 @@ public abstract class MealEmiRecipe implements EmiRecipe {
 
     protected MealEmiRecipe(EmiRecipeCategory category, ResourceLocation id, MealType type,
                             EmiIngredient any, List<EmiIngredient> slots) {
-        this(category, id, type, any, slots, type.resolveItem().map(EmiStack::of).orElse(EmiStack.EMPTY));
+        this(category, id, type, any, slots,
+                type.resolveItem().map(item -> EmiStack.of(item, type.servings())).orElse(EmiStack.EMPTY));
     }
 
     protected MealEmiRecipe(EmiRecipeCategory category, ResourceLocation id, MealType type,

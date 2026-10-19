@@ -1,6 +1,9 @@
 package com.evandev.modest_meals.food.meal;
 
+import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
+import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BooleanSupplier;
 
 /**
  * A kind of dish: what item a set of ingredients turns into, and where and how it is assembled.
@@ -33,7 +37,8 @@ public record MealType(
         Optional<ResourceLocation> dubiousSprite,
         Optional<BaseSprites> baseSprites,
         List<SpecialSprite> specialSprites,
-        List<ItemOverride> itemOverrides
+        List<ItemOverride> itemOverrides,
+        Rules rules
 ) {
 
     public static final ResourceLocation ANY_INGREDIENT =
@@ -53,7 +58,8 @@ public record MealType(
             ResourceLocation.CODEC.optionalFieldOf("dubious_sprite").forGetter(MealType::dubiousSprite),
             BaseSprites.CODEC.optionalFieldOf("base_sprites").forGetter(MealType::baseSprites),
             SpecialSprite.CODEC.listOf().optionalFieldOf("special_sprites", List.of()).forGetter(MealType::specialSprites),
-            ItemOverride.CODEC.listOf().optionalFieldOf("item_overrides", List.of()).forGetter(MealType::itemOverrides)
+            ItemOverride.CODEC.listOf().optionalFieldOf("item_overrides", List.of()).forGetter(MealType::itemOverrides),
+            Rules.MAP_CODEC.forGetter(MealType::rules)
     ).apply(instance, MealType::new));
 
     public MealType(
@@ -68,7 +74,7 @@ public record MealType(
             int priority
     ) {
         this(id, item, station, base, shape, minIngredients, maxIngredients, container, priority,
-                false, Optional.empty(), Optional.empty(), List.of(), List.of());
+                false, Optional.empty(), Optional.empty(), List.of(), List.of(), Rules.NONE);
     }
 
     public MealType(
@@ -87,12 +93,17 @@ public record MealType(
             List<SpecialSprite> specialSprites
     ) {
         this(id, item, station, base, shape, minIngredients, maxIngredients, container, priority,
-                requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, List.of());
+                requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, List.of(), Rules.NONE);
     }
 
     public MealType withItemOverrides(List<ItemOverride> overrides) {
         return new MealType(id, item, station, base, shape, minIngredients, maxIngredients, container, priority,
-                requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, overrides);
+                requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, overrides, rules);
+    }
+
+    public MealType withRules(Rules rules) {
+        return new MealType(id, item, station, base, shape, minIngredients, maxIngredients, container, priority,
+                requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, itemOverrides, rules);
     }
 
     private static int indexMatching(List<ItemStack> stacks, Ingredient ingredient) {
@@ -130,6 +141,17 @@ public record MealType(
         return ingredients.size() >= minIngredients && ingredients.size() <= maxIngredients;
     }
 
+    public boolean accepts(List<ItemStack> ingredients) {
+        if (!withinBudget(ingredients)) {
+            return false;
+        }
+        return rules.allows(ingredients) || itemOverrides.stream().anyMatch(override -> override.matches(ingredients));
+    }
+
+    public int servings() {
+        return rules.servings();
+    }
+
     public Optional<Item> resolveItem() {
         return BuiltInRegistries.ITEM.getOptional(item);
     }
@@ -142,15 +164,31 @@ public record MealType(
      * Where a type can be assembled.
      */
     public enum Station implements StringRepresentable {
-        CRAFTING_TABLE("crafting_table"),
-        COOKING_POT("cooking_pot");
+        CRAFTING_TABLE("crafting_table", () -> true),
+        COOKING_POT("cooking_pot", FarmersDelightCompat::isLoaded),
+        VAT("vat", CulturalDelightsCompat::isLoaded);
 
         public static final Codec<Station> CODEC = StringRepresentable.fromEnum(Station::values);
 
         private final String name;
+        private final BooleanSupplier available;
 
-        Station(String name) {
+        Station(String name, BooleanSupplier available) {
             this.name = name;
+            this.available = available;
+        }
+
+        public boolean isAvailable() {
+            return available.getAsBoolean();
+        }
+
+        public static Station byName(String name) {
+            for (Station station : values()) {
+                if (station.name.equals(name)) {
+                    return station;
+                }
+            }
+            return CRAFTING_TABLE;
         }
 
         @Override
@@ -163,6 +201,43 @@ public record MealType(
      * A matched input split into the type's base stacks and the free ingredients chosen by the player.
      */
     public record Split(List<ItemStack> base, List<ItemStack> ingredients) {
+    }
+
+    /**
+     * Limits on what a type takes beyond its budget, and how many servings it makes.
+     *
+     * @param servings the number of items one assembly makes; the meal's value is split evenly between them
+     * @param required at least one free ingredient must match this
+     * @param allowed  every free ingredient must match this
+     */
+    public record Rules(int servings, Optional<Ingredient> required, Optional<Ingredient> allowed) {
+        public static final Rules NONE = new Rules(1, Optional.empty(), Optional.empty());
+
+        public static final MapCodec<Rules> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                Codec.intRange(1, 64).optionalFieldOf("servings", 1).forGetter(Rules::servings),
+                Ingredient.CODEC_NONEMPTY.optionalFieldOf("required_ingredient").forGetter(Rules::required),
+                Ingredient.CODEC_NONEMPTY.optionalFieldOf("allowed_ingredients").forGetter(Rules::allowed)
+        ).apply(instance, Rules::new));
+
+        public static Rules servings(int servings) {
+            return new Rules(servings, Optional.empty(), Optional.empty());
+        }
+
+        public static Rules requiring(Ingredient required) {
+            return new Rules(1, Optional.of(required), Optional.empty());
+        }
+
+        public static Rules allowing(Ingredient allowed) {
+            return new Rules(1, Optional.empty(), Optional.of(allowed));
+        }
+
+        public boolean allows(List<ItemStack> ingredients) {
+            List<ItemStack> present = ingredients.stream().filter(stack -> stack != null && !stack.isEmpty()).toList();
+            if (required.isPresent() && present.stream().noneMatch(required.get())) {
+                return false;
+            }
+            return allowed.isEmpty() || present.stream().allMatch(allowed.get());
+        }
     }
 
     public record BaseEntry(Ingredient ingredient, int count) {

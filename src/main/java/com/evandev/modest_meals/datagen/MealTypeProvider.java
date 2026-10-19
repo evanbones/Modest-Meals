@@ -3,6 +3,8 @@ package com.evandev.modest_meals.datagen;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.registry.ModItems;
+import com.evandev.modest_meals.tag.ModItemTags;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -10,12 +12,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.crafting.CompoundIngredient;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class MealTypeProvider extends JsonDataProvider<MealType> {
 
@@ -31,6 +38,10 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
     private static final TagKey<Item> SOUP_BASES = itemTag("c", "foods/soup_base");
     private static final TagKey<Item> DRINK_BASES = itemTag("c", "drinks/drink_base");
     private static final TagKey<Item> PIE_CRUSTS = itemTag("c", "foods/pie_crust");
+    private static final TagKey<Item> COOKED_RICES = itemTag("c", "foods/cooked_rice");
+    private static final TagKey<Item> VEGETABLES = itemTag("c", "foods/vegetable");
+    private static final TagKey<Item> FRUITS = itemTag("c", "foods/fruit");
+    private static final TagKey<Item> BERRIES = itemTag("c", "foods/berry");
 
     public MealTypeProvider(PackOutput output) {
         super(output, "modest_meals/meal_types", MealType.CODEC, "Modest Meals meal types");
@@ -54,35 +65,46 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
 
     @Override
     protected void collect(Map<ResourceLocation, MealType> entries) {
+        Ingredient soupBase = withWaterBottle(SOUP_BASES);
+        Ingredient bowl = Ingredient.of(Items.BOWL);
+
         put(entries, "drink", ModItems.DRINK, MealType.Station.COOKING_POT,
-                List.of(new MealType.BaseEntry(Ingredient.of(DRINK_BASES), 1)),
+                List.of(new MealType.BaseEntry(withWaterBottle(DRINK_BASES), 1)),
                 Optional.empty(), 1, 4, Optional.of(itemId(Items.GLASS_BOTTLE)), 10);
         put(entries, "curry", ModItems.CURRY, MealType.Station.COOKING_POT,
                 List.of(new MealType.BaseEntry(Ingredient.of(RICES), 1)),
                 Optional.empty(), 2, 5, Optional.of(itemId(Items.BOWL)), 25);
         put(entries, "jam", ModItems.JAM, MealType.Station.COOKING_POT,
                 List.of(new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
-                Optional.empty(), 1, 3, Optional.of(itemId(Items.GLASS_BOTTLE)), 30);
+                Optional.empty(), 1, 3, Optional.of(itemId(Items.GLASS_BOTTLE)), 30,
+                MealType.Rules.allowing(Ingredient.of(ModItemTags.JAM_FRUITS)));
 
         put(entries, "soup", ModItems.SOUP, MealType.Station.COOKING_POT,
-                List.of(new MealType.BaseEntry(Ingredient.of(SOUP_BASES), 1)),
+                List.of(new MealType.BaseEntry(soupBase, 1)),
                 Optional.empty(), 2, 5, Optional.of(itemId(Items.BOWL)), 0);
         put(entries, "salad", ModItems.SALAD, MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(Items.BOWL), 1),
+                List.of(new MealType.BaseEntry(bowl, 1),
                         new MealType.BaseEntry(Ingredient.of(LEAFY_GREENS), 1)),
-                Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 5);
+                Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 5,
+                MealType.Rules.requiring(Ingredient.fromValues(Stream.of(
+                        new Ingredient.TagValue(VEGETABLES), new Ingredient.TagValue(LEAFY_GREENS),
+                        new Ingredient.TagValue(FRUITS), new Ingredient.TagValue(BERRIES)))));
         put(entries, "ramen", ModItems.RAMEN, MealType.Station.COOKING_POT,
                 List.of(new MealType.BaseEntry(Ingredient.of(PASTAS), 1),
-                        new MealType.BaseEntry(Ingredient.of(SOUP_BASES), 1)),
+                        new MealType.BaseEntry(soupBase, 1)),
                 Optional.empty(), 1, 4, Optional.of(itemId(Items.BOWL)), 20);
-        noodleMeal(entries, "pasta", ModItems.PASTA, 1, 3, 15);
+        put(entries, "pasta", ModItems.PASTA, MealType.Station.COOKING_POT,
+                List.of(new MealType.BaseEntry(Ingredient.of(PASTAS), 1)),
+                Optional.empty(), 1, 4, Optional.of(itemId(Items.BOWL)), 15);
+        put(entries, "porridge", ModItems.PORRIDGE, MealType.Station.COOKING_POT,
+                List.of(new MealType.BaseEntry(Ingredient.of(WHEATS), 1),
+                        new MealType.BaseEntry(soupBase, 1)),
+                Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 25);
 
-        baseBowlMeal(entries, "porridge", ModItems.PORRIDGE, Ingredient.of(WHEATS), 1, 3, 25);
-        put(entries, "ice_cream", ModItems.ICE_CREAM, MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(Items.SNOWBALL), 1),
-                        new MealType.BaseEntry(Ingredient.of(MILKS), 1),
+        put(entries, "ice_cream", ModItems.ICE_CREAM, MealType.Station.VAT,
+                List.of(new MealType.BaseEntry(Ingredient.of(MILKS), 1),
                         new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
-                Optional.empty(), 1, 3, Optional.empty(), 30);
+                Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 30);
         ResourceLocation sandwichId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sandwich");
         entries.put(sandwichId, new MealType(
                 sandwichId,
@@ -128,9 +150,9 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 List.of("###", "###", "SOS"),
                 Map.of("O", "#" + PIE_CRUSTS.location(), "S", id(Items.SUGAR), "#", any()));
         */
-        shaped(entries, "sushi", ModItems.SUSHI, 1, 2, 10,
-                List.of("K#", "R#"),
-                Map.of("K", id(Items.DRIED_KELP), "R", "#" + RICES.location(), "#", any()));
+        put(entries, "sushi", ModItems.SUSHI, MealType.Station.CRAFTING_TABLE,
+                List.of(new MealType.BaseEntry(Ingredient.of(COOKED_RICES), 1)),
+                Optional.empty(), 1, 4, Optional.empty(), 10, MealType.Rules.servings(2));
         /*
         ResourceLocation cakeId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "cake");
         entries.put(cakeId, new MealType(
@@ -158,29 +180,10 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         ));
         */
 
-        shaped(entries, "mochi", ModItems.MOCHI, 1, 1, 12,
-                List.of("D#D"), Map.of("D", "#" + DOUGHS.location(), "#", any()));
 
         DishOverrides.build().forEach((name, overrides) -> entries.computeIfPresent(
                 ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name),
                 (id, type) -> type.withItemOverrides(overrides)));
-    }
-
-    private void baseBowlMeal(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
-                              Ingredient extra, int min, int max, int priority) {
-        put(entries, name, item, MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(Items.BOWL), 1),
-                        new MealType.BaseEntry(extra, 1)),
-                Optional.empty(), min, max, Optional.of(itemId(Items.BOWL)), priority);
-    }
-
-
-    private void noodleMeal(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
-                            int min, int max, int priority) {
-        put(entries, name, item, MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(Items.BOWL), 1),
-                        new MealType.BaseEntry(Ingredient.of(PASTAS), 1)),
-                Optional.empty(), min, max, Optional.of(itemId(Items.BOWL)), priority);
     }
 
     private void shaped(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
@@ -193,8 +196,20 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                      MealType.Station station, List<MealType.BaseEntry> base,
                      Optional<MealType.Shape> shape, int min, int max,
                      Optional<ResourceLocation> container, int priority) {
+        put(entries, name, item, station, base, shape, min, max, container, priority, MealType.Rules.NONE);
+    }
+
+    private void put(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
+                     MealType.Station station, List<MealType.BaseEntry> base,
+                     Optional<MealType.Shape> shape, int min, int max,
+                     Optional<ResourceLocation> container, int priority, MealType.Rules rules) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
         entries.put(id, new MealType(id, itemId(item.get()), station, base, shape,
-                min, max, container, priority));
+                min, max, container, priority).withRules(rules));
+    }
+
+    private static Ingredient withWaterBottle(TagKey<Item> liquids) {
+        return CompoundIngredient.of(Ingredient.of(liquids), DataComponentIngredient.of(false,
+                DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER), Items.POTION));
     }
 }

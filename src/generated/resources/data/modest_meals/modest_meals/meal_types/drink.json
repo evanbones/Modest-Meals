@@ -1,9 +1,20 @@
 {
   "base": [
     {
-      "ingredient": {
-        "tag": "c:drinks/drink_base"
-      }
+      "ingredient": [
+        {
+          "tag": "c:drinks/drink_base"
+        },
+        {
+          "type": "neoforge:components",
+          "components": {
+            "minecraft:potion_contents": {
+              "potion": "minecraft:water"
+            }
+          },
+          "items": "minecraft:potion"
+        }
+      ]
     }
   ],
   "container": "minecraft:glass_bottle",

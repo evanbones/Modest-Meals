@@ -62,6 +62,17 @@ public record MealContents(
     }
 
     /**
+     * One of {@code servings} equal shares of this meal. Each share keeps the full effect.
+     */
+    public MealContents split(int servings) {
+        if (servings <= 1) {
+            return this;
+        }
+        return new MealContents(health / servings, stamina / servings, digestTicks / servings,
+                temporaryHealth / servings, effect, amplifier, durationTicks, ingredients, base, dubious);
+    }
+
+    /**
      * Whether this meal restores or grants anything. A meal that does nothing should not have been cooked.
      */
     public boolean isMeaningful() {

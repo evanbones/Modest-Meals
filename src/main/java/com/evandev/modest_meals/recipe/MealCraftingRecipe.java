@@ -21,7 +21,8 @@ public class MealCraftingRecipe extends CustomRecipe {
 
     @Override
     public boolean matches(CraftingInput input, Level level) {
-        return findMatch(input).isPresent();
+        return findMatch(input).isPresent()
+                && !AuthoredRecipes.anyMatch(level, RecipeType.CRAFTING, input, MealCraftingRecipe.class);
     }
 
     @Override
@@ -68,24 +69,21 @@ public class MealCraftingRecipe extends CustomRecipe {
         if (remaining.isEmpty() || !remaining.stream().allMatch(IngredientProfileManager::isIngredient)) {
             return Optional.empty();
         }
-        return type.withinBudget(remaining)
+        return type.accepts(remaining)
                 ? Optional.of(new Match(type, remaining, split.get().base()))
                 : Optional.empty();
     }
 
     private Optional<Match> matchShaped(MealType type, CraftingInput input) {
         MealType.Shape shape = type.shape().orElseThrow();
-        int maxLeft = input.width() - shape.width();
-        int maxTop = input.height() - shape.height();
-        if (maxLeft < 0 || maxTop < 0) {
-            return Optional.empty();
-        }
+        int slackX = input.width() - shape.width();
+        int slackY = input.height() - shape.height();
 
-        for (int top = 0; top <= maxTop; top++) {
-            for (int left = 0; left <= maxLeft; left++) {
+        for (int top = Math.min(0, slackY); top <= Math.max(0, slackY); top++) {
+            for (int left = Math.min(0, slackX); left <= Math.max(0, slackX); left++) {
                 for (boolean mirrored : new boolean[]{false, true}) {
                     Optional<MealType.Split> matched = matchAt(shape, input, left, top, mirrored);
-                    if (matched.isPresent() && type.withinBudget(matched.get().ingredients())) {
+                    if (matched.isPresent() && type.accepts(matched.get().ingredients())) {
                         return Optional.of(new Match(type, matched.get().ingredients(), matched.get().base()));
                     }
                 }
@@ -99,9 +97,10 @@ public class MealCraftingRecipe extends CustomRecipe {
         List<ItemStack> ingredients = new ArrayList<>();
         List<ItemStack> base = new ArrayList<>();
 
-        for (int row = 0; row < input.height(); row++) {
-            for (int column = 0; column < input.width(); column++) {
-                ItemStack stack = input.getItem(column, row);
+        for (int row = Math.min(0, top); row < Math.max(input.height(), top + shape.height()); row++) {
+            for (int column = Math.min(0, left); column < Math.max(input.width(), left + shape.width()); column++) {
+                boolean insideGrid = row >= 0 && row < input.height() && column >= 0 && column < input.width();
+                ItemStack stack = insideGrid ? input.getItem(column, row) : ItemStack.EMPTY;
                 int patternRow = row - top;
                 int patternColumn = column - left;
 

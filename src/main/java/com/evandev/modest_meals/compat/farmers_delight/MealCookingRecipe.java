@@ -4,6 +4,7 @@ import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.evandev.modest_meals.food.meal.MealAssembler;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.food.meal.MealTypeManager;
+import com.evandev.modest_meals.recipe.AuthoredRecipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +85,7 @@ public class MealCookingRecipe extends CookingPotRecipe {
         }
 
         List<ItemStack> ingredients = split.get().ingredients();
-        if (ingredients.isEmpty() || !type.withinBudget(ingredients)) {
+        if (ingredients.isEmpty() || !type.accepts(ingredients)) {
             return Optional.empty();
         }
         return ingredients.stream().allMatch(IngredientProfileManager::isIngredient)
@@ -108,7 +110,8 @@ public class MealCookingRecipe extends CookingPotRecipe {
         Optional<MealType> mine = mealType();
         return mine.isPresent()
                 && ingredientsFor(inventory, mine.get()).isPresent()
-                && isBestMatch(inventory, mine.get());
+                && isBestMatch(inventory, mine.get())
+                && !AuthoredRecipes.anyMatch(level, ModRecipeTypes.COOKING.get(), inventory, MealCookingRecipe.class);
     }
 
     @Override
@@ -132,7 +135,8 @@ public class MealCookingRecipe extends CookingPotRecipe {
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider registries) {
-        return mealType().flatMap(MealType::resolveItem).map(ItemStack::new).orElse(ItemStack.EMPTY);
+        return mealType().flatMap(type -> type.resolveItem().map(item -> new ItemStack(item, type.servings())))
+                .orElse(ItemStack.EMPTY);
     }
 
     @Override

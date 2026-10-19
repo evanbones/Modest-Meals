@@ -2,11 +2,6 @@
   "base": [
     {
       "ingredient": {
-        "item": "minecraft:bowl"
-      }
-    },
-    {
-      "ingredient": {
         "tag": "c:foods/pasta"
       }
     }
@@ -44,10 +39,20 @@
       "ingredients": [
         "#c:crops/carrot",
         "#c:mushrooms",
-        "#c:foods/leafy_green"
+        "#c:foods/leafy_green",
+        "#c:foods/vegetable"
       ],
       "replace_recipes": true,
       "result": "farmersdelight:vegetable_noodles"
+    },
+    {
+      "ingredients": [
+        "#c:foods/raw_duck",
+        "#c:crops/carrot",
+        "#c:foods/vegetable"
+      ],
+      "replace_recipes": true,
+      "result": "abnormals_delight:duck_noodles"
     },
     {
       "ingredients": [
@@ -58,6 +63,7 @@
       "result": "nomansland:pasta_with_pesto"
     }
   ],
-  "max_ingredients": 3,
-  "priority": 15
+  "max_ingredients": 4,
+  "priority": 15,
+  "station": "cooking_pot"
 }

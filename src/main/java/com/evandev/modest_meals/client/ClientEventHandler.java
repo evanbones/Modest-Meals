@@ -215,7 +215,7 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public static void onModifyBakingResult(ModelEvent.ModifyBakingResult event) {
-        for (var mealSupplier : ModItems.CREATIVE_TAB_ITEMS) {
+        for (var mealSupplier : ModItems.MEALS) {
             ResourceLocation itemLoc = BuiltInRegistries.ITEM.getKey(mealSupplier.get());
             ModelResourceLocation modelLoc =
                     ModelResourceLocation.inventory(itemLoc);

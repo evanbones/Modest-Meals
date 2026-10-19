@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -17,7 +18,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class MealRecipeProvider implements DataProvider {
 
-    private static final List<String> POT_MEAL_TYPES = List.of("soup", "drink", "curry", "jam", "ramen");
+    private static final List<String> POT_MEAL_TYPES = List.of("soup", "drink", "curry", "jam", "ramen", "pasta", "porridge");
+    private static final List<String> COLD_VAT_MEAL_TYPES = List.of("ice_cream");
 
     private final PackOutput.PathProvider pathProvider;
 
@@ -49,6 +51,16 @@ public class MealRecipeProvider implements DataProvider {
             cooking.addProperty("meal_type", Constants.MOD_ID + ":" + mealType);
             cooking.addProperty("cookingtime", 200);
             futures.add(write(output, "cooking/" + mealType, cooking));
+        }
+
+        for (String mealType : COLD_VAT_MEAL_TYPES) {
+            JsonObject chilling = new JsonObject();
+            chilling.add("neoforge:conditions", modLoaded(CulturalDelightsCompat.MOD_ID));
+            chilling.addProperty("type", Constants.MOD_ID + ":meal_vat");
+            chilling.addProperty("meal_type", Constants.MOD_ID + ":" + mealType);
+            chilling.addProperty("temperature", "cold");
+            chilling.addProperty("cooktime", 200);
+            futures.add(write(output, "chilling/" + mealType, chilling));
         }
 
         return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));

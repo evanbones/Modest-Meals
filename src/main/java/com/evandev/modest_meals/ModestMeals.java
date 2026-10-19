@@ -4,6 +4,7 @@ import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.client.ClientConfigSetup;
 import com.evandev.modest_meals.client.ClientEventHandler;
 import com.evandev.modest_meals.compat.cold_sweat.ColdSweatCompat;
+import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.config.ModConfig;
@@ -33,6 +34,7 @@ public class ModestMeals {
         ModCreativeTabs.register(modEventBus);
         ModRecipes.register(modEventBus);
         FarmersDelightCompat.register(modEventBus);
+        CulturalDelightsCompat.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModNetworking::registerPayloads);
         modEventBus.addListener(CustomFoodDatapack::onAddPackFinders);

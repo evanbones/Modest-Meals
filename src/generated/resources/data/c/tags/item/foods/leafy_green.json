@@ -10,10 +10,6 @@
       "required": false
     },
     {
-      "id": "culturaldelights:cut_cabbage",
-      "required": false
-    },
-    {
       "id": "bountifulfares:leek",
       "required": false
     }

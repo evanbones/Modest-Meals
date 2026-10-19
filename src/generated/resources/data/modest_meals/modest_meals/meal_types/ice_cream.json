@@ -2,11 +2,6 @@
   "base": [
     {
       "ingredient": {
-        "item": "minecraft:snowball"
-      }
-    },
-    {
-      "ingredient": {
         "tag": "c:drinks/milk"
       }
     },
@@ -16,6 +11,7 @@
       }
     }
   ],
+  "container": "minecraft:bowl",
   "id": "modest_meals:ice_cream",
   "item": "modest_meals:ice_cream",
   "item_overrides": [
@@ -72,5 +68,6 @@
     }
   ],
   "max_ingredients": 3,
-  "priority": 30
+  "priority": 30,
+  "station": "vat"
 }

@@ -1,0 +1,12 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "culturaldelights"
+    }
+  ],
+  "type": "modest_meals:meal_vat",
+  "cooktime": 200,
+  "meal_type": "modest_meals:ice_cream",
+  "temperature": "cold"
+}

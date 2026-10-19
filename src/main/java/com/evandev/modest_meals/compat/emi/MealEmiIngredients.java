@@ -15,9 +15,6 @@ import java.util.Optional;
 
 public final class MealEmiIngredients {
 
-    private MealEmiIngredients() {
-    }
-
     public static List<EmiStack> pool() {
         List<ItemStack> accepted = BuiltInRegistries.ITEM.stream()
                 .map(ItemStack::new)
@@ -31,10 +28,13 @@ public final class MealEmiIngredients {
     }
 
     public static List<EmiStack> poolFor(MealType type, List<EmiStack> defaultPool) {
+        List<EmiStack> pool = type.rules().allowed()
+                .map(allowed -> defaultPool.stream().filter(stack -> allowed.test(stack.getItemStack())).toList())
+                .orElse(defaultPool);
         if (!type.requiresSupportedIngredients()) {
-            return defaultPool;
+            return pool;
         }
-        return defaultPool.stream()
+        return pool.stream()
                 .filter(stack -> MealIngredientManager.isSupported(type.id(), stack.getItemStack()))
                 .toList();
     }

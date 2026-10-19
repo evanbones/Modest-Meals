@@ -56,6 +56,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private static final TagKey<Item> COOKED_FISH = itemTag("c", "foods/cooked_fish");
     private static final TagKey<Item> BEANS = itemTag("c", "crops/bean");
     private static final TagKey<Item> RICES = itemTag("c", "crops/rice");
+    private static final TagKey<Item> COOKED_RICES = itemTag("c", "foods/cooked_rice");
     private static final TagKey<Item> LEAFY_GREENS = itemTag("c", "foods/leafy_green");
     private static final TagKey<Item> SOUP_BASES = itemTag("c", "foods/soup_base");
     private static final TagKey<Item> DRINK_BASES = itemTag("c", "drinks/drink_base");
@@ -105,7 +106,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     private void modestMealsTags() {
         var foods = tag(Tags.Items.FOODS);
-        ModItems.CREATIVE_TAB_ITEMS.forEach(item -> foods.add(item.get()));
+        ModItems.MEALS.forEach(item -> foods.add(item.get()));
 
         tag(Tags.Items.FOODS_SOUP).add(ModItems.SOUP.get(), ModItems.RAMEN.get());
         // tag(Tags.Items.FOODS_PIE).add(ModItems.PIE.get());
@@ -119,7 +120,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private void notAnIngredient() {
         var notAnIngredient = tag(ModItemTags.NOT_AN_INGREDIENT);
 
-        ModItems.CREATIVE_TAB_ITEMS.forEach(item -> notAnIngredient.add(item.get()));
+        ModItems.MEALS.stream()
+                .filter(item -> item != ModItems.JAM)
+                .forEach(item -> notAnIngredient.add(item.get()));
+        tag(ModItemTags.INGREDIENT_MEALS).add(ModItems.JAM.get());
 
         notAnIngredient.add(
                 Items.MUSHROOM_STEW,
@@ -558,16 +562,24 @@ public class ModItemTagProvider extends ItemTagsProvider {
         rices.addOptionalTag(convention("foods/rice"));
         rices.addOptionalTag(convention("foods/cooked_rice"));
         addOptional(rices, FARMERS_DELIGHT, "rice", "cooked_rice");
-        addOptional(rices, CULTURAL_DELIGHTS, "wild_rice");
+
+        tag(COOKED_RICES).addOptional(fd("cooked_rice"));
+
+        var jamFruits = tag(ModItemTags.JAM_FRUITS);
+        jamFruits.add(Items.APPLE, Items.MELON_SLICE, Items.SWEET_BERRIES, Items.GLOW_BERRIES, Items.CHORUS_FRUIT);
+        jamFruits.addTag(FRUITS);
+        addOptionalTags(jamFruits, "c", "foods/berry", "foods/cherry", "foods/plum", "foods/orange",
+                "foods/elderberry", "foods/lapisberry", "foods/passion_fruit", "foods/pear", "crops/lemon",
+                "crops/mango");
+        addOptional(jamFruits, FARMERS_DELIGHT, "pumpkin_slice");
 
         var leafyGreens = tag(LEAFY_GREENS);
         leafyGreens.add(Items.BEETROOT);
         addOptional(leafyGreens, FARMERS_DELIGHT, "cabbage", "cabbage_leaf");
-        addOptional(leafyGreens, CULTURAL_DELIGHTS, "cut_cabbage");
         addOptional(leafyGreens, BOUNTIFUL_FARES, "leek");
 
         var soupBases = tag(SOUP_BASES);
-        soupBases.add(Items.WATER_BUCKET, Items.POTION);
+        soupBases.add(Items.WATER_BUCKET);
         soupBases.addOptionalTag(convention("drinks/water"));
         soupBases.addOptionalTag(convention("foods/broth"));
         soupBases.addOptionalTag(convention("drinks/milk"));
@@ -576,7 +588,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptional(soupBases, BOUNTIFUL_FARES, "coconut_milk_bottle", "water_cup");
 
         var drinkBases = tag(DRINK_BASES);
-        drinkBases.add(Items.WATER_BUCKET, Items.POTION, Items.SUGAR, Items.HONEY_BOTTLE);
+        drinkBases.add(Items.WATER_BUCKET, Items.SUGAR, Items.HONEY_BOTTLE);
         drinkBases.addOptionalTag(convention("drinks/water"));
         drinkBases.addOptionalTag(convention("drinks/milk"));
         drinkBases.addOptionalTag(convention("drinks/honey"));

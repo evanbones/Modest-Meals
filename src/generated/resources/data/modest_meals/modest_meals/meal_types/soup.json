@@ -1,9 +1,20 @@
 {
   "base": [
     {
-      "ingredient": {
-        "tag": "c:foods/soup_base"
-      }
+      "ingredient": [
+        {
+          "tag": "c:foods/soup_base"
+        },
+        {
+          "type": "neoforge:components",
+          "components": {
+            "minecraft:potion_contents": {
+              "potion": "minecraft:water"
+            }
+          },
+          "items": "minecraft:potion"
+        }
+      ]
     }
   ],
   "container": "minecraft:bowl",

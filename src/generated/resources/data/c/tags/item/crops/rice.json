@@ -19,10 +19,6 @@
     {
       "id": "farmersdelight:cooked_rice",
       "required": false
-    },
-    {
-      "id": "culturaldelights:wild_rice",
-      "required": false
     }
   ]
 }

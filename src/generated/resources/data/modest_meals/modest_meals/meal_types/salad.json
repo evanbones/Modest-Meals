@@ -42,5 +42,19 @@
     }
   ],
   "max_ingredients": 3,
-  "priority": 5
+  "priority": 5,
+  "required_ingredient": [
+    {
+      "tag": "c:foods/vegetable"
+    },
+    {
+      "tag": "c:foods/leafy_green"
+    },
+    {
+      "tag": "c:foods/fruit"
+    },
+    {
+      "tag": "c:foods/berry"
+    }
+  ]
 }

@@ -54,6 +54,7 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("cocoa_beans"), sandwich("minecraft:cocoa_beans", "cocoa_beans"));
         entries.put(id("glow_berries"), sandwich("minecraft:glow_berries", "glow_berries"));
         entries.put(id("honey_bottle"), sandwich("minecraft:honey_bottle", "honey"));
+        entries.put(id("jam"), sandwich("modest_meals:jam", "sweet_berries"));
         entries.put(id("kelp"), sandwich("minecraft:kelp", "kelp"));
         entries.put(id("dried_kelp"), sandwich("minecraft:dried_kelp", "kelp"));
         entries.put(id("melon_slice"), sandwich("minecraft:melon_slice", "melon"));

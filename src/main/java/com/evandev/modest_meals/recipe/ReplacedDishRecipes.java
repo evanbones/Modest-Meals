@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.recipe;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.food.meal.MealType;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -21,11 +22,9 @@ public final class ReplacedDishRecipes {
     private static final Set<String> REPLACEABLE_TYPES = Set.of(
             "minecraft:crafting_shaped",
             "minecraft:crafting_shapeless",
-            "farmersdelight:cooking"
+            "farmersdelight:cooking",
+            "culturaldelights:aging"
     );
-
-    private ReplacedDishRecipes() {
-    }
 
     public static Map<ResourceLocation, JsonElement> filter(Map<ResourceLocation, JsonElement> recipes,
                                                             ResourceManager resourceManager) {
@@ -75,6 +74,9 @@ public final class ReplacedDishRecipes {
         for (Map.Entry<ResourceLocation, Resource> file : files.entrySet()) {
             try (Reader reader = file.getValue().openAsReader()) {
                 JsonObject type = JsonParser.parseReader(reader).getAsJsonObject();
+                if (!MealType.Station.byName(GsonHelper.getAsString(type, "station", "crafting_table")).isAvailable()) {
+                    continue;
+                }
                 for (JsonElement element : GsonHelper.getAsJsonArray(type, "item_overrides", new JsonArray())) {
                     JsonObject override = element.getAsJsonObject();
                     if (GsonHelper.getAsBoolean(override, "replace_recipes", false)) {

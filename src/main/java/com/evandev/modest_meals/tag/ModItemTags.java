@@ -8,6 +8,8 @@ import net.minecraft.world.item.Item;
 
 public class ModItemTags {
     public static final TagKey<Item> NOT_AN_INGREDIENT = tag("not_an_ingredient");
+    public static final TagKey<Item> INGREDIENT_MEALS = tag("ingredient_meals");
+    public static final TagKey<Item> JAM_FRUITS = tag("jam_fruits");
     public static final TagKey<Item> WHEATS = itemTag("c", "crops/wheat");
 
     private static TagKey<Item> tag(String path) {

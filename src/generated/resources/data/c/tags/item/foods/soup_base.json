@@ -1,7 +1,6 @@
 {
   "values": [
     "minecraft:water_bucket",
-    "minecraft:potion",
     {
       "id": "#c:drinks/water",
       "required": false

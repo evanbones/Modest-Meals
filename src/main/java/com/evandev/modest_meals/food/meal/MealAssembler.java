@@ -148,8 +148,8 @@ public final class MealAssembler {
         }
 
         return compute(ingredients, base, hasUnsupported).map(contents -> {
-            ItemStack result = new ItemStack(resultItem.get());
-            result.set(ModDataComponents.MEAL_CONTENTS.get(), contents);
+            ItemStack result = new ItemStack(resultItem.get(), type.servings());
+            result.set(ModDataComponents.MEAL_CONTENTS.get(), contents.split(type.servings()));
             return result;
         });
     }

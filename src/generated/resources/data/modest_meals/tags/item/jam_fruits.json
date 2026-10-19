@@ -1,0 +1,54 @@
+{
+  "values": [
+    "minecraft:apple",
+    "minecraft:melon_slice",
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "minecraft:chorus_fruit",
+    "#c:foods/fruit",
+    {
+      "id": "#c:foods/berry",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cherry",
+      "required": false
+    },
+    {
+      "id": "#c:foods/plum",
+      "required": false
+    },
+    {
+      "id": "#c:foods/orange",
+      "required": false
+    },
+    {
+      "id": "#c:foods/elderberry",
+      "required": false
+    },
+    {
+      "id": "#c:foods/lapisberry",
+      "required": false
+    },
+    {
+      "id": "#c:foods/passion_fruit",
+      "required": false
+    },
+    {
+      "id": "#c:foods/pear",
+      "required": false
+    },
+    {
+      "id": "#c:crops/lemon",
+      "required": false
+    },
+    {
+      "id": "#c:crops/mango",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pumpkin_slice",
+      "required": false
+    }
+  ]
+}

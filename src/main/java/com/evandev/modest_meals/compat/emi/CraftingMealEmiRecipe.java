@@ -26,7 +26,7 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
 
     private CraftingMealEmiRecipe(MealType type, EmiIngredient any, List<EmiIngredient> slots) {
         this(type, any, slots, syntheticId("meal_crafting", type),
-                type.resolveItem().map(EmiStack::of).orElse(EmiStack.EMPTY));
+                type.resolveItem().map(item -> EmiStack.of(item, type.servings())).orElse(EmiStack.EMPTY));
     }
 
     private CraftingMealEmiRecipe(MealType type, EmiIngredient any, List<EmiIngredient> slots, ResourceLocation id, EmiStack output) {

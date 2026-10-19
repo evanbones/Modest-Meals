@@ -49,3 +49,11 @@ type = "optional"
 versionRange = "[2.4,)"
 ordering = "AFTER"
 side = "BOTH"
+
+# 0.19.5 is the first vat that keeps components on what it makes, which vat meals rely on
+[[dependencies.${ mod_id }]]
+modId = "culturaldelights"
+type = "optional"
+versionRange = "[0.19.5,)"
+ordering = "NONE"
+side = "BOTH"

@@ -174,8 +174,8 @@ dependencies {
     runtimeOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
 
     // Cultural Delights
+    compileOnly "maven.modrinth:cultural-delights:${cultural_delights_version}"
     runtimeOnly "maven.modrinth:cultural-delights:${cultural_delights_version}"
-    runtimeOnly "maven.modrinth:cooks-collection:${cooks_collection_version}"
 
     // Thermoo
     compileOnly "maven.modrinth:thermoo:${thermoo_version}"

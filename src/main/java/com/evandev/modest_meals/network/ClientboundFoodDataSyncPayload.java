@@ -14,7 +14,7 @@ import com.evandev.modest_meals.trait.FoodTraitType;
 import com.evandev.modest_meals.trait.TagTraitEntry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -63,7 +63,8 @@ public record ClientboundFoodDataSyncPayload(
                     .optionalFieldOf("meal_ingredient_tags", List.of()).forGetter(ClientboundFoodDataSyncPayload::mealIngredientTags)
     ).apply(instance, ClientboundFoodDataSyncPayload::new));
 
-    public static final StreamCodec<ByteBuf, ClientboundFoodDataSyncPayload> STREAM_CODEC = ByteBufCodecs.fromCodec(CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundFoodDataSyncPayload> STREAM_CODEC =
+            ByteBufCodecs.fromCodecWithRegistries(CODEC);
 
     public static ClientboundFoodDataSyncPayload create() {
         return new ClientboundFoodDataSyncPayload(

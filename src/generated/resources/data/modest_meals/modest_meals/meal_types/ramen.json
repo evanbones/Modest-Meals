@@ -6,9 +6,20 @@
       }
     },
     {
-      "ingredient": {
-        "tag": "c:foods/soup_base"
-      }
+      "ingredient": [
+        {
+          "tag": "c:foods/soup_base"
+        },
+        {
+          "type": "neoforge:components",
+          "components": {
+            "minecraft:potion_contents": {
+              "potion": "minecraft:water"
+            }
+          },
+          "items": "minecraft:potion"
+        }
+      ]
     }
   ],
   "container": "minecraft:bowl",
@@ -32,6 +43,15 @@
       ],
       "replace_recipes": true,
       "result": "mynethersdelight:spicy_noodle_soup"
+    },
+    {
+      "ingredients": [
+        "mynethersdelight:minced_strider",
+        "minecraft:crimson_fungus",
+        "minecraft:crimson_fungus"
+      ],
+      "replace_recipes": true,
+      "result": "mynethersdelight:crimson_stroganoff"
     }
   ],
   "max_ingredients": 4,

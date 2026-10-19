@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.compat.emi;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.food.meal.MealTypeManager;
@@ -38,6 +39,9 @@ public class ModestMealsEmiPlugin implements EmiPlugin {
 
         if (FarmersDelightCompat.isLoaded()) {
             CookingPotEmiSupport.register(registry, pool);
+        }
+        if (CulturalDelightsCompat.isLoaded()) {
+            VatEmiSupport.register(registry, pool);
         }
 
         Constants.LOG.debug("Registered EMI recipes for Modest Meals ({} pool ingredients)", pool.size());
