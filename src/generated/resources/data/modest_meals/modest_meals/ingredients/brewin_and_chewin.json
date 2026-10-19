@@ -1,0 +1,97 @@
+{
+  "entries": [
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "priority": 145,
+      "target": "#brewinandchewin:grapes"
+    },
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "target": "brewinandchewin:red_grapes"
+    },
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "target": "brewinandchewin:white_grapes"
+    },
+    {
+      "health": 1.5,
+      "stamina": 2.5,
+      "target": "brewinandchewin:cooked_corn"
+    },
+    {
+      "stamina": 1.0,
+      "target": "brewinandchewin:popped_corn"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.5,
+      "target": "brewinandchewin:cornmeal",
+      "time_bonus": 30
+    },
+    {
+      "health": 2.0,
+      "priority": 145,
+      "stamina": 3.0,
+      "target": "#brewinandchewin:foods/cheese_wedge"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "brewinandchewin:rennet"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "brewinandchewin:innards"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.5,
+      "target": "brewinandchewin:jerky"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.5,
+      "target": "brewinandchewin:aspic_cube"
+    },
+    {
+      "digest_ticks": 130,
+      "health": 3.0,
+      "target": "brewinandchewin:kippers"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 1.0,
+      "potency": 7,
+      "stamina": 2.0,
+      "target": "brewinandchewin:kimchi"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 1.0,
+      "potency": 7,
+      "stamina": 2.0,
+      "target": "brewinandchewin:pickled_pickles"
+    },
+    {
+      "stamina": 2.0,
+      "target": "brewinandchewin:sweet_berry_jam",
+      "temporary_health": 1.0
+    },
+    {
+      "effect": "modest_meals:glowing",
+      "health": 1.0,
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "brewinandchewin:glow_berry_marmalade"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 3.0,
+      "target": "brewinandchewin:apple_jelly"
+    }
+  ]
+}

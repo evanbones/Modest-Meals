@@ -1,0 +1,65 @@
+{
+  "entries": [
+    {
+      "digest_ticks": 60,
+      "health": 1.0,
+      "priority": 145,
+      "target": "#c:foods/cherry"
+    },
+    {
+      "digest_ticks": 60,
+      "health": 1.0,
+      "target": "environmental:cherries"
+    },
+    {
+      "digest_ticks": 110,
+      "health": 2.5,
+      "priority": 145,
+      "target": "#c:foods/plum"
+    },
+    {
+      "digest_ticks": 110,
+      "health": 2.5,
+      "target": "environmental:plum"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "environmental:venison"
+    },
+    {
+      "health": 6.0,
+      "stamina": 2.0,
+      "target": "environmental:cooked_venison"
+    },
+    {
+      "digest_ticks": 150,
+      "health": 1.5,
+      "target": "environmental:duck"
+    },
+    {
+      "health": 5.0,
+      "stamina": 2.0,
+      "target": "environmental:cooked_duck"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "environmental:duck_egg"
+    },
+    {
+      "effect": "modest_meals:luck",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 0.5,
+      "target": "environmental:koi"
+    },
+    {
+      "effect": "modest_meals:luck",
+      "health": 3.0,
+      "potency": 14,
+      "stamina": 4.0,
+      "target": "environmental:truffle"
+    }
+  ]
+}

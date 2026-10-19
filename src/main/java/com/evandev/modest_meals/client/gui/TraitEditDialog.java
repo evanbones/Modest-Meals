@@ -128,7 +128,7 @@ public class TraitEditDialog extends Screen {
         if (currentEditor != null) {
             currentEditor.buildForm(this.form);
         }
-        this.form.widgets().forEach(this::addRenderableWidget);
+        this.form.widgets().forEach(this::addWidget);
 
         this.scroll = Mth.clamp(this.scroll, 0, maxScroll());
 
@@ -277,6 +277,7 @@ public class TraitEditDialog extends Screen {
 
         graphics.enableScissor(panelX + GuiUtil.PANEL_PADDING, viewTop,
                 panelX + GuiUtil.PANEL_PADDING + formWidth(), viewBottom);
+        form.renderWidgets(graphics, mouseX, mouseY, partialTick);
         form.renderLabels(graphics, scroll);
         graphics.disableScissor();
 
@@ -309,7 +310,7 @@ public class TraitEditDialog extends Screen {
                     contentX + 4, boxY + 6, contentW - 8, GuiUtil.ERROR_RED);
         } else if (previewTrait != null) {
             Component tooltip = FoodItemTooltips.hasTooltipLine(previewTrait)
-                    ? previewTrait.getTooltipComponent(1.0, 1.0)
+                    ? previewTrait.getTooltipComponent(1.0, 1.0, GuiUtil.tickRate())
                     : null;
             if (tooltip != null) {
                 GuiUtil.drawTrimmed(graphics, this.font, tooltip, contentX + 4, boxY + 6, contentW - 8, GuiUtil.WHITE);

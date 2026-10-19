@@ -35,22 +35,14 @@ public record AirBubblesTrait(int value) implements FoodTrait {
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof AirBubblesTrait(int value1)) {
-            return new AirBubblesTrait((int) ((this.value + value1) * valueMultiplier));
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int addAir = (int) (this.value * valueMultiplier);
         entity.setAirSupply(Math.min(entity.getMaxAirSupply(), entity.getAirSupply() + addAir));
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         int bubbles = (int) Math.round((this.value * valueMultiplier) / 30.0);
-        return TraitTooltipHelper.formatPlusTrait("modest_meals.trait.air_bubbles", bubbles > 0 ? bubbles : 1, 0);
+        return TraitTooltipHelper.formatPlusTrait("modest_meals.trait.air_bubbles", bubbles > 0 ? bubbles : 1, 0, tickRate);
     }
 }

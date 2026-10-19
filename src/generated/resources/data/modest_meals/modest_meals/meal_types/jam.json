@@ -1,0 +1,27 @@
+{
+  "base": [
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "container": "minecraft:glass_bottle",
+  "id": "modest_meals:jam",
+  "item": "modest_meals:jam",
+  "item_overrides": [
+    {
+      "count": 2,
+      "ingredients": [
+        "abundant_atmosphere:roasted_gourdnut",
+        "#abundant_atmosphere:squashberry_jam_fruits",
+        "minecraft:sweet_berries"
+      ],
+      "replace_recipes": true,
+      "result": "abundant_atmosphere:squashberry_jam"
+    }
+  ],
+  "max_ingredients": 3,
+  "priority": 30,
+  "station": "cooking_pot"
+}

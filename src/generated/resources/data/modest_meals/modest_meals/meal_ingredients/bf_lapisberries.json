@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:lapisberries",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/lapisberry_0",
+      "modest_meals:item/meal/sandwich/lapisberry_1",
+      "modest_meals:item/meal/sandwich/lapisberry_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/lapisberry_0",
+      "modest_meals:item/meal/wrap/lapisberry_1",
+      "modest_meals:item/meal/wrap/lapisberry_2"
+    ]
+  }
+}

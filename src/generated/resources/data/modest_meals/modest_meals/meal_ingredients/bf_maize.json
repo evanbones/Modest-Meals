@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:maize",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/creamed_corn_0",
+      "modest_meals:item/meal/sandwich/creamed_corn_1",
+      "modest_meals:item/meal/sandwich/creamed_corn_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/creamed_corn_0",
+      "modest_meals:item/meal/wrap/creamed_corn_1",
+      "modest_meals:item/meal/wrap/creamed_corn_2"
+    ]
+  }
+}

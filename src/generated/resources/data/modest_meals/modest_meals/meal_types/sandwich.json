@@ -1,0 +1,107 @@
+{
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/sandwich/sandwich_bottom",
+    "top": "modest_meals:item/meal/sandwich/sandwich_top"
+  },
+  "dubious_sprite": "modest_meals:item/meal/sandwich/dubious",
+  "id": "modest_meals:sandwich",
+  "item": "modest_meals:sandwich",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "#c:foods/cooked_egg",
+        "#c:foods/cooked_egg",
+        "#c:foods/cooked_egg"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:egg_sandwich"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_chicken",
+        "#c:foods/leafy_green",
+        "#c:crops/carrot"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:chicken_sandwich"
+    },
+    {
+      "ingredients": [
+        "farmersdelight:beef_patty|culturaldelights:tofu",
+        "#c:foods/leafy_green",
+        "#c:crops/tomato"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:hamburger"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_bacon",
+        "#c:foods/leafy_green",
+        "#c:crops/tomato"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:bacon_sandwich"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_mutton",
+        "#c:foods/cooked_egg",
+        "#c:crops/beetroot"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:mutton_sandwich"
+    },
+    {
+      "ingredients": [
+        "#culturaldelights:smoked_all_eggplants",
+        "#c:foods/leafy_green",
+        "#c:crops/tomato"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:eggplant_burger"
+    },
+    {
+      "ingredients": [
+        "minecraft:cooked_rabbit",
+        "#c:foods/leafy_green",
+        "#c:crops/tomato"
+      ],
+      "replace_recipes": true,
+      "result": "abundantdelight:rabbit_sandwich"
+    },
+    {
+      "ingredients": [
+        "nomansland:cooked_frog_leg",
+        "nomansland:cooked_frog_leg",
+        "#c:crops/onion"
+      ],
+      "replace_recipes": true,
+      "result": "nomansdelight:frog_sandwich"
+    },
+    {
+      "ingredients": [
+        "nomansland:grilled_mushrooms",
+        "#c:foods/cooked_venison",
+        "nomansland:walnuts"
+      ],
+      "replace_recipes": true,
+      "result": "nomansdelight:shroomburger"
+    }
+  ],
+  "max_ingredients": 3,
+  "min_ingredients": 3,
+  "priority": 10,
+  "requires_supported_ingredients": true,
+  "shape": {
+    "key": {
+      "#": "modest_meals:any_ingredient",
+      "B": "#c:foods/bread"
+    },
+    "pattern": [
+      " B ",
+      "###",
+      " B "
+    ]
+  }
+}

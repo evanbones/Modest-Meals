@@ -31,14 +31,6 @@ public record StaminaNoRegenTrait(int duration) implements FoodTrait {
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof StaminaNoRegenTrait(int duration1)) {
-            return new StaminaNoRegenTrait((int) ((this.duration + duration1) * durationMultiplier));
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int dur = (int) (this.duration * durationMultiplier);
         if (dur > 0) {
@@ -47,7 +39,7 @@ public record StaminaNoRegenTrait(int duration) implements FoodTrait {
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
-        return TraitTooltipHelper.formatSimpleTake("modest_meals.trait.stamina_no_regen", (long) (this.duration * durationMultiplier));
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
+        return TraitTooltipHelper.formatSimpleTake("modest_meals.trait.stamina_no_regen", (long) (this.duration * durationMultiplier), tickRate);
     }
 }

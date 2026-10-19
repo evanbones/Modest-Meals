@@ -1,0 +1,15 @@
+{
+  "item": "neapolitan:vanilla_pods",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/vanilla_0",
+      "modest_meals:item/meal/sandwich/vanilla_1",
+      "modest_meals:item/meal/sandwich/vanilla_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/vanilla_0",
+      "modest_meals:item/meal/wrap/vanilla_1",
+      "modest_meals:item/meal/wrap/vanilla_2"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "item": "nomansland:pear",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/pear_0",
+      "modest_meals:item/meal/sandwich/pear_1",
+      "modest_meals:item/meal/sandwich/pear_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/pear_0",
+      "modest_meals:item/meal/wrap/pear_1",
+      "modest_meals:item/meal/wrap/pear_2"
+    ]
+  }
+}

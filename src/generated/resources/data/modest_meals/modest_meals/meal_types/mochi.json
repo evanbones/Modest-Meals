@@ -1,0 +1,15 @@
+{
+  "id": "modest_meals:mochi",
+  "item": "modest_meals:mochi",
+  "max_ingredients": 1,
+  "priority": 12,
+  "shape": {
+    "key": {
+      "#": "modest_meals:any_ingredient",
+      "D": "#c:foods/dough"
+    },
+    "pattern": [
+      "D#D"
+    ]
+  }
+}

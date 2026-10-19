@@ -1,0 +1,19 @@
+{
+  "id": "modest_meals:speed",
+  "mob_effect": "minecraft:speed",
+  "name_prefix_key": "modest_meals.meal_prefix.speed",
+  "tiers": [
+    {
+      "amplifier": 0,
+      "threshold": 0
+    },
+    {
+      "amplifier": 1,
+      "threshold": 30
+    },
+    {
+      "amplifier": 2,
+      "threshold": 45
+    }
+  ]
+}

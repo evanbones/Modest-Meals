@@ -1,0 +1,6 @@
+{
+  "base_seconds": 60,
+  "id": "modest_meals:invisibility",
+  "mob_effect": "minecraft:invisibility",
+  "name_prefix_key": "modest_meals.meal_prefix.invisibility"
+}

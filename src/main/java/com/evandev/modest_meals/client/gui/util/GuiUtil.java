@@ -2,6 +2,7 @@ package com.evandev.modest_meals.client.gui.util;
 
 import com.evandev.modest_meals.Constants;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.locale.Language;
@@ -26,24 +27,19 @@ public class GuiUtil {
 
     public static final ResourceLocation ROW = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "widget/tabs/vertical_vanilla");
     public static final ResourceLocation ROW_SELECTED = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "widget/tabs/vertical_vanilla_selected");
-
     public static final int PANEL_PADDING = 9;
     public static final int SCROLLBAR_WIDTH = 16;
-
     public static final int SCROLLBAR_EXTRA_WIDTH = SCROLLBAR_WIDTH - PANEL_PADDING;
     public static final int ROW_INSET = 4;
     public static final int LINE_H = 10;
     public static final int SELECTED_SLOT = 0x7700BBFF;
-    public static final int ADDED_SLOT = 0x3300FF00;
-    public static final int INSERTION_MARKER = 0xFF00FFFF;
-    public static final int PRIMARY_SELECTION_OUTLINE = 0xFF88DDFF;
     public static final int SUBTEXT = 0xB5B5B5;
     public static final int BADGE_CUSTOM = 0x88CC88;
-    public static final int BADGE_MODIFIED = 0xCCAA66;
-    public static final int BADGE_HIDDEN = 0xCC7777;
     public static final int HEADER_BG = 0xDD181818;
     public static final int HEADER_OUTLINE = 0xFF333333;
     public static final int SEPARATOR = 0x55FFFFFF;
+    public static final int SECTION = 0xFFD264;
+    public static final int SECTION_RULE = 0x66FFD264;
     public static final int HOVER_WASH = 0x18FFFFFF;
     public static final int LABEL = 0xDDDDDD;
     public static final int DIM = 0x777777;
@@ -52,6 +48,11 @@ public class GuiUtil {
     public static final int ERROR_RED = 0xFF5555;
     public static final int WHITE = 0xFFFFFF;
     private static final int TRACK_PADDING = 2;
+
+    public static float tickRate() {
+        Minecraft minecraft = Minecraft.getInstance();
+        return minecraft.level == null ? 20.0F : minecraft.level.tickRateManager().tickrate();
+    }
 
     public static void drawNinePatch(GuiGraphics context, ResourceLocation texture, int x, int y, int w, int h, int u, int v, int cornerLength, int centerLength) {
         int corcen = cornerLength + centerLength;
@@ -86,6 +87,11 @@ public class GuiUtil {
 
     public static void drawVanillaScrollbar(GuiGraphics context, int x, int contentY, int contentHeight,
                                             double scrollAmount, int maxScroll) {
+        drawVanillaScrollbar(context, x, contentY, contentHeight, contentHeight, scrollAmount, maxScroll);
+    }
+
+    public static void drawVanillaScrollbar(GuiGraphics context, int x, int contentY, int contentHeight,
+                                            int viewportHeight, double scrollAmount, int maxScroll) {
         int trackY = contentY - TRACK_PADDING;
         int trackHeight = contentHeight + TRACK_PADDING * 2;
 
@@ -96,23 +102,28 @@ public class GuiUtil {
         int thumbHeight = trackHeight;
         int thumbY = trackY;
         if (maxScroll > 0) {
-            thumbHeight = thumbHeight(trackHeight, contentHeight, maxScroll);
+            thumbHeight = thumbHeight(trackHeight, viewportHeight, maxScroll);
             thumbY = trackY + (int) ((trackHeight - thumbHeight) * (scrollAmount / maxScroll));
         }
         context.blitSprite(SCROLLBAR_THUMB, x, thumbY, SCROLLBAR_WIDTH, thumbHeight);
         RenderSystem.disableBlend();
     }
 
-    private static int thumbHeight(int trackHeight, int contentHeight, int maxScroll) {
-        float visibleFraction = (float) contentHeight / (float) (contentHeight + maxScroll);
+    private static int thumbHeight(int trackHeight, int viewportHeight, int maxScroll) {
+        float visibleFraction = (float) viewportHeight / (float) (viewportHeight + maxScroll);
         return Math.max(SCROLLBAR_WIDTH, (int) (trackHeight * visibleFraction));
     }
 
     public static double scrollAmountFromMouse(double mouseY, int contentY, int contentHeight, int maxScroll) {
+        return scrollAmountFromMouse(mouseY, contentY, contentHeight, contentHeight, maxScroll);
+    }
+
+    public static double scrollAmountFromMouse(double mouseY, int contentY, int contentHeight,
+                                               int viewportHeight, int maxScroll) {
         if (maxScroll <= 0) return 0;
         int trackY = contentY - TRACK_PADDING;
         int trackHeight = contentHeight + TRACK_PADDING * 2;
-        int thumbHeight = thumbHeight(trackHeight, contentHeight, maxScroll);
+        int thumbHeight = thumbHeight(trackHeight, viewportHeight, maxScroll);
         int travel = trackHeight - thumbHeight;
         if (travel <= 0) return 0;
 
@@ -195,5 +206,9 @@ public class GuiUtil {
 
     public static void drawSeparator(GuiGraphics context, int x, int y, int width) {
         context.fill(x, y, x + width, y + 1, SEPARATOR);
+    }
+
+    public static void drawSectionRule(GuiGraphics context, int x, int y, int width) {
+        context.fill(x, y, x + width, y + 1, SECTION_RULE);
     }
 }

@@ -1,0 +1,47 @@
+{
+  "base": [
+    {
+      "ingredient": {
+        "tag": "c:crops/rice"
+      }
+    }
+  ],
+  "container": "minecraft:bowl",
+  "id": "modest_meals:curry",
+  "item": "modest_meals:curry",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "culturaldelights:cinnamon",
+        "culturaldelights:mint",
+        "culturaldelights:corn_cob",
+        "#c:foods/raw_chicken|culturaldelights:tofu"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:cinnamon_mint_curry"
+    },
+    {
+      "ingredients": [
+        "#mynethersdelight:hot_spice|minecraft:blaze_powder",
+        "farmersdelight:tomato_sauce",
+        "culturaldelights:beans",
+        "#c:foods/raw_chicken|culturaldelights:tofu"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:spicy_curry"
+    },
+    {
+      "ingredients": [
+        "neapolitan:adzuki_beans|neapolitan:roasted_adzuki_beans",
+        "#c:foods/banana|neapolitan:dried_banana",
+        "#c:crops/carrot",
+        "farmersdelight:pumpkin_slice"
+      ],
+      "replace_recipes": true,
+      "result": "neapolitan:adzuki_curry"
+    }
+  ],
+  "min_ingredients": 2,
+  "priority": 25,
+  "station": "cooking_pot"
+}

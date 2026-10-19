@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "environmental:plum",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:plum",
+      "required": false
+    }
+  ]
+}

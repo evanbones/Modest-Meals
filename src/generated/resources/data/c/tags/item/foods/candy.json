@@ -1,0 +1,44 @@
+{
+  "values": [
+    {
+      "id": "neapolitan:mint_candies",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:candy",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:sour_candy",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:piquant_candy",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:bitter_candy",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:strange_candy",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:candied_orange",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:candied_lemon",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:candied_apple",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:candied_plum",
+      "required": false
+    }
+  ]
+}

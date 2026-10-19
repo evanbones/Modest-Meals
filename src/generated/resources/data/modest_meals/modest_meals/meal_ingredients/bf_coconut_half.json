@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:coconut_half",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/coconut_0",
+      "modest_meals:item/meal/sandwich/coconut_1",
+      "modest_meals:item/meal/sandwich/coconut_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/coconut_0",
+      "modest_meals:item/meal/wrap/coconut_1",
+      "modest_meals:item/meal/wrap/coconut_2"
+    ]
+  }
+}

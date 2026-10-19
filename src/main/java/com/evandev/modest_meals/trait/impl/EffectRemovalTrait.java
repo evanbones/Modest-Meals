@@ -40,14 +40,6 @@ public record EffectRemovalTrait(boolean clearAll) implements FoodTrait {
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof EffectRemovalTrait(boolean all)) {
-            return new EffectRemovalTrait(this.clearAll || all);
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         if (this.clearAll) {
             entity.removeAllEffects();
@@ -65,10 +57,10 @@ public record EffectRemovalTrait(boolean clearAll) implements FoodTrait {
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         return TraitTooltipHelper.formatSimple(
                 this.clearAll ? "modest_meals.trait.clear_all_effects" : "modest_meals.trait.clear_negative_effects",
                 0
-        );
+        , tickRate);
     }
 }

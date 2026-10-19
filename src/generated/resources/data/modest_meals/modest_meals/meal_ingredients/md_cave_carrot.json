@@ -1,0 +1,15 @@
+{
+  "item": "minersdelight:cave_carrot",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/carrot_0",
+      "modest_meals:item/meal/sandwich/carrot_1",
+      "modest_meals:item/meal/sandwich/carrot_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/carrot_0",
+      "modest_meals:item/meal/wrap/carrot_1",
+      "modest_meals:item/meal/wrap/carrot_2"
+    ]
+  }
+}

@@ -41,14 +41,6 @@ public record TeleportTrait(float range) implements FoodTrait {
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof TeleportTrait(float range1)) {
-            return new TeleportTrait(Math.max(this.range, range1) * valueMultiplier);
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         if (entity.level().isClientSide()) return;
         float actualRange = this.range * valueMultiplier;
@@ -74,7 +66,7 @@ public record TeleportTrait(float range) implements FoodTrait {
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
-        return TraitTooltipHelper.formatSimple("modest_meals.trait.teleport_randomly", 0);
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
+        return TraitTooltipHelper.formatSimple("modest_meals.trait.teleport_randomly", 0, tickRate);
     }
 }

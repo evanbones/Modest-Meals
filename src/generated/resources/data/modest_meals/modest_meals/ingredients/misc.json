@@ -1,0 +1,113 @@
+{
+  "entries": [
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "minecraft:brown_mushroom"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "minecraft:red_mushroom"
+    },
+    {
+      "effect": "modest_meals:invisibility",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minecraft:warped_fungus"
+    },
+    {
+      "effect": "modest_meals:invisibility",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.0,
+      "target": "minecraft:fermented_spider_eye"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 0.5,
+      "target": "minecraft:crimson_fungus"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 0.0,
+      "potency": 21,
+      "stamina": 0.5,
+      "target": "minecraft:magma_cream"
+    },
+    {
+      "effect": "modest_meals:fire_resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minecraft:blaze_powder"
+    },
+    {
+      "effect": "modest_meals:cold_resistance",
+      "health": 0.0,
+      "potency": 21,
+      "stamina": 0.5,
+      "target": "minecraft:blaze_rod"
+    },
+    {
+      "effect": "modest_meals:cold_resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minecraft:nether_wart"
+    },
+    {
+      "effect": "modest_meals:heat_resistance",
+      "health": 0.0,
+      "potency": 21,
+      "stamina": 0.5,
+      "target": "minecraft:blue_ice"
+    },
+    {
+      "effect": "modest_meals:heat_resistance",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "minecraft:snowball"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "health": 0.5,
+      "potency": 21,
+      "stamina": 0.5,
+      "target": "minecraft:pufferfish"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "health": 0.0,
+      "potency": 14,
+      "stamina": 0.0,
+      "target": "minecraft:nautilus_shell"
+    },
+    {
+      "health": 0.0,
+      "stamina": 0.5,
+      "target": "minecraft:ink_sac"
+    },
+    {
+      "effect": "modest_meals:luck",
+      "health": 0.0,
+      "potency": 21,
+      "stamina": 0.0,
+      "target": "minecraft:rabbit_foot"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.0,
+      "target": "minecraft:spider_eye"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.0,
+      "target": "minecraft:rotten_flesh"
+    }
+  ]
+}

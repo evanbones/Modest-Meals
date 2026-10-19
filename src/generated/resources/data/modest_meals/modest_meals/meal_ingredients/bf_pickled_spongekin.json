@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:pickled_spongekin",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/pickle_0",
+      "modest_meals:item/meal/sandwich/pickle_1",
+      "modest_meals:item/meal/sandwich/pickle_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/pickle_0",
+      "modest_meals:item/meal/wrap/pickle_1",
+      "modest_meals:item/meal/wrap/pickle_2"
+    ]
+  }
+}

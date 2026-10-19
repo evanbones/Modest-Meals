@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "culturaldelights:cooked_sausage",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:cooked_sausage",
+      "required": false
+    }
+  ]
+}

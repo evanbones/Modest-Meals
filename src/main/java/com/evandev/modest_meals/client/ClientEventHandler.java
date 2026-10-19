@@ -3,15 +3,21 @@ package com.evandev.modest_meals.client;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.client.gui.FoodEditorScreen;
 import com.evandev.modest_meals.client.hud.TextureHelper;
+import com.evandev.modest_meals.client.model.DynamicMealBakedModel;
 import com.evandev.modest_meals.client.tooltip.FoodItemTooltips;
 import com.evandev.modest_meals.compat.raised.RaisedCompat;
 import com.evandev.modest_meals.compat.raised.RaisedLayerSync;
 import com.evandev.modest_meals.config.HudLayoutOption;
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.registry.ModItems;
+import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackLocationInfo;
@@ -28,6 +34,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.nio.file.Path;
@@ -88,7 +95,7 @@ public class ClientEventHandler {
         );
 
         if (RaisedCompat.isLoaded()) {
-            RaisedLayerSync.linkToHotbarIfUnconfigured(AIR_LAYER);
+            RaisedLayerSync.registerAndLinkToHotbar(AIR_LAYER);
         }
 
         event.registerAbove(
@@ -117,7 +124,7 @@ public class ClientEventHandler {
         );
 
         if (RaisedCompat.isLoaded()) {
-            RaisedLayerSync.linkToHotbarIfUnconfigured(ARMOR_LAYER);
+            RaisedLayerSync.registerAndLinkToHotbar(ARMOR_LAYER);
         }
 
         event.registerAbove(
@@ -141,7 +148,7 @@ public class ClientEventHandler {
         );
 
         if (RaisedCompat.isLoaded()) {
-            RaisedLayerSync.linkToHotbarIfUnconfigured(STAMINA_ARMOR_LAYER);
+            RaisedLayerSync.registerAndLinkToHotbar(STAMINA_ARMOR_LAYER);
         }
 
         event.registerAbove(
@@ -165,7 +172,7 @@ public class ClientEventHandler {
         );
 
         if (RaisedCompat.isLoaded()) {
-            RaisedLayerSync.linkToHotbarIfUnconfigured(STAMINA_FOOD_LAYER);
+            RaisedLayerSync.registerAndLinkToHotbar(STAMINA_FOOD_LAYER);
         }
 
         event.registerAbove(
@@ -206,6 +213,20 @@ public class ClientEventHandler {
         });
     }
 
+    @SubscribeEvent
+    public static void onModifyBakingResult(ModelEvent.ModifyBakingResult event) {
+        for (var mealSupplier : ModItems.CREATIVE_TAB_ITEMS) {
+            ResourceLocation itemLoc = BuiltInRegistries.ITEM.getKey(mealSupplier.get());
+            ModelResourceLocation modelLoc =
+                    ModelResourceLocation.inventory(itemLoc);
+            BakedModel original = event.getModels().get(modelLoc);
+            if (original != null) {
+                event.getModels().put(modelLoc,
+                        new DynamicMealBakedModel(original, itemLoc));
+            }
+        }
+    }
+
     public static class GameEvents {
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         public static void onRenderGuiLayerPre(RenderGuiLayerEvent.Pre event) {
@@ -222,9 +243,21 @@ public class ClientEventHandler {
             }
         }
 
-        @SubscribeEvent
+        @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void onItemTooltip(ItemTooltipEvent event) {
             FoodItemTooltips.onTooltip(event);
+        }
+
+        @SubscribeEvent
+        public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
+            StaminaHelper.clearClient();
+        }
+
+        @SubscribeEvent
+        public static void onEntityLeaveLevel(EntityLeaveLevelEvent event) {
+            if (event.getLevel().isClientSide() && event.getEntity() instanceof Player player) {
+                StaminaHelper.forget(player);
+            }
         }
 
         @SubscribeEvent

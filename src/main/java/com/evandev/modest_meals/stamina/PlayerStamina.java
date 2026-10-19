@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.stamina;
 
+import com.evandev.modest_meals.api.StaminaEvent;
 import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
@@ -12,7 +13,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
+import net.neoforged.neoforge.common.NeoForge;
+import org.jetbrains.annotations.ApiStatus;
 
+@ApiStatus.Internal
 public class PlayerStamina {
     private static final int SYNC_INTERVAL_TICKS = 20;
 
@@ -85,6 +89,43 @@ public class PlayerStamina {
         this.data.setRemaining(gain.remaining());
         this.data.setExhausted(gain.exhausted());
         this.data.setStaminaUsingTicks(gain.exhausted() ? this.getRechargeInTicks() : this.getDurationInTicks(), this.getMaxLevel());
+    }
+
+    /**
+     * Take stamina off the player. Hitting zero exhausts them.
+     */
+    public void spend(float levels) {
+        int ticks = this.levelsToTicks(levels);
+        if (ticks <= 0) {
+            return;
+        }
+
+        int remaining = this.data.getRemaining() - ticks;
+        if (remaining <= 0) {
+            this.data.setRemaining(0);
+            this.markExhausted();
+        } else {
+            this.data.setRemaining(remaining);
+        }
+        this.data.setStaminaUsingTicks(this.getActiveBarInTicks(), this.getMaxLevel());
+    }
+
+    /**
+     * Flip into the exhausted state.
+     */
+    private void markExhausted() {
+        if (this.data.isExhausted()) {
+            return;
+        }
+        this.data.setExhausted(true);
+        this.postServerSide(new StaminaEvent.Exhausted(this.player));
+        this.syncNow();
+    }
+
+    private void postServerSide(StaminaEvent event) {
+        if (!this.player.level().isClientSide()) {
+            NeoForge.EVENT_BUS.post(event);
+        }
     }
 
     public int levelAfterGain(float levels) {
@@ -171,18 +212,18 @@ public class PlayerStamina {
                 this.data.remaining = durationInTicks;
                 this.data.cooldown = 0;
                 this.data.setExhausted(false);
+                this.postServerSide(new StaminaEvent.Recovered(this.player));
                 this.syncNow();
             }
 
             this.data.setStaminaUsingTicks(this.data.isExhausted() ? rechargeInTicks : durationInTicks, maxLevel);
         } else if (this.isAtFullSprint()) {
-            if (!this.isNourished()) {
+            if (!this.isNourished() && !this.isDrainCancelled()) {
                 this.data.remaining--;
 
                 if (this.data.remaining <= 0) {
                     this.data.remaining = 0;
-                    this.data.setExhausted(true);
-                    this.syncNow();
+                    this.markExhausted();
                 }
             }
             this.data.cooldown = this.getCooldownInTicks();
@@ -204,7 +245,19 @@ public class PlayerStamina {
         }
     }
 
-    private void syncNow() {
+    /**
+     * Ask whether anything wants to stop this tick's drain.
+     */
+    private boolean isDrainCancelled() {
+        if (this.player.level().isClientSide()) {
+            return false;
+        }
+        StaminaEvent.Drain event = new StaminaEvent.Drain(this.player);
+        NeoForge.EVENT_BUS.post(event);
+        return event.isCanceled();
+    }
+
+    public void syncNow() {
         if (this.player instanceof ServerPlayer serverPlayer) {
             this.ticksSinceSync = 0;
             ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
@@ -294,10 +347,6 @@ public class PlayerStamina {
     }
 
     public int getPositiveEffectAmplifier() {
-        MobEffectInstance regen = this.player.getEffect(ModMobEffects.STAMINA_REGEN);
-        if (regen != null) {
-            return regen.getAmplifier();
-        }
         MobEffectInstance sat = this.player.getEffect(MobEffects.SATURATION);
         if (sat != null) {
             return sat.getAmplifier();

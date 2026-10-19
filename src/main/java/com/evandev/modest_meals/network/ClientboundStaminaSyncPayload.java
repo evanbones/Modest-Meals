@@ -26,7 +26,8 @@ public record ClientboundStaminaSyncPayload(int stamina, int remaining, int cool
 
     public static ClientboundStaminaSyncPayload create(ServerPlayer player) {
         StaminaData data = StaminaHelper.get(player).getData();
-        return new ClientboundStaminaSyncPayload(data.getStamina(), data.getRemaining(), data.getCooldown(), data.isExhausted());
+        return new ClientboundStaminaSyncPayload(data.getStamina(), data.getRemaining(), data.getCooldown(),
+                data.isExhausted());
     }
 
     public static void handle(ClientboundStaminaSyncPayload payload, IPayloadContext context) {

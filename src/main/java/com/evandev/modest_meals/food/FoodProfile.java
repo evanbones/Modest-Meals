@@ -5,6 +5,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 /**
  * A rule that determines what a food restores from its vanilla nutrition.
+ * <p>
+ * These are rates, multiplied by nutrition to mass balance entire categories. Per-item amounts live in an IngredientProfile.
  */
 public record FoodProfile(
         String id,

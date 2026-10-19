@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "culturaldelights:raw_sausage",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:raw_sausage",
+      "required": false
+    }
+  ]
+}

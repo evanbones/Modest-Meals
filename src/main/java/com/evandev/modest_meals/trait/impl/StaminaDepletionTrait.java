@@ -33,17 +33,6 @@ public record StaminaDepletionTrait(float value, int duration) implements FoodTr
     }
 
     @Override
-    public FoodTrait compoundWith(FoodTrait other, float valueMultiplier, float durationMultiplier) {
-        if (other instanceof StaminaDepletionTrait(float value1, int duration1)) {
-            return new StaminaDepletionTrait(
-                    (this.value + value1) * valueMultiplier,
-                    (int) ((this.duration + duration1) * durationMultiplier)
-            );
-        }
-        return this;
-    }
-
-    @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int amp = Math.max(0, Math.round(this.value * valueMultiplier) - 1);
         int dur = (int) (this.duration * durationMultiplier);
@@ -53,8 +42,8 @@ public record StaminaDepletionTrait(float value, int duration) implements FoodTr
     }
 
     @Override
-    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier) {
+    public Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate) {
         return TraitTooltipHelper.formatTakeTrait("modest_meals.trait.stamina_depletion",
-                this.value * valueMultiplier, (long) (this.duration * durationMultiplier));
+                this.value * valueMultiplier, (long) (this.duration * durationMultiplier), tickRate);
     }
 }

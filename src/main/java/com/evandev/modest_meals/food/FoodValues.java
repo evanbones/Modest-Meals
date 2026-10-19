@@ -1,6 +1,9 @@
 package com.evandev.modest_meals.food;
 
+import com.evandev.modest_meals.component.MealContents;
+import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.food.meal.MealTraits;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import com.evandev.modest_meals.trait.FoodTraitType;
@@ -41,6 +44,10 @@ public class FoodValues {
             return FoodProfileManager.resolveDefault()
                     .map(profile -> withDerived(ItemStack.EMPTY, nutrition, List.of(), profile, Set.of()))
                     .orElseGet(List::of);
+        }
+        MealContents contents = stack.get(ModDataComponents.MEAL_CONTENTS.get());
+        if (contents != null && contents.isMeaningful()) {
+            return MealTraits.of(stack, contents);
         }
         return withDerived(stack, nutrition, FoodTraitManager.getTraits(stack),
                 FoodProfileManager.resolve(stack).orElse(null),
@@ -181,7 +188,11 @@ public class FoodValues {
         if (stack.isEmpty()) {
             return false;
         }
-        return stack.has(DataComponents.FOOD) || EdibleBlockFoods.getFoodProperties(stack.getItem()).isPresent();
+        if (stack.has(DataComponents.FOOD) || EdibleBlockFoods.getFoodProperties(stack.getItem()).isPresent()) {
+            return true;
+        }
+        MealContents contents = stack.get(ModDataComponents.MEAL_CONTENTS.get());
+        return contents != null && contents.isMeaningful();
     }
 
     /**

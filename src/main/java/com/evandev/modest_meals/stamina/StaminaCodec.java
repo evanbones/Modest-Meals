@@ -6,7 +6,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.ApiStatus;
 
+@ApiStatus.Internal
 public final class StaminaCodec {
     public static final String NBT_KEY = Constants.MOD_ID + "_stamina";
 

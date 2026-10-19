@@ -1,0 +1,262 @@
+{
+  "entries": [
+    {
+      "health": 2.0,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:crops/avocado"
+    },
+    {
+      "health": 2.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:avocado"
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.0,
+      "target": "culturaldelights:cut_avocado"
+    },
+    {
+      "health": 0.5,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:crops/cucumber"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.5,
+      "target": "culturaldelights:cucumber"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "culturaldelights:cut_cucumber"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 1.0,
+      "potency": 7,
+      "stamina": 2.0,
+      "target": "culturaldelights:pickle"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.0,
+      "target": "culturaldelights:cut_pickle"
+    },
+    {
+      "health": 1.0,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:crops/eggplant"
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.5,
+      "target": "culturaldelights:eggplant"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "culturaldelights:cut_eggplant"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "culturaldelights:white_eggplant"
+    },
+    {
+      "health": 3.0,
+      "stamina": 2.5,
+      "target": "culturaldelights:smoked_eggplant"
+    },
+    {
+      "health": 1.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:smoked_cut_eggplant"
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.0,
+      "target": "culturaldelights:smoked_white_eggplant"
+    },
+    {
+      "effect": "modest_meals:strength",
+      "health": 1.0,
+      "potency": 14,
+      "stamina": 2.5,
+      "target": "culturaldelights:smoked_tomato"
+    },
+    {
+      "health": 0.5,
+      "priority": 145,
+      "stamina": 2.0,
+      "target": "#c:crops/corn"
+    },
+    {
+      "health": 0.5,
+      "stamina": 2.0,
+      "target": "culturaldelights:corn_cob"
+    },
+    {
+      "stamina": 1.0,
+      "target": "culturaldelights:popcorn"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.5,
+      "target": "culturaldelights:tortilla_chips"
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:corn_dough",
+      "time_bonus": 30
+    },
+    {
+      "health": 0.5,
+      "priority": 145,
+      "stamina": 1.0,
+      "target": "#c:crops/bean"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:beans"
+    },
+    {
+      "health": 1.5,
+      "stamina": 1.5,
+      "target": "culturaldelights:bean_pod"
+    },
+    {
+      "health": 3.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:tofu"
+    },
+    {
+      "effect": "modest_meals:heat_resistance",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.5,
+      "target": "culturaldelights:mint"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:agave",
+      "time_bonus": 40
+    },
+    {
+      "health": 2.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:refried_beans"
+    },
+    {
+      "effect": "modest_meals:cold_resistance",
+      "health": 0.5,
+      "potency": 14,
+      "stamina": 1.0,
+      "target": "culturaldelights:cinnamon"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:butter"
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:cheese_wedge"
+    },
+    {
+      "digest_ticks": 90,
+      "health": 0.5,
+      "stamina": 0.5,
+      "target": "culturaldelights:raw_sausage"
+    },
+    {
+      "health": 2.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:cooked_sausage"
+    },
+    {
+      "health": 3.0,
+      "stamina": 3.0,
+      "target": "culturaldelights:creamed_corn"
+    },
+    {
+      "digest_ticks": 120,
+      "health": 1.0,
+      "target": "culturaldelights:squid"
+    },
+    {
+      "health": 3.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:cooked_squid"
+    },
+    {
+      "effect": "modest_meals:glowing",
+      "health": 1.0,
+      "potency": 14,
+      "stamina": 0.5,
+      "target": "culturaldelights:glow_squid"
+    },
+    {
+      "digest_ticks": 110,
+      "health": 0.5,
+      "target": "culturaldelights:raw_calamari"
+    },
+    {
+      "health": 1.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:cooked_calamari"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:crops/lemon"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.5,
+      "target": "culturaldelights:lemon"
+    },
+    {
+      "health": 0.0,
+      "stamina": 0.5,
+      "target": "culturaldelights:salt",
+      "time_bonus": 60
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "culturaldelights:cooking_oil",
+      "time_bonus": 40
+    },
+    {
+      "stamina": 1.5,
+      "target": "culturaldelights:fried_potato"
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "culturaldelights:rustic_loaf_slice",
+      "time_bonus": 25
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.0,
+      "target": "culturaldelights:marshmallow"
+    }
+  ]
+}

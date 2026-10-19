@@ -1,0 +1,15 @@
+{
+  "item": "abnormals_delight:cooked_perch_slice",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/salmon_0",
+      "modest_meals:item/meal/sandwich/salmon_1",
+      "modest_meals:item/meal/sandwich/salmon_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/salmon_0",
+      "modest_meals:item/meal/wrap/salmon_1",
+      "modest_meals:item/meal/wrap/salmon_2"
+    ]
+  }
+}

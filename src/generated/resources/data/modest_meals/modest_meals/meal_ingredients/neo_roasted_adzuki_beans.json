@@ -1,0 +1,15 @@
+{
+  "item": "neapolitan:roasted_adzuki_beans",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/adzuki_beans_0",
+      "modest_meals:item/meal/sandwich/adzuki_beans_1",
+      "modest_meals:item/meal/sandwich/adzuki_beans_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/adzuki_beans_0",
+      "modest_meals:item/meal/wrap/adzuki_beans_1",
+      "modest_meals:item/meal/wrap/adzuki_beans_2"
+    ]
+  }
+}

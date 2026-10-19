@@ -1,10 +1,12 @@
 package com.evandev.modest_meals.client;
 
+import com.evandev.modest_meals.client.gui.FoodEditorScreen;
 import com.evandev.modest_meals.config.*;
 import com.evandev.modest_meals.stamina.Corner;
 import com.evandev.modest_meals.stamina.StaminaRegain;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
@@ -137,9 +139,11 @@ public class ClientConfigScreen {
                 .option(ButtonOption.createBuilder()
                         .name(Component.translatable("config.modest_meals.option.open_food_editor"))
                         .description(OptionDescription.of(Component.translatable("config.modest_meals.option.open_food_editor.tooltip")))
-                        .action((yaclScreen, opt) -> net.minecraft.client.Minecraft.getInstance().setScreen(new com.evandev.modest_meals.client.gui.FoodEditorScreen(yaclScreen)))
+                        .action((yaclScreen, opt) -> Minecraft.getInstance().setScreen(new FoodEditorScreen(yaclScreen)))
                         .build())
                 .option(createBoolOption("show_food_trait_tooltips", defaults.showFoodTraitTooltips, () -> config.showFoodTraitTooltips, val -> config.showFoodTraitTooltips = val))
+                .option(createEnumOption("when_eaten_tooltip", TooltipVisibility.class, defaults.whenEatenTooltip, () -> config.whenEatenTooltip, val -> config.whenEatenTooltip = val, TooltipVisibility::getTitle))
+                .option(createEnumOption("ingredient_tooltip", TooltipVisibility.class, defaults.ingredientTooltip, () -> config.ingredientTooltip, val -> config.ingredientTooltip = val, TooltipVisibility::getTitle))
                 .build());
 
         foodEffectsCategoryBuilder.group(OptionGroup.createBuilder()
@@ -147,8 +151,6 @@ public class ClientConfigScreen {
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.food_multipliers.tooltip")))
                 .option(createFloatOption("trait_global_value_multiplier", defaults.traitGlobalValueMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalValueMultiplier, val -> config.traitGlobalValueMultiplier = val))
                 .option(createFloatOption("trait_global_duration_multiplier", defaults.traitGlobalDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalDurationMultiplier, val -> config.traitGlobalDurationMultiplier = val))
-                .option(createFloatOption("smelting_multiplier", defaults.smeltingMultiplier, 0.1F, 10.0F, 0.1F, () -> config.smeltingMultiplier, val -> config.smeltingMultiplier = val))
-                .option(createFloatOption("smelting_duration_multiplier", defaults.smeltingDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.smeltingDurationMultiplier, val -> config.smeltingDurationMultiplier = val))
                 .build());
 
         builder.category(foodEffectsCategoryBuilder.build());
@@ -194,7 +196,7 @@ public class ClientConfigScreen {
                 .build();
     }
 
-    private static <T extends Enum<T>> Option<T> createEnumOption(String name, Class<T> enumClass, T defaultValue, Supplier<T> getter, Consumer<T> setter, dev.isxander.yacl3.api.controller.ValueFormatter<T> formatter) {
+    private static <T extends Enum<T>> Option<T> createEnumOption(String name, Class<T> enumClass, T defaultValue, Supplier<T> getter, Consumer<T> setter, ValueFormatter<T> formatter) {
         return Option.<T>createBuilder()
                 .name(Component.translatable("config.modest_meals.option." + name))
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.option." + name + ".tooltip")))

@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:pickled_beetroot",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/beetroot_0",
+      "modest_meals:item/meal/sandwich/beetroot_1",
+      "modest_meals:item/meal/sandwich/beetroot_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/beetroot_0",
+      "modest_meals:item/meal/wrap/beetroot_1",
+      "modest_meals:item/meal/wrap/beetroot_2"
+    ]
+  }
+}

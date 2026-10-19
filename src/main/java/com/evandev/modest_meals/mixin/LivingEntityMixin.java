@@ -5,10 +5,10 @@ import com.evandev.modest_meals.compat.farmers_delight.NourishmentEffectHandler;
 import com.evandev.modest_meals.config.HungerEffectOption;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
+import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -44,10 +44,6 @@ public abstract class LivingEntityMixin {
                             : effect.getDuration(),
                     effect.getAmplifier()
             );
-        } else if (ModConfig.get().disableHunger && effect.is(MobEffects.SATURATION)) {
-            effect = new MobEffectInstance(
-                    ModMobEffects.STAMINA_REGEN, effect.getDuration(), effect.getAmplifier()
-            );
         } else if (FarmersDelightCompat.isLoaded()) {
             effect = NourishmentEffectHandler.getEffectToApply(effect);
         }
@@ -64,9 +60,12 @@ public abstract class LivingEntityMixin {
     private int mm$setCurrentHandMaxUseTime(
             ItemStack stack, LivingEntity user, Operation<Integer> original
     ) {
-        if (ModConfig.get().instantEating && stack.get(DataComponents.FOOD) != null) {
+        if (stack.getFoodProperties(user) == null) {
+            return original.call(stack, user);
+        }
+        if (ModConfig.get().instantEating) {
             return 1;
         }
-        return original.call(stack, user);
+        return IngredientProfileManager.eatTicks(stack).orElseGet(() -> original.call(stack, user));
     }
 }

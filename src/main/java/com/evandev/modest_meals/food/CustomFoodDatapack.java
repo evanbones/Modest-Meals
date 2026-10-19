@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.food;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.food.ingredient.IngredientProfile;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
 import com.google.gson.*;
@@ -26,6 +27,8 @@ public class CustomFoodDatapack {
     private static final Path PACK_DIR = FMLPaths.CONFIGDIR.get().resolve(Constants.MOD_ID).resolve("datapack");
     private static final Path TRAITS_FILE = PACK_DIR.resolve("data").resolve(Constants.MOD_ID).resolve("food_traits").resolve("custom_traits.json");
     private static final Path PROFILES_FILE = PACK_DIR.resolve("data").resolve(Constants.MOD_ID).resolve("food_profiles").resolve("custom_profiles.json");
+    private static final Path INGREDIENTS_FILE = PACK_DIR.resolve("data").resolve(Constants.MOD_ID)
+            .resolve("modest_meals").resolve("ingredients").resolve("custom_ingredients.json");
 
     public static Path getPackDir() {
         return PACK_DIR;
@@ -55,6 +58,9 @@ public class CustomFoodDatapack {
             }
             if (!Files.exists(PROFILES_FILE.getParent())) {
                 Files.createDirectories(PROFILES_FILE.getParent());
+            }
+            if (!Files.exists(INGREDIENTS_FILE.getParent())) {
+                Files.createDirectories(INGREDIENTS_FILE.getParent());
             }
         } catch (Exception e) {
             Constants.LOG.error("Failed to initialize custom food datapack at {}", PACK_DIR, e);
@@ -190,6 +196,57 @@ public class CustomFoodDatapack {
             }
         } catch (Exception e) {
             Constants.LOG.error("Failed to save custom traits to {}", TRAITS_FILE, e);
+        }
+    }
+
+    public static Map<String, IngredientProfile> readCustomIngredients() {
+        Map<String, IngredientProfile> map = new LinkedHashMap<>();
+        if (!Files.exists(INGREDIENTS_FILE)) {
+            return map;
+        }
+
+        try (FileReader reader = new FileReader(INGREDIENTS_FILE.toFile())) {
+            JsonObject json = GSON.fromJson(reader, JsonObject.class);
+            if (json != null && json.has("entries") && json.get("entries").isJsonArray()) {
+                for (JsonElement element : json.getAsJsonArray("entries")) {
+                    if (!(element instanceof JsonObject entry) || !entry.has("target")) {
+                        continue;
+                    }
+                    String target = entry.get("target").getAsString();
+                    IngredientProfile.CODEC.parse(JsonOps.INSTANCE, entry)
+                            .resultOrPartial(err -> Constants.LOG.error(
+                                    "Failed to parse custom ingredient {}: {}", target, err))
+                            .ifPresent(profile -> map.put(target, profile));
+                }
+            }
+        } catch (Exception e) {
+            Constants.LOG.error("Failed to read custom ingredients from {}", INGREDIENTS_FILE, e);
+        }
+        return map;
+    }
+
+    public static void saveCustomIngredients(Map<String, IngredientProfile> ingredients) {
+        ensurePackExists();
+        try {
+            JsonArray entries = new JsonArray();
+            ingredients.forEach((target, profile) -> IngredientProfile.CODEC
+                    .encodeStart(JsonOps.INSTANCE, profile)
+                    .resultOrPartial(err -> Constants.LOG.error(
+                            "Failed to encode custom ingredient {}: {}", target, err))
+                    .ifPresent(encoded -> {
+                        JsonObject entry = encoded.getAsJsonObject();
+                        entry.addProperty("target", target);
+                        entries.add(entry);
+                    }));
+
+            JsonObject root = new JsonObject();
+            root.add("entries", entries);
+
+            try (FileWriter writer = new FileWriter(INGREDIENTS_FILE.toFile())) {
+                GSON.toJson(root, writer);
+            }
+        } catch (Exception e) {
+            Constants.LOG.error("Failed to save custom ingredients to {}", INGREDIENTS_FILE, e);
         }
     }
 

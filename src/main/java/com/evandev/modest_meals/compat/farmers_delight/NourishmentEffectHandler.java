@@ -5,7 +5,6 @@ import com.evandev.modest_meals.effect.ModMobEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.player.Player;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class NourishmentEffectHandler {

@@ -1,0 +1,15 @@
+{
+  "item": "mynethersdelight:raw_sausage",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/sausage_0",
+      "modest_meals:item/meal/sandwich/sausage_1",
+      "modest_meals:item/meal/sandwich/sausage_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/sausage_0",
+      "modest_meals:item/meal/wrap/sausage_1",
+      "modest_meals:item/meal/wrap/sausage_2"
+    ]
+  }
+}

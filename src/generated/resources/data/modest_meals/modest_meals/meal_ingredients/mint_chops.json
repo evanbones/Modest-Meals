@@ -1,0 +1,15 @@
+{
+  "item": "neapolitan:mint_chops",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/mutton_0",
+      "modest_meals:item/meal/sandwich/mutton_1",
+      "modest_meals:item/meal/sandwich/mutton_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/mutton_0",
+      "modest_meals:item/meal/wrap/mutton_1",
+      "modest_meals:item/meal/wrap/mutton_2"
+    ]
+  }
+}

@@ -47,8 +47,12 @@ public abstract class StaminaRenderer {
         return Mth.ceil(stamina.getMaxLevel() / 2.0F);
     }
 
+    public static int totalIconCount(PlayerStamina stamina) {
+        return iconCount(stamina);
+    }
+
     public static int rowCount(PlayerStamina stamina) {
-        return Mth.ceil(iconCount(stamina) / (float) ICONS_PER_ROW);
+        return Mth.ceil(totalIconCount(stamina) / (float) ICONS_PER_ROW);
     }
 
     private static int rowHeight(int rows) {
@@ -148,7 +152,8 @@ public abstract class StaminaRenderer {
             return level;
         }
 
-        return Math.max(level, stamina.levelAfterGain(addedLevels));
+        int stepped = Math.min(stamina.getMaxLevel(), level + Mth.ceil(addedLevels));
+        return Math.max(stepped, stamina.levelAfterGain(addedLevels));
     }
 
     public static void render(GuiGraphics graphics, int rightHeight, int offsetLeft) {

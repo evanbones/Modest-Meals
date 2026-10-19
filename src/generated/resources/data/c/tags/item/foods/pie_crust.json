@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "farmersdelight:pie_crust",
+      "required": false
+    },
+    {
+      "id": "#c:foods/dough",
+      "required": false
+    }
+  ]
+}

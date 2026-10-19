@@ -1,0 +1,29 @@
+{
+  "values": [
+    "modest_meals:wrap",
+    {
+      "id": "culturaldelights:cheesy_chip_wrap",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:pork_wrap",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:mutton_wrap",
+      "required": false
+    },
+    {
+      "id": "nomansdelight:horse_wrap",
+      "required": false
+    },
+    {
+      "id": "minersdelight:insect_wrap",
+      "required": false
+    },
+    {
+      "id": "minersdelight:vegan_wrap",
+      "required": false
+    }
+  ]
+}

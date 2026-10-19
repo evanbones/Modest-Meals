@@ -1,0 +1,224 @@
+{
+  "entries": [
+    {
+      "target": "nomansdelight:venison_chop",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:venison_roulade",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:billhook_bass_roll",
+      "traits": [
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 150
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:cooked_weeds",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:horse_wrap",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:shroomburger",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:frog_sandwich",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:jump_boost",
+          "duration": 400,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:billhook_bass_with_eggs",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:air_bubbles",
+          "value": 200
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:dolphins_grace",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:living_soup_bowl",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 300
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:venison_tartare",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1800
+        },
+        {
+          "type": "modest_meals:stamina_no_regen",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:smore",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 1200
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:speed",
+          "duration": 300,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:spore_salad",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:haste",
+          "duration": 600,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:pesto_pizza_slice",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:strength",
+          "duration": 250,
+          "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:fruit_tart",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        },
+        {
+          "type": "modest_meals:health_addition",
+          "value": 2.0,
+          "duration": 160
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:nut_bun",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
+        },
+        {
+          "type": "modest_meals:stamina_addition",
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "target": "nomansdelight:lavender_tea",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 1200
+        },
+        {
+          "type": "modest_meals:effect_removal",
+          "clear_all": false
+        }
+      ]
+    }
+  ]
+}

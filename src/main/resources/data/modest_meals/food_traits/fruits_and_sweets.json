@@ -1,96 +1,6 @@
 {
   "entries": [
     {
-      "target": "minecraft:apple",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 100
-        }
-      ]
-    },
-    {
-      "target": "minecraft:sugar",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 300,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:honey_bottle",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 400,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:honeycomb",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 300,
-          "amplifier": 0
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 2.0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:sweet_berries",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 200,
-          "amplifier": 0
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:glow_berries",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:glowing",
-          "duration": 400,
-          "amplifier": 0
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:night_vision",
-          "duration": 300,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
-      "target": "minecraft:cocoa_beans",
-      "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:haste",
-          "duration": 400,
-          "amplifier": 0
-        }
-      ]
-    },
-    {
       "target": "minecraft:cookie",
       "traits": [
         {
@@ -98,10 +8,6 @@
           "effect": "minecraft:haste",
           "duration": 200,
           "amplifier": 0
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
         }
       ]
     },
@@ -110,10 +16,6 @@
       "traits": [
         {
           "type": "modest_meals:fire_extinguish"
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
         }
       ]
     },
@@ -124,18 +26,29 @@
           "type": "modest_meals:fire_extinguish"
         },
         {
-          "type": "modest_meals:health_addition",
-          "value": 4.0,
-          "duration": 120
+          "type": "modest_meals:stamina_capacity",
+          "value": 1.0,
+          "duration": 600
         }
       ]
     },
     {
-      "target": "minecraft:pumpkin",
+      "target": "minecraft:golden_apple",
       "traits": [
         {
-          "type": "modest_meals:stamina_addition",
-          "value": 2.0
+          "type": "modest_meals:stamina_capacity",
+          "value": 2.0,
+          "duration": 2400
+        }
+      ]
+    },
+    {
+      "target": "minecraft:enchanted_golden_apple",
+      "traits": [
+        {
+          "type": "modest_meals:stamina_capacity",
+          "value": 3.0,
+          "duration": 3600
         }
       ]
     },
@@ -169,51 +82,10 @@
       ]
     },
     {
-      "target": "farmersdelight:pumpkin_slice",
-      "traits": [
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
-        }
-      ]
-    },
-    {
       "target": "farmersdelight:melon_popsicle",
       "traits": [
         {
           "type": "modest_meals:fire_extinguish"
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 2.0
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:apple_pie_slice",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 100
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
-        }
-      ]
-    },
-    {
-      "target": "farmersdelight:apple_pie",
-      "traits": [
-        {
-          "type": "modest_meals:health_addition",
-          "value": 8.0,
-          "duration": 400
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 4.0
         }
       ]
     },
@@ -225,10 +97,6 @@
           "effect": "minecraft:haste",
           "duration": 300,
           "amplifier": 0
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
         }
       ]
     },
@@ -240,22 +108,12 @@
           "effect": "minecraft:haste",
           "duration": 1200,
           "amplifier": 0
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 4.0
         }
       ]
     },
     {
       "target": "farmersdelight:sweet_berry_cheesecake_slice",
       "traits": [
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 200,
-          "amplifier": 0
-        },
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
@@ -296,12 +154,6 @@
           "duration": 600
         },
         {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 400,
-          "amplifier": 0
-        },
-        {
           "type": "modest_meals:effect_removal",
           "clear_all": false
         }
@@ -315,16 +167,6 @@
           "effect": "minecraft:resistance",
           "duration": 300,
           "amplifier": 0
-        },
-        {
-          "type": "modest_meals:effect_grant",
-          "effect": "minecraft:speed",
-          "duration": 200,
-          "amplifier": 0
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.0
         }
       ]
     },
@@ -336,10 +178,6 @@
           "effect": "minecraft:speed",
           "duration": 250,
           "amplifier": 0
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 1.2
         }
       ]
     },
@@ -374,15 +212,6 @@
       "traits": [
         {
           "type": "modest_meals:fire_extinguish"
-        },
-        {
-          "type": "modest_meals:health_addition",
-          "value": 2.0,
-          "duration": 100
-        },
-        {
-          "type": "modest_meals:stamina_addition",
-          "value": 2.0
         }
       ]
     }

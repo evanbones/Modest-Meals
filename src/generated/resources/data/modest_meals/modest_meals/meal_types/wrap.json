@@ -1,0 +1,84 @@
+{
+  "base": [
+    {
+      "ingredient": {
+        "tag": "c:foods/tortilla"
+      }
+    }
+  ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/wrap/wrap_base"
+  },
+  "dubious_sprite": "modest_meals:item/meal/wrap/dubious",
+  "id": "modest_meals:wrap",
+  "item": "modest_meals:wrap",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "#c:foods/cooked_mutton",
+        "#c:foods/leafy_green",
+        "culturaldelights:refried_beans"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:mutton_wrap"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_pork",
+        "minecraft:apple",
+        "#c:foods/leafy_green"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:pork_wrap"
+    },
+    {
+      "ingredients": [
+        "#culturaldelights:cheese_wedges",
+        "culturaldelights:tortilla_chips",
+        "culturaldelights:tortilla_chips"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:cheesy_chip_wrap"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_beef",
+        "#culturaldelights:avocados",
+        "culturaldelights:refried_beans"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:beef_burrito"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_chicken",
+        "culturaldelights:refried_beans",
+        "#c:crops/corn"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:chicken_taco"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_fish",
+        "#c:crops/tomato",
+        "#c:foods/leafy_green"
+      ],
+      "replace_recipes": true,
+      "result": "culturaldelights:fish_taco"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_horse",
+        "#c:foods/leafy_green",
+        "#c:crops/tomato"
+      ],
+      "replace_recipes": true,
+      "result": "nomansdelight:horse_wrap"
+    }
+  ],
+  "max_ingredients": 3,
+  "min_ingredients": 3,
+  "priority": 10,
+  "requires_supported_ingredients": true
+}

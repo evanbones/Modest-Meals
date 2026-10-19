@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:foul_flesh",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/rotten_flesh_0",
+      "modest_meals:item/meal/sandwich/rotten_flesh_1",
+      "modest_meals:item/meal/sandwich/rotten_flesh_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/rotten_flesh_0",
+      "modest_meals:item/meal/wrap/rotten_flesh_1",
+      "modest_meals:item/meal/wrap/rotten_flesh_2"
+    ]
+  }
+}

@@ -46,6 +46,14 @@
       "stamina_per_nutrition": 0.0
     },
     {
+      "id": "wrap",
+      "match": "#c:foods/wrap",
+      "priority": 135,
+      "health_per_nutrition": 0.6,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.6
+    },
+    {
       "id": "soup",
       "match": "#c:foods/soup",
       "priority": 130,
@@ -273,6 +281,162 @@
       "priority": 145,
       "health_per_nutrition": 0.0,
       "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "cheese_wedge",
+      "match": "#brewinandchewin:foods/cheese_wedge",
+      "priority": 145,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 40.0,
+      "stamina_per_nutrition": 0.6
+    },
+    {
+      "id": "cheese_wedge_cd",
+      "match": "culturaldelights:cheese_wedge",
+      "priority": 145,
+      "health_per_nutrition": 0.5,
+      "health_ticks_per_point": 40.0,
+      "stamina_per_nutrition": 0.6
+    },
+    {
+      "id": "crop_cave_carrot",
+      "match": "#c:crops/cave_carrot",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_corn",
+      "match": "#c:crops/corn",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_avocado",
+      "match": "#c:crops/avocado",
+      "priority": 145,
+      "health_per_nutrition": 0.2,
+      "stamina_per_nutrition": 0.8
+    },
+    {
+      "id": "crop_cucumber",
+      "match": "#c:crops/cucumber",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_eggplant",
+      "match": "#c:crops/eggplant",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_beans",
+      "match": "culturaldelights:beans",
+      "priority": 145,
+      "health_per_nutrition": 0.1,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "tofu",
+      "match": "culturaldelights:tofu",
+      "priority": 145,
+      "health_per_nutrition": 0.8,
+      "health_ticks_per_point": 35.0,
+      "stamina_per_nutrition": 0.2
+    },
+    {
+      "id": "crop_leek",
+      "match": "#c:crops/leek",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "crop_leek_bf",
+      "match": "bountifulfares:leek",
+      "priority": 145,
+      "health_per_nutrition": 0.0,
+      "stamina_per_nutrition": 0.9
+    },
+    {
+      "id": "cooked_egg_bf",
+      "match": "bountifulfares:cooked_egg",
+      "priority": 145,
+      "health_per_nutrition": 1.0,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.0
+    },
+    {
+      "id": "walnut",
+      "match": "#c:foods/walnuts",
+      "priority": 145,
+      "health_per_nutrition": 0.2,
+      "stamina_per_nutrition": 0.8
+    },
+    {
+      "id": "walnut_bf",
+      "match": "bountifulfares:walnut",
+      "priority": 145,
+      "health_per_nutrition": 0.2,
+      "stamina_per_nutrition": 0.8
+    },
+    {
+      "id": "coconut_half",
+      "match": "#c:coconut_halves",
+      "priority": 145,
+      "health_per_nutrition": 0.3,
+      "stamina_per_nutrition": 0.6
+    },
+    {
+      "id": "coconut_half_bf",
+      "match": "bountifulfares:coconut_half",
+      "priority": 145,
+      "health_per_nutrition": 0.3,
+      "stamina_per_nutrition": 0.6
+    },
+    {
+      "id": "ice_cream",
+      "match": "#c:foods/ice_cream",
+      "priority": 120,
+      "health_per_nutrition": 0.25,
+      "health_ticks_per_point": 20.0,
+      "stamina_per_nutrition": 0.7
+    },
+    {
+      "id": "milkshake",
+      "match": "#c:drinks/milkshake",
+      "priority": 120,
+      "health_per_nutrition": 0.3,
+      "health_ticks_per_point": 20.0,
+      "stamina_per_nutrition": 0.7
+    },
+    {
+      "id": "cake",
+      "match": "#c:foods/cake",
+      "priority": 120,
+      "health_per_nutrition": 0.3,
+      "health_ticks_per_point": 20.0,
+      "stamina_per_nutrition": 0.5
+    },
+    {
+      "id": "pastry",
+      "match": "#c:foods/pastry",
+      "priority": 110,
+      "health_per_nutrition": 0.3,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.6
+    },
+    {
+      "id": "feast",
+      "match": "#farmersdelight:feasts",
+      "priority": 90,
+      "health_per_nutrition": 0.6,
+      "health_ticks_per_point": 30.0,
+      "stamina_per_nutrition": 0.4
     },
     {
       "id": "fruit",

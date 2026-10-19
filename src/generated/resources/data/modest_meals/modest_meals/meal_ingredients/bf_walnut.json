@@ -1,0 +1,15 @@
+{
+  "item": "bountifulfares:walnut",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/walnut_0",
+      "modest_meals:item/meal/sandwich/walnut_1",
+      "modest_meals:item/meal/sandwich/walnut_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/walnut_0",
+      "modest_meals:item/meal/wrap/walnut_1",
+      "modest_meals:item/meal/wrap/walnut_2"
+    ]
+  }
+}

@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.FormattedCharSink;
 import net.minecraft.util.StringDecomposer;
+import org.joml.Matrix4f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 public class IconRowTooltip implements ClientTooltipComponent {
     public static final int MAX_ICONS = 10;
     public static final int ICON_WIDTH = 9;
+    public static final int ICON_HEIGHT = 9;
     public static final int SECTION_SPACING = 4;
     private final List<Section> sections;
 
@@ -40,9 +42,9 @@ public class IconRowTooltip implements ClientTooltipComponent {
 
     private static void draw(GuiGraphics context, Icon icon, int x, int y) {
         if (icon.isAtlasSprite()) {
-            context.blitSprite(icon.location(), x, y, ICON_WIDTH, ICON_WIDTH);
+            context.blitSprite(icon.location(), x, y, ICON_WIDTH, ICON_HEIGHT);
         } else {
-            context.blit(icon.location(), x, y, 0.0F, 0.0F, ICON_WIDTH, ICON_WIDTH, ICON_WIDTH, ICON_WIDTH);
+            context.blit(icon.location(), x, y, 0.0F, 0.0F, ICON_WIDTH, ICON_HEIGHT, ICON_WIDTH, ICON_HEIGHT);
         }
     }
 
@@ -67,7 +69,7 @@ public class IconRowTooltip implements ClientTooltipComponent {
     }
 
     @Override
-    public void renderText(Font font, int mouseX, int mouseY, org.joml.Matrix4f matrix, MultiBufferSource.BufferSource bufferSource) {
+    public void renderText(Font font, int mouseX, int mouseY, Matrix4f matrix, MultiBufferSource.BufferSource bufferSource) {
         int currentX = mouseX;
         int textY = mouseY + 2;
         for (int s = 0; s < sections.size(); s++) {

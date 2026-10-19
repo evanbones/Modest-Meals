@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "culturaldelights:lemon",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:lemon",
+      "required": false
+    }
+  ]
+}

@@ -118,17 +118,17 @@ public class ModConfig {
     @SerializedName("show_food_trait_tooltips")
     public boolean showFoodTraitTooltips = true;
 
+    @SerializedName("when_eaten_tooltip")
+    public TooltipVisibility whenEatenTooltip = TooltipVisibility.VISIBLE;
+
+    @SerializedName("ingredient_tooltip")
+    public TooltipVisibility ingredientTooltip = TooltipVisibility.VISIBLE;
+
     @SerializedName("trait_global_value_multiplier")
     public float traitGlobalValueMultiplier = 1.0f;
 
     @SerializedName("trait_global_duration_multiplier")
     public float traitGlobalDurationMultiplier = 1.0f;
-
-    @SerializedName("smelting_multiplier")
-    public float smeltingMultiplier = 1.25f;
-
-    @SerializedName("smelting_duration_multiplier")
-    public float smeltingDurationMultiplier = 1.25f;
 
     @SerializedName("hud_layout")
     public HudLayoutOption hudLayout = HudLayoutOption.DEFAULT;
@@ -259,6 +259,12 @@ public class ModConfig {
     public void validateDefaults() {
         if (hudLayout == null) {
             hudLayout = HudLayoutOption.DEFAULT;
+        }
+        if (whenEatenTooltip == null) {
+            whenEatenTooltip = TooltipVisibility.VISIBLE;
+        }
+        if (ingredientTooltip == null) {
+            ingredientTooltip = TooltipVisibility.VISIBLE;
         }
         if (restoredHeartsOverlayColor == null) {
             restoredHeartsOverlayColor = new Color(120, 0, 20);

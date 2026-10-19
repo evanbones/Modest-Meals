@@ -2,11 +2,11 @@ package com.evandev.modest_meals.effect;
 
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.attribute.ModAttributes;
+import com.evandev.modest_meals.compat.thermoo.ThermooCompat;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -40,16 +40,6 @@ public class ModMobEffects {
             )
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> STAMINA_REGEN = MOB_EFFECTS.register(
-            "stamina_regen",
-            () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x55FF55) {
-                @Override
-                public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-                    return false;
-                }
-            }
-    );
-
     public static final DeferredHolder<MobEffect, MobEffect> STAMINA_DEPLETION = MOB_EFFECTS.register(
             "stamina_depletion",
             () -> new MobEffect(MobEffectCategory.HARMFUL, 0xAA0000) {
@@ -80,46 +70,32 @@ public class ModMobEffects {
             }
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> HEALTH_REGEN = MOB_EFFECTS.register(
-            "health_regen",
-            () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xFF5555) {
-                @Override
-                public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-                    int k = 40 >> amplifier;
-                    if (k > 0) {
-                        return duration % k == 0;
-                    }
-                    return true;
-                }
+    // TODO: these should also probably be configurable
+    private static final double THERMAL_RESISTANCE_PER_LEVEL = 2.5;
+    private static final double ENVIRONMENT_RESISTANCE_PER_LEVEL = 1.0;
 
-                @Override
-                public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-                    if (entity.getHealth() < entity.getMaxHealth()) {
-                        entity.heal(1.0F);
-                    }
-                    return true;
-                }
-            }
+    public static final DeferredHolder<MobEffect, MobEffect> COLD_RESISTANCE = MOB_EFFECTS.register(
+            "cold_resistance",
+            () -> new ThermalResistanceEffect(
+                    "cold_resistance",
+                    ThermooCompat::frostResistance,
+                    ThermooCompat::environmentFrostResistance,
+                    THERMAL_RESISTANCE_PER_LEVEL,
+                    ENVIRONMENT_RESISTANCE_PER_LEVEL,
+                    0xE08A3C
+            )
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> HEALTH_DEPLETION = MOB_EFFECTS.register(
-            "health_depletion",
-            () -> new MobEffect(MobEffectCategory.HARMFUL, 0x4E004E) {
-                @Override
-                public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-                    int k = 40 >> amplifier;
-                    if (k > 0) {
-                        return duration % k == 0;
-                    }
-                    return true;
-                }
-
-                @Override
-                public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-                    entity.hurt(entity.damageSources().magic(), 1.0F);
-                    return true;
-                }
-            }
+    public static final DeferredHolder<MobEffect, MobEffect> HEAT_RESISTANCE = MOB_EFFECTS.register(
+            "heat_resistance",
+            () -> new ThermalResistanceEffect(
+                    "heat_resistance",
+                    ThermooCompat::heatResistance,
+                    ThermooCompat::environmentHeatResistance,
+                    THERMAL_RESISTANCE_PER_LEVEL,
+                    ENVIRONMENT_RESISTANCE_PER_LEVEL,
+                    0x6EC6E8
+            )
     );
 
     public static void register(IEventBus modBus) {

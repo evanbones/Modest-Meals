@@ -3,11 +3,17 @@ package com.evandev.modest_meals;
 import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.client.ClientConfigSetup;
 import com.evandev.modest_meals.client.ClientEventHandler;
+import com.evandev.modest_meals.compat.cold_sweat.ColdSweatCompat;
+import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
+import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.event.CommonEventHandler;
 import com.evandev.modest_meals.food.CustomFoodDatapack;
 import com.evandev.modest_meals.network.ModNetworking;
+import com.evandev.modest_meals.recipe.ModRecipes;
+import com.evandev.modest_meals.registry.ModCreativeTabs;
+import com.evandev.modest_meals.registry.ModItems;
 import com.evandev.modest_meals.trait.FoodTraitType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -22,11 +28,17 @@ public class ModestMeals {
         ModAttributes.register(modEventBus);
         ModMobEffects.register(modEventBus);
         FoodTraitType.register(modEventBus);
+        ModDataComponents.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModCreativeTabs.register(modEventBus);
+        ModRecipes.register(modEventBus);
+        FarmersDelightCompat.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModNetworking::registerPayloads);
         modEventBus.addListener(CustomFoodDatapack::onAddPackFinders);
 
         NeoForge.EVENT_BUS.register(CommonEventHandler.class);
+        ColdSweatCompat.register();
 
         if (FMLEnvironment.dist.isClient()) {
             ClientConfigSetup.register(modContainer);

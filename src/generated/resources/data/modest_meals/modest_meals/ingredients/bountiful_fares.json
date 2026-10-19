@@ -1,0 +1,161 @@
+{
+  "entries": [
+    {
+      "digest_ticks": 90,
+      "health": 2.0,
+      "priority": 145,
+      "target": "#c:foods/orange"
+    },
+    {
+      "digest_ticks": 90,
+      "health": 2.0,
+      "target": "bountifulfares:orange"
+    },
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "priority": 145,
+      "target": "#c:foods/lemon"
+    },
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "target": "bountifulfares:lemon"
+    },
+    {
+      "digest_ticks": 110,
+      "health": 2.5,
+      "target": "bountifulfares:plum"
+    },
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "priority": 145,
+      "target": "#c:foods/passion_fruit"
+    },
+    {
+      "digest_ticks": 80,
+      "health": 1.5,
+      "target": "bountifulfares:passion_fruit"
+    },
+    {
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:foods/elderberry",
+      "temporary_health": 1.0
+    },
+    {
+      "stamina": 1.5,
+      "target": "bountifulfares:elderberries",
+      "temporary_health": 1.0
+    },
+    {
+      "effect": "modest_meals:night_vision",
+      "health": 0.5,
+      "potency": 7,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:foods/lapisberry"
+    },
+    {
+      "effect": "modest_meals:night_vision",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.5,
+      "target": "bountifulfares:lapisberries"
+    },
+    {
+      "effect": "modest_meals:cold_resistance",
+      "health": 1.5,
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "bountifulfares:hoary_apple"
+    },
+    {
+      "health": 0.5,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:foods/walnuts"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.5,
+      "target": "bountifulfares:walnut"
+    },
+    {
+      "health": 2.0,
+      "stamina": 2.0,
+      "target": "bountifulfares:coconut_half"
+    },
+    {
+      "health": 1.0,
+      "stamina": 1.5,
+      "target": "bountifulfares:coconut_milk_bottle",
+      "time_bonus": 40
+    },
+    {
+      "health": 1.0,
+      "stamina": 2.0,
+      "target": "bountifulfares:maize"
+    },
+    {
+      "stamina": 1.0,
+      "target": "bountifulfares:popped_maize"
+    },
+    {
+      "health": 0.5,
+      "stamina": 2.0,
+      "target": "bountifulfares:leek"
+    },
+    {
+      "health": 2.0,
+      "priority": 145,
+      "stamina": 1.5,
+      "target": "#c:foods/cooked_egg"
+    },
+    {
+      "health": 2.0,
+      "stamina": 1.5,
+      "target": "bountifulfares:cooked_egg"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.0,
+      "target": "bountifulfares:spongekin_slice"
+    },
+    {
+      "effect": "modest_meals:water_breathing",
+      "health": 1.5,
+      "potency": 14,
+      "stamina": 2.0,
+      "target": "bountifulfares:pickled_spongekin"
+    },
+    {
+      "effect": "modest_meals:speed",
+      "health": 1.0,
+      "potency": 7,
+      "stamina": 2.0,
+      "target": "bountifulfares:pickled_beetroot"
+    },
+    {
+      "effect": "modest_meals:haste",
+      "health": 0.5,
+      "potency": 7,
+      "stamina": 1.0,
+      "target": "bountifulfares:citrus_essence"
+    },
+    {
+      "health": 0.5,
+      "stamina": 0.0,
+      "target": "bountifulfares:foul_flesh"
+    },
+    {
+      "health": 0.5,
+      "stamina": 1.0,
+      "target": "bountifulfares:flour",
+      "time_bonus": 20
+    }
+  ]
+}

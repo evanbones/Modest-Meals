@@ -1,0 +1,15 @@
+{
+  "item": "environmental:plum",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/plum_0",
+      "modest_meals:item/meal/sandwich/plum_1",
+      "modest_meals:item/meal/sandwich/plum_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/plum_0",
+      "modest_meals:item/meal/wrap/plum_1",
+      "modest_meals:item/meal/wrap/plum_2"
+    ]
+  }
+}

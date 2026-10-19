@@ -102,6 +102,18 @@ repositories {
             includeGroup "com.teamabnormals"
         }
     }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Shedaniel"
+                url = "https://maven.shedaniel.me/"
+            }
+        }
+        filter {
+            includeGroupAndSubgroups "me.shedaniel"
+        }
+    }
 }
 
 neoForge {
@@ -150,7 +162,8 @@ dependencies {
     implementation "maven.modrinth:yacl:${yacl_version}-neoforge"
 
     // EMI
-    runtimeOnly "maven.modrinth:emi:1.1.22+1.21.1+neoforge"
+    runtimeOnly "maven.modrinth:emi:${emi_version}+neoforge"
+    compileOnly "maven.modrinth:emi:${emi_version}+neoforge"
 
     // Raised
     compileOnly "maven.modrinth:raised:NeoForge-${raised_version}"
@@ -159,6 +172,26 @@ dependencies {
     // Farmer's Delight
     compileOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
     runtimeOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
+
+    // Cultural Delights
+    runtimeOnly "maven.modrinth:cultural-delights:${cultural_delights_version}"
+    runtimeOnly "maven.modrinth:cooks-collection:${cooks_collection_version}"
+
+    // Thermoo
+    compileOnly "maven.modrinth:thermoo:${thermoo_version}"
+    runtimeOnly "maven.modrinth:thermoo:${thermoo_version}"
+    runtimeOnly "maven.modrinth:forgified-fabric-api:${ffapi_version}"
+
+    // Frostiful and Scorchful
+    runtimeOnly "maven.modrinth:frostiful:${frostiful_version}"
+    runtimeOnly "maven.modrinth:scorchful:${scorchful_version}"
+    runtimeOnly "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config_version}"
+    runtimeOnly "maven.modrinth:velvet-api:${velvet_version}"
+    runtimeOnly "maven.modrinth:sparkweave:${sparkweave_version}"
+
+    // Cold Sweat
+    compileOnly "maven.modrinth:cold-sweat:${cold_sweat_version}"
+    //runtimeOnly "maven.modrinth:cold-sweat:${cold_sweat_version}"
 
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     compileOnly group: 'org.ow2.asm', name: 'asm-tree', version: '9.6'

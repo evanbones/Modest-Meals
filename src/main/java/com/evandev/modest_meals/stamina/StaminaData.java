@@ -3,7 +3,9 @@ package com.evandev.modest_meals.stamina;
 import com.evandev.modest_meals.config.ModConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.ApiStatus;
 
+@ApiStatus.Internal
 public class StaminaData {
     public static final int MAX_STAMINA_LEVEL = 20;
     public static final Codec<StaminaData> CODEC = StaminaCodec.create();

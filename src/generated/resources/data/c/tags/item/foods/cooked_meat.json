@@ -1,0 +1,44 @@
+{
+  "values": [
+    {
+      "id": "#c:foods/cooked_venison",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_horse",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_duck",
+      "required": false
+    },
+    {
+      "id": "#minersdelight:cooked_insect_meat",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:cooked_duck_fillet",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:cooked_venison_shanks",
+      "required": false
+    },
+    {
+      "id": "environmental:cooked_duck",
+      "required": false
+    },
+    {
+      "id": "environmental:cooked_venison",
+      "required": false
+    },
+    {
+      "id": "neapolitan:cooked_mint_chops",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cooked_sausage",
+      "required": false
+    }
+  ]
+}

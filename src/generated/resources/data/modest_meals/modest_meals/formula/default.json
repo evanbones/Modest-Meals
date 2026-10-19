@@ -1,0 +1,17 @@
+{
+  "eat_time_steps": [
+    {
+      "portion": 0.0,
+      "seconds": 0.8
+    },
+    {
+      "portion": 4.0,
+      "seconds": 1.6
+    },
+    {
+      "portion": 16.0,
+      "seconds": 2.4
+    }
+  ],
+  "seconds_per_ingredient": 30
+}

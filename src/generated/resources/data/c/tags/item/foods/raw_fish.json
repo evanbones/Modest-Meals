@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#c:foods/raw_squid",
+      "required": false
+    },
+    {
+      "id": "environmental:koi",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mango_fish",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "item": "brewinandchewin:cheese_wedge",
+  "meals": {
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/cheese_0",
+      "modest_meals:item/meal/sandwich/cheese_1",
+      "modest_meals:item/meal/sandwich/cheese_2"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/cheese_0",
+      "modest_meals:item/meal/wrap/cheese_1",
+      "modest_meals:item/meal/wrap/cheese_2"
+    ]
+  }
+}

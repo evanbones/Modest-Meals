@@ -70,7 +70,7 @@ public class FormBuilder {
     }
 
     private void addLabel(Component text) {
-        labels.add(new Label(text, x, cursorY + (ROW_H - 8) / 2, labelWidth()));
+        labels.add(new Label(text, x, cursorY + (ROW_H - 8) / 2, labelWidth(), false));
     }
 
     private void advance() {
@@ -158,8 +158,11 @@ public class FormBuilder {
         return this;
     }
 
+    /**
+     * A section heading: its own colour and a rule beneath it, to break the form into groups.
+     */
     public FormBuilder note(String labelKey) {
-        labels.add(new Label(Component.translatable(labelKey), x, cursorY, width));
+        labels.add(new Label(Component.translatable(labelKey), x, cursorY + 2, width, true));
         advance();
         return this;
     }
@@ -188,24 +191,43 @@ public class FormBuilder {
         dropdowns.forEach(DropdownWidget::close);
     }
 
+    /**
+     * Positions the rows for the current scroll. A row is drawn whenever it overlaps the view at all, so that it
+     * clips against the viewport rather than blinking out, but only takes input once it is fully inside.
+     */
     public void applyScroll(double scroll, int viewTop, int viewBottom) {
         for (Placed p : placed) {
             int newY = p.baseY() - (int) scroll;
             p.widget().setY(newY);
-            p.widget().visible = newY >= viewTop - ROW_H && newY + ROW_H <= viewBottom + ROW_H;
-            p.widget().active = p.widget().visible;
+            p.widget().visible = newY + ROW_H > viewTop && newY < viewBottom;
+            p.widget().active = newY >= viewTop && newY + ROW_H <= viewBottom;
+        }
+    }
+
+    /**
+     * Draws the rows. Call this inside the caller's scissor so partly scrolled rows clip at the viewport edge.
+     */
+    public void renderWidgets(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        for (Placed p : placed) {
+            p.widget().render(graphics, mouseX, mouseY, partialTick);
         }
     }
 
     public void renderLabels(GuiGraphics graphics, double scroll) {
         for (Label l : labels) {
-            GuiUtil.drawTrimmed(graphics, font, l.text(), l.x(), l.baseY() - (int) scroll, l.maxWidth(), GuiUtil.LABEL);
+            int labelY = l.baseY() - (int) scroll;
+            if (l.section()) {
+                GuiUtil.drawTrimmed(graphics, font, l.text(), l.x(), labelY, l.maxWidth(), GuiUtil.SECTION);
+                GuiUtil.drawSectionRule(graphics, l.x(), labelY + 11, l.maxWidth());
+            } else {
+                GuiUtil.drawTrimmed(graphics, font, l.text(), l.x(), labelY, l.maxWidth(), GuiUtil.LABEL);
+            }
         }
     }
 
     private record Placed(AbstractWidget widget, int baseY) {
     }
 
-    private record Label(Component text, int x, int baseY, int maxWidth) {
+    private record Label(Component text, int x, int baseY, int maxWidth, boolean section) {
     }
 }
