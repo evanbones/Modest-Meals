@@ -50,6 +50,7 @@ public class RestoredHeartsDrawHelper {
     private Function<Boolean, RenderedHeart> restoredHeartGetter;
     private Supplier<RenderedHeart> restoredRightHalfHeartGetter;
     private Function<Boolean, RenderedHeart> regeneratedHeartGetter;
+    private Supplier<RenderedHeart> regeneratedRightHalfHeartGetter;
 
     public RestoredHeartsDrawHelper(Player player, RandomSource random) {
         this.heartType = getHeartTypeForPlayer(player);
@@ -73,11 +74,18 @@ public class RestoredHeartsDrawHelper {
             );
             HeartTextureOption textureOption = ModConfig.get().regeneratedHeartsTexture;
             switch (textureOption) {
-                case SINGLE_COLOR -> regeneratedHeartGetter = isHalf -> getWhiteHeart(isHalf, regeneratingHeartColor);
-                case ORIGINAL ->
-                        regeneratedHeartGetter = isHalf -> getAtlasSpriteHeart(heartType, isHalf, false, regeneratingHeartColor);
-                case BLINKING ->
-                        regeneratedHeartGetter = isHalf -> getAtlasSpriteHeart(heartType, isHalf, true, regeneratingHeartColor);
+                case SINGLE_COLOR -> {
+                    regeneratedHeartGetter = isHalf -> getWhiteHeart(isHalf, regeneratingHeartColor);
+                    regeneratedRightHalfHeartGetter = () -> new RenderedHeart(WHITE_RIGHT_HALF_HEART_TEXTURE, false, regeneratingHeartColor);
+                }
+                case ORIGINAL -> {
+                    regeneratedHeartGetter = isHalf -> getAtlasSpriteHeart(heartType, isHalf, false, regeneratingHeartColor);
+                    regeneratedRightHalfHeartGetter = () -> new RenderedHeart(ORIGINAL_RIGHT_HALF_HEART_TEXTURE, false, regeneratingHeartColor);
+                }
+                case BLINKING -> {
+                    regeneratedHeartGetter = isHalf -> getAtlasSpriteHeart(heartType, isHalf, true, regeneratingHeartColor);
+                    regeneratedRightHalfHeartGetter = () -> new RenderedHeart(BLINKING_RIGHT_HALF_HEART_TEXTURE, false, regeneratingHeartColor);
+                }
             }
         }
 
@@ -144,6 +152,9 @@ public class RestoredHeartsDrawHelper {
         if (highlightRegeneratedHearts && consumedNutrition > 0 && heartsDiff <= consumedNutrition) {
             // this heart is regenerating
             boolean isHalf = heartsDiff == consumedNutrition;
+            if (heartsDiff == 0 && playerHealth % 2 == 1) {
+                return new Pair<>(regeneratedRightHalfHeartGetter != null ? regeneratedRightHalfHeartGetter.get() : null, null);
+            }
             RenderedHeart regeneratingHeart = regeneratedHeartGetter != null ? regeneratedHeartGetter.apply(isHalf) : null;
             if (isHalf && highlightRestoredHearts && heldFoodNutrition > 0 && restoredRightHalfHeartGetter != null) {
                 // the left half of this heart is regenerating and the right half can be restored by held food
@@ -154,6 +165,9 @@ public class RestoredHeartsDrawHelper {
         if (highlightRestoredHearts && totalNutritionToDraw > 0 && heartsDiff <= totalNutritionToDraw) {
             // this heart can be restored by held food
             boolean isHalf = heartsDiff == totalNutritionToDraw;
+            if (heartsDiff == 0 && playerHealth % 2 == 1) {
+                return new Pair<>(restoredRightHalfHeartGetter != null ? restoredRightHalfHeartGetter.get() : null, null);
+            }
             return new Pair<>(restoredHeartGetter != null ? restoredHeartGetter.apply(isHalf) : null, null);
         }
         return new Pair<>(null, null);

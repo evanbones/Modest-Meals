@@ -110,9 +110,6 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
             widgets.addTexture(EmiTexture.SHAPELESS, 97, 0);
         }
 
-        SlotWidget result = widgets.addSlot(output, 92, 14).large(true).recipeContext(this);
-        if (!isOverride()) {
-            result.appendTooltip(ingredientCountLine());
-        }
+        widgets.addSlot(output, 92, 14).large(true).recipeContext(this);
     }
 }

@@ -138,9 +138,6 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
         if (experience > 0) {
             lines.add(Component.translatable("emi.cooking.experience", experience));
         }
-        if (!isOverride()) {
-            lines.add(ingredientCountLine());
-        }
         return lines.stream()
                 .map(line -> ClientTooltipComponent.create(line.getVisualOrderText()))
                 .toList();

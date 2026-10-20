@@ -152,16 +152,6 @@ public abstract class MealEmiRecipe implements EmiRecipe {
                 : "emi.modest_meals.any_ingredient");
         slot.appendTooltip(Component.translatable(titleKey)
                 .withStyle(ChatFormatting.YELLOW));
-        slot.appendTooltip(ingredientCountLine());
-    }
-
-    protected Component ingredientCountLine() {
-        if (type.minIngredients() == type.maxIngredients()) {
-            return Component.translatable("emi.modest_meals.ingredient_count.exact", type.minIngredients())
-                    .withStyle(ChatFormatting.GRAY);
-        }
-        return Component.translatable("emi.modest_meals.ingredient_count.range",
-                type.minIngredients(), type.maxIngredients()).withStyle(ChatFormatting.GRAY);
     }
 
     protected EmiStack containerStack() {

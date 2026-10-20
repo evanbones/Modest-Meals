@@ -401,8 +401,6 @@
   "emi.modest_meals.any_ingredient": "Any Ingredient",
   "emi.modest_meals.supported_ingredient": "Supported Ingredient",
   "emi.modest_meals.unsupported_ingredient": "Unsupported Ingredient",
-  "emi.modest_meals.ingredient_count.range": "Uses %1$s-%2$s ingredients",
-  "emi.modest_meals.ingredient_count.exact": "Uses exactly %s",
   "emi.modest_meals.pool_size": "%s items qualify",
   "emi.modest_meals.container": "Served in this"
 }
