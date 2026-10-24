@@ -1,0 +1,61 @@
+{
+  "values": [
+    "#c:foods/raw_fish",
+    "#c:foods/cooked_fish",
+    "#c:foods/raw_squid",
+    "#c:foods/cooked_squid",
+    "#c:foods/leafy_green",
+    "minecraft:kelp",
+    "minecraft:dried_kelp",
+    "minecraft:carrot",
+    "minecraft:beetroot",
+    {
+      "id": "#c:foods/vegetable",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_egg",
+      "required": false
+    },
+    {
+      "id": "#c:foods/safe_raw_fish",
+      "required": false
+    },
+    {
+      "id": "#c:foods/raw_calamari",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_calamari",
+      "required": false
+    },
+    {
+      "id": "#c:crops/cucumber",
+      "required": false
+    },
+    {
+      "id": "#c:mushrooms",
+      "required": false
+    },
+    {
+      "id": "#culturaldelights:avocados",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:tofu",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cut_avocado",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cut_cucumber",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cut_pickle",
+      "required": false
+    }
+  ]
+}

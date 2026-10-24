@@ -1,0 +1,110 @@
+{
+  "values": [
+    "#c:foods/fruit",
+    "#modest_meals:jam_fruits",
+    "#c:foods/leafy_green",
+    "#modest_meals:sweets",
+    "#modest_meals:not_for_dishes",
+    "minecraft:carrot",
+    "minecraft:golden_carrot",
+    "minecraft:beetroot",
+    "minecraft:pumpkin",
+    "minecraft:kelp",
+    "minecraft:spider_eye",
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "minecraft:melon_slice",
+    {
+      "id": "#c:foods/berry",
+      "required": false
+    },
+    {
+      "id": "#c:foods/nuts",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/juice",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/tea",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/milk",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/eggnog",
+      "required": false
+    },
+    {
+      "id": "#c:milk",
+      "required": false
+    },
+    {
+      "id": "#c:crops/tomato",
+      "required": false
+    },
+    {
+      "id": "#c:crops/cucumber",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cinnamon",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:mint",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:agave",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:coconut",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mint_leaves",
+      "required": false
+    },
+    {
+      "id": "neapolitan:cinnamon_sticks",
+      "required": false
+    },
+    {
+      "id": "neapolitan:roasted_adzuki_beans",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:citrus_essence",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:coconut_half",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:tea_leaves",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:dried_tea_leaves",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:pepper_powder",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:bullet_pepper",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pumpkin_slice",
+      "required": false
+    }
+  ]
+}

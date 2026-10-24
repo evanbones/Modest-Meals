@@ -1,6 +1,27 @@
 {
   "item": "abnormals_delight:cooked_duck_fillet",
   "meals": {
+    "modest_meals:pizza": [
+      "modest_meals:item/meal/pizza/chicken_0",
+      "modest_meals:item/meal/pizza/chicken_1",
+      "modest_meals:item/meal/pizza/chicken_2",
+      "modest_meals:item/meal/pizza/chicken_3",
+      "modest_meals:item/meal/pizza/chicken_4"
+    ],
+    "modest_meals:pizza_slice": [
+      "modest_meals:item/meal/pizza_slice/chicken_0",
+      "modest_meals:item/meal/pizza_slice/chicken_1",
+      "modest_meals:item/meal/pizza_slice/chicken_2",
+      "modest_meals:item/meal/pizza_slice/chicken_3",
+      "modest_meals:item/meal/pizza_slice/chicken_4"
+    ],
+    "modest_meals:placed_pizza": [
+      "modest_meals:item/meal/placed_pizza/chicken_0",
+      "modest_meals:item/meal/placed_pizza/chicken_1",
+      "modest_meals:item/meal/placed_pizza/chicken_2",
+      "modest_meals:item/meal/placed_pizza/chicken_3",
+      "modest_meals:item/meal/placed_pizza/chicken_4"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/chicken_0",
       "modest_meals:item/meal/sandwich/chicken_1",

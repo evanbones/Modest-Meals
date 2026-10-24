@@ -45,10 +45,6 @@
     {
       "id": "#c:crops/mango",
       "required": false
-    },
-    {
-      "id": "farmersdelight:pumpkin_slice",
-      "required": false
     }
   ]
 }

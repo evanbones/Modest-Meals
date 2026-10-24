@@ -210,30 +210,47 @@ public record MealType(
      * @param required at least one free ingredient must match this
      * @param allowed  every free ingredient must match this
      */
-    public record Rules(int servings, Optional<Ingredient> required, Optional<Ingredient> allowed) {
-        public static final Rules NONE = new Rules(1, Optional.empty(), Optional.empty());
+    public record Rules(int servings, Optional<Ingredient> required, Optional<Ingredient> allowed,
+                        Optional<Ingredient> forbidden) {
+        public static final Rules NONE = new Rules(1, Optional.empty(), Optional.empty(), Optional.empty());
 
         public static final MapCodec<Rules> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Codec.intRange(1, 64).optionalFieldOf("servings", 1).forGetter(Rules::servings),
                 Ingredient.CODEC_NONEMPTY.optionalFieldOf("required_ingredient").forGetter(Rules::required),
-                Ingredient.CODEC_NONEMPTY.optionalFieldOf("allowed_ingredients").forGetter(Rules::allowed)
+                Ingredient.CODEC_NONEMPTY.optionalFieldOf("allowed_ingredients").forGetter(Rules::allowed),
+                Ingredient.CODEC_NONEMPTY.optionalFieldOf("forbidden_ingredients").forGetter(Rules::forbidden)
         ).apply(instance, Rules::new));
 
         public static Rules servings(int servings) {
-            return new Rules(servings, Optional.empty(), Optional.empty());
+            return new Rules(servings, Optional.empty(), Optional.empty(), Optional.empty());
         }
 
         public static Rules requiring(Ingredient required) {
-            return new Rules(1, Optional.of(required), Optional.empty());
+            return new Rules(1, Optional.of(required), Optional.empty(), Optional.empty());
         }
 
         public static Rules allowing(Ingredient allowed) {
-            return new Rules(1, Optional.empty(), Optional.of(allowed));
+            return new Rules(1, Optional.empty(), Optional.of(allowed), Optional.empty());
+        }
+
+        public static Rules forbidding(Ingredient forbidden) {
+            return new Rules(1, Optional.empty(), Optional.empty(), Optional.of(forbidden));
+        }
+
+        public Rules withServings(int servings) {
+            return new Rules(servings, required, allowed, forbidden);
+        }
+
+        public Rules withForbidden(Ingredient forbidden) {
+            return new Rules(servings, required, allowed, Optional.of(forbidden));
         }
 
         public boolean allows(List<ItemStack> ingredients) {
             List<ItemStack> present = ingredients.stream().filter(stack -> stack != null && !stack.isEmpty()).toList();
             if (required.isPresent() && present.stream().noneMatch(required.get())) {
+                return false;
+            }
+            if (forbidden.isPresent() && present.stream().anyMatch(forbidden.get())) {
                 return false;
             }
             return allowed.isEmpty() || present.stream().allMatch(allowed.get());
@@ -333,13 +350,22 @@ public record MealType(
         }
     }
 
-    public record ItemOverride(ResourceLocation result, int count, List<String> ingredients, boolean replaceRecipes) {
+    /**
+     * @param base base stacks this override also needs, matched against the type's base rather than the free ingredients
+     */
+    public record ItemOverride(ResourceLocation result, int count, List<String> ingredients, boolean replaceRecipes,
+                               List<String> base) {
         public static final Codec<ItemOverride> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ResourceLocation.CODEC.fieldOf("result").forGetter(ItemOverride::result),
                 Codec.INT.optionalFieldOf("count", 1).forGetter(ItemOverride::count),
                 Codec.STRING.listOf().fieldOf("ingredients").forGetter(ItemOverride::ingredients),
-                Codec.BOOL.optionalFieldOf("replace_recipes", false).forGetter(ItemOverride::replaceRecipes)
+                Codec.BOOL.optionalFieldOf("replace_recipes", false).forGetter(ItemOverride::replaceRecipes),
+                Codec.STRING.listOf().optionalFieldOf("base", List.of()).forGetter(ItemOverride::base)
         ).apply(instance, ItemOverride::new));
+
+        public ItemOverride(ResourceLocation result, int count, List<String> ingredients, boolean replaceRecipes) {
+            this(result, count, ingredients, replaceRecipes, List.of());
+        }
 
         public ItemOverride(ResourceLocation result, int count, List<String> ingredients) {
             this(result, count, ingredients, false);
@@ -364,6 +390,16 @@ public record MealType(
 
         public List<Ingredient> matchers() {
             return ingredients.stream().map(ItemOverride::parseIngredient).toList();
+        }
+
+        public boolean matches(List<ItemStack> mealIngredients, List<ItemStack> baseStacks) {
+            for (String spec : base) {
+                Ingredient matcher = parseIngredient(spec);
+                if (baseStacks.stream().noneMatch(matcher)) {
+                    return false;
+                }
+            }
+            return matches(mealIngredients);
         }
 
         public boolean matches(List<ItemStack> mealIngredients) {

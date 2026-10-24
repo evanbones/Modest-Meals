@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "modest_meals:block/pizza_stage0"
+    },
+    "bites=1": {
+      "model": "modest_meals:block/pizza_stage1"
+    },
+    "bites=2": {
+      "model": "modest_meals:block/pizza_stage2"
+    },
+    "bites=3": {
+      "model": "modest_meals:block/pizza_stage3"
+    }
+  }
+}

@@ -37,15 +37,15 @@
       "target": "mynethersdelight:cooked_loin"
     },
     {
-      "health": 1.0,
-      "priority": 140,
+      "health": 1.5,
+      "priority": 141,
       "stamina": 1.0,
       "target": "#c:foods/raw_sausage"
     },
     {
-      "health": 3.0,
-      "priority": 145,
-      "stamina": 1.5,
+      "health": 4.0,
+      "priority": 146,
+      "stamina": 2.0,
       "target": "#c:foods/cooked_sausage"
     },
     {

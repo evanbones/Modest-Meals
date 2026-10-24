@@ -1,17 +1,52 @@
 {
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/pizza/pizza_base"
+  },
+  "dubious_sprite": "modest_meals:item/meal/pizza/dubious",
+  "forbidden_ingredients": [
+    {
+      "tag": "modest_meals:not_for_dishes"
+    },
+    {
+      "tag": "modest_meals:sweets"
+    },
+    {
+      "tag": "modest_meals:staples"
+    },
+    {
+      "tag": "modest_meals:jam_fruits"
+    },
+    {
+      "tag": "c:drinks/milk"
+    }
+  ],
   "id": "modest_meals:pizza",
   "item": "modest_meals:pizza",
+  "item_overrides": [
+    {
+      "base": [
+        "nomansland:pesto_bottle"
+      ],
+      "ingredients": [
+        "#c:foods/cooked_venison",
+        "#c:foods/cooked_venison"
+      ],
+      "replace_recipes": true,
+      "result": "nomansdelight:pesto_pizza"
+    }
+  ],
   "priority": 10,
+  "requires_supported_ingredients": true,
   "shape": {
     "key": {
       "#": "modest_meals:any_ingredient",
       "D": "#c:foods/dough",
-      "S": "#c:foods/tomato_sauce"
+      "S": "#modest_meals:pizza_sauces"
     },
     "pattern": [
       "###",
       "#S#",
-      "DDD"
+      " D "
     ]
   }
 }

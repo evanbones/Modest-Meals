@@ -23,6 +23,9 @@
     }
   ],
   "container": "minecraft:bowl",
+  "forbidden_ingredients": {
+    "tag": "modest_meals:not_for_dishes"
+  },
   "id": "modest_meals:porridge",
   "item": "modest_meals:porridge",
   "max_ingredients": 3,

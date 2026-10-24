@@ -13,6 +13,7 @@ import com.evandev.modest_meals.event.CommonEventHandler;
 import com.evandev.modest_meals.food.CustomFoodDatapack;
 import com.evandev.modest_meals.network.ModNetworking;
 import com.evandev.modest_meals.recipe.ModRecipes;
+import com.evandev.modest_meals.registry.ModBlocks;
 import com.evandev.modest_meals.registry.ModCreativeTabs;
 import com.evandev.modest_meals.registry.ModItems;
 import com.evandev.modest_meals.trait.FoodTraitType;
@@ -30,6 +31,7 @@ public class ModestMeals {
         ModMobEffects.register(modEventBus);
         FoodTraitType.register(modEventBus);
         ModDataComponents.register(modEventBus);
+        ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModRecipes.register(modEventBus);

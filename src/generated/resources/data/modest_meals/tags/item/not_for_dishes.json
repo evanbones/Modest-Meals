@@ -1,0 +1,28 @@
+{
+  "values": [
+    "minecraft:amethyst_shard",
+    "minecraft:blaze_powder",
+    "minecraft:blaze_rod",
+    "minecraft:blue_ice",
+    "minecraft:fermented_spider_eye",
+    "minecraft:glistering_melon_slice",
+    "minecraft:honeycomb",
+    "minecraft:ink_sac",
+    "minecraft:magma_cream",
+    "minecraft:milk_bucket",
+    "minecraft:nautilus_shell",
+    "minecraft:nether_wart",
+    "minecraft:rabbit_foot",
+    "minecraft:snowball",
+    "minecraft:sugar_cane",
+    "minecraft:turtle_scute",
+    "minecraft:ghast_tear",
+    "minecraft:phantom_membrane",
+    "minecraft:glowstone_dust",
+    "minecraft:pumpkin",
+    {
+      "id": "neapolitan:ice_cubes",
+      "required": false
+    }
+  ]
+}

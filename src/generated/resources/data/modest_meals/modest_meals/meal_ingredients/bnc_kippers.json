@@ -1,6 +1,27 @@
 {
   "item": "brewinandchewin:kippers",
   "meals": {
+    "modest_meals:pizza": [
+      "modest_meals:item/meal/pizza/cod_0",
+      "modest_meals:item/meal/pizza/cod_1",
+      "modest_meals:item/meal/pizza/cod_2",
+      "modest_meals:item/meal/pizza/cod_3",
+      "modest_meals:item/meal/pizza/cod_4"
+    ],
+    "modest_meals:pizza_slice": [
+      "modest_meals:item/meal/pizza_slice/cod_0",
+      "modest_meals:item/meal/pizza_slice/cod_1",
+      "modest_meals:item/meal/pizza_slice/cod_2",
+      "modest_meals:item/meal/pizza_slice/cod_3",
+      "modest_meals:item/meal/pizza_slice/cod_4"
+    ],
+    "modest_meals:placed_pizza": [
+      "modest_meals:item/meal/placed_pizza/cod_0",
+      "modest_meals:item/meal/placed_pizza/cod_1",
+      "modest_meals:item/meal/placed_pizza/cod_2",
+      "modest_meals:item/meal/placed_pizza/cod_3",
+      "modest_meals:item/meal/placed_pizza/cod_4"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/cod_0",
       "modest_meals:item/meal/sandwich/cod_1",

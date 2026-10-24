@@ -7,6 +7,17 @@
     }
   ],
   "container": "minecraft:bowl",
+  "forbidden_ingredients": [
+    {
+      "tag": "modest_meals:not_for_dishes"
+    },
+    {
+      "tag": "modest_meals:sweets"
+    },
+    {
+      "tag": "modest_meals:staples"
+    }
+  ],
   "id": "modest_meals:curry",
   "item": "modest_meals:curry",
   "item_overrides": [

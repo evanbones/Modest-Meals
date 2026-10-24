@@ -19,6 +19,11 @@ public class EdibleBlockContext {
         return map(player).put(player.getUUID(), context);
     }
 
+    @Nullable
+    public static Context set(Player player, BlockState state, EdibleBlockFoods.EdibleBlock food) {
+        return map(player).put(player.getUUID(), new Context(state, food));
+    }
+
     public static Optional<Context> get(Player player) {
         return Optional.ofNullable(map(player).get(player.getUUID()));
     }

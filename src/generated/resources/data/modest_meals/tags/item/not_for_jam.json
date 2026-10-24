@@ -1,0 +1,17 @@
+{
+  "values": [
+    "minecraft:enchanted_golden_apple",
+    {
+      "id": "#culturaldelights:avocados",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:avocado",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cut_avocado",
+      "required": false
+    }
+  ]
+}

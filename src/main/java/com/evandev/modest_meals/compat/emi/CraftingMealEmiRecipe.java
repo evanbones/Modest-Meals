@@ -9,6 +9,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.SlotWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,7 +58,7 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
             return Optional.empty();
         }
         return overrideFillings(override).map(fillings -> new CraftingMealEmiRecipe(type, null,
-                type.isShaped() ? shapedSlots(type, fillings) : fixedSlots(type, fillings, SLOTS),
+                type.isShaped() ? shapedSlots(type, fillings, override.base()) : fixedSlots(type, fillings, SLOTS),
                 overrideId("meal_crafting", type, index), output));
     }
 
@@ -65,12 +66,21 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
         return shapedSlots(type, symbol -> any);
     }
 
-    private static List<EmiIngredient> shapedSlots(MealType type, List<EmiIngredient> fillings) {
+    private static List<EmiIngredient> shapedSlots(MealType type, List<EmiIngredient> fillings, List<String> base) {
         Iterator<EmiIngredient> next = fillings.iterator();
-        return shapedSlots(type, symbol -> next.hasNext() ? next.next() : EmiStack.EMPTY);
+        List<Ingredient> required = base.stream().map(MealType.ItemOverride::parseIngredient).toList();
+        return shapedSlots(type, symbol -> next.hasNext() ? next.next() : EmiStack.EMPTY, required);
     }
 
     private static List<EmiIngredient> shapedSlots(MealType type, Function<Character, EmiIngredient> free) {
+        return shapedSlots(type, free, List.of());
+    }
+
+    /**
+     * @param required base stacks an override needs; a key slot that can hold one shows just that instead of its whole key
+     */
+    private static List<EmiIngredient> shapedSlots(MealType type, Function<Character, EmiIngredient> free,
+                                                   List<Ingredient> required) {
         MealType.Shape shape = type.shape().orElseThrow();
         List<EmiIngredient> laid = new ArrayList<>(Collections.nCopies(SLOTS, (EmiIngredient) EmiStack.EMPTY));
         for (int row = 0; row < Math.min(GRID, shape.height()); row++) {
@@ -79,10 +89,21 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
                 if (symbol == ' ') {
                     continue;
                 }
-                laid.set(row * GRID + column, shape.isAny(symbol) ? free.apply(symbol) : keyIngredient(shape, symbol, EmiStack.EMPTY));
+                laid.set(row * GRID + column, shape.isAny(symbol) ? free.apply(symbol) : narrowed(keyIngredient(shape, symbol, EmiStack.EMPTY), required));
             }
         }
         return laid;
+    }
+
+    private static EmiIngredient narrowed(EmiIngredient key, List<Ingredient> required) {
+        for (Ingredient ingredient : required) {
+            boolean overlaps = key.getEmiStacks().stream()
+                    .anyMatch(stack -> ingredient.test(stack.getItemStack()));
+            if (overlaps) {
+                return EmiIngredient.of(ingredient);
+            }
+        }
+        return key;
     }
 
     @Override

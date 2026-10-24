@@ -7,6 +7,10 @@
     {
       "id": "mynethersdelight:cooked_sausage",
       "required": false
+    },
+    {
+      "id": "mynethersdelight:roasted_sausage",
+      "required": false
     }
   ]
 }

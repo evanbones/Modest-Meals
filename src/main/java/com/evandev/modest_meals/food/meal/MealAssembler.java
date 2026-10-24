@@ -130,7 +130,7 @@ public final class MealAssembler {
         }
 
         for (MealType.ItemOverride override : type.itemOverrides()) {
-            if (override.matches(ingredients)) {
+            if (override.matches(ingredients, base)) {
                 return BuiltInRegistries.ITEM.getOptional(override.result())
                         .map(item -> new ItemStack(item, override.count()));
             }

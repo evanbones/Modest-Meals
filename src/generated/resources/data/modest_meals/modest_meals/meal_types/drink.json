@@ -1,4 +1,7 @@
 {
+  "allowed_ingredients": {
+    "tag": "modest_meals:drink_ingredients"
+  },
   "base": [
     {
       "ingredient": [
@@ -60,7 +63,7 @@
     {
       "count": 3,
       "ingredients": [
-        "neapolitan:mint_leaves",
+        "neapolitan:mint_leaves|culturaldelights:mint",
         "minecraft:snowball"
       ],
       "replace_recipes": true,

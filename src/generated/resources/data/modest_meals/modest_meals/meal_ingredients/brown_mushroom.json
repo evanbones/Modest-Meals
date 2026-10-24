@@ -1,0 +1,26 @@
+{
+  "item": "minecraft:brown_mushroom",
+  "meals": {
+    "modest_meals:pizza": [
+      "modest_meals:item/meal/pizza/mushroom_0",
+      "modest_meals:item/meal/pizza/mushroom_1",
+      "modest_meals:item/meal/pizza/mushroom_2",
+      "modest_meals:item/meal/pizza/mushroom_3",
+      "modest_meals:item/meal/pizza/mushroom_4"
+    ],
+    "modest_meals:pizza_slice": [
+      "modest_meals:item/meal/pizza_slice/mushroom_0",
+      "modest_meals:item/meal/pizza_slice/mushroom_1",
+      "modest_meals:item/meal/pizza_slice/mushroom_2",
+      "modest_meals:item/meal/pizza_slice/mushroom_3",
+      "modest_meals:item/meal/pizza_slice/mushroom_4"
+    ],
+    "modest_meals:placed_pizza": [
+      "modest_meals:item/meal/placed_pizza/mushroom_0",
+      "modest_meals:item/meal/placed_pizza/mushroom_1",
+      "modest_meals:item/meal/placed_pizza/mushroom_2",
+      "modest_meals:item/meal/placed_pizza/mushroom_3",
+      "modest_meals:item/meal/placed_pizza/mushroom_4"
+    ]
+  }
+}

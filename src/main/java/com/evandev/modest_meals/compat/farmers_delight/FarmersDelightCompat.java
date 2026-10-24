@@ -16,6 +16,7 @@ public class FarmersDelightCompat {
             DeferredRegister.create(Registries.RECIPE_SERIALIZER, Constants.MOD_ID);
 
     public static Supplier<MealCookingRecipe.Serializer> MEAL_COOKING_SERIALIZER;
+    public static Supplier<MealCuttingRecipe.Serializer> MEAL_CUTTING_SERIALIZER;
 
     public static boolean isLoaded() {
         return ModList.get().isLoaded(MOD_ID);
@@ -26,6 +27,7 @@ public class FarmersDelightCompat {
             return;
         }
         MEAL_COOKING_SERIALIZER = RECIPE_SERIALIZERS.register("meal_cooking", MealCookingRecipe.Serializer::new);
+        MEAL_CUTTING_SERIALIZER = RECIPE_SERIALIZERS.register("meal_cutting", MealCuttingRecipe.Serializer::new);
         RECIPE_SERIALIZERS.register(modBus);
     }
 }

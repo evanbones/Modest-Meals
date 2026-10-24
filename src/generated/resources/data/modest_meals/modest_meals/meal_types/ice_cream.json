@@ -1,4 +1,7 @@
 {
+  "allowed_ingredients": {
+    "tag": "modest_meals:dessert_ingredients"
+  },
   "base": [
     {
       "ingredient": {
@@ -54,7 +57,7 @@
     },
     {
       "ingredients": [
-        "neapolitan:mint_leaves"
+        "neapolitan:mint_leaves|culturaldelights:mint"
       ],
       "replace_recipes": true,
       "result": "neapolitan:mint_ice_cream"

@@ -4,6 +4,9 @@
     "top": "modest_meals:item/meal/sandwich/sandwich_top"
   },
   "dubious_sprite": "modest_meals:item/meal/sandwich/dubious",
+  "forbidden_ingredients": {
+    "tag": "modest_meals:not_for_dishes"
+  },
   "id": "modest_meals:sandwich",
   "item": "modest_meals:sandwich",
   "item_overrides": [

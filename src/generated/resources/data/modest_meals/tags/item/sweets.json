@@ -1,0 +1,69 @@
+{
+  "values": [
+    "minecraft:sugar",
+    "minecraft:honey_bottle",
+    "minecraft:cocoa_beans",
+    "modest_meals:jam",
+    "#c:foods/ice_cream",
+    {
+      "id": "#c:foods/candy",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cookie",
+      "required": false
+    },
+    {
+      "id": "#c:foods/chocolate_bar",
+      "required": false
+    },
+    {
+      "id": "#c:foods/chocolate",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/juice",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/tea",
+      "required": false
+    },
+    {
+      "id": "#c:drinks/eggnog",
+      "required": false
+    },
+    {
+      "id": "neapolitan:vanilla_pods",
+      "required": false
+    },
+    {
+      "id": "neapolitan:dried_vanilla_pods",
+      "required": false
+    },
+    {
+      "id": "neapolitan:chocolate_spider_eye",
+      "required": false
+    },
+    {
+      "id": "nomansland:maple_syrup_bottle",
+      "required": false
+    },
+    {
+      "id": "nomansland:candied_pear",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:sweet_berry_jam",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:glow_berry_marmalade",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:apple_jelly",
+      "required": false
+    }
+  ]
+}

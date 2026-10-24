@@ -1,13 +1,21 @@
 {
+  "allowed_ingredients": {
+    "tag": "modest_meals:roll_fillings"
+  },
   "base": [
     {
       "ingredient": {
         "tag": "c:foods/cooked_rice"
       }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:dried_kelp"
+      }
     }
   ],
-  "id": "modest_meals:sushi",
-  "item": "modest_meals:sushi",
+  "id": "modest_meals:roll",
+  "item": "modest_meals:roll",
   "item_overrides": [
     {
       "count": 2,
@@ -28,9 +36,17 @@
       "result": "farmersdelight:cod_roll"
     },
     {
+      "ingredients": [
+        "#c:foods/vegetable",
+        "minecraft:dried_kelp",
+        "minecraft:dried_kelp"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:kelp_roll"
+    },
+    {
       "count": 4,
       "ingredients": [
-        "minecraft:dried_kelp",
         "#c:foods/cooked_egg",
         "#c:foods/cooked_egg",
         "#c:foods/cooked_egg"
@@ -50,7 +66,6 @@
     {
       "count": 2,
       "ingredients": [
-        "minecraft:dried_kelp",
         "minecraft:tropical_fish",
         "minecraft:tropical_fish"
       ],
@@ -60,7 +75,6 @@
     {
       "count": 2,
       "ingredients": [
-        "minecraft:dried_kelp",
         "culturaldelights:raw_calamari",
         "culturaldelights:raw_calamari"
       ],
@@ -77,7 +91,6 @@
       "result": "nomansdelight:billhook_bass_roll"
     }
   ],
-  "max_ingredients": 4,
-  "priority": 10,
-  "servings": 2
+  "max_ingredients": 3,
+  "priority": 10
 }

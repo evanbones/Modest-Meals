@@ -1,6 +1,27 @@
 {
   "item": "minecraft:mutton",
   "meals": {
+    "modest_meals:pizza": [
+      "modest_meals:item/meal/pizza/mutton_0",
+      "modest_meals:item/meal/pizza/mutton_1",
+      "modest_meals:item/meal/pizza/mutton_2",
+      "modest_meals:item/meal/pizza/mutton_3",
+      "modest_meals:item/meal/pizza/mutton_4"
+    ],
+    "modest_meals:pizza_slice": [
+      "modest_meals:item/meal/pizza_slice/mutton_0",
+      "modest_meals:item/meal/pizza_slice/mutton_1",
+      "modest_meals:item/meal/pizza_slice/mutton_2",
+      "modest_meals:item/meal/pizza_slice/mutton_3",
+      "modest_meals:item/meal/pizza_slice/mutton_4"
+    ],
+    "modest_meals:placed_pizza": [
+      "modest_meals:item/meal/placed_pizza/mutton_0",
+      "modest_meals:item/meal/placed_pizza/mutton_1",
+      "modest_meals:item/meal/placed_pizza/mutton_2",
+      "modest_meals:item/meal/placed_pizza/mutton_3",
+      "modest_meals:item/meal/placed_pizza/mutton_4"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/mutton_0",
       "modest_meals:item/meal/sandwich/mutton_1",

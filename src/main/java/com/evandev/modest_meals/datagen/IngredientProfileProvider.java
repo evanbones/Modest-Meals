@@ -272,10 +272,12 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add("farmersdelight:cod_slice", dish(2F, null, 90));
         builder.add("farmersdelight:cooked_cod_slice", dish(3F, null, 130));
         builder.add("farmersdelight:cooked_salmon_slice", dish(3.75F, null, 145));
+        builder.add("farmersdelight:ham", food(2F, 1F));
         builder.add("farmersdelight:pie_crust", dish(null, 1.5F));
         builder.add("farmersdelight:pumpkin_slice", dish(null, 1F));
         builder.add("farmersdelight:rice", dish(null, 1F));
         builder.add("farmersdelight:salmon_slice", dish(2.5F, null, 100));
+        builder.add("farmersdelight:smoked_ham", food(6F, 2F));
         builder.add("farmersdelight:tomato", dish(null, 2F));
         builder.add("farmersdelight:tomato_sauce", dish(null, 2.5F));
         builder.add(id(Items.GLISTERING_MELON_SLICE), build(4F, null, 120,
@@ -319,8 +321,6 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(cd("cinnamon"), effect(0.5F, 1.0F, "cold_resistance", MEDIUM));
         builder.add(cd("butter"), food(0.5F, 1.0F));
         builder.add(cd("cheese_wedge"), food(1.0F, 2.0F));
-        builder.add(cd("raw_sausage"), dish(0.5F, 0.5F, 90));
-        builder.add(cd("cooked_sausage"), food(2.0F, 2.0F));
         builder.add(cd("creamed_corn"), food(3.0F, 3.0F));
 
         builder.add(cd("squid"), dish(1.0F, null, 120));
@@ -378,8 +378,8 @@ public class IngredientProfileProvider implements DataProvider {
         builder.addTag("c:foods/cooked_hoglin", 145, food(6.0F, 2.0F));
         builder.add(mnd("hoglin_loin"), food(2.0F, 1.0F));
         builder.add(mnd("cooked_loin"), food(6.0F, 2.0F));
-        builder.addTag("c:foods/raw_sausage", 140, food(1.0F, 1.0F));
-        builder.addTag("c:foods/cooked_sausage", 145, food(3.0F, 1.5F));
+        builder.addTag("c:foods/raw_sausage", 141, food(1.5F, 1.0F));
+        builder.addTag("c:foods/cooked_sausage", 146, food(4.0F, 2.0F));
 
         builder.addTag("c:foods/raw_strider", 140, effect(2.0F, 1.0F, "fire_resistance", WEAK));
         builder.add(mnd("strider_slice"), effect(2.0F, 1.0F, "fire_resistance", WEAK));

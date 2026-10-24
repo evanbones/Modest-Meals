@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "modest_meals:item/sushi"
+    "layer0": "modest_meals:item/pizza_slice"
   }
 }

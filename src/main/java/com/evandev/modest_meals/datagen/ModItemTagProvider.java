@@ -102,6 +102,74 @@ public class ModItemTagProvider extends ItemTagsProvider {
         modestMealsTags();
         notAnIngredient();
         seedConventionFoods();
+        dishRules();
+    }
+
+    private void dishRules() {
+        tag(ModItemTags.NOT_FOR_DISHES).add(
+                Items.AMETHYST_SHARD, Items.BLAZE_POWDER, Items.BLAZE_ROD, Items.BLUE_ICE, Items.FERMENTED_SPIDER_EYE,
+                Items.GLISTERING_MELON_SLICE, Items.HONEYCOMB, Items.INK_SAC, Items.MAGMA_CREAM, Items.MILK_BUCKET,
+                Items.NAUTILUS_SHELL, Items.NETHER_WART, Items.RABBIT_FOOT, Items.SNOWBALL, Items.SUGAR_CANE,
+                Items.TURTLE_SCUTE, Items.GHAST_TEAR, Items.PHANTOM_MEMBRANE, Items.GLOWSTONE_DUST, Items.PUMPKIN);
+        addOptional(tag(ModItemTags.NOT_FOR_DISHES), NEAPOLITAN, "ice_cubes");
+
+        var sweets = tag(ModItemTags.SWEETS);
+        sweets.add(Items.SUGAR, Items.HONEY_BOTTLE, Items.COCOA_BEANS, ModItems.JAM.get());
+        sweets.addTag(ICE_CREAMS);
+        addOptionalTags(sweets, "c", "foods/candy", "foods/cookie", "foods/chocolate_bar", "foods/chocolate",
+                "drinks/juice", "drinks/tea", "drinks/eggnog");
+        addOptional(sweets, NEAPOLITAN, "vanilla_pods", "dried_vanilla_pods", "chocolate_spider_eye");
+        addOptional(sweets, NO_MANS_LAND, "maple_syrup_bottle", "candied_pear");
+        addOptional(sweets, BREWIN_AND_CHEWIN, "sweet_berry_jam", "glow_berry_marmalade", "apple_jelly");
+
+        var staples = tag(ModItemTags.STAPLES);
+        staples.addTag(BREADS).addTag(DOUGHS).addTag(PASTAS).addTag(RICES).addTag(ModItemTags.WHEATS)
+                .addTag(TORTILLAS).addTag(PIE_CRUSTS);
+
+        var drinkIngredients = tag(ModItemTags.DRINK_INGREDIENTS);
+        drinkIngredients.addTag(FRUITS).addTag(ModItemTags.JAM_FRUITS).addTag(LEAFY_GREENS)
+                .addTag(ModItemTags.SWEETS).addTag(ModItemTags.NOT_FOR_DISHES);
+        drinkIngredients.add(Items.CARROT, Items.GOLDEN_CARROT, Items.BEETROOT, Items.PUMPKIN, Items.KELP,
+                Items.SPIDER_EYE, Items.SWEET_BERRIES, Items.GLOW_BERRIES, Items.MELON_SLICE);
+        addOptionalTags(drinkIngredients, "c", "foods/berry", "foods/nuts", "drinks/juice", "drinks/tea",
+                "drinks/milk", "drinks/eggnog", "milk", "crops/tomato", "crops/cucumber");
+        addOptional(drinkIngredients, CULTURAL_DELIGHTS, "cinnamon", "mint", "agave", "coconut");
+        addOptional(drinkIngredients, NEAPOLITAN, "mint_leaves", "cinnamon_sticks", "roasted_adzuki_beans");
+        addOptional(drinkIngredients, BOUNTIFUL_FARES, "citrus_essence", "coconut_half", "tea_leaves",
+                "dried_tea_leaves");
+        addOptional(drinkIngredients, MY_NETHERS_DELIGHT, "pepper_powder", "bullet_pepper");
+        addOptional(drinkIngredients, FARMERS_DELIGHT, "pumpkin_slice");
+
+        var notForJam = tag(ModItemTags.NOT_FOR_JAM);
+        notForJam.add(Items.ENCHANTED_GOLDEN_APPLE);
+        addOptionalTags(notForJam, CULTURAL_DELIGHTS, "avocados");
+        addOptional(notForJam, CULTURAL_DELIGHTS, "avocado", "cut_avocado");
+
+        var desserts = tag(ModItemTags.DESSERT_INGREDIENTS);
+        desserts.addTag(ModItemTags.JAM_FRUITS).addTag(FRUITS);
+        desserts.add(Items.SUGAR, Items.HONEY_BOTTLE, Items.COCOA_BEANS, Items.SNOWBALL, Items.SWEET_BERRIES,
+                Items.GLOW_BERRIES, Items.MELON_SLICE, ModItems.JAM.get());
+        addOptionalTags(desserts, "c", "foods/berry", "foods/nuts", "foods/candy", "foods/cookie",
+                "foods/chocolate_bar", "foods/chocolate");
+        addOptional(desserts, NEAPOLITAN, "vanilla_pods", "dried_vanilla_pods", "mint_leaves", "ice_cubes",
+                "cinnamon_sticks", "roasted_adzuki_beans");
+        addOptional(desserts, CULTURAL_DELIGHTS, "mint", "cinnamon");
+        addOptional(desserts, NO_MANS_LAND, "maple_syrup_bottle", "walnuts", "pine_nuts", "candied_pear");
+        addOptional(desserts, BOUNTIFUL_FARES, "coconut_half", "walnut");
+        addOptional(desserts, FARMERS_DELIGHT, "pumpkin_slice");
+
+        var rollFillings = tag(ModItemTags.ROLL_FILLINGS);
+        rollFillings.addTag(RAW_FISH).addTag(COOKED_FISH).addTag(RAW_SQUID).addTag(COOKED_SQUID)
+                .addTag(LEAFY_GREENS);
+        rollFillings.add(Items.KELP, Items.DRIED_KELP, Items.CARROT, Items.BEETROOT);
+        addOptionalTags(rollFillings, "c", "foods/vegetable", "foods/cooked_egg", "foods/safe_raw_fish",
+                "foods/raw_calamari", "foods/cooked_calamari", "crops/cucumber", "mushrooms");
+        addOptionalTags(rollFillings, CULTURAL_DELIGHTS, "avocados");
+        addOptional(rollFillings, CULTURAL_DELIGHTS, "tofu", "cut_avocado", "cut_cucumber", "cut_pickle");
+
+        var pizzaSauces = tag(ModItemTags.PIZZA_SAUCES);
+        pizzaSauces.addTag(TOMATO_SAUCES);
+        addOptional(pizzaSauces, NO_MANS_LAND, "pesto_bottle");
     }
 
     private void modestMealsTags() {
@@ -515,11 +583,11 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         var rawSausages = tag(RAW_SAUSAGES);
         rawSausages.addOptional(cd("raw_sausage"));
-        addOptional(rawSausages, MY_NETHERS_DELIGHT, "raw_sausage");
+        addOptional(rawSausages, MY_NETHERS_DELIGHT, "raw_sausage", "hoglin_sausage");
 
         var cookedSausages = tag(COOKED_SAUSAGES);
         cookedSausages.addOptional(cd("cooked_sausage"));
-        addOptional(cookedSausages, MY_NETHERS_DELIGHT, "cooked_sausage");
+        addOptional(cookedSausages, MY_NETHERS_DELIGHT, "cooked_sausage", "roasted_sausage");
         cookedMeats.addOptional(cd("cooked_sausage"));
 
         var rawSquid = tag(RAW_SQUID);
@@ -571,7 +639,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptionalTags(jamFruits, "c", "foods/berry", "foods/cherry", "foods/plum", "foods/orange",
                 "foods/elderberry", "foods/lapisberry", "foods/passion_fruit", "foods/pear", "crops/lemon",
                 "crops/mango");
-        addOptional(jamFruits, FARMERS_DELIGHT, "pumpkin_slice");
 
         var leafyGreens = tag(LEAFY_GREENS);
         leafyGreens.add(Items.BEETROOT);

@@ -38,11 +38,27 @@ import java.util.function.Function;
 public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
 
     private final ResourceLocation mealTypeId;
+    private final ResourceLocation visualId;
+    private final @Nullable ResourceLocation portionBase;
+    private final @Nullable ResourceLocation portionDubious;
     private final ItemOverrides overrides;
 
     public DynamicMealBakedModel(BakedModel originalModel, ResourceLocation mealTypeId) {
+        this(originalModel, mealTypeId, mealTypeId, null, null);
+    }
+
+    /**
+     * @param visualId    which meal key ingredient visuals are looked up under
+     * @param portionBase the base sprite drawn under the toppings instead of the meal type's own, for a portion of a meal
+     * @param portionDubious the sprite shown instead of the meal type's dubious sprite, for a portion of a meal
+     */
+    public DynamicMealBakedModel(BakedModel originalModel, ResourceLocation mealTypeId, ResourceLocation visualId,
+                                 @Nullable ResourceLocation portionBase, @Nullable ResourceLocation portionDubious) {
         super(originalModel);
         this.mealTypeId = mealTypeId;
+        this.visualId = visualId;
+        this.portionBase = portionBase;
+        this.portionDubious = portionDubious;
         this.overrides = new DynamicMealItemOverrides(originalModel);
     }
 
@@ -75,15 +91,12 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
                     Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS);
 
             if (contents.dubious()) {
-                if (type.dubiousSprite().isEmpty()) {
+                Optional<ResourceLocation> dubiousSprite = dubiousSprite(type);
+                if (dubiousSprite.isEmpty()) {
                     return baseModel;
                 }
-                String key = "dubious:" + mealTypeId;
-                return cache.computeIfAbsent(key, k -> {
-                    ResourceLocation dubiousSpriteLoc = type.dubiousSprite().get();
-                    TextureAtlasSprite sprite = spriteGetter.apply(dubiousSpriteLoc);
-                    return bakeLayered(baseModel, List.of(sprite));
-                });
+                return cache.computeIfAbsent("dubious", k ->
+                        bakeLayered(baseModel, List.of(spriteGetter.apply(dubiousSprite.get()))));
             }
 
             if (contents.ingredients().isEmpty()) {
@@ -104,7 +117,9 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
                 return baseModel;
             }
 
-            MealType.BaseSprites baseSprites = type.baseSprites().get();
+            MealType.BaseSprites baseSprites = portionBase == null
+                    ? type.baseSprites().get()
+                    : new MealType.BaseSprites(portionBase);
             String cacheKey = String.join(",", contents.ingredients().stream().map(ResourceLocation::toString).toList());
             return cache.computeIfAbsent(cacheKey, k -> {
                 List<TextureAtlasSprite> sprites = new ArrayList<>();
@@ -128,15 +143,22 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
             if (index < ingredients.size()) {
                 ResourceLocation itemId = ingredients.get(index);
                 Item item = BuiltInRegistries.ITEM.get(itemId);
-                Optional<ResourceLocation> sprite = MealIngredientManager.getIngredientSprite(mealTypeId, item, index, totalSlots);
+                Optional<ResourceLocation> sprite = MealIngredientManager.getIngredientSprite(visualId, item, index, totalSlots);
                 if (sprite.isPresent()) {
                     return sprite.get();
                 }
                 if (type.requiresSupportedIngredients()) {
-                    return type.dubiousSprite().orElse(null);
+                    return dubiousSprite(type).orElse(null);
                 }
             }
             return null;
+        }
+
+        private Optional<ResourceLocation> dubiousSprite(MealType type) {
+            if (portionBase == null || type.dubiousSprite().isEmpty()) {
+                return type.dubiousSprite();
+            }
+            return Optional.ofNullable(portionDubious);
         }
 
         private BakedModel bakeLayered(BakedModel original, List<TextureAtlasSprite> sprites) {

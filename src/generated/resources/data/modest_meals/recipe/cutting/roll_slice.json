@@ -1,0 +1,12 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "modest_meals:meal_cutting",
+  "count": 3,
+  "meal": "modest_meals:roll",
+  "portion": "modest_meals:roll_slice"
+}

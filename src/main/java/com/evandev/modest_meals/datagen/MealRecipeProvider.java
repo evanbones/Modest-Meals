@@ -3,9 +3,11 @@ package com.evandev.modest_meals.datagen;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
+import com.evandev.modest_meals.registry.ModItems;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -52,6 +54,17 @@ public class MealRecipeProvider implements DataProvider {
             cooking.addProperty("cookingtime", 200);
             futures.add(write(output, "cooking/" + mealType, cooking));
         }
+
+        ModItems.PORTIONS.forEach((portion, info) -> {
+            String portionId = BuiltInRegistries.ITEM.getKey(portion.get()).toString();
+            JsonObject cutting = new JsonObject();
+            cutting.add("neoforge:conditions", modLoaded(FarmersDelightCompat.MOD_ID));
+            cutting.addProperty("type", Constants.MOD_ID + ":meal_cutting");
+            cutting.addProperty("meal", BuiltInRegistries.ITEM.getKey(info.whole().get()).toString());
+            cutting.addProperty("portion", portionId);
+            cutting.addProperty("count", info.count());
+            futures.add(write(output, "cutting/" + BuiltInRegistries.ITEM.getKey(portion.get()).getPath(), cutting));
+        });
 
         for (String mealType : COLD_VAT_MEAL_TYPES) {
             JsonObject chilling = new JsonObject();

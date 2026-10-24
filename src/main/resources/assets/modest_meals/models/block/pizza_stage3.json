@@ -1,0 +1,152 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "modest_meals:block/pizza_floor",
+    "rim": "modest_meals:block/pizza_rim",
+    "floor": "modest_meals:block/pizza_floor",
+    "side": "modest_meals:block/pizza_side",
+    "cut": "modest_meals:block/pizza_cut",
+    "bottom": "modest_meals:block/pizza_bottom"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        8,
+        2,
+        8
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "texture": "#rim"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "texture": "#bottom",
+          "cullface": "down"
+        },
+        "north": {
+          "uv": [
+            8,
+            14,
+            16,
+            16
+          ],
+          "texture": "#side"
+        },
+        "south": {
+          "uv": [
+            0,
+            14,
+            8,
+            16
+          ],
+          "texture": "#cut"
+        },
+        "west": {
+          "uv": [
+            0,
+            14,
+            8,
+            16
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            8,
+            14,
+            16,
+            16
+          ],
+          "texture": "#cut"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        1,
+        2
+      ],
+      "to": [
+        8,
+        1,
+        8
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            2,
+            2,
+            8,
+            8
+          ],
+          "texture": "#floor"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        1,
+        2
+      ],
+      "to": [
+        8,
+        2,
+        2
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            2,
+            15,
+            8,
+            16
+          ],
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        1,
+        2
+      ],
+      "to": [
+        2,
+        2,
+        8
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            8,
+            15,
+            14,
+            16
+          ],
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

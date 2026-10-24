@@ -1,0 +1,98 @@
+{
+  "values": [
+    "#modest_meals:jam_fruits",
+    "#c:foods/fruit",
+    "minecraft:sugar",
+    "minecraft:honey_bottle",
+    "minecraft:cocoa_beans",
+    "minecraft:snowball",
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "minecraft:melon_slice",
+    "modest_meals:jam",
+    {
+      "id": "#c:foods/berry",
+      "required": false
+    },
+    {
+      "id": "#c:foods/nuts",
+      "required": false
+    },
+    {
+      "id": "#c:foods/candy",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cookie",
+      "required": false
+    },
+    {
+      "id": "#c:foods/chocolate_bar",
+      "required": false
+    },
+    {
+      "id": "#c:foods/chocolate",
+      "required": false
+    },
+    {
+      "id": "neapolitan:vanilla_pods",
+      "required": false
+    },
+    {
+      "id": "neapolitan:dried_vanilla_pods",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mint_leaves",
+      "required": false
+    },
+    {
+      "id": "neapolitan:ice_cubes",
+      "required": false
+    },
+    {
+      "id": "neapolitan:cinnamon_sticks",
+      "required": false
+    },
+    {
+      "id": "neapolitan:roasted_adzuki_beans",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:mint",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cinnamon",
+      "required": false
+    },
+    {
+      "id": "nomansland:maple_syrup_bottle",
+      "required": false
+    },
+    {
+      "id": "nomansland:walnuts",
+      "required": false
+    },
+    {
+      "id": "nomansland:pine_nuts",
+      "required": false
+    },
+    {
+      "id": "nomansland:candied_pear",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:coconut_half",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:walnut",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pumpkin_slice",
+      "required": false
+    }
+  ]
+}

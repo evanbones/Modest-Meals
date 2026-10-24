@@ -1,6 +1,27 @@
 {
   "item": "minersdelight:glow_squid",
   "meals": {
+    "modest_meals:pizza": [
+      "modest_meals:item/meal/pizza/squid_0",
+      "modest_meals:item/meal/pizza/squid_1",
+      "modest_meals:item/meal/pizza/squid_2",
+      "modest_meals:item/meal/pizza/squid_3",
+      "modest_meals:item/meal/pizza/squid_4"
+    ],
+    "modest_meals:pizza_slice": [
+      "modest_meals:item/meal/pizza_slice/squid_0",
+      "modest_meals:item/meal/pizza_slice/squid_1",
+      "modest_meals:item/meal/pizza_slice/squid_2",
+      "modest_meals:item/meal/pizza_slice/squid_3",
+      "modest_meals:item/meal/pizza_slice/squid_4"
+    ],
+    "modest_meals:placed_pizza": [
+      "modest_meals:item/meal/placed_pizza/squid_0",
+      "modest_meals:item/meal/placed_pizza/squid_1",
+      "modest_meals:item/meal/placed_pizza/squid_2",
+      "modest_meals:item/meal/placed_pizza/squid_3",
+      "modest_meals:item/meal/placed_pizza/squid_4"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/squid_0",
       "modest_meals:item/meal/sandwich/squid_1",

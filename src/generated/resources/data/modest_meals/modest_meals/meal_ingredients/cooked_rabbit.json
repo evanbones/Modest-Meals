@@ -1,6 +1,27 @@
 {
   "item": "minecraft:cooked_rabbit",
   "meals": {
+    "modest_meals:pizza": [
+      "modest_meals:item/meal/pizza/rabbit_0",
+      "modest_meals:item/meal/pizza/rabbit_1",
+      "modest_meals:item/meal/pizza/rabbit_2",
+      "modest_meals:item/meal/pizza/rabbit_3",
+      "modest_meals:item/meal/pizza/rabbit_4"
+    ],
+    "modest_meals:pizza_slice": [
+      "modest_meals:item/meal/pizza_slice/rabbit_0",
+      "modest_meals:item/meal/pizza_slice/rabbit_1",
+      "modest_meals:item/meal/pizza_slice/rabbit_2",
+      "modest_meals:item/meal/pizza_slice/rabbit_3",
+      "modest_meals:item/meal/pizza_slice/rabbit_4"
+    ],
+    "modest_meals:placed_pizza": [
+      "modest_meals:item/meal/placed_pizza/rabbit_0",
+      "modest_meals:item/meal/placed_pizza/rabbit_1",
+      "modest_meals:item/meal/placed_pizza/rabbit_2",
+      "modest_meals:item/meal/placed_pizza/rabbit_3",
+      "modest_meals:item/meal/placed_pizza/rabbit_4"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/rabbit_0",
       "modest_meals:item/meal/sandwich/rabbit_1",

@@ -50,7 +50,8 @@ public final class ReplacedDishRecipes {
         if (id.getNamespace().equals(Constants.MOD_ID) || !(json instanceof JsonObject recipe)) {
             return false;
         }
-        if (!REPLACEABLE_TYPES.contains(GsonHelper.getAsString(recipe, "type", ""))) {
+        ResourceLocation type = ResourceLocation.tryParse(GsonHelper.getAsString(recipe, "type", ""));
+        if (type == null || !REPLACEABLE_TYPES.contains(type.toString())) {
             return false;
         }
         JsonElement result = recipe.get("result");

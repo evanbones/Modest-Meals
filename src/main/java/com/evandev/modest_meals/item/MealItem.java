@@ -83,8 +83,14 @@ public class MealItem extends Item {
 
     @Override
     public Component getName(ItemStack stack) {
+        return nameOf(stack, Component.translatable(this.getDescriptionId(stack)));
+    }
+
+    /**
+     * A meal's name, prefixed by its effect or marked dubious.
+     */
+    public static Component nameOf(ItemStack stack, Component base) {
         MealContents contents = contentsOf(stack);
-        Component base = Component.translatable(this.getDescriptionId(stack));
         if (contents.dubious()) {
             return Component.translatable(NAME_DUBIOUS_KEY, base);
         }

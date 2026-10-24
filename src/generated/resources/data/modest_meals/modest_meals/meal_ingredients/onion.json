@@ -1,6 +1,27 @@
 {
   "item": "farmersdelight:onion",
   "meals": {
+    "modest_meals:pizza": [
+      "modest_meals:item/meal/pizza/onion_0",
+      "modest_meals:item/meal/pizza/onion_1",
+      "modest_meals:item/meal/pizza/onion_2",
+      "modest_meals:item/meal/pizza/onion_3",
+      "modest_meals:item/meal/pizza/onion_4"
+    ],
+    "modest_meals:pizza_slice": [
+      "modest_meals:item/meal/pizza_slice/onion_0",
+      "modest_meals:item/meal/pizza_slice/onion_1",
+      "modest_meals:item/meal/pizza_slice/onion_2",
+      "modest_meals:item/meal/pizza_slice/onion_3",
+      "modest_meals:item/meal/pizza_slice/onion_4"
+    ],
+    "modest_meals:placed_pizza": [
+      "modest_meals:item/meal/placed_pizza/onion_0",
+      "modest_meals:item/meal/placed_pizza/onion_1",
+      "modest_meals:item/meal/placed_pizza/onion_2",
+      "modest_meals:item/meal/placed_pizza/onion_3",
+      "modest_meals:item/meal/placed_pizza/onion_4"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/onion_0",
       "modest_meals:item/meal/sandwich/onion_1",

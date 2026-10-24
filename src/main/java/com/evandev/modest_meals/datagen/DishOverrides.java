@@ -43,6 +43,7 @@ public final class DishOverrides {
     private static final String CHOCOLATE = "#c:foods/chocolate_bar";
     private static final String VANILLA = NEA + "dried_vanilla_pods";
     private static final String SNOWBALL = "minecraft:snowball";
+    private static final String MINT = NEA + "mint_leaves|" + CD + "mint";
 
     private final Map<String, List<MealType.ItemOverride>> byType = new LinkedHashMap<>();
 
@@ -57,7 +58,8 @@ public final class DishOverrides {
         table.salads();
         table.sandwiches();
         table.wraps();
-        table.sushi();
+        table.roll();
+        table.pizza();
         table.curries();
         table.iceCream();
         table.drinks();
@@ -135,14 +137,20 @@ public final class DishOverrides {
         add("wrap", NMD + "horse_wrap", "#c:foods/cooked_horse", GREENS, TOMATO);
     }
 
-    private void sushi() {
-        add("sushi", FD + "salmon_roll", 2, FD + "salmon_slice", FD + "salmon_slice");
-        add("sushi", FD + "cod_roll", 2, FD + "cod_slice", FD + "cod_slice");
-        add("sushi", CD + "egg_roll", 4, "minecraft:dried_kelp", COOKED_EGG, COOKED_EGG, COOKED_EGG);
-        add("sushi", CD + "pufferfish_roll", 2, "minecraft:pufferfish", "minecraft:pufferfish");
-        add("sushi", CD + "tropical_roll", 2, "minecraft:dried_kelp", "minecraft:tropical_fish", "minecraft:tropical_fish");
-        add("sushi", CD + "calamari_roll", 2, "minecraft:dried_kelp", CD + "raw_calamari", CD + "raw_calamari");
-        add("sushi", NMD + "billhook_bass_roll", 2, NMD + "billhook_bass_slice", NMD + "billhook_bass_slice");
+    private void roll() {
+        add("roll", FD + "salmon_roll", 2, FD + "salmon_slice", FD + "salmon_slice");
+        add("roll", FD + "cod_roll", 2, FD + "cod_slice", FD + "cod_slice");
+        add("roll", FD + "kelp_roll", VEGETABLE, "minecraft:dried_kelp", "minecraft:dried_kelp");
+        add("roll", CD + "egg_roll", 4, COOKED_EGG, COOKED_EGG, COOKED_EGG);
+        add("roll", CD + "pufferfish_roll", 2, "minecraft:pufferfish", "minecraft:pufferfish");
+        add("roll", CD + "tropical_roll", 2, "minecraft:tropical_fish", "minecraft:tropical_fish");
+        add("roll", CD + "calamari_roll", 2, CD + "raw_calamari", CD + "raw_calamari");
+        add("roll", NMD + "billhook_bass_roll", 2, NMD + "billhook_bass_slice", NMD + "billhook_bass_slice");
+    }
+
+    private void pizza() {
+        addOnBase("pizza", NMD + "pesto_pizza", List.of(NML + "pesto_bottle"),
+                "#c:foods/cooked_venison", "#c:foods/cooked_venison");
     }
 
     private void curries() {
@@ -158,7 +166,7 @@ public final class DishOverrides {
         add("ice_cream", NEA + "chocolate_ice_cream", CHOCOLATE);
         add("ice_cream", NEA + "strawberry_ice_cream", STRAWBERRY);
         add("ice_cream", NEA + "banana_ice_cream", BANANA);
-        add("ice_cream", NEA + "mint_ice_cream", NEA + "mint_leaves");
+        add("ice_cream", NEA + "mint_ice_cream", MINT);
         add("ice_cream", NEA + "adzuki_ice_cream", NEA + "roasted_adzuki_beans");
     }
 
@@ -167,7 +175,7 @@ public final class DishOverrides {
         add("drink", NEA + "chocolate_milkshake", 3, CHOCOLATE, SNOWBALL);
         add("drink", NEA + "strawberry_milkshake", 3, STRAWBERRY, SNOWBALL);
         add("drink", NEA + "banana_milkshake", 3, BANANA, SNOWBALL);
-        add("drink", NEA + "mint_milkshake", 3, NEA + "mint_leaves", SNOWBALL);
+        add("drink", NEA + "mint_milkshake", 3, MINT, SNOWBALL);
         add("drink", NEA + "adzuki_milkshake", 3, NEA + "roasted_adzuki_beans", SNOWBALL);
         add("drink", NEA + "strawberry_banana_smoothie", STRAWBERRY, STRAWBERRY, BANANA);
     }
@@ -185,5 +193,10 @@ public final class DishOverrides {
     private void add(String type, String result, int count, String... ingredients) {
         byType.computeIfAbsent(type, key -> new ArrayList<>())
                 .add(new MealType.ItemOverride(ResourceLocation.parse(result), count, List.of(ingredients), true));
+    }
+
+    private void addOnBase(String type, String result, List<String> base, String... ingredients) {
+        byType.computeIfAbsent(type, key -> new ArrayList<>())
+                .add(new MealType.ItemOverride(ResourceLocation.parse(result), 1, List.of(ingredients), true, base));
     }
 }

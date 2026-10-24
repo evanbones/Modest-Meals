@@ -10,6 +10,9 @@
     }
   ],
   "container": "minecraft:glass_bottle",
+  "forbidden_ingredients": {
+    "tag": "modest_meals:not_for_jam"
+  },
   "id": "modest_meals:jam",
   "item": "modest_meals:jam",
   "item_overrides": [

@@ -4,11 +4,13 @@ import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.client.gui.FoodEditorScreen;
 import com.evandev.modest_meals.client.hud.TextureHelper;
 import com.evandev.modest_meals.client.model.DynamicMealBakedModel;
+import com.evandev.modest_meals.client.model.PizzaRenderer;
 import com.evandev.modest_meals.client.tooltip.FoodItemTooltips;
 import com.evandev.modest_meals.compat.raised.RaisedCompat;
 import com.evandev.modest_meals.compat.raised.RaisedLayerSync;
 import com.evandev.modest_meals.config.HudLayoutOption;
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.registry.ModBlocks;
 import com.evandev.modest_meals.registry.ModItems;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -220,11 +222,25 @@ public class ClientEventHandler {
             ModelResourceLocation modelLoc =
                     ModelResourceLocation.inventory(itemLoc);
             BakedModel original = event.getModels().get(modelLoc);
-            if (original != null) {
+            if (original == null) {
+                continue;
+            }
+            ModItems.Portion portion = ModItems.PORTIONS.get(mealSupplier);
+            if (portion == null) {
+                event.getModels().put(modelLoc, new DynamicMealBakedModel(original, itemLoc));
+            } else {
+                ResourceLocation wholeLoc = BuiltInRegistries.ITEM.getKey(portion.whole().get());
+                ResourceLocation portionBase = itemLoc.withPath(path -> "item/meal/" + path + "/" + path + "_base");
+                ResourceLocation portionDubious = itemLoc.withPath(path -> "item/meal/" + path + "/dubious");
                 event.getModels().put(modelLoc,
-                        new DynamicMealBakedModel(original, itemLoc));
+                        new DynamicMealBakedModel(original, wholeLoc, itemLoc, portionBase, portionDubious));
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlocks.PIZZA_ENTITY.get(), PizzaRenderer::new);
     }
 
     public static class GameEvents {

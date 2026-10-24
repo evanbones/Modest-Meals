@@ -26,6 +26,11 @@
       "target": "farmersdelight:cooked_salmon_slice"
     },
     {
+      "health": 2.0,
+      "stamina": 1.0,
+      "target": "farmersdelight:ham"
+    },
+    {
       "stamina": 1.5,
       "target": "farmersdelight:pie_crust"
     },
@@ -41,6 +46,11 @@
       "digest_ticks": 100,
       "health": 2.5,
       "target": "farmersdelight:salmon_slice"
+    },
+    {
+      "health": 6.0,
+      "stamina": 2.0,
+      "target": "farmersdelight:smoked_ham"
     },
     {
       "stamina": 2.0,
