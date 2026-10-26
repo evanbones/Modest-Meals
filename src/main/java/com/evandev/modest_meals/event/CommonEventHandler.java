@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.event;
 
+import com.evandev.modest_meals.api.StaminaApi;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
@@ -14,17 +15,22 @@ import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.stamina.StaminaHolder;
+import com.evandev.modest_meals.tag.ModBlockTags;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class CommonEventHandler {
+    private static final float CRANK_STAMINA_COST = 0.13F;
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -51,6 +57,28 @@ public class CommonEventHandler {
         if (!player.level().isClientSide()) {
             StaminaHelper.get(player).tickNaturalRegeneration();
             HealthRegenHelper.get(player).serverTick();
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        Player player = event.getEntity();
+        if (!StaminaApi.isEnabled() || player.isCreative() || player.isSpectator() || player instanceof FakePlayer) {
+            return;
+        }
+        if (!event.getLevel().getBlockState(event.getPos()).is(ModBlockTags.STAMINA_CRANKS)) {
+            return;
+        }
+        if (StaminaApi.isExhausted(player)) {
+            event.setCanceled(true);
+            event.setCancellationResult(InteractionResult.FAIL);
+            return;
+        }
+        if (!player.level().isClientSide()) {
+            PlayerStamina stamina = StaminaHelper.get(player);
+            stamina.spend(CRANK_STAMINA_COST);
+            stamina.getData().setCooldown(stamina.getCooldownInTicks());
+            stamina.syncNow();
         }
     }
 
