@@ -1,0 +1,11 @@
+{
+  "item": "#c:foods/orange",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/orange_0",
+      "modest_meals:item/meal/ice_cream/orange_1",
+      "modest_meals:item/meal/ice_cream/orange_2"
+    ]
+  },
+  "priority": 10
+}

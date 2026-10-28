@@ -7,7 +7,6 @@ import com.evandev.modest_meals.item.PizzaItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -30,20 +29,18 @@ public class ModItems {
     public static final Supplier<Item> SALAD = registerBowlMeal("salad", Station.CRAFTING_TABLE);
     public static final Supplier<Item> CURRY = registerBowlMeal("curry", Station.COOKING_POT);
     public static final Supplier<Item> PORRIDGE = registerBowlMeal("porridge", Station.COOKING_POT);
-    public static final Supplier<Item> DRINK = registerMeal("drink", Station.COOKING_POT,
-            () -> new MealItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16),
-                    UseAnim.DRINK));
     public static final Supplier<Item> JAM = registerMeal("jam", Station.COOKING_POT,
             () -> new MealItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
 
     public static final Supplier<Item> SANDWICH = registerMeal("sandwich", Station.CRAFTING_TABLE);
     public static final Supplier<Item> WRAP = registerMeal("wrap", Station.CRAFTING_TABLE);
-    public static final Supplier<Item> PIZZA = registerMeal("pizza", Station.CRAFTING_TABLE,
+
+    public static final Supplier<Item> PIZZA = registerHiddenMeal("pizza",
             () -> new PizzaItem(ModBlocks.PIZZA.get(), new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> PIZZA_SLICE = registerPortion("pizza_slice", PIZZA, 4);
     public static final Supplier<Item> ROLL = registerMeal("roll", Station.CRAFTING_TABLE);
     public static final Supplier<Item> ROLL_SLICE = registerPortion("roll_slice", ROLL, 3);
-    public static final Supplier<Item> ICE_CREAM = registerBowlMeal("ice_cream", Station.VAT);
+    public static final Supplier<Item> ICE_CREAM = registerMeal("ice_cream", Station.VAT);
     // public static final Supplier<Item> PIE = registerMeal("pie");
     // public static final Supplier<Item> CAKE = registerMeal("cake");
 
@@ -62,6 +59,13 @@ public class ModItems {
         if (station.isAvailable()) {
             CREATIVE_TAB_ITEMS.add(registered);
         }
+        return registered;
+    }
+
+    // Just temporarily using this for pizza until I add it again
+    private static Supplier<Item> registerHiddenMeal(String name, Supplier<Item> supplier) {
+        Supplier<Item> registered = ITEMS.register(name, supplier);
+        MEALS.add(registered);
         return registered;
     }
 

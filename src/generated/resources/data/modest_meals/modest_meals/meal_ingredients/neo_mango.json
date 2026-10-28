@@ -1,6 +1,11 @@
 {
   "item": "neapolitan:mango",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/mango_0",
+      "modest_meals:item/meal/ice_cream/mango_1",
+      "modest_meals:item/meal/ice_cream/mango_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/mango_0",
       "modest_meals:item/meal/sandwich/mango_1",

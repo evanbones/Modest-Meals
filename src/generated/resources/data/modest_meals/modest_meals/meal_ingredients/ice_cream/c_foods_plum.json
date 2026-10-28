@@ -1,0 +1,11 @@
+{
+  "item": "#c:foods/plum",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/grape_0",
+      "modest_meals:item/meal/ice_cream/grape_1",
+      "modest_meals:item/meal/ice_cream/grape_2"
+    ]
+  },
+  "priority": 10
+}

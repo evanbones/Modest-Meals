@@ -24,6 +24,8 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
     private static final ResourceLocation PLACED_PIZZA_ID =
             ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "placed_pizza");
     private static final int PIZZA_SLOTS = 5;
+    private static final ResourceLocation ICE_CREAM_ID =
+            ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "ice_cream");
 
     public MealIngredientProvider(PackOutput output) {
         super(output, "modest_meals/meal_ingredients", Entry.CODEC, "Modest Meals meal ingredients");
@@ -69,6 +71,10 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
                 PIZZA_SLICE_ID, pizzaToppings("pizza_slice", toppingSprite),
                 PLACED_PIZZA_ID, pizzaToppings("placed_pizza", toppingSprite)
         ));
+    }
+
+    private static MealLayerVisual iceCream(String flavour) {
+        return MealLayerVisual.triplet(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/ice_cream/" + flavour));
     }
 
     public static Builder builder(String item) {
@@ -290,6 +296,115 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("mnd_roast_ear"), topping("mynethersdelight:roast_ear", "creamed_corn"));
         entries.put(id("mnd_bullet_pepper"), topping("mynethersdelight:bullet_pepper", "bullet_pepper"));
         entries.put(id("mnd_pepper_powder"), pizza("mynethersdelight:pepper_powder", "bullet_pepper"));
+
+        iceCreamFlavours(entries);
+    }
+
+    private static void iceCreamFlavours(Map<ResourceLocation, Entry> entries) {
+        flavour(entries, "minecraft:apple", "apple");
+        flavour(entries, "minecraft:golden_apple", "mango");
+        flavour(entries, "minecraft:enchanted_golden_apple", "mango");
+        flavour(entries, "minecraft:sweet_berries", "berry");
+        flavour(entries, "minecraft:glow_berries", "glow_berry");
+        flavour(entries, "minecraft:melon_slice", "melon");
+        flavour(entries, "minecraft:chorus_fruit", "chorus");
+        flavour(entries, "minecraft:honey_bottle", "caramel");
+        flavour(entries, "minecraft:cocoa_beans", "chocolate");
+        flavour(entries, "minecraft:sugar", "vanilla");
+        flavour(entries, "minecraft:snowball", "snow");
+        flavour(entries, "modest_meals:jam", "berry");
+        flavour(entries, "farmersdelight:pumpkin_slice", "pumpkin");
+
+        flavour(entries, "culturaldelights:lemon", "lemon");
+        flavour(entries, "culturaldelights:mint", "mint");
+        flavour(entries, "culturaldelights:cinnamon", "cinnamon");
+        flavour(entries, "culturaldelights:avocado", "avocado");
+        flavour(entries, "culturaldelights:cut_avocado", "avocado");
+
+        flavour(entries, "neapolitan:strawberries", "berry");
+        flavour(entries, "neapolitan:white_strawberries", "berry");
+        flavour(entries, "neapolitan:banana", "banana");
+        flavour(entries, "neapolitan:dried_banana", "banana");
+        flavour(entries, "neapolitan:chocolate_bar", "chocolate");
+        flavour(entries, "neapolitan:vanilla_pods", "vanilla");
+        flavour(entries, "neapolitan:dried_vanilla_pods", "vanilla");
+        flavour(entries, "neapolitan:mint_leaves", "mint");
+        flavour(entries, "neapolitan:ice_cubes", "snow");
+        flavour(entries, "neapolitan:cinnamon_sticks", "cinnamon");
+        flavour(entries, "neapolitan:roasted_adzuki_beans", "adzuki");
+        flavour(entries, "neapolitan:mango", "mango");
+        flavour(entries, "neapolitan:dried_mango", "mango");
+
+        flavour(entries, "environmental:cherries", "cherry");
+        flavour(entries, "environmental:plum", "grape");
+
+        flavour(entries, "bountifulfares:orange", "orange");
+        flavour(entries, "bountifulfares:lemon", "lemon");
+        flavour(entries, "bountifulfares:plum", "grape");
+        flavour(entries, "bountifulfares:passion_fruit", "mango");
+        flavour(entries, "bountifulfares:elderberries", "blueberry");
+        flavour(entries, "bountifulfares:lapisberries", "lapisberry");
+        flavour(entries, "bountifulfares:walnut", "nut");
+        flavour(entries, "bountifulfares:coconut_half", "coconut");
+        flavour(entries, "bountifulfares:hoary_apple", "apple");
+
+        flavour(entries, "brewinandchewin:red_grapes", "grape");
+        flavour(entries, "brewinandchewin:white_grapes", "pear");
+        flavour(entries, "brewinandchewin:sweet_berry_jam", "berry");
+        flavour(entries, "brewinandchewin:glow_berry_marmalade", "glow_berry");
+        flavour(entries, "brewinandchewin:apple_jelly", "apple");
+
+        flavour(entries, "nomansland:maple_syrup_bottle", "caramel");
+        flavour(entries, "nomansland:walnuts", "nut");
+        flavour(entries, "nomansland:pine_nuts", "nut");
+        flavour(entries, "nomansland:pear", "pear");
+        flavour(entries, "nomansland:candied_pear", "pear");
+
+        flavourTag(entries, "c:foods/chocolate_bar", "chocolate", 10);
+        flavourTag(entries, "c:foods/chocolate", "chocolate", 10);
+        flavourTag(entries, "c:foods/strawberry", "berry", 10);
+        flavourTag(entries, "c:foods/banana", "banana", 10);
+        flavourTag(entries, "c:foods/cherry", "cherry", 10);
+        flavourTag(entries, "c:foods/plum", "grape", 10);
+        flavourTag(entries, "c:foods/orange", "orange", 10);
+        flavourTag(entries, "c:foods/elderberry", "blueberry", 10);
+        flavourTag(entries, "c:foods/lapisberry", "lapisberry", 10);
+        flavourTag(entries, "c:foods/passion_fruit", "mango", 10);
+        flavourTag(entries, "c:foods/pear", "pear", 10);
+        flavourTag(entries, "c:crops/lemon", "lemon", 10);
+        flavourTag(entries, "c:fruits/lemon", "lemon", 10);
+        flavourTag(entries, "c:crops/mango", "mango", 10);
+        flavourTag(entries, "c:crops/ginger", "ginger", 10);
+        flavourTag(entries, "c:foods/cookie", "cookie", 5);
+        flavourTag(entries, "c:foods/candy", "candy", 5);
+        flavourTag(entries, "c:foods/nuts", "nut", 5);
+        flavourTag(entries, "c:foods/berry", "berry", 5);
+        flavourTag(entries, "c:foods/fruit", "fruit", 1);
+        flavourTag(entries, Constants.MOD_ID + ":jam_fruits", "fruit", 1);
+        flavourTag(entries, Constants.MOD_ID + ":dessert_ingredients", "vanilla", 0);
+    }
+
+    private static void flavour(Map<ResourceLocation, Entry> entries, String item, String flavour) {
+        ResourceLocation itemId = ResourceLocation.parse(item);
+        ResourceLocation key = entries.entrySet().stream()
+                .filter(entry -> entry.getValue().item().equals(item))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElseGet(() -> id(itemId.getNamespace().equals("minecraft")
+                        ? itemId.getPath()
+                        : itemId.getNamespace() + "_" + itemId.getPath()));
+        Entry existing = entries.get(key);
+        Map<ResourceLocation, MealLayerVisual> meals = new LinkedHashMap<>();
+        if (existing != null) {
+            meals.putAll(existing.meals());
+        }
+        meals.put(ICE_CREAM_ID, iceCream(flavour));
+        entries.put(key, new Entry(item, meals));
+    }
+
+    private static void flavourTag(Map<ResourceLocation, Entry> entries, String tag, String flavour, int priority) {
+        String name = "ice_cream/" + tag.replace(':', '_').replace('/', '_');
+        entries.put(id(name), new Entry("#" + tag, Map.of(ICE_CREAM_ID, iceCream(flavour)), priority));
     }
 
     public static class Builder {
@@ -332,11 +447,17 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
 
     public record Entry(
             String item,
-            Map<ResourceLocation, MealLayerVisual> meals
+            Map<ResourceLocation, MealLayerVisual> meals,
+            int priority
     ) {
         public static final Codec<Entry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.STRING.fieldOf("item").forGetter(Entry::item),
-                Codec.unboundedMap(ResourceLocation.CODEC, MealLayerVisual.CODEC).fieldOf("meals").forGetter(Entry::meals)
+                Codec.unboundedMap(ResourceLocation.CODEC, MealLayerVisual.CODEC).fieldOf("meals").forGetter(Entry::meals),
+                Codec.INT.optionalFieldOf("priority", 0).forGetter(Entry::priority)
         ).apply(instance, Entry::new));
+
+        public Entry(String item, Map<ResourceLocation, MealLayerVisual> meals) {
+            this(item, meals, 0);
+        }
     }
 }

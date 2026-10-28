@@ -1,6 +1,11 @@
 {
   "item": "bountifulfares:orange",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/orange_0",
+      "modest_meals:item/meal/ice_cream/orange_1",
+      "modest_meals:item/meal/ice_cream/orange_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/orange_0",
       "modest_meals:item/meal/sandwich/orange_1",

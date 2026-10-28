@@ -1,6 +1,11 @@
 {
   "item": "bountifulfares:elderberries",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/blueberry_0",
+      "modest_meals:item/meal/ice_cream/blueberry_1",
+      "modest_meals:item/meal/ice_cream/blueberry_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/elderberry_0",
       "modest_meals:item/meal/sandwich/elderberry_1",

@@ -36,13 +36,13 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
     private static final TagKey<Item> RICES = itemTag("c", "crops/rice");
     private static final TagKey<Item> LEAFY_GREENS = itemTag("c", "foods/leafy_green");
     private static final TagKey<Item> SOUP_BASES = itemTag("c", "foods/soup_base");
-    private static final TagKey<Item> DRINK_BASES = itemTag("c", "drinks/drink_base");
     private static final TagKey<Item> PIE_CRUSTS = itemTag("c", "foods/pie_crust");
     private static final TagKey<Item> COOKED_RICES = itemTag("c", "foods/cooked_rice");
     private static final TagKey<Item> VEGETABLES = itemTag("c", "foods/vegetable");
     private static final TagKey<Item> FRUITS = itemTag("c", "foods/fruit");
     private static final TagKey<Item> BERRIES = itemTag("c", "foods/berry");
     private static final TagKey<Item> RAW_MEATS = itemTag("c", "foods/raw_meat");
+    private static final ResourceLocation WAFER = ResourceLocation.fromNamespaceAndPath("culturaldelights", "wafer");
 
     public MealTypeProvider(PackOutput output) {
         super(output, "modest_meals/meal_types", MealType.CODEC, "Modest Meals meal types");
@@ -78,10 +78,6 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         Ingredient savoryNoFruit = tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS, ModItemTags.STAPLES,
                 ModItemTags.JAM_FRUITS);
 
-        put(entries, "drink", ModItems.DRINK, MealType.Station.COOKING_POT,
-                List.of(new MealType.BaseEntry(withWaterBottle(DRINK_BASES), 1)),
-                Optional.empty(), 1, 4, Optional.of(itemId(Items.GLASS_BOTTLE)), 10,
-                MealType.Rules.allowing(Ingredient.of(ModItemTags.DRINK_INGREDIENTS)));
         put(entries, "curry", ModItems.CURRY, MealType.Station.COOKING_POT,
                 List.of(new MealType.BaseEntry(Ingredient.of(RICES), 1)),
                 Optional.empty(), 2, 5, Optional.of(itemId(Items.BOWL)), 25,
@@ -117,11 +113,25 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 25,
                 MealType.Rules.forbidding(Ingredient.of(ModItemTags.NOT_FOR_DISHES)));
 
-        put(entries, "ice_cream", ModItems.ICE_CREAM, MealType.Station.VAT,
+        ResourceLocation iceCreamId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "ice_cream");
+        entries.put(iceCreamId, new MealType(
+                iceCreamId,
+                itemId(ModItems.ICE_CREAM.get()),
+                MealType.Station.VAT,
                 List.of(new MealType.BaseEntry(Ingredient.of(MILKS), 1),
                         new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
-                Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 30,
-                MealType.Rules.allowing(Ingredient.of(ModItemTags.DESSERT_INGREDIENTS)));
+                Optional.empty(),
+                1,
+                3,
+                Optional.of(WAFER),
+                30,
+                true,
+                Optional.of(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/ice_cream/dubious")),
+                Optional.of(new MealType.BaseSprites(
+                        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/ice_cream/cone")
+                )),
+                List.of()
+        ));
         ResourceLocation sandwichId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sandwich");
         entries.put(sandwichId, new MealType(
                 sandwichId,
@@ -159,6 +169,8 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 )),
                 List.of()
         ).withRules(MealType.Rules.forbidding(Ingredient.of(ModItemTags.NOT_FOR_DISHES))));
+        // Pizza is disabled for now.
+        /*
         ResourceLocation pizzaId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "pizza");
         entries.put(pizzaId, new MealType(
                 pizzaId,
@@ -179,6 +191,7 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 List.of()
         ).withRules(MealType.Rules.forbidding(tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS,
                 ModItemTags.STAPLES, ModItemTags.JAM_FRUITS, MILKS))));
+        */
         /*
         shaped(entries, "pie", ModItems.PIE, 2, 6, 10,
                 List.of("###", "###", "SOS"),

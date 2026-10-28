@@ -110,9 +110,6 @@ public class PlayerStamina {
         this.data.setStaminaUsingTicks(this.getActiveBarInTicks(), this.getMaxLevel());
     }
 
-    /**
-     * Flip into the exhausted state.
-     */
     private void markExhausted() {
         if (this.data.isExhausted()) {
             return;
@@ -245,9 +242,6 @@ public class PlayerStamina {
         }
     }
 
-    /**
-     * Ask whether anything wants to stop this tick's drain.
-     */
     private boolean isDrainCancelled() {
         if (this.player.level().isClientSide()) {
             return false;

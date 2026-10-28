@@ -1,6 +1,11 @@
 {
   "item": "bountifulfares:hoary_apple",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/apple_0",
+      "modest_meals:item/meal/ice_cream/apple_1",
+      "modest_meals:item/meal/ice_cream/apple_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/apple_0",
       "modest_meals:item/meal/sandwich/apple_1",

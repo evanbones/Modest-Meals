@@ -63,13 +63,6 @@
       "target": "minecraft:pumpkin"
     },
     {
-      "effect": "modest_meals:resistance",
-      "health": 0.0,
-      "potency": 14,
-      "stamina": 0.0,
-      "target": "minecraft:turtle_scute"
-    },
-    {
       "effect": "modest_meals:strength",
       "potency": 14,
       "priority": 145,

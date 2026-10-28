@@ -1,0 +1,11 @@
+{
+  "item": "#c:foods/cookie",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/cookie_0",
+      "modest_meals:item/meal/ice_cream/cookie_1",
+      "modest_meals:item/meal/ice_cream/cookie_2"
+    ]
+  },
+  "priority": 5
+}

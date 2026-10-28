@@ -1,7 +1,4 @@
 {
-  "allowed_ingredients": {
-    "tag": "modest_meals:dessert_ingredients"
-  },
   "base": [
     {
       "ingredient": {
@@ -14,63 +11,15 @@
       }
     }
   ],
-  "container": "minecraft:bowl",
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/ice_cream/cone"
+  },
+  "container": "culturaldelights:wafer",
+  "dubious_sprite": "modest_meals:item/meal/ice_cream/dubious",
   "id": "modest_meals:ice_cream",
   "item": "modest_meals:ice_cream",
-  "item_overrides": [
-    {
-      "ingredients": [
-        "#c:foods/chocolate_bar",
-        "neapolitan:dried_vanilla_pods",
-        "#c:foods/strawberry"
-      ],
-      "replace_recipes": true,
-      "result": "neapolitan:neapolitan_ice_cream"
-    },
-    {
-      "ingredients": [
-        "neapolitan:dried_vanilla_pods"
-      ],
-      "replace_recipes": true,
-      "result": "neapolitan:vanilla_ice_cream"
-    },
-    {
-      "ingredients": [
-        "#c:foods/chocolate_bar"
-      ],
-      "replace_recipes": true,
-      "result": "neapolitan:chocolate_ice_cream"
-    },
-    {
-      "ingredients": [
-        "#c:foods/strawberry"
-      ],
-      "replace_recipes": true,
-      "result": "neapolitan:strawberry_ice_cream"
-    },
-    {
-      "ingredients": [
-        "#c:foods/banana"
-      ],
-      "replace_recipes": true,
-      "result": "neapolitan:banana_ice_cream"
-    },
-    {
-      "ingredients": [
-        "neapolitan:mint_leaves|culturaldelights:mint"
-      ],
-      "replace_recipes": true,
-      "result": "neapolitan:mint_ice_cream"
-    },
-    {
-      "ingredients": [
-        "neapolitan:roasted_adzuki_beans"
-      ],
-      "replace_recipes": true,
-      "result": "neapolitan:adzuki_ice_cream"
-    }
-  ],
   "max_ingredients": 3,
   "priority": 30,
+  "requires_supported_ingredients": true,
   "station": "vat"
 }

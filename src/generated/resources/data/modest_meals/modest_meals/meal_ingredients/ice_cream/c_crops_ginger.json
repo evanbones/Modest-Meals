@@ -1,0 +1,11 @@
+{
+  "item": "#c:crops/ginger",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/ginger_0",
+      "modest_meals:item/meal/ice_cream/ginger_1",
+      "modest_meals:item/meal/ice_cream/ginger_2"
+    ]
+  },
+  "priority": 10
+}

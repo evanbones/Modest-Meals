@@ -6,9 +6,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 
 final class ThermooAttributeAccess {
 
-    private ThermooAttributeAccess() {
-    }
-
     static Holder<Attribute> frostResistance() {
         return ThermooAttributes.FROST_RESISTANCE;
     }

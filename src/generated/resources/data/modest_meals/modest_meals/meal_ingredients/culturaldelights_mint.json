@@ -1,0 +1,10 @@
+{
+  "item": "culturaldelights:mint",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/mint_0",
+      "modest_meals:item/meal/ice_cream/mint_1",
+      "modest_meals:item/meal/ice_cream/mint_2"
+    ]
+  }
+}

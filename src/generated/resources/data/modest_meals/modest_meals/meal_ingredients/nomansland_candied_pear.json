@@ -1,0 +1,10 @@
+{
+  "item": "nomansland:candied_pear",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/pear_0",
+      "modest_meals:item/meal/ice_cream/pear_1",
+      "modest_meals:item/meal/ice_cream/pear_2"
+    ]
+  }
+}

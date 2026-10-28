@@ -16,9 +16,6 @@ import java.util.List;
  */
 public final class MealTraits {
 
-    private MealTraits() {
-    }
-
     public static List<FoodTrait> of(ItemStack stack, MealContents contents) {
         List<FoodTrait> traits = new ArrayList<>();
 
@@ -43,9 +40,6 @@ public final class MealTraits {
         return traits;
     }
 
-    /**
-     * How long a meal's health takes to digest.
-     */
     private static int digestTicksFor(ItemStack stack, MealContents contents) {
         if (contents.digestTicks() > 0) {
             return contents.digestTicks();

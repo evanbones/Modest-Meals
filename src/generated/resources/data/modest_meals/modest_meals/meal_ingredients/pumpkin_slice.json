@@ -1,6 +1,11 @@
 {
   "item": "farmersdelight:pumpkin_slice",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/pumpkin_0",
+      "modest_meals:item/meal/ice_cream/pumpkin_1",
+      "modest_meals:item/meal/ice_cream/pumpkin_2"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/pumpkin_0",
       "modest_meals:item/meal/pizza/pumpkin_1",

@@ -1,6 +1,5 @@
 {
   "values": [
-    "modest_meals:drink",
     {
       "id": "#c:drinks/tea",
       "required": false

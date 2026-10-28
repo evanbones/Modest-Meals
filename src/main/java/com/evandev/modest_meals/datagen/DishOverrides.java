@@ -59,10 +59,8 @@ public final class DishOverrides {
         table.sandwiches();
         table.wraps();
         table.roll();
-        table.pizza();
+        // table.pizza();
         table.curries();
-        table.iceCream();
-        table.drinks();
         table.jams();
         return table.byType;
     }
@@ -155,7 +153,7 @@ public final class DishOverrides {
 
     private void curries() {
         add("curry", CD + "cinnamon_mint_curry", CD + "cinnamon", CD + "mint", CD + "corn_cob", RAW_CHICKEN + "|" + TOFU);
-        add("curry", CD + "spicy_curry", "#mynethersdelight:hot_spice|minecraft:blaze_powder", TOMATO_SAUCE, CD + "beans", RAW_CHICKEN + "|" + TOFU);
+        add("curry", CD + "spicy_curry", "#mynethersdelight:hot_spice|#c:crops/ginger", TOMATO_SAUCE, CD + "beans", RAW_CHICKEN + "|" + TOFU);
         add("curry", NEA + "adzuki_curry", NEA + "adzuki_beans|" + NEA + "roasted_adzuki_beans",
                 BANANA + "|" + NEA + "dried_banana", CARROT, FD + "pumpkin_slice");
     }
@@ -168,16 +166,6 @@ public final class DishOverrides {
         add("ice_cream", NEA + "banana_ice_cream", BANANA);
         add("ice_cream", NEA + "mint_ice_cream", MINT);
         add("ice_cream", NEA + "adzuki_ice_cream", NEA + "roasted_adzuki_beans");
-    }
-
-    private void drinks() {
-        add("drink", NEA + "vanilla_milkshake", 3, VANILLA, SNOWBALL);
-        add("drink", NEA + "chocolate_milkshake", 3, CHOCOLATE, SNOWBALL);
-        add("drink", NEA + "strawberry_milkshake", 3, STRAWBERRY, SNOWBALL);
-        add("drink", NEA + "banana_milkshake", 3, BANANA, SNOWBALL);
-        add("drink", NEA + "mint_milkshake", 3, MINT, SNOWBALL);
-        add("drink", NEA + "adzuki_milkshake", 3, NEA + "roasted_adzuki_beans", SNOWBALL);
-        add("drink", NEA + "strawberry_banana_smoothie", STRAWBERRY, STRAWBERRY, BANANA);
     }
 
     private void jams() {

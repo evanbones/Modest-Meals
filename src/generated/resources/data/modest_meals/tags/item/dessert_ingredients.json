@@ -35,6 +35,10 @@
       "required": false
     },
     {
+      "id": "#c:crops/ginger",
+      "required": false
+    },
+    {
       "id": "neapolitan:vanilla_pods",
       "required": false
     },

@@ -1,0 +1,10 @@
+{
+  "item": "minecraft:snowball",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/snow_0",
+      "modest_meals:item/meal/ice_cream/snow_1",
+      "modest_meals:item/meal/ice_cream/snow_2"
+    ]
+  }
+}

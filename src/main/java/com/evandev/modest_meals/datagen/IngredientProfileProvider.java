@@ -176,7 +176,6 @@ public class IngredientProfileProvider implements DataProvider {
                 0.0F, 0));
 
         builder.add(id(Items.PUMPKIN), effect(null, 2.0F, "resistance", MEDIUM));
-        builder.add(id(Items.TURTLE_SCUTE), effect(0.0F, 0.0F, "resistance", MEDIUM));
         builder.addTag("c:crops/tomato", 145, effect(null, 2.0F, "strength", MEDIUM));
         builder.addTag("c:crops/onion", 145, effect(1.0F, 1.0F, "strength", WEAK));
         builder.addTag("c:crops/cabbage", 145, food(1.0F, 2.0F));
@@ -214,10 +213,8 @@ public class IngredientProfileProvider implements DataProvider {
     private void fruitsAndSweets(Builder builder) {
         builder.add(id(Items.SUGAR), effect(0.0F, 1.0F, "speed", MEDIUM));
         builder.add(id(Items.HONEY_BOTTLE), effect(2.0F, 2.0F, "speed", MEDIUM));
-        builder.add(id(Items.HONEYCOMB), effect(null, 2.0F, "speed", WEAK));
 
         builder.add(id(Items.COCOA_BEANS), effect(0.5F, 1.0F, "haste", MEDIUM));
-        builder.add(id(Items.AMETHYST_SHARD), effect(0.0F, 0.0F, "haste", MEDIUM));
 
         builder.add(id(Items.MELON_SLICE), effect(null, 1.0F, "fire_resistance", MEDIUM));
         builder.add(id(Items.GLOW_BERRIES), effect(1.0F, 1.0F, "glowing", MEDIUM));
@@ -228,11 +225,9 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(id(Items.ENCHANTED_GOLDEN_APPLE), temporary(8.0F, 8.0F, 0, 8.0F));
 
         builder.add(id(Items.CHORUS_FRUIT), effect(2.0F, 1.0F, "jump_boost", MEDIUM));
-        builder.add(id(Items.PHANTOM_MEMBRANE), effect(0.0F, 0.0F, "jump_boost", MEDIUM));
     }
 
     private void staples(Builder builder) {
-        builder.add(id(Items.SUGAR_CANE), timeBoost(0.0F, 0.5F, 50));
         builder.add(id(Items.MILK_BUCKET), timeBoost(1.0F, 1.0F, 50));
         builder.addTag("c:drinks/milk", 140, timeBoost(1.0F, 1.0F, 50));
         builder.addTag("c:foods/dough", 140, timeBoost(1.0F, 2.0F, 30));
@@ -244,24 +239,10 @@ public class IngredientProfileProvider implements DataProvider {
     private void misc(Builder builder) {
         builder.add(id(Items.BROWN_MUSHROOM), food(0.5F, 1.0F));
         builder.add(id(Items.RED_MUSHROOM), food(0.5F, 0.5F));
-        builder.add(id(Items.WARPED_FUNGUS), effect(0.5F, 0.5F, "invisibility", MEDIUM));
-        builder.add(id(Items.FERMENTED_SPIDER_EYE), effect(0.0F, 0.0F, "invisibility", MEDIUM));
-        builder.add(id(Items.CRIMSON_FUNGUS), effect(0.5F, 0.5F, "fire_resistance", WEAK));
 
-        builder.add(id(Items.MAGMA_CREAM), effect(0.0F, 0.5F, "fire_resistance", STRONG));
-        builder.add(id(Items.BLAZE_POWDER), effect(0.0F, 0.5F, "fire_resistance", MEDIUM));
-
-        builder.add(id(Items.BLAZE_ROD), effect(0.0F, 0.5F, "cold_resistance", STRONG));
-        builder.add(id(Items.NETHER_WART), effect(0.0F, 0.5F, "cold_resistance", MEDIUM));
-
-        builder.add(id(Items.BLUE_ICE), effect(0.0F, 0.5F, "heat_resistance", STRONG));
         builder.add(id(Items.SNOWBALL), effect(0.0F, 0.5F, "heat_resistance", MEDIUM));
-
         builder.add(id(Items.PUFFERFISH), effect(0.5F, 0.5F, "water_breathing", STRONG));
-        builder.add(id(Items.NAUTILUS_SHELL), effect(0.0F, 0.0F, "water_breathing", MEDIUM));
-        builder.add(id(Items.INK_SAC), food(0.0F, 0.5F));
 
-        builder.add(id(Items.RABBIT_FOOT), effect(0.0F, 0.0F, "luck", STRONG));
         builder.add(id(Items.SPIDER_EYE), food(0.5F, 0.0F));
         builder.add(id(Items.ROTTEN_FLESH), food(0.5F, 0.0F));
     }
@@ -280,8 +261,6 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add("farmersdelight:smoked_ham", food(6F, 2F));
         builder.add("farmersdelight:tomato", dish(null, 2F));
         builder.add("farmersdelight:tomato_sauce", dish(null, 2.5F));
-        builder.add(id(Items.GLISTERING_MELON_SLICE), build(4F, null, 120,
-                Optional.empty(), 0, 0.0F, 0));
     }
 
     private void culturalDelights(Builder builder) {
@@ -296,6 +275,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(cd("cut_pickle"), effect(0.5F, 1.0F, "speed", WEAK));
 
         builder.addTag("c:crops/eggplant", 145, food(1.0F, 1.5F));
+        builder.addTag("c:crops/ginger", 145, effect(0.5F, 1.0F, "cold_resistance", MEDIUM));
         builder.add(cd("eggplant"), food(1.0F, 1.5F));
         builder.add(cd("cut_eggplant"), food(0.5F, 0.5F));
         builder.add(cd("white_eggplant"), food(0.5F, 0.5F));

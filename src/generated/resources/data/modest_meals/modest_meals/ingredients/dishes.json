@@ -59,11 +59,6 @@
     {
       "stamina": 2.5,
       "target": "farmersdelight:tomato_sauce"
-    },
-    {
-      "digest_ticks": 120,
-      "health": 4.0,
-      "target": "minecraft:glistering_melon_slice"
     }
   ]
 }

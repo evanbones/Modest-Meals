@@ -1,0 +1,10 @@
+{
+  "item": "#modest_meals:dessert_ingredients",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/vanilla_0",
+      "modest_meals:item/meal/ice_cream/vanilla_1",
+      "modest_meals:item/meal/ice_cream/vanilla_2"
+    ]
+  }
+}

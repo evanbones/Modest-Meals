@@ -25,9 +25,6 @@ public final class CookingPotEmiSupport {
     public static final EmiRecipeCategory MEAL_COOKING = new EmiRecipeCategory(
             MealEmiCategories.id("meal_cooking"), COOKING_POT, simplifiedCookingIcon());
 
-    private CookingPotEmiSupport() {
-    }
-
     private static EmiRenderable simplifiedCookingIcon() {
         return (draw, x, y, delta) -> draw.blit(SIMPLIFIED, x, y, 0, 0, 16, 16, 48, 16);
     }

@@ -1,12 +1,6 @@
 {
   "entries": [
     {
-      "health": 0.0,
-      "stamina": 0.5,
-      "target": "minecraft:sugar_cane",
-      "time_bonus": 50
-    },
-    {
       "health": 1.0,
       "stamina": 1.0,
       "target": "minecraft:milk_bucket",

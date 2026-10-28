@@ -6,7 +6,6 @@
     "modest_meals:salad",
     "modest_meals:curry",
     "modest_meals:porridge",
-    "modest_meals:drink",
     "modest_meals:sandwich",
     "modest_meals:wrap",
     "modest_meals:pizza",
@@ -279,6 +278,10 @@
     },
     {
       "id": "culturaldelights:cola",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:ginger_beer",
       "required": false
     },
     {

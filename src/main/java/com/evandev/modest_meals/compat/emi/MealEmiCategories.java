@@ -11,9 +11,6 @@ public final class MealEmiCategories {
     public static final EmiRecipeCategory MEAL_CRAFTING = new EmiRecipeCategory(
             id("meal_crafting"), EmiStack.of(ModItems.SANDWICH.get()));
 
-    private MealEmiCategories() {
-    }
-
     static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, path);
     }

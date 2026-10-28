@@ -9,9 +9,6 @@ import java.util.Optional;
 public final class ThermooCompat {
     public static final String MOD_ID = "thermoo";
 
-    private ThermooCompat() {
-    }
-
     public static boolean isLoaded() {
         return ModList.get().isLoaded(MOD_ID);
     }

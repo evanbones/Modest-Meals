@@ -1,6 +1,11 @@
 {
   "item": "brewinandchewin:white_grapes",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/pear_0",
+      "modest_meals:item/meal/ice_cream/pear_1",
+      "modest_meals:item/meal/ice_cream/pear_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/white_grapes_0",
       "modest_meals:item/meal/sandwich/white_grapes_1",

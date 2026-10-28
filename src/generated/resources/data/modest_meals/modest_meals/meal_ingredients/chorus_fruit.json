@@ -1,6 +1,11 @@
 {
   "item": "minecraft:chorus_fruit",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/chorus_0",
+      "modest_meals:item/meal/ice_cream/chorus_1",
+      "modest_meals:item/meal/ice_cream/chorus_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/chorus_fruit_0",
       "modest_meals:item/meal/sandwich/chorus_fruit_1",

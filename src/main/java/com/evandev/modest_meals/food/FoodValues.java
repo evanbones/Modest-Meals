@@ -165,9 +165,6 @@ public class FoodValues {
         return false;
     }
 
-    /**
-     * Vanilla nutrition for this stack.
-     */
     public static int nutritionOf(ItemStack stack) {
         if (stack.isEmpty()) {
             return 0;

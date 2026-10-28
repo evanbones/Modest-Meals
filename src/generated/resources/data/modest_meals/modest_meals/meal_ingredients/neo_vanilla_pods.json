@@ -1,6 +1,11 @@
 {
   "item": "neapolitan:vanilla_pods",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/vanilla_0",
+      "modest_meals:item/meal/ice_cream/vanilla_1",
+      "modest_meals:item/meal/ice_cream/vanilla_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/vanilla_0",
       "modest_meals:item/meal/sandwich/vanilla_1",

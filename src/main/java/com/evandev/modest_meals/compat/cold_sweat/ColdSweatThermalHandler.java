@@ -24,9 +24,6 @@ public final class ColdSweatThermalHandler {
     private static final double DAMPENING_PER_LEVEL = 1.0;
     private static final int SYNC_INTERVAL = 20;
 
-    private ColdSweatThermalHandler() {
-    }
-
     @SubscribeEvent
     public static void registerTempModifiers(TempModifierRegisterEvent event) {
         event.register(MODIFIER_ID, MealResistanceTempModifier::new);

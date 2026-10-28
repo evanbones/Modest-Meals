@@ -12,9 +12,6 @@ import org.jetbrains.annotations.ApiStatus;
 public final class StaminaCodec {
     public static final String NBT_KEY = Constants.MOD_ID + "_stamina";
 
-    private StaminaCodec() {
-    }
-
     public static Codec<StaminaData> create() {
         return RecordCodecBuilder.create(instance -> instance.group(
                 Codec.INT.fieldOf("stamina").forGetter(StaminaData::getStamina),

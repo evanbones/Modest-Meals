@@ -54,9 +54,6 @@ public record MealContents(
         this(health, stamina, digestTicks, temporaryHealth, effect, amplifier, durationTicks, List.of(), List.of(), false);
     }
 
-    /**
-     * Whether this meal grants an effect at all.
-     */
     public boolean hasEffect() {
         return effect.isPresent() && durationTicks > 0;
     }

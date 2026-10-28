@@ -1,0 +1,11 @@
+{
+  "item": "#c:crops/mango",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/mango_0",
+      "modest_meals:item/meal/ice_cream/mango_1",
+      "modest_meals:item/meal/ice_cream/mango_2"
+    ]
+  },
+  "priority": 10
+}

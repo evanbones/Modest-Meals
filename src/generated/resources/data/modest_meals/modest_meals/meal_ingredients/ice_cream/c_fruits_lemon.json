@@ -1,0 +1,11 @@
+{
+  "item": "#c:fruits/lemon",
+  "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/lemon_0",
+      "modest_meals:item/meal/ice_cream/lemon_1",
+      "modest_meals:item/meal/ice_cream/lemon_2"
+    ]
+  },
+  "priority": 10
+}

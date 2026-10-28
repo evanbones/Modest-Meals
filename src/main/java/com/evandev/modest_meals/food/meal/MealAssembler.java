@@ -16,14 +16,8 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
 
-/**
- * Turns a set of ingredients into a finished meal.
- */
 public final class MealAssembler {
 
-    /**
-     * Work out what a meal made from these ingredients does.
-     */
     public static Optional<MealContents> compute(List<ItemStack> ingredients, List<ItemStack> base) {
         return compute(ingredients, base, false);
     }
@@ -116,9 +110,6 @@ public final class MealAssembler {
         return contents.isMeaningful() ? Optional.of(contents) : Optional.empty();
     }
 
-    /**
-     * Build the finished stack for a meal type from these ingredients.
-     */
     public static Optional<ItemStack> assemble(MealType type, List<ItemStack> ingredients, List<ItemStack> base) {
         Optional<Item> resultItem = type.resolveItem();
         if (resultItem.isEmpty()) {
@@ -198,9 +189,6 @@ public final class MealAssembler {
         return new EffectResult(Optional.of(axisId), amplifier.get(), seconds * 20);
     }
 
-    /**
-     * Duration from time-boosting ingredients.
-     */
     private static int bonusSeconds(List<Holder<Item>> used, List<IngredientProfile> profiles) {
         Set<ResourceLocation> counted = new HashSet<>();
         int bonus = 0;

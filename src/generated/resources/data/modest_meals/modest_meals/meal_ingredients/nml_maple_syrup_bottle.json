@@ -1,6 +1,11 @@
 {
   "item": "nomansland:maple_syrup_bottle",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/caramel_0",
+      "modest_meals:item/meal/ice_cream/caramel_1",
+      "modest_meals:item/meal/ice_cream/caramel_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/honey_0",
       "modest_meals:item/meal/sandwich/honey_1",

@@ -7,20 +7,11 @@ import net.minecraft.world.item.ItemStack;
 public interface FoodTrait {
     FoodTraitType<?> getType();
 
-    /**
-     * What this trait offers the eater. Defaults to {@link TraitBenefit#NONE}.
-     */
     default TraitBenefit benefit() {
         return TraitBenefit.NONE;
     }
 
-    /**
-     * Applies this trait's effect when the food is consumed by an entity.
-     */
     void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier);
 
-    /**
-     * Produces a formatted tooltip line.
-     */
     Component getTooltipComponent(double valueMultiplier, double durationMultiplier, float tickRate);
 }

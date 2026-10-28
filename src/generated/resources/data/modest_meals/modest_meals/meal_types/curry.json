@@ -33,7 +33,7 @@
     },
     {
       "ingredients": [
-        "#mynethersdelight:hot_spice|minecraft:blaze_powder",
+        "#mynethersdelight:hot_spice|#c:crops/ginger",
         "farmersdelight:tomato_sauce",
         "culturaldelights:beans",
         "#c:foods/raw_chicken|culturaldelights:tofu"

@@ -14,7 +14,6 @@ public class ModItemTags {
     public static final TagKey<Item> PIZZA_SAUCES = tag("pizza_sauces");
     public static final TagKey<Item> ROLL_FILLINGS = tag("roll_fillings");
     public static final TagKey<Item> NOT_FOR_DISHES = tag("not_for_dishes");
-    public static final TagKey<Item> DRINK_INGREDIENTS = tag("drink_ingredients");
     public static final TagKey<Item> STAPLES = tag("staples");
     public static final TagKey<Item> NOT_FOR_JAM = tag("not_for_jam");
     public static final TagKey<Item> SWEETS = tag("sweets");

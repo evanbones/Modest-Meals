@@ -57,20 +57,37 @@ public class MealIngredientManager extends SimpleJsonResourceReloadListener {
         return Optional.empty();
     }
 
+    public static Optional<MealIngredientVisual> resolveFor(ResourceLocation mealTypeId, Item item) {
+        MealIngredientVisual direct = INSTANCE.itemVisuals.get(BuiltInRegistries.ITEM.getKey(item));
+        if (direct != null && direct.supportsMeal(mealTypeId)) {
+            return Optional.of(direct);
+        }
+        Holder<Item> holder = item.builtInRegistryHolder();
+        for (TagEntry entry : INSTANCE.tagVisuals) {
+            if (holder.is(entry.tag()) && entry.visual().supportsMeal(mealTypeId)) {
+                return Optional.of(entry.visual());
+            }
+        }
+        return Optional.empty();
+    }
+
     public static boolean isSupported(ResourceLocation mealTypeId, ItemStack stack) {
-        return resolve(stack).map(v -> v.supportsMeal(mealTypeId)).orElse(false);
+        return stack != null && !stack.isEmpty() && isSupported(mealTypeId, stack.getItem());
     }
 
     public static boolean isSupported(ResourceLocation mealTypeId, Item item) {
-        return resolve(item).map(v -> v.supportsMeal(mealTypeId)).orElse(false);
+        return resolveFor(mealTypeId, item).isPresent();
     }
 
     public static Optional<ResourceLocation> getIngredientSprite(ResourceLocation mealTypeId, ItemStack stack, int slotIndex, int totalSlots) {
-        return resolve(stack).flatMap(v -> v.getSprite(mealTypeId, slotIndex, totalSlots));
+        if (stack == null || stack.isEmpty()) {
+            return Optional.empty();
+        }
+        return getIngredientSprite(mealTypeId, stack.getItem(), slotIndex, totalSlots);
     }
 
     public static Optional<ResourceLocation> getIngredientSprite(ResourceLocation mealTypeId, Item item, int slotIndex, int totalSlots) {
-        return resolve(item).flatMap(v -> v.getSprite(mealTypeId, slotIndex, totalSlots));
+        return resolveFor(mealTypeId, item).flatMap(v -> v.getSprite(mealTypeId, slotIndex, totalSlots));
     }
 
     public static Map<ResourceLocation, MealIngredientVisual> snapshotItemVisuals() {

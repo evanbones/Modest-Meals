@@ -15,24 +15,11 @@
       "target": "minecraft:honey_bottle"
     },
     {
-      "effect": "modest_meals:speed",
-      "potency": 7,
-      "stamina": 2.0,
-      "target": "minecraft:honeycomb"
-    },
-    {
       "effect": "modest_meals:haste",
       "health": 0.5,
       "potency": 14,
       "stamina": 1.0,
       "target": "minecraft:cocoa_beans"
-    },
-    {
-      "effect": "modest_meals:haste",
-      "health": 0.0,
-      "potency": 14,
-      "stamina": 0.0,
-      "target": "minecraft:amethyst_shard"
     },
     {
       "effect": "modest_meals:fire_resistance",
@@ -75,13 +62,6 @@
       "potency": 14,
       "stamina": 1.0,
       "target": "minecraft:chorus_fruit"
-    },
-    {
-      "effect": "modest_meals:jump_boost",
-      "health": 0.0,
-      "potency": 14,
-      "stamina": 0.0,
-      "target": "minecraft:phantom_membrane"
     }
   ]
 }

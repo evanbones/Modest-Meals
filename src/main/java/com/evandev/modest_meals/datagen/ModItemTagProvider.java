@@ -59,7 +59,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private static final TagKey<Item> COOKED_RICES = itemTag("c", "foods/cooked_rice");
     private static final TagKey<Item> LEAFY_GREENS = itemTag("c", "foods/leafy_green");
     private static final TagKey<Item> SOUP_BASES = itemTag("c", "foods/soup_base");
-    private static final TagKey<Item> DRINK_BASES = itemTag("c", "drinks/drink_base");
     private static final TagKey<Item> PIE_CRUSTS = itemTag("c", "foods/pie_crust");
     private static final TagKey<Item> WRAPS = itemTag("c", "foods/wrap");
 
@@ -126,20 +125,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
         staples.addTag(BREADS).addTag(DOUGHS).addTag(PASTAS).addTag(RICES).addTag(ModItemTags.WHEATS)
                 .addTag(TORTILLAS).addTag(PIE_CRUSTS);
 
-        var drinkIngredients = tag(ModItemTags.DRINK_INGREDIENTS);
-        drinkIngredients.addTag(FRUITS).addTag(ModItemTags.JAM_FRUITS).addTag(LEAFY_GREENS)
-                .addTag(ModItemTags.SWEETS).addTag(ModItemTags.NOT_FOR_DISHES);
-        drinkIngredients.add(Items.CARROT, Items.GOLDEN_CARROT, Items.BEETROOT, Items.PUMPKIN, Items.KELP,
-                Items.SPIDER_EYE, Items.SWEET_BERRIES, Items.GLOW_BERRIES, Items.MELON_SLICE);
-        addOptionalTags(drinkIngredients, "c", "foods/berry", "foods/nuts", "drinks/juice", "drinks/tea",
-                "drinks/milk", "drinks/eggnog", "milk", "crops/tomato", "crops/cucumber");
-        addOptional(drinkIngredients, CULTURAL_DELIGHTS, "cinnamon", "mint", "agave", "coconut");
-        addOptional(drinkIngredients, NEAPOLITAN, "mint_leaves", "cinnamon_sticks", "roasted_adzuki_beans");
-        addOptional(drinkIngredients, BOUNTIFUL_FARES, "citrus_essence", "coconut_half", "tea_leaves",
-                "dried_tea_leaves");
-        addOptional(drinkIngredients, MY_NETHERS_DELIGHT, "pepper_powder", "bullet_pepper");
-        addOptional(drinkIngredients, FARMERS_DELIGHT, "pumpkin_slice");
-
         var notForJam = tag(ModItemTags.NOT_FOR_JAM);
         notForJam.add(Items.ENCHANTED_GOLDEN_APPLE);
         addOptionalTags(notForJam, CULTURAL_DELIGHTS, "avocados");
@@ -150,7 +135,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         desserts.add(Items.SUGAR, Items.HONEY_BOTTLE, Items.COCOA_BEANS, Items.SNOWBALL, Items.SWEET_BERRIES,
                 Items.GLOW_BERRIES, Items.MELON_SLICE, ModItems.JAM.get());
         addOptionalTags(desserts, "c", "foods/berry", "foods/nuts", "foods/candy", "foods/cookie",
-                "foods/chocolate_bar", "foods/chocolate");
+                "foods/chocolate_bar", "foods/chocolate", "crops/ginger");
         addOptional(desserts, NEAPOLITAN, "vanilla_pods", "dried_vanilla_pods", "mint_leaves", "ice_cubes",
                 "cinnamon_sticks", "roasted_adzuki_beans");
         addOptional(desserts, CULTURAL_DELIGHTS, "mint", "cinnamon");
@@ -180,9 +165,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
         // tag(Tags.Items.FOODS_PIE).add(ModItems.PIE.get());
         // tag(CAKES).add(ModItems.CAKE.get());
         tag(ICE_CREAMS).add(ModItems.ICE_CREAM.get());
-
-        tag(Tags.Items.DRINKS).add(ModItems.DRINK.get());
-        tag(Tags.Items.DRINK_CONTAINING_BOTTLE).add(ModItems.DRINK.get());
     }
 
     private void notAnIngredient() {
@@ -272,6 +254,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "lemon_liqueur",
                 "butterbeer",
                 "cola",
+                "ginger_beer",
                 "tequila",
                 "gin",
                 "brandy",
@@ -653,15 +636,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptional(soupBases, FARMERS_DELIGHT, "bone_broth", "milk_bottle");
         addOptional(soupBases, NEAPOLITAN, "milk_bottle");
         addOptional(soupBases, BOUNTIFUL_FARES, "coconut_milk_bottle", "water_cup");
-
-        var drinkBases = tag(DRINK_BASES);
-        drinkBases.add(Items.WATER_BUCKET, Items.SUGAR, Items.HONEY_BOTTLE);
-        drinkBases.addOptionalTag(convention("drinks/water"));
-        drinkBases.addOptionalTag(convention("drinks/milk"));
-        drinkBases.addOptionalTag(convention("drinks/honey"));
-        addOptional(drinkBases, FARMERS_DELIGHT, "milk_bottle");
-        addOptional(drinkBases, NEAPOLITAN, "milk_bottle");
-        addOptional(drinkBases, BOUNTIFUL_FARES, "coconut_milk_bottle", "water_cup");
 
         var pieCrusts = tag(PIE_CRUSTS);
         addOptional(pieCrusts, FARMERS_DELIGHT, "pie_crust");

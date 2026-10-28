@@ -1,6 +1,11 @@
 {
   "item": "culturaldelights:cut_avocado",
   "meals": {
+    "modest_meals:ice_cream": [
+      "modest_meals:item/meal/ice_cream/avocado_0",
+      "modest_meals:item/meal/ice_cream/avocado_1",
+      "modest_meals:item/meal/ice_cream/avocado_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/avocado_0",
       "modest_meals:item/meal/sandwich/avocado_1",

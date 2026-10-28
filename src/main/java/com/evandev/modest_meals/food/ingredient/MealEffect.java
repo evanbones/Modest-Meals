@@ -46,9 +46,6 @@ public record MealEffect(
         return mobEffect.flatMap(BuiltInRegistries.MOB_EFFECT::getHolder);
     }
 
-    /**
-     * Whether this axis can currently be applied to anything.
-     */
     public boolean isUsable() {
         return resolveMobEffect().isPresent() && requiredModsPresent() && anyOfModsPresent();
     }

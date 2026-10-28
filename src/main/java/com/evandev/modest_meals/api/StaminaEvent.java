@@ -19,8 +19,6 @@ public abstract class StaminaEvent extends PlayerEvent {
 
     /**
      * Fired before sprinting takes stamina off a player, and cancellable to stop it.
-     *
-     * <p>Cancelling means the player sprints for free this tick. Useful for effects like "does not tire while doing X".
      */
     public static class Drain extends StaminaEvent implements ICancellableEvent {
         public Drain(Player player) {
