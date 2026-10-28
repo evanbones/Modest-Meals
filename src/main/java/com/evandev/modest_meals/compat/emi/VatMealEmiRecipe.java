@@ -1,6 +1,8 @@
 package com.evandev.modest_meals.compat.emi;
 
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
+import com.evandev.modest_meals.item.MealItem;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
@@ -42,6 +44,15 @@ public class VatMealEmiRecipe extends MealEmiRecipe {
         EmiIngredient any = typePool.isEmpty() ? EmiStack.EMPTY : EmiIngredient.of(typePool);
         return new VatMealEmiRecipe(syntheticId("meal_chilling", type), type, any,
                 flatSlots(type, any, VAT_SLOTS), cookTicks);
+    }
+
+    public static VatMealEmiRecipe dubiousOf(MealType type, int cookTicks, List<EmiStack> pool) {
+        List<EmiStack> unsupported = MealEmiIngredients.unsupportedPoolFor(type, pool);
+        EmiIngredient any = unsupported.isEmpty() ? EmiStack.EMPTY : EmiIngredient.of(unsupported);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID,
+                "/meal_chilling_dubious/" + type.id().getNamespace() + "/" + type.id().getPath());
+        EmiStack output = type.resolveItem().map(item -> EmiStack.of(MealItem.makeDubious(item))).orElse(EmiStack.EMPTY);
+        return new VatMealEmiRecipe(id, type, any, flatSlots(type, any, VAT_SLOTS), cookTicks, output);
     }
 
     public static Optional<VatMealEmiRecipe> overrideOf(MealType type, MealType.ItemOverride override, int index,
