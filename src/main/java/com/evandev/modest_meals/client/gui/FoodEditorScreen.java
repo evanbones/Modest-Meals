@@ -248,29 +248,60 @@ public class FoodEditorScreen extends Screen {
         return vyIngredientHeader() + 16;
     }
 
-    private Component ingredientSummary() {
-        if (selectedItem != null && !customIngredients.containsKey(itemId(selectedItem))
+    /**
+     * One stat per line, so the pane scrolls over them instead of cramming everything into a wrapped sentence.
+     */
+    private List<Component> ingredientSummary() {
+        if (selectedItem == null) return List.of();
+        if (!customIngredients.containsKey(itemId(selectedItem))
                 && !IngredientProfileManager.isIngredient(new ItemStack(selectedItem))) {
-            return Component.translatable("gui.modest_meals.ingredient_excluded");
+            return wrappedLines(Component.translatable("gui.modest_meals.ingredient_excluded"));
         }
         IngredientProfile profile = getResolvedIngredient(selectedItem);
         if (profile == null) {
-            return Component.translatable("gui.modest_meals.ingredient_none");
+            return wrappedLines(Component.translatable("gui.modest_meals.ingredient_none"));
         }
+
+        Component auto = Component.translatable("gui.modest_meals.value.auto");
         Component effect = profile.effect()
                 .flatMap(MealEffectManager::get)
                 .map(MealEffect::displayName)
                 .orElseGet(() -> Component.translatable("gui.modest_meals.effect.none"));
-        return Component.translatable("gui.modest_meals.ingredient_summary",
-                effect, profile.potency(), fmt(profile.healthOrZero()), fmt(profile.staminaOrZero()),
-                fmt(profile.temporaryHealth()),
-                profile.timeBonusSeconds());
+
+        List<Component> lines = new ArrayList<>();
+        lines.add(statLine("gui.modest_meals.field.meal_effect", effect));
+        if (profile.effect().isPresent()) {
+            lines.add(statLine("gui.modest_meals.field.potency", Component.literal(String.valueOf(profile.potency()))));
+        }
+        lines.add(statLine("gui.modest_meals.field.health",
+                profile.health().<Component>map(v -> Component.literal(fmt(v))).orElse(auto)));
+        lines.add(statLine("gui.modest_meals.field.stamina",
+                profile.stamina().<Component>map(v -> Component.literal(fmt(v))).orElse(auto)));
+        lines.add(statLine("gui.modest_meals.field.digest_ticks",
+                profile.digestTicks().<Component>map(v -> Component.literal(String.valueOf(v))).orElse(auto)));
+        lines.add(statLine("gui.modest_meals.field.temporary_health", Component.literal(fmt(profile.temporaryHealth()))));
+        lines.add(statLine("gui.modest_meals.field.time_bonus", Component.literal(String.valueOf(profile.timeBonusSeconds()))));
+        lines.add(statLine("gui.modest_meals.field.eat_seconds", profile.eatSeconds()
+                .<Component>map(v -> Component.literal(fmt(v)))
+                .orElseGet(() -> Component.translatable("gui.modest_meals.value.default"))));
+        return lines;
+    }
+
+    private static Component statLine(String labelKey, Component value) {
+        return Component.translatable("gui.modest_meals.stat_line", Component.translatable(labelKey),
+                value.copy().withStyle(ChatFormatting.WHITE));
+    }
+
+    private List<Component> wrappedLines(Component text) {
+        List<Component> lines = new ArrayList<>();
+        for (String line : GuiUtil.wrap(this.font, text.getString(), paneContentWidth(), PROFILE_SUMMARY_MAX_LINES)) {
+            lines.add(Component.literal(line));
+        }
+        return lines;
     }
 
     private int ingredientSummaryLines() {
-        if (selectedItem == null) return 1;
-        return Math.max(1, GuiUtil.wrap(this.font, ingredientSummary().getString(),
-                paneContentWidth(), PROFILE_SUMMARY_MAX_LINES).size());
+        return Math.max(1, ingredientSummary().size());
     }
 
     private IngredientProfile getResolvedIngredient(Item item) {
@@ -699,8 +730,11 @@ public class FoodEditorScreen extends Screen {
         GuiUtil.drawTrimmed(graphics, this.font,
                 Component.translatable("gui.modest_meals.ingredient_header").withStyle(ChatFormatting.YELLOW),
                 contentX, ingredientY, contentW - editW - 6, 0xFFFF55);
-        GuiUtil.drawWrapped(graphics, this.font, ingredientSummary(), contentX, paneY(vyIngredientSummary()),
-                contentW, PROFILE_SUMMARY_MAX_LINES, GuiUtil.LABEL);
+        List<Component> ingredientLines = ingredientSummary();
+        for (int i = 0; i < ingredientLines.size(); i++) {
+            GuiUtil.drawTrimmed(graphics, this.font, ingredientLines.get(i), contentX,
+                    paneY(vyIngredientSummary()) + i * GuiUtil.LINE_H, contentW, GuiUtil.LABEL);
+        }
 
         int traitsY = paneY(vyTraitsHeader());
         GuiUtil.drawSeparator(graphics, contentX, traitsY - 8, contentW);

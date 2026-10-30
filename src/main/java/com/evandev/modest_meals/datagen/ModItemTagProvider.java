@@ -184,6 +184,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 Items.CAKE,
                 Items.COOKIE);
 
+        notAnIngredient.addTag(ModItemTags.WHEATS);
+
         notAnIngredient.addOptionalTag(convention("foods/soup"));
         notAnIngredient.addOptionalTag(convention("foods/pie"));
         notAnIngredient.addOptionalTag(convention("foods/cookie"));

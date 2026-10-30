@@ -1,0 +1,26 @@
+{
+  "parent": "modest_meals:root",
+  "display": {
+    "icon": {
+      "id": "modest_meals:sandwich"
+    },
+    "title": {
+      "translate": "advancements.modest_meals.sandwich.title"
+    },
+    "description": {
+      "translate": "advancements.modest_meals.sandwich.description"
+    }
+  },
+  "criteria": {
+    "has_sandwich": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "modest_meals:sandwich"
+          }
+        ]
+      }
+    }
+  }
+}

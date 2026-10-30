@@ -1,0 +1,26 @@
+{
+  "parent": "modest_meals:root",
+  "display": {
+    "icon": {
+      "id": "modest_meals:roll"
+    },
+    "title": {
+      "translate": "advancements.modest_meals.roll.title"
+    },
+    "description": {
+      "translate": "advancements.modest_meals.roll.description"
+    }
+  },
+  "criteria": {
+    "has_roll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "modest_meals:roll"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -20,6 +20,7 @@
     "minecraft:pumpkin_pie",
     "minecraft:cake",
     "minecraft:cookie",
+    "#c:crops/wheat",
     {
       "id": "#c:foods/soup",
       "required": false

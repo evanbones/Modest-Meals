@@ -1,0 +1,26 @@
+{
+  "parent": "modest_meals:root",
+  "display": {
+    "icon": {
+      "id": "modest_meals:wrap"
+    },
+    "title": {
+      "translate": "advancements.modest_meals.wrap.title"
+    },
+    "description": {
+      "translate": "advancements.modest_meals.wrap.description"
+    }
+  },
+  "criteria": {
+    "has_wrap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "modest_meals:wrap"
+          }
+        ]
+      }
+    }
+  }
+}

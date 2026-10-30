@@ -1,0 +1,26 @@
+{
+  "parent": "modest_meals:root",
+  "display": {
+    "icon": {
+      "id": "modest_meals:salad"
+    },
+    "title": {
+      "translate": "advancements.modest_meals.salad.title"
+    },
+    "description": {
+      "translate": "advancements.modest_meals.salad.description"
+    }
+  },
+  "criteria": {
+    "has_salad": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "modest_meals:salad"
+          }
+        ]
+      }
+    }
+  }
+}

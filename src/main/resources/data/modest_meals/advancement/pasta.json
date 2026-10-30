@@ -1,0 +1,32 @@
+{
+  "parent": "modest_meals:root",
+  "display": {
+    "icon": {
+      "id": "modest_meals:pasta"
+    },
+    "title": {
+      "translate": "advancements.modest_meals.pasta.title"
+    },
+    "description": {
+      "translate": "advancements.modest_meals.pasta.description"
+    }
+  },
+  "criteria": {
+    "has_pasta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "modest_meals:pasta"
+          }
+        ]
+      }
+    }
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ]
+}

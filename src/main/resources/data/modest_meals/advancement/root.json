@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "modest_meals:sandwich"
+    },
+    "title": {
+      "translate": "advancements.modest_meals.root.title"
+    },
+    "description": {
+      "translate": "advancements.modest_meals.root.description"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/husbandry.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "has_meal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modest_meals:sandwich",
+              "modest_meals:wrap",
+              "modest_meals:salad",
+              "modest_meals:roll",
+              "modest_meals:soup",
+              "modest_meals:ramen",
+              "modest_meals:pasta",
+              "modest_meals:curry",
+              "modest_meals:porridge",
+              "modest_meals:jam",
+              "modest_meals:ice_cream"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

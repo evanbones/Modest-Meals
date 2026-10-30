@@ -1,0 +1,32 @@
+{
+  "parent": "modest_meals:root",
+  "display": {
+    "icon": {
+      "id": "modest_meals:curry"
+    },
+    "title": {
+      "translate": "advancements.modest_meals.curry.title"
+    },
+    "description": {
+      "translate": "advancements.modest_meals.curry.description"
+    }
+  },
+  "criteria": {
+    "has_curry": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "modest_meals:curry"
+          }
+        ]
+      }
+    }
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ]
+}
