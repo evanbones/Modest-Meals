@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.food.meal;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.compat.reliable_remover.ReliableRemoverCompat;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -98,7 +99,7 @@ public class MealTypeManager extends SimpleJsonResourceReloadListener {
                 continue;
             }
 
-            MealType type = parsed.get();
+            MealType type = ReliableRemoverCompat.prune(parsed.get());
             if (type.resolveItem().isEmpty()) {
                 Constants.LOG.warn("Meal type {} names an unknown result item {}, skipping it",
                         type.id(), type.item());

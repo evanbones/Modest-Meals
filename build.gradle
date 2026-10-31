@@ -189,6 +189,9 @@ dependencies {
     runtimeOnly "maven.modrinth:velvet-api:${velvet_version}"
     runtimeOnly "maven.modrinth:sparkweave:${sparkweave_version}"
 
+    // Reliable Remover
+    compileOnly "maven.modrinth:reliable-remover:${reliable_remover_version}"
+
     // Cold Sweat
     compileOnly "maven.modrinth:cold-sweat:${cold_sweat_version}"
     //runtimeOnly "maven.modrinth:cold-sweat:${cold_sweat_version}"
