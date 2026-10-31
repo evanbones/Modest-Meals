@@ -1,0 +1,26 @@
+{
+  "parent": "modest_meals:root",
+  "display": {
+    "icon": {
+      "id": "modest_meals:pizza"
+    },
+    "title": {
+      "translate": "advancements.modest_meals.pizza.title"
+    },
+    "description": {
+      "translate": "advancements.modest_meals.pizza.description"
+    }
+  },
+  "criteria": {
+    "has_pizza": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "modest_meals:pizza"
+          }
+        ]
+      }
+    }
+  }
+}

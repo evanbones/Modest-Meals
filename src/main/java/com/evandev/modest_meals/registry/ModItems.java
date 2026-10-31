@@ -35,7 +35,7 @@ public class ModItems {
     public static final Supplier<Item> SANDWICH = registerMeal("sandwich", Station.CRAFTING_TABLE);
     public static final Supplier<Item> WRAP = registerMeal("wrap", Station.CRAFTING_TABLE);
 
-    public static final Supplier<Item> PIZZA = registerHiddenMeal("pizza",
+    public static final Supplier<Item> PIZZA = registerMeal("pizza", Station.CRAFTING_TABLE,
             () -> new PizzaItem(ModBlocks.PIZZA.get(), new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> PIZZA_SLICE = registerPortion("pizza_slice", PIZZA, 4);
     public static final Supplier<Item> ROLL = registerMeal("roll", Station.CRAFTING_TABLE);
@@ -59,13 +59,6 @@ public class ModItems {
         if (station.isAvailable()) {
             CREATIVE_TAB_ITEMS.add(registered);
         }
-        return registered;
-    }
-
-    // Just temporarily using this for pizza until I add it again
-    private static Supplier<Item> registerHiddenMeal(String name, Supplier<Item> supplier) {
-        Supplier<Item> registered = ITEMS.register(name, supplier);
-        MEALS.add(registered);
         return registered;
     }
 

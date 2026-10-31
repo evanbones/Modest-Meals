@@ -59,7 +59,7 @@ public final class DishOverrides {
         table.sandwiches();
         table.wraps();
         table.roll();
-        // table.pizza();
+        table.pizza();
         table.curries();
         table.jams();
         return table.byType;

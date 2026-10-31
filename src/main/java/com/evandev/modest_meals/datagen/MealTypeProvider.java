@@ -169,8 +169,6 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 )),
                 List.of()
         ).withRules(MealType.Rules.forbidding(Ingredient.of(ModItemTags.NOT_FOR_DISHES))));
-        // Pizza is disabled for now.
-        /*
         ResourceLocation pizzaId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "pizza");
         entries.put(pizzaId, new MealType(
                 pizzaId,
@@ -191,7 +189,6 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 List.of()
         ).withRules(MealType.Rules.forbidding(tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS,
                 ModItemTags.STAPLES, ModItemTags.JAM_FRUITS, MILKS))));
-        */
         /*
         shaped(entries, "pie", ModItems.PIE, 2, 6, 10,
                 List.of("###", "###", "SOS"),
