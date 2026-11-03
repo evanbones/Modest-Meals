@@ -22,10 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Loads {@link MealIngredientVisual} definitions from {@code data/<namespace>/modest_meals/meal_ingredients/}
- * and resolves visuals for meal ingredients by item or tag.
- */
 public class MealIngredientManager extends SimpleJsonResourceReloadListener {
     public static final MealIngredientManager INSTANCE = new MealIngredientManager();
 

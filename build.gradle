@@ -200,6 +200,11 @@ dependencies {
     compileOnly "maven.modrinth:reliable-gliders:${reliable_gliders_version}"
     runtimeOnly "maven.modrinth:reliable-gliders:${reliable_gliders_version}"
 
+    // Combat Roll
+    compileOnly "maven.modrinth:combat-roll:${combat_roll_version}"
+    //runtimeOnly "maven.modrinth:combat-roll:${combat_roll_version}"
+    //runtimeOnly "maven.modrinth:playeranimator:${player_animator_version}"
+
     // Cold Sweat
     compileOnly "maven.modrinth:cold-sweat:${cold_sweat_version}"
     //runtimeOnly "maven.modrinth:cold-sweat:${cold_sweat_version}"
@@ -269,7 +274,7 @@ publishMods {
 
         requires("yacl")
         optional("farmers-delight", "cultural-delights", "emi", "raised", "thermoo", "cold-sweat",
-                "reliable-remover", "shield-expansion", "reliable-gliders")
+                "reliable-remover", "shield-expansion", "reliable-gliders", "combat-roll")
     }
 
     modrinth {
@@ -279,7 +284,7 @@ publishMods {
 
         requires("yacl")
         optional("farmers-delight", "cultural-delights", "emi", "raised", "thermoo", "cold-sweat",
-                "reliable-remover", "shield-expansion", "reliable-gliders")
+                "reliable-remover", "shield-expansion", "reliable-gliders", "combat-roll")
         incompatible("melancholic_hunger")
     }
 }

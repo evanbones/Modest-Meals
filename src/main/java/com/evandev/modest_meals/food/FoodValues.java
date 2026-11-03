@@ -20,15 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Source of truth for what a food restores. Everything that needs to know how many hearts or how
- * much stamina an item gives reads it from here.
- */
 public class FoodValues {
 
-    /**
-     * The traits a food actually applies.
-     */
     public static List<FoodTrait> effectiveTraits(ItemStack stack) {
         if (stack == null || stack.isEmpty()) {
             return List.of();
@@ -36,9 +29,6 @@ public class FoodValues {
         return effectiveTraits(stack, nutritionOf(stack));
     }
 
-    /**
-     * The traits a food applies when its nutrition is known independently of the stack, (e.g. an edible block being bitten).
-     */
     public static List<FoodTrait> effectiveTraits(ItemStack stack, int nutrition) {
         if (stack == null || stack.isEmpty()) {
             return FoodProfileManager.resolveDefault()
@@ -54,9 +44,6 @@ public class FoodValues {
                 FoodTraitManager.suppressionsFor(stack.getItem()));
     }
 
-    /**
-     * The authored traits plus the health and stamina a food's profile gives it.
-     */
     public static List<FoodTrait> withDerived(ItemStack stack, List<FoodTrait> authored,
                                               @Nullable FoodProfile profile, Set<String> suppressed) {
         return withDerived(stack, nutritionOf(stack), authored, profile, suppressed);
@@ -99,9 +86,6 @@ public class FoodValues {
         return effective;
     }
 
-    /**
-     * Total health, in half-hearts, that eating this stack restores.
-     */
     public static float healthPoints(ItemStack stack) {
         float total = 0.0F;
         for (FoodTrait trait : effectiveTraits(stack)) {
@@ -112,9 +96,6 @@ public class FoodValues {
         return total * ModConfig.get().traitGlobalValueMultiplier;
     }
 
-    /**
-     * How long, in ticks, the health from this stack takes to fully digest. Zero means it heals instantly.
-     */
     public static int healthDigestTicks(ItemStack stack) {
         int longest = 0;
         for (FoodTrait trait : effectiveTraits(stack)) {
@@ -125,9 +106,6 @@ public class FoodValues {
         return (int) (longest * ModConfig.get().traitGlobalDurationMultiplier);
     }
 
-    /**
-     * Total stamina, in half-bolts, that eating this stack restores.
-     */
     public static float staminaLevels(ItemStack stack) {
         float total = 0.0F;
         for (FoodTrait trait : effectiveTraits(stack)) {
@@ -142,16 +120,10 @@ public class FoodValues {
         return hasBenefit(stack, TraitBenefit.HEALTH);
     }
 
-    /**
-     * Whether this stack restores or regenerates stamina, and so should be gated on the stamina bar.
-     */
     public static boolean touchesStamina(ItemStack stack) {
         return ModConfig.get().staminaSprint && hasBenefit(stack, TraitBenefit.STAMINA);
     }
 
-    /**
-     * Whether this stack provides non-bar-filling utility traits (e.g. effects, cures, air, fire extinguishment...).
-     */
     public static boolean hasUtility(ItemStack stack) {
         return hasBenefit(stack, TraitBenefit.UTILITY);
     }
@@ -178,9 +150,6 @@ public class FoodValues {
                 .orElse(0);
     }
 
-    /**
-     * If something is a food (did you read the method name?).
-     */
     public static boolean isFood(ItemStack stack) {
         if (stack.isEmpty()) {
             return false;
@@ -192,9 +161,6 @@ public class FoodValues {
         return contents != null && contents.isMeaningful();
     }
 
-    /**
-     * The food the player is holding (main hand first, then offhand).
-     */
     public static ItemStack resolveHeldFood(Player player) {
         ItemStack mainHand = player.getMainHandItem();
         if (isFood(mainHand)) {

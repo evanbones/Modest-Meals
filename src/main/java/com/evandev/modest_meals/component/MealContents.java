@@ -10,9 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Everything a cooked meal does, worked out from its ingredients at craft time and carried on the stack.
- */
 public record MealContents(
         float health,
         float stamina,
@@ -58,9 +55,6 @@ public record MealContents(
         return effect.isPresent() && durationTicks > 0;
     }
 
-    /**
-     * One of {@code servings} equal shares of this meal. Each share keeps the full effect.
-     */
     public MealContents split(int servings) {
         if (servings <= 1) {
             return this;
@@ -69,9 +63,6 @@ public record MealContents(
                 temporaryHealth / servings, effect, amplifier, durationTicks, ingredients, base, dubious);
     }
 
-    /**
-     * Whether this meal restores or grants anything. A meal that does nothing should not have been cooked.
-     */
     public boolean isMeaningful() {
         return dubious
                 || health > 0.0F || stamina > 0.0F

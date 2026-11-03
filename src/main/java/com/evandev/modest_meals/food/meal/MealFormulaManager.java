@@ -14,9 +14,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Loads the {@link MealFormula} from {@code data/<namespace>/modest_meals/formula/}.
- */
 public class MealFormulaManager extends SimpleJsonResourceReloadListener {
     public static final MealFormulaManager INSTANCE = new MealFormulaManager();
 

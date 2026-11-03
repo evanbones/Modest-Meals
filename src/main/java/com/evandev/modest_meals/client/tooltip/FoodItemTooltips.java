@@ -86,9 +86,6 @@ public class FoodItemTooltips {
         addIngredientHint(lines, stack);
     }
 
-    /**
-     * On a raw ingredient, show the effect it would contribute to a meal.
-     */
     private static void addIngredientHint(List<Component> lines, ItemStack stack) {
         if (!isVisible(ModConfig.get().ingredientTooltip)
                 || stack.has(ModDataComponents.MEAL_CONTENTS.get())
@@ -194,9 +191,6 @@ public class FoodItemTooltips {
         return !(trait instanceof HealthAdditionTrait || trait instanceof StaminaAdditionTrait);
     }
 
-    /**
-     * Every effect eating this stack applies, including the ones other mods grant outside its food component.
-     */
     private static List<FoodProperties.PossibleEffect> foodEffects(ItemStack stack) {
         FoodProperties food = stack.get(DataComponents.FOOD);
         if (food == null) {

@@ -19,7 +19,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
-import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
@@ -27,9 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Lets one {@link MealType} be cooked in Farmer's Delight's cooking pot.
- */
 public class MealCookingRecipe extends CookingPotRecipe {
 
     private final ResourceLocation mealTypeId;
@@ -41,9 +37,6 @@ public class MealCookingRecipe extends CookingPotRecipe {
         this.cookTime = cookTime;
     }
 
-    /**
-     * The stacks in the pot's input slots, in slot order.
-     */
     private static List<ItemStack> inputsOf(RecipeWrapper inventory) {
         List<ItemStack> inputs = new ArrayList<>();
         for (int slot = 0; slot < INPUT_SLOTS; slot++) {
@@ -55,12 +48,6 @@ public class MealCookingRecipe extends CookingPotRecipe {
         return inputs;
     }
 
-    private boolean containerMatches(RecipeWrapper inventory, MealType type) {
-        return type.resolveContainer()
-                .map(container -> inventory.getItem(CookingPotBlockEntity.CONTAINER_SLOT).is(container))
-                .orElse(true);
-    }
-
     public ResourceLocation mealTypeId() {
         return mealTypeId;
     }
@@ -70,15 +57,7 @@ public class MealCookingRecipe extends CookingPotRecipe {
                 .filter(type -> type.station() == MealType.Station.COOKING_POT);
     }
 
-    /**
-     * The flavor ingredients in the pot: everything in the input slots minus the stacks the meal type takes
-     * as its base.
-     */
     private Optional<MealType.Split> ingredientsFor(RecipeWrapper inventory, MealType type) {
-        if (!containerMatches(inventory, type)) {
-            return Optional.empty();
-        }
-
         Optional<MealType.Split> split = type.splitBase(inputsOf(inventory));
         if (split.isEmpty()) {
             return Optional.empty();
@@ -122,9 +101,6 @@ public class MealCookingRecipe extends CookingPotRecipe {
                 .orElse(ItemStack.EMPTY);
     }
 
-    /**
-     * The bowl or bottle the finished dish is served in, from the meal type.
-     */
     @Override
     public ItemStack getOutputContainer() {
         return mealType()

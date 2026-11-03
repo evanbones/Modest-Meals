@@ -62,9 +62,6 @@ public class ModItems {
         return registered;
     }
 
-    /**
-     * A share of a whole meal, made by cutting it up. It carries {@code 1 / count} of the whole meal.
-     */
     private static Supplier<Item> registerPortion(String name, Supplier<Item> whole, int count) {
         Supplier<Item> registered = ITEMS.register(name, () -> new MealItem(new Item.Properties().stacksTo(16)));
         MEALS.add(registered);

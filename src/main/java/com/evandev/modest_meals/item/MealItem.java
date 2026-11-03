@@ -18,9 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * A cooked dish. What a particular meal does lives in its {@link MealContents} component rather than in the item.
- */
 public class MealItem extends Item {
 
     public static final String NAME_PREFIXED_KEY = "modest_meals.meal.name.prefixed";
@@ -86,9 +83,6 @@ public class MealItem extends Item {
         return nameOf(stack, Component.translatable(this.getDescriptionId(stack)));
     }
 
-    /**
-     * A meal's name, prefixed by its effect or marked dubious.
-     */
     public static Component nameOf(ItemStack stack, Component base) {
         MealContents contents = contentsOf(stack);
         if (contents.dubious()) {

@@ -16,9 +16,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Loads {@link MealEffect}s from {@code data/<namespace>/modest_meals/meal_effects/}.
- */
 public class MealEffectManager extends SimpleJsonResourceReloadListener {
     public static final MealEffectManager INSTANCE = new MealEffectManager();
 

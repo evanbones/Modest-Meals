@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Cuts a whole meal into portions on Farmer's Delight's cutting board, each portion keeping its share of the meal.
- */
 public class MealCuttingRecipe extends CuttingBoardRecipe {
 
     private final Item whole;

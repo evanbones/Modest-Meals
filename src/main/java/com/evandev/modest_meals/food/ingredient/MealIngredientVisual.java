@@ -16,9 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Visual configuration for an ingredient cooked into dynamic meals.
- */
 public record MealIngredientVisual(
         Map<ResourceLocation, MealLayerVisual> meals
 ) {

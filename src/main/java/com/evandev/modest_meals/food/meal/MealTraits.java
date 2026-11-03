@@ -11,9 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Bridges a cooked meal's {@link MealContents} into its traits.
- */
 public final class MealTraits {
 
     public static List<FoodTrait> of(ItemStack stack, MealContents contents) {

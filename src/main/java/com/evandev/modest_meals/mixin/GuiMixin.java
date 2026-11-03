@@ -62,9 +62,6 @@ public abstract class GuiMixin {
         context.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    /**
-     * Draws amount of hearts that can be restored by eating currently held food item or that are regenerating
-     */
     @WrapOperation(
             method = "renderHearts",
             at = @At(

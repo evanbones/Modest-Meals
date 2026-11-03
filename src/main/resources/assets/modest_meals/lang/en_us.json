@@ -97,6 +97,12 @@
   "config.modest_meals.option.stamina_parry_restore": "Parry Stamina Restore",
   "config.modest_meals.option.stamina_parry_restore.tooltip": "With Shield Expansion installed, how much stamina a successful parry gives back, in half-bolts. 0 turns it off.",
 
+  "config.modest_meals.option.stamina_combat_roll_cost": "Combat Roll Stamina Cost",
+  "config.modest_meals.option.stamina_combat_roll_cost.tooltip": "With Combat Roll installed, how much stamina each roll takes, in half-bolts. An exhausted player can't roll. 0 turns it off.",
+
+  "config.modest_meals.option.stamina_hand_crank_cost": "Hand Crank Stamina Cost",
+  "config.modest_meals.option.stamina_hand_crank_cost.tooltip": "How much stamina each turn of a hand crank (like Create's) takes, in half-bolts. An exhausted player can't turn one. 0 turns it off.",
+
   "config.modest_meals.option.hud_layout": "HUD Layout",
   "config.modest_meals.option.hud_layout.tooltip": "Default: Standard layout with armor above hearts on the left, stamina in place of hunger on the right, and air bubbles above stamina.\nClassic: Beta-style layout with air bubbles above hearts on the left, armor on the right, and stamina above armor.",
 

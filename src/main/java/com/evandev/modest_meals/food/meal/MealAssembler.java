@@ -145,9 +145,6 @@ public final class MealAssembler {
         });
     }
 
-    /**
-     * Decide the meal's effect axis, tier and duration.
-     */
     private static EffectResult computeEffect(MealFormula formula, List<Holder<Item>> used,
                                               List<IngredientProfile> profiles,
                                               List<Holder<Item>> baseUsed, List<IngredientProfile> baseProfiles) {

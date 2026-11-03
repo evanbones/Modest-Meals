@@ -158,9 +158,6 @@ public class FormBuilder {
         return this;
     }
 
-    /**
-     * A section heading: its own colour and a rule beneath it, to break the form into groups.
-     */
     public FormBuilder note(String labelKey) {
         labels.add(new Label(Component.translatable(labelKey), x, cursorY + 2, width, true));
         advance();
@@ -191,10 +188,6 @@ public class FormBuilder {
         dropdowns.forEach(DropdownWidget::close);
     }
 
-    /**
-     * Positions the rows for the current scroll. A row is drawn whenever it overlaps the view at all, so that it
-     * clips against the viewport rather than blinking out, but only takes input once it is fully inside.
-     */
     public void applyScroll(double scroll, int viewTop, int viewBottom) {
         for (Placed p : placed) {
             int newY = p.baseY() - (int) scroll;
@@ -204,9 +197,6 @@ public class FormBuilder {
         }
     }
 
-    /**
-     * Draws the rows. Call this inside the caller's scissor so partly scrolled rows clip at the viewport edge.
-     */
     public void renderWidgets(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         for (Placed p : placed) {
             p.widget().render(graphics, mouseX, mouseY, partialTick);

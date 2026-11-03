@@ -4,6 +4,7 @@ import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.client.ClientConfigSetup;
 import com.evandev.modest_meals.client.ClientEventHandler;
 import com.evandev.modest_meals.compat.cold_sweat.ColdSweatCompat;
+import com.evandev.modest_meals.compat.combat_roll.CombatRollCompat;
 import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.compat.shield_expansion.ShieldExpansionCompat;
@@ -45,6 +46,7 @@ public class ModestMeals {
         NeoForge.EVENT_BUS.register(CommonEventHandler.class);
         ColdSweatCompat.register();
         ShieldExpansionCompat.init();
+        CombatRollCompat.init();
 
         if (FMLEnvironment.dist.isClient()) {
             ClientConfigSetup.register(modContainer);

@@ -9,9 +9,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
-/**
- * Decides whether a player is allowed to eat a given food. A food may only be eaten when a bar it actually fills has room.
- */
 public class FoodConsumption {
 
     public static boolean canConsume(Player player, ItemStack stack) {

@@ -248,9 +248,6 @@ public class FoodEditorScreen extends Screen {
         return vyIngredientHeader() + 16;
     }
 
-    /**
-     * One stat per line, so the pane scrolls over them instead of cramming everything into a wrapped sentence.
-     */
     private List<Component> ingredientSummary() {
         if (selectedItem == null) return List.of();
         if (!customIngredients.containsKey(itemId(selectedItem))

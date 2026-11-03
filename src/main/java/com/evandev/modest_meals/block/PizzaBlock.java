@@ -49,9 +49,6 @@ public class PizzaBlock extends BaseEntityBlock {
     public static final int SLICES = 4;
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, SLICES - 1);
 
-    /**
-     * The quarter each slice occupies, in the order they are taken: north-east, south-east, south-west, north-west.
-     */
     public static final int[][] QUADRANTS = {
             {8, 0, 16, 8},
             {8, 8, 16, 16},

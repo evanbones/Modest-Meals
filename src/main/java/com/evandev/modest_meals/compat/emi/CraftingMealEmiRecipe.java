@@ -76,9 +76,6 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
         return shapedSlots(type, free, List.of());
     }
 
-    /**
-     * @param required base stacks an override needs; a key slot that can hold one shows just that instead of its whole key
-     */
     private static List<EmiIngredient> shapedSlots(MealType type, Function<Character, EmiIngredient> free,
                                                    List<Ingredient> required) {
         MealType.Shape shape = type.shape().orElseThrow();

@@ -28,10 +28,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Loads {@link IngredientProfile}s from {@code data/<namespace>/modest_meals/ingredients/} and resolves the
- * best one for a given item.
- */
 public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
     public static final IngredientProfileManager INSTANCE = new IngredientProfileManager();
 
@@ -90,10 +86,6 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
         return authored.map(profile -> profile.withDerived(d.health(), d.stamina(), d.digestTicks()));
     }
 
-    /**
-     * A finished meal used as an ingredient is worth what it restores, and carries its effect at the potency its
-     * own ingredients gave it.
-     */
     private static Optional<IngredientProfile> fromMeal(ItemStack stack) {
         MealContents contents = stack.get(ModDataComponents.MEAL_CONTENTS.get());
         if (contents == null || contents.dubious() || !contents.isMeaningful()) {

@@ -6,9 +6,6 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-/**
- * Lets a mod's own fixed recipe win over a meal type that would otherwise take the same inputs.
- */
 public final class AuthoredRecipes {
 
     public static <I extends RecipeInput, T extends Recipe<I>> boolean anyMatch(Level level, RecipeType<T> type, I input,

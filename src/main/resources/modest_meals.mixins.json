@@ -15,6 +15,7 @@
   ],
   "client": [
     "GuiMixin",
+    "compat.RollManagerMixin",
     "LocalPlayerMixin",
     "MinecraftMixin",
     "TooltipComponentMixin"

@@ -27,9 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Lets one {@link MealType} be made in Cultural Delights' vat.
- */
 public class VatMealRecipe extends VatRecipe {
 
     private static final int INPUT_SLOTS = 6;

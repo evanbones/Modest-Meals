@@ -3,11 +3,6 @@ package com.evandev.modest_meals.food;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-/**
- * A rule that determines what a food restores from its vanilla nutrition.
- * <p>
- * These are rates, multiplied by nutrition to mass balance entire categories. Per-item amounts live in an IngredientProfile.
- */
 public record FoodProfile(
         String id,
         String match,
@@ -27,23 +22,14 @@ public record FoodProfile(
             Codec.FLOAT.optionalFieldOf("stamina_per_nutrition", 0.0F).forGetter(FoodProfile::staminaPerNutrition)
     ).apply(instance, FoodProfile::new));
 
-    /**
-     * Health restored, in half-hearts, for a food of the given nutrition.
-     */
     public float healthFor(int nutrition) {
         return healthPerNutrition * nutrition;
     }
 
-    /**
-     * How long that health takes to digest, in ticks.
-     */
     public int digestTicksFor(float healthPoints) {
         return Math.max(0, (int) (healthPoints * healthTicksPerPoint));
     }
 
-    /**
-     * Stamina restored, in half-bolts, for a food of the given nutrition.
-     */
     public float staminaFor(int nutrition) {
         return staminaPerNutrition * nutrition;
     }

@@ -24,9 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Lays a placed pizza's toppings over the slices that are still there.
- */
 public class PizzaRenderer implements BlockEntityRenderer<PizzaBlockEntity> {
     private static final float FLOOR = 1.0F / 16.0F + 0.001F;
     private static final ResourceLocation VISUALS =

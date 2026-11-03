@@ -13,9 +13,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * One axis a meal's effect can fall on, identified by (and named after) the mob effect it grants.
- */
 public record MealEffect(
         ResourceLocation id,
         Optional<ResourceLocation> mobEffect,
@@ -58,25 +55,16 @@ public record MealEffect(
         return anyOfMods.isEmpty() || anyOfMods.stream().anyMatch(modId -> ModList.get().isLoaded(modId));
     }
 
-    /**
-     * The lang key for the adjective prepended to a meal's name, e.g. {@code modest_meals.meal_prefix.strength}.
-     */
     public String namePrefixKeyOrDefault() {
         return namePrefixKey.orElseGet(() -> "modest_meals.meal_prefix." + id.getPath());
     }
 
-    /**
-     * The axis's display name: the mob effect's own name where there is one, otherwise our own key.
-     */
     public Component displayName() {
         return resolveMobEffect()
                 .map(holder -> (Component) Component.translatable(holder.value().getDescriptionId()))
                 .orElseGet(() -> Component.translatable("modest_meals.meal_effect." + id.getPath()));
     }
 
-    /**
-     * A potency threshold and the mob-effect amplifier reaching it awards.
-     */
     public record Tier(int threshold, int amplifier) {
         public static final Codec<Tier> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.INT.fieldOf("threshold").forGetter(Tier::threshold),

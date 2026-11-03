@@ -19,10 +19,6 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
 
-/**
- * Loads {@link FoodProfile}s from {@code data/<namespace>/food_profiles/} and resolves the best one for
- * a given food.
- */
 public class FoodProfileManager extends SimpleJsonResourceReloadListener {
     public static final FoodProfileManager INSTANCE = new FoodProfileManager();
 

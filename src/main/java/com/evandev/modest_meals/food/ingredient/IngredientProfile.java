@@ -10,11 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.Optional;
 
-/**
- * What one item is worth: how much it restores when eaten, and what it contributes to a dish cooked from it.
- * <p>
- * An empty health or stamina defers to the item's FoodProfile rate.
- */
 public record IngredientProfile(
         Optional<Float> health,
         Optional<Float> stamina,

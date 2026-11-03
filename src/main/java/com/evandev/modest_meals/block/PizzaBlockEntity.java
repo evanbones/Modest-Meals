@@ -14,9 +14,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-/**
- * Holds what a placed pizza was made from, so each slice keeps its share of the meal and the toppings can be drawn.
- */
 public class PizzaBlockEntity extends BlockEntity {
     private static final String CONTENTS_KEY = "contents";
 

@@ -32,9 +32,6 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-/**
- * Dynamically composites layer textures onto a meal item based on its {@link MealContents} component.
- */
 public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
 
     private final ResourceLocation mealTypeId;
@@ -47,11 +44,6 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
         this(originalModel, mealTypeId, mealTypeId, null, null);
     }
 
-    /**
-     * @param visualId    which meal key ingredient visuals are looked up under
-     * @param portionBase the base sprite drawn under the toppings instead of the meal type's own, for a portion of a meal
-     * @param portionDubious the sprite shown instead of the meal type's dubious sprite, for a portion of a meal
-     */
     public DynamicMealBakedModel(BakedModel originalModel, ResourceLocation mealTypeId, ResourceLocation visualId,
                                  @Nullable ResourceLocation portionBase, @Nullable ResourceLocation portionDubious) {
         super(originalModel);

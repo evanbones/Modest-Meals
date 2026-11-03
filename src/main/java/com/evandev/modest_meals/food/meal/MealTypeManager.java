@@ -17,9 +17,6 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Loads {@link MealType}s from {@code data/<namespace>/modest_meals/meal_types/}.
- */
 public class MealTypeManager extends SimpleJsonResourceReloadListener {
     public static final MealTypeManager INSTANCE = new MealTypeManager();
 

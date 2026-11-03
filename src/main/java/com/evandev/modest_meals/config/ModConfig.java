@@ -73,6 +73,12 @@ public class ModConfig {
     @SerializedName("stamina_parry_restore")
     public float staminaParryRestore = 3.0f;
 
+    @SerializedName("stamina_combat_roll_cost")
+    public float staminaCombatRollCost = 4.0f;
+
+    @SerializedName("stamina_hand_crank_cost")
+    public float staminaHandCrankCost = 0.13f;
+
     @SerializedName("disable_hunger")
     public boolean disableHunger = true;
 

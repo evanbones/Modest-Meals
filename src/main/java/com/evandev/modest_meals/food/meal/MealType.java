@@ -20,9 +20,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
-/**
- * A kind of dish: what item a set of ingredients turns into, and where and how it is assembled.
- */
 public record MealType(
         ResourceLocation id,
         ResourceLocation item,
@@ -119,9 +116,6 @@ public record MealType(
         return shape.isPresent();
     }
 
-    /**
-     * Separates the stacks the type takes as its base from the free ingredients.
-     */
     public Optional<Split> splitBase(List<ItemStack> stacks) {
         List<ItemStack> remaining = new ArrayList<>(stacks);
         List<ItemStack> taken = new ArrayList<>();
@@ -160,9 +154,6 @@ public record MealType(
         return container.flatMap(BuiltInRegistries.ITEM::getOptional);
     }
 
-    /**
-     * Where a type can be assembled.
-     */
     public enum Station implements StringRepresentable {
         CRAFTING_TABLE("crafting_table", () -> true),
         COOKING_POT("cooking_pot", FarmersDelightCompat::isLoaded),
@@ -197,19 +188,9 @@ public record MealType(
         }
     }
 
-    /**
-     * A matched input split into the type's base stacks and the free ingredients chosen by the player.
-     */
     public record Split(List<ItemStack> base, List<ItemStack> ingredients) {
     }
 
-    /**
-     * Limits on what a type takes beyond its budget, and how many servings it makes.
-     *
-     * @param servings the number of items one assembly makes; the meal's value is split evenly between them
-     * @param required at least one free ingredient must match this
-     * @param allowed  every free ingredient must match this
-     */
     public record Rules(int servings, Optional<Ingredient> required, Optional<Ingredient> allowed,
                         Optional<Ingredient> forbidden) {
         public static final Rules NONE = new Rules(1, Optional.empty(), Optional.empty(), Optional.empty());
@@ -264,9 +245,6 @@ public record MealType(
         ).apply(instance, BaseEntry::new));
     }
 
-    /**
-     * A crafting-grid layout, matching vanilla's {@code pattern}/{@code key} shape.
-     */
     public record Shape(List<String> pattern, Map<String, String> key) {
         public static final Codec<Shape> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.STRING.listOf().fieldOf("pattern").forGetter(Shape::pattern),
@@ -350,9 +328,6 @@ public record MealType(
         }
     }
 
-    /**
-     * @param base base stacks this override also needs, matched against the type's base rather than the free ingredients
-     */
     public record ItemOverride(ResourceLocation result, int count, List<String> ingredients, boolean replaceRecipes,
                                List<String> base) {
         public static final Codec<ItemOverride> CODEC = RecordCodecBuilder.create(instance -> instance.group(

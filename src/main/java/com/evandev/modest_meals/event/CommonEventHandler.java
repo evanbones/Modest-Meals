@@ -32,8 +32,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class CommonEventHandler {
-    private static final float CRANK_STAMINA_COST = 0.13F;
-
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
@@ -72,7 +70,8 @@ public class CommonEventHandler {
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();
-        if (!StaminaApi.isEnabled() || player.isCreative() || player.isSpectator() || player instanceof FakePlayer) {
+        float cost = ModConfig.get().staminaHandCrankCost;
+        if (cost <= 0.0F || !StaminaApi.isEnabled() || player.isCreative() || player.isSpectator() || player instanceof FakePlayer) {
             return;
         }
         if (!event.getLevel().getBlockState(event.getPos()).is(ModBlockTags.STAMINA_CRANKS)) {
@@ -85,7 +84,7 @@ public class CommonEventHandler {
         }
         if (!player.level().isClientSide()) {
             PlayerStamina stamina = StaminaHelper.get(player);
-            stamina.spend(CRANK_STAMINA_COST);
+            stamina.spend(cost);
             stamina.getData().setCooldown(stamina.getCooldownInTicks());
             stamina.syncNow();
         }
