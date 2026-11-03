@@ -270,7 +270,6 @@ publishMods {
         requires("yacl")
         optional("farmers-delight", "cultural-delights", "emi", "raised", "thermoo", "cold-sweat",
                 "reliable-remover", "shield-expansion", "reliable-gliders")
-        incompatible("melancholic_hunger")
     }
 
     modrinth {
