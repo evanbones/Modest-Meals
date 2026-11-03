@@ -88,6 +88,9 @@
   "config.modest_meals.option.stamina_cooldown": "Recharge Cooldown Delay (Seconds)",
   "config.modest_meals.option.stamina_cooldown.tooltip": "The delay in seconds after stopping sprinting before stamina begins to naturally recover.",
 
+  "config.modest_meals.option.stamina_sprinting": "Sprinting Uses Stamina",
+  "config.modest_meals.option.stamina_sprinting.tooltip": "When enabled, sprinting and swimming drain stamina, and an exhausted player can't sprint. Turn off to keep stamina for other exertion only.",
+
   "config.modest_meals.option.stamina_gliding": "Gliding Uses Stamina",
   "config.modest_meals.option.stamina_gliding.tooltip": "With Reliable Gliders installed, gliding drains stamina like sprinting does, and an exhausted player can't glide.",
 

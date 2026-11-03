@@ -24,7 +24,7 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
             return canSprint;
         }
 
-        if (StaminaHelper.get(this).getData().isExhausted()) {
+        if (ModConfig.get().staminaSprinting && StaminaHelper.get(this).getData().isExhausted()) {
             return false;
         }
 

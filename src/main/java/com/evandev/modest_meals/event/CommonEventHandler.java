@@ -45,11 +45,13 @@ public class CommonEventHandler {
             stamina.tick();
 
             if (stamina.getData().isExhausted()) {
-                if (player.isSprinting()) {
-                    player.setSprinting(false);
-                }
-                if (player.isSwimming()) {
-                    player.setSwimming(false);
+                if (ModConfig.get().staminaSprinting) {
+                    if (player.isSprinting()) {
+                        player.setSprinting(false);
+                    }
+                    if (player.isSwimming()) {
+                        player.setSwimming(false);
+                    }
                 }
                 if (ShieldExpansionCompat.isBlocking(player)) {
                     player.stopUsingItem();

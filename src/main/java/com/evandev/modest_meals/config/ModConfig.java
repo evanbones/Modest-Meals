@@ -64,6 +64,9 @@ public class ModConfig {
     @SerializedName("stamina_cooldown")
     public int staminaCooldown = 2;
 
+    @SerializedName("stamina_sprinting")
+    public boolean staminaSprinting = true;
+
     @SerializedName("stamina_gliding")
     public boolean staminaGliding = true;
 

@@ -275,7 +275,7 @@ public class PlayerStamina {
     }
 
     public boolean isAtFullSprint() {
-        return !this.player.isUsingItem() && this.player.isSprinting();
+        return ModConfig.get().staminaSprinting && !this.player.isUsingItem() && this.player.isSprinting();
     }
 
     public boolean isExerting() {
