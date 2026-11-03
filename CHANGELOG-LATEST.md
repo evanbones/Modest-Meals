@@ -1,9 +1,8 @@
-### Added
+### Changed
 
-- Added Combat Roll support.
-  - Each roll takes stamina, and an exhausted player can't roll.
-- Added a Hand Crank Stamina Cost option for Create's hand crank and anything else in the `modest_meals:stamina_cranks` tag.
+- Renamed the Stamina Sprinting option to Enable Stamina, since turning it off disables the whole stamina system.
 
 ### Fixed
 
-- Fixed cooking pot meals only cooking when their bowl or bottle was already in the container slot.
+- Fixed layered meals z-fighting in item frames.
+- Items removed with Reliable Remover no longer show up in the food profile editor.

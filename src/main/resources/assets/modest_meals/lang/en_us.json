@@ -70,8 +70,8 @@
   "config.modest_meals.option.sprinting_health_limit": "Sprint Health Limit",
   "config.modest_meals.option.sprinting_health_limit.tooltip": "Minimum health points required to sprint when Limited by Health is selected (6 = 3 hearts).",
 
-  "config.modest_meals.option.stamina_sprint": "Stamina Sprinting",
-  "config.modest_meals.option.stamina_sprint.tooltip": "When enabled, players have a dedicated stamina pool for sprinting. Depleting it completely triggers exhaustion until refilled.",
+  "config.modest_meals.option.stamina_sprint": "Enable Stamina",
+  "config.modest_meals.option.stamina_sprint.tooltip": "When enabled, players have a dedicated stamina pool spent by sprinting, swimming, and other exertion. Depleting it completely triggers exhaustion until refilled.",
 
   "config.modest_meals.option.stamina_infinite_peaceful": "Infinite Stamina on Peaceful",
   "config.modest_meals.option.stamina_infinite_peaceful.tooltip": "When enabled, stamina never depletes on Peaceful difficulty.",

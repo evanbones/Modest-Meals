@@ -26,6 +26,10 @@ public final class ReliableRemoverCompat {
         return isLoaded() && ReliableRemoverBridge.isRemoved(item);
     }
 
+    public static boolean isHidden(Item item) {
+        return isLoaded() && ReliableRemoverBridge.isHidden(item);
+    }
+
     public static MealType prune(MealType type) {
         if (!isLoaded() || type.itemOverrides().isEmpty()) {
             return type;

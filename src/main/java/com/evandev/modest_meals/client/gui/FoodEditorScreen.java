@@ -4,6 +4,7 @@ import com.evandev.modest_meals.client.gui.util.GuiUtil;
 import com.evandev.modest_meals.client.gui.widget.DropdownWidget;
 import com.evandev.modest_meals.client.gui.widget.ModButton;
 import com.evandev.modest_meals.client.gui.widget.ModEditBox;
+import com.evandev.modest_meals.compat.reliable_remover.ReliableRemoverCompat;
 import com.evandev.modest_meals.food.CustomFoodDatapack;
 import com.evandev.modest_meals.food.FoodProfile;
 import com.evandev.modest_meals.food.FoodProfileManager;
@@ -89,6 +90,7 @@ public class FoodEditorScreen extends Screen {
         }
 
         for (Item item : BuiltInRegistries.ITEM) {
+            if (ReliableRemoverCompat.isHidden(item)) continue;
             ItemStack stack = new ItemStack(item);
             String id = BuiltInRegistries.ITEM.getKey(item).toString();
             candidates.add(new Candidate(item, id,

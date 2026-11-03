@@ -8,6 +8,7 @@ import com.evandev.modest_meals.food.meal.MealTypeManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.BlockElement;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -33,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
+    private static final float LAYER_DEPTH_OFFSET = 0.05F;
 
     private final ResourceLocation mealTypeId;
     private final ResourceLocation visualId;
@@ -171,7 +173,12 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
                 if (sprite == null) {
                     continue;
                 }
-                var unbaked = UnbakedGeometryHelper.createUnbakedItemElements(i, sprite);
+                List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemElements(i, sprite);
+                float offset = i * LAYER_DEPTH_OFFSET;
+                for (BlockElement element : unbaked) {
+                    element.from.z -= offset;
+                    element.to.z += offset;
+                }
                 var quads = UnbakedGeometryHelper.bakeElements(unbaked, $ -> sprite, BlockModelRotation.X0_Y0);
                 builder.addQuads(normalRenderTypes, quads);
             }
