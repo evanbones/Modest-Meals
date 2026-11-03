@@ -5,8 +5,6 @@
 Modest Meals is a vanilla-style overhaul of Minecraft's food system. The hunger bar is replaced with a stamina bar,
 food heals you directly as you digest it, and you can cook your own meals out of almost any ingredient.
 
-What you put in a meal decides how much it heals, how long it lasts, and what effects it gives.
-
 ![The Modest Meals HUD](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/hud.png)
 
 ---
@@ -15,11 +13,9 @@ What you put in a meal decides how much it heals, how long it lasts, and what ef
 
 ### No more hunger!
 
-- The hunger bar is gone. Eating restores health/stamina instead of hunger.
-- Healing happens gradually as food is digested. Light snacks digest quickly and hearty meals heal for longer.
+- Food heals you gradually as it digests. Light snacks digest quickly, hearty meals heal for longer.
 - Hold a food item to see how many hearts it will restore.
-- Food tooltips show the hearts and stamina a food restores, any effects it gives when eaten, and what it adds when
-  cooked into a meal.
+- Tooltips show what a food restores and what it adds to a meal.
 - The vanilla Hunger effect becomes Drained, which slows stamina recovery. You can also turn it off or swap it for
   another effect.
 
@@ -27,7 +23,7 @@ What you put in a meal decides how much it heals, how long it lasts, and what ef
 
 ### Stamina!
 
-- Sprinting uses a separate stamina bar, which sits where the hunger bar used to be.
+- Sprinting drains stamina.
 - Use it up and you become exhausted, which prevents sprinting until the bar has fully refilled.
 - Stamina refills on its own after a short pause. How fast it refills while you're moving can be configured.
 - Some foods and effects change your stamina:
@@ -45,14 +41,13 @@ For example, a sandwich made with beetroot gives Strength, so it's called a **Mi
 
 ![Crafting a Mighty Sandwich](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/crafting.png)
 
-- Ingredients can add meal effects such as Strength, Speed, Haste, Night Vision, Fire Resistance, Water Breathing,
-  Jump Boost, and more.
-    - More of an ingredient means a stronger, longer-lasting effect.
-- Each effect gives the meal a name prefix, like *Hasty*, *Fireproof*, *Tidal*, or *Keen-Eyed*.
+- Ingredients can add effects like Strength, Haste, Night Vision, or Water Breathing. More of an ingredient means a
+  stronger, longer-lasting effect.
+- Each effect gives the meal a name prefix, like *Hasty* or *Tidal*.
 - Ingredients that don't belong in a meal make a **Dubious** meal. It still fills you up but gives no effects.
 - Some ingredient combinations make a mod's own dish instead.
     - For example, a beef patty, leafy greens, and tomato in a sandwich gives you Farmer's Delight's Hamburger.
-- Pizzas can be placed in the world and eaten one slice at a time.
+- Pizzas can be placed down and eaten slice by slice.
 - With [EMI](https://modrinth.com/mod/emi) installed, every meal has a recipe page showing which ingredients work.
 
 ![A pizza placed in the world](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/pizza.png)
@@ -61,11 +56,10 @@ For example, a sandwich made with beetroot gives Strength, so it's called a **Mi
 
 ### Customisable
 
-- Nearly every mechanic can be configured in-game (requires [YACL](https://modrinth.com/mod/yacl)): hunger, digestion
-  speed, stamina length and recharge time, sprinting rules, HUD layout, heart and stamina highlights, tooltips, and
-  more.
-- The **Food Effect Editor** shows the stats of every food in the game. You can change how much a food heals, its
-  ingredient stats and its effects, and save the changes to a datapack.
+- Nearly everything is configurable in-game with [YACL](https://modrinth.com/mod/yacl), from digestion speed and
+  stamina to the HUD layout. You can even turn the hunger replacement off entirely.
+- The **Food Effect Editor** lets you view and tweak every food's stats and effects, then save the changes to a
+  datapack.
     - On a server, the editor shows that server's food data (read-only).
 - All food stats, ingredients, meal types, and meal effects are loaded from datapacks, so modpacks can freely change any
   of them.
@@ -98,8 +92,7 @@ For example, a sandwich made with beetroot gives Strength, so it's called a **Mi
 
 - [Melancholic Hunger & HUD](https://modrinth.com/mod/melancholic_hunger): Modest Meals already includes all of its
   features.
-- Nostalgic Tweaks (partially): Modest Meals' stamina heavily overlaps with their stamina system, so one should be
-  disabled.
+- Nostalgic Tweaks (partially): its stamina system overlaps heavily with Modest Meals', so disable one of them.
 
 ---
 
