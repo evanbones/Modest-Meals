@@ -2,6 +2,107 @@
 
 <a href="https://neoforged.net/"><img alt="NeoForge Supported" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/neoforge_vector.svg"></a>
 
+Modest Meals is a vanilla-style overhaul of Minecraft's food system. The hunger bar is replaced with a stamina bar,
+food heals you directly as you digest it, and you can cook your own meals out of almost any ingredient.
+
+What you put in a meal decides how much it heals, how long it lasts, and what effects it gives.
+
+![The Modest Meals HUD](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/hud.png)
+
+---
+
+## Features
+
+### No more hunger!
+
+- The hunger bar is gone. Eating restores health/stamina instead of hunger.
+- Healing happens gradually as food is digested. Light snacks digest quickly and hearty meals heal for longer.
+- Hold a food item to see how many hearts it will restore.
+- Food tooltips show the hearts and stamina a food restores, any effects it gives when eaten, and what it adds when
+  cooked into a meal.
+- The vanilla Hunger effect becomes Drained, which slows stamina recovery. You can also turn it off or swap it for
+  another effect.
+
+![Holding a sandwich shows the hearts it will restore](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/food-preview.png)
+
+### Stamina!
+
+- Sprinting uses a separate stamina bar, which sits where the hunger bar used to be.
+- Use it up and you become exhausted, which prevents sprinting until the bar has fully refilled.
+- Stamina refills on its own after a short pause. How fast it refills while you're moving can be configured.
+- Some foods and effects change your stamina:
+    - **Endurance** gives you a bigger stamina bar.
+    - **Nourishment** stops stamina from draining.
+    - **Exhausted** stops stamina from refilling.
+- Optionally, health can regenerate naturally while your stamina is high, like vanilla saturation healing.
+
+### Meals!
+
+Combine ingredients to make a meal. Each meal's health, stamina, digestion time, and effects come from what you put in
+it, and its texture and name change to match.
+
+For example, a sandwich made with beetroot gives Strength, so it's called a **Mighty Sandwich**.
+
+![Crafting a Mighty Sandwich](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/crafting.png)
+
+- Ingredients can add meal effects such as Strength, Speed, Haste, Night Vision, Fire Resistance, Water Breathing,
+  Jump Boost, and more.
+    - More of an ingredient means a stronger, longer-lasting effect.
+- Each effect gives the meal a name prefix, like *Hasty*, *Fireproof*, *Tidal*, or *Keen-Eyed*.
+- Ingredients that don't belong in a meal make a **Dubious** meal. It still fills you up but gives no effects.
+- Some ingredient combinations make a mod's own dish instead.
+    - For example, a beef patty, leafy greens, and tomato in a sandwich gives you Farmer's Delight's Hamburger.
+- Pizzas can be placed in the world and eaten one slice at a time.
+- With [EMI](https://modrinth.com/mod/emi) installed, every meal has a recipe page showing which ingredients work.
+
+![A pizza placed in the world](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/pizza.png)
+
+![EMI's Meal Crafting page](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/emi.png)
+
+### Customisable
+
+- Nearly every mechanic can be configured in-game (requires [YACL](https://modrinth.com/mod/yacl)): hunger, digestion
+  speed, stamina length and recharge time, sprinting rules, HUD layout, heart and stamina highlights, tooltips, and
+  more.
+- The **Food Effect Editor** shows the stats of every food in the game. You can change how much a food heals, its
+  ingredient stats and its effects, and save the changes to a datapack.
+    - On a server, the editor shows that server's food data (read-only).
+- All food stats, ingredients, meal types, and meal effects are loaded from datapacks, so modpacks can freely change any
+  of them.
+
+![The config screen](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/config.png)
+
+![The Food Effect Editor](https://raw.githubusercontent.com/evanbones/Modest-Meals/1.21.1/images/food-editor.png)
+
+---
+
+## Dependencies
+
+**Required:**
+
+- [YetAnotherConfigLib (YACL)](https://modrinth.com/mod/yacl) for the config screen
+
+**Optional integrations:**
+
+| Mod                                                                                                                   | Needed for                                                                                     |
+|-----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| [Farmer's Delight](https://modrinth.com/mod/farmers-delight)                                                          | Cooking-pot meals, Farmer's Delight dishes in meal recipes, Nourishment stops stamina draining |
+| [Cultural Delights](https://modrinth.com/mod/cultural-delights)                                                       | Ice cream, made in a cold vat                                                                  |
+| [EMI](https://modrinth.com/mod/emi)                                                                                   | Recipe pages for meal crafting, cooking, and chilling                                          |
+| [Cold Sweat](https://modrinth.com/mod/cold-sweat), [Thermoo](https://modrinth.com/mod/thermoo) (Frostiful, Scorchful) | *Spicy* and *Chilly* meals give cold and heat resistance                                       |
+| [Shield Expansion](https://modrinth.com/mod/shield-expansion)                                                         | Holding up a shield drains stamina, and a successful parry restores some                       |
+| [Reliable Gliders](https://modrinth.com/mod/reliable-gliders)                                                         | Gliding drains stamina, and an exhausted player can't glide                                    |
+| [Reliable Remover](https://modrinth.com/mod/reliable-remover)                                                         | Meal recipes skip items that have been removed                                                 |
+
+**Incompatible:**
+
+- [Melancholic Hunger & HUD](https://modrinth.com/mod/melancholic_hunger): Modest Meals already includes all of its
+  features.
+- Nostalgic Tweaks (partially): Modest Meals' stamina heavily overlaps with their stamina system, so one should be
+  disabled.
+
+---
+
 ## License
 
 * **Code**: Licensed under the [LGPL-3.0 License](https://github.com/evanbones/Modest-Meals/blob/1.21.1/LICENSE).
@@ -21,8 +122,6 @@ Stamina and health system adapted from Nostalgic
 Tweaks ([LGPL-3.0-only](https://github.com/Nostalgica-Reverie/Nostalgic-Tweaks/blob/main/LICENSE.txt)) and Melancholic
 Hunger & HUD ([LGPL-3.0-only](https://github.com/antigers/melancholic_hunger/blob/1.21.1/LICENSE)).
 
-Contains code adapted from [FoodAttributes](https://modrinth.com/mod/foodattributes), used under the MIT license.
-
 ---
 
-[![discord-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-plural_vector.svg)](https://discord.com/invite/JcGRdT6Pbx) [![github-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/github-plural_vector.svg)](https://github.com/evanbones/Manual-Labour)
+[![discord-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-plural_vector.svg)](https://discord.com/invite/JcGRdT6Pbx) [![github-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/github-plural_vector.svg)](https://github.com/evanbones/Modest-Meals)

@@ -1,6 +1,8 @@
 package com.evandev.modest_meals.event;
 
 import com.evandev.modest_meals.api.StaminaApi;
+import com.evandev.modest_meals.compat.reliable_gliders.ReliableGlidersCompat;
+import com.evandev.modest_meals.compat.shield_expansion.ShieldExpansionCompat;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
@@ -51,7 +53,14 @@ public class CommonEventHandler {
                 if (player.isSwimming()) {
                     player.setSwimming(false);
                 }
+                if (ShieldExpansionCompat.isBlocking(player)) {
+                    player.stopUsingItem();
+                }
             }
+        }
+
+        if (player instanceof ServerPlayer serverPlayer && ReliableGlidersCompat.isLoaded()) {
+            ReliableGlidersCompat.tickExhaustedFall(serverPlayer);
         }
 
         if (!player.level().isClientSide()) {

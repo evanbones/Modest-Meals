@@ -62,6 +62,9 @@ public class ClientConfigScreen {
                 .option(createIntOption("stamina_duration", defaults.staminaDuration, 1, 60, 1, () -> config.staminaDuration, val -> config.staminaDuration = val))
                 .option(createIntOption("stamina_recharge", defaults.staminaRecharge, 1, 60, 1, () -> config.staminaRecharge, val -> config.staminaRecharge = val))
                 .option(createIntOption("stamina_cooldown", defaults.staminaCooldown, 0, 60, 1, () -> config.staminaCooldown, val -> config.staminaCooldown = val))
+                .option(createBoolOption("stamina_gliding", defaults.staminaGliding, () -> config.staminaGliding, val -> config.staminaGliding = val))
+                .option(createBoolOption("stamina_shield_blocking", defaults.staminaShieldBlocking, () -> config.staminaShieldBlocking, val -> config.staminaShieldBlocking = val))
+                .option(createFloatOption("stamina_parry_restore", defaults.staminaParryRestore, 0.0F, 20.0F, 0.5F, () -> config.staminaParryRestore, val -> config.staminaParryRestore = val))
                 .option(createEnumOption("sprinting", SprintingOption.class, defaults.sprinting, () -> config.sprinting, val -> config.sprinting = val, SprintingOption::getTitle))
                 .option(createIntOption("sprinting_health_limit", defaults.sprintingHealthLimit, 1, 20, 1, () -> config.sprintingHealthLimit, val -> config.sprintingHealthLimit = val))
                 .build());

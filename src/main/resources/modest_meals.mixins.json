@@ -5,11 +5,13 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BlockStateBaseMixin",
+    "compat.GlidingStateMixin",
     "FoodDataMixin",
     "ItemMixin",
     "LivingEntityMixin",
     "PlayerMixin",
-    "RecipeManagerMixin"
+    "RecipeManagerMixin",
+    "ServerGamePacketListenerImplAccessor"
   ],
   "client": [
     "GuiMixin",

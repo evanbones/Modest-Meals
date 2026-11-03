@@ -113,7 +113,7 @@ public abstract class StaminaRenderer {
         int maxLevel = stamina.getMaxLevel();
 
         if (ModConfig.get().highlightStaminaBar && level != maxLevel) {
-            shouldHighlight = stamina.isAtFullSprint();
+            shouldHighlight = stamina.isExerting();
         }
 
         long now = System.currentTimeMillis();
@@ -134,7 +134,7 @@ public abstract class StaminaRenderer {
         }
 
         int flashAt = ModConfig.get().flashStaminaBarAt;
-        if (flashAt > 0 && flashAt >= level && stamina.isAtFullSprint()) {
+        if (flashAt > 0 && flashAt >= level && stamina.isExerting()) {
             shouldHighlight = (now / 200) % 2 == 0;
         }
 

@@ -37,6 +37,35 @@ ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.${ mod_id }]]
+modId = "melancholic_hunger"
+type = "incompatible"
+reason = "Modest Meals already includes all of Melancholic Hunger's features."
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "farmersdelight"
+type = "optional"
+versionRange = "[1.3.3,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "emi"
+type = "optional"
+versionRange = "[1.1.24,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "raised"
+type = "optional"
+versionRange = "[6.0.0,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.${ mod_id }]]
 modId = "thermoo"
 type = "optional"
 versionRange = "[4.8.0,)"
@@ -46,7 +75,21 @@ side = "BOTH"
 [[dependencies.${ mod_id }]]
 modId = "reliable_remover"
 type = "optional"
-versionRange = "*"
+versionRange = "[3.5.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "shieldexp"
+type = "optional"
+versionRange = "[1.4.3,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "reliable_gliders"
+type = "optional"
+versionRange = "[2.1.0,)"
 ordering = "NONE"
 side = "BOTH"
 

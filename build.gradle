@@ -167,7 +167,7 @@ dependencies {
 
     // Raised
     compileOnly "maven.modrinth:raised:NeoForge-${raised_version}"
-    runtimeOnly "maven.modrinth:raised:NeoForge-${raised_version}"
+    //runtimeOnly "maven.modrinth:raised:NeoForge-${raised_version}"
 
     // Farmer's Delight
     compileOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
@@ -179,18 +179,26 @@ dependencies {
 
     // Thermoo
     compileOnly "maven.modrinth:thermoo:${thermoo_version}"
-    runtimeOnly "maven.modrinth:thermoo:${thermoo_version}"
-    runtimeOnly "maven.modrinth:forgified-fabric-api:${ffapi_version}"
+    //runtimeOnly "maven.modrinth:thermoo:${thermoo_version}"
+    //runtimeOnly "maven.modrinth:forgified-fabric-api:${ffapi_version}"
 
     // Frostiful and Scorchful
-    runtimeOnly "maven.modrinth:frostiful:${frostiful_version}"
-    runtimeOnly "maven.modrinth:scorchful:${scorchful_version}"
+    //runtimeOnly "maven.modrinth:frostiful:${frostiful_version}"
+    //runtimeOnly "maven.modrinth:scorchful:${scorchful_version}"
     runtimeOnly "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config_version}"
-    runtimeOnly "maven.modrinth:velvet-api:${velvet_version}"
-    runtimeOnly "maven.modrinth:sparkweave:${sparkweave_version}"
+    //runtimeOnly "maven.modrinth:velvet-api:${velvet_version}"
+    //runtimeOnly "maven.modrinth:sparkweave:${sparkweave_version}"
 
     // Reliable Remover
     compileOnly "maven.modrinth:reliable-remover:${reliable_remover_version}"
+
+    // Shield Expansion
+    compileOnly "maven.modrinth:shield-expansion:${shield_expansion_version}"
+    runtimeOnly "maven.modrinth:shield-expansion:${shield_expansion_version}"
+
+    // Reliable Gliders
+    compileOnly "maven.modrinth:reliable-gliders:${reliable_gliders_version}"
+    runtimeOnly "maven.modrinth:reliable-gliders:${reliable_gliders_version}"
 
     // Cold Sweat
     compileOnly "maven.modrinth:cold-sweat:${cold_sweat_version}"
@@ -254,19 +262,25 @@ publishMods {
 
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-        projectId = ""
+        projectId = "1780757"
         minecraftVersions.add("${minecraft_version}")
         client = true
         server = true
 
         requires("yacl")
+        optional("farmers-delight", "cultural-delights", "emi", "raised", "thermoo", "cold-sweat",
+                "reliable-remover", "shield-expansion", "reliable-gliders")
+        incompatible("melancholic_hunger")
     }
 
     modrinth {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-        projectId = "kCbtgaek"
+        projectId = "93YCaBJj"
         minecraftVersions.add("${minecraft_version}")
 
         requires("yacl")
+        optional("farmers-delight", "cultural-delights", "emi", "raised", "thermoo", "cold-sweat",
+                "reliable-remover", "shield-expansion", "reliable-gliders")
+        incompatible("melancholic_hunger")
     }
 }

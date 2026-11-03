@@ -2,6 +2,8 @@ package com.evandev.modest_meals.stamina;
 
 import com.evandev.modest_meals.api.StaminaEvent;
 import com.evandev.modest_meals.attribute.ModAttributes;
+import com.evandev.modest_meals.compat.reliable_gliders.ReliableGlidersCompat;
+import com.evandev.modest_meals.compat.shield_expansion.ShieldExpansionCompat;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
@@ -91,9 +93,6 @@ public class PlayerStamina {
         this.data.setStaminaUsingTicks(gain.exhausted() ? this.getRechargeInTicks() : this.getDurationInTicks(), this.getMaxLevel());
     }
 
-    /**
-     * Take stamina off the player. Hitting zero exhausts them.
-     */
     public void spend(float levels) {
         int ticks = this.levelsToTicks(levels);
         if (ticks <= 0) {
@@ -176,7 +175,7 @@ public class PlayerStamina {
         this.regainThisTick = this.isRegainable() && this.isTrackerNotHalved();
 
         int extraSteps = 0;
-        if (!this.isAtFullSprint()) {
+        if (!this.isExerting()) {
             int posAmp = this.getPositiveEffectAmplifier();
             if (posAmp >= 0) {
                 extraSteps += (posAmp + 1);
@@ -214,7 +213,7 @@ public class PlayerStamina {
             }
 
             this.data.setStaminaUsingTicks(this.data.isExhausted() ? rechargeInTicks : durationInTicks, maxLevel);
-        } else if (this.isAtFullSprint()) {
+        } else if (this.isExerting()) {
             if (!this.isNourished() && !this.isDrainCancelled()) {
                 this.data.remaining--;
 
@@ -279,11 +278,21 @@ public class PlayerStamina {
         return !this.player.isUsingItem() && this.player.isSprinting();
     }
 
+    public boolean isExerting() {
+        if (this.isAtFullSprint()) {
+            return true;
+        }
+        if (this.player.level().isClientSide() && !this.player.isLocalPlayer()) {
+            return false;
+        }
+        return ReliableGlidersCompat.isGliding(this.player) || ShieldExpansionCompat.isBlocking(this.player);
+    }
+
     public boolean isTiringOrExhausted() {
         if (!ModConfig.get().staminaSprint) {
             return false;
         }
-        return this.data.isTiring(this.getMaxLevel()) || this.data.isExhausted() || this.isAtFullSprint();
+        return this.data.isTiring(this.getMaxLevel()) || this.data.isExhausted() || this.isExerting();
     }
 
     public boolean hasStaminaRoom() {
@@ -312,14 +321,14 @@ public class PlayerStamina {
     }
 
     public boolean isNotRegainable() {
-        return !this.isRegainable() && !this.isAtFullSprint() && this.data.isTiring(this.getMaxLevel());
+        return !this.isRegainable() && !this.isExerting() && this.data.isTiring(this.getMaxLevel());
     }
 
     public boolean isTrackerNotHalved() {
         boolean isHalved = false;
 
         if (ModConfig.get().staminaRegainWhenMoving == StaminaRegain.HALF && this.isMoving()) {
-            isHalved = !this.isAtFullSprint() && this.data.isTiring(this.getMaxLevel());
+            isHalved = !this.isExerting() && this.data.isTiring(this.getMaxLevel());
         }
 
         if (isHalved || this.hasNegativeEffect()) {

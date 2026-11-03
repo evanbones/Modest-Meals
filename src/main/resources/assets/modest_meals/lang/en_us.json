@@ -88,6 +88,15 @@
   "config.modest_meals.option.stamina_cooldown": "Recharge Cooldown Delay (Seconds)",
   "config.modest_meals.option.stamina_cooldown.tooltip": "The delay in seconds after stopping sprinting before stamina begins to naturally recover.",
 
+  "config.modest_meals.option.stamina_gliding": "Gliding Uses Stamina",
+  "config.modest_meals.option.stamina_gliding.tooltip": "With Reliable Gliders installed, gliding drains stamina like sprinting does, and an exhausted player can't glide.",
+
+  "config.modest_meals.option.stamina_shield_blocking": "Blocking Uses Stamina",
+  "config.modest_meals.option.stamina_shield_blocking.tooltip": "With Shield Expansion installed, holding up a shield drains stamina like sprinting does, and an exhausted player can't block.",
+
+  "config.modest_meals.option.stamina_parry_restore": "Parry Stamina Restore",
+  "config.modest_meals.option.stamina_parry_restore.tooltip": "With Shield Expansion installed, how much stamina a successful parry gives back, in half-bolts. 0 turns it off.",
+
   "config.modest_meals.option.hud_layout": "HUD Layout",
   "config.modest_meals.option.hud_layout.tooltip": "Default: Standard layout with armor above hearts on the left, stamina in place of hunger on the right, and air bubbles above stamina.\nClassic: Beta-style layout with air bubbles above hearts on the left, armor on the right, and stamina above armor.",
 
