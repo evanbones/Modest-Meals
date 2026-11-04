@@ -108,11 +108,6 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 List.of(new MealType.BaseEntry(Ingredient.of(PASTAS), 1)),
                 Optional.empty(), 1, 4, Optional.of(itemId(Items.BOWL)), 15,
                 MealType.Rules.forbidding(savoryNoFruit));
-        put(entries, "porridge", ModItems.PORRIDGE, MealType.Station.COOKING_POT,
-                List.of(new MealType.BaseEntry(Ingredient.of(WHEATS), 1),
-                        new MealType.BaseEntry(soupBase, 1)),
-                Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 25,
-                MealType.Rules.forbidding(Ingredient.of(ModItemTags.NOT_FOR_DISHES)));
 
         ResourceLocation iceCreamId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "ice_cream");
         entries.put(iceCreamId, new MealType(

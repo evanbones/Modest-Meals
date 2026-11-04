@@ -30,7 +30,6 @@ public class ModItems {
     public static final Supplier<Item> PASTA = registerBowlMeal("pasta", Station.COOKING_POT);
     public static final Supplier<Item> SALAD = registerBowlMeal("salad", Station.CRAFTING_TABLE);
     public static final Supplier<Item> CURRY = registerBowlMeal("curry", Station.COOKING_POT);
-    public static final Supplier<Item> PORRIDGE = registerBowlMeal("porridge", Station.COOKING_POT);
     public static final Supplier<Item> JAM = registerMeal("jam", Station.COOKING_POT,
             () -> new MealItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
 

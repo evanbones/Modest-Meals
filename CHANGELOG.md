@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added milkshakes, coloured by their flavour.
     - Neapolitan flavours make Neapolitan's own milkshakes.
 - Added three-scoop ice cream bowls, made in the Cultural Delights vat.
-- Soup, curry, pasta, ramen, porridge, salad, jam, and sushi rolls now show their ingredients like sandwiches and wraps
+- Soup, curry, pasta, ramen, salad, jam, and sushi rolls now show their ingredients like sandwiches and wraps
   do.
 - Added an Exhaustion Lockout option.
     - Turning it off makes it so running out of stamina only pauses you for the recharge cooldown.

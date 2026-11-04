@@ -309,10 +309,6 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
             "kelp", "mushroom", "mutton", "onion", "pork", "potato", "pumpkin", "rabbit", "refried_beans",
             "rotten_flesh", "salmon", "sausage", "smoked_ham", "spider_eye", "squid", "tofu", "tomato", "truffle",
             "cooked_rice");
-    private static final Set<String> SWEET = Set.of("apple", "banana", "butter", "cherry", "chocolate", "cinnamon",
-            "cocoa_beans", "coconut", "elderberry", "glow_berries", "golden_apple", "honey", "lapisberry", "mango",
-            "orange", "passion_fruit", "pear", "plum", "pumpkin", "red_grapes", "strawberry", "sweet_berries",
-            "vanilla", "walnut", "white_grapes");
     private static final Set<String> SALAD = Set.of("apple", "avocado", "baked_potato", "banana", "beef",
             "beetroot", "bullet_pepper", "cabbage", "carrot", "cheese", "cherry", "chicken", "chorus_fruit", "cod",
             "coconut", "creamed_corn", "cucumber", "eggplant", "elderberry", "fried_egg", "glow_berries",
@@ -339,7 +335,7 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
     private static final List<Dish> DISHES = List.of(
             new Dish("soup", 5, SAVOURY), new Dish("curry", 5, SAVOURY),
             new Dish("pasta", 4, SAVOURY), new Dish("ramen", 4, SAVOURY),
-            new Dish("porridge", 3, SWEET), new Dish("salad", 3, SALAD), new Dish("jam", 3, FRUIT),
+            new Dish("salad", 3, SALAD), new Dish("jam", 3, FRUIT),
             new Dish("roll", 3, ROLL), new Dish("roll_slice", 3, ROLL),
             new Dish("pie", 3, PIE), new Dish("pie_slice", 3, PIE));
 
