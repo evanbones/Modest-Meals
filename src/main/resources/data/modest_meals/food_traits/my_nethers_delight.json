@@ -201,7 +201,7 @@
         {
           "type": "modest_meals:health_addition",
           "value": 2.0,
-          "duration": 100
+          "duration": 40
         }
       ]
     },
@@ -211,7 +211,7 @@
         {
           "type": "modest_meals:health_addition",
           "value": 2.0,
-          "duration": 300
+          "duration": 60
         }
       ]
     },

@@ -20,6 +20,8 @@
 - Endurance's timer is paused while Nourishment is active.
 - Meal recipes now show up in EMI's Crafting, Cooking and Aging categories, rather than in separate Meal categories.
 - Sprinting Restriction now also applies when Sprinting Uses Stamina is disabled.
+- Fish, fruit and modded raw meats now digest at the same rates as other food.
+- Small raw foods like calamari no longer take ages to digest, and neither do a few modded desserts, salads, and soups.
 
 ### Fixed
 

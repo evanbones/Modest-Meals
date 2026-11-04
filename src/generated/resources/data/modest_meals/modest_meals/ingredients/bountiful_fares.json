@@ -1,40 +1,40 @@
 {
   "entries": [
     {
-      "digest_ticks": 90,
+      "digest_ticks": 60,
       "health": 2.0,
       "priority": 145,
       "target": "#c:foods/orange"
     },
     {
-      "digest_ticks": 90,
+      "digest_ticks": 60,
       "health": 2.0,
       "target": "bountifulfares:orange"
     },
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "priority": 145,
       "target": "#c:foods/lemon"
     },
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "target": "bountifulfares:lemon"
     },
     {
-      "digest_ticks": 110,
+      "digest_ticks": 75,
       "health": 2.5,
       "target": "bountifulfares:plum"
     },
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "priority": 145,
       "target": "#c:foods/passion_fruit"
     },
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "target": "bountifulfares:passion_fruit"
     },

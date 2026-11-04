@@ -1,27 +1,27 @@
 {
   "entries": [
     {
-      "digest_ticks": 100,
+      "digest_ticks": 60,
       "health": 2.0,
       "target": "farmersdelight:apple_cider"
     },
     {
-      "digest_ticks": 150,
+      "digest_ticks": 60,
       "health": 1.0,
       "target": "farmersdelight:chicken_cuts"
     },
     {
-      "digest_ticks": 90,
+      "digest_ticks": 120,
       "health": 2.0,
       "target": "farmersdelight:cod_slice"
     },
     {
-      "digest_ticks": 130,
+      "digest_ticks": 90,
       "health": 3.0,
       "target": "farmersdelight:cooked_cod_slice"
     },
     {
-      "digest_ticks": 145,
+      "digest_ticks": 113,
       "health": 3.75,
       "target": "farmersdelight:cooked_salmon_slice"
     },
@@ -44,7 +44,7 @@
       "target": "farmersdelight:rice"
     },
     {
-      "digest_ticks": 100,
+      "digest_ticks": 150,
       "health": 2.5,
       "target": "farmersdelight:salmon_slice"
     },

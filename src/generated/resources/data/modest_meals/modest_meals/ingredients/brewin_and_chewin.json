@@ -1,18 +1,18 @@
 {
   "entries": [
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "priority": 145,
       "target": "#brewinandchewin:grapes"
     },
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "target": "brewinandchewin:red_grapes"
     },
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "target": "brewinandchewin:white_grapes"
     },
@@ -58,7 +58,7 @@
       "target": "brewinandchewin:aspic_cube"
     },
     {
-      "digest_ticks": 130,
+      "digest_ticks": 90,
       "health": 3.0,
       "target": "brewinandchewin:kippers"
     },
@@ -89,7 +89,7 @@
       "target": "brewinandchewin:glow_berry_marmalade"
     },
     {
-      "digest_ticks": 120,
+      "digest_ticks": 60,
       "health": 3.0,
       "target": "brewinandchewin:apple_jelly"
     }

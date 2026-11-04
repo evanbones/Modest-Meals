@@ -15,7 +15,7 @@
       "target": "#c:foods/cooked_meat"
     },
     {
-      "digest_ticks": 120,
+      "digest_ticks": 180,
       "health": 3.0,
       "priority": 140,
       "reference_nutrition": 2,
@@ -59,7 +59,7 @@
       "target": "minecraft:cooked_mutton"
     },
     {
-      "digest_ticks": 150,
+      "digest_ticks": 90,
       "health": 1.5,
       "target": "minecraft:chicken"
     },
@@ -79,7 +79,7 @@
       "target": "minecraft:cooked_rabbit"
     },
     {
-      "digest_ticks": 120,
+      "digest_ticks": 240,
       "health": 4.0,
       "target": "minecraft:salmon",
       "temporary_health": 1.0
@@ -91,7 +91,7 @@
       "temporary_health": 2.0
     },
     {
-      "digest_ticks": 90,
+      "digest_ticks": 180,
       "health": 3.0,
       "target": "minecraft:cod"
     },

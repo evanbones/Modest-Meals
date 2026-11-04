@@ -21,12 +21,12 @@
       "target": "nomansdelight:cooked_venison_chop"
     },
     {
-      "digest_ticks": 100,
+      "digest_ticks": 90,
       "health": 1.5,
       "target": "nomansdelight:billhook_bass_slice"
     },
     {
-      "digest_ticks": 130,
+      "digest_ticks": 90,
       "health": 3.0,
       "target": "nomansdelight:cooked_billhook_bass_slice"
     }

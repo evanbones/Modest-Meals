@@ -40,7 +40,7 @@
       "temporary_health": 1.0
     },
     {
-      "digest_ticks": 100,
+      "digest_ticks": 60,
       "health": 2.0,
       "target": "minecraft:apple"
     },

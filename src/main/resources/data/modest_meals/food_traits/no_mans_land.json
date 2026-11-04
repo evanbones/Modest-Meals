@@ -121,7 +121,7 @@
         {
           "type": "modest_meals:health_addition",
           "value": 2.0,
-          "duration": 160
+          "duration": 60
         },
         {
           "type": "modest_meals:stamina_capacity",

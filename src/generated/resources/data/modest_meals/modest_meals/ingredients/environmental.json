@@ -1,24 +1,24 @@
 {
   "entries": [
     {
-      "digest_ticks": 60,
+      "digest_ticks": 30,
       "health": 1.0,
       "priority": 145,
       "target": "#c:foods/cherry"
     },
     {
-      "digest_ticks": 60,
+      "digest_ticks": 30,
       "health": 1.0,
       "target": "environmental:cherries"
     },
     {
-      "digest_ticks": 110,
+      "digest_ticks": 75,
       "health": 2.5,
       "priority": 145,
       "target": "#c:foods/plum"
     },
     {
-      "digest_ticks": 110,
+      "digest_ticks": 75,
       "health": 2.5,
       "target": "environmental:plum"
     },
@@ -33,7 +33,7 @@
       "target": "environmental:cooked_venison"
     },
     {
-      "digest_ticks": 150,
+      "digest_ticks": 90,
       "health": 1.5,
       "target": "environmental:duck"
     },

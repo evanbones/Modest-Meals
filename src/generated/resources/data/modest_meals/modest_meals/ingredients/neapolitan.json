@@ -39,28 +39,28 @@
       "target": "neapolitan:dried_banana"
     },
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "priority": 145,
       "target": "#c:crops/mango"
     },
     {
-      "digest_ticks": 80,
+      "digest_ticks": 45,
       "health": 1.5,
       "target": "neapolitan:mango"
     },
     {
-      "digest_ticks": 100,
+      "digest_ticks": 60,
       "health": 2.0,
       "target": "neapolitan:dried_mango"
     },
     {
-      "digest_ticks": 110,
+      "digest_ticks": 120,
       "health": 2.0,
       "target": "neapolitan:mango_fish"
     },
     {
-      "digest_ticks": 140,
+      "digest_ticks": 120,
       "health": 4.0,
       "target": "neapolitan:cooked_mango_fish"
     },

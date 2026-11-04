@@ -185,7 +185,7 @@
       "target": "culturaldelights:creamed_corn"
     },
     {
-      "digest_ticks": 120,
+      "digest_ticks": 60,
       "health": 1.0,
       "target": "culturaldelights:squid"
     },
@@ -202,7 +202,7 @@
       "target": "culturaldelights:glow_squid"
     },
     {
-      "digest_ticks": 110,
+      "digest_ticks": 30,
       "health": 0.5,
       "target": "culturaldelights:raw_calamari"
     },
