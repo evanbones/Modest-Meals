@@ -1,10 +1,47 @@
 {
   "item": "bountifulfares:lapisberries",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/lapisberry_0",
-      "modest_meals:item/meal/ice_cream/lapisberry_1",
-      "modest_meals:item/meal/ice_cream/lapisberry_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/lapisberry_0",
+      "modest_meals:item/meal/cake/lapisberry_1",
+      "modest_meals:item/meal/cake/lapisberry_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/lapisberry_0",
+      "modest_meals:item/meal/cake_slice/lapisberry_1",
+      "modest_meals:item/meal/cake_slice/lapisberry_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/lapisberry",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/lapisberry_0",
+      "modest_meals:item/meal/ice_cream_bowl/lapisberry_1",
+      "modest_meals:item/meal/ice_cream_bowl/lapisberry_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/lapisberry_0",
+      "modest_meals:item/meal/jam/lapisberry_1",
+      "modest_meals:item/meal/jam/lapisberry_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/lapisberry",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/lapisberry_0",
+      "modest_meals:item/meal/pie/lapisberry_1",
+      "modest_meals:item/meal/pie/lapisberry_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/lapisberry_0",
+      "modest_meals:item/meal/pie_slice/lapisberry_1",
+      "modest_meals:item/meal/pie_slice/lapisberry_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/lapisberry_0",
+      "modest_meals:item/meal/porridge/lapisberry_1",
+      "modest_meals:item/meal/porridge/lapisberry_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/lapisberry_0",
+      "modest_meals:item/meal/salad/lapisberry_1",
+      "modest_meals:item/meal/salad/lapisberry_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/lapisberry_0",

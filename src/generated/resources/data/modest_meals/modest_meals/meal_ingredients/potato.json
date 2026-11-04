@@ -1,0 +1,56 @@
+{
+  "item": "minecraft:potato",
+  "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/potato_0",
+      "modest_meals:item/meal/curry/potato_1",
+      "modest_meals:item/meal/curry/potato_2",
+      "modest_meals:item/meal/curry/potato_3",
+      "modest_meals:item/meal/curry/potato_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/potato_0",
+      "modest_meals:item/meal/pasta/potato_1",
+      "modest_meals:item/meal/pasta/potato_2",
+      "modest_meals:item/meal/pasta/potato_3"
+    ],
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/potato_0",
+      "modest_meals:item/meal/pie/potato_1",
+      "modest_meals:item/meal/pie/potato_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/potato_0",
+      "modest_meals:item/meal/pie_slice/potato_1",
+      "modest_meals:item/meal/pie_slice/potato_2"
+    ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/potato_0",
+      "modest_meals:item/meal/ramen/potato_1",
+      "modest_meals:item/meal/ramen/potato_2",
+      "modest_meals:item/meal/ramen/potato_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/potato_0",
+      "modest_meals:item/meal/roll/potato_1",
+      "modest_meals:item/meal/roll/potato_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/potato_0",
+      "modest_meals:item/meal/roll_slice/potato_1",
+      "modest_meals:item/meal/roll_slice/potato_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/potato_0",
+      "modest_meals:item/meal/salad/potato_1",
+      "modest_meals:item/meal/salad/potato_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/potato_0",
+      "modest_meals:item/meal/soup/potato_1",
+      "modest_meals:item/meal/soup/potato_2",
+      "modest_meals:item/meal/soup/potato_3",
+      "modest_meals:item/meal/soup/potato_4"
+    ]
+  }
+}

@@ -1,13 +1,13 @@
 package com.evandev.modest_meals.compat.emi;
 
-import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
+import com.baisylia.culturaldelights.integration.emi.VatRecipeHandler;
+import com.baisylia.culturaldelights.screens.ModMenuTypes;
 import com.evandev.modest_meals.compat.cultural_delights.VatMealRecipe;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.food.meal.MealTypeManager;
 import dev.emi.emi.api.EmiRegistry;
-import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.stack.EmiStack;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
@@ -18,15 +18,8 @@ import java.util.Set;
 
 public final class VatEmiSupport {
 
-    private static final EmiStack VAT = EmiStack.of(BuiltInRegistries.ITEM.get(
-            ResourceLocation.fromNamespaceAndPath(CulturalDelightsCompat.MOD_ID, "vat")));
-
-    public static final EmiRecipeCategory MEAL_CHILLING = new EmiRecipeCategory(
-            MealEmiCategories.id("meal_chilling"), VAT);
-
     public static void register(EmiRegistry registry, List<EmiStack> pool) {
-        registry.addCategory(MEAL_CHILLING);
-        registry.addWorkstation(MEAL_CHILLING, VAT);
+        registry.addRecipeHandler(ModMenuTypes.VAT_MENU.get(), new MealVatHandler());
 
         Set<ResourceLocation> backing = new HashSet<>();
         for (RecipeHolder<?> holder : registry.getRecipeManager().getRecipes()) {
@@ -51,6 +44,13 @@ public final class VatEmiSupport {
 
         if (!backing.isEmpty()) {
             registry.removeRecipes(recipe -> backing.contains(recipe.getId()));
+        }
+    }
+
+    private static class MealVatHandler extends VatRecipeHandler {
+        @Override
+        public boolean supportsRecipe(EmiRecipe recipe) {
+            return recipe instanceof VatMealEmiRecipe;
         }
     }
 }

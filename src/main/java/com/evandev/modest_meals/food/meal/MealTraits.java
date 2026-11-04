@@ -4,6 +4,7 @@ import com.evandev.modest_meals.component.MealContents;
 import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.food.ingredient.MealEffect;
 import com.evandev.modest_meals.food.ingredient.MealEffectManager;
+import com.evandev.modest_meals.registry.ModItems;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.impl.*;
 import net.minecraft.world.item.ItemStack;
@@ -30,11 +31,15 @@ public final class MealTraits {
             contents.effect()
                     .flatMap(MealEffectManager::get)
                     .flatMap(MealEffect::resolveMobEffect)
-                    .ifPresent(effect -> traits.add(new EffectGrantTrait(
-                            effect, contents.durationTicks(), contents.amplifier(), true, false)));
+                    .ifPresent(effect -> traits.add(new EffectGrantTrait(effect, contents.durationTicks(),
+                            contents.amplifier(), true, false, contents.durationTicks() * portionsOf(stack))));
         }
 
         return traits;
+    }
+
+    private static int portionsOf(ItemStack stack) {
+        return ModItems.portionOf(stack.getItem()).map(ModItems.Portion::count).orElse(0);
     }
 
     private static int digestTicksFor(ItemStack stack, MealContents contents) {

@@ -31,7 +31,8 @@
       "target": "farmersdelight:ham"
     },
     {
-      "stamina": 1.5,
+      "health": 3.0,
+      "stamina": 3.0,
       "target": "farmersdelight:pie_crust"
     },
     {

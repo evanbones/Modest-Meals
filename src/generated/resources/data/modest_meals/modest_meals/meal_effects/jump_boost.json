@@ -1,7 +1,6 @@
 {
   "id": "modest_meals:jump_boost",
   "mob_effect": "minecraft:jump_boost",
-  "name_prefix_key": "modest_meals.meal_prefix.jump_boost",
   "tiers": [
     {
       "amplifier": 0,
@@ -9,11 +8,11 @@
     },
     {
       "amplifier": 1,
-      "threshold": 30
+      "threshold": 50
     },
     {
       "amplifier": 2,
-      "threshold": 45
+      "threshold": 80
     }
   ]
 }

@@ -1,6 +1,19 @@
 {
   "item": "farmersdelight:salmon_slice",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/salmon_0",
+      "modest_meals:item/meal/curry/salmon_1",
+      "modest_meals:item/meal/curry/salmon_2",
+      "modest_meals:item/meal/curry/salmon_3",
+      "modest_meals:item/meal/curry/salmon_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/salmon_0",
+      "modest_meals:item/meal/pasta/salmon_1",
+      "modest_meals:item/meal/pasta/salmon_2",
+      "modest_meals:item/meal/pasta/salmon_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/salmon_0",
       "modest_meals:item/meal/pizza/salmon_1",
@@ -22,10 +35,38 @@
       "modest_meals:item/meal/placed_pizza/salmon_3",
       "modest_meals:item/meal/placed_pizza/salmon_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/salmon_0",
+      "modest_meals:item/meal/ramen/salmon_1",
+      "modest_meals:item/meal/ramen/salmon_2",
+      "modest_meals:item/meal/ramen/salmon_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/salmon_0",
+      "modest_meals:item/meal/roll/salmon_1",
+      "modest_meals:item/meal/roll/salmon_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/salmon_0",
+      "modest_meals:item/meal/roll_slice/salmon_1",
+      "modest_meals:item/meal/roll_slice/salmon_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/salmon_0",
+      "modest_meals:item/meal/salad/salmon_1",
+      "modest_meals:item/meal/salad/salmon_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/salmon_0",
       "modest_meals:item/meal/sandwich/salmon_1",
       "modest_meals:item/meal/sandwich/salmon_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/salmon_0",
+      "modest_meals:item/meal/soup/salmon_1",
+      "modest_meals:item/meal/soup/salmon_2",
+      "modest_meals:item/meal/soup/salmon_3",
+      "modest_meals:item/meal/soup/salmon_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/salmon_0",

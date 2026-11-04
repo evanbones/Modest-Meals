@@ -83,7 +83,16 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
         }
 
         Derived d = derived.orElse(Derived.NONE);
-        return authored.map(profile -> profile.withDerived(d.health(), d.stamina(), d.digestTicks()));
+        int nutrition = FoodValues.nutritionOf(stack);
+        return authored.map(profile -> profile.scaledTo(nutrition)).map(profile -> profile.withDerived(d.health(), d.stamina(),
+                profile.health().map(health -> digestTicksFor(stack, health)).orElse(d.digestTicks())));
+    }
+
+    private static int digestTicksFor(ItemStack stack, float health) {
+        return FoodProfileManager.resolve(stack)
+                .or(FoodProfileManager::resolveDefault)
+                .map(profile -> profile.digestTicksFor(health))
+                .orElse(0);
     }
 
     private static Optional<IngredientProfile> fromMeal(ItemStack stack) {
@@ -104,7 +113,7 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
         return Optional.of(new IngredientProfile(
                 Optional.of(contents.health()), Optional.of(contents.stamina()), Optional.of(contents.digestTicks()),
                 Optional.empty(), potency > 0 ? contents.effect() : Optional.empty(), potency,
-                contents.temporaryHealth(), 0));
+                contents.temporaryHealth(), 0, Optional.empty()));
     }
 
     private static Optional<Derived> derive(ItemStack stack) {

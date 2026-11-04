@@ -1,0 +1,181 @@
+{
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/pie/pie_base"
+  },
+  "dubious_sprite": "modest_meals:item/meal/pie/dubious",
+  "forbidden_ingredients": {
+    "tag": "modest_meals:not_for_dishes"
+  },
+  "id": "modest_meals:pie",
+  "item": "modest_meals:pie",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "minecraft:apple",
+        "minecraft:apple",
+        "minecraft:apple"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:apple_pie"
+    },
+    {
+      "ingredients": [
+        "minecraft:cocoa_beans",
+        "minecraft:cocoa_beans",
+        "minecraft:cocoa_beans"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:chocolate_pie"
+    },
+    {
+      "ingredients": [
+        "minecraft:sweet_berries",
+        "minecraft:sweet_berries",
+        "minecraft:sweet_berries"
+      ],
+      "replace_recipes": true,
+      "result": "farmersdelight:sweet_berry_cheesecake"
+    },
+    {
+      "ingredients": [
+        "farmersdelight:pumpkin_slice",
+        "farmersdelight:pumpkin_slice",
+        "farmersdelight:pumpkin_slice"
+      ],
+      "result": "minecraft:pumpkin_pie"
+    },
+    {
+      "ingredients": [
+        "minecraft:glow_berries",
+        "minecraft:glow_berries",
+        "minecraft:glow_berries"
+      ],
+      "replace_recipes": true,
+      "result": "brewinandchewin:glow_berry_meringue_pie"
+    },
+    {
+      "ingredients": [
+        "#c:foods/cooked_bacon|minecraft:brown_mushroom",
+        "#c:foods/cooked_bacon|minecraft:brown_mushroom",
+        "#brewinandchewin:foods/cheese_wedge"
+      ],
+      "replace_recipes": true,
+      "result": "brewinandchewin:quiche"
+    },
+    {
+      "ingredients": [
+        "nomansland:pear",
+        "nomansland:walnuts"
+      ],
+      "replace_recipes": true,
+      "result": "nomansland:pear_cobbler"
+    },
+    {
+      "ingredients": [
+        "minecraft:apple",
+        "minecraft:apple"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:apple_pie"
+    },
+    {
+      "ingredients": [
+        "#c:foods/oranges",
+        "#c:foods/oranges",
+        "#c:foods/oranges"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:orange_pie"
+    },
+    {
+      "ingredients": [
+        "#c:foods/lemons",
+        "#c:foods/lemons",
+        "#c:foods/lemons"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:lemon_pie"
+    },
+    {
+      "ingredients": [
+        "#c:foods/plums",
+        "#c:foods/plums",
+        "#c:foods/plums"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:plum_pie"
+    },
+    {
+      "ingredients": [
+        "bountifulfares:hoary_apple",
+        "bountifulfares:hoary_apple",
+        "bountifulfares:hoary_apple"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:hoary_pie"
+    },
+    {
+      "ingredients": [
+        "minecraft:melon_slice",
+        "minecraft:melon_slice",
+        "minecraft:melon_slice"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:melon_pie"
+    },
+    {
+      "ingredients": [
+        "#c:foods/elderberries",
+        "#c:foods/elderberries"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:elderberry_tart"
+    },
+    {
+      "ingredients": [
+        "minecraft:glow_berries",
+        "minecraft:glow_berries"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:glow_berry_tart"
+    },
+    {
+      "ingredients": [
+        "bountifulfares:lapisberries",
+        "bountifulfares:lapisberries"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:lapisberry_tart"
+    },
+    {
+      "ingredients": [
+        "#c:foods/passion_fruit",
+        "#c:foods/passion_fruit"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:passion_fruit_tart"
+    },
+    {
+      "ingredients": [
+        "minecraft:sweet_berries",
+        "minecraft:sweet_berries"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:sweet_berry_tart"
+    }
+  ],
+  "max_ingredients": 3,
+  "priority": 10,
+  "requires_supported_ingredients": true,
+  "shape": {
+    "key": {
+      "#": "modest_meals:any_ingredient",
+      "O": "#c:foods/pie_crust",
+      "S": "minecraft:sugar"
+    },
+    "pattern": [
+      "###",
+      "SOS"
+    ]
+  }
+}

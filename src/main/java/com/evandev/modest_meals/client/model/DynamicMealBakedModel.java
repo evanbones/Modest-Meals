@@ -113,7 +113,8 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
 
             MealType.BaseSprites baseSprites = portionBase == null
                     ? type.baseSprites().get()
-                    : new MealType.BaseSprites(portionBase);
+                    : new MealType.BaseSprites(Optional.of(portionBase), Optional.empty(), Optional.empty(),
+                    type.baseSprites().get().repeatIngredients());
             String cacheKey = String.join(",", contents.ingredients().stream().map(ResourceLocation::toString).toList());
             return cache.computeIfAbsent(cacheKey, k -> {
                 List<TextureAtlasSprite> sprites = new ArrayList<>();
@@ -121,7 +122,8 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
 
                 int slots = baseSprites.getEffectiveLayerSlots(type.maxIngredients());
                 for (int i = 0; i < slots; i++) {
-                    ResourceLocation fillingLoc = getIngredientSprite(contents.ingredients(), i, slots, type);
+                    ResourceLocation fillingLoc = getIngredientSprite(contents.ingredients(), i, slots, type,
+                            baseSprites.repeatIngredients());
                     if (fillingLoc != null) {
                         sprites.add(spriteGetter.apply(fillingLoc));
                     }
@@ -133,9 +135,10 @@ public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
             });
         }
 
-        private @Nullable ResourceLocation getIngredientSprite(List<ResourceLocation> ingredients, int index, int totalSlots, MealType type) {
-            if (index < ingredients.size()) {
-                ResourceLocation itemId = ingredients.get(index);
+        private @Nullable ResourceLocation getIngredientSprite(List<ResourceLocation> ingredients, int index, int totalSlots,
+                                                               MealType type, boolean repeat) {
+            if (repeat && !ingredients.isEmpty() || index < ingredients.size()) {
+                ResourceLocation itemId = ingredients.get(index % ingredients.size());
                 Item item = BuiltInRegistries.ITEM.get(itemId);
                 Optional<ResourceLocation> sprite = MealIngredientManager.getIngredientSprite(visualId, item, index, totalSlots);
                 if (sprite.isPresent()) {

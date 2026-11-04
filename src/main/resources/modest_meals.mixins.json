@@ -9,6 +9,7 @@
     "FoodDataMixin",
     "ItemMixin",
     "LivingEntityMixin",
+    "MobEffectInstanceAccessor",
     "PlayerMixin",
     "RecipeManagerMixin",
     "ServerGamePacketListenerImplAccessor"

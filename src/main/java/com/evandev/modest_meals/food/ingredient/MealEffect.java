@@ -17,8 +17,8 @@ public record MealEffect(
         ResourceLocation id,
         Optional<ResourceLocation> mobEffect,
         int baseSeconds,
+        float fillerScale,
         List<Tier> tiers,
-        Optional<String> namePrefixKey,
         List<String> requiredMods,
         List<String> anyOfMods
 ) {
@@ -26,8 +26,8 @@ public record MealEffect(
             ResourceLocation.CODEC.fieldOf("id").forGetter(MealEffect::id),
             ResourceLocation.CODEC.optionalFieldOf("mob_effect").forGetter(MealEffect::mobEffect),
             Codec.INT.optionalFieldOf("base_seconds", 30).forGetter(MealEffect::baseSeconds),
+            Codec.FLOAT.optionalFieldOf("filler_scale", 1.0F).forGetter(MealEffect::fillerScale),
             Tier.CODEC.listOf().optionalFieldOf("tiers", List.of(new Tier(0, 0))).forGetter(MealEffect::tiers),
-            Codec.STRING.optionalFieldOf("name_prefix_key").forGetter(MealEffect::namePrefixKey),
             Codec.STRING.listOf().optionalFieldOf("required_mods", List.of()).forGetter(MealEffect::requiredMods),
             Codec.STRING.listOf().optionalFieldOf("any_of_mods", List.of()).forGetter(MealEffect::anyOfMods)
     ).apply(instance, MealEffect::new));
@@ -55,9 +55,6 @@ public record MealEffect(
         return anyOfMods.isEmpty() || anyOfMods.stream().anyMatch(modId -> ModList.get().isLoaded(modId));
     }
 
-    public String namePrefixKeyOrDefault() {
-        return namePrefixKey.orElseGet(() -> "modest_meals.meal_prefix." + id.getPath());
-    }
 
     public Component displayName() {
         return resolveMobEffect()

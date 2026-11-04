@@ -17,7 +17,11 @@
       ]
     }
   ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/soup/soup_base"
+  },
   "container": "minecraft:bowl",
+  "dubious_sprite": "modest_meals:item/meal/soup/dubious",
   "id": "modest_meals:soup",
   "item": "modest_meals:soup",
   "item_overrides": [
@@ -193,5 +197,6 @@
     }
   ],
   "min_ingredients": 2,
+  "requires_supported_ingredients": true,
   "station": "cooking_pot"
 }

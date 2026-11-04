@@ -1,6 +1,6 @@
 package com.evandev.modest_meals.client;
 
-import com.evandev.modest_meals.block.PizzaBlock;
+import com.evandev.modest_meals.block.SlicedMealBlock;
 import com.evandev.modest_meals.component.MealContents;
 import com.evandev.modest_meals.food.EdibleBlockFoods;
 import net.minecraft.client.Minecraft;
@@ -30,10 +30,10 @@ public class HoveredEdibleBlock {
         }
 
         BlockState state = minecraft.level.getBlockState(blockHit.getBlockPos());
-        if (state.getBlock() instanceof PizzaBlock) {
-            MealContents contents = PizzaBlock.contentsAt(minecraft.level, blockHit.getBlockPos());
+        if (state.getBlock() instanceof SlicedMealBlock meal) {
+            MealContents contents = SlicedMealBlock.contentsAt(minecraft.level, blockHit.getBlockPos());
             return contents.isMeaningful()
-                    ? Optional.of(new EdibleBlockFoods.EdibleBlock(PizzaBlock.sliceOf(contents), 1.0F))
+                    ? Optional.of(new EdibleBlockFoods.EdibleBlock(meal.sliceOf(contents), 1.0F))
                     : Optional.empty();
         }
         if (state != cachedState) {

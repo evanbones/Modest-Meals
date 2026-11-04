@@ -1,0 +1,108 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "modest_meals:block/pie_side",
+    "side": "modest_meals:block/pie_side",
+    "bottom": "modest_meals:block/pie_bottom",
+    "filling": "modest_meals:block/pie_top_filling",
+    "crust": "modest_meals:block/pie_top_crust",
+    "inner_filling": "modest_meals:block/pie_inner_filling",
+    "inner_crust": "modest_meals:block/pie_inner_crust"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        4,
+        14
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#filling",
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "tintindex": 0
+        },
+        "north": {
+          "texture": "#side",
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#side",
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#side",
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#side",
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        1.99,
+        0,
+        1.99
+      ],
+      "to": [
+        14.01,
+        4.01,
+        14.01
+      ],
+      "faces": {
+        "up": {
+          "texture": "#crust",
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ]
+        }
+      }
+    }
+  ]
+}

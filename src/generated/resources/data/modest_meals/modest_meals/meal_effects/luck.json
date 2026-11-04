@@ -1,6 +1,6 @@
 {
   "base_seconds": 60,
+  "filler_scale": 2.0,
   "id": "modest_meals:luck",
-  "mob_effect": "minecraft:luck",
-  "name_prefix_key": "modest_meals.meal_prefix.luck"
+  "mob_effect": "minecraft:luck"
 }

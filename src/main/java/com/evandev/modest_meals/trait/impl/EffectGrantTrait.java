@@ -23,13 +23,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int amplifier, boolean showParticles,
-                               boolean ambient) implements FoodTrait {
+                               boolean ambient, int stackLimit) implements FoodTrait {
     public static final MapCodec<EffectGrantTrait> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.MOB_EFFECT.holderByNameCodec().fieldOf("effect").forGetter(EffectGrantTrait::effect),
             Codec.INT.fieldOf("duration").forGetter(EffectGrantTrait::duration),
             Codec.INT.optionalFieldOf("amplifier", 0).forGetter(EffectGrantTrait::amplifier),
             Codec.BOOL.optionalFieldOf("show_particles", true).forGetter(EffectGrantTrait::showParticles),
-            Codec.BOOL.optionalFieldOf("ambient", false).forGetter(EffectGrantTrait::ambient)
+            Codec.BOOL.optionalFieldOf("ambient", false).forGetter(EffectGrantTrait::ambient),
+            Codec.INT.optionalFieldOf("stack_limit", 0).forGetter(EffectGrantTrait::stackLimit)
     ).apply(instance, EffectGrantTrait::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, EffectGrantTrait> STREAM_CODEC = StreamCodec.composite(
@@ -38,8 +39,13 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
             ByteBufCodecs.VAR_INT, EffectGrantTrait::amplifier,
             ByteBufCodecs.BOOL, EffectGrantTrait::showParticles,
             ByteBufCodecs.BOOL, EffectGrantTrait::ambient,
+            ByteBufCodecs.VAR_INT, EffectGrantTrait::stackLimit,
             EffectGrantTrait::new
     );
+
+    public EffectGrantTrait(Holder<MobEffect> effect, int duration, int amplifier, boolean showParticles, boolean ambient) {
+        this(effect, duration, amplifier, showParticles, ambient, 0);
+    }
 
     @Override
     public FoodTraitType<?> getType() {
@@ -54,6 +60,10 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
     @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
         int dur = (int) (this.duration * durationMultiplier);
+        MobEffectInstance active = entity.getEffect(this.effect);
+        if (this.stackLimit > 0 && active != null && active.getAmplifier() == this.amplifier) {
+            dur = Math.max(active.getDuration(), Math.min(active.getDuration() + dur, (int) (this.stackLimit * durationMultiplier)));
+        }
         if (dur > 0) {
             entity.addEffect(new MobEffectInstance(this.effect, dur, this.amplifier, this.ambient, this.showParticles));
         }

@@ -1,6 +1,19 @@
 {
   "item": "farmersdelight:fried_egg",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/fried_egg_0",
+      "modest_meals:item/meal/curry/fried_egg_1",
+      "modest_meals:item/meal/curry/fried_egg_2",
+      "modest_meals:item/meal/curry/fried_egg_3",
+      "modest_meals:item/meal/curry/fried_egg_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/fried_egg_0",
+      "modest_meals:item/meal/pasta/fried_egg_1",
+      "modest_meals:item/meal/pasta/fried_egg_2",
+      "modest_meals:item/meal/pasta/fried_egg_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/fried_egg_0",
       "modest_meals:item/meal/pizza/fried_egg_1",
@@ -22,10 +35,38 @@
       "modest_meals:item/meal/placed_pizza/fried_egg_3",
       "modest_meals:item/meal/placed_pizza/fried_egg_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/fried_egg_0",
+      "modest_meals:item/meal/ramen/fried_egg_1",
+      "modest_meals:item/meal/ramen/fried_egg_2",
+      "modest_meals:item/meal/ramen/fried_egg_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/fried_egg_0",
+      "modest_meals:item/meal/roll/fried_egg_1",
+      "modest_meals:item/meal/roll/fried_egg_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/fried_egg_0",
+      "modest_meals:item/meal/roll_slice/fried_egg_1",
+      "modest_meals:item/meal/roll_slice/fried_egg_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/fried_egg_0",
+      "modest_meals:item/meal/salad/fried_egg_1",
+      "modest_meals:item/meal/salad/fried_egg_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/fried_egg_0",
       "modest_meals:item/meal/sandwich/fried_egg_1",
       "modest_meals:item/meal/sandwich/fried_egg_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/fried_egg_0",
+      "modest_meals:item/meal/soup/fried_egg_1",
+      "modest_meals:item/meal/soup/fried_egg_2",
+      "modest_meals:item/meal/soup/fried_egg_3",
+      "modest_meals:item/meal/soup/fried_egg_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/fried_egg_0",

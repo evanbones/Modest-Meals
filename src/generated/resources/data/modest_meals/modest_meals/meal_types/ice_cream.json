@@ -18,7 +18,7 @@
   "dubious_sprite": "modest_meals:item/meal/ice_cream/dubious",
   "id": "modest_meals:ice_cream",
   "item": "modest_meals:ice_cream",
-  "max_ingredients": 3,
+  "max_ingredients": 1,
   "priority": 30,
   "requires_supported_ingredients": true,
   "station": "vat"

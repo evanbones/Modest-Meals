@@ -1,0 +1,30 @@
+{
+  "item": "nomansland:honeyed_apple",
+  "meals": {
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/apple_0",
+      "modest_meals:item/meal/jam/apple_1",
+      "modest_meals:item/meal/jam/apple_2"
+    ],
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/apple_0",
+      "modest_meals:item/meal/pie/apple_1",
+      "modest_meals:item/meal/pie/apple_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/apple_0",
+      "modest_meals:item/meal/pie_slice/apple_1",
+      "modest_meals:item/meal/pie_slice/apple_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/apple_0",
+      "modest_meals:item/meal/porridge/apple_1",
+      "modest_meals:item/meal/porridge/apple_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/apple_0",
+      "modest_meals:item/meal/salad/apple_1",
+      "modest_meals:item/meal/salad/apple_2"
+    ]
+  }
+}

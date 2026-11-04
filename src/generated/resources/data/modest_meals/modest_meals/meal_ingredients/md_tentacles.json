@@ -1,6 +1,19 @@
 {
   "item": "minersdelight:tentacles",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/squid_0",
+      "modest_meals:item/meal/curry/squid_1",
+      "modest_meals:item/meal/curry/squid_2",
+      "modest_meals:item/meal/curry/squid_3",
+      "modest_meals:item/meal/curry/squid_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/squid_0",
+      "modest_meals:item/meal/pasta/squid_1",
+      "modest_meals:item/meal/pasta/squid_2",
+      "modest_meals:item/meal/pasta/squid_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/squid_0",
       "modest_meals:item/meal/pizza/squid_1",
@@ -22,10 +35,38 @@
       "modest_meals:item/meal/placed_pizza/squid_3",
       "modest_meals:item/meal/placed_pizza/squid_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/squid_0",
+      "modest_meals:item/meal/ramen/squid_1",
+      "modest_meals:item/meal/ramen/squid_2",
+      "modest_meals:item/meal/ramen/squid_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/squid_0",
+      "modest_meals:item/meal/roll/squid_1",
+      "modest_meals:item/meal/roll/squid_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/squid_0",
+      "modest_meals:item/meal/roll_slice/squid_1",
+      "modest_meals:item/meal/roll_slice/squid_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/squid_0",
+      "modest_meals:item/meal/salad/squid_1",
+      "modest_meals:item/meal/salad/squid_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/squid_0",
       "modest_meals:item/meal/sandwich/squid_1",
       "modest_meals:item/meal/sandwich/squid_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/squid_0",
+      "modest_meals:item/meal/soup/squid_1",
+      "modest_meals:item/meal/soup/squid_2",
+      "modest_meals:item/meal/soup/squid_3",
+      "modest_meals:item/meal/soup/squid_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/squid_0",

@@ -1,10 +1,47 @@
 {
   "item": "brewinandchewin:red_grapes",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/grape_0",
-      "modest_meals:item/meal/ice_cream/grape_1",
-      "modest_meals:item/meal/ice_cream/grape_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/grape_0",
+      "modest_meals:item/meal/cake/grape_1",
+      "modest_meals:item/meal/cake/grape_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/grape_0",
+      "modest_meals:item/meal/cake_slice/grape_1",
+      "modest_meals:item/meal/cake_slice/grape_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/grape",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/grape_0",
+      "modest_meals:item/meal/ice_cream_bowl/grape_1",
+      "modest_meals:item/meal/ice_cream_bowl/grape_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/red_grapes_0",
+      "modest_meals:item/meal/jam/red_grapes_1",
+      "modest_meals:item/meal/jam/red_grapes_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/grape",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/red_grapes_0",
+      "modest_meals:item/meal/pie/red_grapes_1",
+      "modest_meals:item/meal/pie/red_grapes_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/red_grapes_0",
+      "modest_meals:item/meal/pie_slice/red_grapes_1",
+      "modest_meals:item/meal/pie_slice/red_grapes_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/red_grapes_0",
+      "modest_meals:item/meal/porridge/red_grapes_1",
+      "modest_meals:item/meal/porridge/red_grapes_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/red_grapes_0",
+      "modest_meals:item/meal/salad/red_grapes_1",
+      "modest_meals:item/meal/salad/red_grapes_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/red_grapes_0",

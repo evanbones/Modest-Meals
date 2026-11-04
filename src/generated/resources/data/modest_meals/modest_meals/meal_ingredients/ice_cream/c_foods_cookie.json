@@ -1,11 +1,23 @@
 {
   "item": "#c:foods/cookie",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/cookie_0",
-      "modest_meals:item/meal/ice_cream/cookie_1",
-      "modest_meals:item/meal/ice_cream/cookie_2"
-    ]
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/cookie_0",
+      "modest_meals:item/meal/cake/cookie_1",
+      "modest_meals:item/meal/cake/cookie_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/cookie_0",
+      "modest_meals:item/meal/cake_slice/cookie_1",
+      "modest_meals:item/meal/cake_slice/cookie_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/cookie",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/cookie_0",
+      "modest_meals:item/meal/ice_cream_bowl/cookie_1",
+      "modest_meals:item/meal/ice_cream_bowl/cookie_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/cookie"
   },
   "priority": 5
 }

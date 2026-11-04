@@ -1,10 +1,42 @@
 {
   "item": "minecraft:chorus_fruit",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/chorus_0",
-      "modest_meals:item/meal/ice_cream/chorus_1",
-      "modest_meals:item/meal/ice_cream/chorus_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/chorus_0",
+      "modest_meals:item/meal/cake/chorus_1",
+      "modest_meals:item/meal/cake/chorus_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/chorus_0",
+      "modest_meals:item/meal/cake_slice/chorus_1",
+      "modest_meals:item/meal/cake_slice/chorus_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/chorus",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/chorus_0",
+      "modest_meals:item/meal/ice_cream_bowl/chorus_1",
+      "modest_meals:item/meal/ice_cream_bowl/chorus_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/chorus_fruit_0",
+      "modest_meals:item/meal/jam/chorus_fruit_1",
+      "modest_meals:item/meal/jam/chorus_fruit_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/chorus",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/chorus_fruit_0",
+      "modest_meals:item/meal/pie/chorus_fruit_1",
+      "modest_meals:item/meal/pie/chorus_fruit_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/chorus_fruit_0",
+      "modest_meals:item/meal/pie_slice/chorus_fruit_1",
+      "modest_meals:item/meal/pie_slice/chorus_fruit_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/chorus_fruit_0",
+      "modest_meals:item/meal/salad/chorus_fruit_1",
+      "modest_meals:item/meal/salad/chorus_fruit_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/chorus_fruit_0",

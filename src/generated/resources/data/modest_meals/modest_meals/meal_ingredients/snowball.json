@@ -1,10 +1,22 @@
 {
   "item": "minecraft:snowball",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/snow_0",
-      "modest_meals:item/meal/ice_cream/snow_1",
-      "modest_meals:item/meal/ice_cream/snow_2"
-    ]
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/snow_0",
+      "modest_meals:item/meal/cake/snow_1",
+      "modest_meals:item/meal/cake/snow_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/snow_0",
+      "modest_meals:item/meal/cake_slice/snow_1",
+      "modest_meals:item/meal/cake_slice/snow_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/snow",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/snow_0",
+      "modest_meals:item/meal/ice_cream_bowl/snow_1",
+      "modest_meals:item/meal/ice_cream_bowl/snow_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/snow"
   }
 }

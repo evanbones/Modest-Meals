@@ -1,0 +1,132 @@
+{
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/cake/cake_base"
+  },
+  "dubious_sprite": "modest_meals:item/meal/cake/dubious",
+  "forbidden_ingredients": {
+    "tag": "modest_meals:not_for_dishes"
+  },
+  "id": "modest_meals:cake",
+  "item": "modest_meals:cake",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "neapolitan:dried_vanilla_pods",
+        "neapolitan:dried_vanilla_pods"
+      ],
+      "replace_recipes": true,
+      "result": "neapolitan:vanilla_cake"
+    },
+    {
+      "ingredients": [
+        "#c:foods/chocolate_bar",
+        "#c:foods/chocolate_bar"
+      ],
+      "replace_recipes": true,
+      "result": "neapolitan:chocolate_cake"
+    },
+    {
+      "ingredients": [
+        "#c:foods/strawberry",
+        "#c:foods/strawberry"
+      ],
+      "replace_recipes": true,
+      "result": "neapolitan:strawberry_cake"
+    },
+    {
+      "ingredients": [
+        "#c:foods/banana",
+        "#c:foods/banana"
+      ],
+      "replace_recipes": true,
+      "result": "neapolitan:banana_cake"
+    },
+    {
+      "ingredients": [
+        "neapolitan:mint_leaves",
+        "neapolitan:mint_leaves"
+      ],
+      "replace_recipes": true,
+      "result": "neapolitan:mint_cake"
+    },
+    {
+      "ingredients": [
+        "neapolitan:roasted_adzuki_beans",
+        "neapolitan:roasted_adzuki_beans"
+      ],
+      "replace_recipes": true,
+      "result": "neapolitan:adzuki_cake"
+    },
+    {
+      "ingredients": [
+        "minecraft:cocoa_beans",
+        "minecraft:cocoa_beans",
+        "minecraft:cocoa_beans"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:cocoa_cake"
+    },
+    {
+      "ingredients": [
+        "#c:coconut_halves",
+        "#c:coconut_halves",
+        "#c:coconut_halves"
+      ],
+      "replace_recipes": true,
+      "result": "bountifulfares:coconut_cake"
+    },
+    {
+      "ingredients": [
+        "nomansland:pear",
+        "minecraft:sweet_berries",
+        "minecraft:apple"
+      ],
+      "replace_recipes": true,
+      "result": "nomansland:fruit_cake"
+    },
+    {
+      "ingredients": [
+        "brewinandchewin:cocoa_fudge",
+        "brewinandchewin:cocoa_fudge",
+        "minecraft:sweet_berries"
+      ],
+      "replace_recipes": true,
+      "result": "brewinandchewin:rich_chocolate_cake"
+    },
+    {
+      "ingredients": [
+        "farmersdelight:pumpkin_slice",
+        "farmersdelight:pumpkin_slice",
+        "farmersdelight:pumpkin_slice"
+      ],
+      "replace_recipes": true,
+      "result": "brewinandchewin:pumpkin_roll"
+    },
+    {
+      "ingredients": [
+        "minecraft:magma_cream",
+        "minecraft:magma_cream",
+        "mynethersdelight:hot_cream"
+      ],
+      "replace_recipes": true,
+      "result": "mynethersdelight:magma_cake_block"
+    }
+  ],
+  "max_ingredients": 3,
+  "priority": 10,
+  "requires_supported_ingredients": true,
+  "shape": {
+    "key": {
+      "#": "modest_meals:any_ingredient",
+      "E": "#c:eggs",
+      "M": "#c:drinks/milk",
+      "S": "minecraft:sugar",
+      "W": "#c:crops/wheat"
+    },
+    "pattern": [
+      "M#M",
+      "#E#",
+      "WSW"
+    ]
+  }
+}

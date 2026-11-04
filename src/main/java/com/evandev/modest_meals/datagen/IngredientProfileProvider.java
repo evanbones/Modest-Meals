@@ -64,7 +64,13 @@ public class IngredientProfileProvider implements DataProvider {
                 Optional.ofNullable(health), Optional.ofNullable(stamina),
                 digestTicks > 0 ? Optional.of(digestTicks) : Optional.empty(),
                 Optional.empty(),
-                effect, potency, temporaryHealth, timeBonus);
+                effect, potency, temporaryHealth, timeBonus, Optional.empty());
+    }
+
+    private static IngredientProfile perNutrition(IngredientProfile profile, int referenceNutrition) {
+        return new IngredientProfile(profile.health(), profile.stamina(), profile.digestTicks(),
+                profile.eatSeconds(), profile.effect(), profile.potency(), profile.temporaryHealth(),
+                profile.timeBonusSeconds(), Optional.of(referenceNutrition));
     }
 
     private static String id(Item item) {
@@ -165,8 +171,8 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(id(Items.POTATO), dish(null, 1.5F));
         builder.add(id(Items.BAKED_POTATO), dish(null, 2.5F));
 
-        builder.addTag("c:crops/beetroot", 145, effect(2.0F, 1.0F, "strength", MEDIUM));
-        builder.add(id(Items.BEETROOT), effect(2.0F, 1.0F, "strength", MEDIUM));
+        builder.addTag("c:crops/beetroot", 145, effect(2.0F, 1.0F, "strength", WEAK));
+        builder.add(id(Items.BEETROOT), effect(2.0F, 1.0F, "strength", WEAK));
 
         builder.addTag("c:crops/rice", 145, dish(null, 1.0F));
 
@@ -185,10 +191,10 @@ public class IngredientProfileProvider implements DataProvider {
     }
 
     private void proteins(Builder builder) {
-        builder.addTag("c:foods/raw_meat", 140, food(2.0F, 1.0F));
-        builder.addTag("c:foods/cooked_meat", 145, food(5.0F, 2.0F));
-        builder.addTag("c:foods/raw_fish", 140, dish(3.0F, null, 120));
-        builder.addTag("c:foods/cooked_fish", 145, dish(5.0F, null, 150));
+        builder.addTag("c:foods/raw_meat", 140, perNutrition(food(2.0F, 1.0F), 3));
+        builder.addTag("c:foods/cooked_meat", 145, perNutrition(food(5.0F, 2.0F), 7));
+        builder.addTag("c:foods/raw_fish", 140, perNutrition(dish(3.0F, null, 120), 2));
+        builder.addTag("c:foods/cooked_fish", 145, perNutrition(dish(5.0F, null, 150), 5));
 
         builder.add(id(Items.BEEF), food(2.0F, 1.0F));
         builder.add(id(Items.COOKED_BEEF), food(6.0F, 2.0F));
@@ -233,7 +239,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.addTag("c:foods/dough", 140, timeBoost(1.0F, 2.0F, 30));
         builder.addTag("c:foods/pasta", 140, timeBoost(1.0F, 3.0F, 30));
         builder.addTag("c:foods/tortilla", 140, timeBoost(2.0F, 3.0F, 30));
-        builder.addTag("c:foods/bread", 130, timeBoost(3.0F, 5.0F, 30));
+        builder.addTag("c:foods/bread", 130, timeBoost(1.5F, 3.0F, 30));
     }
 
     private void misc(Builder builder) {
@@ -254,7 +260,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add("farmersdelight:cooked_cod_slice", dish(3F, null, 130));
         builder.add("farmersdelight:cooked_salmon_slice", dish(3.75F, null, 145));
         builder.add("farmersdelight:ham", food(2F, 1F));
-        builder.add("farmersdelight:pie_crust", dish(null, 1.5F));
+        builder.add("farmersdelight:pie_crust", dish(3.0F, 3.0F));
         builder.add("farmersdelight:pumpkin_slice", dish(null, 1F));
         builder.add("farmersdelight:rice", dish(null, 1F));
         builder.add("farmersdelight:salmon_slice", dish(2.5F, null, 100));

@@ -1,10 +1,47 @@
 {
   "item": "brewinandchewin:glow_berry_marmalade",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/glow_berry_0",
-      "modest_meals:item/meal/ice_cream/glow_berry_1",
-      "modest_meals:item/meal/ice_cream/glow_berry_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/glow_berry_0",
+      "modest_meals:item/meal/cake/glow_berry_1",
+      "modest_meals:item/meal/cake/glow_berry_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/glow_berry_0",
+      "modest_meals:item/meal/cake_slice/glow_berry_1",
+      "modest_meals:item/meal/cake_slice/glow_berry_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/glow_berry",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/glow_berry_0",
+      "modest_meals:item/meal/ice_cream_bowl/glow_berry_1",
+      "modest_meals:item/meal/ice_cream_bowl/glow_berry_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/glow_berries_0",
+      "modest_meals:item/meal/jam/glow_berries_1",
+      "modest_meals:item/meal/jam/glow_berries_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/glow_berry",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/glow_berries_0",
+      "modest_meals:item/meal/pie/glow_berries_1",
+      "modest_meals:item/meal/pie/glow_berries_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/glow_berries_0",
+      "modest_meals:item/meal/pie_slice/glow_berries_1",
+      "modest_meals:item/meal/pie_slice/glow_berries_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/glow_berries_0",
+      "modest_meals:item/meal/porridge/glow_berries_1",
+      "modest_meals:item/meal/porridge/glow_berries_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/glow_berries_0",
+      "modest_meals:item/meal/salad/glow_berries_1",
+      "modest_meals:item/meal/salad/glow_berries_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/glow_berries_0",

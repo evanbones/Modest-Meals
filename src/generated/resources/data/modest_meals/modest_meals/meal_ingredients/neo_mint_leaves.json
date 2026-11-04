@@ -1,15 +1,68 @@
 {
   "item": "neapolitan:mint_leaves",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/mint_0",
-      "modest_meals:item/meal/ice_cream/mint_1",
-      "modest_meals:item/meal/ice_cream/mint_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/mint_0",
+      "modest_meals:item/meal/cake/mint_1",
+      "modest_meals:item/meal/cake/mint_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/mint_0",
+      "modest_meals:item/meal/cake_slice/mint_1",
+      "modest_meals:item/meal/cake_slice/mint_2"
+    ],
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/cabbage_0",
+      "modest_meals:item/meal/curry/cabbage_1",
+      "modest_meals:item/meal/curry/cabbage_2",
+      "modest_meals:item/meal/curry/cabbage_3",
+      "modest_meals:item/meal/curry/cabbage_4"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/mint",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/mint_0",
+      "modest_meals:item/meal/ice_cream_bowl/mint_1",
+      "modest_meals:item/meal/ice_cream_bowl/mint_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/mint",
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/cabbage_0",
+      "modest_meals:item/meal/pasta/cabbage_1",
+      "modest_meals:item/meal/pasta/cabbage_2",
+      "modest_meals:item/meal/pasta/cabbage_3"
+    ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/cabbage_0",
+      "modest_meals:item/meal/ramen/cabbage_1",
+      "modest_meals:item/meal/ramen/cabbage_2",
+      "modest_meals:item/meal/ramen/cabbage_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/cabbage_0",
+      "modest_meals:item/meal/roll/cabbage_1",
+      "modest_meals:item/meal/roll/cabbage_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/cabbage_0",
+      "modest_meals:item/meal/roll_slice/cabbage_1",
+      "modest_meals:item/meal/roll_slice/cabbage_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/cabbage_0",
+      "modest_meals:item/meal/salad/cabbage_1",
+      "modest_meals:item/meal/salad/cabbage_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/cabbage_0",
       "modest_meals:item/meal/sandwich/cabbage_1",
       "modest_meals:item/meal/sandwich/cabbage_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/cabbage_0",
+      "modest_meals:item/meal/soup/cabbage_1",
+      "modest_meals:item/meal/soup/cabbage_2",
+      "modest_meals:item/meal/soup/cabbage_3",
+      "modest_meals:item/meal/soup/cabbage_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/cabbage_0",

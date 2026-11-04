@@ -185,6 +185,11 @@ public class ClientEventHandler {
     }
 
     @SubscribeEvent
+    public static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register(MealBlockColors::color, ModBlocks.PIE.get(), ModBlocks.CAKE.get());
+    }
+
+    @SubscribeEvent
     public static void onAddPackFinders(AddPackFindersEvent event) {
         if (event.getPackType() == PackType.CLIENT_RESOURCES) {
             Path resourcePath = ModList.get().getModFileById(Constants.MOD_ID).getFile().findResource("resourcepacks/baisylia_hud");
@@ -208,6 +213,7 @@ public class ClientEventHandler {
     @SubscribeEvent
     public static void onRegisterClientReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener((ResourceManagerReloadListener) resourceManager -> {
+            MealBlockColors.clearCache();
             try {
                 new TextureHelper().generateHudTextures();
             } catch (Exception ignored) {
@@ -240,7 +246,7 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(ModBlocks.PIZZA_ENTITY.get(), PizzaRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.MEAL_ENTITY.get(), PizzaRenderer::new);
     }
 
     public static class GameEvents {

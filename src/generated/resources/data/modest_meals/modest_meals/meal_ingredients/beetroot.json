@@ -1,10 +1,51 @@
 {
   "item": "minecraft:beetroot",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/beetroot_0",
+      "modest_meals:item/meal/curry/beetroot_1",
+      "modest_meals:item/meal/curry/beetroot_2",
+      "modest_meals:item/meal/curry/beetroot_3",
+      "modest_meals:item/meal/curry/beetroot_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/beetroot_0",
+      "modest_meals:item/meal/pasta/beetroot_1",
+      "modest_meals:item/meal/pasta/beetroot_2",
+      "modest_meals:item/meal/pasta/beetroot_3"
+    ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/beetroot_0",
+      "modest_meals:item/meal/ramen/beetroot_1",
+      "modest_meals:item/meal/ramen/beetroot_2",
+      "modest_meals:item/meal/ramen/beetroot_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/beetroot_0",
+      "modest_meals:item/meal/roll/beetroot_1",
+      "modest_meals:item/meal/roll/beetroot_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/beetroot_0",
+      "modest_meals:item/meal/roll_slice/beetroot_1",
+      "modest_meals:item/meal/roll_slice/beetroot_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/beetroot_0",
+      "modest_meals:item/meal/salad/beetroot_1",
+      "modest_meals:item/meal/salad/beetroot_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/beetroot_0",
       "modest_meals:item/meal/sandwich/beetroot_1",
       "modest_meals:item/meal/sandwich/beetroot_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/beetroot_0",
+      "modest_meals:item/meal/soup/beetroot_1",
+      "modest_meals:item/meal/soup/beetroot_2",
+      "modest_meals:item/meal/soup/beetroot_3",
+      "modest_meals:item/meal/soup/beetroot_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/beetroot_0",

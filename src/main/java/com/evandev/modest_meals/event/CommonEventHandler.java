@@ -43,6 +43,7 @@ public class CommonEventHandler {
         if (ModConfig.get().staminaSprint) {
             PlayerStamina stamina = StaminaHelper.get(player);
             stamina.tick();
+            stamina.holdEnduranceWhileNourished();
 
             if (stamina.getData().isExhausted()) {
                 if (ModConfig.get().staminaSprinting) {

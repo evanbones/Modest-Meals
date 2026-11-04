@@ -307,7 +307,8 @@ public class FoodEditorScreen extends Screen {
         if (item == null) return null;
         IngredientProfile edited = customIngredients.get(itemId(item));
         if (edited != null) return edited;
-        return IngredientProfileManager.authored(item).orElse(null);
+        int nutrition = FoodValues.nutritionOf(new ItemStack(item));
+        return IngredientProfileManager.authored(item).map(profile -> profile.scaledTo(nutrition)).orElse(null);
     }
 
     private int vyTraitsHeader() {

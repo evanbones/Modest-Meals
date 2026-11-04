@@ -1,10 +1,47 @@
 {
   "item": "bountifulfares:elderberries",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/blueberry_0",
-      "modest_meals:item/meal/ice_cream/blueberry_1",
-      "modest_meals:item/meal/ice_cream/blueberry_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/blueberry_0",
+      "modest_meals:item/meal/cake/blueberry_1",
+      "modest_meals:item/meal/cake/blueberry_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/blueberry_0",
+      "modest_meals:item/meal/cake_slice/blueberry_1",
+      "modest_meals:item/meal/cake_slice/blueberry_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/blueberry",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/blueberry_0",
+      "modest_meals:item/meal/ice_cream_bowl/blueberry_1",
+      "modest_meals:item/meal/ice_cream_bowl/blueberry_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/elderberry_0",
+      "modest_meals:item/meal/jam/elderberry_1",
+      "modest_meals:item/meal/jam/elderberry_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/blueberry",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/elderberry_0",
+      "modest_meals:item/meal/pie/elderberry_1",
+      "modest_meals:item/meal/pie/elderberry_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/elderberry_0",
+      "modest_meals:item/meal/pie_slice/elderberry_1",
+      "modest_meals:item/meal/pie_slice/elderberry_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/elderberry_0",
+      "modest_meals:item/meal/porridge/elderberry_1",
+      "modest_meals:item/meal/porridge/elderberry_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/elderberry_0",
+      "modest_meals:item/meal/salad/elderberry_1",
+      "modest_meals:item/meal/salad/elderberry_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/elderberry_0",

@@ -1,6 +1,19 @@
 {
   "item": "farmersdelight:smoked_ham",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/smoked_ham_0",
+      "modest_meals:item/meal/curry/smoked_ham_1",
+      "modest_meals:item/meal/curry/smoked_ham_2",
+      "modest_meals:item/meal/curry/smoked_ham_3",
+      "modest_meals:item/meal/curry/smoked_ham_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/smoked_ham_0",
+      "modest_meals:item/meal/pasta/smoked_ham_1",
+      "modest_meals:item/meal/pasta/smoked_ham_2",
+      "modest_meals:item/meal/pasta/smoked_ham_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/smoked_ham_0",
       "modest_meals:item/meal/pizza/smoked_ham_1",
@@ -22,10 +35,28 @@
       "modest_meals:item/meal/placed_pizza/smoked_ham_3",
       "modest_meals:item/meal/placed_pizza/smoked_ham_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/smoked_ham_0",
+      "modest_meals:item/meal/ramen/smoked_ham_1",
+      "modest_meals:item/meal/ramen/smoked_ham_2",
+      "modest_meals:item/meal/ramen/smoked_ham_3"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/smoked_ham_0",
+      "modest_meals:item/meal/salad/smoked_ham_1",
+      "modest_meals:item/meal/salad/smoked_ham_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/smoked_ham_0",
       "modest_meals:item/meal/sandwich/smoked_ham_1",
       "modest_meals:item/meal/sandwich/smoked_ham_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/smoked_ham_0",
+      "modest_meals:item/meal/soup/smoked_ham_1",
+      "modest_meals:item/meal/soup/smoked_ham_2",
+      "modest_meals:item/meal/soup/smoked_ham_3",
+      "modest_meals:item/meal/soup/smoked_ham_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/smoked_ham_0",

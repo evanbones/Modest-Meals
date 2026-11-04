@@ -1,0 +1,31 @@
+{
+  "item": "culturaldelights:bean_pod",
+  "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/refried_beans_0",
+      "modest_meals:item/meal/curry/refried_beans_1",
+      "modest_meals:item/meal/curry/refried_beans_2",
+      "modest_meals:item/meal/curry/refried_beans_3",
+      "modest_meals:item/meal/curry/refried_beans_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/refried_beans_0",
+      "modest_meals:item/meal/pasta/refried_beans_1",
+      "modest_meals:item/meal/pasta/refried_beans_2",
+      "modest_meals:item/meal/pasta/refried_beans_3"
+    ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/refried_beans_0",
+      "modest_meals:item/meal/ramen/refried_beans_1",
+      "modest_meals:item/meal/ramen/refried_beans_2",
+      "modest_meals:item/meal/ramen/refried_beans_3"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/refried_beans_0",
+      "modest_meals:item/meal/soup/refried_beans_1",
+      "modest_meals:item/meal/soup/refried_beans_2",
+      "modest_meals:item/meal/soup/refried_beans_3",
+      "modest_meals:item/meal/soup/refried_beans_4"
+    ]
+  }
+}

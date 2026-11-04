@@ -1,6 +1,21 @@
 {
   "item": "culturaldelights:cucumber",
   "meals": {
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/cucumber_0",
+      "modest_meals:item/meal/roll/cucumber_1",
+      "modest_meals:item/meal/roll/cucumber_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/cucumber_0",
+      "modest_meals:item/meal/roll_slice/cucumber_1",
+      "modest_meals:item/meal/roll_slice/cucumber_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/cucumber_0",
+      "modest_meals:item/meal/salad/cucumber_1",
+      "modest_meals:item/meal/salad/cucumber_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/cucumber_0",
       "modest_meals:item/meal/sandwich/cucumber_1",

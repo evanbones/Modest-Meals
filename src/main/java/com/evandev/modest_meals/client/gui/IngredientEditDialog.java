@@ -45,6 +45,7 @@ public class IngredientEditDialog extends Screen {
     private float eatSeconds;
     private float temporaryHealth;
     private int timeBonus;
+    private final Optional<Integer> referenceNutrition;
 
     private FormBuilder form;
     private Button doneButton;
@@ -68,6 +69,7 @@ public class IngredientEditDialog extends Screen {
         this.eatSeconds = profile.eatSecondsOrZero();
         this.temporaryHealth = profile.temporaryHealth();
         this.timeBonus = profile.timeBonusSeconds();
+        this.referenceNutrition = profile.referenceNutrition();
     }
 
     private static List<String> effectChoices() {
@@ -189,7 +191,7 @@ public class IngredientEditDialog extends Screen {
                 Optional.of(health), Optional.of(stamina),
                 digestTicks > 0 ? Optional.of(digestTicks) : Optional.empty(),
                 eatSeconds > 0.0F ? Optional.of(eatSeconds) : Optional.empty(),
-                effect, potency, temporaryHealth, timeBonus));
+                effect, potency, temporaryHealth, timeBonus, referenceNutrition));
         this.minecraft.setScreen(this.parent);
     }
 

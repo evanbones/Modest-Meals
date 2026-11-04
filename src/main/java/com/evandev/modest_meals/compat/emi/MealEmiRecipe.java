@@ -29,8 +29,6 @@ public abstract class MealEmiRecipe implements EmiRecipe {
     protected final List<EmiIngredient> slots;
     protected final EmiStack output;
 
-    private final List<EmiIngredient> inputs;
-
     protected MealEmiRecipe(EmiRecipeCategory category, ResourceLocation id, MealType type,
                             EmiIngredient any, List<EmiIngredient> slots) {
         this(category, id, type, any, slots,
@@ -45,22 +43,6 @@ public abstract class MealEmiRecipe implements EmiRecipe {
         this.any = any;
         this.slots = List.copyOf(slots);
         this.output = output;
-
-        List<EmiIngredient> collected = new ArrayList<>();
-        boolean pooled = false;
-        for (EmiIngredient slot : this.slots) {
-            if (slot.isEmpty()) {
-                continue;
-            }
-            if (slot == any) {
-                if (pooled) {
-                    continue;
-                }
-                pooled = true;
-            }
-            collected.add(slot);
-        }
-        this.inputs = List.copyOf(collected);
     }
 
     protected static ResourceLocation syntheticId(String kind, MealType type) {
@@ -170,7 +152,7 @@ public abstract class MealEmiRecipe implements EmiRecipe {
 
     @Override
     public List<EmiIngredient> getInputs() {
-        return inputs;
+        return slots;
     }
 
     @Override

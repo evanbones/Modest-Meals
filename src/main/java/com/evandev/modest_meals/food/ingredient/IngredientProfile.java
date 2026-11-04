@@ -18,11 +18,12 @@ public record IngredientProfile(
         Optional<ResourceLocation> effect,
         int potency,
         float temporaryHealth,
-        int timeBonusSeconds
+        int timeBonusSeconds,
+        Optional<Integer> referenceNutrition
 ) {
     public static final IngredientProfile EMPTY = new IngredientProfile(
             Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), 0, 0.0F, 0);
+            Optional.empty(), 0, 0.0F, 0, Optional.empty());
 
     public static final MapCodec<IngredientProfile> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.FLOAT.optionalFieldOf("health").forGetter(IngredientProfile::health),
@@ -32,7 +33,8 @@ public record IngredientProfile(
             ResourceLocation.CODEC.optionalFieldOf("effect").forGetter(IngredientProfile::effect),
             Codec.INT.optionalFieldOf("potency", 0).forGetter(IngredientProfile::potency),
             Codec.FLOAT.optionalFieldOf("temporary_health", 0.0F).forGetter(IngredientProfile::temporaryHealth),
-            Codec.INT.optionalFieldOf("time_bonus", 0).forGetter(IngredientProfile::timeBonusSeconds)
+            Codec.INT.optionalFieldOf("time_bonus", 0).forGetter(IngredientProfile::timeBonusSeconds),
+            Codec.INT.optionalFieldOf("reference_nutrition").forGetter(IngredientProfile::referenceNutrition)
     ).apply(instance, IngredientProfile::new));
 
     public static final Codec<IngredientProfile> CODEC = MAP_CODEC.codec();
@@ -45,7 +47,18 @@ public record IngredientProfile(
                 Optional.of(health.orElse(derivedHealth)),
                 Optional.of(stamina.orElse(derivedStamina)),
                 Optional.of(digestTicks.orElse(derivedDigestTicks)),
-                eatSeconds, effect, potency, temporaryHealth, timeBonusSeconds);
+                eatSeconds, effect, potency, temporaryHealth, timeBonusSeconds, referenceNutrition);
+    }
+
+    public IngredientProfile scaledTo(int nutrition) {
+        if (referenceNutrition.isEmpty() || nutrition <= 0 || nutrition >= referenceNutrition.get()) {
+            return this;
+        }
+        float factor = nutrition / (float) referenceNutrition.get();
+        return new IngredientProfile(
+                health.map(value -> value * factor), stamina.map(value -> value * factor),
+                digestTicks.map(ticks -> Math.round(ticks * factor)),
+                eatSeconds, effect, potency, temporaryHealth * factor, timeBonusSeconds, Optional.empty());
     }
 
     public float healthOrZero() {

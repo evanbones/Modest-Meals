@@ -1,0 +1,139 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "modest_meals:block/cake_side",
+    "side": "modest_meals:block/cake_side",
+    "inner": "modest_meals:block/cake_inner",
+    "bottom": "modest_meals:block/cake_bottom",
+    "top": "modest_meals:block/cake_top",
+    "band": "modest_meals:block/cake_frosting_band",
+    "inner_band": "modest_meals:block/cake_inner_frosting"
+  },
+  "elements": [
+    {
+      "from": [
+        7,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        8,
+        15
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "uv": [
+            7,
+            1,
+            15,
+            15
+          ],
+          "cullface": "down"
+        },
+        "north": {
+          "texture": "#side",
+          "uv": [
+            1,
+            8,
+            9,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#side",
+          "uv": [
+            7,
+            8,
+            15,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#side",
+          "uv": [
+            1,
+            8,
+            15,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#inner",
+          "uv": [
+            1,
+            8,
+            15,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.99,
+        0,
+        0.99
+      ],
+      "to": [
+        15.01,
+        8.01,
+        15.01
+      ],
+      "faces": {
+        "up": {
+          "texture": "#top",
+          "uv": [
+            7,
+            1,
+            15,
+            15
+          ],
+          "tintindex": 0
+        },
+        "north": {
+          "texture": "#band",
+          "uv": [
+            1,
+            8,
+            9,
+            16
+          ],
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#band",
+          "uv": [
+            7,
+            8,
+            15,
+            16
+          ],
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#band",
+          "uv": [
+            1,
+            8,
+            15,
+            16
+          ],
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#inner_band",
+          "uv": [
+            1,
+            8,
+            15,
+            16
+          ],
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}

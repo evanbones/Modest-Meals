@@ -121,9 +121,9 @@ public final class MealAssembler {
         }
 
         for (MealType.ItemOverride override : type.itemOverrides()) {
-            if (override.matches(ingredients, base)) {
-                return BuiltInRegistries.ITEM.getOptional(override.result())
-                        .map(item -> new ItemStack(item, override.count()));
+            Optional<Item> result = BuiltInRegistries.ITEM.getOptional(override.result());
+            if (result.isPresent() && override.matches(ingredients, base)) {
+                return Optional.of(new ItemStack(result.get(), override.count()));
             }
         }
 
@@ -179,9 +179,9 @@ public final class MealAssembler {
             return EffectResult.NONE;
         }
 
-        int seconds = axis.baseSeconds() * contributing
-                + formula.secondsPerIngredient() * profiles.size()
+        int fillerSeconds = formula.secondsPerIngredient() * profiles.size()
                 + bonusSeconds(concat(used, baseUsed), concat(profiles, baseProfiles));
+        int seconds = axis.baseSeconds() * contributing + Math.round(fillerSeconds * axis.fillerScale());
 
         return new EffectResult(Optional.of(axisId), amplifier.get(), seconds * 20);
     }

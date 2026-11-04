@@ -1,6 +1,19 @@
 {
   "item": "farmersdelight:tomato",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/tomato_0",
+      "modest_meals:item/meal/curry/tomato_1",
+      "modest_meals:item/meal/curry/tomato_2",
+      "modest_meals:item/meal/curry/tomato_3",
+      "modest_meals:item/meal/curry/tomato_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/tomato_0",
+      "modest_meals:item/meal/pasta/tomato_1",
+      "modest_meals:item/meal/pasta/tomato_2",
+      "modest_meals:item/meal/pasta/tomato_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/tomato_0",
       "modest_meals:item/meal/pizza/tomato_1",
@@ -22,10 +35,38 @@
       "modest_meals:item/meal/placed_pizza/tomato_3",
       "modest_meals:item/meal/placed_pizza/tomato_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/tomato_0",
+      "modest_meals:item/meal/ramen/tomato_1",
+      "modest_meals:item/meal/ramen/tomato_2",
+      "modest_meals:item/meal/ramen/tomato_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/tomato_0",
+      "modest_meals:item/meal/roll/tomato_1",
+      "modest_meals:item/meal/roll/tomato_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/tomato_0",
+      "modest_meals:item/meal/roll_slice/tomato_1",
+      "modest_meals:item/meal/roll_slice/tomato_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/tomato_0",
+      "modest_meals:item/meal/salad/tomato_1",
+      "modest_meals:item/meal/salad/tomato_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/tomato_0",
       "modest_meals:item/meal/sandwich/tomato_1",
       "modest_meals:item/meal/sandwich/tomato_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/tomato_0",
+      "modest_meals:item/meal/soup/tomato_1",
+      "modest_meals:item/meal/soup/tomato_2",
+      "modest_meals:item/meal/soup/tomato_3",
+      "modest_meals:item/meal/soup/tomato_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/tomato_0",

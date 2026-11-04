@@ -1,11 +1,23 @@
 {
   "item": "#c:foods/candy",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/candy_0",
-      "modest_meals:item/meal/ice_cream/candy_1",
-      "modest_meals:item/meal/ice_cream/candy_2"
-    ]
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/candy_0",
+      "modest_meals:item/meal/cake/candy_1",
+      "modest_meals:item/meal/cake/candy_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/candy_0",
+      "modest_meals:item/meal/cake_slice/candy_1",
+      "modest_meals:item/meal/cake_slice/candy_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/candy",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/candy_0",
+      "modest_meals:item/meal/ice_cream_bowl/candy_1",
+      "modest_meals:item/meal/ice_cream_bowl/candy_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/candy"
   },
   "priority": 5
 }

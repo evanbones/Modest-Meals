@@ -2,7 +2,9 @@ package com.evandev.modest_meals.registry;
 
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.block.PizzaBlock;
-import com.evandev.modest_meals.block.PizzaBlockEntity;
+import com.evandev.modest_meals.block.CakeBlock;
+import com.evandev.modest_meals.block.MealBlockEntity;
+import com.evandev.modest_meals.block.PieBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,8 +28,22 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)));
 
-    public static final Supplier<BlockEntityType<PizzaBlockEntity>> PIZZA_ENTITY = BLOCK_ENTITIES.register("pizza",
-            () -> BlockEntityType.Builder.of(PizzaBlockEntity::new, PIZZA.get()).build(null));
+    public static final DeferredBlock<PieBlock> PIE = BLOCKS.register("pie", () -> new PieBlock(
+            BlockBehaviour.Properties.of()
+                    .strength(0.5F)
+                    .sound(SoundType.WOOL)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<CakeBlock> CAKE = BLOCKS.register("cake", () -> new CakeBlock(
+            BlockBehaviour.Properties.of()
+                    .strength(0.5F)
+                    .sound(SoundType.WOOL)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final Supplier<BlockEntityType<MealBlockEntity>> MEAL_ENTITY = BLOCK_ENTITIES.register("pizza",
+            () -> BlockEntityType.Builder.of(MealBlockEntity::new, PIZZA.get(), PIE.get(), CAKE.get()).build(null));
 
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);

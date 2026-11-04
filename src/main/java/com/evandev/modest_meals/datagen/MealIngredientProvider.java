@@ -8,7 +8,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvider.Entry> {
@@ -74,7 +76,7 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
     }
 
     private static MealLayerVisual iceCream(String flavour) {
-        return MealLayerVisual.triplet(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/ice_cream/" + flavour));
+        return MealLayerVisual.single(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/ice_cream/" + flavour));
     }
 
     public static Builder builder(String item) {
@@ -298,6 +300,170 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("mnd_pepper_powder"), pizza("mynethersdelight:pepper_powder", "bullet_pepper"));
 
         iceCreamFlavours(entries);
+        dishExtras(entries);
+        dishes(entries);
+    }
+
+    private static final Set<String> SAVOURY = Set.of("adzuki_beans", "baked_potato", "beef", "beetroot",
+            "bullet_pepper", "cabbage", "carrot", "cheese", "chicken", "cod", "creamed_corn", "eggplant", "fried_egg",
+            "kelp", "mushroom", "mutton", "onion", "pork", "potato", "pumpkin", "rabbit", "refried_beans",
+            "rotten_flesh", "salmon", "sausage", "smoked_ham", "spider_eye", "squid", "tofu", "tomato", "truffle",
+            "cooked_rice");
+    private static final Set<String> SWEET = Set.of("apple", "banana", "butter", "cherry", "chocolate", "cinnamon",
+            "cocoa_beans", "coconut", "elderberry", "glow_berries", "golden_apple", "honey", "lapisberry", "mango",
+            "orange", "passion_fruit", "pear", "plum", "pumpkin", "red_grapes", "strawberry", "sweet_berries",
+            "vanilla", "walnut", "white_grapes");
+    private static final Set<String> SALAD = Set.of("apple", "avocado", "baked_potato", "banana", "beef",
+            "beetroot", "bullet_pepper", "cabbage", "carrot", "cheese", "cherry", "chicken", "chorus_fruit", "cod",
+            "coconut", "creamed_corn", "cucumber", "eggplant", "elderberry", "fried_egg", "glow_berries",
+            "golden_apple", "kelp", "lapisberry", "lemon", "mango", "melon", "mushroom", "mutton", "onion", "orange",
+            "passion_fruit", "pear", "pickle", "plum", "pork", "potato", "pumpkin", "rabbit", "red_grapes", "salmon",
+            "smoked_ham", "squid", "strawberry", "sweet_berries", "tofu", "tomato", "truffle", "walnut",
+            "white_grapes");
+    private static final Set<String> FRUIT = Set.of("apple", "banana", "cherry", "chorus_fruit", "coconut",
+            "elderberry", "glow_berries", "golden_apple", "lapisberry", "lemon", "mango", "melon", "orange",
+            "passion_fruit", "pear", "plum", "pumpkin", "red_grapes", "strawberry", "sweet_berries", "white_grapes");
+    private static final Set<String> ROLL = Set.of("avocado", "beetroot", "bullet_pepper", "cabbage", "carrot", "cod",
+            "creamed_corn", "cucumber", "eggplant", "fried_egg", "kelp", "mango", "mushroom", "onion", "pickle",
+            "potato", "pumpkin", "salmon", "squid", "tofu", "tomato");
+
+    private static final Set<String> PIE = Set.of("apple", "banana", "beef", "butter", "carrot", "cheese", "cherry",
+            "chicken", "chocolate", "chorus_fruit", "cinnamon", "cocoa_beans", "coconut", "elderberry", "glow_berries",
+            "golden_apple", "honey", "lapisberry", "lemon", "mango", "melon", "mushroom", "mutton", "onion", "orange",
+            "passion_fruit", "pear", "plum", "pork", "potato", "pumpkin", "rabbit", "red_grapes", "strawberry",
+            "sweet_berries", "vanilla", "walnut", "white_grapes");
+
+    private record Dish(String name, int slots, Set<String> families) {
+    }
+
+    private static final List<Dish> DISHES = List.of(
+            new Dish("soup", 5, SAVOURY), new Dish("curry", 5, SAVOURY),
+            new Dish("pasta", 4, SAVOURY), new Dish("ramen", 4, SAVOURY),
+            new Dish("porridge", 3, SWEET), new Dish("salad", 3, SALAD), new Dish("jam", 3, FRUIT),
+            new Dish("roll", 3, ROLL), new Dish("roll_slice", 3, ROLL),
+            new Dish("pie", 3, PIE), new Dish("pie_slice", 3, PIE));
+
+    private record FlavouredDish(String name, int slots) {
+    }
+
+    private static final List<FlavouredDish> FLAVOURED_DISHES = List.of(
+            new FlavouredDish("cake", 3), new FlavouredDish("cake_slice", 3), new FlavouredDish("milkshake", 1),
+            new FlavouredDish("ice_cream_bowl", 3));
+
+    private static void dishExtras(Map<ResourceLocation, Entry> entries) {
+        dishFamily(entries, "minecraft:potato", "potato");
+        dishFamily(entries, "minecraft:golden_apple", "golden_apple");
+        dishFamily(entries, "minecraft:enchanted_golden_apple", "golden_apple");
+        dishFamily(entries, "minecraft:golden_carrot", "carrot");
+        dishFamily(entries, "minecraft:pumpkin", "pumpkin");
+        dishFamily(entries, "minecraft:sugar", "vanilla");
+        dishFamily(entries, "minecraft:honeycomb", "honey");
+        dishFamily(entries, "minecraft:poisonous_potato", "potato");
+        dishFamily(entries, "minecraft:tropical_fish", "salmon");
+        dishFamily(entries, "minecraft:pufferfish", "cod");
+        dishFamily(entries, "farmersdelight:rice", "cooked_rice");
+        dishFamily(entries, "culturaldelights:mint", "cabbage");
+        dishFamily(entries, "culturaldelights:corn_kernels", "creamed_corn");
+        dishFamily(entries, "culturaldelights:tofu", "tofu");
+        dishFamily(entries, "culturaldelights:beans", "refried_beans");
+        dishFamily(entries, "culturaldelights:bean_pod", "refried_beans");
+        dishFamily(entries, "farmersdelight:tomato_sauce", "tomato");
+        dishFamily(entries, "mynethersdelight:golden_egg", "fried_egg");
+        dishFamily(entries, "mynethersdelight:enchanted_golden_egg", "fried_egg");
+        dishFamily(entries, "mynethersdelight:strider_egg", "fried_egg");
+        dishFamily(entries, "abundant_atmosphere:puffball_mushroom", "mushroom");
+        dishFamily(entries, "abundant_atmosphere:puffball_slice", "mushroom");
+        dishFamily(entries, "atmospheric:orange", "orange");
+        dishFamily(entries, "atmospheric:blood_orange", "orange");
+        dishFamily(entries, "atmospheric:passion_fruit", "passion_fruit");
+        dishFamily(entries, "bountifulfares:spongekin", "pumpkin");
+        dishFamily(entries, "brewinandchewin:corn", "creamed_corn");
+        dishFamily(entries, "hauntedharvest:corn", "creamed_corn");
+        dishFamily(entries, "brewinandchewin:raw_sausage", "sausage");
+        dishFamily(entries, "brewinandchewin:cooked_sausage", "sausage");
+        dishFamily(entries, "mynethersdelight:ghasta", "squid");
+        dishFamily(entries, "mynethersdelight:ghasmati", "cooked_rice");
+        dishFamily(entries, "nomansland:tortoise_egg", "fried_egg");
+        dishFamily(entries, "nomansland:honeyed_apple", "apple");
+        dishFamily(entries, "nomansland:syruped_pear", "pear");
+    }
+
+    private static void dishFamily(Map<ResourceLocation, Entry> entries, String item, String family) {
+        ResourceLocation itemId = ResourceLocation.parse(item);
+        ResourceLocation key = entries.entrySet().stream()
+                .filter(entry -> entry.getValue().item().equals(item))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElseGet(() -> id(itemId.getNamespace().equals("minecraft")
+                        ? itemId.getPath()
+                        : itemId.getNamespace() + "_" + itemId.getPath()));
+        Entry existing = entries.get(key);
+        Map<ResourceLocation, MealLayerVisual> meals = new LinkedHashMap<>();
+        if (existing != null) {
+            meals.putAll(existing.meals());
+        }
+        meals.put(DISH_FAMILY_ID, MealLayerVisual.single(dishSprite("family", family)));
+        entries.put(key, new Entry(item, meals));
+    }
+
+    private static final ResourceLocation DISH_FAMILY_ID = id("dish_family");
+
+    private static void dishes(Map<ResourceLocation, Entry> entries) {
+        entries.replaceAll((key, entry) -> {
+            if (entry.item().startsWith("#")) {
+                Map<ResourceLocation, MealLayerVisual> tagMeals = new LinkedHashMap<>(entry.meals());
+                addFlavoured(tagMeals);
+                return new Entry(entry.item(), tagMeals, entry.priority());
+            }
+            Map<ResourceLocation, MealLayerVisual> meals = new LinkedHashMap<>(entry.meals());
+            MealLayerVisual explicit = meals.remove(DISH_FAMILY_ID);
+            String family = explicit != null ? lastSegment(explicit.slots().getFirst()) : familyOf(meals);
+            if (family == null) {
+                addFlavoured(meals);
+                return new Entry(entry.item(), meals, entry.priority());
+            }
+            for (Dish dish : DISHES) {
+                if (dish.families().contains(family)) {
+                    meals.putIfAbsent(id(dish.name()), MealLayerVisual.slots(IntStream.range(0, dish.slots())
+                            .mapToObj(i -> dishSprite(dish.name(), family + "_" + i)).toList()));
+                }
+            }
+            addFlavoured(meals);
+            return new Entry(entry.item(), meals, entry.priority());
+        });
+    }
+
+    private static void addFlavoured(Map<ResourceLocation, MealLayerVisual> meals) {
+        MealLayerVisual iceCream = meals.get(ICE_CREAM_ID);
+        if (iceCream == null || iceCream.slots().isEmpty()) {
+            return;
+        }
+        String flavour = lastSegment(iceCream.slots().getFirst());
+        for (FlavouredDish dish : FLAVOURED_DISHES) {
+            meals.putIfAbsent(id(dish.name()), dish.slots() == 1
+                    ? MealLayerVisual.single(dishSprite(dish.name(), flavour))
+                    : MealLayerVisual.slots(IntStream.range(0, dish.slots())
+                            .mapToObj(i -> dishSprite(dish.name(), flavour + "_" + i)).toList()));
+        }
+    }
+
+    private static String familyOf(Map<ResourceLocation, MealLayerVisual> meals) {
+        for (ResourceLocation meal : List.of(SANDWICH_ID, PIZZA_ID)) {
+            MealLayerVisual visual = meals.get(meal);
+            if (visual != null && !visual.slots().isEmpty()) {
+                String sprite = lastSegment(visual.slots().getFirst());
+                return sprite.substring(0, sprite.lastIndexOf('_'));
+            }
+        }
+        return null;
+    }
+
+    private static String lastSegment(ResourceLocation sprite) {
+        return sprite.getPath().substring(sprite.getPath().lastIndexOf('/') + 1);
+    }
+
+    private static ResourceLocation dishSprite(String dish, String sprite) {
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/" + dish + "/" + sprite);
     }
 
     private static void iceCreamFlavours(Map<ResourceLocation, Entry> entries) {

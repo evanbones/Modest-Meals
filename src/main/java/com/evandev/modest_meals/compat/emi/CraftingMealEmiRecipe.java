@@ -3,6 +3,7 @@ package com.evandev.modest_meals.compat.emi;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.item.MealItem;
+import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
@@ -31,7 +32,7 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
     }
 
     private CraftingMealEmiRecipe(MealType type, EmiIngredient any, List<EmiIngredient> slots, ResourceLocation id, EmiStack output) {
-        super(MealEmiCategories.MEAL_CRAFTING, id, type, any, slots, output);
+        super(VanillaEmiRecipeCategories.CRAFTING, id, type, any, slots, output);
         this.shapeless = !type.isShaped();
     }
 

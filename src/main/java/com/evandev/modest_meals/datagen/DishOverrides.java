@@ -19,6 +19,7 @@ public final class DishOverrides {
     private static final String NEA = "neapolitan:";
     private static final String AD = "abnormals_delight:";
     private static final String UA = "upgrade_aquatic:";
+    private static final String BNC = "brewinandchewin:";
 
     private static final String RAW_BEEF = "#c:foods/raw_beef";
     private static final String RAW_CHICKEN = "#c:foods/raw_chicken";
@@ -62,6 +63,10 @@ public final class DishOverrides {
         table.pizza();
         table.curries();
         table.jams();
+        table.pies();
+        table.cakes();
+        table.milkshakes();
+        table.iceCream();
         return table.byType;
     }
 
@@ -159,19 +164,77 @@ public final class DishOverrides {
     }
 
     private void iceCream() {
-        add("ice_cream", NEA + "neapolitan_ice_cream", CHOCOLATE, VANILLA, STRAWBERRY);
-        add("ice_cream", NEA + "vanilla_ice_cream", VANILLA);
-        add("ice_cream", NEA + "chocolate_ice_cream", CHOCOLATE);
-        add("ice_cream", NEA + "strawberry_ice_cream", STRAWBERRY);
-        add("ice_cream", NEA + "banana_ice_cream", BANANA);
-        add("ice_cream", NEA + "mint_ice_cream", MINT);
-        add("ice_cream", NEA + "adzuki_ice_cream", NEA + "roasted_adzuki_beans");
+        add("ice_cream_bowl", NEA + "neapolitan_ice_cream", CHOCOLATE, VANILLA, STRAWBERRY);
+        flavouredIceCream("vanilla", VANILLA);
+        flavouredIceCream("chocolate", CHOCOLATE);
+        flavouredIceCream("strawberry", STRAWBERRY);
+        flavouredIceCream("banana", BANANA);
+        flavouredIceCream("mint", NEA + "mint_leaves");
+        flavouredIceCream("adzuki", NEA + "roasted_adzuki_beans");
+    }
+
+    private void flavouredIceCream(String flavour, String ingredient) {
+        add("ice_cream_bowl", NEA + flavour + "_ice_cream", ingredient);
+        add("ice_cream_bowl", NEA + flavour + "_ice_cream", ingredient, ingredient, ingredient);
     }
 
     private void jams() {
         add("jam", "abundant_atmosphere:squashberry_jam", 2, "abundant_atmosphere:roasted_gourdnut",
                 "#abundant_atmosphere:squashberry_jam_fruits", "minecraft:sweet_berries");
         add("jam", UA + "mulberry_jam_bottle", UA + "mulberry");
+    }
+
+    private void pies() {
+        add("pie", FD + "apple_pie", "minecraft:apple", "minecraft:apple", "minecraft:apple");
+        add("pie", FD + "chocolate_pie", "minecraft:cocoa_beans", "minecraft:cocoa_beans", "minecraft:cocoa_beans");
+        add("pie", FD + "sweet_berry_cheesecake", "minecraft:sweet_berries", "minecraft:sweet_berries",
+                "minecraft:sweet_berries");
+        addAlongside("pie", "minecraft:pumpkin_pie", FD + "pumpkin_slice", FD + "pumpkin_slice", FD + "pumpkin_slice");
+        add("pie", BNC + "glow_berry_meringue_pie", "minecraft:glow_berries", "minecraft:glow_berries",
+                "minecraft:glow_berries");
+        add("pie", BNC + "quiche", "#c:foods/cooked_bacon|minecraft:brown_mushroom",
+                "#c:foods/cooked_bacon|minecraft:brown_mushroom", "#brewinandchewin:foods/cheese_wedge");
+        add("pie", NML + "pear_cobbler", NML + "pear", NML + "walnuts");
+        add("pie", BF + "apple_pie", "minecraft:apple", "minecraft:apple");
+        add("pie", BF + "orange_pie", "#c:foods/oranges", "#c:foods/oranges", "#c:foods/oranges");
+        add("pie", BF + "lemon_pie", "#c:foods/lemons", "#c:foods/lemons", "#c:foods/lemons");
+        add("pie", BF + "plum_pie", "#c:foods/plums", "#c:foods/plums", "#c:foods/plums");
+        add("pie", BF + "hoary_pie", BF + "hoary_apple", BF + "hoary_apple", BF + "hoary_apple");
+        add("pie", BF + "melon_pie", "minecraft:melon_slice", "minecraft:melon_slice", "minecraft:melon_slice");
+        add("pie", BF + "elderberry_tart", "#c:foods/elderberries", "#c:foods/elderberries");
+        add("pie", BF + "glow_berry_tart", "minecraft:glow_berries", "minecraft:glow_berries");
+        add("pie", BF + "lapisberry_tart", BF + "lapisberries", BF + "lapisberries");
+        add("pie", BF + "passion_fruit_tart", "#c:foods/passion_fruit", "#c:foods/passion_fruit");
+        add("pie", BF + "sweet_berry_tart", "minecraft:sweet_berries", "minecraft:sweet_berries");
+    }
+
+    private void cakes() {
+        add("cake", NEA + "vanilla_cake", VANILLA, VANILLA);
+        add("cake", NEA + "chocolate_cake", CHOCOLATE, CHOCOLATE);
+        add("cake", NEA + "strawberry_cake", STRAWBERRY, STRAWBERRY);
+        add("cake", NEA + "banana_cake", BANANA, BANANA);
+        add("cake", NEA + "mint_cake", NEA + "mint_leaves", NEA + "mint_leaves");
+        add("cake", NEA + "adzuki_cake", NEA + "roasted_adzuki_beans", NEA + "roasted_adzuki_beans");
+        add("cake", BF + "cocoa_cake", "minecraft:cocoa_beans", "minecraft:cocoa_beans", "minecraft:cocoa_beans");
+        add("cake", BF + "coconut_cake", "#c:coconut_halves", "#c:coconut_halves", "#c:coconut_halves");
+        add("cake", NML + "fruit_cake", NML + "pear", "minecraft:sweet_berries", "minecraft:apple");
+        add("cake", BNC + "rich_chocolate_cake", BNC + "cocoa_fudge", BNC + "cocoa_fudge", "minecraft:sweet_berries");
+        add("cake", BNC + "pumpkin_roll", FD + "pumpkin_slice", FD + "pumpkin_slice", FD + "pumpkin_slice");
+        add("cake", MND + "magma_cake_block", "minecraft:magma_cream", "minecraft:magma_cream", MND + "hot_cream");
+    }
+
+    private void milkshakes() {
+        addAlongside("milkshake", NEA + "vanilla_milkshake", VANILLA);
+        addAlongside("milkshake", NEA + "chocolate_milkshake", CHOCOLATE);
+        addAlongside("milkshake", NEA + "strawberry_milkshake", STRAWBERRY);
+        addAlongside("milkshake", NEA + "banana_milkshake", BANANA);
+        addAlongside("milkshake", NEA + "mint_milkshake", NEA + "mint_leaves");
+        addAlongside("milkshake", NEA + "adzuki_milkshake", NEA + "roasted_adzuki_beans");
+    }
+
+    private void addAlongside(String type, String result, String... ingredients) {
+        byType.computeIfAbsent(type, key -> new ArrayList<>())
+                .add(new MealType.ItemOverride(ResourceLocation.parse(result), 1, List.of(ingredients), false));
     }
 
     private void add(String type, String result, String... ingredients) {

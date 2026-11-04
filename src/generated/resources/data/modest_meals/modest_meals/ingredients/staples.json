@@ -35,9 +35,9 @@
       "time_bonus": 30
     },
     {
-      "health": 3.0,
+      "health": 1.5,
       "priority": 130,
-      "stamina": 5.0,
+      "stamina": 3.0,
       "target": "#c:foods/bread",
       "time_bonus": 30
     }

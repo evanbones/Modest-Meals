@@ -36,7 +36,7 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         if (this.isPassenger() || this.getAbilities().mayfly) {
             return true;
         }
-        if (!ModConfig.get().staminaSprint) {
+        if (!ModConfig.get().staminaSprint || !ModConfig.get().staminaSprinting) {
             switch (ModConfig.get().sprinting) {
                 case DISABLED -> {
                     if (!this.isUnderWater()) {

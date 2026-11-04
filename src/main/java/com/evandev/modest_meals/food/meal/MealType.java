@@ -287,24 +287,30 @@ public record MealType(
     public record BaseSprites(
             Optional<ResourceLocation> bottom,
             Optional<ResourceLocation> top,
-            Optional<Integer> layerSlots
+            Optional<Integer> layerSlots,
+            boolean repeatIngredients
     ) {
         public static final Codec<BaseSprites> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ResourceLocation.CODEC.optionalFieldOf("bottom").forGetter(BaseSprites::bottom),
                 ResourceLocation.CODEC.optionalFieldOf("top").forGetter(BaseSprites::top),
-                Codec.INT.optionalFieldOf("layer_slots").forGetter(BaseSprites::layerSlots)
+                Codec.INT.optionalFieldOf("layer_slots").forGetter(BaseSprites::layerSlots),
+                Codec.BOOL.optionalFieldOf("repeat_ingredients", false).forGetter(BaseSprites::repeatIngredients)
         ).apply(instance, BaseSprites::new));
 
         public BaseSprites(ResourceLocation bottom) {
-            this(Optional.of(bottom), Optional.empty(), Optional.empty());
+            this(Optional.of(bottom), Optional.empty(), Optional.empty(), false);
         }
 
         public BaseSprites(ResourceLocation bottom, ResourceLocation top) {
-            this(Optional.of(bottom), Optional.of(top), Optional.empty());
+            this(Optional.of(bottom), Optional.of(top), Optional.empty(), false);
         }
 
         public BaseSprites(ResourceLocation bottom, ResourceLocation top, int layerSlots) {
-            this(Optional.of(bottom), Optional.of(top), Optional.of(layerSlots));
+            this(Optional.of(bottom), Optional.of(top), Optional.of(layerSlots), false);
+        }
+
+        public BaseSprites repeating() {
+            return new BaseSprites(bottom, top, layerSlots, true);
         }
 
         public int getEffectiveLayerSlots(int fallback) {

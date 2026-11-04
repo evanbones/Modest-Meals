@@ -1,10 +1,47 @@
 {
   "item": "neapolitan:dried_banana",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/banana_0",
-      "modest_meals:item/meal/ice_cream/banana_1",
-      "modest_meals:item/meal/ice_cream/banana_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/banana_0",
+      "modest_meals:item/meal/cake/banana_1",
+      "modest_meals:item/meal/cake/banana_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/banana_0",
+      "modest_meals:item/meal/cake_slice/banana_1",
+      "modest_meals:item/meal/cake_slice/banana_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/banana",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/banana_0",
+      "modest_meals:item/meal/ice_cream_bowl/banana_1",
+      "modest_meals:item/meal/ice_cream_bowl/banana_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/banana_0",
+      "modest_meals:item/meal/jam/banana_1",
+      "modest_meals:item/meal/jam/banana_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/banana",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/banana_0",
+      "modest_meals:item/meal/pie/banana_1",
+      "modest_meals:item/meal/pie/banana_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/banana_0",
+      "modest_meals:item/meal/pie_slice/banana_1",
+      "modest_meals:item/meal/pie_slice/banana_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/banana_0",
+      "modest_meals:item/meal/porridge/banana_1",
+      "modest_meals:item/meal/porridge/banana_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/banana_0",
+      "modest_meals:item/meal/salad/banana_1",
+      "modest_meals:item/meal/salad/banana_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/banana_0",

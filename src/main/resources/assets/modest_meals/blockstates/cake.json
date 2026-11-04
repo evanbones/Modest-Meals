@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "modest_meals:block/cake_stage0"
+    },
+    "bites=1": {
+      "model": "modest_meals:block/cake_stage1"
+    },
+    "bites=2": {
+      "model": "modest_meals:block/cake_stage2"
+    },
+    "bites=3": {
+      "model": "modest_meals:block/cake_stage3"
+    },
+    "bites=4": {
+      "model": "modest_meals:block/cake_stage4"
+    },
+    "bites=5": {
+      "model": "modest_meals:block/cake_stage5"
+    },
+    "bites=6": {
+      "model": "modest_meals:block/cake_stage6"
+    }
+  }
+}

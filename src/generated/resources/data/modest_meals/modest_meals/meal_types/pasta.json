@@ -6,7 +6,11 @@
       }
     }
   ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/pasta/pasta_base"
+  },
   "container": "minecraft:bowl",
+  "dubious_sprite": "modest_meals:item/meal/pasta/dubious",
   "forbidden_ingredients": [
     {
       "tag": "modest_meals:not_for_dishes"
@@ -79,5 +83,6 @@
   ],
   "max_ingredients": 4,
   "priority": 15,
+  "requires_supported_ingredients": true,
   "station": "cooking_pot"
 }

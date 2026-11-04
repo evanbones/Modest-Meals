@@ -1,6 +1,19 @@
 {
   "item": "minecraft:baked_potato",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/baked_potato_0",
+      "modest_meals:item/meal/curry/baked_potato_1",
+      "modest_meals:item/meal/curry/baked_potato_2",
+      "modest_meals:item/meal/curry/baked_potato_3",
+      "modest_meals:item/meal/curry/baked_potato_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/baked_potato_0",
+      "modest_meals:item/meal/pasta/baked_potato_1",
+      "modest_meals:item/meal/pasta/baked_potato_2",
+      "modest_meals:item/meal/pasta/baked_potato_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/baked_potato_0",
       "modest_meals:item/meal/pizza/baked_potato_1",
@@ -22,10 +35,28 @@
       "modest_meals:item/meal/placed_pizza/baked_potato_3",
       "modest_meals:item/meal/placed_pizza/baked_potato_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/baked_potato_0",
+      "modest_meals:item/meal/ramen/baked_potato_1",
+      "modest_meals:item/meal/ramen/baked_potato_2",
+      "modest_meals:item/meal/ramen/baked_potato_3"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/baked_potato_0",
+      "modest_meals:item/meal/salad/baked_potato_1",
+      "modest_meals:item/meal/salad/baked_potato_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/baked_potato_0",
       "modest_meals:item/meal/sandwich/baked_potato_1",
       "modest_meals:item/meal/sandwich/baked_potato_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/baked_potato_0",
+      "modest_meals:item/meal/soup/baked_potato_1",
+      "modest_meals:item/meal/soup/baked_potato_2",
+      "modest_meals:item/meal/soup/baked_potato_3",
+      "modest_meals:item/meal/soup/baked_potato_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/baked_potato_0",

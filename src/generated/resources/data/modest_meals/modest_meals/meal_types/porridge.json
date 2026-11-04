@@ -22,7 +22,11 @@
       ]
     }
   ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/porridge/porridge_base"
+  },
   "container": "minecraft:bowl",
+  "dubious_sprite": "modest_meals:item/meal/porridge/dubious",
   "forbidden_ingredients": {
     "tag": "modest_meals:not_for_dishes"
   },
@@ -30,5 +34,6 @@
   "item": "modest_meals:porridge",
   "max_ingredients": 3,
   "priority": 25,
+  "requires_supported_ingredients": true,
   "station": "cooking_pot"
 }

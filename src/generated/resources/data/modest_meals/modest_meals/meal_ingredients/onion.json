@@ -1,6 +1,29 @@
 {
   "item": "farmersdelight:onion",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/onion_0",
+      "modest_meals:item/meal/curry/onion_1",
+      "modest_meals:item/meal/curry/onion_2",
+      "modest_meals:item/meal/curry/onion_3",
+      "modest_meals:item/meal/curry/onion_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/onion_0",
+      "modest_meals:item/meal/pasta/onion_1",
+      "modest_meals:item/meal/pasta/onion_2",
+      "modest_meals:item/meal/pasta/onion_3"
+    ],
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/onion_0",
+      "modest_meals:item/meal/pie/onion_1",
+      "modest_meals:item/meal/pie/onion_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/onion_0",
+      "modest_meals:item/meal/pie_slice/onion_1",
+      "modest_meals:item/meal/pie_slice/onion_2"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/onion_0",
       "modest_meals:item/meal/pizza/onion_1",
@@ -22,10 +45,38 @@
       "modest_meals:item/meal/placed_pizza/onion_3",
       "modest_meals:item/meal/placed_pizza/onion_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/onion_0",
+      "modest_meals:item/meal/ramen/onion_1",
+      "modest_meals:item/meal/ramen/onion_2",
+      "modest_meals:item/meal/ramen/onion_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/onion_0",
+      "modest_meals:item/meal/roll/onion_1",
+      "modest_meals:item/meal/roll/onion_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/onion_0",
+      "modest_meals:item/meal/roll_slice/onion_1",
+      "modest_meals:item/meal/roll_slice/onion_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/onion_0",
+      "modest_meals:item/meal/salad/onion_1",
+      "modest_meals:item/meal/salad/onion_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/onion_0",
       "modest_meals:item/meal/sandwich/onion_1",
       "modest_meals:item/meal/sandwich/onion_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/onion_0",
+      "modest_meals:item/meal/soup/onion_1",
+      "modest_meals:item/meal/soup/onion_2",
+      "modest_meals:item/meal/soup/onion_3",
+      "modest_meals:item/meal/soup/onion_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/onion_0",

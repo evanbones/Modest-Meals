@@ -67,6 +67,12 @@ public class MealIngredientManager extends SimpleJsonResourceReloadListener {
         return Optional.empty();
     }
 
+    public static Optional<String> familyOf(ResourceLocation mealTypeId, Item item) {
+        return getIngredientSprite(mealTypeId, item, 0, 1)
+                .map(sprite -> sprite.getPath().substring(sprite.getPath().lastIndexOf('/') + 1))
+                .map(name -> name.replaceFirst("_\\d+$", ""));
+    }
+
     public static boolean isSupported(ResourceLocation mealTypeId, ItemStack stack) {
         return stack != null && !stack.isEmpty() && isSupported(mealTypeId, stack.getItem());
     }

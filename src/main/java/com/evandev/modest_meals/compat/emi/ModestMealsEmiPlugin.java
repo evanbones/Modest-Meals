@@ -9,7 +9,7 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.stack.EmiStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.inventory.MenuType;
 
 import java.util.List;
 
@@ -23,8 +23,7 @@ public class ModestMealsEmiPlugin implements EmiPlugin {
             return;
         }
 
-        registry.addCategory(MealEmiCategories.MEAL_CRAFTING);
-        registry.addWorkstation(MealEmiCategories.MEAL_CRAFTING, EmiStack.of(Items.CRAFTING_TABLE));
+        registry.addRecipeHandler(MenuType.CRAFTING, new MealCraftingHandler());
         for (MealType type : MealTypeManager.craftingTable()) {
             if (type.resolveItem().isPresent()) {
                 registry.addRecipe(CraftingMealEmiRecipe.of(type, pool));

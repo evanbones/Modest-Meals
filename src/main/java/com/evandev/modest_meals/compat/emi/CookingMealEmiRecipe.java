@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.emi;
 
+import vectorwing.farmersdelight.integration.emi.FDRecipeCategories;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.item.MealItem;
@@ -34,7 +35,7 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
 
     private CookingMealEmiRecipe(ResourceLocation id, MealType type, EmiIngredient any,
                                  List<EmiIngredient> slots, int cookTicks, float experience) {
-        super(CookingPotEmiSupport.MEAL_COOKING, id, type, any, slots);
+        super(FDRecipeCategories.COOKING, id, type, any, slots);
         this.cookTicks = cookTicks;
         this.experience = experience;
         this.container = containerStack();
@@ -42,7 +43,7 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
 
     private CookingMealEmiRecipe(ResourceLocation id, MealType type, EmiIngredient any,
                                  List<EmiIngredient> slots, int cookTicks, float experience, EmiStack output) {
-        super(CookingPotEmiSupport.MEAL_COOKING, id, type, any, slots, output);
+        super(FDRecipeCategories.COOKING, id, type, any, slots, output);
         this.cookTicks = cookTicks;
         this.experience = experience;
         this.container = containerStack();

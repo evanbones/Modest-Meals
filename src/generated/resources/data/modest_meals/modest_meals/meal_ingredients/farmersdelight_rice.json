@@ -1,0 +1,31 @@
+{
+  "item": "farmersdelight:rice",
+  "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/cooked_rice_0",
+      "modest_meals:item/meal/curry/cooked_rice_1",
+      "modest_meals:item/meal/curry/cooked_rice_2",
+      "modest_meals:item/meal/curry/cooked_rice_3",
+      "modest_meals:item/meal/curry/cooked_rice_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/cooked_rice_0",
+      "modest_meals:item/meal/pasta/cooked_rice_1",
+      "modest_meals:item/meal/pasta/cooked_rice_2",
+      "modest_meals:item/meal/pasta/cooked_rice_3"
+    ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/cooked_rice_0",
+      "modest_meals:item/meal/ramen/cooked_rice_1",
+      "modest_meals:item/meal/ramen/cooked_rice_2",
+      "modest_meals:item/meal/ramen/cooked_rice_3"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/cooked_rice_0",
+      "modest_meals:item/meal/soup/cooked_rice_1",
+      "modest_meals:item/meal/soup/cooked_rice_2",
+      "modest_meals:item/meal/soup/cooked_rice_3",
+      "modest_meals:item/meal/soup/cooked_rice_4"
+    ]
+  }
+}

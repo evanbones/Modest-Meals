@@ -1,10 +1,47 @@
 {
   "item": "brewinandchewin:apple_jelly",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/apple_0",
-      "modest_meals:item/meal/ice_cream/apple_1",
-      "modest_meals:item/meal/ice_cream/apple_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/apple_0",
+      "modest_meals:item/meal/cake/apple_1",
+      "modest_meals:item/meal/cake/apple_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/apple_0",
+      "modest_meals:item/meal/cake_slice/apple_1",
+      "modest_meals:item/meal/cake_slice/apple_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/apple",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/apple_0",
+      "modest_meals:item/meal/ice_cream_bowl/apple_1",
+      "modest_meals:item/meal/ice_cream_bowl/apple_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/apple_0",
+      "modest_meals:item/meal/jam/apple_1",
+      "modest_meals:item/meal/jam/apple_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/apple",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/apple_0",
+      "modest_meals:item/meal/pie/apple_1",
+      "modest_meals:item/meal/pie/apple_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/apple_0",
+      "modest_meals:item/meal/pie_slice/apple_1",
+      "modest_meals:item/meal/pie_slice/apple_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/apple_0",
+      "modest_meals:item/meal/porridge/apple_1",
+      "modest_meals:item/meal/porridge/apple_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/apple_0",
+      "modest_meals:item/meal/salad/apple_1",
+      "modest_meals:item/meal/salad/apple_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/apple_0",

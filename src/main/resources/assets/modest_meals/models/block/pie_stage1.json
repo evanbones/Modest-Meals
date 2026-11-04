@@ -1,0 +1,231 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "modest_meals:block/pie_side",
+    "side": "modest_meals:block/pie_side",
+    "bottom": "modest_meals:block/pie_bottom",
+    "filling": "modest_meals:block/pie_top_filling",
+    "crust": "modest_meals:block/pie_top_crust",
+    "inner_filling": "modest_meals:block/pie_inner_filling",
+    "inner_crust": "modest_meals:block/pie_inner_crust"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        8
+      ],
+      "to": [
+        14,
+        4,
+        14
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "uv": [
+            2,
+            8,
+            14,
+            14
+          ],
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#filling",
+          "uv": [
+            2,
+            8,
+            14,
+            14
+          ],
+          "tintindex": 0
+        },
+        "north": {
+          "texture": "#inner_filling",
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ],
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#side",
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#side",
+          "uv": [
+            8,
+            12,
+            14,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#side",
+          "uv": [
+            2,
+            12,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        1.99,
+        0,
+        7.99
+      ],
+      "to": [
+        14.01,
+        4.01,
+        14.01
+      ],
+      "faces": {
+        "up": {
+          "texture": "#crust",
+          "uv": [
+            2,
+            8,
+            14,
+            14
+          ]
+        },
+        "north": {
+          "texture": "#inner_crust",
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        8,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        4,
+        8
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "uv": [
+            8,
+            2,
+            14,
+            8
+          ],
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#filling",
+          "uv": [
+            8,
+            2,
+            14,
+            8
+          ],
+          "tintindex": 0
+        },
+        "north": {
+          "texture": "#side",
+          "uv": [
+            2,
+            12,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#inner_filling",
+          "uv": [
+            8,
+            12,
+            14,
+            16
+          ],
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#inner_filling",
+          "uv": [
+            2,
+            12,
+            8,
+            16
+          ],
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#side",
+          "uv": [
+            8,
+            12,
+            14,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7.99,
+        0,
+        1.99
+      ],
+      "to": [
+        14.01,
+        4.01,
+        8.01
+      ],
+      "faces": {
+        "up": {
+          "texture": "#crust",
+          "uv": [
+            8,
+            2,
+            14,
+            8
+          ]
+        },
+        "south": {
+          "texture": "#inner_crust",
+          "uv": [
+            8,
+            12,
+            14,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#inner_crust",
+          "uv": [
+            2,
+            12,
+            8,
+            16
+          ]
+        }
+      }
+    }
+  ]
+}

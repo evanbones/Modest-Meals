@@ -1,10 +1,36 @@
 {
   "item": "minecraft:spider_eye",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/spider_eye_0",
+      "modest_meals:item/meal/curry/spider_eye_1",
+      "modest_meals:item/meal/curry/spider_eye_2",
+      "modest_meals:item/meal/curry/spider_eye_3",
+      "modest_meals:item/meal/curry/spider_eye_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/spider_eye_0",
+      "modest_meals:item/meal/pasta/spider_eye_1",
+      "modest_meals:item/meal/pasta/spider_eye_2",
+      "modest_meals:item/meal/pasta/spider_eye_3"
+    ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/spider_eye_0",
+      "modest_meals:item/meal/ramen/spider_eye_1",
+      "modest_meals:item/meal/ramen/spider_eye_2",
+      "modest_meals:item/meal/ramen/spider_eye_3"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/spider_eye_0",
       "modest_meals:item/meal/sandwich/spider_eye_1",
       "modest_meals:item/meal/sandwich/spider_eye_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/spider_eye_0",
+      "modest_meals:item/meal/soup/spider_eye_1",
+      "modest_meals:item/meal/soup/spider_eye_2",
+      "modest_meals:item/meal/soup/spider_eye_3",
+      "modest_meals:item/meal/soup/spider_eye_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/spider_eye_0",

@@ -27,7 +27,7 @@
     {
       "effect": "modest_meals:strength",
       "health": 2.0,
-      "potency": 14,
+      "potency": 7,
       "priority": 145,
       "stamina": 1.0,
       "target": "#c:crops/beetroot"
@@ -35,7 +35,7 @@
     {
       "effect": "modest_meals:strength",
       "health": 2.0,
-      "potency": 14,
+      "potency": 7,
       "stamina": 1.0,
       "target": "minecraft:beetroot"
     },

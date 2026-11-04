@@ -1,10 +1,37 @@
 {
   "item": "neapolitan:cinnamon_sticks",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/cinnamon_0",
-      "modest_meals:item/meal/ice_cream/cinnamon_1",
-      "modest_meals:item/meal/ice_cream/cinnamon_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/cinnamon_0",
+      "modest_meals:item/meal/cake/cinnamon_1",
+      "modest_meals:item/meal/cake/cinnamon_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/cinnamon_0",
+      "modest_meals:item/meal/cake_slice/cinnamon_1",
+      "modest_meals:item/meal/cake_slice/cinnamon_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/cinnamon",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/cinnamon_0",
+      "modest_meals:item/meal/ice_cream_bowl/cinnamon_1",
+      "modest_meals:item/meal/ice_cream_bowl/cinnamon_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/cinnamon",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/cinnamon_0",
+      "modest_meals:item/meal/pie/cinnamon_1",
+      "modest_meals:item/meal/pie/cinnamon_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/cinnamon_0",
+      "modest_meals:item/meal/pie_slice/cinnamon_1",
+      "modest_meals:item/meal/pie_slice/cinnamon_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/cinnamon_0",
+      "modest_meals:item/meal/porridge/cinnamon_1",
+      "modest_meals:item/meal/porridge/cinnamon_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/cinnamon_0",

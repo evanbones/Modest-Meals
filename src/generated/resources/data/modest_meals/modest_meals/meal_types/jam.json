@@ -9,7 +9,11 @@
       }
     }
   ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/jam/jam_base"
+  },
   "container": "minecraft:glass_bottle",
+  "dubious_sprite": "modest_meals:item/meal/jam/dubious",
   "forbidden_ingredients": {
     "tag": "modest_meals:not_for_jam"
   },
@@ -36,5 +40,6 @@
   ],
   "max_ingredients": 3,
   "priority": 30,
+  "requires_supported_ingredients": true,
   "station": "cooking_pot"
 }

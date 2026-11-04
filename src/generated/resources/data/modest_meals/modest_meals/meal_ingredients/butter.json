@@ -1,6 +1,21 @@
 {
   "item": "culturaldelights:butter",
   "meals": {
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/butter_0",
+      "modest_meals:item/meal/pie/butter_1",
+      "modest_meals:item/meal/pie/butter_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/butter_0",
+      "modest_meals:item/meal/pie_slice/butter_1",
+      "modest_meals:item/meal/pie_slice/butter_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/butter_0",
+      "modest_meals:item/meal/porridge/butter_1",
+      "modest_meals:item/meal/porridge/butter_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/butter_0",
       "modest_meals:item/meal/sandwich/butter_1",

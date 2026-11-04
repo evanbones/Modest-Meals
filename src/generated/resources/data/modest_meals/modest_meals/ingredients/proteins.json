@@ -3,12 +3,14 @@
     {
       "health": 2.0,
       "priority": 140,
+      "reference_nutrition": 3,
       "stamina": 1.0,
       "target": "#c:foods/raw_meat"
     },
     {
       "health": 5.0,
       "priority": 145,
+      "reference_nutrition": 7,
       "stamina": 2.0,
       "target": "#c:foods/cooked_meat"
     },
@@ -16,12 +18,14 @@
       "digest_ticks": 120,
       "health": 3.0,
       "priority": 140,
+      "reference_nutrition": 2,
       "target": "#c:foods/raw_fish"
     },
     {
       "digest_ticks": 150,
       "health": 5.0,
       "priority": 145,
+      "reference_nutrition": 5,
       "target": "#c:foods/cooked_fish"
     },
     {

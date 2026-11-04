@@ -1,11 +1,23 @@
 {
   "item": "#c:foods/elderberry",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/blueberry_0",
-      "modest_meals:item/meal/ice_cream/blueberry_1",
-      "modest_meals:item/meal/ice_cream/blueberry_2"
-    ]
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/blueberry_0",
+      "modest_meals:item/meal/cake/blueberry_1",
+      "modest_meals:item/meal/cake/blueberry_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/blueberry_0",
+      "modest_meals:item/meal/cake_slice/blueberry_1",
+      "modest_meals:item/meal/cake_slice/blueberry_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/blueberry",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/blueberry_0",
+      "modest_meals:item/meal/ice_cream_bowl/blueberry_1",
+      "modest_meals:item/meal/ice_cream_bowl/blueberry_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/blueberry"
   },
   "priority": 10
 }

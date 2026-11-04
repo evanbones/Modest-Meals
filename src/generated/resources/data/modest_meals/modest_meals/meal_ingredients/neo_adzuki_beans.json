@@ -1,10 +1,36 @@
 {
   "item": "neapolitan:adzuki_beans",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/adzuki_beans_0",
+      "modest_meals:item/meal/curry/adzuki_beans_1",
+      "modest_meals:item/meal/curry/adzuki_beans_2",
+      "modest_meals:item/meal/curry/adzuki_beans_3",
+      "modest_meals:item/meal/curry/adzuki_beans_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/adzuki_beans_0",
+      "modest_meals:item/meal/pasta/adzuki_beans_1",
+      "modest_meals:item/meal/pasta/adzuki_beans_2",
+      "modest_meals:item/meal/pasta/adzuki_beans_3"
+    ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/adzuki_beans_0",
+      "modest_meals:item/meal/ramen/adzuki_beans_1",
+      "modest_meals:item/meal/ramen/adzuki_beans_2",
+      "modest_meals:item/meal/ramen/adzuki_beans_3"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/adzuki_beans_0",
       "modest_meals:item/meal/sandwich/adzuki_beans_1",
       "modest_meals:item/meal/sandwich/adzuki_beans_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/adzuki_beans_0",
+      "modest_meals:item/meal/soup/adzuki_beans_1",
+      "modest_meals:item/meal/soup/adzuki_beans_2",
+      "modest_meals:item/meal/soup/adzuki_beans_3",
+      "modest_meals:item/meal/soup/adzuki_beans_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/adzuki_beans_0",

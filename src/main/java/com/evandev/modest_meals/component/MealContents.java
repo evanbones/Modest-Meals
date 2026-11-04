@@ -60,7 +60,7 @@ public record MealContents(
             return this;
         }
         return new MealContents(health / servings, stamina / servings, digestTicks / servings,
-                temporaryHealth / servings, effect, amplifier, durationTicks, ingredients, base, dubious);
+                temporaryHealth / servings, effect, amplifier, durationTicks / servings, ingredients, base, dubious);
     }
 
     public boolean isMeaningful() {

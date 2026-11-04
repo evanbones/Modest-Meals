@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.emi;
 
+import com.baisylia.culturaldelights.integration.emi.EMICulturalDelightsPlugin;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.item.MealItem;
@@ -27,14 +28,14 @@ public class VatMealEmiRecipe extends MealEmiRecipe {
 
     private VatMealEmiRecipe(ResourceLocation id, MealType type, EmiIngredient any, List<EmiIngredient> slots,
                              int cookTicks) {
-        super(VatEmiSupport.MEAL_CHILLING, id, type, any, slots);
+        super(EMICulturalDelightsPlugin.AGING, id, type, any, slots);
         this.cookTicks = cookTicks;
         this.container = containerStack();
     }
 
     private VatMealEmiRecipe(ResourceLocation id, MealType type, EmiIngredient any, List<EmiIngredient> slots,
                              int cookTicks, EmiStack output) {
-        super(VatEmiSupport.MEAL_CHILLING, id, type, any, slots, output);
+        super(EMICulturalDelightsPlugin.AGING, id, type, any, slots, output);
         this.cookTicks = cookTicks;
         this.container = containerStack();
     }

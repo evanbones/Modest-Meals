@@ -1,10 +1,47 @@
 {
   "item": "brewinandchewin:sweet_berry_jam",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/berry_0",
-      "modest_meals:item/meal/ice_cream/berry_1",
-      "modest_meals:item/meal/ice_cream/berry_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/berry_0",
+      "modest_meals:item/meal/cake/berry_1",
+      "modest_meals:item/meal/cake/berry_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/berry_0",
+      "modest_meals:item/meal/cake_slice/berry_1",
+      "modest_meals:item/meal/cake_slice/berry_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/berry",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/berry_0",
+      "modest_meals:item/meal/ice_cream_bowl/berry_1",
+      "modest_meals:item/meal/ice_cream_bowl/berry_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/sweet_berries_0",
+      "modest_meals:item/meal/jam/sweet_berries_1",
+      "modest_meals:item/meal/jam/sweet_berries_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/berry",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/sweet_berries_0",
+      "modest_meals:item/meal/pie/sweet_berries_1",
+      "modest_meals:item/meal/pie/sweet_berries_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/sweet_berries_0",
+      "modest_meals:item/meal/pie_slice/sweet_berries_1",
+      "modest_meals:item/meal/pie_slice/sweet_berries_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/sweet_berries_0",
+      "modest_meals:item/meal/porridge/sweet_berries_1",
+      "modest_meals:item/meal/porridge/sweet_berries_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/sweet_berries_0",
+      "modest_meals:item/meal/salad/sweet_berries_1",
+      "modest_meals:item/meal/salad/sweet_berries_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/sweet_berries_0",

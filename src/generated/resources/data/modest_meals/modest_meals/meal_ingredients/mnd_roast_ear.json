@@ -1,6 +1,19 @@
 {
   "item": "mynethersdelight:roast_ear",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/creamed_corn_0",
+      "modest_meals:item/meal/curry/creamed_corn_1",
+      "modest_meals:item/meal/curry/creamed_corn_2",
+      "modest_meals:item/meal/curry/creamed_corn_3",
+      "modest_meals:item/meal/curry/creamed_corn_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/creamed_corn_0",
+      "modest_meals:item/meal/pasta/creamed_corn_1",
+      "modest_meals:item/meal/pasta/creamed_corn_2",
+      "modest_meals:item/meal/pasta/creamed_corn_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/creamed_corn_0",
       "modest_meals:item/meal/pizza/creamed_corn_1",
@@ -22,10 +35,38 @@
       "modest_meals:item/meal/placed_pizza/creamed_corn_3",
       "modest_meals:item/meal/placed_pizza/creamed_corn_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/creamed_corn_0",
+      "modest_meals:item/meal/ramen/creamed_corn_1",
+      "modest_meals:item/meal/ramen/creamed_corn_2",
+      "modest_meals:item/meal/ramen/creamed_corn_3"
+    ],
+    "modest_meals:roll": [
+      "modest_meals:item/meal/roll/creamed_corn_0",
+      "modest_meals:item/meal/roll/creamed_corn_1",
+      "modest_meals:item/meal/roll/creamed_corn_2"
+    ],
+    "modest_meals:roll_slice": [
+      "modest_meals:item/meal/roll_slice/creamed_corn_0",
+      "modest_meals:item/meal/roll_slice/creamed_corn_1",
+      "modest_meals:item/meal/roll_slice/creamed_corn_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/creamed_corn_0",
+      "modest_meals:item/meal/salad/creamed_corn_1",
+      "modest_meals:item/meal/salad/creamed_corn_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/creamed_corn_0",
       "modest_meals:item/meal/sandwich/creamed_corn_1",
       "modest_meals:item/meal/sandwich/creamed_corn_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/creamed_corn_0",
+      "modest_meals:item/meal/soup/creamed_corn_1",
+      "modest_meals:item/meal/soup/creamed_corn_2",
+      "modest_meals:item/meal/soup/creamed_corn_3",
+      "modest_meals:item/meal/soup/creamed_corn_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/creamed_corn_0",

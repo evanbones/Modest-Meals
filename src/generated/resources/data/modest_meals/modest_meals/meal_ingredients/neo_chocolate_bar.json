@@ -1,10 +1,37 @@
 {
   "item": "neapolitan:chocolate_bar",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/chocolate_0",
-      "modest_meals:item/meal/ice_cream/chocolate_1",
-      "modest_meals:item/meal/ice_cream/chocolate_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/chocolate_0",
+      "modest_meals:item/meal/cake/chocolate_1",
+      "modest_meals:item/meal/cake/chocolate_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/chocolate_0",
+      "modest_meals:item/meal/cake_slice/chocolate_1",
+      "modest_meals:item/meal/cake_slice/chocolate_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/chocolate",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/chocolate_0",
+      "modest_meals:item/meal/ice_cream_bowl/chocolate_1",
+      "modest_meals:item/meal/ice_cream_bowl/chocolate_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/chocolate",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/chocolate_0",
+      "modest_meals:item/meal/pie/chocolate_1",
+      "modest_meals:item/meal/pie/chocolate_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/chocolate_0",
+      "modest_meals:item/meal/pie_slice/chocolate_1",
+      "modest_meals:item/meal/pie_slice/chocolate_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/chocolate_0",
+      "modest_meals:item/meal/porridge/chocolate_1",
+      "modest_meals:item/meal/porridge/chocolate_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/chocolate_0",

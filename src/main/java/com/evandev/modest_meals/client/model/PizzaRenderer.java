@@ -2,7 +2,7 @@ package com.evandev.modest_meals.client.model;
 
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.block.PizzaBlock;
-import com.evandev.modest_meals.block.PizzaBlockEntity;
+import com.evandev.modest_meals.block.MealBlockEntity;
 import com.evandev.modest_meals.component.MealContents;
 import com.evandev.modest_meals.food.ingredient.MealIngredientManager;
 import com.evandev.modest_meals.food.meal.MealType;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PizzaRenderer implements BlockEntityRenderer<PizzaBlockEntity> {
+public class PizzaRenderer implements BlockEntityRenderer<MealBlockEntity> {
     private static final float FLOOR = 1.0F / 16.0F + 0.001F;
     private static final ResourceLocation VISUALS =
             ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "placed_pizza");
@@ -35,8 +35,11 @@ public class PizzaRenderer implements BlockEntityRenderer<PizzaBlockEntity> {
     }
 
     @Override
-    public void render(PizzaBlockEntity pizza, float partialTick, PoseStack poseStack, MultiBufferSource buffers,
+    public void render(MealBlockEntity pizza, float partialTick, PoseStack poseStack, MultiBufferSource buffers,
                        int light, int overlay) {
+        if (!(pizza.getBlockState().getBlock() instanceof PizzaBlock)) {
+            return;
+        }
         List<TextureAtlasSprite> toppings = toppingsOf(pizza.contents());
         if (toppings.isEmpty()) {
             return;

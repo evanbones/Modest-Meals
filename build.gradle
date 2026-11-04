@@ -142,6 +142,7 @@ neoForge {
         }
         data {
             data()
+            gameDirectory = file('run/data')
             programArguments.addAll '--mod', mod_id, '--all',
                     '--output', file('src/generated/resources/').absolutePath,
                     '--existing', file('src/main/resources/').absolutePath
@@ -287,4 +288,25 @@ publishMods {
                 "reliable-remover", "shield-expansion", "reliable-gliders", "combat-roll")
         incompatible("melancholic_hunger")
     }
+}
+
+// Blueprint's own data generators crash the data run, so these mods are copied into run/mods for client and server only
+configurations {
+    gameplayMods {
+        transitive = false
+    }
+}
+
+dependencies {
+    gameplayMods "maven.modrinth:neapolitan:${neapolitan_version}"
+    gameplayMods "maven.modrinth:blueprint:${blueprint_version}"
+}
+
+def copyGameplayMods = tasks.register('copyGameplayMods', Copy) {
+    from configurations.gameplayMods
+    into file('run/mods')
+}
+
+tasks.matching { it.name == 'runClient' || it.name == 'runServer' }.configureEach {
+    dependsOn copyGameplayMods
 }

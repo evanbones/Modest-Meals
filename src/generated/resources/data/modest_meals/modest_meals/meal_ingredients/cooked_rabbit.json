@@ -1,6 +1,29 @@
 {
   "item": "minecraft:cooked_rabbit",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/rabbit_0",
+      "modest_meals:item/meal/curry/rabbit_1",
+      "modest_meals:item/meal/curry/rabbit_2",
+      "modest_meals:item/meal/curry/rabbit_3",
+      "modest_meals:item/meal/curry/rabbit_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/rabbit_0",
+      "modest_meals:item/meal/pasta/rabbit_1",
+      "modest_meals:item/meal/pasta/rabbit_2",
+      "modest_meals:item/meal/pasta/rabbit_3"
+    ],
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/rabbit_0",
+      "modest_meals:item/meal/pie/rabbit_1",
+      "modest_meals:item/meal/pie/rabbit_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/rabbit_0",
+      "modest_meals:item/meal/pie_slice/rabbit_1",
+      "modest_meals:item/meal/pie_slice/rabbit_2"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/rabbit_0",
       "modest_meals:item/meal/pizza/rabbit_1",
@@ -22,10 +45,28 @@
       "modest_meals:item/meal/placed_pizza/rabbit_3",
       "modest_meals:item/meal/placed_pizza/rabbit_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/rabbit_0",
+      "modest_meals:item/meal/ramen/rabbit_1",
+      "modest_meals:item/meal/ramen/rabbit_2",
+      "modest_meals:item/meal/ramen/rabbit_3"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/rabbit_0",
+      "modest_meals:item/meal/salad/rabbit_1",
+      "modest_meals:item/meal/salad/rabbit_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/rabbit_0",
       "modest_meals:item/meal/sandwich/rabbit_1",
       "modest_meals:item/meal/sandwich/rabbit_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/rabbit_0",
+      "modest_meals:item/meal/soup/rabbit_1",
+      "modest_meals:item/meal/soup/rabbit_2",
+      "modest_meals:item/meal/soup/rabbit_3",
+      "modest_meals:item/meal/soup/rabbit_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/rabbit_0",

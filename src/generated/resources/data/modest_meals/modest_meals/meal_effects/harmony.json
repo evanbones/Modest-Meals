@@ -1,6 +1,6 @@
 {
   "base_seconds": 40,
+  "filler_scale": 2.0,
   "id": "modest_meals:harmony",
-  "mob_effect": "neapolitan:harmony",
-  "name_prefix_key": "modest_meals.meal_prefix.harmony"
+  "mob_effect": "neapolitan:harmony"
 }

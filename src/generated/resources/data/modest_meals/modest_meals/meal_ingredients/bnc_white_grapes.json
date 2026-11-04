@@ -1,10 +1,47 @@
 {
   "item": "brewinandchewin:white_grapes",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/pear_0",
-      "modest_meals:item/meal/ice_cream/pear_1",
-      "modest_meals:item/meal/ice_cream/pear_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/pear_0",
+      "modest_meals:item/meal/cake/pear_1",
+      "modest_meals:item/meal/cake/pear_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/pear_0",
+      "modest_meals:item/meal/cake_slice/pear_1",
+      "modest_meals:item/meal/cake_slice/pear_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/pear",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/pear_0",
+      "modest_meals:item/meal/ice_cream_bowl/pear_1",
+      "modest_meals:item/meal/ice_cream_bowl/pear_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/white_grapes_0",
+      "modest_meals:item/meal/jam/white_grapes_1",
+      "modest_meals:item/meal/jam/white_grapes_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/pear",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/white_grapes_0",
+      "modest_meals:item/meal/pie/white_grapes_1",
+      "modest_meals:item/meal/pie/white_grapes_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/white_grapes_0",
+      "modest_meals:item/meal/pie_slice/white_grapes_1",
+      "modest_meals:item/meal/pie_slice/white_grapes_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/white_grapes_0",
+      "modest_meals:item/meal/porridge/white_grapes_1",
+      "modest_meals:item/meal/porridge/white_grapes_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/white_grapes_0",
+      "modest_meals:item/meal/salad/white_grapes_1",
+      "modest_meals:item/meal/salad/white_grapes_2"
     ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/white_grapes_0",

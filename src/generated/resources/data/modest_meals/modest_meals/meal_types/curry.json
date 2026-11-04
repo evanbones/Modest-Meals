@@ -6,7 +6,11 @@
       }
     }
   ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/curry/curry_base"
+  },
   "container": "minecraft:bowl",
+  "dubious_sprite": "modest_meals:item/meal/curry/dubious",
   "forbidden_ingredients": [
     {
       "tag": "modest_meals:not_for_dishes"
@@ -54,5 +58,6 @@
   ],
   "min_ingredients": 2,
   "priority": 25,
+  "requires_supported_ingredients": true,
   "station": "cooking_pot"
 }

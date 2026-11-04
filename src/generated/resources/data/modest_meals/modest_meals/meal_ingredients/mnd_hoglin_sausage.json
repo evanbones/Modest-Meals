@@ -1,6 +1,19 @@
 {
   "item": "mynethersdelight:hoglin_sausage",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/sausage_0",
+      "modest_meals:item/meal/curry/sausage_1",
+      "modest_meals:item/meal/curry/sausage_2",
+      "modest_meals:item/meal/curry/sausage_3",
+      "modest_meals:item/meal/curry/sausage_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/sausage_0",
+      "modest_meals:item/meal/pasta/sausage_1",
+      "modest_meals:item/meal/pasta/sausage_2",
+      "modest_meals:item/meal/pasta/sausage_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/sausage_0",
       "modest_meals:item/meal/pizza/sausage_1",
@@ -22,10 +35,23 @@
       "modest_meals:item/meal/placed_pizza/sausage_3",
       "modest_meals:item/meal/placed_pizza/sausage_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/sausage_0",
+      "modest_meals:item/meal/ramen/sausage_1",
+      "modest_meals:item/meal/ramen/sausage_2",
+      "modest_meals:item/meal/ramen/sausage_3"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/sausage_0",
       "modest_meals:item/meal/sandwich/sausage_1",
       "modest_meals:item/meal/sandwich/sausage_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/sausage_0",
+      "modest_meals:item/meal/soup/sausage_1",
+      "modest_meals:item/meal/soup/sausage_2",
+      "modest_meals:item/meal/soup/sausage_3",
+      "modest_meals:item/meal/soup/sausage_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/sausage_0",

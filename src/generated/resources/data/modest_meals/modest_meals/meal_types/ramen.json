@@ -22,7 +22,11 @@
       ]
     }
   ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/ramen/ramen_base"
+  },
   "container": "minecraft:bowl",
+  "dubious_sprite": "modest_meals:item/meal/ramen/dubious",
   "forbidden_ingredients": [
     {
       "tag": "modest_meals:not_for_dishes"
@@ -70,5 +74,6 @@
   ],
   "max_ingredients": 4,
   "priority": 20,
+  "requires_supported_ingredients": true,
   "station": "cooking_pot"
 }

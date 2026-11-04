@@ -1,6 +1,19 @@
 {
   "item": "environmental:truffle",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/truffle_0",
+      "modest_meals:item/meal/curry/truffle_1",
+      "modest_meals:item/meal/curry/truffle_2",
+      "modest_meals:item/meal/curry/truffle_3",
+      "modest_meals:item/meal/curry/truffle_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/truffle_0",
+      "modest_meals:item/meal/pasta/truffle_1",
+      "modest_meals:item/meal/pasta/truffle_2",
+      "modest_meals:item/meal/pasta/truffle_3"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/truffle_0",
       "modest_meals:item/meal/pizza/truffle_1",
@@ -22,10 +35,28 @@
       "modest_meals:item/meal/placed_pizza/truffle_3",
       "modest_meals:item/meal/placed_pizza/truffle_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/truffle_0",
+      "modest_meals:item/meal/ramen/truffle_1",
+      "modest_meals:item/meal/ramen/truffle_2",
+      "modest_meals:item/meal/ramen/truffle_3"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/truffle_0",
+      "modest_meals:item/meal/salad/truffle_1",
+      "modest_meals:item/meal/salad/truffle_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/truffle_0",
       "modest_meals:item/meal/sandwich/truffle_1",
       "modest_meals:item/meal/sandwich/truffle_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/truffle_0",
+      "modest_meals:item/meal/soup/truffle_1",
+      "modest_meals:item/meal/soup/truffle_2",
+      "modest_meals:item/meal/soup/truffle_3",
+      "modest_meals:item/meal/soup/truffle_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/truffle_0",

@@ -1,6 +1,29 @@
 {
   "item": "abnormals_delight:cooked_venison_shanks",
   "meals": {
+    "modest_meals:curry": [
+      "modest_meals:item/meal/curry/beef_0",
+      "modest_meals:item/meal/curry/beef_1",
+      "modest_meals:item/meal/curry/beef_2",
+      "modest_meals:item/meal/curry/beef_3",
+      "modest_meals:item/meal/curry/beef_4"
+    ],
+    "modest_meals:pasta": [
+      "modest_meals:item/meal/pasta/beef_0",
+      "modest_meals:item/meal/pasta/beef_1",
+      "modest_meals:item/meal/pasta/beef_2",
+      "modest_meals:item/meal/pasta/beef_3"
+    ],
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/beef_0",
+      "modest_meals:item/meal/pie/beef_1",
+      "modest_meals:item/meal/pie/beef_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/beef_0",
+      "modest_meals:item/meal/pie_slice/beef_1",
+      "modest_meals:item/meal/pie_slice/beef_2"
+    ],
     "modest_meals:pizza": [
       "modest_meals:item/meal/pizza/beef_0",
       "modest_meals:item/meal/pizza/beef_1",
@@ -22,10 +45,28 @@
       "modest_meals:item/meal/placed_pizza/beef_3",
       "modest_meals:item/meal/placed_pizza/beef_4"
     ],
+    "modest_meals:ramen": [
+      "modest_meals:item/meal/ramen/beef_0",
+      "modest_meals:item/meal/ramen/beef_1",
+      "modest_meals:item/meal/ramen/beef_2",
+      "modest_meals:item/meal/ramen/beef_3"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/beef_0",
+      "modest_meals:item/meal/salad/beef_1",
+      "modest_meals:item/meal/salad/beef_2"
+    ],
     "modest_meals:sandwich": [
       "modest_meals:item/meal/sandwich/beef_0",
       "modest_meals:item/meal/sandwich/beef_1",
       "modest_meals:item/meal/sandwich/beef_2"
+    ],
+    "modest_meals:soup": [
+      "modest_meals:item/meal/soup/beef_0",
+      "modest_meals:item/meal/soup/beef_1",
+      "modest_meals:item/meal/soup/beef_2",
+      "modest_meals:item/meal/soup/beef_3",
+      "modest_meals:item/meal/soup/beef_4"
     ],
     "modest_meals:wrap": [
       "modest_meals:item/meal/wrap/beef_0",

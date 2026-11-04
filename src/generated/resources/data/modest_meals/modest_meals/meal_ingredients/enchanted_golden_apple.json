@@ -1,10 +1,47 @@
 {
   "item": "minecraft:enchanted_golden_apple",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/mango_0",
-      "modest_meals:item/meal/ice_cream/mango_1",
-      "modest_meals:item/meal/ice_cream/mango_2"
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/mango_0",
+      "modest_meals:item/meal/cake/mango_1",
+      "modest_meals:item/meal/cake/mango_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/mango_0",
+      "modest_meals:item/meal/cake_slice/mango_1",
+      "modest_meals:item/meal/cake_slice/mango_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/mango",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/mango_0",
+      "modest_meals:item/meal/ice_cream_bowl/mango_1",
+      "modest_meals:item/meal/ice_cream_bowl/mango_2"
+    ],
+    "modest_meals:jam": [
+      "modest_meals:item/meal/jam/golden_apple_0",
+      "modest_meals:item/meal/jam/golden_apple_1",
+      "modest_meals:item/meal/jam/golden_apple_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/mango",
+    "modest_meals:pie": [
+      "modest_meals:item/meal/pie/golden_apple_0",
+      "modest_meals:item/meal/pie/golden_apple_1",
+      "modest_meals:item/meal/pie/golden_apple_2"
+    ],
+    "modest_meals:pie_slice": [
+      "modest_meals:item/meal/pie_slice/golden_apple_0",
+      "modest_meals:item/meal/pie_slice/golden_apple_1",
+      "modest_meals:item/meal/pie_slice/golden_apple_2"
+    ],
+    "modest_meals:porridge": [
+      "modest_meals:item/meal/porridge/golden_apple_0",
+      "modest_meals:item/meal/porridge/golden_apple_1",
+      "modest_meals:item/meal/porridge/golden_apple_2"
+    ],
+    "modest_meals:salad": [
+      "modest_meals:item/meal/salad/golden_apple_0",
+      "modest_meals:item/meal/salad/golden_apple_1",
+      "modest_meals:item/meal/salad/golden_apple_2"
     ]
   }
 }

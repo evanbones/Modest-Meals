@@ -1,10 +1,22 @@
 {
   "item": "#modest_meals:dessert_ingredients",
   "meals": {
-    "modest_meals:ice_cream": [
-      "modest_meals:item/meal/ice_cream/vanilla_0",
-      "modest_meals:item/meal/ice_cream/vanilla_1",
-      "modest_meals:item/meal/ice_cream/vanilla_2"
-    ]
+    "modest_meals:cake": [
+      "modest_meals:item/meal/cake/vanilla_0",
+      "modest_meals:item/meal/cake/vanilla_1",
+      "modest_meals:item/meal/cake/vanilla_2"
+    ],
+    "modest_meals:cake_slice": [
+      "modest_meals:item/meal/cake_slice/vanilla_0",
+      "modest_meals:item/meal/cake_slice/vanilla_1",
+      "modest_meals:item/meal/cake_slice/vanilla_2"
+    ],
+    "modest_meals:ice_cream": "modest_meals:item/meal/ice_cream/vanilla",
+    "modest_meals:ice_cream_bowl": [
+      "modest_meals:item/meal/ice_cream_bowl/vanilla_0",
+      "modest_meals:item/meal/ice_cream_bowl/vanilla_1",
+      "modest_meals:item/meal/ice_cream_bowl/vanilla_2"
+    ],
+    "modest_meals:milkshake": "modest_meals:item/meal/milkshake/vanilla"
   }
 }

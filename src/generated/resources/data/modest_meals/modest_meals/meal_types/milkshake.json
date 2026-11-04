@@ -1,0 +1,66 @@
+{
+  "base": [
+    {
+      "ingredient": {
+        "tag": "c:drinks/milk"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glass_bottle"
+      }
+    }
+  ],
+  "base_sprites": {
+    "bottom": "modest_meals:item/meal/milkshake/milkshake_bottom",
+    "top": "modest_meals:item/meal/milkshake/milkshake_top"
+  },
+  "container": "minecraft:glass_bottle",
+  "dubious_sprite": "modest_meals:item/meal/milkshake/dubious",
+  "forbidden_ingredients": {
+    "tag": "modest_meals:not_for_dishes"
+  },
+  "id": "modest_meals:milkshake",
+  "item": "modest_meals:milkshake",
+  "item_overrides": [
+    {
+      "ingredients": [
+        "neapolitan:dried_vanilla_pods"
+      ],
+      "result": "neapolitan:vanilla_milkshake"
+    },
+    {
+      "ingredients": [
+        "#c:foods/chocolate_bar"
+      ],
+      "result": "neapolitan:chocolate_milkshake"
+    },
+    {
+      "ingredients": [
+        "#c:foods/strawberry"
+      ],
+      "result": "neapolitan:strawberry_milkshake"
+    },
+    {
+      "ingredients": [
+        "#c:foods/banana"
+      ],
+      "result": "neapolitan:banana_milkshake"
+    },
+    {
+      "ingredients": [
+        "neapolitan:mint_leaves"
+      ],
+      "result": "neapolitan:mint_milkshake"
+    },
+    {
+      "ingredients": [
+        "neapolitan:roasted_adzuki_beans"
+      ],
+      "result": "neapolitan:adzuki_milkshake"
+    }
+  ],
+  "max_ingredients": 1,
+  "priority": 30,
+  "requires_supported_ingredients": true
+}
