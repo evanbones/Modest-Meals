@@ -1051,6 +1051,74 @@
       "required": false
     },
     {
+      "id": "bountifulfares:coconut_cake",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:cocoa_cake",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:sponge_cake",
+      "required": false
+    },
+    {
+      "id": "bountifulfares:citrus_essence",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:wafer",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:cooking_oil",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:agave",
+      "required": false
+    },
+    {
+      "id": "nomansland:maple_mead_bottle",
+      "required": false
+    },
+    {
+      "id": "abundant_atmosphere:swamp_scran",
+      "required": false
+    },
+    {
+      "id": "abundant_atmosphere:gourdnut_pudding",
+      "required": false
+    },
+    {
+      "id": "berry_good:glowgurt",
+      "required": false
+    },
+    {
+      "id": "create:sweet_roll",
+      "required": false
+    },
+    {
+      "id": "infernalexp:warped_shell",
+      "required": false
+    },
+    {
+      "id": "nirvana:weed_brownie",
+      "required": false
+    },
+    {
+      "id": "onion_onion:motley_grill",
+      "required": false
+    },
+    {
+      "id": "onion_onion:motley_grill_block",
+      "required": false
+    },
+    {
+      "id": "redomesticate:sinister_carrot",
+      "required": false
+    },
+    {
       "id": "#bountifulfares:meals",
       "required": false
     },

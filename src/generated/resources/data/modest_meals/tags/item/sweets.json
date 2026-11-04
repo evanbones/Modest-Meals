@@ -64,6 +64,10 @@
     {
       "id": "brewinandchewin:apple_jelly",
       "required": false
+    },
+    {
+      "id": "abundant_atmosphere:squashberry_jam",
+      "required": false
     }
   ]
 }

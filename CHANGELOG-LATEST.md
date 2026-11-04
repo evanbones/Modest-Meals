@@ -1,10 +1,13 @@
 ### Added
 
 - Added pies and cakes, which work like Farmer's Delight's.
-- Added milkshakes, coloured by their flavour. 
-  - Neapolitan flavours make Neapolitan's own milkshakes.
+- Added milkshakes, coloured by their flavour.
+    - Neapolitan flavours make Neapolitan's own milkshakes.
 - Added three-scoop ice cream bowls, made in the Cultural Delights vat.
 - Soup, curry, pasta, ramen, salad, jam, and sushi rolls now show their ingredients like sandwiches and wraps do.
+- Added meal art for ingredients from Tide, Upgrade Aquatic, Caverns & Chasms, Quark, Onion Onion, Incubation,
+  Buzzier Bees, Berry Good, and Abundant Atmosphere.
+- Quark Crab legs can now go in rolls.
 - Added an Exhaustion Lockout option.
     - Turning it off makes it so running out of stamina only pauses you for the recharge cooldown.
 
@@ -22,6 +25,9 @@
 - Sprinting Restriction now also applies when Sprinting Uses Stamina is disabled.
 - Fish, fruit and modded raw meats now digest at the same rates as other food.
 - Small raw foods like calamari no longer take ages to digest, and neither do a few modded desserts, salads, and soups.
+- Tagged more ingredients from Abundant Atmosphere, Berry Good, Bountiful Fares, Create, Infernal
+  Expansion, Nirvana, No Man's Land, Onion Onion, and Redomesticate.
+- More modded sweets, desserts, and jam exclusions are recognised.
 
 ### Fixed
 

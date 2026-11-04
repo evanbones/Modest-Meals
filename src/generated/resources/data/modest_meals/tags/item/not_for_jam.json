@@ -12,6 +12,14 @@
     {
       "id": "culturaldelights:cut_avocado",
       "required": false
+    },
+    {
+      "id": "redomesticate:rotten_apple",
+      "required": false
+    },
+    {
+      "id": "caverns_and_chasms:bejeweled_apple",
+      "required": false
     }
   ]
 }

@@ -49,7 +49,7 @@
     },
     {
       "ingredients": [
-        "neapolitan:mint_leaves"
+        "neapolitan:mint_leaves|culturaldelights:mint"
       ],
       "result": "neapolitan:mint_milkshake"
     },

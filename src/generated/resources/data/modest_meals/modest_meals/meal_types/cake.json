@@ -43,8 +43,8 @@
     },
     {
       "ingredients": [
-        "neapolitan:mint_leaves",
-        "neapolitan:mint_leaves"
+        "neapolitan:mint_leaves|culturaldelights:mint",
+        "neapolitan:mint_leaves|culturaldelights:mint"
       ],
       "replace_recipes": true,
       "result": "neapolitan:mint_cake"

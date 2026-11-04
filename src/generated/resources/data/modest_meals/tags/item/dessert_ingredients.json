@@ -97,6 +97,14 @@
     {
       "id": "farmersdelight:pumpkin_slice",
       "required": false
+    },
+    {
+      "id": "culturaldelights:marshmallow",
+      "required": false
+    },
+    {
+      "id": "abundant_atmosphere:roasted_gourdnut",
+      "required": false
     }
   ]
 }

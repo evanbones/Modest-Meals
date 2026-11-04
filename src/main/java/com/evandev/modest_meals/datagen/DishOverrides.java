@@ -169,7 +169,7 @@ public final class DishOverrides {
         flavouredIceCream("chocolate", CHOCOLATE);
         flavouredIceCream("strawberry", STRAWBERRY);
         flavouredIceCream("banana", BANANA);
-        flavouredIceCream("mint", NEA + "mint_leaves");
+        flavouredIceCream("mint", MINT);
         flavouredIceCream("adzuki", NEA + "roasted_adzuki_beans");
     }
 
@@ -213,7 +213,7 @@ public final class DishOverrides {
         add("cake", NEA + "chocolate_cake", CHOCOLATE, CHOCOLATE);
         add("cake", NEA + "strawberry_cake", STRAWBERRY, STRAWBERRY);
         add("cake", NEA + "banana_cake", BANANA, BANANA);
-        add("cake", NEA + "mint_cake", NEA + "mint_leaves", NEA + "mint_leaves");
+        add("cake", NEA + "mint_cake", MINT, MINT);
         add("cake", NEA + "adzuki_cake", NEA + "roasted_adzuki_beans", NEA + "roasted_adzuki_beans");
         add("cake", BF + "cocoa_cake", "minecraft:cocoa_beans", "minecraft:cocoa_beans", "minecraft:cocoa_beans");
         add("cake", BF + "coconut_cake", "#c:coconut_halves", "#c:coconut_halves", "#c:coconut_halves");
@@ -228,7 +228,7 @@ public final class DishOverrides {
         addAlongside("milkshake", NEA + "chocolate_milkshake", CHOCOLATE);
         addAlongside("milkshake", NEA + "strawberry_milkshake", STRAWBERRY);
         addAlongside("milkshake", NEA + "banana_milkshake", BANANA);
-        addAlongside("milkshake", NEA + "mint_milkshake", NEA + "mint_leaves");
+        addAlongside("milkshake", NEA + "mint_milkshake", MINT);
         addAlongside("milkshake", NEA + "adzuki_milkshake", NEA + "roasted_adzuki_beans");
     }
 

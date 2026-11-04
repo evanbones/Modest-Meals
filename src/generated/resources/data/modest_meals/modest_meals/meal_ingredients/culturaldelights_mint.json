@@ -52,12 +52,22 @@
       "modest_meals:item/meal/salad/cabbage_1",
       "modest_meals:item/meal/salad/cabbage_2"
     ],
+    "modest_meals:sandwich": [
+      "modest_meals:item/meal/sandwich/cabbage_0",
+      "modest_meals:item/meal/sandwich/cabbage_1",
+      "modest_meals:item/meal/sandwich/cabbage_2"
+    ],
     "modest_meals:soup": [
       "modest_meals:item/meal/soup/cabbage_0",
       "modest_meals:item/meal/soup/cabbage_1",
       "modest_meals:item/meal/soup/cabbage_2",
       "modest_meals:item/meal/soup/cabbage_3",
       "modest_meals:item/meal/soup/cabbage_4"
+    ],
+    "modest_meals:wrap": [
+      "modest_meals:item/meal/wrap/cabbage_0",
+      "modest_meals:item/meal/wrap/cabbage_1",
+      "modest_meals:item/meal/wrap/cabbage_2"
     ]
   }
 }

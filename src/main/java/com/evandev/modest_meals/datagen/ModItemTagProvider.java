@@ -120,6 +120,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptional(sweets, NEAPOLITAN, "vanilla_pods", "dried_vanilla_pods", "chocolate_spider_eye");
         addOptional(sweets, NO_MANS_LAND, "maple_syrup_bottle", "candied_pear");
         addOptional(sweets, BREWIN_AND_CHEWIN, "sweet_berry_jam", "glow_berry_marmalade", "apple_jelly");
+        addOptional(sweets, "abundant_atmosphere", "squashberry_jam");
 
         var staples = tag(ModItemTags.STAPLES);
         staples.addTag(BREADS).addTag(DOUGHS).addTag(PASTAS).addTag(RICES).addTag(ModItemTags.WHEATS)
@@ -129,6 +130,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         notForJam.add(Items.ENCHANTED_GOLDEN_APPLE);
         addOptionalTags(notForJam, CULTURAL_DELIGHTS, "avocados");
         addOptional(notForJam, CULTURAL_DELIGHTS, "avocado", "cut_avocado");
+        addOptional(notForJam, "redomesticate", "rotten_apple");
+        addOptional(notForJam, "caverns_and_chasms", "bejeweled_apple");
 
         var desserts = tag(ModItemTags.DESSERT_INGREDIENTS);
         desserts.addTag(ModItemTags.JAM_FRUITS).addTag(FRUITS);
@@ -142,6 +145,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         addOptional(desserts, NO_MANS_LAND, "maple_syrup_bottle", "walnuts", "pine_nuts", "candied_pear");
         addOptional(desserts, BOUNTIFUL_FARES, "coconut_half", "walnut");
         addOptional(desserts, FARMERS_DELIGHT, "pumpkin_slice");
+        addOptional(desserts, CULTURAL_DELIGHTS, "marshmallow");
+        addOptional(desserts, "abundant_atmosphere", "roasted_gourdnut");
 
         var rollFillings = tag(ModItemTags.ROLL_FILLINGS);
         rollFillings.addTag(RAW_FISH).addTag(COOKED_FISH).addTag(RAW_SQUID).addTag(COOKED_SQUID)
@@ -151,6 +156,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "foods/raw_calamari", "foods/cooked_calamari", "crops/cucumber", "mushrooms");
         addOptionalTags(rollFillings, CULTURAL_DELIGHTS, "avocados");
         addOptional(rollFillings, CULTURAL_DELIGHTS, "tofu", "cut_avocado", "cut_cucumber", "cut_pickle");
+        addOptional(rollFillings, "quark", "crab_leg", "cooked_crab_leg");
 
         var pizzaSauces = tag(ModItemTags.PIZZA_SAUCES);
         pizzaSauces.addTag(TOMATO_SAUCES);
@@ -466,6 +472,17 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 "rich_chocolate_cake",
                 "pumpkin_roll",
                 "glow_berry_meringue_pie");
+
+        addOptional(notAnIngredient, BOUNTIFUL_FARES, "coconut_cake", "cocoa_cake", "sponge_cake", "citrus_essence");
+        addOptional(notAnIngredient, CULTURAL_DELIGHTS, "wafer", "cooking_oil", "agave");
+        addOptional(notAnIngredient, NO_MANS_LAND, "maple_mead_bottle");
+        addOptional(notAnIngredient, "abundant_atmosphere", "swamp_scran", "gourdnut_pudding");
+        addOptional(notAnIngredient, "berry_good", "glowgurt");
+        addOptional(notAnIngredient, "create", "sweet_roll");
+        addOptional(notAnIngredient, "infernalexp", "warped_shell");
+        addOptional(notAnIngredient, "nirvana", "weed_brownie");
+        addOptional(notAnIngredient, "onion_onion", "motley_grill", "motley_grill_block");
+        addOptional(notAnIngredient, "redomesticate", "sinister_carrot");
 
         notAnIngredient.addOptionalTag(itemTag(BOUNTIFUL_FARES, "meals"));
         addOptional(notAnIngredient, BOUNTIFUL_FARES,

@@ -299,6 +299,82 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("mnd_bullet_pepper"), topping("mynethersdelight:bullet_pepper", "bullet_pepper"));
         entries.put(id("mnd_pepper_powder"), pizza("mynethersdelight:pepper_powder", "bullet_pepper"));
 
+        entries.put(id("culturaldelights_mint"), sandwich("culturaldelights:mint", "cabbage"));
+
+        entries.put(id("abundant_atmosphere_puffball_slice"), topping("abundant_atmosphere:puffball_slice", "mushroom"));
+        entries.put(id("abundant_atmosphere_puffball_cutlet"), topping("abundant_atmosphere:puffball_cutlet", "mushroom"));
+        entries.put(id("abundant_atmosphere_poreshroom"), pizza("abundant_atmosphere:poreshroom", "mushroom"));
+
+        entries.put(id("quark_crab_leg"), topping("quark:crab_leg", "salmon"));
+        entries.put(id("quark_cooked_crab_leg"), topping("quark:cooked_crab_leg", "salmon"));
+
+        entries.put(id("tide_fish_slice"), topping("tide:fish_slice", "cod"));
+        entries.put(id("tide_cooked_fish_slice"), topping("tide:cooked_fish_slice", "cod"));
+        entries.put(id("tide_cooked_fish"), topping("tide:cooked_fish", "cod"));
+        entries.put(id("tide_anchovy"), topping("tide:anchovy", "cod"));
+        entries.put(id("tide_tuna"), topping("tide:tuna", "salmon"));
+        entries.put(id("tide_arapaima"), topping("tide:arapaima", "salmon"));
+        entries.put(id("tide_blazing_swordfish"), topping("tide:blazing_swordfish", "salmon"));
+        entries.put(id("tide_brook_trout"), topping("tide:brook_trout", "salmon"));
+        entries.put(id("tide_crimson_fangjaw"), topping("tide:crimson_fangjaw", "salmon"));
+        entries.put(id("tide_ember_koi"), topping("tide:ember_koi", "salmon"));
+        entries.put(id("tide_magma_mackerel"), topping("tide:magma_mackerel", "salmon"));
+        entries.put(id("tide_mahi_mahi"), topping("tide:mahi_mahi", "salmon"));
+        entries.put(id("tide_rainbow_trout"), topping("tide:rainbow_trout", "salmon"));
+        entries.put(id("tide_red_snapper"), topping("tide:red_snapper", "salmon"));
+        entries.put(id("tide_sailfish"), topping("tide:sailfish", "salmon"));
+        entries.put(id("tide_swordfish"), topping("tide:swordfish", "salmon"));
+        entries.put(id("tide_angelfish"), topping("tide:angelfish", "cod"));
+        entries.put(id("tide_anglerfish"), topping("tide:anglerfish", "cod"));
+        entries.put(id("tide_ash_perch"), topping("tide:ash_perch", "cod"));
+        entries.put(id("tide_black_crappie"), topping("tide:black_crappie", "cod"));
+        entries.put(id("tide_bluegill"), topping("tide:bluegill", "cod"));
+        entries.put(id("tide_carp"), topping("tide:carp", "cod"));
+        entries.put(id("tide_catfish"), topping("tide:catfish", "cod"));
+        entries.put(id("tide_cave_eel"), topping("tide:cave_eel", "cod"));
+        entries.put(id("tide_chorus_cod"), topping("tide:chorus_cod", "cod"));
+        entries.put(id("tide_coelacanth"), topping("tide:coelacanth", "cod"));
+        entries.put(id("tide_deep_grouper"), topping("tide:deep_grouper", "cod"));
+        entries.put(id("tide_devils_hole_pupfish"), topping("tide:devils_hole_pupfish", "cod"));
+        entries.put(id("tide_elytrout"), topping("tide:elytrout", "cod"));
+        entries.put(id("tide_ender_glider"), topping("tide:ender_glider", "cod"));
+        entries.put(id("tide_enderfin"), topping("tide:enderfin", "cod"));
+        entries.put(id("tide_endergazer"), topping("tide:endergazer", "cod"));
+        entries.put(id("tide_flounder"), topping("tide:flounder", "cod"));
+        entries.put(id("tide_guppy"), topping("tide:guppy", "cod"));
+        entries.put(id("tide_inferno_guppy"), topping("tide:inferno_guppy", "cod"));
+        entries.put(id("tide_mackerel"), topping("tide:mackerel", "cod"));
+        entries.put(id("tide_manta_ray"), topping("tide:manta_ray", "cod"));
+        entries.put(id("tide_mooneye"), topping("tide:mooneye", "cod"));
+        entries.put(id("tide_obsidian_pike"), topping("tide:obsidian_pike", "cod"));
+        entries.put(id("tide_pale_clubfish"), topping("tide:pale_clubfish", "cod"));
+        entries.put(id("tide_snook"), topping("tide:snook", "cod"));
+        entries.put(id("tide_soulscale"), topping("tide:soulscale", "cod"));
+        entries.put(id("tide_sturgeon"), topping("tide:sturgeon", "cod"));
+        entries.put(id("tide_violet_carp"), topping("tide:violet_carp", "cod"));
+        entries.put(id("tide_voidseeker"), topping("tide:voidseeker", "cod"));
+        entries.put(id("tide_walleye"), topping("tide:walleye", "cod"));
+        entries.put(id("tide_warped_guppy"), topping("tide:warped_guppy", "cod"));
+        entries.put(id("tide_white_crappie"), topping("tide:white_crappie", "cod"));
+        entries.put(id("tide_witherfin"), topping("tide:witherfin", "cod"));
+        entries.put(id("tide_snatcher_squid"), topping("tide:snatcher_squid", "squid"));
+
+        entries.put(id("ua_pike"), topping("upgrade_aquatic:pike", "cod"));
+        entries.put(id("ua_lionfish"), topping("upgrade_aquatic:lionfish", "cod"));
+        entries.put(id("ua_perch"), topping("upgrade_aquatic:perch", "salmon"));
+        entries.put(id("ua_boiled_pickerelweed"), sandwich("upgrade_aquatic:boiled_pickerelweed", "kelp"));
+        entries.put(id("cac_cavefish"), topping("caverns_and_chasms:cavefish", "cod"));
+        entries.put(id("abundant_atmosphere_squashberry_jam"), sandwich("abundant_atmosphere:squashberry_jam", "orange"));
+        entries.put(id("infernalexp_blindsight_tongue"), topping("infernalexp:blindsight_tongue", "baked_potato"));
+
+        entries.put(id("onion_onion_onion_slice"), topping("onion_onion:onion_slice", "onion"));
+        entries.put(id("onion_onion_onion_rings"), topping("onion_onion:onion_rings", "onion"));
+
+        entries.put(id("incubation_scrambled_eggs"), topping("incubation:scrambled_eggs", "fried_egg"));
+        entries.put(id("buzzier_bees_glazed_porkchop"), topping("buzzier_bees:glazed_porkchop", "pork"));
+        entries.put(id("berry_good_sweet_berry_meatballs"), topping("berry_good:sweet_berry_meatballs", "sausage"));
+        entries.put(id("berry_good_sweet_berry_mince"), topping("berry_good:sweet_berry_mince", "beef"));
+
         iceCreamFlavours(entries);
         dishExtras(entries);
         dishes(entries);
