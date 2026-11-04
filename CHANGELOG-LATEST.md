@@ -25,3 +25,7 @@
 
 - Fixed temporary health from meals not being granted.
 - Fixed bowl meals not giving the bowl back when eaten.
+
+### Removed
+
+- Removed Porridge.
