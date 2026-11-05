@@ -96,7 +96,7 @@ public class MealTypeManager extends SimpleJsonResourceReloadListener {
                 continue;
             }
 
-            MealType type = ReliableRemoverCompat.prune(parsed.get());
+            MealType type = ReliableRemoverCompat.prune(parsed.get(), this.getContext());
             if (type.resolveItem().isEmpty()) {
                 Constants.LOG.warn("Meal type {} names an unknown result item {}, skipping it",
                         type.id(), type.item());

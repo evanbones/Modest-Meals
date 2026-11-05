@@ -1,12 +1,17 @@
 package com.evandev.modest_meals.compat.reliable_remover;
 
 import com.evandev.modest_meals.food.meal.MealType;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,23 +35,27 @@ public final class ReliableRemoverCompat {
         return isLoaded() && ReliableRemoverBridge.isHidden(item);
     }
 
-    public static MealType prune(MealType type) {
-        if (!isLoaded() || type.itemOverrides().isEmpty()) {
+    public static MealType prune(MealType type, ICondition.IContext context) {
+        if (type.itemOverrides().isEmpty()) {
             return type;
         }
         List<MealType.ItemOverride> kept = new ArrayList<>();
         for (MealType.ItemOverride override : type.itemOverrides()) {
-            prune(override).ifPresent(kept::add);
+            prune(override, context).ifPresent(kept::add);
         }
         return kept.equals(type.itemOverrides()) ? type : type.withItemOverrides(kept);
     }
 
-    private static Optional<MealType.ItemOverride> prune(MealType.ItemOverride override) {
+    public static boolean isSatisfiable(String result, List<String> ingredients, List<String> base, ICondition.IContext context) {
+        return !removed(result) && pruneSpecs(ingredients, context).isPresent() && pruneSpecs(base, context).isPresent();
+    }
+
+    private static Optional<MealType.ItemOverride> prune(MealType.ItemOverride override, ICondition.IContext context) {
         if (removed(override.result().toString())) {
             return Optional.empty();
         }
-        Optional<List<String>> ingredients = pruneSpecs(override.ingredients());
-        Optional<List<String>> base = pruneSpecs(override.base());
+        Optional<List<String>> ingredients = pruneSpecs(override.ingredients(), context);
+        Optional<List<String>> base = pruneSpecs(override.base(), context);
         if (ingredients.isEmpty() || base.isEmpty()) {
             return Optional.empty();
         }
@@ -54,12 +63,12 @@ public final class ReliableRemoverCompat {
                 override.replaceRecipes(), base.get()));
     }
 
-    private static Optional<List<String>> pruneSpecs(List<String> specs) {
+    private static Optional<List<String>> pruneSpecs(List<String> specs, ICondition.IContext context) {
         List<String> out = new ArrayList<>(specs.size());
         for (String spec : specs) {
             List<String> options = new ArrayList<>();
             for (String option : spec.split("\\|")) {
-                if (option.startsWith("#") || !removed(option)) {
+                if (option.startsWith("#") ? hasMembers(option.substring(1), context) : !removed(option)) {
                     options.add(option);
                 }
             }
@@ -69,6 +78,15 @@ public final class ReliableRemoverCompat {
             out.add(String.join("|", options));
         }
         return Optional.of(out);
+    }
+
+    private static boolean hasMembers(String tag, ICondition.IContext context) {
+        ResourceLocation location = ResourceLocation.tryParse(tag);
+        if (location == null || context == ICondition.IContext.EMPTY || context == ICondition.IContext.TAGS_INVALID) {
+            return true;
+        }
+        Collection<Holder<Item>> members = context.getTag(TagKey.create(Registries.ITEM, location));
+        return members.stream().anyMatch(holder -> !isRemoved(holder.value()));
     }
 
     private static boolean removed(String id) {

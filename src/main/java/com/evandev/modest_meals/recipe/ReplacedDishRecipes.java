@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.recipe;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.compat.reliable_remover.ReliableRemoverCompat;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -10,10 +11,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.io.Reader;
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,8 +31,8 @@ public final class ReplacedDishRecipes {
     );
 
     public static Map<ResourceLocation, JsonElement> filter(Map<ResourceLocation, JsonElement> recipes,
-                                                            ResourceManager resourceManager) {
-        Set<String> replaced = replacedResults(resourceManager);
+                                                            ResourceManager resourceManager, ICondition.IContext context) {
+        Set<String> replaced = replacedResults(resourceManager, context);
         if (replaced.isEmpty()) {
             return recipes;
         }
@@ -68,7 +72,7 @@ public final class ReplacedDishRecipes {
         return false;
     }
 
-    private static Set<String> replacedResults(ResourceManager resourceManager) {
+    private static Set<String> replacedResults(ResourceManager resourceManager, ICondition.IContext context) {
         Set<String> results = new HashSet<>();
         Map<ResourceLocation, Resource> files = resourceManager.listResources("modest_meals/meal_types",
                 path -> path.getPath().endsWith(".json"));
@@ -81,7 +85,10 @@ public final class ReplacedDishRecipes {
                 for (JsonElement element : GsonHelper.getAsJsonArray(type, "item_overrides", new JsonArray())) {
                     JsonObject override = element.getAsJsonObject();
                     if (GsonHelper.getAsBoolean(override, "replace_recipes", false)) {
-                        results.add(ResourceLocation.parse(GsonHelper.getAsString(override, "result")).toString());
+                        String result = ResourceLocation.parse(GsonHelper.getAsString(override, "result")).toString();
+                        if (ReliableRemoverCompat.isSatisfiable(result, strings(override, "ingredients"), strings(override, "base"), context)) {
+                            results.add(result);
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -89,5 +96,13 @@ public final class ReplacedDishRecipes {
             }
         }
         return results;
+    }
+
+    private static List<String> strings(JsonObject object, String key) {
+        List<String> out = new ArrayList<>();
+        for (JsonElement element : GsonHelper.getAsJsonArray(object, key, new JsonArray())) {
+            out.add(element.getAsString());
+        }
+        return out;
     }
 }
