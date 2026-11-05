@@ -8,6 +8,7 @@ import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import com.evandev.modest_meals.trait.FoodTraitType;
 import com.evandev.modest_meals.trait.TraitBenefit;
+import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
 import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
 import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
 import net.minecraft.core.component.DataComponents;
@@ -30,6 +31,14 @@ public class FoodValues {
     }
 
     public static List<FoodTrait> effectiveTraits(ItemStack stack, int nutrition) {
+        List<FoodTrait> traits = unfilteredTraits(stack, nutrition);
+        if (ModConfig.get().foodEffects) {
+            return traits;
+        }
+        return traits.stream().filter(trait -> !(trait instanceof EffectGrantTrait)).toList();
+    }
+
+    private static List<FoodTrait> unfilteredTraits(ItemStack stack, int nutrition) {
         if (stack == null || stack.isEmpty()) {
             return FoodProfileManager.resolveDefault()
                     .map(profile -> withDerived(ItemStack.EMPTY, nutrition, List.of(), profile, Set.of()))

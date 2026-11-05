@@ -148,6 +148,9 @@ public class ModConfig {
     @SerializedName("ingredient_tooltip")
     public TooltipVisibility ingredientTooltip = TooltipVisibility.VISIBLE;
 
+    @SerializedName("food_effects")
+    public boolean foodEffects = true;
+
     @SerializedName("trait_global_value_multiplier")
     public float traitGlobalValueMultiplier = 1.0f;
 

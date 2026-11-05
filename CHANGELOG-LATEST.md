@@ -1,3 +1,3 @@
-### Fixed
+### Added
 
-- Fixed ice cream in a bowl having no Vat recipe.
+- Added a config option to toggle all food effects.

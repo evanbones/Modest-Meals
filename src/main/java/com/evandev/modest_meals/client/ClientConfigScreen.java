@@ -157,6 +157,7 @@ public class ClientConfigScreen {
         foodEffectsCategoryBuilder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("config.modest_meals.group.food_multipliers"))
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.food_multipliers.tooltip")))
+                .option(createBoolOption("food_effects", defaults.foodEffects, () -> config.foodEffects, val -> config.foodEffects = val))
                 .option(createFloatOption("trait_global_value_multiplier", defaults.traitGlobalValueMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalValueMultiplier, val -> config.traitGlobalValueMultiplier = val))
                 .option(createFloatOption("trait_global_duration_multiplier", defaults.traitGlobalDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalDurationMultiplier, val -> config.traitGlobalDurationMultiplier = val))
                 .build());
