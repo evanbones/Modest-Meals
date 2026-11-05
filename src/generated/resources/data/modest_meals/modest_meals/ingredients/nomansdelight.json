@@ -1,33 +1,33 @@
 {
   "entries": [
     {
-      "health": 2.0,
-      "stamina": 1.0,
+      "health": 1.0,
+      "stamina": 0.5,
       "target": "nomansdelight:horse_cuts"
     },
     {
       "health": 4.0,
-      "stamina": 1.5,
+      "stamina": 1.0,
       "target": "nomansdelight:cooked_horse_cuts"
     },
     {
-      "health": 1.5,
-      "stamina": 1.0,
+      "health": 1.0,
+      "stamina": 0.5,
       "target": "nomansdelight:venison_chop"
     },
     {
-      "health": 3.5,
-      "stamina": 1.5,
+      "health": 3.0,
+      "stamina": 1.0,
       "target": "nomansdelight:cooked_venison_chop"
     },
     {
-      "digest_ticks": 90,
-      "health": 1.5,
+      "digest_ticks": 120,
+      "health": 2.0,
       "target": "nomansdelight:billhook_bass_slice"
     },
     {
-      "digest_ticks": 90,
-      "health": 3.0,
+      "digest_ticks": 105,
+      "health": 3.5,
       "target": "nomansdelight:cooked_billhook_bass_slice"
     }
   ]

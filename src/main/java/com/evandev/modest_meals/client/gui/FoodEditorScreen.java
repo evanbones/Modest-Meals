@@ -13,6 +13,7 @@ import com.evandev.modest_meals.food.ingredient.IngredientProfile;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.evandev.modest_meals.food.ingredient.MealEffect;
 import com.evandev.modest_meals.food.ingredient.MealEffectManager;
+import com.evandev.modest_meals.item.MealItem;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import net.minecraft.ChatFormatting;
@@ -250,8 +251,15 @@ public class FoodEditorScreen extends Screen {
         return vyIngredientHeader() + 16;
     }
 
+    private static boolean isMeal(Item item) {
+        return item instanceof MealItem;
+    }
+
     private List<Component> ingredientSummary() {
         if (selectedItem == null) return List.of();
+        if (isMeal(selectedItem)) {
+            return List.of(eatSecondsLine(getResolvedIngredient(selectedItem), "gui.modest_meals.value.scales_with_size"));
+        }
         if (!customIngredients.containsKey(itemId(selectedItem))
                 && !IngredientProfileManager.isIngredient(new ItemStack(selectedItem))) {
             return wrappedLines(Component.translatable("gui.modest_meals.ingredient_excluded"));
@@ -280,10 +288,15 @@ public class FoodEditorScreen extends Screen {
                 profile.digestTicks().<Component>map(v -> Component.literal(String.valueOf(v))).orElse(auto)));
         lines.add(statLine("gui.modest_meals.field.temporary_health", Component.literal(fmt(profile.temporaryHealth()))));
         lines.add(statLine("gui.modest_meals.field.time_bonus", Component.literal(String.valueOf(profile.timeBonusSeconds()))));
-        lines.add(statLine("gui.modest_meals.field.eat_seconds", profile.eatSeconds()
-                .<Component>map(v -> Component.literal(fmt(v)))
-                .orElseGet(() -> Component.translatable("gui.modest_meals.value.default"))));
+        lines.add(eatSecondsLine(profile, "gui.modest_meals.value.default"));
         return lines;
+    }
+
+    private static Component eatSecondsLine(IngredientProfile profile, String fallbackKey) {
+        return statLine("gui.modest_meals.field.eat_seconds", Optional.ofNullable(profile)
+                .flatMap(IngredientProfile::eatSeconds)
+                .<Component>map(v -> Component.literal(fmt(v)))
+                .orElseGet(() -> Component.translatable(fallbackKey)));
     }
 
     private static Component statLine(String labelKey, Component value) {
@@ -365,7 +378,7 @@ public class FoodEditorScreen extends Screen {
         addPaneWidget(new PaneButton(paneContentX() + contentW - editW, paneY(vyIngredientHeader() - 4), editW, BUTTON_H,
                 Component.translatable("gui.modest_meals.edit_ingredient"), b ->
                 this.minecraft.setScreen(new IngredientEditDialog(this, selectedItem,
-                        getResolvedIngredient(selectedItem), newProfile -> {
+                        getResolvedIngredient(selectedItem), isMeal(selectedItem), newProfile -> {
                     customIngredients.put(itemId, newProfile);
                     dirty = true;
                     layoutWidgets();
@@ -728,7 +741,8 @@ public class FoodEditorScreen extends Screen {
         int ingredientY = paneY(vyIngredientHeader());
         GuiUtil.drawSeparator(graphics, contentX, ingredientY - 8, contentW);
         GuiUtil.drawTrimmed(graphics, this.font,
-                Component.translatable("gui.modest_meals.ingredient_header").withStyle(ChatFormatting.YELLOW),
+                Component.translatable(isMeal(selectedItem) ? "gui.modest_meals.eating_header"
+                        : "gui.modest_meals.ingredient_header").withStyle(ChatFormatting.YELLOW),
                 contentX, ingredientY, contentW - editW - 6, 0xFFFF55);
         List<Component> ingredientLines = ingredientSummary();
         for (int i = 0; i < ingredientLines.size(); i++) {

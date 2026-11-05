@@ -36,6 +36,16 @@ public class FarmersDelightEdibleBlockFoods {
         return Optional.empty();
     }
 
+    public static Optional<EdibleBlockFoods.Servings> servingsOf(Block block) {
+        return switch (block) {
+            case PieBlock pieBlock when !pieBlock.getPieSliceItem().isEmpty() ->
+                    Optional.of(EdibleBlockFoods.Servings.slices(pieBlock.getPieSliceItem(), 1.0F, pieBlock.getMaxBites()));
+            case FeastBlock feastBlock -> Optional.of(EdibleBlockFoods.Servings.portions(
+                    feastBlock.servingItem.get().getDefaultInstance(), feastBlock.getMaxServings()));
+            default -> Optional.empty();
+        };
+    }
+
     public static Optional<EdibleBlockFoods.EdibleBlock> resolve(Block block) {
         if (block instanceof PieBlock pieBlock) {
             ItemStack slice = pieBlock.getPieSliceItem();

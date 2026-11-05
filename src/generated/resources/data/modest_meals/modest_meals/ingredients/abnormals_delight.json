@@ -13,13 +13,13 @@
       "target": "#c:foods/cooked_duck"
     },
     {
-      "digest_ticks": 90,
-      "health": 1.5,
+      "digest_ticks": 60,
+      "health": 1.0,
       "target": "abnormals_delight:duck_fillet"
     },
     {
       "health": 3.0,
-      "stamina": 1.5,
+      "stamina": 1.0,
       "target": "abnormals_delight:cooked_duck_fillet"
     },
     {
@@ -28,31 +28,31 @@
       "target": "abnormals_delight:venison_shanks"
     },
     {
-      "health": 2.5,
-      "stamina": 1.5,
+      "health": 3.0,
+      "stamina": 1.0,
       "target": "abnormals_delight:cooked_venison_shanks"
+    },
+    {
+      "digest_ticks": 150,
+      "health": 2.5,
+      "priority": 140,
+      "target": "#c:foods/raw_pike"
+    },
+    {
+      "digest_ticks": 150,
+      "health": 5.0,
+      "priority": 145,
+      "target": "#c:foods/cooked_pike"
     },
     {
       "digest_ticks": 90,
       "health": 1.5,
       "priority": 140,
-      "target": "#c:foods/raw_pike"
-    },
-    {
-      "digest_ticks": 90,
-      "health": 3.0,
-      "priority": 145,
-      "target": "#c:foods/cooked_pike"
-    },
-    {
-      "digest_ticks": 60,
-      "health": 1.0,
-      "priority": 140,
       "target": "#c:foods/raw_perch"
     },
     {
-      "digest_ticks": 60,
-      "health": 2.0,
+      "digest_ticks": 105,
+      "health": 3.5,
       "priority": 145,
       "target": "#c:foods/cooked_perch"
     },

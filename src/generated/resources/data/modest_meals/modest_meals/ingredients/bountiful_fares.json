@@ -13,13 +13,17 @@
     },
     {
       "digest_ticks": 45,
+      "effect": "modest_meals:speed",
       "health": 1.5,
+      "potency": 7,
       "priority": 145,
       "target": "#c:foods/lemon"
     },
     {
       "digest_ticks": 45,
+      "effect": "modest_meals:speed",
       "health": 1.5,
+      "potency": 7,
       "target": "bountifulfares:lemon"
     },
     {
@@ -72,13 +76,13 @@
       "target": "bountifulfares:hoary_apple"
     },
     {
-      "health": 0.5,
+      "health": 1.0,
       "priority": 145,
       "stamina": 1.5,
       "target": "#c:foods/walnuts"
     },
     {
-      "health": 0.5,
+      "health": 1.0,
       "stamina": 1.5,
       "target": "bountifulfares:walnut"
     },

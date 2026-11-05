@@ -95,6 +95,8 @@
 
   "config.modest_meals.option.stamina_gliding": "Gliding Uses Stamina",
   "config.modest_meals.option.stamina_gliding.tooltip": "With Reliable Gliders installed, gliding drains stamina like sprinting does, and an exhausted player can't glide.",
+  "config.modest_meals.option.stamina_elytra": "Elytra Uses Stamina",
+  "config.modest_meals.option.stamina_elytra.tooltip": "Flying with an elytra drains stamina like sprinting does, and an exhausted player drops out of flight.",
 
   "config.modest_meals.option.stamina_shield_blocking": "Blocking Uses Stamina",
   "config.modest_meals.option.stamina_shield_blocking.tooltip": "With Shield Expansion installed, holding up a shield drains stamina like sprinting does, and an exhausted player can't block.",
@@ -468,6 +470,8 @@
   "modest_meals.meal_effect.harmony": "Harmony",
   "modest_meals.trait.temporary_health": "Temporary Health",
   "modest_meals.trait.header.ingredient": "As Ingredient:",
+  "modest_meals.tooltip.per_slice": "Per slice (%s slices):",
+  "modest_meals.tooltip.per_serving": "Per serving (%s servings):",
   "gui.modest_meals.field.temporary_health": "Temporary Hearts",
   "gui.modest_meals.ingredient_header": "Ingredient",
   "gui.modest_meals.edit_ingredient": "Edit",
@@ -478,6 +482,10 @@
   "gui.modest_meals.value.auto": "Auto",
   "gui.modest_meals.value.default": "Default",
   "gui.modest_meals.ingredient_dialog.title": "Edit Ingredient",
+  "gui.modest_meals.eat_time_dialog.title": "Edit Eating Time",
+  "gui.modest_meals.eating_header": "Eating",
+  "gui.modest_meals.section.eat_time_override": "Overrides how long every meal of this kind takes to eat",
+  "gui.modest_meals.value.scales_with_size": "Scales with size",
   "gui.modest_meals.field.meal_effect": "Meal Effect",
   "gui.modest_meals.section.when_eaten": "Restored when eaten",
   "gui.modest_meals.section.when_cooked": "Contributed when cooked into a meal",

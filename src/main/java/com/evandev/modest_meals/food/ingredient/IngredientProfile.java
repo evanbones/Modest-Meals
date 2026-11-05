@@ -77,6 +77,15 @@ public record IngredientProfile(
         return eatSeconds.orElse(0.0F);
     }
 
+    public static IngredientProfile eatTimeOnly(float seconds) {
+        return new IngredientProfile(Optional.empty(), Optional.empty(), Optional.empty(), Optional.of(seconds),
+                Optional.empty(), 0, 0.0F, 0, Optional.empty());
+    }
+
+    public boolean isEatTimeOnly() {
+        return eatSeconds.isPresent() && equals(eatTimeOnly(eatSeconds.get()));
+    }
+
     public boolean hasEffect() {
         return effect.isPresent() && potency > 0;
     }

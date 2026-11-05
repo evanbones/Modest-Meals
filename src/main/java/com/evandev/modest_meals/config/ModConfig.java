@@ -73,6 +73,9 @@ public class ModConfig {
     @SerializedName("stamina_gliding")
     public boolean staminaGliding = true;
 
+    @SerializedName("stamina_elytra")
+    public boolean staminaElytra = false;
+
     @SerializedName("stamina_shield_blocking")
     public boolean staminaShieldBlocking = true;
 

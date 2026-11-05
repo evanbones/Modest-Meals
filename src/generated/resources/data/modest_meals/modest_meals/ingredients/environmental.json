@@ -28,7 +28,7 @@
       "target": "environmental:venison"
     },
     {
-      "health": 6.0,
+      "health": 5.0,
       "stamina": 2.0,
       "target": "environmental:cooked_venison"
     },

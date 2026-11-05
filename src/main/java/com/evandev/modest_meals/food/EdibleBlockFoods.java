@@ -1,7 +1,10 @@
 package com.evandev.modest_meals.food;
 
+import com.evandev.modest_meals.block.SlicedMealBlock;
+import com.evandev.modest_meals.component.MealContents;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightEdibleBlockFoods;
+import com.evandev.modest_meals.item.MealItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -31,6 +34,27 @@ public class EdibleBlockFoods {
             if (FarmersDelightCompat.isLoaded()) {
                 return FarmersDelightEdibleBlockFoods.getFoodProperties(blockItem);
             }
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<Servings> servingsOf(ItemStack stack) {
+        if (!(stack.getItem() instanceof BlockItem blockItem)) {
+            return Optional.empty();
+        }
+        Block block = blockItem.getBlock();
+        if (block instanceof SlicedMealBlock meal) {
+            MealContents contents = MealItem.contentsOf(stack);
+            return contents.isMeaningful()
+                    ? Optional.of(Servings.slices(meal.sliceOf(contents), 1.0F, meal.slices()))
+                    : Optional.empty();
+        }
+        if (block instanceof CakeBlock) {
+            int slices = CakeBlock.MAX_BITES + 1;
+            return Optional.of(Servings.slices(stack, 1.0F / slices, slices));
+        }
+        if (FarmersDelightCompat.isLoaded()) {
+            return FarmersDelightEdibleBlockFoods.servingsOf(block);
         }
         return Optional.empty();
     }
@@ -73,6 +97,16 @@ public class EdibleBlockFoods {
             }
         }
         return Optional.empty();
+    }
+
+    public record Servings(ItemStack serving, float scale, int count, boolean sliced) {
+        public static Servings slices(ItemStack slice, float scale, int count) {
+            return new Servings(slice, scale, count, true);
+        }
+
+        public static Servings portions(ItemStack portion, int count) {
+            return new Servings(portion, 1.0F, count, false);
+        }
     }
 
     public record EdibleBlock(ItemStack stack, float biteScale) {

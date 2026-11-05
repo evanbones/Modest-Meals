@@ -46,7 +46,7 @@ public class CommonEventHandler {
             stamina.holdEnduranceWhileNourished();
 
             if (stamina.getData().isExhausted()) {
-                if (ModConfig.get().staminaSprinting) {
+                if (ModConfig.get().staminaSprinting && !player.isPassenger()) {
                     if (player.isSprinting()) {
                         player.setSprinting(false);
                     }
@@ -56,6 +56,9 @@ public class CommonEventHandler {
                 }
                 if (ShieldExpansionCompat.isBlocking(player)) {
                     player.stopUsingItem();
+                }
+                if (stamina.isElytraGliding()) {
+                    player.stopFallFlying();
                 }
             }
         }

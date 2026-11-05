@@ -19,7 +19,7 @@
       "target": "#c:foods/raw_horse"
     },
     {
-      "health": 5.0,
+      "health": 6.5,
       "priority": 145,
       "stamina": 2.0,
       "target": "#c:foods/cooked_horse"
@@ -31,8 +31,8 @@
       "target": "#c:foods/raw_billhook_bass"
     },
     {
-      "digest_ticks": 150,
-      "health": 5.0,
+      "digest_ticks": 180,
+      "health": 6.0,
       "priority": 145,
       "target": "#c:foods/cooked_billhook_bass"
     },

@@ -75,7 +75,7 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
             return fromMeal(stack);
         }
 
-        Optional<IngredientProfile> authored = authored(stack.getItem());
+        Optional<IngredientProfile> authored = authored(stack.getItem()).filter(profile -> !profile.isEatTimeOnly());
         Optional<Derived> derived = derive(stack);
 
         if (authored.isEmpty()) {
@@ -131,10 +131,13 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
         if (stack == null || stack.isEmpty()) {
             return Optional.empty();
         }
-        return authored(stack.getItem())
+        return eatSeconds(stack.getItem()).map(seconds -> Math.max(1, Math.round(seconds * 20.0F)));
+    }
+
+    public static Optional<Float> eatSeconds(Item item) {
+        return authored(item)
                 .flatMap(IngredientProfile::eatSeconds)
-                .filter(seconds -> seconds > 0.0F)
-                .map(seconds -> Math.max(1, Math.round(seconds * 20.0F)));
+                .filter(seconds -> seconds > 0.0F);
     }
 
     public static boolean isIngredient(ItemStack stack) {
@@ -148,13 +151,14 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
     }
 
     private static boolean hasCustomProfile(Item item) {
-        if (INSTANCE.customItemProfiles.containsKey(BuiltInRegistries.ITEM.getKey(item))) {
-            return true;
+        IngredientProfile itemProfile = INSTANCE.customItemProfiles.get(BuiltInRegistries.ITEM.getKey(item));
+        if (itemProfile != null) {
+            return !itemProfile.isEatTimeOnly();
         }
         Holder<Item> holder = item.builtInRegistryHolder();
         for (TagEntry entry : INSTANCE.customTagProfiles) {
             if (holder.is(entry.tag())) {
-                return true;
+                return !entry.profile().isEatTimeOnly();
             }
         }
         return false;

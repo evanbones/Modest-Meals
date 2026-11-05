@@ -77,12 +77,18 @@ public class FoodItemTooltips {
             removePreExistingFoodEffects(lines, effects);
         }
 
+        Optional<EdibleBlockFoods.Servings> servings = EdibleBlockFoods.servingsOf(stack);
+        ItemStack eaten = servings.map(EdibleBlockFoods.Servings::serving).orElse(stack);
+        float scale = servings.map(EdibleBlockFoods.Servings::scale).orElse(1.0F);
+        List<FoodProperties.PossibleEffect> eatenEffects = servings.isPresent() ? foodEffects(eaten) : effects;
+
         if (ModConfig.get().showFoodItemTooltips) {
-            addStatRows(lines, stack);
-            addDigestionRateLine(lines, stack);
+            servings.ifPresent(serving -> lines.add(servingsLine(serving)));
+            addStatRows(lines, eaten, scale);
+            addDigestionRateLine(lines, eaten);
         }
 
-        addEffectsAndTraits(lines, stack, effects, tickRate);
+        addEffectsAndTraits(lines, eaten, eatenEffects, tickRate, scale);
         addIngredientHint(lines, stack);
     }
 
@@ -115,11 +121,16 @@ public class FoodItemTooltips {
         return Component.literal(" ").append(line);
     }
 
-    private static void addStatRows(List<Component> lines, ItemStack stack) {
-        int halfHearts = Mth.ceil(FoodValues.healthPoints(stack));
+    private static Component servingsLine(EdibleBlockFoods.Servings servings) {
+        String key = servings.sliced() ? "modest_meals.tooltip.per_slice" : "modest_meals.tooltip.per_serving";
+        return Component.translatable(key, servings.count()).withStyle(ChatFormatting.GRAY);
+    }
+
+    private static void addStatRows(List<Component> lines, ItemStack stack, float scale) {
+        int halfHearts = Mth.ceil(FoodValues.healthPoints(stack) * scale);
         int halfStamina = 0;
         if (ModConfig.get().staminaSprint) {
-            float levels = FoodValues.staminaLevels(stack);
+            float levels = FoodValues.staminaLevels(stack) * scale;
             if (levels > 0.0F) {
                 halfStamina = Math.min(Mth.ceil(levels), staminaMaxLevel());
             }
@@ -210,7 +221,8 @@ public class FoodItemTooltips {
     }
 
     private static void addEffectsAndTraits(List<Component> lines, ItemStack stack,
-                                            List<FoodProperties.PossibleEffect> effects, float tickRate) {
+                                            List<FoodProperties.PossibleEffect> effects, float tickRate,
+                                            float scale) {
         if (!FoodValues.isFood(stack) || !isVisible(ModConfig.get().whenEatenTooltip)) {
             return;
         }
@@ -220,8 +232,8 @@ public class FoodItemTooltips {
 
         List<FoodProperties.PossibleEffect> shownEffects = new ArrayList<>(effects);
         List<FoodTrait> traits = new ArrayList<>();
-        double valMult = ModConfig.get().traitGlobalValueMultiplier;
-        double durMult = ModConfig.get().traitGlobalDurationMultiplier;
+        double valMult = ModConfig.get().traitGlobalValueMultiplier * scale;
+        double durMult = ModConfig.get().traitGlobalDurationMultiplier * scale;
 
         if (ModConfig.get().showFoodTraitTooltips) {
             for (FoodTrait trait : FoodValues.effectiveTraits(stack)) {

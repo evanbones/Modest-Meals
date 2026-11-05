@@ -175,8 +175,8 @@
       "target": "culturaldelights:butter"
     },
     {
-      "health": 1.0,
-      "stamina": 2.0,
+      "health": 2.0,
+      "stamina": 3.0,
       "target": "culturaldelights:cheese_wedge"
     },
     {
@@ -212,18 +212,18 @@
       "target": "culturaldelights:cooked_calamari"
     },
     {
+      "digest_ticks": 45,
       "effect": "modest_meals:speed",
-      "health": 0.5,
+      "health": 1.5,
       "potency": 7,
       "priority": 145,
-      "stamina": 1.5,
       "target": "#c:crops/lemon"
     },
     {
+      "digest_ticks": 45,
       "effect": "modest_meals:speed",
-      "health": 0.5,
+      "health": 1.5,
       "potency": 7,
-      "stamina": 1.5,
       "target": "culturaldelights:lemon"
     },
     {

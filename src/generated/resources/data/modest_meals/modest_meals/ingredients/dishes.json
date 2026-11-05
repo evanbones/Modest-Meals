@@ -26,8 +26,8 @@
       "target": "farmersdelight:cooked_salmon_slice"
     },
     {
-      "health": 2.0,
-      "stamina": 1.0,
+      "health": 3.5,
+      "stamina": 1.5,
       "target": "farmersdelight:ham"
     },
     {
@@ -49,13 +49,9 @@
       "target": "farmersdelight:salmon_slice"
     },
     {
-      "health": 6.0,
-      "stamina": 2.0,
+      "health": 10.0,
+      "stamina": 3.0,
       "target": "farmersdelight:smoked_ham"
-    },
-    {
-      "stamina": 2.0,
-      "target": "farmersdelight:tomato"
     },
     {
       "stamina": 2.5,

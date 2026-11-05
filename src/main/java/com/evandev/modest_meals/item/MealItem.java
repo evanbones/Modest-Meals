@@ -2,6 +2,7 @@ package com.evandev.modest_meals.item;
 
 import com.evandev.modest_meals.component.MealContents;
 import com.evandev.modest_meals.component.ModDataComponents;
+import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.evandev.modest_meals.food.ingredient.MealIngredientManager;
 import com.evandev.modest_meals.food.meal.MealFormulaManager;
 import com.evandev.modest_meals.registry.ModItems;
@@ -73,7 +74,8 @@ public class MealItem extends Item {
         int nutrition = Math.max(1, Mth.ceil(contents.health()));
 
         boolean alwaysEdible = contents.health() <= 0.0F && contents.stamina() <= 0.0F;
-        float eatSeconds = MealFormulaManager.get().eatSecondsFor(contents.health() + contents.stamina());
+        float eatSeconds = IngredientProfileManager.eatSeconds(this)
+                .orElseGet(() -> MealFormulaManager.get().eatSecondsFor(contents.health() + contents.stamina()));
 
         return new FoodProperties(
                 nutrition,

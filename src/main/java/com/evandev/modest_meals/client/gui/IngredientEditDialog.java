@@ -30,11 +30,15 @@ public class IngredientEditDialog extends Screen {
     private static final int GAP = 8;
     private static final int FOOTER_H = 28;
     private static final int FORM_ROWS = 11;
+    private static final int EAT_TIME_FORM_ROWS = 2;
+    private static final double MIN_EAT_SECONDS = 0.05;
+    private static final float VANILLA_EAT_SECONDS = 1.6F;
 
     private static final String NO_EFFECT = "";
 
     private final Screen parent;
     private final Item item;
+    private final boolean eatTimeOnly;
     private final Consumer<IngredientProfile> onSave;
 
     private String effectId;
@@ -54,10 +58,13 @@ public class IngredientEditDialog extends Screen {
     private double scroll = 0;
     private boolean draggingScrollbar = false;
 
-    public IngredientEditDialog(Screen parent, Item item, IngredientProfile existing, Consumer<IngredientProfile> onSave) {
-        super(Component.translatable("gui.modest_meals.ingredient_dialog.title"));
+    public IngredientEditDialog(Screen parent, Item item, IngredientProfile existing, boolean eatTimeOnly,
+                                Consumer<IngredientProfile> onSave) {
+        super(Component.translatable(eatTimeOnly ? "gui.modest_meals.eat_time_dialog.title"
+                : "gui.modest_meals.ingredient_dialog.title"));
         this.parent = parent;
         this.item = item;
+        this.eatTimeOnly = eatTimeOnly;
         this.onSave = onSave;
 
         IngredientProfile profile = existing == null ? IngredientProfile.EMPTY : existing;
@@ -66,7 +73,7 @@ public class IngredientEditDialog extends Screen {
         this.health = profile.healthOrZero();
         this.stamina = profile.staminaOrZero();
         this.digestTicks = profile.digestTicksOrZero();
-        this.eatSeconds = profile.eatSecondsOrZero();
+        this.eatSeconds = eatTimeOnly && profile.eatSeconds().isEmpty() ? VANILLA_EAT_SECONDS : profile.eatSecondsOrZero();
         this.temporaryHealth = profile.temporaryHealth();
         this.timeBonus = profile.timeBonusSeconds();
         this.referenceNutrition = profile.referenceNutrition();
@@ -131,7 +138,7 @@ public class IngredientEditDialog extends Screen {
 
         int contentW = PANEL_W - GuiUtil.PANEL_PADDING * 2;
         int formTop = TITLE_H + HEADER_H + GAP;
-        int formH = FORM_ROWS * (FormBuilder.ROW_H + 6) - 6;
+        int formH = (eatTimeOnly ? EAT_TIME_FORM_ROWS : FORM_ROWS) * (FormBuilder.ROW_H + 6) - 6;
 
         int desired = formTop + formH + GAP + FOOTER_H;
         this.panelH = Math.min(desired, this.height - 20);
@@ -159,6 +166,12 @@ public class IngredientEditDialog extends Screen {
 
     private FormBuilder buildForm(int contentX, int contentW) {
         FormBuilder form = new FormBuilder(this.font, contentX, formViewTop(), contentW, this::onFormChanged);
+        if (eatTimeOnly) {
+            form.note("gui.modest_meals.section.eat_time_override");
+            form.decimal("gui.modest_meals.field.eat_seconds", MIN_EAT_SECONDS, 60, eatSeconds,
+                    v -> eatSeconds = (float) v);
+            return form;
+        }
         form.note("gui.modest_meals.section.when_eaten");
         form.decimal("gui.modest_meals.field.health", 0, 1024, health, v -> health = (float) v);
         form.decimal("gui.modest_meals.field.stamina", 0, 1024, stamina, v -> stamina = (float) v);
@@ -182,6 +195,11 @@ public class IngredientEditDialog extends Screen {
 
     private void save() {
         if (form != null && !form.isValid()) {
+            return;
+        }
+        if (eatTimeOnly) {
+            onSave.accept(IngredientProfile.eatTimeOnly(eatSeconds));
+            this.minecraft.setScreen(this.parent);
             return;
         }
         Optional<ResourceLocation> effect = effectId == null || effectId.isEmpty()

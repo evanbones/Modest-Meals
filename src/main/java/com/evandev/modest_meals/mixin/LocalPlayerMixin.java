@@ -20,7 +20,7 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
     @ModifyReturnValue(method = "canStartSprinting", at = @At("RETURN"))
     private boolean mm$modifyCanStartSprinting(boolean canSprint) {
-        if (!ModConfig.get().staminaSprint || this.isCreative() || this.isSpectator()) {
+        if (!ModConfig.get().staminaSprint || this.isCreative() || this.isSpectator() || this.isPassenger()) {
             return canSprint;
         }
 

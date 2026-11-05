@@ -28,6 +28,13 @@ public class IngredientProfileProvider implements DataProvider {
     private static final int COOKED_DIGEST = 30;
     private static final int RAW_DIGEST = 60;
 
+    private static final float FAST_EAT_SECONDS = 0.8F;
+    private static final float VANILLA_EAT_SECONDS = 1.6F;
+    private static final float MILKSHAKE_EAT_SECONDS = 2.0F;
+    private static final float WHOLE_ROLL_EAT_SECONDS = 2.4F;
+    private static final float WRAP_EAT_SECONDS = 2.8F;
+    private static final float SANDWICH_EAT_SECONDS = 3.2F;
+
     private final PackOutput.PathProvider pathProvider;
 
     public IngredientProfileProvider(PackOutput output) {
@@ -52,6 +59,11 @@ public class IngredientProfileProvider implements DataProvider {
 
     private static IngredientProfile timeBoost(Float health, Float stamina, int seconds) {
         return build(health, stamina, 0, Optional.empty(), 0, 0.0F, seconds);
+    }
+
+    private static IngredientProfile lemon() {
+        return build(1.5F, null, FRUIT_DIGEST,
+                Optional.of(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "speed")), WEAK, 0.0F, 0);
     }
 
     private static IngredientProfile dish(Float health, Float stamina) {
@@ -82,6 +94,10 @@ public class IngredientProfileProvider implements DataProvider {
 
     private static String id(Item item) {
         return BuiltInRegistries.ITEM.getKey(item).toString();
+    }
+
+    private static String mm(String path) {
+        return Constants.MOD_ID + ":" + path;
     }
 
     private static String cd(String path) {
@@ -133,6 +149,7 @@ public class IngredientProfileProvider implements DataProvider {
         staples(files.computeIfAbsent("staples", key -> new Builder()));
         misc(files.computeIfAbsent("misc", key -> new Builder()));
         dishes(files.computeIfAbsent("dishes", key -> new Builder()));
+        mealEatTimes(files.computeIfAbsent("meal_eat_times", key -> new Builder()));
         culturalDelights(files.computeIfAbsent("cultural_delights", key -> new Builder()));
         minersDelight(files.computeIfAbsent("miners_delight", key -> new Builder()));
         myNethersDelight(files.computeIfAbsent("my_nethers_delight", key -> new Builder()));
@@ -189,7 +206,7 @@ public class IngredientProfileProvider implements DataProvider {
                 0.0F, 0));
 
         builder.add(id(Items.PUMPKIN), effect(null, 2.0F, "resistance", MEDIUM));
-        builder.addTag("c:crops/tomato", 145, effect(null, 2.0F, "strength", MEDIUM));
+        builder.addTag("c:crops/tomato", 145, effect(null, 2.0F, "strength", WEAK));
         builder.addTag("c:crops/onion", 145, effect(1.0F, 1.0F, "strength", WEAK));
         builder.addTag("c:crops/cabbage", 145, food(1.0F, 2.0F));
 
@@ -260,19 +277,31 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(id(Items.ROTTEN_FLESH), food(0.5F, 0.0F));
     }
 
+    private void mealEatTimes(Builder builder) {
+        builder.add(mm("sandwich"), IngredientProfile.eatTimeOnly(SANDWICH_EAT_SECONDS));
+        builder.add(mm("wrap"), IngredientProfile.eatTimeOnly(WRAP_EAT_SECONDS));
+        builder.add(mm("roll"), IngredientProfile.eatTimeOnly(WHOLE_ROLL_EAT_SECONDS));
+        builder.add(mm("roll_slice"), IngredientProfile.eatTimeOnly(FAST_EAT_SECONDS));
+        builder.add(mm("pizza_slice"), IngredientProfile.eatTimeOnly(FAST_EAT_SECONDS));
+        builder.add(mm("pie_slice"), IngredientProfile.eatTimeOnly(FAST_EAT_SECONDS));
+        builder.add(mm("cake_slice"), IngredientProfile.eatTimeOnly(FAST_EAT_SECONDS));
+        builder.add(mm("ice_cream"), IngredientProfile.eatTimeOnly(VANILLA_EAT_SECONDS));
+        builder.add(mm("ice_cream_bowl"), IngredientProfile.eatTimeOnly(VANILLA_EAT_SECONDS));
+        builder.add(mm("milkshake"), IngredientProfile.eatTimeOnly(MILKSHAKE_EAT_SECONDS));
+    }
+
     private void dishes(Builder builder) {
         builder.add("farmersdelight:apple_cider", dish(2F, null, FRUIT_DIGEST));
         builder.add("farmersdelight:chicken_cuts", dish(1F, null, RAW_DIGEST));
         builder.add("farmersdelight:cod_slice", dish(2F, null, RAW_DIGEST));
         builder.add("farmersdelight:cooked_cod_slice", dish(3F, null, COOKED_DIGEST));
         builder.add("farmersdelight:cooked_salmon_slice", dish(3.75F, null, COOKED_DIGEST));
-        builder.add("farmersdelight:ham", food(2F, 1F));
+        builder.add("farmersdelight:ham", food(3.5F, 1.5F));
         builder.add("farmersdelight:pie_crust", dish(3.0F, 3.0F));
         builder.add("farmersdelight:pumpkin_slice", dish(null, 1F));
         builder.add("farmersdelight:rice", dish(null, 1F));
         builder.add("farmersdelight:salmon_slice", dish(2.5F, null, RAW_DIGEST));
-        builder.add("farmersdelight:smoked_ham", food(6F, 2F));
-        builder.add("farmersdelight:tomato", dish(null, 2F));
+        builder.add("farmersdelight:smoked_ham", food(10F, 3F));
         builder.add("farmersdelight:tomato_sauce", dish(null, 2.5F));
     }
 
@@ -313,7 +342,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(cd("refried_beans"), food(2.0F, 2.0F));
         builder.add(cd("cinnamon"), effect(0.5F, 1.0F, "cold_resistance", MEDIUM));
         builder.add(cd("butter"), food(0.5F, 1.0F));
-        builder.add(cd("cheese_wedge"), food(1.0F, 2.0F));
+        builder.add(cd("cheese_wedge"), food(2.0F, 3.0F));
         builder.add(cd("creamed_corn"), food(3.0F, 3.0F));
 
         builder.add(cd("squid"), dish(1.0F, null, RAW_DIGEST));
@@ -322,8 +351,8 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(cd("raw_calamari"), dish(0.5F, null, RAW_DIGEST));
         builder.add(cd("cooked_calamari"), food(1.5F, 1.0F));
 
-        builder.addTag("c:crops/lemon", 145, effect(0.5F, 1.5F, "speed", WEAK));
-        builder.add(cd("lemon"), effect(0.5F, 1.5F, "speed", WEAK));
+        builder.addTag("c:crops/lemon", 145, lemon());
+        builder.add(cd("lemon"), lemon());
 
         builder.add(cd("salt"), timeBoost(0.0F, 0.5F, 60));
         builder.add(cd("cooking_oil"), timeBoost(0.5F, 1.0F, 40));
@@ -360,7 +389,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(md("baked_squid"), food(3.0F, 2.0F));
         builder.add(md("glow_squid"), effect(1.0F, 0.5F, "glowing", MEDIUM));
         builder.add(md("tentacles"), dish(0.5F, null, RAW_DIGEST));
-        builder.add(md("baked_tentacles"), food(1.5F, 1.0F));
+        builder.add(md("baked_tentacles"), food(1.0F, 0.5F));
     }
 
     private void myNethersDelight(Builder builder) {
@@ -370,13 +399,13 @@ public class IngredientProfileProvider implements DataProvider {
         builder.addTag("c:foods/raw_hoglin", 140, food(2.0F, 1.0F));
         builder.addTag("c:foods/cooked_hoglin", 145, food(6.0F, 2.0F));
         builder.add(mnd("hoglin_loin"), food(2.0F, 1.0F));
-        builder.add(mnd("cooked_loin"), food(6.0F, 2.0F));
-        builder.addTag("c:foods/raw_sausage", 141, food(1.5F, 1.0F));
-        builder.addTag("c:foods/cooked_sausage", 146, food(4.0F, 2.0F));
+        builder.add(mnd("cooked_loin"), food(5.5F, 2.0F));
+        builder.addTag("c:foods/raw_sausage", 141, food(1.0F, 0.5F));
+        builder.addTag("c:foods/cooked_sausage", 146, food(3.5F, 1.0F));
 
         builder.addTag("c:foods/raw_strider", 140, effect(2.0F, 1.0F, "fire_resistance", WEAK));
         builder.add(mnd("strider_slice"), effect(2.0F, 1.0F, "fire_resistance", WEAK));
-        builder.add(mnd("minced_strider"), food(1.0F, 1.0F));
+        builder.add(mnd("minced_strider"), food(1.0F, 0.5F));
         builder.add(mnd("strider_egg"), effect(1.0F, 1.5F, "fire_resistance", WEAK));
 
         builder.addTag("c:foods/boiled_egg", 145, food(1.5F, 2.0F));
@@ -392,9 +421,9 @@ public class IngredientProfileProvider implements DataProvider {
         builder.addTag("c:foods/raw_venison", 140, food(2.0F, 1.0F));
         builder.addTag("c:foods/cooked_venison", 145, food(5.0F, 2.0F));
         builder.addTag("c:foods/raw_horse", 140, food(2.0F, 1.0F));
-        builder.addTag("c:foods/cooked_horse", 145, food(5.0F, 2.0F));
+        builder.addTag("c:foods/cooked_horse", 145, food(6.5F, 2.0F));
         builder.addTag("c:foods/raw_billhook_bass", 140, dish(3.0F, null, RAW_DIGEST));
-        builder.addTag("c:foods/cooked_billhook_bass", 145, dish(5.0F, null, COOKED_DIGEST));
+        builder.addTag("c:foods/cooked_billhook_bass", 145, dish(6.0F, null, COOKED_DIGEST));
 
         builder.add(nml("frog_leg"), food(1.5F, 1.0F));
         builder.add(nml("cooked_frog_leg"), food(4.0F, 2.0F));
@@ -413,27 +442,27 @@ public class IngredientProfileProvider implements DataProvider {
     }
 
     private void noMansDelight(Builder builder) {
-        builder.add(nmd("horse_cuts"), food(2.0F, 1.0F));
-        builder.add(nmd("cooked_horse_cuts"), food(4.0F, 1.5F));
-        builder.add(nmd("venison_chop"), food(1.5F, 1.0F));
-        builder.add(nmd("cooked_venison_chop"), food(3.5F, 1.5F));
-        builder.add(nmd("billhook_bass_slice"), dish(1.5F, null, RAW_DIGEST));
-        builder.add(nmd("cooked_billhook_bass_slice"), dish(3.0F, null, COOKED_DIGEST));
+        builder.add(nmd("horse_cuts"), food(1.0F, 0.5F));
+        builder.add(nmd("cooked_horse_cuts"), food(4.0F, 1.0F));
+        builder.add(nmd("venison_chop"), food(1.0F, 0.5F));
+        builder.add(nmd("cooked_venison_chop"), food(3.0F, 1.0F));
+        builder.add(nmd("billhook_bass_slice"), dish(2.0F, null, RAW_DIGEST));
+        builder.add(nmd("cooked_billhook_bass_slice"), dish(3.5F, null, COOKED_DIGEST));
     }
 
     private void abnormalsDelight(Builder builder) {
         builder.addTag("c:foods/raw_duck", 140, dish(1.5F, null, RAW_DIGEST));
         builder.addTag("c:foods/cooked_duck", 145, food(5.0F, 2.0F));
-        builder.add(ad("duck_fillet"), dish(1.5F, null, RAW_DIGEST));
-        builder.add(ad("cooked_duck_fillet"), food(3.0F, 1.5F));
+        builder.add(ad("duck_fillet"), dish(1.0F, null, RAW_DIGEST));
+        builder.add(ad("cooked_duck_fillet"), food(3.0F, 1.0F));
 
         builder.add(ad("venison_shanks"), food(1.0F, 0.5F));
-        builder.add(ad("cooked_venison_shanks"), food(2.5F, 1.5F));
+        builder.add(ad("cooked_venison_shanks"), food(3.0F, 1.0F));
 
-        builder.addTag("c:foods/raw_pike", 140, dish(1.5F, null, RAW_DIGEST));
-        builder.addTag("c:foods/cooked_pike", 145, dish(3.0F, null, COOKED_DIGEST));
-        builder.addTag("c:foods/raw_perch", 140, dish(1.0F, null, RAW_DIGEST));
-        builder.addTag("c:foods/cooked_perch", 145, dish(2.0F, null, COOKED_DIGEST));
+        builder.addTag("c:foods/raw_pike", 140, dish(2.5F, null, RAW_DIGEST));
+        builder.addTag("c:foods/cooked_pike", 145, dish(5.0F, null, COOKED_DIGEST));
+        builder.addTag("c:foods/raw_perch", 140, dish(1.5F, null, RAW_DIGEST));
+        builder.addTag("c:foods/cooked_perch", 145, dish(3.5F, null, COOKED_DIGEST));
         builder.add(ad("pike_slice"), dish(1.5F, null, RAW_DIGEST));
         builder.add(ad("cooked_pike_slice"), dish(3.0F, null, COOKED_DIGEST));
         builder.add(ad("perch_slice"), dish(1.0F, null, RAW_DIGEST));
@@ -447,7 +476,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(env("plum"), dish(2.5F, null, FRUIT_DIGEST));
 
         builder.add(env("venison"), food(2.0F, 1.0F));
-        builder.add(env("cooked_venison"), food(6.0F, 2.0F));
+        builder.add(env("cooked_venison"), food(5.0F, 2.0F));
         builder.add(env("duck"), dish(1.5F, null, RAW_DIGEST));
         builder.add(env("cooked_duck"), food(5.0F, 2.0F));
         builder.add(env("duck_egg"), food(0.5F, 1.0F));
@@ -488,7 +517,7 @@ public class IngredientProfileProvider implements DataProvider {
         builder.add(neo("waffle_cone"), timeBoost(0.5F, 1.5F, 25));
 
         builder.add(neo("mint_chops"), food(2.0F, 1.0F));
-        builder.add(neo("cooked_mint_chops"), food(6.0F, 2.0F));
+        builder.add(neo("cooked_mint_chops"), food(5.5F, 2.0F));
     }
 
     private void brewinAndChewin(Builder builder) {
@@ -520,8 +549,8 @@ public class IngredientProfileProvider implements DataProvider {
         builder.addTag("c:foods/orange", 145, dish(2.0F, null, FRUIT_DIGEST));
         builder.add(bf("orange"), dish(2.0F, null, FRUIT_DIGEST));
 
-        builder.addTag("c:foods/lemon", 145, dish(1.5F, null, FRUIT_DIGEST));
-        builder.add(bf("lemon"), dish(1.5F, null, FRUIT_DIGEST));
+        builder.addTag("c:foods/lemon", 145, lemon());
+        builder.add(bf("lemon"), lemon());
 
         builder.add(bf("plum"), dish(2.5F, null, FRUIT_DIGEST));
 
@@ -536,8 +565,8 @@ public class IngredientProfileProvider implements DataProvider {
 
         builder.add(bf("hoary_apple"), effect(1.5F, 2.0F, "cold_resistance", MEDIUM));
 
-        builder.addTag("c:foods/walnuts", 145, food(0.5F, 1.5F));
-        builder.add(bf("walnut"), food(0.5F, 1.5F));
+        builder.addTag("c:foods/walnuts", 145, food(1.0F, 1.5F));
+        builder.add(bf("walnut"), food(1.0F, 1.5F));
 
         builder.add(bf("coconut_half"), food(2.0F, 2.0F));
         builder.add(bf("coconut_milk_bottle"), timeBoost(1.0F, 1.5F, 40));

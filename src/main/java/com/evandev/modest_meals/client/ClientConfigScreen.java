@@ -65,6 +65,7 @@ public class ClientConfigScreen {
                 .option(createBoolOption("stamina_exhaustion_lockout", defaults.staminaExhaustionLockout, () -> config.staminaExhaustionLockout, val -> config.staminaExhaustionLockout = val))
                 .option(createBoolOption("stamina_sprinting", defaults.staminaSprinting, () -> config.staminaSprinting, val -> config.staminaSprinting = val))
                 .option(createBoolOption("stamina_gliding", defaults.staminaGliding, () -> config.staminaGliding, val -> config.staminaGliding = val))
+                .option(createBoolOption("stamina_elytra", defaults.staminaElytra, () -> config.staminaElytra, val -> config.staminaElytra = val))
                 .option(createBoolOption("stamina_shield_blocking", defaults.staminaShieldBlocking, () -> config.staminaShieldBlocking, val -> config.staminaShieldBlocking = val))
                 .option(createFloatOption("stamina_parry_restore", defaults.staminaParryRestore, 0.0F, 20.0F, 0.5F, () -> config.staminaParryRestore, val -> config.staminaParryRestore = val))
                 .option(createFloatOption("stamina_combat_roll_cost", defaults.staminaCombatRollCost, 0.0F, 20.0F, 0.5F, () -> config.staminaCombatRollCost, val -> config.staminaCombatRollCost = val))

@@ -1,0 +1,44 @@
+{
+  "entries": [
+    {
+      "eat_seconds": 3.2,
+      "target": "modest_meals:sandwich"
+    },
+    {
+      "eat_seconds": 2.8,
+      "target": "modest_meals:wrap"
+    },
+    {
+      "eat_seconds": 2.4,
+      "target": "modest_meals:roll"
+    },
+    {
+      "eat_seconds": 0.8,
+      "target": "modest_meals:roll_slice"
+    },
+    {
+      "eat_seconds": 0.8,
+      "target": "modest_meals:pizza_slice"
+    },
+    {
+      "eat_seconds": 0.8,
+      "target": "modest_meals:pie_slice"
+    },
+    {
+      "eat_seconds": 0.8,
+      "target": "modest_meals:cake_slice"
+    },
+    {
+      "eat_seconds": 1.6,
+      "target": "modest_meals:ice_cream"
+    },
+    {
+      "eat_seconds": 1.6,
+      "target": "modest_meals:ice_cream_bowl"
+    },
+    {
+      "eat_seconds": 2.0,
+      "target": "modest_meals:milkshake"
+    }
+  ]
+}

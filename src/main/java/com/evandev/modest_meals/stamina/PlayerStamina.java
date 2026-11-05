@@ -302,7 +302,11 @@ public class PlayerStamina {
     }
 
     public boolean isAtFullSprint() {
-        return ModConfig.get().staminaSprinting && !this.player.isUsingItem() && this.player.isSprinting();
+        return ModConfig.get().staminaSprinting && !this.player.isUsingItem() && !this.player.isPassenger() && this.player.isSprinting();
+    }
+
+    public boolean isElytraGliding() {
+        return ModConfig.get().staminaElytra && this.player.isFallFlying();
     }
 
     public boolean isExerting() {
@@ -312,7 +316,7 @@ public class PlayerStamina {
         if (this.player.level().isClientSide() && !this.player.isLocalPlayer()) {
             return false;
         }
-        return ReliableGlidersCompat.isGliding(this.player) || ShieldExpansionCompat.isBlocking(this.player);
+        return this.isElytraGliding() || ReliableGlidersCompat.isGliding(this.player) || ShieldExpansionCompat.isBlocking(this.player);
     }
 
     public boolean isTiringOrExhausted() {
