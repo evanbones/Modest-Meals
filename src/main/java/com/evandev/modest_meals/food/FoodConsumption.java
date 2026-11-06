@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class FoodConsumption {
 
     public static boolean canConsume(Player player, ItemStack stack) {
-        if (player.getAbilities().invulnerable) {
+        if (player.getAbilities().invulnerable || ModConfig.get().alwaysEat) {
             return true;
         }
 
@@ -61,7 +61,7 @@ public class FoodConsumption {
     }
 
     public static boolean canConsumeUnknown(Player player) {
-        if (player.getAbilities().invulnerable) {
+        if (player.getAbilities().invulnerable || ModConfig.get().alwaysEat) {
             return true;
         }
 

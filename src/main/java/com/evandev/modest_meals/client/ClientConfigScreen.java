@@ -38,6 +38,7 @@ public class ClientConfigScreen {
                 .option(createStringOption("hunger_replacement_effect", defaults.hungerReplacementEffect, () -> config.hungerReplacementEffect, val -> config.hungerReplacementEffect = val))
                 .option(createFloatOption("hunger_replacement_duration_multiplier", defaults.hungerReplacementDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.hungerReplacementDurationMultiplier, val -> config.hungerReplacementDurationMultiplier = val))
                 .option(createBoolOption("instant_eating", defaults.instantEating, () -> config.instantEating, val -> config.instantEating = val))
+                .option(createBoolOption("always_eat", defaults.alwaysEat, () -> config.alwaysEat, val -> config.alwaysEat = val))
                 .build());
 
         gameplayCategoryBuilder.group(OptionGroup.createBuilder()
@@ -59,8 +60,8 @@ public class ClientConfigScreen {
                 .option(createBoolOption("stamina_sprint", defaults.staminaSprint, () -> config.staminaSprint, val -> config.staminaSprint = val))
                 .option(createBoolOption("stamina_infinite_peaceful", defaults.staminaInfinitePeaceful, () -> config.staminaInfinitePeaceful, val -> config.staminaInfinitePeaceful = val))
                 .option(createEnumOption("stamina_regain_when_moving", StaminaRegain.class, defaults.staminaRegainWhenMoving, () -> config.staminaRegainWhenMoving, val -> config.staminaRegainWhenMoving = val, StaminaRegain::getTitle))
-                .option(createIntOption("stamina_duration", defaults.staminaDuration, 1, 60, 1, () -> config.staminaDuration, val -> config.staminaDuration = val))
-                .option(createIntOption("stamina_recharge", defaults.staminaRecharge, 1, 60, 1, () -> config.staminaRecharge, val -> config.staminaRecharge = val))
+                .option(createIntOption("stamina_duration", defaults.staminaDuration, 1, 600, 1, () -> config.staminaDuration, val -> config.staminaDuration = val))
+                .option(createIntOption("stamina_recharge", defaults.staminaRecharge, 1, 600, 1, () -> config.staminaRecharge, val -> config.staminaRecharge = val))
                 .option(createIntOption("stamina_cooldown", defaults.staminaCooldown, 0, 60, 1, () -> config.staminaCooldown, val -> config.staminaCooldown = val))
                 .option(createBoolOption("stamina_exhaustion_lockout", defaults.staminaExhaustionLockout, () -> config.staminaExhaustionLockout, val -> config.staminaExhaustionLockout = val))
                 .option(createBoolOption("stamina_sprinting", defaults.staminaSprinting, () -> config.staminaSprinting, val -> config.staminaSprinting = val))

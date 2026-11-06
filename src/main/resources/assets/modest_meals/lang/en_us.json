@@ -39,6 +39,8 @@
 
   "config.modest_meals.option.instant_eating": "Disable Eating Animation",
   "config.modest_meals.option.instant_eating.tooltip": "When enabled, removes the eating animation, making food consumption instantaneous.",
+  "config.modest_meals.option.always_eat": "Always Allow Eating",
+  "config.modest_meals.option.always_eat.tooltip": "When enabled, food can be eaten at any time, even with full health, stamina, or hunger.",
 
   "config.modest_meals.option.gradual_health_regeneration": "Gradual Health Regeneration",
   "config.modest_meals.option.gradual_health_regeneration.tooltip": "When enabled, health regenerates gradually over time after eating food instead of instantly.",

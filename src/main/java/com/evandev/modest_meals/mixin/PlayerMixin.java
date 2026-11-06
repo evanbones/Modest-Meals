@@ -108,7 +108,7 @@ public abstract class PlayerMixin extends LivingEntity implements StaminaHolder,
 
     @WrapMethod(method = "canEat")
     private boolean mm$canPlayerEatFood(boolean ignoreHunger, Operation<Boolean> original) {
-        if (this.abilities.invulnerable || ignoreHunger) {
+        if (this.abilities.invulnerable || ignoreHunger || ModConfig.get().alwaysEat) {
             return true;
         }
         if (ModConfig.get().disableHunger) {

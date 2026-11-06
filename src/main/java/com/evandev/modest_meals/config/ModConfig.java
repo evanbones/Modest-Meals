@@ -103,6 +103,9 @@ public class ModConfig {
     @SerializedName("instant_eating")
     public boolean instantEating = false;
 
+    @SerializedName("always_eat")
+    public boolean alwaysEat = false;
+
     @SerializedName("gradual_health_regeneration")
     public boolean gradualHealthRegeneration = true;
 

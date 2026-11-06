@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-11-05
+
+### Added
+
+- Added a config option to allow eating at any time.
+
+### Changed
+
+- Raised the maximum slider for sprint duration/recharge in the in-game config to 10 minutes.
+
 ## [2.1.2] - 2026-11-05
 
 ### Added
