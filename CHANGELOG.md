@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-11-07
+
+### Added
+
+- Effects that foods grant on their own (e.g. golden apple's Regeneration, raw chicken's Hunger) now show up in the food
+  editor and can be edited or removed.
+- Effect traits now support a chance to apply, shown in tooltips (e.g. "Hunger (00:30) (30% chance)").
+- The Health trait's tooltip preview in the food editor now shows its regeneration speed.
+
+### Changed
+
+- Gameplay config options (hunger, health regeneration, stamina, and food effect settings) are now controlled by the
+  server.
+    - On a server, they show the server's values and are greyed out in the config screen.
+- Dedicated servers now reload the config file on `/reload` and send the new values to everyone online.
+
 ## [2.2.0] - 2026-11-05
 
 ### Added

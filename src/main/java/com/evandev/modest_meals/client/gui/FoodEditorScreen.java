@@ -5,6 +5,7 @@ import com.evandev.modest_meals.client.gui.widget.DropdownWidget;
 import com.evandev.modest_meals.client.gui.widget.ModButton;
 import com.evandev.modest_meals.client.gui.widget.ModEditBox;
 import com.evandev.modest_meals.compat.reliable_remover.ReliableRemoverCompat;
+import com.evandev.modest_meals.food.BuiltInFoodEffects;
 import com.evandev.modest_meals.food.CustomFoodDatapack;
 import com.evandev.modest_meals.food.FoodProfile;
 import com.evandev.modest_meals.food.FoodProfileManager;
@@ -502,8 +503,10 @@ public class FoodEditorScreen extends Screen {
         }
         merged.keySet().removeAll(suppressed);
 
-        return FoodValues.withDerived(new ItemStack(item), new ArrayList<>(merged.values()),
+        ItemStack stack = new ItemStack(item);
+        List<FoodTrait> traits = FoodValues.withDerived(stack, new ArrayList<>(merged.values()),
                 getResolvedProfile(item), suppressed);
+        return BuiltInFoodEffects.appendTo(stack, traits, suppressed);
     }
 
     public void selectItem(Item item) {

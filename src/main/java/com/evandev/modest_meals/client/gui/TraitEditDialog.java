@@ -309,9 +309,7 @@ public class TraitEditDialog extends Screen {
             GuiUtil.drawTrimmed(graphics, this.font, Component.translatable("gui.modest_meals.invalid_input"),
                     contentX + 4, boxY + 6, contentW - 8, GuiUtil.ERROR_RED);
         } else if (previewTrait != null) {
-            Component tooltip = FoodItemTooltips.hasTooltipLine(previewTrait)
-                    ? previewTrait.getTooltipComponent(1.0, 1.0, GuiUtil.tickRate())
-                    : null;
+            Component tooltip = FoodItemTooltips.previewLine(previewTrait, GuiUtil.tickRate()).orElse(null);
             if (tooltip != null) {
                 GuiUtil.drawTrimmed(graphics, this.font, tooltip, contentX + 4, boxY + 6, contentW - 8, GuiUtil.WHITE);
             } else {

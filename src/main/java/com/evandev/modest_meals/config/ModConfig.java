@@ -1,11 +1,13 @@
 package com.evandev.modest_meals.config;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.network.ClientboundConfigSyncPayload;
 import com.evandev.modest_meals.stamina.Corner;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.stamina.StaminaRegain;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -16,13 +18,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.neoforged.fml.loading.FMLPaths;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public class ModConfig {
     private static final TypeAdapter<Color> COLOR_ADAPTER = new TypeAdapter<>() {
@@ -44,95 +50,131 @@ public class ModConfig {
             .registerTypeAdapter(Color.class, COLOR_ADAPTER)
             .create();
     private static final File CONFIG_FILE = FMLPaths.CONFIGDIR.get().resolve(Constants.MOD_ID + ".json").toFile();
+    private static final Set<String> SERVER_SYNCED_NAMES = serverSyncedNames();
     private static ModConfig INSTANCE;
+    private static ModConfig effective;
+    @Nullable
+    private static JsonObject serverValues;
+    @Nullable
+    private static JsonObject lastSyncedValues;
 
+    @ServerSynced
     @SerializedName("stamina_sprint")
     public boolean staminaSprint = true;
 
+    @ServerSynced
     @SerializedName("stamina_infinite_peaceful")
     public boolean staminaInfinitePeaceful = false;
 
+    @ServerSynced
     @SerializedName("stamina_regain_when_moving")
     public StaminaRegain staminaRegainWhenMoving = StaminaRegain.NORMAL;
 
+    @ServerSynced
     @SerializedName("stamina_duration")
     public int staminaDuration = 33;
 
+    @ServerSynced
     @SerializedName("stamina_recharge")
     public int staminaRecharge = 33;
 
+    @ServerSynced
     @SerializedName("stamina_cooldown")
     public int staminaCooldown = 2;
 
+    @ServerSynced
     @SerializedName("stamina_exhaustion_lockout")
     public boolean staminaExhaustionLockout = true;
 
+    @ServerSynced
     @SerializedName("stamina_sprinting")
     public boolean staminaSprinting = true;
 
+    @ServerSynced
     @SerializedName("stamina_gliding")
     public boolean staminaGliding = true;
 
+    @ServerSynced
     @SerializedName("stamina_elytra")
     public boolean staminaElytra = false;
 
+    @ServerSynced
     @SerializedName("stamina_shield_blocking")
     public boolean staminaShieldBlocking = true;
 
+    @ServerSynced
     @SerializedName("stamina_parry_restore")
     public float staminaParryRestore = 3.0f;
 
+    @ServerSynced
     @SerializedName("stamina_combat_roll_cost")
     public float staminaCombatRollCost = 4.0f;
 
+    @ServerSynced
     @SerializedName("stamina_hand_crank_cost")
     public float staminaHandCrankCost = 0.13f;
 
+    @ServerSynced
     @SerializedName("disable_hunger")
     public boolean disableHunger = true;
 
+    @ServerSynced
     @SerializedName("hunger_effect")
     public HungerEffectOption hungerEffect = HungerEffectOption.VANILLA;
 
+    @ServerSynced
     @SerializedName("hunger_replacement_effect")
     public String hungerReplacementEffect = "minecraft:poison";
 
+    @ServerSynced
     @SerializedName("hunger_replacement_duration_multiplier")
     public float hungerReplacementDurationMultiplier = 0.5f;
 
+    @ServerSynced
     @SerializedName("instant_eating")
     public boolean instantEating = false;
 
+    @ServerSynced
     @SerializedName("always_eat")
     public boolean alwaysEat = false;
 
+    @ServerSynced
     @SerializedName("gradual_health_regeneration")
     public boolean gradualHealthRegeneration = true;
 
+    @ServerSynced
     @SerializedName("gradual_health_regeneration_speed")
     public float gradualHealthRegenerationSpeed = 1.0f;
 
+    @ServerSynced
     @SerializedName("regeneration_at_full_health")
     public RegenerationAtFullHealthOption regenerationAtFullHealth = RegenerationAtFullHealthOption.CONTINUED;
 
+    @ServerSynced
     @SerializedName("stamina_natural_regeneration")
     public boolean staminaNaturalRegeneration = false;
 
+    @ServerSynced
     @SerializedName("stamina_natural_regeneration_fast_interval")
     public int staminaNaturalRegenerationFastInterval = 10;
 
+    @ServerSynced
     @SerializedName("stamina_natural_regeneration_interval")
     public int staminaNaturalRegenerationInterval = 80;
 
+    @ServerSynced
     @SerializedName("stamina_natural_regeneration_threshold")
     public int staminaNaturalRegenerationThreshold = 18;
 
+    @ServerSynced
     @SerializedName("stamina_natural_regeneration_drain")
     public float staminaNaturalRegenerationDrain = 1.5f;
 
+    @ServerSynced
     @SerializedName("sprinting")
     public SprintingOption sprinting = SprintingOption.VANILLA;
 
+    @ServerSynced
     @SerializedName("sprinting_health_limit")
     public int sprintingHealthLimit = 6;
 
@@ -151,12 +193,15 @@ public class ModConfig {
     @SerializedName("ingredient_tooltip")
     public TooltipVisibility ingredientTooltip = TooltipVisibility.VISIBLE;
 
+    @ServerSynced
     @SerializedName("food_effects")
     public boolean foodEffects = true;
 
+    @ServerSynced
     @SerializedName("trait_global_value_multiplier")
     public float traitGlobalValueMultiplier = 1.0f;
 
+    @ServerSynced
     @SerializedName("trait_global_duration_multiplier")
     public float traitGlobalDurationMultiplier = 1.0f;
 
@@ -248,7 +293,67 @@ public class ModConfig {
         if (INSTANCE == null) {
             load();
         }
+        return effective;
+    }
+
+    public static ModConfig local() {
+        if (INSTANCE == null) {
+            load();
+        }
         return INSTANCE;
+    }
+
+    public static boolean isServerControlled() {
+        return serverValues != null;
+    }
+
+    public static boolean isServerControlled(String option) {
+        return serverValues != null && SERVER_SYNCED_NAMES.contains(option);
+    }
+
+    public static JsonObject serverSyncedValues() {
+        JsonObject all = GSON.toJsonTree(get()).getAsJsonObject();
+        JsonObject synced = new JsonObject();
+        for (String name : SERVER_SYNCED_NAMES) {
+            if (all.has(name)) {
+                synced.add(name, all.get(name));
+            }
+        }
+        return synced;
+    }
+
+    public static void applyServerValues(@Nullable JsonObject values) {
+        serverValues = values;
+        refreshEffective();
+    }
+
+    private static void refreshEffective() {
+        if (serverValues == null) {
+            effective = INSTANCE;
+            lastSyncedValues = serverSyncedValues();
+            return;
+        }
+        JsonObject merged = GSON.toJsonTree(INSTANCE).getAsJsonObject();
+        for (String name : SERVER_SYNCED_NAMES) {
+            if (serverValues.has(name)) {
+                merged.add(name, serverValues.get(name));
+            }
+        }
+        ModConfig config = GSON.fromJson(merged, ModConfig.class);
+        config.validateDefaults();
+        effective = config;
+        lastSyncedValues = serverSyncedValues();
+    }
+
+    private static Set<String> serverSyncedNames() {
+        Set<String> names = new LinkedHashSet<>();
+        for (Field field : ModConfig.class.getDeclaredFields()) {
+            SerializedName name = field.getAnnotation(SerializedName.class);
+            if (name != null && field.isAnnotationPresent(ServerSynced.class)) {
+                names.add(name.value());
+            }
+        }
+        return Set.copyOf(names);
     }
 
     public static void load() {
@@ -259,6 +364,7 @@ public class ModConfig {
                     INSTANCE = new ModConfig();
                 }
                 INSTANCE.validateDefaults();
+                refreshEffective();
             } catch (Exception e) {
                 Constants.LOG.error("Failed to load " + Constants.MOD_ID + ".json", e);
                 INSTANCE = new ModConfig();
@@ -271,11 +377,16 @@ public class ModConfig {
     }
 
     public static void save() {
+        JsonObject syncedBefore = lastSyncedValues;
+        refreshEffective();
         try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
             GSON.toJson(INSTANCE, writer);
-            StaminaHelper.reset();
         } catch (IOException e) {
             Constants.LOG.error("Failed to save " + Constants.MOD_ID + ".json", e);
+        }
+        if (!lastSyncedValues.equals(syncedBefore)) {
+            ClientboundConfigSyncPayload.broadcast();
+            StaminaHelper.reset();
         }
     }
 

@@ -7,6 +7,7 @@ import com.evandev.modest_meals.trait.TraitTooltipHelper;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,28 +24,41 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int amplifier, boolean showParticles,
-                               boolean ambient, int stackLimit) implements FoodTrait {
+                               boolean ambient, int stackLimit, float probability) implements FoodTrait {
     public static final MapCodec<EffectGrantTrait> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.MOB_EFFECT.holderByNameCodec().fieldOf("effect").forGetter(EffectGrantTrait::effect),
             Codec.INT.fieldOf("duration").forGetter(EffectGrantTrait::duration),
             Codec.INT.optionalFieldOf("amplifier", 0).forGetter(EffectGrantTrait::amplifier),
             Codec.BOOL.optionalFieldOf("show_particles", true).forGetter(EffectGrantTrait::showParticles),
             Codec.BOOL.optionalFieldOf("ambient", false).forGetter(EffectGrantTrait::ambient),
-            Codec.INT.optionalFieldOf("stack_limit", 0).forGetter(EffectGrantTrait::stackLimit)
+            Codec.INT.optionalFieldOf("stack_limit", 0).forGetter(EffectGrantTrait::stackLimit),
+            Codec.floatRange(0.0F, 1.0F).optionalFieldOf("probability", 1.0F).forGetter(EffectGrantTrait::probability)
     ).apply(instance, EffectGrantTrait::new));
+
+    private static final StreamCodec<ByteBuf, Display> DISPLAY_CODEC = StreamCodec.composite(
+            ByteBufCodecs.BOOL, Display::showParticles,
+            ByteBufCodecs.BOOL, Display::ambient,
+            Display::new
+    );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, EffectGrantTrait> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT), EffectGrantTrait::effect,
             ByteBufCodecs.VAR_INT, EffectGrantTrait::duration,
             ByteBufCodecs.VAR_INT, EffectGrantTrait::amplifier,
-            ByteBufCodecs.BOOL, EffectGrantTrait::showParticles,
-            ByteBufCodecs.BOOL, EffectGrantTrait::ambient,
+            DISPLAY_CODEC, trait -> new Display(trait.showParticles(), trait.ambient()),
             ByteBufCodecs.VAR_INT, EffectGrantTrait::stackLimit,
-            EffectGrantTrait::new
+            ByteBufCodecs.FLOAT, EffectGrantTrait::probability,
+            (effect, duration, amplifier, display, stackLimit, probability) -> new EffectGrantTrait(
+                    effect, duration, amplifier, display.showParticles(), display.ambient(), stackLimit, probability)
     );
 
     public EffectGrantTrait(Holder<MobEffect> effect, int duration, int amplifier, boolean showParticles, boolean ambient) {
-        this(effect, duration, amplifier, showParticles, ambient, 0);
+        this(effect, duration, amplifier, showParticles, ambient, 0, 1.0F);
+    }
+
+    public EffectGrantTrait(Holder<MobEffect> effect, int duration, int amplifier, boolean showParticles, boolean ambient,
+                            int stackLimit) {
+        this(effect, duration, amplifier, showParticles, ambient, stackLimit, 1.0F);
     }
 
     @Override
@@ -59,6 +73,9 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
 
     @Override
     public void apply(LivingEntity entity, ItemStack stack, float valueMultiplier, float durationMultiplier) {
+        if (this.probability < 1.0F && entity.getRandom().nextFloat() >= this.probability) {
+            return;
+        }
         int dur = (int) (this.duration * durationMultiplier);
         MobEffectInstance active = entity.getEffect(this.effect);
         if (this.stackLimit > 0 && active != null && active.getAmplifier() == this.amplifier) {
@@ -83,6 +100,13 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
         if (dur > 0) {
             effectName = Component.translatable("potion.withDuration", effectName, TraitTooltipHelper.formatDuration(dur, tickRate));
         }
+        if (this.probability < 1.0F) {
+            effectName = Component.translatable("modest_meals.trait.chance", effectName,
+                    Math.round(this.probability * 100.0F));
+        }
         return effectName.withStyle(color);
+    }
+
+    private record Display(boolean showParticles, boolean ambient) {
     }
 }

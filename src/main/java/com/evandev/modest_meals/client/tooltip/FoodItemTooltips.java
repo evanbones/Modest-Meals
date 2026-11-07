@@ -7,6 +7,7 @@ import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightSoupEffects
 import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.config.TooltipVisibility;
+import com.evandev.modest_meals.food.BuiltInFoodEffects;
 import com.evandev.modest_meals.food.EdibleBlockFoods;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.food.ingredient.IngredientProfile;
@@ -15,7 +16,6 @@ import com.evandev.modest_meals.food.ingredient.MealEffectManager;
 import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTrait;
-import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
 import com.evandev.modest_meals.trait.impl.HealthAdditionTrait;
 import com.evandev.modest_meals.trait.impl.StaminaAdditionTrait;
 import net.minecraft.ChatFormatting;
@@ -162,13 +162,15 @@ public class FoodItemTooltips {
     }
 
     private static void addDigestionRateLine(List<Component> lines, ItemStack stack) {
+        digestionRateLine(FoodValues.healthPoints(stack), FoodValues.healthDigestTicks(stack)).ifPresent(lines::add);
+    }
+
+    public static Optional<Component> digestionRateLine(float halfHearts, int digestTicks) {
         if (!ModConfig.get().showFoodRegenerationTooltips || !ModConfig.get().gradualHealthRegeneration) {
-            return;
+            return Optional.empty();
         }
-        float halfHearts = FoodValues.healthPoints(stack);
-        int digestTicks = FoodValues.healthDigestTicks(stack);
         if (halfHearts <= 0.0F || digestTicks <= 0) {
-            return;
+            return Optional.empty();
         }
 
         float secondsPerHeart = digestTicks / halfHearts / 20.0F;
@@ -192,10 +194,19 @@ public class FoodItemTooltips {
             formatting = ChatFormatting.DARK_RED;
         }
 
-        lines.add(
-                Component.translatable(CONFIG_PREFIX + "template", Component.translatable(rate))
-                        .setStyle(Style.EMPTY.withColor(formatting.getColor()))
-        );
+        return Optional.of(Component.translatable(CONFIG_PREFIX + "template", Component.translatable(rate))
+                .setStyle(Style.EMPTY.withColor(formatting.getColor())));
+    }
+
+    public static Optional<Component> previewLine(FoodTrait trait, float tickRate) {
+        if (trait instanceof HealthAdditionTrait health) {
+            return digestionRateLine(health.value() * ModConfig.get().traitGlobalValueMultiplier,
+                    (int) (health.duration() * ModConfig.get().traitGlobalDurationMultiplier));
+        }
+        if (!hasTooltipLine(trait)) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(trait.getTooltipComponent(1.0, 1.0, tickRate));
     }
 
     public static boolean hasTooltipLine(FoodTrait trait) {
@@ -230,7 +241,7 @@ public class FoodItemTooltips {
         List<Component> effectLines = new ArrayList<>();
         List<Component> traitLines = new ArrayList<>();
 
-        List<FoodProperties.PossibleEffect> shownEffects = new ArrayList<>(effects);
+        List<FoodProperties.PossibleEffect> shownEffects = BuiltInFoodEffects.kept(stack, effects);
         List<FoodTrait> traits = new ArrayList<>();
         double valMult = ModConfig.get().traitGlobalValueMultiplier * scale;
         double durMult = ModConfig.get().traitGlobalDurationMultiplier * scale;
@@ -242,8 +253,6 @@ public class FoodItemTooltips {
                 }
             }
         }
-
-        dropRedundantEffectGrants(shownEffects, traits, durMult);
 
         if (!shownEffects.isEmpty()) {
             collectFoodEffectTooltips(shownEffects, tickRate, effectLines);
@@ -259,31 +268,6 @@ public class FoodItemTooltips {
                     .withStyle(ChatFormatting.GRAY));
             effectLines.forEach(line -> lines.add(indent(line)));
             traitLines.forEach(line -> lines.add(indent(line)));
-        }
-    }
-
-    private static void dropRedundantEffectGrants(List<FoodProperties.PossibleEffect> effects,
-                                                  List<FoodTrait> traits, double durationMultiplier) {
-        for (Iterator<FoodTrait> it = traits.iterator(); it.hasNext(); ) {
-            if (!(it.next() instanceof EffectGrantTrait grant)) {
-                continue;
-            }
-            long grantDuration = (long) (grant.duration() * durationMultiplier);
-            for (int i = 0; i < effects.size(); i++) {
-                FoodProperties.PossibleEffect entry = effects.get(i);
-                MobEffectInstance instance = entry.effect();
-                if (entry.probability() < 1.0F
-                        || !instance.getEffect().equals(grant.effect())
-                        || instance.getAmplifier() != grant.amplifier()) {
-                    continue;
-                }
-                if (grantDuration > instance.getDuration()) {
-                    effects.remove(i);
-                } else {
-                    it.remove();
-                }
-                break;
-            }
         }
     }
 

@@ -5,15 +5,18 @@ import com.evandev.modest_meals.compat.farmers_delight.NourishmentEffectHandler;
 import com.evandev.modest_meals.config.HungerEffectOption;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
+import com.evandev.modest_meals.food.BuiltInFoodEffects;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -48,6 +51,18 @@ public abstract class LivingEntityMixin {
             effect = NourishmentEffectHandler.getEffectToApply(effect);
         }
         return original.call(effect, source);
+    }
+
+    @WrapOperation(
+            method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;addEatEffect(Lnet/minecraft/world/food/FoodProperties;)V"
+            )
+    )
+    private void mm$applyKeptFoodEffects(LivingEntity entity, FoodProperties food, Operation<Void> original,
+                                         @Local(argsOnly = true) ItemStack stack) {
+        original.call(entity, BuiltInFoodEffects.withKeptEffects(stack, food));
     }
 
     @WrapOperation(

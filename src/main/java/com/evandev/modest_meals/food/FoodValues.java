@@ -38,6 +38,15 @@ public class FoodValues {
         return traits.stream().filter(trait -> !(trait instanceof EffectGrantTrait)).toList();
     }
 
+    public static List<FoodTrait> displayTraits(ItemStack stack) {
+        List<FoodTrait> traits = effectiveTraits(stack);
+        MealContents contents = stack.get(ModDataComponents.MEAL_CONTENTS.get());
+        if (!ModConfig.get().foodEffects || (contents != null && contents.isMeaningful())) {
+            return traits;
+        }
+        return BuiltInFoodEffects.appendTo(stack, traits, FoodTraitManager.suppressionsFor(stack.getItem()));
+    }
+
     private static List<FoodTrait> unfilteredTraits(ItemStack stack, int nutrition) {
         if (stack == null || stack.isEmpty()) {
             return FoodProfileManager.resolveDefault()

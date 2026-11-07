@@ -6,6 +6,7 @@ import com.evandev.modest_meals.stamina.Corner;
 import com.evandev.modest_meals.stamina.StaminaRegain;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.*;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -19,8 +20,9 @@ public class ClientConfigScreen {
     public static Screen create(Screen parent) {
         ModConfig defaults = new ModConfig();
         defaults.validateDefaults();
-        ModConfig config = ModConfig.get();
+        ModConfig config = ModConfig.local();
         config.validateDefaults();
+        ModConfig gameplay = ModConfig.isServerControlled() ? ModConfig.get() : config;
 
         YetAnotherConfigLib.Builder builder = YetAnotherConfigLib.createBuilder()
                 .title(Component.translatable("config.modest_meals.title"))
@@ -33,46 +35,46 @@ public class ClientConfigScreen {
         gameplayCategoryBuilder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("config.modest_meals.group.hunger"))
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.hunger.tooltip")))
-                .option(createBoolOption("disable_hunger", defaults.disableHunger, () -> config.disableHunger, val -> config.disableHunger = val))
-                .option(createEnumOption("hunger_effect", HungerEffectOption.class, defaults.hungerEffect, () -> config.hungerEffect, val -> config.hungerEffect = val, HungerEffectOption::getTitle))
-                .option(createStringOption("hunger_replacement_effect", defaults.hungerReplacementEffect, () -> config.hungerReplacementEffect, val -> config.hungerReplacementEffect = val))
-                .option(createFloatOption("hunger_replacement_duration_multiplier", defaults.hungerReplacementDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.hungerReplacementDurationMultiplier, val -> config.hungerReplacementDurationMultiplier = val))
-                .option(createBoolOption("instant_eating", defaults.instantEating, () -> config.instantEating, val -> config.instantEating = val))
-                .option(createBoolOption("always_eat", defaults.alwaysEat, () -> config.alwaysEat, val -> config.alwaysEat = val))
+                .option(createBoolOption("disable_hunger", defaults.disableHunger, () -> gameplay.disableHunger, val -> gameplay.disableHunger = val))
+                .option(createEnumOption("hunger_effect", HungerEffectOption.class, defaults.hungerEffect, () -> gameplay.hungerEffect, val -> gameplay.hungerEffect = val, HungerEffectOption::getTitle))
+                .option(createStringOption("hunger_replacement_effect", defaults.hungerReplacementEffect, () -> gameplay.hungerReplacementEffect, val -> gameplay.hungerReplacementEffect = val))
+                .option(createFloatOption("hunger_replacement_duration_multiplier", defaults.hungerReplacementDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> gameplay.hungerReplacementDurationMultiplier, val -> gameplay.hungerReplacementDurationMultiplier = val))
+                .option(createBoolOption("instant_eating", defaults.instantEating, () -> gameplay.instantEating, val -> gameplay.instantEating = val))
+                .option(createBoolOption("always_eat", defaults.alwaysEat, () -> gameplay.alwaysEat, val -> gameplay.alwaysEat = val))
                 .build());
 
         gameplayCategoryBuilder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("config.modest_meals.group.health_regeneration"))
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.health_regeneration.tooltip")))
-                .option(createBoolOption("gradual_health_regeneration", defaults.gradualHealthRegeneration, () -> config.gradualHealthRegeneration, val -> config.gradualHealthRegeneration = val))
-                .option(createFloatOption("gradual_health_regeneration_speed", defaults.gradualHealthRegenerationSpeed, 0.1F, 10.0F, 0.1F, () -> config.gradualHealthRegenerationSpeed, val -> config.gradualHealthRegenerationSpeed = val))
-                .option(createEnumOption("regeneration_at_full_health", RegenerationAtFullHealthOption.class, defaults.regenerationAtFullHealth, () -> config.regenerationAtFullHealth, val -> config.regenerationAtFullHealth = val, RegenerationAtFullHealthOption::getTitle))
-                .option(createBoolOption("stamina_natural_regeneration", defaults.staminaNaturalRegeneration, () -> config.staminaNaturalRegeneration, val -> config.staminaNaturalRegeneration = val))
-                .option(createIntOption("stamina_natural_regeneration_fast_interval", defaults.staminaNaturalRegenerationFastInterval, 1, 40, 1, () -> config.staminaNaturalRegenerationFastInterval, val -> config.staminaNaturalRegenerationFastInterval = val))
-                .option(createIntOption("stamina_natural_regeneration_interval", defaults.staminaNaturalRegenerationInterval, 10, 200, 5, () -> config.staminaNaturalRegenerationInterval, val -> config.staminaNaturalRegenerationInterval = val))
-                .option(createIntOption("stamina_natural_regeneration_threshold", defaults.staminaNaturalRegenerationThreshold, 1, 20, 1, () -> config.staminaNaturalRegenerationThreshold, val -> config.staminaNaturalRegenerationThreshold = val))
-                .option(createFloatOption("stamina_natural_regeneration_drain", defaults.staminaNaturalRegenerationDrain, 0.0F, 5.0F, 0.1F, () -> config.staminaNaturalRegenerationDrain, val -> config.staminaNaturalRegenerationDrain = val))
+                .option(createBoolOption("gradual_health_regeneration", defaults.gradualHealthRegeneration, () -> gameplay.gradualHealthRegeneration, val -> gameplay.gradualHealthRegeneration = val))
+                .option(createFloatOption("gradual_health_regeneration_speed", defaults.gradualHealthRegenerationSpeed, 0.1F, 10.0F, 0.1F, () -> gameplay.gradualHealthRegenerationSpeed, val -> gameplay.gradualHealthRegenerationSpeed = val))
+                .option(createEnumOption("regeneration_at_full_health", RegenerationAtFullHealthOption.class, defaults.regenerationAtFullHealth, () -> gameplay.regenerationAtFullHealth, val -> gameplay.regenerationAtFullHealth = val, RegenerationAtFullHealthOption::getTitle))
+                .option(createBoolOption("stamina_natural_regeneration", defaults.staminaNaturalRegeneration, () -> gameplay.staminaNaturalRegeneration, val -> gameplay.staminaNaturalRegeneration = val))
+                .option(createIntOption("stamina_natural_regeneration_fast_interval", defaults.staminaNaturalRegenerationFastInterval, 1, 40, 1, () -> gameplay.staminaNaturalRegenerationFastInterval, val -> gameplay.staminaNaturalRegenerationFastInterval = val))
+                .option(createIntOption("stamina_natural_regeneration_interval", defaults.staminaNaturalRegenerationInterval, 10, 200, 5, () -> gameplay.staminaNaturalRegenerationInterval, val -> gameplay.staminaNaturalRegenerationInterval = val))
+                .option(createIntOption("stamina_natural_regeneration_threshold", defaults.staminaNaturalRegenerationThreshold, 1, 20, 1, () -> gameplay.staminaNaturalRegenerationThreshold, val -> gameplay.staminaNaturalRegenerationThreshold = val))
+                .option(createFloatOption("stamina_natural_regeneration_drain", defaults.staminaNaturalRegenerationDrain, 0.0F, 5.0F, 0.1F, () -> gameplay.staminaNaturalRegenerationDrain, val -> gameplay.staminaNaturalRegenerationDrain = val))
                 .build());
 
         gameplayCategoryBuilder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("config.modest_meals.group.mechanics"))
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.mechanics.tooltip")))
-                .option(createBoolOption("stamina_sprint", defaults.staminaSprint, () -> config.staminaSprint, val -> config.staminaSprint = val))
-                .option(createBoolOption("stamina_infinite_peaceful", defaults.staminaInfinitePeaceful, () -> config.staminaInfinitePeaceful, val -> config.staminaInfinitePeaceful = val))
-                .option(createEnumOption("stamina_regain_when_moving", StaminaRegain.class, defaults.staminaRegainWhenMoving, () -> config.staminaRegainWhenMoving, val -> config.staminaRegainWhenMoving = val, StaminaRegain::getTitle))
-                .option(createIntOption("stamina_duration", defaults.staminaDuration, 1, 600, 1, () -> config.staminaDuration, val -> config.staminaDuration = val))
-                .option(createIntOption("stamina_recharge", defaults.staminaRecharge, 1, 600, 1, () -> config.staminaRecharge, val -> config.staminaRecharge = val))
-                .option(createIntOption("stamina_cooldown", defaults.staminaCooldown, 0, 60, 1, () -> config.staminaCooldown, val -> config.staminaCooldown = val))
-                .option(createBoolOption("stamina_exhaustion_lockout", defaults.staminaExhaustionLockout, () -> config.staminaExhaustionLockout, val -> config.staminaExhaustionLockout = val))
-                .option(createBoolOption("stamina_sprinting", defaults.staminaSprinting, () -> config.staminaSprinting, val -> config.staminaSprinting = val))
-                .option(createBoolOption("stamina_gliding", defaults.staminaGliding, () -> config.staminaGliding, val -> config.staminaGliding = val))
-                .option(createBoolOption("stamina_elytra", defaults.staminaElytra, () -> config.staminaElytra, val -> config.staminaElytra = val))
-                .option(createBoolOption("stamina_shield_blocking", defaults.staminaShieldBlocking, () -> config.staminaShieldBlocking, val -> config.staminaShieldBlocking = val))
-                .option(createFloatOption("stamina_parry_restore", defaults.staminaParryRestore, 0.0F, 20.0F, 0.5F, () -> config.staminaParryRestore, val -> config.staminaParryRestore = val))
-                .option(createFloatOption("stamina_combat_roll_cost", defaults.staminaCombatRollCost, 0.0F, 20.0F, 0.5F, () -> config.staminaCombatRollCost, val -> config.staminaCombatRollCost = val))
-                .option(createFloatOption("stamina_hand_crank_cost", defaults.staminaHandCrankCost, 0.0F, 2.0F, 0.01F, () -> config.staminaHandCrankCost, val -> config.staminaHandCrankCost = val))
-                .option(createEnumOption("sprinting", SprintingOption.class, defaults.sprinting, () -> config.sprinting, val -> config.sprinting = val, SprintingOption::getTitle))
-                .option(createIntOption("sprinting_health_limit", defaults.sprintingHealthLimit, 1, 20, 1, () -> config.sprintingHealthLimit, val -> config.sprintingHealthLimit = val))
+                .option(createBoolOption("stamina_sprint", defaults.staminaSprint, () -> gameplay.staminaSprint, val -> gameplay.staminaSprint = val))
+                .option(createBoolOption("stamina_infinite_peaceful", defaults.staminaInfinitePeaceful, () -> gameplay.staminaInfinitePeaceful, val -> gameplay.staminaInfinitePeaceful = val))
+                .option(createEnumOption("stamina_regain_when_moving", StaminaRegain.class, defaults.staminaRegainWhenMoving, () -> gameplay.staminaRegainWhenMoving, val -> gameplay.staminaRegainWhenMoving = val, StaminaRegain::getTitle))
+                .option(createIntOption("stamina_duration", defaults.staminaDuration, 1, 600, 1, () -> gameplay.staminaDuration, val -> gameplay.staminaDuration = val))
+                .option(createIntOption("stamina_recharge", defaults.staminaRecharge, 1, 600, 1, () -> gameplay.staminaRecharge, val -> gameplay.staminaRecharge = val))
+                .option(createIntOption("stamina_cooldown", defaults.staminaCooldown, 0, 60, 1, () -> gameplay.staminaCooldown, val -> gameplay.staminaCooldown = val))
+                .option(createBoolOption("stamina_exhaustion_lockout", defaults.staminaExhaustionLockout, () -> gameplay.staminaExhaustionLockout, val -> gameplay.staminaExhaustionLockout = val))
+                .option(createBoolOption("stamina_sprinting", defaults.staminaSprinting, () -> gameplay.staminaSprinting, val -> gameplay.staminaSprinting = val))
+                .option(createBoolOption("stamina_gliding", defaults.staminaGliding, () -> gameplay.staminaGliding, val -> gameplay.staminaGliding = val))
+                .option(createBoolOption("stamina_elytra", defaults.staminaElytra, () -> gameplay.staminaElytra, val -> gameplay.staminaElytra = val))
+                .option(createBoolOption("stamina_shield_blocking", defaults.staminaShieldBlocking, () -> gameplay.staminaShieldBlocking, val -> gameplay.staminaShieldBlocking = val))
+                .option(createFloatOption("stamina_parry_restore", defaults.staminaParryRestore, 0.0F, 20.0F, 0.5F, () -> gameplay.staminaParryRestore, val -> gameplay.staminaParryRestore = val))
+                .option(createFloatOption("stamina_combat_roll_cost", defaults.staminaCombatRollCost, 0.0F, 20.0F, 0.5F, () -> gameplay.staminaCombatRollCost, val -> gameplay.staminaCombatRollCost = val))
+                .option(createFloatOption("stamina_hand_crank_cost", defaults.staminaHandCrankCost, 0.0F, 2.0F, 0.01F, () -> gameplay.staminaHandCrankCost, val -> gameplay.staminaHandCrankCost = val))
+                .option(createEnumOption("sprinting", SprintingOption.class, defaults.sprinting, () -> gameplay.sprinting, val -> gameplay.sprinting = val, SprintingOption::getTitle))
+                .option(createIntOption("sprinting_health_limit", defaults.sprintingHealthLimit, 1, 20, 1, () -> gameplay.sprintingHealthLimit, val -> gameplay.sprintingHealthLimit = val))
                 .build());
 
         builder.category(gameplayCategoryBuilder.build());
@@ -158,9 +160,9 @@ public class ClientConfigScreen {
         foodEffectsCategoryBuilder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("config.modest_meals.group.food_multipliers"))
                 .description(OptionDescription.of(Component.translatable("config.modest_meals.group.food_multipliers.tooltip")))
-                .option(createBoolOption("food_effects", defaults.foodEffects, () -> config.foodEffects, val -> config.foodEffects = val))
-                .option(createFloatOption("trait_global_value_multiplier", defaults.traitGlobalValueMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalValueMultiplier, val -> config.traitGlobalValueMultiplier = val))
-                .option(createFloatOption("trait_global_duration_multiplier", defaults.traitGlobalDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> config.traitGlobalDurationMultiplier, val -> config.traitGlobalDurationMultiplier = val))
+                .option(createBoolOption("food_effects", defaults.foodEffects, () -> gameplay.foodEffects, val -> gameplay.foodEffects = val))
+                .option(createFloatOption("trait_global_value_multiplier", defaults.traitGlobalValueMultiplier, 0.1F, 10.0F, 0.1F, () -> gameplay.traitGlobalValueMultiplier, val -> gameplay.traitGlobalValueMultiplier = val))
+                .option(createFloatOption("trait_global_duration_multiplier", defaults.traitGlobalDurationMultiplier, 0.1F, 10.0F, 0.1F, () -> gameplay.traitGlobalDurationMultiplier, val -> gameplay.traitGlobalDurationMultiplier = val))
                 .build());
 
         builder.category(foodEffectsCategoryBuilder.build());
@@ -168,10 +170,20 @@ public class ClientConfigScreen {
         return builder.build().generateScreen(parent);
     }
 
+    private static OptionDescription description(String name) {
+        Component tooltip = Component.translatable("config.modest_meals.option." + name + ".tooltip");
+        if (!ModConfig.isServerControlled(name)) {
+            return OptionDescription.of(tooltip);
+        }
+        return OptionDescription.of(tooltip, Component.translatable("config.modest_meals.server_controlled")
+                .withStyle(ChatFormatting.GOLD));
+    }
+
     private static Option<Boolean> createBoolOption(String name, boolean defaultValue, Supplier<Boolean> getter, Consumer<Boolean> setter) {
         return Option.<Boolean>createBuilder()
                 .name(Component.translatable("config.modest_meals.option." + name))
-                .description(OptionDescription.of(Component.translatable("config.modest_meals.option." + name + ".tooltip")))
+                .description(description(name))
+                .available(!ModConfig.isServerControlled(name))
                 .binding(defaultValue, getter, setter)
                 .controller(TickBoxControllerBuilder::create)
                 .build();
@@ -180,7 +192,8 @@ public class ClientConfigScreen {
     private static Option<Integer> createIntOption(String name, int defaultValue, int min, int max, int step, Supplier<Integer> getter, Consumer<Integer> setter) {
         return Option.<Integer>createBuilder()
                 .name(Component.translatable("config.modest_meals.option." + name))
-                .description(OptionDescription.of(Component.translatable("config.modest_meals.option." + name + ".tooltip")))
+                .description(description(name))
+                .available(!ModConfig.isServerControlled(name))
                 .binding(defaultValue, getter, setter)
                 .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(min, max).step(step))
                 .build();
@@ -189,7 +202,8 @@ public class ClientConfigScreen {
     private static Option<Float> createFloatOption(String name, float defaultValue, float min, float max, float step, Supplier<Float> getter, Consumer<Float> setter) {
         return Option.<Float>createBuilder()
                 .name(Component.translatable("config.modest_meals.option." + name))
-                .description(OptionDescription.of(Component.translatable("config.modest_meals.option." + name + ".tooltip")))
+                .description(description(name))
+                .available(!ModConfig.isServerControlled(name))
                 .binding(defaultValue, getter, setter)
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).range(min, max).step(step).formatValue(
                         value -> Component.literal(String.format("%,.2f", value))
@@ -200,7 +214,8 @@ public class ClientConfigScreen {
     private static Option<Color> createColorOption(String name, Color defaultValue, Supplier<Color> getter, Consumer<Color> setter) {
         return Option.<Color>createBuilder()
                 .name(Component.translatable("config.modest_meals.option." + name))
-                .description(OptionDescription.of(Component.translatable("config.modest_meals.option." + name + ".tooltip")))
+                .description(description(name))
+                .available(!ModConfig.isServerControlled(name))
                 .binding(defaultValue, getter, setter)
                 .controller(opt -> ColorControllerBuilder.create(opt).allowAlpha(false))
                 .build();
@@ -209,7 +224,8 @@ public class ClientConfigScreen {
     private static <T extends Enum<T>> Option<T> createEnumOption(String name, Class<T> enumClass, T defaultValue, Supplier<T> getter, Consumer<T> setter, ValueFormatter<T> formatter) {
         return Option.<T>createBuilder()
                 .name(Component.translatable("config.modest_meals.option." + name))
-                .description(OptionDescription.of(Component.translatable("config.modest_meals.option." + name + ".tooltip")))
+                .description(description(name))
+                .available(!ModConfig.isServerControlled(name))
                 .binding(defaultValue, getter, setter)
                 .controller(opt -> EnumControllerBuilder.create(opt).enumClass(enumClass).formatValue(formatter))
                 .build();
@@ -218,7 +234,8 @@ public class ClientConfigScreen {
     private static Option<String> createStringOption(String name, String defaultValue, Supplier<String> getter, Consumer<String> setter) {
         return Option.<String>createBuilder()
                 .name(Component.translatable("config.modest_meals.option." + name))
-                .description(OptionDescription.of(Component.translatable("config.modest_meals.option." + name + ".tooltip")))
+                .description(description(name))
+                .available(!ModConfig.isServerControlled(name))
                 .binding(defaultValue, getter, setter)
                 .controller(StringControllerBuilder::create)
                 .build();

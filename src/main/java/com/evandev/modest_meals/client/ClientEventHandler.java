@@ -273,6 +273,7 @@ public class ClientEventHandler {
         @SubscribeEvent
         public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
             StaminaHelper.clearClient();
+            ModConfig.applyServerValues(null);
         }
 
         @SubscribeEvent

@@ -17,6 +17,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -90,9 +91,13 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
 
     public static String getMergeKey(FoodTrait trait) {
         if (trait instanceof EffectGrantTrait effectGrant) {
-            return "effect_grant:" + effectGrant.effect().getRegisteredName();
+            return effectGrantKey(effectGrant.effect());
         }
         return mergeKeyOf(trait.getType());
+    }
+
+    public static String effectGrantKey(Holder<MobEffect> effect) {
+        return "effect_grant:" + effect.getRegisteredName();
     }
 
     public static String mergeKeyOf(FoodTraitType<?> type) {

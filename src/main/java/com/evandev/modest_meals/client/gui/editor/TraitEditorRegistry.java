@@ -97,6 +97,8 @@ public class TraitEditorRegistry {
         private int level = 1;
         private boolean showParticles = true;
         private boolean ambient = false;
+        private int stackLimit = 0;
+        private double chancePercent = 100;
 
         public EffectGrantEditor() {
             for (Holder<MobEffect> holder : BuiltInRegistries.MOB_EFFECT.asHolderIdMap()) {
@@ -124,6 +126,8 @@ public class TraitEditorRegistry {
             this.level = trait.amplifier() + 1;
             this.showParticles = trait.showParticles();
             this.ambient = trait.ambient();
+            this.stackLimit = trait.stackLimit();
+            this.chancePercent = trait.probability() * 100.0;
             trait.effect().unwrapKey().ifPresent(key -> this.effectId = key.location().toString());
         }
 
@@ -133,6 +137,7 @@ public class TraitEditorRegistry {
                     "gui.modest_meals.search.effects");
             form.decimal("gui.modest_meals.field.duration", 0, MAX_SECONDS, durationSeconds, v -> durationSeconds = v);
             form.integer("gui.modest_meals.field.level", 1, 255, level, v -> level = (int) v);
+            form.decimal("gui.modest_meals.field.chance", 0, 100, chancePercent, v -> chancePercent = v);
             form.toggle("gui.modest_meals.field.particles", showParticles, v -> showParticles = v);
             form.toggle("gui.modest_meals.field.ambient", ambient, v -> ambient = v);
         }
@@ -141,7 +146,8 @@ public class TraitEditorRegistry {
         public EffectGrantTrait createTrait() {
             Holder<MobEffect> holder = resolve(effectId);
             if (holder == null) holder = MobEffects.MOVEMENT_SPEED;
-            return new EffectGrantTrait(holder, toTicks(durationSeconds), level - 1, showParticles, ambient);
+            return new EffectGrantTrait(holder, toTicks(durationSeconds), level - 1, showParticles, ambient, stackLimit,
+                    (float) (chancePercent / 100.0));
         }
     }
 

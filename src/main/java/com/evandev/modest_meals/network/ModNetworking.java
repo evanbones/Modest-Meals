@@ -9,7 +9,12 @@ import org.jetbrains.annotations.ApiStatus;
 @ApiStatus.Internal
 public class ModNetworking {
     public static void registerPayloads(final RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar("1.0.0");
+        final PayloadRegistrar registrar = event.registrar("2.0.0");
+        registrar.playToClient(
+                ClientboundConfigSyncPayload.TYPE,
+                ClientboundConfigSyncPayload.STREAM_CODEC,
+                ClientboundConfigSyncPayload::handle
+        );
         registrar.playToClient(
                 ClientboundStaminaSyncPayload.TYPE,
                 ClientboundStaminaSyncPayload.STREAM_CODEC,

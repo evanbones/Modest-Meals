@@ -10,6 +10,7 @@ import com.evandev.modest_meals.food.ingredient.MealEffectManager;
 import com.evandev.modest_meals.food.ingredient.MealIngredientManager;
 import com.evandev.modest_meals.food.meal.MealFormulaManager;
 import com.evandev.modest_meals.food.meal.MealTypeManager;
+import com.evandev.modest_meals.network.ClientboundConfigSyncPayload;
 import com.evandev.modest_meals.network.ClientboundFoodDataSyncPayload;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
@@ -150,6 +151,10 @@ public class CommonEventHandler {
 
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
+        if (event.getPlayer() == null && event.getPlayerList().getServer().isDedicatedServer()) {
+            ModConfig.load();
+        }
+        event.getRelevantPlayers().forEach(ClientboundConfigSyncPayload::sendTo);
         ClientboundFoodDataSyncPayload payload = ClientboundFoodDataSyncPayload.create();
         event.getRelevantPlayers().forEach(player -> ModNetworking.sendToPlayer(player, payload));
     }

@@ -119,7 +119,7 @@ public class PlayerStamina {
     }
 
     private void markExhausted() {
-        if (this.data.isExhausted()) {
+        if (this.data.isExhausted() || this.player.level().isClientSide()) {
             return;
         }
         this.data.setExhausted(true);
@@ -218,7 +218,7 @@ public class PlayerStamina {
         if (this.data.isExhausted() && !locksOut()) {
             if (this.data.cooldown > 0) {
                 this.data.cooldown--;
-            } else {
+            } else if (!this.player.level().isClientSide()) {
                 this.recover();
             }
             this.data.setStaminaUsingTicks(durationInTicks, maxLevel);
@@ -228,9 +228,13 @@ public class PlayerStamina {
             }
 
             if (this.data.remaining >= rechargeInTicks) {
-                this.data.remaining = durationInTicks;
-                this.data.cooldown = 0;
-                this.recover();
+                if (this.player.level().isClientSide()) {
+                    this.data.remaining = rechargeInTicks;
+                } else {
+                    this.data.remaining = durationInTicks;
+                    this.data.cooldown = 0;
+                    this.recover();
+                }
             }
 
             this.data.setStaminaUsingTicks(this.barTicks(this.data.isExhausted()), maxLevel);
