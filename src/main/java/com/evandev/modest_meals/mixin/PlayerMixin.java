@@ -7,6 +7,7 @@ import com.evandev.modest_meals.food.FoodDataOwner;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.regen.HealthRegenHolder;
 import com.evandev.modest_meals.regen.PlayerHealthRegen;
+import com.evandev.modest_meals.stamina.SprintRules;
 import com.evandev.modest_meals.stamina.StaminaCodec;
 import com.evandev.modest_meals.stamina.StaminaData;
 import com.evandev.modest_meals.stamina.StaminaHolder;
@@ -24,6 +25,10 @@ import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+//? if >=26.1 {
+/*import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+*///?}
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,6 +43,9 @@ public abstract class PlayerMixin extends LivingEntity implements StaminaHolder,
     @Final
     @Shadow
     private Abilities abilities;
+
+    @Unique
+    private static final String HEALTH_REGEN_KEY = "ModestMealsHealthRegen";
 
     @Unique
     private StaminaData mm$staminaData = StaminaData.create();
@@ -73,26 +81,46 @@ public abstract class PlayerMixin extends LivingEntity implements StaminaHolder,
     public abstract FoodData getFoodData();
 
     @Inject(method = "<init>", at = @At("TAIL"))
+    //? if >=26.1 {
+    /*private void mm$bindFoodDataOwner(Level level, GameProfile gameProfile, CallbackInfo ci) {
+    *///?} else
     private void mm$bindFoodDataOwner(Level level, BlockPos pos, float yRot, GameProfile gameProfile, CallbackInfo ci) {
         ((FoodDataOwner) this.getFoodData()).mm$setOwner((Player) (Object) this);
     }
 
+    //? if >=26.1 {
+    /*@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+    private void mm$onAddAdditionalSaveData(ValueOutput output, CallbackInfo ci) {
+        output.store(StaminaCodec.NBT_KEY, StaminaData.CODEC, this.mm$staminaData);
+        CompoundTag regenTag = new CompoundTag();
+        this.mm$healthRegen.writeToNbt(regenTag);
+        output.store(HEALTH_REGEN_KEY, CompoundTag.CODEC, regenTag);
+    }
+
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    private void mm$onReadAdditionalSaveData(ValueInput input, CallbackInfo ci) {
+        input.read(StaminaCodec.NBT_KEY, StaminaData.CODEC).ifPresent(data -> this.mm$staminaData = data);
+        input.read(HEALTH_REGEN_KEY, CompoundTag.CODEC).ifPresent(this.mm$healthRegen::readFromNbt);
+    }
+    *///?} else {
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void mm$onAddAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         StaminaCodec.save((Player) (Object) this, compound);
         CompoundTag regenTag = new CompoundTag();
         this.mm$healthRegen.writeToNbt(regenTag);
-        compound.put("ModestMealsHealthRegen", regenTag);
+        compound.put(HEALTH_REGEN_KEY, regenTag);
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void mm$onReadAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         StaminaCodec.read((Player) (Object) this, compound);
-        if (compound.contains("ModestMealsHealthRegen")) {
-            this.mm$healthRegen.readFromNbt(compound.getCompound("ModestMealsHealthRegen"));
+        if (compound.contains(HEALTH_REGEN_KEY)) {
+            this.mm$healthRegen.readFromNbt(compound.getCompound(HEALTH_REGEN_KEY));
         }
     }
+    //?}
 
+    //? if <26.1 {
     @WrapOperation(
             method = "eat",
             at = @At(
@@ -105,6 +133,12 @@ public abstract class PlayerMixin extends LivingEntity implements StaminaHolder,
             original.call(foodData, foodProperties);
         }
     }
+    //?} else {
+    /*@WrapMethod(method = "hasEnoughFoodToDoExhaustiveManoeuvres")
+    private boolean mm$canPlayerSprint(Operation<Boolean> original) {
+        return SprintRules.hasEnoughFoodToSprint((Player) (Object) this, original::call);
+    }
+    *///?}
 
     @WrapMethod(method = "canEat")
     private boolean mm$canPlayerEatFood(boolean ignoreHunger, Operation<Boolean> original) {

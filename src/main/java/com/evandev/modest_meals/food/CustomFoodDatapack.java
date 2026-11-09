@@ -1,20 +1,24 @@
 package com.evandev.modest_meals.food;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.ingredient.IngredientProfile;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
 import com.google.gson.*;
 import com.mojang.serialization.JsonOps;
+import net.minecraft.SharedConstants;
 import net.minecraft.network.chat.Component;
+//? if >=26.1 {
+/*import net.minecraft.server.packs.metadata.pack.PackFormat;
+import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
+*///?}
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
-import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.event.AddPackFindersEvent;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -23,8 +27,9 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class CustomFoodDatapack {
+    private static final String PACK_DESCRIPTION = "Modest Meals Custom Food Datapack";
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private static final Path PACK_DIR = FMLPaths.CONFIGDIR.get().resolve(Constants.MOD_ID).resolve("datapack");
+    private static final Path PACK_DIR = Platform.getConfigDirectory().resolve(Constants.MOD_ID).resolve("datapack");
     private static final Path TRAITS_FILE = PACK_DIR.resolve("data").resolve(Constants.MOD_ID).resolve("food_traits").resolve("custom_traits.json");
     private static final Path PROFILES_FILE = PACK_DIR.resolve("data").resolve(Constants.MOD_ID).resolve("food_profiles").resolve("custom_profiles.json");
     private static final Path INGREDIENTS_FILE = PACK_DIR.resolve("data").resolve(Constants.MOD_ID)
@@ -40,17 +45,10 @@ public class CustomFoodDatapack {
                 Files.createDirectories(PACK_DIR);
             }
 
-            Path mcmeta = PACK_DIR.resolve("pack.mcmeta");
-            if (!Files.exists(mcmeta)) {
-                JsonObject root = new JsonObject();
-                JsonObject packObj = new JsonObject();
-                packObj.addProperty("pack_format", 48);
-                packObj.addProperty("description", "Modest Meals Custom Food Datapack");
-                root.add("pack", packObj);
-
-                try (FileWriter writer = new FileWriter(mcmeta.toFile())) {
-                    GSON.toJson(root, writer);
-                }
+            JsonObject root = new JsonObject();
+            root.add("pack", packMetadata());
+            try (FileWriter writer = new FileWriter(PACK_DIR.resolve("pack.mcmeta").toFile())) {
+                GSON.toJson(root, writer);
             }
 
             if (!Files.exists(TRAITS_FILE.getParent())) {
@@ -67,25 +65,33 @@ public class CustomFoodDatapack {
         }
     }
 
-    public static void onAddPackFinders(AddPackFindersEvent event) {
-        if (event.getPackType() == PackType.SERVER_DATA) {
-            ensurePackExists();
+    private static JsonElement packMetadata() {
+        //? if >=26.1 {
+        /*PackFormat format = SharedConstants.getCurrentVersion().packVersion(PackType.SERVER_DATA);
+        return PackMetadataSection.SERVER_TYPE.codec()
+                .encodeStart(JsonOps.INSTANCE, new PackMetadataSection(Component.literal(PACK_DESCRIPTION), format.minorRange()))
+                .getOrThrow();
+        *///?} else {
+        JsonObject pack = new JsonObject();
+        pack.addProperty("pack_format", SharedConstants.getCurrentVersion().getPackVersion(PackType.SERVER_DATA));
+        pack.addProperty("description", PACK_DESCRIPTION);
+        return pack;
+        //?}
+    }
 
-            PackLocationInfo info = new PackLocationInfo(
-                    Constants.MOD_ID + "_custom_data",
-                    Component.literal("Modest Meals Custom Data"),
-                    PackSource.DEFAULT,
-                    Optional.empty()
-            );
+    public static Optional<Pack> createPack() {
+        ensurePackExists();
 
-            Pack.ResourcesSupplier supplier = new PathPackResources.PathResourcesSupplier(PACK_DIR);
-            PackSelectionConfig selectionConfig = new PackSelectionConfig(true, Pack.Position.TOP, false);
-            Pack pack = Pack.readMetaAndCreate(info, supplier, PackType.SERVER_DATA, selectionConfig);
+        PackLocationInfo info = new PackLocationInfo(
+                Constants.MOD_ID + "_custom_data",
+                Component.literal("Modest Meals Custom Data"),
+                PackSource.DEFAULT,
+                Optional.empty()
+        );
 
-            if (pack != null) {
-                event.addRepositorySource(packConsumer -> packConsumer.accept(pack));
-            }
-        }
+        Pack.ResourcesSupplier supplier = new PathPackResources.PathResourcesSupplier(PACK_DIR);
+        PackSelectionConfig selectionConfig = new PackSelectionConfig(true, Pack.Position.TOP, false);
+        return Optional.ofNullable(Pack.readMetaAndCreate(info, supplier, PackType.SERVER_DATA, selectionConfig));
     }
 
     public static Map<String, List<FoodTrait>> readCustomTraits() {

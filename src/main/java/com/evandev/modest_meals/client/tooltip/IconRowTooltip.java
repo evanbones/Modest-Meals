@@ -1,8 +1,10 @@
 package com.evandev.modest_meals.client.tooltip;
 
+import com.evandev.modest_meals.client.RenderCompat;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+//? if <26.1
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentContents;
@@ -12,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.FormattedCharSink;
 import net.minecraft.util.StringDecomposer;
+//? if <26.1
 import org.joml.Matrix4f;
 
 import java.util.ArrayList;
@@ -42,13 +45,16 @@ public class IconRowTooltip implements ClientTooltipComponent {
 
     private static void draw(GuiGraphics context, Icon icon, int x, int y) {
         if (icon.isAtlasSprite()) {
-            context.blitSprite(icon.location(), x, y, ICON_WIDTH, ICON_HEIGHT);
+            RenderCompat.blitSprite(context, icon.location(), x, y, ICON_WIDTH, ICON_HEIGHT);
         } else {
-            context.blit(icon.location(), x, y, 0.0F, 0.0F, ICON_WIDTH, ICON_HEIGHT, ICON_WIDTH, ICON_HEIGHT);
+            RenderCompat.blitTexture(context, icon.location(), x, y, 0.0F, 0.0F, ICON_WIDTH, ICON_HEIGHT, ICON_WIDTH, ICON_HEIGHT);
         }
     }
 
     @Override
+    //? if >=26.1 {
+    /*public int getHeight(Font font) {
+    *///?} else
     public int getHeight() {
         return 14;
     }
@@ -68,10 +74,37 @@ public class IconRowTooltip implements ClientTooltipComponent {
         return totalWidth;
     }
 
+    //? if >=26.1 {
+    /*@Override
+    public void extractText(GuiGraphics graphics, Font font, int x, int y) {
+        forEachText(font, x, y, (text, textX, textY) -> graphics.drawString(font, text, textX, textY, -1, true));
+    }
+
+    @Override
+    public void extractImage(Font font, int x, int y, int width, int height, GuiGraphics graphics) {
+        drawIcons(font, x, y, graphics);
+    }
+    *///?} else {
     @Override
     public void renderText(Font font, int mouseX, int mouseY, Matrix4f matrix, MultiBufferSource.BufferSource bufferSource) {
-        int currentX = mouseX;
-        int textY = mouseY + 2;
+        forEachText(font, mouseX, mouseY, (text, textX, textY) -> font.drawInBatch(text, (float) textX, (float) textY, -1, true,
+                matrix, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880));
+    }
+
+    @Override
+    public void renderImage(Font font, int x, int y, GuiGraphics context) {
+        drawIcons(font, x, y, context);
+    }
+    //?}
+
+    @FunctionalInterface
+    private interface TextSink {
+        void accept(FormattedCharSequence text, int x, int y);
+    }
+
+    private void forEachText(Font font, int x, int y, TextSink sink) {
+        int currentX = x;
+        int textY = y + 2;
         for (int s = 0; s < sections.size(); s++) {
             Section section = sections.get(s);
             if (s > 0) {
@@ -79,14 +112,13 @@ public class IconRowTooltip implements ClientTooltipComponent {
             }
             currentX += section.iconCount() * ICON_WIDTH;
             if (!section.text().isEmpty()) {
-                font.drawInBatch(section.visualText(), (float) currentX, (float) textY, -1, true, matrix, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+                sink.accept(section.visualText(), currentX, textY);
                 currentX += font.width(section.text());
             }
         }
     }
 
-    @Override
-    public void renderImage(Font font, int x, int y, GuiGraphics context) {
+    private void drawIcons(Font font, int x, int y, GuiGraphics context) {
         int currentX = x;
         int iconY = y + 2;
         for (int s = 0; s < sections.size(); s++) {

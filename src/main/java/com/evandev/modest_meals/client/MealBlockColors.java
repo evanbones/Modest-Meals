@@ -5,11 +5,14 @@ import com.evandev.modest_meals.block.SlicedMealBlock;
 import com.evandev.modest_meals.component.MealContents;
 import com.evandev.modest_meals.food.ingredient.MealIngredientManager;
 import com.evandev.modest_meals.item.MealItem;
+import com.evandev.modest_meals.mixin.SpriteContentsAccessor;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
+//? if >=26.1
+/*import net.minecraft.client.color.block.BlockTintSource;*/
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -23,6 +26,20 @@ public class MealBlockColors {
     private static final int PLAIN = 0xFFFFFF;
     private static final int DUBIOUS = 0x7E8F3A;
     private static final Map<ResourceLocation, Integer> SPRITE_COLORS = new ConcurrentHashMap<>();
+
+    //? if >=26.1 {
+    /*public static final BlockTintSource TINT = new BlockTintSource() {
+        @Override
+        public int color(BlockState state) {
+            return 0xFF000000 | PLAIN;
+        }
+
+        @Override
+        public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+            return 0xFF000000 | MealBlockColors.color(state, level, pos, 0);
+        }
+    };
+    *///?}
 
     public static int color(BlockState state, @Nullable BlockAndTintGetter level, @Nullable BlockPos pos, int tintIndex) {
         if (level == null || pos == null || !(level.getBlockEntity(pos) instanceof MealBlockEntity meal)) {
@@ -45,15 +62,15 @@ public class MealBlockColors {
     }
 
     private static int averageColor(ResourceLocation spriteId) {
-        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(spriteId);
-        NativeImage image = sprite.contents().getOriginalImage();
+        TextureAtlasSprite sprite = RenderCompat.itemSprite(spriteId);
+        NativeImage image = ((SpriteContentsAccessor) sprite.contents()).mm$getOriginalImage();
         long red = 0;
         long green = 0;
         long blue = 0;
         int count = 0;
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
-                int abgr = image.getPixelRGBA(x, y);
+                int abgr = RenderCompat.pixelAbgr(image, x, y);
                 if ((abgr >>> 24) < 128) {
                     continue;
                 }

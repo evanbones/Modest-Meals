@@ -6,6 +6,8 @@ import com.evandev.modest_meals.food.FoodDataOwner;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.entity.player.Player;
+//? if >=26.1
+/*import net.minecraft.server.level.ServerPlayer;*/
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
 import org.jetbrains.annotations.Nullable;
@@ -36,6 +38,9 @@ public abstract class FoodDataMixin implements FoodDataOwner {
             at = @At("HEAD"),
             cancellable = true
     )
+    //? if >=26.1 {
+    /*public void mm$disableHunger(ServerPlayer player, CallbackInfo callback) {
+    *///?} else
     public void mm$disableHunger(Player player, CallbackInfo callback) {
         if (mm$owner == null) {
             mm$owner = player;

@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
-import com.evandev.modest_meals.Constants;
+//? if neoforge_legacy {
+/*import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.ingredient.IngredientProfile;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -609,3 +610,4 @@ public class IngredientProfileProvider implements DataProvider {
         }
     }
 }
+*///?}

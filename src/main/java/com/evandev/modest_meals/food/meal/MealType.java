@@ -12,10 +12,14 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+//? if emi
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
@@ -103,7 +107,7 @@ public record MealType(
                 requiresSupportedIngredients, dubiousSprite, baseSprites, specialSprites, itemOverrides, rules);
     }
 
-    private static int indexMatching(List<ItemStack> stacks, Ingredient ingredient) {
+    private static int indexMatching(List<ItemStack> stacks, ItemMatcher ingredient) {
         for (int i = 0; i < stacks.size(); i++) {
             if (ingredient.test(stacks.get(i))) {
                 return i;
@@ -191,30 +195,30 @@ public record MealType(
     public record Split(List<ItemStack> base, List<ItemStack> ingredients) {
     }
 
-    public record Rules(int servings, Optional<Ingredient> required, Optional<Ingredient> allowed,
-                        Optional<Ingredient> forbidden) {
+    public record Rules(int servings, Optional<ItemMatcher> required, Optional<ItemMatcher> allowed,
+                        Optional<ItemMatcher> forbidden) {
         public static final Rules NONE = new Rules(1, Optional.empty(), Optional.empty(), Optional.empty());
 
         public static final MapCodec<Rules> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Codec.intRange(1, 64).optionalFieldOf("servings", 1).forGetter(Rules::servings),
-                Ingredient.CODEC_NONEMPTY.optionalFieldOf("required_ingredient").forGetter(Rules::required),
-                Ingredient.CODEC_NONEMPTY.optionalFieldOf("allowed_ingredients").forGetter(Rules::allowed),
-                Ingredient.CODEC_NONEMPTY.optionalFieldOf("forbidden_ingredients").forGetter(Rules::forbidden)
+                ItemMatcher.CODEC.optionalFieldOf("required_ingredient").forGetter(Rules::required),
+                ItemMatcher.CODEC.optionalFieldOf("allowed_ingredients").forGetter(Rules::allowed),
+                ItemMatcher.CODEC.optionalFieldOf("forbidden_ingredients").forGetter(Rules::forbidden)
         ).apply(instance, Rules::new));
 
         public static Rules servings(int servings) {
             return new Rules(servings, Optional.empty(), Optional.empty(), Optional.empty());
         }
 
-        public static Rules requiring(Ingredient required) {
+        public static Rules requiring(ItemMatcher required) {
             return new Rules(1, Optional.of(required), Optional.empty(), Optional.empty());
         }
 
-        public static Rules allowing(Ingredient allowed) {
+        public static Rules allowing(ItemMatcher allowed) {
             return new Rules(1, Optional.empty(), Optional.of(allowed), Optional.empty());
         }
 
-        public static Rules forbidding(Ingredient forbidden) {
+        public static Rules forbidding(ItemMatcher forbidden) {
             return new Rules(1, Optional.empty(), Optional.empty(), Optional.of(forbidden));
         }
 
@@ -222,7 +226,7 @@ public record MealType(
             return new Rules(servings, required, allowed, forbidden);
         }
 
-        public Rules withForbidden(Ingredient forbidden) {
+        public Rules withForbidden(ItemMatcher forbidden) {
             return new Rules(servings, required, allowed, Optional.of(forbidden));
         }
 
@@ -238,9 +242,9 @@ public record MealType(
         }
     }
 
-    public record BaseEntry(Ingredient ingredient, int count) {
+    public record BaseEntry(ItemMatcher ingredient, int count) {
         public static final Codec<BaseEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(BaseEntry::ingredient),
+                ItemMatcher.CODEC.fieldOf("ingredient").forGetter(BaseEntry::ingredient),
                 Codec.INT.optionalFieldOf("count", 1).forGetter(BaseEntry::count)
         ).apply(instance, BaseEntry::new));
     }
@@ -271,16 +275,15 @@ public record MealType(
             return ANY_INGREDIENT.toString().equals(key.get(String.valueOf(symbol)));
         }
 
-        public Optional<Ingredient> pinnedAt(char symbol) {
+        public Optional<ItemMatcher> pinnedAt(char symbol) {
             String value = key.get(String.valueOf(symbol));
             if (value == null || ANY_INGREDIENT.toString().equals(value)) {
                 return Optional.empty();
             }
             if (value.startsWith("#")) {
-                return Optional.of(Ingredient.of(TagKey.create(
-                        Registries.ITEM, ResourceLocation.parse(value.substring(1)))));
+                return Optional.of(ItemMatcher.tag(TagKey.create(Registries.ITEM, ResourceLocation.parse(value.substring(1)))));
             }
-            return BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(value)).map(Ingredient::of);
+            return BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(value)).map(ItemMatcher::item);
         }
     }
 
@@ -356,6 +359,7 @@ public record MealType(
             this(result, 1, ingredients);
         }
 
+        //? if emi {
         public static Ingredient parseIngredient(String spec) {
             List<Ingredient.Value> values = new ArrayList<>();
             for (String option : spec.split("\\|")) {
@@ -368,14 +372,28 @@ public record MealType(
             }
             return values.isEmpty() ? Ingredient.EMPTY : Ingredient.fromValues(values.stream());
         }
+        //?}
 
-        public List<Ingredient> matchers() {
-            return ingredients.stream().map(ItemOverride::parseIngredient).toList();
+        public static Predicate<ItemStack> matcherFor(String spec) {
+            Set<Item> items = new HashSet<>();
+            List<TagKey<Item>> tags = new ArrayList<>();
+            for (String option : spec.split("\\|")) {
+                if (option.startsWith("#")) {
+                    tags.add(TagKey.create(Registries.ITEM, ResourceLocation.parse(option.substring(1))));
+                } else {
+                    BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(option)).ifPresent(items::add);
+                }
+            }
+            return stack -> items.contains(stack.getItem()) || tags.stream().anyMatch(stack::is);
+        }
+
+        public List<Predicate<ItemStack>> matchers() {
+            return ingredients.stream().map(ItemOverride::matcherFor).toList();
         }
 
         public boolean matches(List<ItemStack> mealIngredients, List<ItemStack> baseStacks) {
             for (String spec : base) {
-                Ingredient matcher = parseIngredient(spec);
+                Predicate<ItemStack> matcher = matcherFor(spec);
                 if (baseStacks.stream().noneMatch(matcher)) {
                     return false;
                 }
@@ -393,11 +411,11 @@ public record MealType(
             return assign(matchers(), 0, nonNull, new boolean[nonNull.size()]);
         }
 
-        private static boolean assign(List<Ingredient> matchers, int index, List<ItemStack> stacks, boolean[] used) {
+        private static boolean assign(List<Predicate<ItemStack>> matchers, int index, List<ItemStack> stacks, boolean[] used) {
             if (index == matchers.size()) {
                 return true;
             }
-            Ingredient matcher = matchers.get(index);
+            Predicate<ItemStack> matcher = matchers.get(index);
             for (int i = 0; i < stacks.size(); i++) {
                 if (!used[i] && matcher.test(stacks.get(i))) {
                     used[i] = true;

@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.farmers_delight;
 
+//? if farmers_delight {
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.evandev.modest_meals.food.meal.MealAssembler;
 import com.evandev.modest_meals.food.meal.MealType;
@@ -8,17 +9,29 @@ import com.evandev.modest_meals.recipe.AuthoredRecipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+//? if >=26.1 {
+/*import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.PlacementInfo;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import vectorwing.farmersdelight.common.crafting.CookingPotBookCategory;
+*///?} else {
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+//?}
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
+//? if >=26.1
+/*import net.minecraft.world.item.Items;*/
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+//? if neoforge {
+/*import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+*///?} else
+import vectorwing.farmersdelight.refabricated.inventory.RecipeWrapper;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
@@ -28,10 +41,17 @@ import java.util.Optional;
 
 public class MealCookingRecipe extends CookingPotRecipe {
 
+    //? if >=26.1
+    /*private static final List<Ingredient> PROPERTY_SET_PLACEHOLDER_INPUT = List.of(Ingredient.of(Items.BOWL));*/
+
     private final ResourceLocation mealTypeId;
     private final int cookTime;
 
     public MealCookingRecipe(ResourceLocation mealTypeId, int cookTime) {
+        //? if >=26.1 {
+        /*super("", CookingPotBookCategory.MEALS, PROPERTY_SET_PLACEHOLDER_INPUT, new ItemStackTemplate(Items.BOWL),
+                Optional.empty(), 0.0F, cookTime);
+        *///?} else
         super("", null, NonNullList.create(), ItemStack.EMPTY, ItemStack.EMPTY, 0.0F, cookTime);
         this.mealTypeId = mealTypeId;
         this.cookTime = cookTime;
@@ -93,12 +113,49 @@ public class MealCookingRecipe extends CookingPotRecipe {
                 && !AuthoredRecipes.anyMatch(level, ModRecipeTypes.COOKING.get(), inventory, MealCookingRecipe.class);
     }
 
+    //? if >=26.1 {
+    /*@Override
+    public ItemStack assemble(RecipeWrapper inventory) {
+        return assembleMeal(inventory);
+    }
+
+    @Override
+    public ItemStackTemplate container() {
+        return mealType()
+                .flatMap(MealType::resolveContainer)
+                .map(ItemStackTemplate::new)
+                .orElse(null);
+    }
+
+    @Override
+    public ItemStackTemplate result() {
+        return mealType()
+                .flatMap(type -> type.resolveItem().map(item -> new ItemStackTemplate(item, type.servings())))
+                .orElseGet(super::result);
+    }
+
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    @Override
+    public List<RecipeDisplay> display() {
+        return List.of();
+    }
+
+    @Override
+    public RecipeSerializer<MealCookingRecipe> getSerializer() {
+        return FarmersDelightCompat.MEAL_COOKING_SERIALIZER.get();
+    }
+
+    public static RecipeSerializer<MealCookingRecipe> serializer() {
+        return new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
+    }
+    *///?} else {
     @Override
     public ItemStack assemble(RecipeWrapper inventory, HolderLookup.Provider registries) {
-        return mealType()
-                .flatMap(type -> ingredientsFor(inventory, type)
-                        .flatMap(split -> MealAssembler.assemble(type, split.ingredients(), split.base())))
-                .orElse(ItemStack.EMPTY);
+        return assembleMeal(inventory);
     }
 
     @Override
@@ -126,6 +183,23 @@ public class MealCookingRecipe extends CookingPotRecipe {
     }
 
     @Override
+    public RecipeSerializer<?> getSerializer() {
+        return FarmersDelightCompat.MEAL_COOKING_SERIALIZER.get();
+    }
+
+    public static RecipeSerializer<MealCookingRecipe> serializer() {
+        return new Serializer();
+    }
+    //?}
+
+    private ItemStack assembleMeal(RecipeWrapper inventory) {
+        return mealType()
+                .flatMap(type -> ingredientsFor(inventory, type)
+                        .flatMap(split -> MealAssembler.assemble(type, split.ingredients(), split.base())))
+                .orElse(ItemStack.EMPTY);
+    }
+
+    @Override
     public int getCookTime() {
         return cookTime;
     }
@@ -135,11 +209,9 @@ public class MealCookingRecipe extends CookingPotRecipe {
         return true;
     }
 
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return FarmersDelightCompat.MEAL_COOKING_SERIALIZER.get();
-    }
-
+    //? if >=26.1 {
+    /*private static class Serializer {
+    *///?} else
     public static class Serializer implements RecipeSerializer<MealCookingRecipe> {
         private static final MapCodec<MealCookingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 ResourceLocation.CODEC.fieldOf("meal_type").forGetter(MealCookingRecipe::mealTypeId),
@@ -154,6 +226,7 @@ public class MealCookingRecipe extends CookingPotRecipe {
                         MealCookingRecipe::new
                 );
 
+        //? if <26.1 {
         @Override
         public MapCodec<MealCookingRecipe> codec() {
             return CODEC;
@@ -163,5 +236,7 @@ public class MealCookingRecipe extends CookingPotRecipe {
         public StreamCodec<RegistryFriendlyByteBuf, MealCookingRecipe> streamCodec() {
             return STREAM_CODEC;
         }
+        //?}
     }
 }
+//?}

@@ -10,6 +10,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PizzaBlock extends SlicedMealBlock {
+    //? if <26.3
     public static final MapCodec<PizzaBlock> CODEC = simpleCodec(PizzaBlock::new);
     public static final int SLICES = 4;
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, SLICES - 1);
@@ -37,10 +38,12 @@ public class PizzaBlock extends SlicedMealBlock {
         super(properties);
     }
 
+    //? if <26.3 {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
+    //?}
 
     @Override
     public IntegerProperty bites() {

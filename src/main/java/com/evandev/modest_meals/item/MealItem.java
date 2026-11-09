@@ -11,6 +11,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+//? if fabric || >=26.1 {
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+//?}
+//? if >=26.1 {
+/*import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.component.Consumable;
+*///?} else if fabric
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.food.FoodConstants;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -65,25 +76,88 @@ public class MealItem extends Item {
         return contentsOf(stack).isMeaningful() ? useAnimation : super.getUseAnimation(stack);
     }
 
-    @Override
+    //? if neoforge && <26.1 {
+    /*@Override
     public @Nullable FoodProperties getFoodProperties(ItemStack stack, @Nullable LivingEntity entity) {
+        FoodProperties meal = mealFoodProperties(stack);
+        return meal != null ? meal : super.getFoodProperties(stack, entity);
+    }
+    *///?} else if >=26.1 {
+    /*@Override
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        FoodProperties food = mealFoodProperties(player.getItemInHand(hand));
+        if (food == null) {
+            return InteractionResult.PASS;
+        }
+        if (!player.canEat(food.canAlwaysEat())) {
+            return InteractionResult.FAIL;
+        }
+        player.startUsingItem(hand);
+        return InteractionResult.CONSUME;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+        MealContents contents = contentsOf(stack);
+        return contents.isMeaningful() ? Mth.floor(eatSeconds(contents) * 20.0F) : super.getUseDuration(stack, entity);
+    }
+
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+        FoodProperties food = mealFoodProperties(stack);
+        Consumable consumable = stack.get(DataComponents.CONSUMABLE);
+        if (food != null && consumable != null) {
+            food.onConsume(level, entity, stack, consumable);
+        }
+        return super.finishUsingItem(stack, level, entity);
+    }
+    *///?} else {
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        FoodProperties food = mealFoodProperties(stack);
+        if (food == null) {
+            return super.use(level, player, hand);
+        }
+        if (!player.canEat(food.canAlwaysEat())) {
+            return InteractionResultHolder.fail(stack);
+        }
+        player.startUsingItem(hand);
+        return InteractionResultHolder.consume(stack);
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+        FoodProperties food = mealFoodProperties(stack);
+        return food != null ? food.eatDurationTicks() : super.getUseDuration(stack, entity);
+    }
+
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+        FoodProperties food = mealFoodProperties(stack);
+        return food != null ? entity.eat(level, stack, food) : super.finishUsingItem(stack, level, entity);
+    }
+    //?}
+
+    public @Nullable FoodProperties mealFoodProperties(ItemStack stack) {
         MealContents contents = contentsOf(stack);
         if (!contents.isMeaningful()) {
-            return super.getFoodProperties(stack, entity);
+            return null;
         }
         int nutrition = Math.max(1, Mth.ceil(contents.health()));
-
         boolean alwaysEdible = contents.health() <= 0.0F && contents.stamina() <= 0.0F;
-        float eatSeconds = IngredientProfileManager.eatSeconds(this)
-                .orElseGet(() -> MealFormulaManager.get().eatSecondsFor(contents.health() + contents.stamina()));
+        float saturation = FoodConstants.saturationByModifier(nutrition, SATURATION_MODIFIER);
+        //? if >=26.1 {
+        /*return new FoodProperties(nutrition, saturation, alwaysEdible);
+        *///?} else {
+        return new FoodProperties(nutrition, saturation, alwaysEdible, eatSeconds(contents),
+                Optional.ofNullable(getCraftingRemainingItem()).map(ItemStack::new), List.of());
+        //?}
+    }
 
-        return new FoodProperties(
-                nutrition,
-                FoodConstants.saturationByModifier(nutrition, SATURATION_MODIFIER),
-                alwaysEdible,
-                eatSeconds,
-                Optional.ofNullable(getCraftingRemainingItem()).map(ItemStack::new),
-                List.of());
+    private float eatSeconds(MealContents contents) {
+        return IngredientProfileManager.eatSeconds(this)
+                .orElseGet(() -> MealFormulaManager.get().eatSecondsFor(contents.health() + contents.stamina()));
     }
 
     @Override
@@ -92,7 +166,7 @@ public class MealItem extends Item {
                 .filter(ModItems.Portion::sliceOfWhole)
                 .map(portion -> (Component) Component.translatable(NAME_SLICE_KEY,
                         nameOf(stack, Component.translatable(portion.whole().get().getDescriptionId()))))
-                .orElseGet(() -> nameOf(stack, Component.translatable(this.getDescriptionId(stack))));
+                .orElseGet(() -> nameOf(stack, Component.translatable(this.getDescriptionId())));
     }
 
     public static Component nameOf(ItemStack stack, Component base) {

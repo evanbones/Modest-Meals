@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
-import com.evandev.modest_meals.Constants;
+//? if neoforge_legacy {
+/*import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealFormula;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -18,3 +19,4 @@ public class MealFormulaProvider extends JsonDataProvider<MealFormula> {
         entries.put(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "default"), MealFormula.DEFAULT);
     }
 }
+*///?}

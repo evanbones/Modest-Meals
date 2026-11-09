@@ -1,17 +1,21 @@
 package com.evandev.modest_meals.compat.farmers_delight;
 
+import com.evandev.modest_meals.food.FoodEffect;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+//? if farmers_delight && <26.1 {
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
+//?}
 
 import java.util.List;
 
 public class FarmersDelightSoupEffects {
 
-    public static List<FoodProperties.PossibleEffect> get(ItemStack stack) {
+    public static List<FoodEffect> get(ItemStack stack) {
+        //? if farmers_delight && <26.1 {
         Item item = stack.getItem();
         if (!Configuration.ENABLE_VANILLA_SOUP_EXTRA_EFFECTS.get()) {
             return List.of();
@@ -20,6 +24,8 @@ public class FarmersDelightSoupEffects {
             return List.of();
         }
         FoodProperties soup = FoodValues.VANILLA_SOUP_EFFECTS.get(item);
-        return soup == null ? List.of() : soup.effects();
+        return soup == null ? List.of() : FoodEffect.of(soup.effects());
+        //?} else
+        /*return List.of();*/
     }
 }

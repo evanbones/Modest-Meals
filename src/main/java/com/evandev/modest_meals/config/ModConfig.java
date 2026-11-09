@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.config;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.network.ClientboundConfigSyncPayload;
 import com.evandev.modest_meals.stamina.Corner;
@@ -17,7 +18,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.neoforged.fml.loading.FMLPaths;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -49,7 +49,7 @@ public class ModConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting()
             .registerTypeAdapter(Color.class, COLOR_ADAPTER)
             .create();
-    private static final File CONFIG_FILE = FMLPaths.CONFIGDIR.get().resolve(Constants.MOD_ID + ".json").toFile();
+    private static final File CONFIG_FILE = Platform.getConfigDirectory().resolve(Constants.MOD_ID + ".json").toFile();
     private static final Set<String> SERVER_SYNCED_NAMES = serverSyncedNames();
     private static ModConfig INSTANCE;
     private static ModConfig effective;
@@ -213,6 +213,12 @@ public class ModConfig {
 
     @SerializedName("hide_stamina_bar")
     public boolean hideStaminaBar = false;
+
+    @SerializedName("stamina_bar_offset_x")
+    public int staminaBarOffsetX = 0;
+
+    @SerializedName("stamina_bar_offset_y")
+    public int staminaBarOffsetY = 0;
 
     @SerializedName("hide_stamina_bar_moving")
     public boolean hideStaminaBarMoving = false;

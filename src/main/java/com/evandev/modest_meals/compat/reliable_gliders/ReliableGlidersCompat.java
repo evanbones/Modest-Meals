@@ -1,10 +1,10 @@
 package com.evandev.modest_meals.compat.reliable_gliders;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.mixin.ServerGamePacketListenerImplAccessor;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.fml.ModList;
 
 import java.util.Collections;
 import java.util.Set;
@@ -19,7 +19,7 @@ public final class ReliableGlidersCompat {
 
     public static boolean isLoaded() {
         if (loaded == null) {
-            loaded = ModList.get() != null && ModList.get().isLoaded(MOD_ID);
+            loaded = Platform.isModLoaded(MOD_ID);
         }
         return loaded;
     }

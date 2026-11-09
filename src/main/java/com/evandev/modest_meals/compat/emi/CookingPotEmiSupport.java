@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.emi;
 
+//? if emi {
 import com.evandev.modest_meals.compat.farmers_delight.MealCookingRecipe;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.food.meal.MealTypeManager;
@@ -56,3 +57,4 @@ public final class CookingPotEmiSupport {
         }
     }
 }
+//?}

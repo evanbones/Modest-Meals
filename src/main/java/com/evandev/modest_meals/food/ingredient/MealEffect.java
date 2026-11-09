@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.food.ingredient;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -7,7 +8,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
-import net.neoforged.fml.ModList;
 
 import java.util.Comparator;
 import java.util.List;
@@ -48,11 +48,11 @@ public record MealEffect(
     }
 
     private boolean requiredModsPresent() {
-        return requiredMods.stream().allMatch(modId -> ModList.get().isLoaded(modId));
+        return requiredMods.stream().allMatch(modId -> Platform.isModLoaded(modId));
     }
 
     private boolean anyOfModsPresent() {
-        return anyOfMods.isEmpty() || anyOfMods.stream().anyMatch(modId -> ModList.get().isLoaded(modId));
+        return anyOfMods.isEmpty() || anyOfMods.stream().anyMatch(modId -> Platform.isModLoaded(modId));
     }
 
 

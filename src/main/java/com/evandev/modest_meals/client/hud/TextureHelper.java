@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.client.hud;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.client.RenderCompat;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
@@ -49,7 +50,7 @@ public class TextureHelper {
         try (InputStream stream = heartResource.get().open(); NativeImage image = NativeImage.read(stream)) {
             for (int y = 0; y < image.getHeight(); y++) {
                 for (int x = 0; x < image.getWidth(); x++) {
-                    int abgr = image.getPixelRGBA(x, y);
+                    int abgr = RenderCompat.pixelAbgr(image, x, y);
                     int color;
                     if (!checker.shouldBeOpaque(abgr, x, y)) {
                         color = 0; // fully transparent
@@ -59,10 +60,10 @@ public class TextureHelper {
                         color = abgr;
                     }
 
-                    image.setPixelRGBA(x, y, color);
+                    RenderCompat.setPixelAbgr(image, x, y, color);
                 }
             }
-            DynamicTexture dynamicTexture = new DynamicTexture(image);
+            DynamicTexture dynamicTexture = RenderCompat.dynamicTexture(outputTexture, image);
             minecraft.getTextureManager().register(outputTexture, dynamicTexture);
             return true;
         }
@@ -114,7 +115,7 @@ public class TextureHelper {
         @Override
         public boolean shouldBeOpaque(int abgr, int x, int y) {
             // full heart pixel is opaque and half heart pixel is transparent - this pixel only exists on the right half
-            return checkIfPixelOpaque(abgr) && !checkIfPixelOpaque(halfTexture.getPixelRGBA(x, y));
+            return checkIfPixelOpaque(abgr) && !checkIfPixelOpaque(RenderCompat.pixelAbgr(halfTexture, x, y));
         }
 
         @Override
@@ -141,7 +142,7 @@ public class TextureHelper {
             if (x >= halfTexture.getWidth() || y >= halfTexture.getHeight()) {
                 return false;
             }
-            return abgr != halfTexture.getPixelRGBA(x, y);
+            return abgr != RenderCompat.pixelAbgr(halfTexture, x, y);
         }
 
         @Override

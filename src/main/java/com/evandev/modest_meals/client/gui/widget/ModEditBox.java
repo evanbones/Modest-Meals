@@ -1,16 +1,16 @@
 package com.evandev.modest_meals.client.gui.widget;
 
+import com.evandev.modest_meals.client.RenderCompat;
+import com.evandev.modest_meals.client.gui.compat.CompatEditBox;
 import com.evandev.modest_meals.client.gui.util.GuiUtil;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class ModEditBox extends EditBox {
+public class ModEditBox extends CompatEditBox {
     private static final int TEXT_INSET_X = 4;
     private static final int PLACEHOLDER_COLOR = 0xFF808080;
 
@@ -54,16 +54,14 @@ public class ModEditBox extends EditBox {
         if (!this.isVisible()) return;
 
         ResourceLocation sprite = this.isActive() && this.isFocused() ? GuiUtil.TEXT_FIELD_HIGHLIGHTED : GuiUtil.TEXT_FIELD;
-        RenderSystem.enableBlend();
-        guiGraphics.blitSprite(sprite, this.getX(), this.getY(), this.getWidth(), this.getHeight());
-        RenderSystem.disableBlend();
+        RenderCompat.blitSprite(guiGraphics, sprite, this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(TEXT_INSET_X, textInsetY(), 0);
+        RenderCompat.pushPose(guiGraphics);
+        RenderCompat.translate(guiGraphics, TEXT_INSET_X, textInsetY());
         if (placeholder != null && this.getValue().isEmpty() && !this.isFocused()) {
             guiGraphics.drawString(Minecraft.getInstance().font, placeholder, this.getX(), this.getY(), PLACEHOLDER_COLOR);
         }
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTicks);
-        guiGraphics.pose().popPose();
+        RenderCompat.popPose(guiGraphics);
     }
 }

@@ -3,19 +3,20 @@ package com.evandev.modest_meals.effect;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.compat.thermoo.ThermooCompat;
+import com.evandev.modest_meals.platform.RegistrationProvider;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModMobEffects {
-    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, Constants.MOD_ID);
+    private static final RegistrationProvider<MobEffect> MOB_EFFECTS = RegistrationProvider.get(Registries.MOB_EFFECT);
 
-    public static final DeferredHolder<MobEffect, MobEffect> STAMINA_NOURISHMENT = MOB_EFFECTS.register(
+    public static final Holder<MobEffect> STAMINA_NOURISHMENT = register(
             "stamina_nourishment",
             () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xF3B300) {
                 @Override
@@ -25,7 +26,7 @@ public class ModMobEffects {
             }
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> STAMINA_BOOST = MOB_EFFECTS.register(
+    public static final Holder<MobEffect> STAMINA_BOOST = register(
             "stamina_boost",
             () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xECD613) {
                 @Override
@@ -40,7 +41,7 @@ public class ModMobEffects {
             )
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> STAMINA_DEPLETION = MOB_EFFECTS.register(
+    public static final Holder<MobEffect> STAMINA_DEPLETION = register(
             "stamina_depletion",
             () -> new MobEffect(MobEffectCategory.HARMFUL, 0xAA0000) {
                 @Override
@@ -50,7 +51,7 @@ public class ModMobEffects {
             }
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> STAMINA_NO_REGEN = MOB_EFFECTS.register(
+    public static final Holder<MobEffect> STAMINA_NO_REGEN = register(
             "stamina_no_regen",
             () -> new MobEffect(MobEffectCategory.HARMFUL, 0x555555) {
                 @Override
@@ -60,7 +61,7 @@ public class ModMobEffects {
             }
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> HEALTH_NO_REGEN = MOB_EFFECTS.register(
+    public static final Holder<MobEffect> HEALTH_NO_REGEN = register(
             "health_no_regen",
             () -> new MobEffect(MobEffectCategory.HARMFUL, 0x880000) {
                 @Override
@@ -74,7 +75,7 @@ public class ModMobEffects {
     private static final double THERMAL_RESISTANCE_PER_LEVEL = 2.5;
     private static final double ENVIRONMENT_RESISTANCE_PER_LEVEL = 1.0;
 
-    public static final DeferredHolder<MobEffect, MobEffect> COLD_RESISTANCE = MOB_EFFECTS.register(
+    public static final Holder<MobEffect> COLD_RESISTANCE = register(
             "cold_resistance",
             () -> new ThermalResistanceEffect(
                     "cold_resistance",
@@ -86,7 +87,7 @@ public class ModMobEffects {
             )
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> HEAT_RESISTANCE = MOB_EFFECTS.register(
+    public static final Holder<MobEffect> HEAT_RESISTANCE = register(
             "heat_resistance",
             () -> new ThermalResistanceEffect(
                     "heat_resistance",
@@ -98,7 +99,10 @@ public class ModMobEffects {
             )
     );
 
-    public static void register(IEventBus modBus) {
-        MOB_EFFECTS.register(modBus);
+    private static Holder<MobEffect> register(String name, Supplier<MobEffect> effect) {
+        return MOB_EFFECTS.register(name, effect).holder();
+    }
+
+    public static void init() {
     }
 }

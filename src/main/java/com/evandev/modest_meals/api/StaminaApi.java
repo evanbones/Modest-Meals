@@ -4,7 +4,6 @@ import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * <p>Every method here that changes stamina syncs the result to the client. Call them on the server: on the client
@@ -73,7 +72,7 @@ public final class StaminaApi {
         PlayerStamina stamina = stamina(player);
         stamina.addLevels(amount);
         stamina.syncNow();
-        NeoForge.EVENT_BUS.post(new StaminaEvent.Restored(player, amount));
+        StaminaEvent.postRestored(player, amount);
     }
 
     /**

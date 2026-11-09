@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "${description}",
+  "authors": [
+    "Evan",
+    "Baisylia"
+  ],
+  "contributors": [
+    "${credits}"
+  ],
+  "contact": {
+    "homepage": "https://github.com/evanbones/Modest-Meals",
+    "sources": "https://github.com/evanbones/Modest-Meals",
+    "issues": "https://github.com/evanbones/Modest-Meals/issues"
+  },
+  "license": "${license}",
+  "icon": "${mod_id}.png",
+  "environment": "*",
+  "accessWidener": "${mod_id}.accesswidener",
+  "entrypoints": {
+    "main": [
+      "com.evandev.modest_meals.fabric.ModestMealsFabric"
+    ],
+    "client": [
+      "com.evandev.modest_meals.fabric.client.ModestMealsFabricClient"
+    ],
+    "modmenu": [
+      "com.evandev.modest_meals.fabric.client.ModMenuIntegration"
+    ],
+    "emi": [
+      "com.evandev.modest_meals.compat.emi.ModestMealsEmiPlugin"
+    ]
+  },
+  "mixins": [
+    "${mod_id}.mixins.json",
+    "${mod_id}.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft}",
+    "java": ">=${java_version}",
+    "yet_another_config_lib_v3": "*"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "farmersdelight": "*"
+  },
+  "breaks": {
+    "melancholic_hunger": "*"
+  }
+}

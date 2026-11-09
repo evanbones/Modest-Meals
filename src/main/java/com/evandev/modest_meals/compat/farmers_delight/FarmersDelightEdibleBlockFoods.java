@@ -6,15 +6,18 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+//? if farmers_delight {
 import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.block.RiceRollMedleyBlock;
+//?}
 
 import java.util.Optional;
 
 public class FarmersDelightEdibleBlockFoods {
 
     public static Optional<FoodProperties> getFoodProperties(BlockItem blockItem) {
+        //? if farmers_delight {
         Block block = blockItem.getBlock();
         FoodPropertiesAdder totalFoodProperties = new FoodPropertiesAdder();
         switch (block) {
@@ -23,7 +26,10 @@ public class FarmersDelightEdibleBlockFoods {
                 return Optional.of(totalFoodProperties.getResult());
             }
             case RiceRollMedleyBlock riceRollMedleyBlock -> {
-                riceRollMedleyBlock.riceRollServings.forEach(item -> totalFoodProperties.addFromItem(item.get().getDefaultInstance(), 1));
+                //? if neoforge {
+                /*riceRollMedleyBlock.riceRollServings.forEach(item -> totalFoodProperties.addFromItem(item.get().getDefaultInstance(), 1));
+                *///?} else
+                riceRollMedleyBlock.riceRollServings.get().forEach(item -> totalFoodProperties.addFromItem(item.getDefaultInstance(), 1));
                 return Optional.of(totalFoodProperties.getResult());
             }
             case FeastBlock feastBlock -> {
@@ -34,9 +40,12 @@ public class FarmersDelightEdibleBlockFoods {
             }
         }
         return Optional.empty();
+        //?} else
+        /*return Optional.empty();*/
     }
 
     public static Optional<EdibleBlockFoods.Servings> servingsOf(Block block) {
+        //? if farmers_delight {
         return switch (block) {
             case PieBlock pieBlock when !pieBlock.getPieSliceItem().isEmpty() ->
                     Optional.of(EdibleBlockFoods.Servings.slices(pieBlock.getPieSliceItem(), 1.0F, pieBlock.getMaxBites()));
@@ -44,9 +53,12 @@ public class FarmersDelightEdibleBlockFoods {
                     feastBlock.servingItem.get().getDefaultInstance(), feastBlock.getMaxServings()));
             default -> Optional.empty();
         };
+        //?} else
+        /*return Optional.empty();*/
     }
 
     public static Optional<EdibleBlockFoods.EdibleBlock> resolve(Block block) {
+        //? if farmers_delight {
         if (block instanceof PieBlock pieBlock) {
             ItemStack slice = pieBlock.getPieSliceItem();
             if (!slice.isEmpty()) {
@@ -54,5 +66,7 @@ public class FarmersDelightEdibleBlockFoods {
             }
         }
         return Optional.empty();
+        //?} else
+        /*return Optional.empty();*/
     }
 }

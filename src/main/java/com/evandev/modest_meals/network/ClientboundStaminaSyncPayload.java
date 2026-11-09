@@ -10,7 +10,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundStaminaSyncPayload(int stamina, int remaining, int cooldown,
                                             boolean exhausted) implements CustomPacketPayload {
@@ -30,15 +29,13 @@ public record ClientboundStaminaSyncPayload(int stamina, int remaining, int cool
                 data.isExhausted());
     }
 
-    public static void handle(ClientboundStaminaSyncPayload payload, IPayloadContext context) {
-        context.enqueueWork(() -> {
-            Player player = context.player();
-            StaminaData data = StaminaHelper.get(player).getData();
-            data.setStaminaRaw(payload.stamina());
-            data.setRemaining(payload.remaining());
-            data.setCooldown(payload.cooldown());
-            data.setExhausted(payload.exhausted());
-        });
+    public static void handle(ClientboundStaminaSyncPayload payload, ClientPacketContext context) {
+        Player player = context.player();
+        StaminaData data = StaminaHelper.get(player).getData();
+        data.setStaminaRaw(payload.stamina());
+        data.setRemaining(payload.remaining());
+        data.setCooldown(payload.cooldown());
+        data.setExhausted(payload.exhausted());
     }
 
     @Override

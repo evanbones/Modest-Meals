@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CakeBlock extends SlicedMealBlock {
+    //? if <26.3
     public static final MapCodec<CakeBlock> CODEC = simpleCodec(CakeBlock::new);
     public static final int SLICES = 7;
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, SLICES - 1);
@@ -17,10 +18,12 @@ public class CakeBlock extends SlicedMealBlock {
         super(properties);
     }
 
+    //? if <26.3 {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
+    //?}
 
     @Override
     public IntegerProperty bites() {

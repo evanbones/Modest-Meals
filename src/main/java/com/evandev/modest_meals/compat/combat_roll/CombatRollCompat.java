@@ -1,13 +1,12 @@
 package com.evandev.modest_meals.compat.combat_roll;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.api.StaminaApi;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.util.FakePlayer;
 
 public final class CombatRollCompat {
     public static final String MOD_ID = "combat_roll";
@@ -16,7 +15,7 @@ public final class CombatRollCompat {
 
     public static boolean isLoaded() {
         if (loaded == null) {
-            loaded = ModList.get() != null && ModList.get().isLoaded(MOD_ID);
+            loaded = Platform.isModLoaded(MOD_ID);
         }
         return loaded;
     }
@@ -29,7 +28,7 @@ public final class CombatRollCompat {
 
     public static boolean usesStamina(Player player) {
         return ModConfig.get().staminaCombatRollCost > 0.0F && StaminaApi.isEnabled()
-                && !player.isCreative() && !player.isSpectator() && !(player instanceof FakePlayer);
+                && !player.isCreative() && !player.isSpectator() && !Platform.isFakePlayer(player);
     }
 
     public static boolean canRoll(Player player) {

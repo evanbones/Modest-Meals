@@ -1,23 +1,22 @@
 package com.evandev.modest_meals.component;
 
-import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.platform.RegistrationProvider;
 import net.minecraft.core.component.DataComponentType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.core.registries.Registries;
 
 import java.util.function.Supplier;
 
 public class ModDataComponents {
-    public static final DeferredRegister.DataComponents DATA_COMPONENTS =
-            DeferredRegister.createDataComponents(Constants.MOD_ID);
+    private static final RegistrationProvider<DataComponentType<?>> DATA_COMPONENTS =
+            RegistrationProvider.get(Registries.DATA_COMPONENT_TYPE);
 
     public static final Supplier<DataComponentType<MealContents>> MEAL_CONTENTS =
-            DATA_COMPONENTS.registerComponentType("meal_contents", builder -> builder
+            DATA_COMPONENTS.register("meal_contents", () -> DataComponentType.<MealContents>builder()
                     .persistent(MealContents.CODEC)
                     .networkSynchronized(MealContents.STREAM_CODEC)
-                    .cacheEncoding());
+                    .cacheEncoding()
+                    .build());
 
-    public static void register(IEventBus modBus) {
-        DATA_COMPONENTS.register(modBus);
+    public static void init() {
     }
 }

@@ -1,22 +1,39 @@
 package com.evandev.modest_meals.food;
 
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.item.MealItem;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.trait.FoodTraitManager;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class FoodConsumption {
+
+    public static @Nullable FoodProperties foodOf(ItemStack stack, @Nullable LivingEntity entity) {
+        //? if neoforge && <26.1 {
+        /*return stack.getFoodProperties(entity);
+        *///?} else {
+        if (stack.getItem() instanceof MealItem meal) {
+            FoodProperties food = meal.mealFoodProperties(stack);
+            if (food != null) {
+                return food;
+            }
+        }
+        return stack.get(net.minecraft.core.component.DataComponents.FOOD);
+        //?}
+    }
 
     public static boolean canConsume(Player player, ItemStack stack) {
         if (player.getAbilities().invulnerable || ModConfig.get().alwaysEat) {
             return true;
         }
 
-        FoodProperties food = stack.getFoodProperties(player);
+        FoodProperties food = foodOf(stack, player);
         if (food != null && food.canAlwaysEat()) {
             return true;
         }

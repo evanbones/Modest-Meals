@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.emi;
 
+//? if emi {
 import com.evandev.modest_meals.food.ingredient.IngredientProfile;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.evandev.modest_meals.food.ingredient.MealIngredientManager;
@@ -57,4 +58,4 @@ public final class MealEmiIngredients {
         return authored.isPresent() ? 1 : 2;
     }
 }
-
+//?}

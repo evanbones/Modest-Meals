@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.network;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.config.ModConfig;
 import com.google.gson.JsonParser;
@@ -10,9 +11,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 public record ClientboundConfigSyncPayload(String json) implements CustomPacketPayload {
     public static final Type<ClientboundConfigSyncPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "config_sync"));
@@ -27,14 +25,18 @@ public record ClientboundConfigSyncPayload(String json) implements CustomPacketP
     }
 
     public static void sendTo(ServerPlayer player) {
-        if (player.server.isSingleplayerOwner(player.getGameProfile())) {
+        MinecraftServer server = Platform.getCurrentServer();
+        //? if >=26.1 {
+        /*if (server == null || server.isSingleplayerOwner(player.nameAndId())) {
+        *///?} else
+        if (server == null || server.isSingleplayerOwner(player.getGameProfile())) {
             return;
         }
-        PacketDistributor.sendToPlayer(player, create());
+        Platform.sendToPlayer(player, create());
     }
 
     public static void broadcast() {
-        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        MinecraftServer server = Platform.getCurrentServer();
         if (server == null) {
             return;
         }
@@ -43,8 +45,8 @@ public record ClientboundConfigSyncPayload(String json) implements CustomPacketP
         }
     }
 
-    public static void handle(ClientboundConfigSyncPayload payload, IPayloadContext context) {
-        context.enqueueWork(() -> ModConfig.applyServerValues(JsonParser.parseString(payload.json()).getAsJsonObject()));
+    public static void handle(ClientboundConfigSyncPayload payload, ClientPacketContext context) {
+        ModConfig.applyServerValues(JsonParser.parseString(payload.json()).getAsJsonObject());
     }
 
     @Override

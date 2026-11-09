@@ -19,7 +19,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.List;
 import java.util.Map;
@@ -64,7 +63,7 @@ public record ClientboundFoodDataSyncPayload(
     ).apply(instance, ClientboundFoodDataSyncPayload::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundFoodDataSyncPayload> STREAM_CODEC =
-            ByteBufCodecs.fromCodecWithRegistries(CODEC);
+            ByteBufCodecs.fromCodecWithRegistriesTrusted(CODEC);
 
     public static ClientboundFoodDataSyncPayload create() {
         return new ClientboundFoodDataSyncPayload(
@@ -82,17 +81,15 @@ public record ClientboundFoodDataSyncPayload(
         );
     }
 
-    public static void handle(ClientboundFoodDataSyncPayload payload, IPayloadContext context) {
-        boolean updateBaseline = !context.connection().isMemoryConnection();
-        context.enqueueWork(() -> {
-            FoodTraitManager.applyFromNetwork(payload.itemTraits(), payload.tagTraits(), payload.suppressions(), updateBaseline);
-            FoodProfileManager.applyFromNetwork(payload.profiles(), updateBaseline);
-            IngredientProfileManager.applyFromNetwork(payload.ingredients(), payload.ingredientTags(), updateBaseline);
-            MealEffectManager.applyFromNetwork(payload.mealEffects(), updateBaseline);
-            MealTypeManager.applyFromNetwork(payload.mealTypes());
-            MealFormulaManager.applyFromNetwork(payload.formula());
-            MealIngredientManager.applyFromNetwork(payload.mealIngredients(), payload.mealIngredientTags());
-        });
+    public static void handle(ClientboundFoodDataSyncPayload payload, ClientPacketContext context) {
+        boolean updateBaseline = !context.isMemoryConnection();
+        FoodTraitManager.applyFromNetwork(payload.itemTraits(), payload.tagTraits(), payload.suppressions(), updateBaseline);
+        FoodProfileManager.applyFromNetwork(payload.profiles(), updateBaseline);
+        IngredientProfileManager.applyFromNetwork(payload.ingredients(), payload.ingredientTags(), updateBaseline);
+        MealEffectManager.applyFromNetwork(payload.mealEffects(), updateBaseline);
+        MealTypeManager.applyFromNetwork(payload.mealTypes());
+        MealFormulaManager.applyFromNetwork(payload.formula());
+        MealIngredientManager.applyFromNetwork(payload.mealIngredients(), payload.mealIngredientTags());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.shield_expansion;
 
+//? if shield_expansion {
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -32,3 +33,4 @@ final class ShieldExpansionBridge {
                 && LivingEntityAccess.get(player).shieldexp$getParryWindow() > 0;
     }
 }
+//?}

@@ -9,6 +9,7 @@ import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.config.TooltipVisibility;
 import com.evandev.modest_meals.food.BuiltInFoodEffects;
 import com.evandev.modest_meals.food.EdibleBlockFoods;
+import com.evandev.modest_meals.food.FoodEffect;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.food.ingredient.IngredientProfile;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
@@ -24,7 +25,6 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -33,10 +33,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.util.*;
 
@@ -63,16 +61,13 @@ public class FoodItemTooltips {
         );
     }
 
-    public static void onTooltip(ItemTooltipEvent event) {
-        ItemStack stack = event.getItemStack();
+    public static void onTooltip(ItemStack stack, List<Component> lines, float tickRate) {
         if (stack.isEmpty()) {
             return;
         }
 
-        List<Component> lines = event.getToolTip();
-        float tickRate = event.getContext().tickRate();
 
-        List<FoodProperties.PossibleEffect> effects = foodEffects(stack);
+        List<FoodEffect> effects = foodEffects(stack);
         if (FoodValues.isFood(stack)) {
             removePreExistingFoodEffects(lines, effects);
         }
@@ -80,7 +75,7 @@ public class FoodItemTooltips {
         Optional<EdibleBlockFoods.Servings> servings = EdibleBlockFoods.servingsOf(stack);
         ItemStack eaten = servings.map(EdibleBlockFoods.Servings::serving).orElse(stack);
         float scale = servings.map(EdibleBlockFoods.Servings::scale).orElse(1.0F);
-        List<FoodProperties.PossibleEffect> eatenEffects = servings.isPresent() ? foodEffects(eaten) : effects;
+        List<FoodEffect> eatenEffects = servings.isPresent() ? foodEffects(eaten) : effects;
 
         if (ModConfig.get().showFoodItemTooltips) {
             servings.ifPresent(serving -> lines.add(servingsLine(serving)));
@@ -195,7 +190,7 @@ public class FoodItemTooltips {
         }
 
         return Optional.of(Component.translatable(CONFIG_PREFIX + "template", Component.translatable(rate))
-                .setStyle(Style.EMPTY.withColor(formatting.getColor())));
+                .setStyle(Style.EMPTY.withColor(formatting)));
     }
 
     public static Optional<Component> previewLine(FoodTrait trait, float tickRate) {
@@ -213,17 +208,13 @@ public class FoodItemTooltips {
         return !(trait instanceof HealthAdditionTrait || trait instanceof StaminaAdditionTrait);
     }
 
-    private static List<FoodProperties.PossibleEffect> foodEffects(ItemStack stack) {
-        FoodProperties food = stack.get(DataComponents.FOOD);
-        if (food == null) {
-            food = EdibleBlockFoods.getFoodProperties(stack.getItem()).orElse(null);
-        }
-        List<FoodProperties.PossibleEffect> effects = food == null ? List.of() : food.effects();
+    private static List<FoodEffect> foodEffects(ItemStack stack) {
+        List<FoodEffect> effects = FoodEffect.ofStack(stack);
 
         if (FarmersDelightCompat.isLoaded()) {
-            List<FoodProperties.PossibleEffect> soupEffects = FarmersDelightSoupEffects.get(stack);
+            List<FoodEffect> soupEffects = FarmersDelightSoupEffects.get(stack);
             if (!soupEffects.isEmpty()) {
-                List<FoodProperties.PossibleEffect> combined = new ArrayList<>(effects);
+                List<FoodEffect> combined = new ArrayList<>(effects);
                 combined.addAll(soupEffects);
                 return combined;
             }
@@ -232,7 +223,7 @@ public class FoodItemTooltips {
     }
 
     private static void addEffectsAndTraits(List<Component> lines, ItemStack stack,
-                                            List<FoodProperties.PossibleEffect> effects, float tickRate,
+                                            List<FoodEffect> effects, float tickRate,
                                             float scale) {
         if (!FoodValues.isFood(stack) || !isVisible(ModConfig.get().whenEatenTooltip)) {
             return;
@@ -241,7 +232,7 @@ public class FoodItemTooltips {
         List<Component> effectLines = new ArrayList<>();
         List<Component> traitLines = new ArrayList<>();
 
-        List<FoodProperties.PossibleEffect> shownEffects = BuiltInFoodEffects.kept(stack, effects);
+        List<FoodEffect> shownEffects = BuiltInFoodEffects.kept(stack, effects);
         List<FoodTrait> traits = new ArrayList<>();
         double valMult = ModConfig.get().traitGlobalValueMultiplier * scale;
         double durMult = ModConfig.get().traitGlobalDurationMultiplier * scale;
@@ -272,9 +263,9 @@ public class FoodItemTooltips {
     }
 
     private static void removePreExistingFoodEffects(List<Component> lines,
-                                                     List<FoodProperties.PossibleEffect> effects) {
+                                                     List<FoodEffect> effects) {
         Set<String> effectKeys = new HashSet<>();
-        for (FoodProperties.PossibleEffect pe : effects) {
+        for (FoodEffect pe : effects) {
             effectKeys.add(pe.effect().getDescriptionId());
         }
         effectKeys.add("effect.farmersdelight.nourishment");
@@ -305,11 +296,11 @@ public class FoodItemTooltips {
     }
 
     private static void collectFoodEffectTooltips(
-            List<FoodProperties.PossibleEffect> effects,
+            List<FoodEffect> effects,
             float tickRate,
             List<Component> effectLines
     ) {
-        for (FoodProperties.PossibleEffect entry : effects) {
+        for (FoodEffect entry : effects) {
             MobEffectInstance instance = entry.effect();
             MutableComponent mutableComponent = Component.translatable(instance.getDescriptionId());
             Holder<MobEffect> holder = instance.getEffect();

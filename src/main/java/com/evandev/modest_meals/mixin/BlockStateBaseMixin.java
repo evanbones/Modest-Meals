@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+//? if <26.1
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,10 +26,17 @@ public abstract class BlockStateBaseMixin {
     protected abstract BlockState asState();
 
     @WrapMethod(method = "useItemOn")
+    //? if >=26.1 {
+    /*private InteractionResult mm$scopeItemInteraction(
+            ItemStack stack, Level level, Player player, InteractionHand hand, BlockHitResult hitResult,
+            Operation<InteractionResult> original
+    ) {
+    *///?} else {
     private ItemInteractionResult mm$scopeItemInteraction(
             ItemStack stack, Level level, Player player, InteractionHand hand, BlockHitResult hitResult,
             Operation<ItemInteractionResult> original
     ) {
+    //?}
         return mm$withBlockContext(player, () -> original.call(stack, level, player, hand, hitResult));
     }
 

@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.client.gui.editor;
 
+import com.evandev.modest_meals.client.RenderCompat;
 import com.evandev.modest_meals.client.gui.util.GuiUtil;
 import com.evandev.modest_meals.client.gui.widget.DropdownWidget;
 import com.evandev.modest_meals.client.gui.widget.ModButton;
@@ -199,7 +200,7 @@ public class FormBuilder {
 
     public void renderWidgets(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         for (Placed p : placed) {
-            p.widget().render(graphics, mouseX, mouseY, partialTick);
+            RenderCompat.renderWidget(p.widget(), graphics, mouseX, mouseY, partialTick);
         }
     }
 

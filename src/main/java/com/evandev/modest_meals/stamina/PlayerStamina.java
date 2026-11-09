@@ -9,6 +9,7 @@ import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.mixin.MobEffectInstanceAccessor;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
@@ -16,7 +17,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
-import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.ApiStatus;
 
 @ApiStatus.Internal
@@ -126,14 +126,10 @@ public class PlayerStamina {
         if (!locksOut()) {
             this.data.setCooldown(this.getCooldownInTicks());
         }
-        this.postServerSide(new StaminaEvent.Exhausted(this.player));
-        this.syncNow();
-    }
-
-    private void postServerSide(StaminaEvent event) {
         if (!this.player.level().isClientSide()) {
-            NeoForge.EVENT_BUS.post(event);
+            StaminaEvent.postExhausted(this.player);
         }
+        this.syncNow();
     }
 
     public int levelAfterGain(float levels) {
@@ -258,7 +254,6 @@ public class PlayerStamina {
                     this.data.remaining++;
                 }
             } else if (this.data.remaining > durationInTicks) {
-                // The capacity attribute or the config shrank underneath us.
                 this.data.remaining = durationInTicks;
             }
 
@@ -268,7 +263,9 @@ public class PlayerStamina {
 
     private void recover() {
         this.data.setExhausted(false);
-        this.postServerSide(new StaminaEvent.Recovered(this.player));
+        if (!this.player.level().isClientSide()) {
+            StaminaEvent.postRecovered(this.player);
+        }
         this.syncNow();
     }
 
@@ -276,9 +273,7 @@ public class PlayerStamina {
         if (this.player.level().isClientSide()) {
             return false;
         }
-        StaminaEvent.Drain event = new StaminaEvent.Drain(this.player);
-        NeoForge.EVENT_BUS.post(event);
-        return event.isCanceled();
+        return StaminaEvent.postDrain(this.player);
     }
 
     public void syncNow() {
@@ -426,8 +421,8 @@ public class PlayerStamina {
         if (this.player.level().isClientSide()) {
             return;
         }
-        boolean naturalRegenRule = this.player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
-        if (!naturalRegenRule) {
+        if (!(this.player.level() instanceof ServerLevel serverLevel)
+                || !serverLevel.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)) {
             this.naturalRegenTickTimer = 0;
             return;
         }

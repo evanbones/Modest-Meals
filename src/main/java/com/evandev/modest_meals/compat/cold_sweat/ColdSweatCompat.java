@@ -1,13 +1,14 @@
 package com.evandev.modest_meals.compat.cold_sweat;
 
-import net.neoforged.fml.ModList;
+//? if neoforge_legacy {
+/*import com.evandev.modest_meals.platform.Platform;
 import net.neoforged.neoforge.common.NeoForge;
 
 public final class ColdSweatCompat {
     public static final String MOD_ID = "cold_sweat";
 
     public static boolean isLoaded() {
-        return ModList.get().isLoaded(MOD_ID);
+        return Platform.isModLoaded(MOD_ID);
     }
 
     public static void register() {
@@ -16,3 +17,4 @@ public final class ColdSweatCompat {
         }
     }
 }
+*///?}

@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.compat.cultural_delights;
 
-import com.baisylia.culturaldelights.recipes.ModRecipes;
+//? if neoforge_legacy {
+/*import com.baisylia.culturaldelights.recipes.ModRecipes;
 import com.baisylia.culturaldelights.recipes.VatRecipe;
 import com.baisylia.culturaldelights.util.VatTemperature;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
@@ -183,3 +184,4 @@ public class VatMealRecipe extends VatRecipe {
         }
     }
 }
+*///?}

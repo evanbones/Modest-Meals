@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.thermoo;
 
+//? if thermoo {
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -22,3 +23,4 @@ final class ThermooAttributeAccess {
         return ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE;
     }
 }
+//?}

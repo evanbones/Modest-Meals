@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.emi;
 
+//? if emi {
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.handler.StandardRecipeHandler;
 import net.minecraft.world.inventory.CraftingMenu;
@@ -42,3 +43,4 @@ public class MealCraftingHandler implements StandardRecipeHandler<CraftingMenu> 
         return slots;
     }
 }
+//?}

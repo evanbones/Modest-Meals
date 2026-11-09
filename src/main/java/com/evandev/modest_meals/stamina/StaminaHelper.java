@@ -1,11 +1,11 @@
 package com.evandev.modest_meals.stamina;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Map;
@@ -22,7 +22,7 @@ public abstract class StaminaHelper {
         SERVER_DATA.values().forEach(PlayerStamina::reset);
         CLIENT_DATA.values().forEach(PlayerStamina::reset);
 
-        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        MinecraftServer server = Platform.getCurrentServer();
         if (server != null) {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 ModNetworking.sendToPlayer(player, ClientboundStaminaSyncPayload.create(player));

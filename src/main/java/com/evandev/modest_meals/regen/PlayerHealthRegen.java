@@ -33,7 +33,12 @@ public class PlayerHealthRegen {
     }
 
     public void readFromNbt(CompoundTag tag) {
-        this.consumedNutrition = Math.max(tag.getInt(NBT_CONSUMED_NUTRITION), 0);
+        this.consumedNutrition = Math.max(
+                //? if >=26.1 {
+                /*tag.getIntOr(NBT_CONSUMED_NUTRITION, 0),
+                *///?} else
+                tag.getInt(NBT_CONSUMED_NUTRITION),
+                0);
         this.consumedFoods = new HashSet<>();
 
         Tag foods = tag.get(NBT_CONSUMED_FOODS);
@@ -77,7 +82,6 @@ public class PlayerHealthRegen {
             return;
         }
         if (player.getHealth() >= player.getMaxHealth()) {
-            // Player is at full health
             switch (ModConfig.get().regenerationAtFullHealth) {
                 case STOPPED -> {
                     consumedFoods.clear();
@@ -88,9 +92,7 @@ public class PlayerHealthRegen {
                 case STORED -> {
                     return;
                 }
-                case CONTINUED -> {
-                    // Continues digesting below
-                }
+                case CONTINUED -> {}
             }
         }
 

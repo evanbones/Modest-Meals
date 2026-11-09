@@ -1,8 +1,9 @@
 package com.evandev.modest_meals.food.meal;
 
+import com.evandev.modest_meals.food.JsonReloadListener;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.compat.reliable_remover.ReliableRemoverCompat;
-import com.google.gson.GsonBuilder;
+import com.evandev.modest_meals.food.ItemTagLookup;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
@@ -11,13 +12,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MealTypeManager extends SimpleJsonResourceReloadListener {
+public class MealTypeManager extends JsonReloadListener {
     public static final MealTypeManager INSTANCE = new MealTypeManager();
 
     private static final RegistryOps<JsonElement> BUILT_IN_OPS =
@@ -29,7 +29,7 @@ public class MealTypeManager extends SimpleJsonResourceReloadListener {
     private volatile List<MealType> vatTypes = List.of();
 
     public MealTypeManager() {
-        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "modest_meals/meal_types");
+        super("modest_meals/meal_types");
     }
 
     public static Optional<MealType> get(ResourceLocation id) {
@@ -96,7 +96,7 @@ public class MealTypeManager extends SimpleJsonResourceReloadListener {
                 continue;
             }
 
-            MealType type = ReliableRemoverCompat.prune(parsed.get(), this.getContext());
+            MealType type = ReliableRemoverCompat.prune(parsed.get(), tagLookup());
             if (type.resolveItem().isEmpty()) {
                 Constants.LOG.warn("Meal type {} names an unknown result item {}, skipping it",
                         type.id(), type.item());

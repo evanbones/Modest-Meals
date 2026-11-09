@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.mixin;
 
+import com.evandev.modest_meals.client.RenderCompat;
 import com.evandev.modest_meals.client.hud.RestoredHeartsDrawHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -20,6 +21,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {
+    //? if >=26.2 {
+    /*@Unique
+    private static final String HEART_TARGET = "Lnet/minecraft/client/gui/Hud;extractHeart(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/gui/Hud$HeartType;IIZZZ)V";
+    *///?} else if >=26.1 {
+    /*@Unique
+    private static final String HEART_TARGET = "Lnet/minecraft/client/gui/Gui;extractHeart(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V";
+    *///?} else {
+    @Unique
+    private static final String HEART_TARGET = "Lnet/minecraft/client/gui/Gui;renderHeart(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V";
+    //?}
     @Shadow
     @Final
     private Minecraft minecraft;
@@ -51,22 +62,19 @@ public abstract class GuiMixin {
     private void mm$drawHeartWithColor(
             GuiGraphics context, RestoredHeartsDrawHelper.RenderedHeart renderedHeart, int x, int y
     ) {
-        float[] colorComponents = renderedHeart.color().getRGBComponents(null);
+        int color = renderedHeart.color().getRGB();
         if (renderedHeart.isAtlasTexture()) {
-            TextureAtlasSprite sprite = minecraft.getGuiSprites().getSprite(renderedHeart.texture());
-            context.blit(x, y, 0, 9, 9, sprite, colorComponents[0], colorComponents[1], colorComponents[2], colorComponents[3]);
+            RenderCompat.blitSprite(context, RenderCompat.guiSprite(renderedHeart.texture()), x, y, 9, 9, color);
             return;
         }
-        context.setColor(colorComponents[0], colorComponents[1], colorComponents[2], colorComponents[3]);
-        context.blit(renderedHeart.texture(), x, y, 0.0F, 0.0F, 9, 9, 9, 9);
-        context.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderCompat.blitTexture(context, renderedHeart.texture(), x, y, 0.0F, 0.0F, 9, 9, 9, 9, color);
     }
 
     @WrapOperation(
             method = "renderHearts",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;renderHeart(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V"
+                    target = HEART_TARGET
             )
     )
     private void mm$drawRestoredHearts(

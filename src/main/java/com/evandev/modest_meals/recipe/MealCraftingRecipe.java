@@ -2,6 +2,7 @@ package com.evandev.modest_meals.recipe;
 
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.evandev.modest_meals.food.meal.MealAssembler;
+import com.evandev.modest_meals.food.meal.ItemMatcher;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.food.meal.MealTypeManager;
 import net.minecraft.core.HolderLookup;
@@ -15,9 +16,14 @@ import java.util.Optional;
 
 public class MealCraftingRecipe extends CustomRecipe {
 
+    //? if >=26.1 {
+    /*public MealCraftingRecipe() {
+    }
+    *///?} else {
     public MealCraftingRecipe(CraftingBookCategory category) {
         super(category);
     }
+    //?}
 
     @Override
     public boolean matches(CraftingInput input, Level level) {
@@ -26,12 +32,21 @@ public class MealCraftingRecipe extends CustomRecipe {
     }
 
     @Override
+    //? if >=26.1 {
+    /*public ItemStack assemble(CraftingInput input) {
+    *///?} else
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
         return findMatch(input)
                 .flatMap(match -> MealAssembler.assemble(match.type(), match.ingredients(), match.base()))
                 .orElse(ItemStack.EMPTY);
     }
 
+    //? if >=26.1 {
+    /*@Override
+    public RecipeSerializer<MealCraftingRecipe> getSerializer() {
+        return ModRecipes.MEAL_CRAFTING.get();
+    }
+    *///?} else {
     @Override
     public boolean canCraftInDimensions(int width, int height) {
         return width * height >= 2;
@@ -41,6 +56,7 @@ public class MealCraftingRecipe extends CustomRecipe {
     public RecipeSerializer<?> getSerializer() {
         return ModRecipes.MEAL_CRAFTING.get();
     }
+    //?}
 
     private Optional<Match> findMatch(CraftingInput input) {
         for (MealType type : MealTypeManager.craftingTable()) {
@@ -128,7 +144,7 @@ public class MealCraftingRecipe extends CustomRecipe {
                         ingredients.add(stack);
                     }
                 } else {
-                    Optional<Ingredient> pinned = shape.pinnedAt(symbol);
+                    Optional<ItemMatcher> pinned = shape.pinnedAt(symbol);
                     if (pinned.isEmpty() || !pinned.get().test(stack)) {
                         return Optional.empty();
                     }

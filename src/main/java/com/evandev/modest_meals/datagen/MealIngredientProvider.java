@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
-import com.evandev.modest_meals.Constants;
+//? if neoforge_legacy {
+/*import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.ingredient.MealLayerVisual;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -699,3 +700,4 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         }
     }
 }
+*///?}

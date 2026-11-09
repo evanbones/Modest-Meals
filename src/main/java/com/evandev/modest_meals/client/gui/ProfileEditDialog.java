@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.client.gui;
 
+import com.evandev.modest_meals.client.gui.compat.CompatScreen;
 import com.evandev.modest_meals.client.gui.editor.FormBuilder;
 import com.evandev.modest_meals.client.gui.util.GuiUtil;
 import com.evandev.modest_meals.client.gui.widget.ModButton;
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class ProfileEditDialog extends Screen {
+public class ProfileEditDialog extends CompatScreen {
     private static final int PANEL_W = 288;
     private static final int TITLE_H = 22;
     private static final int HEADER_H = 24;

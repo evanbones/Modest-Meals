@@ -18,6 +18,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.GameEvent;
+//? if >=26.3
+/*import net.minecraft.tags.BlockTags;*/
 import net.minecraft.world.phys.Vec3;
 
 public record TeleportTrait(float range) implements FoodTrait {
@@ -56,6 +58,9 @@ public record TeleportTrait(float range) implements FoodTrait {
             }
 
             Vec3 initialPos = entity.position();
+            //? if >=26.3 {
+            /*if (entity.randomTeleport(d0, d1, d2, true, BlockTags.CONSUMABLE_DOES_NOT_TELEPORT_TO)) {
+            *///?} else
             if (entity.randomTeleport(d0, d1, d2, true)) {
                 entity.level().gameEvent(GameEvent.TELEPORT, initialPos, GameEvent.Context.of(entity));
                 entity.level().playSound(null, initialPos.x, initialPos.y, initialPos.z, SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);

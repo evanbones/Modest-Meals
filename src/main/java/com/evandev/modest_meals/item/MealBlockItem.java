@@ -11,13 +11,15 @@ public class MealBlockItem extends BlockItem {
         super(block, properties);
     }
 
+    //? if <26.1 {
     @Override
     public String getDescriptionId() {
         return getOrCreateDescriptionId();
     }
+    //?}
 
     @Override
     public Component getName(ItemStack stack) {
-        return MealItem.nameOf(stack, Component.translatable(getDescriptionId(stack)));
+        return MealItem.nameOf(stack, Component.translatable(getDescriptionId()));
     }
 }

@@ -2,24 +2,25 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.evandev.modest_meals.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_${java_version}",
   "mixins": [
     "BlockStateBaseMixin",
-    "compat.FarmersDelightSoupEffectsMixin",
-    "compat.GlidingStateMixin",
     "FoodDataMixin",
     "ItemMixin",
     "LivingEntityMixin",
     "MobEffectInstanceAccessor",
     "PlayerMixin",
     "RecipeManagerMixin",
-    "ServerGamePacketListenerImplAccessor"
+    "ServerGamePacketListenerImplAccessor",
+    "compat.FarmersDelightSoupEffectsMixin",
+    "compat.GlidingStateMixin"
   ],
   "client": [
     "GuiMixin",
     "compat.RollManagerMixin",
     "LocalPlayerMixin",
     "MinecraftMixin",
+    "SpriteContentsAccessor",
     "TooltipComponentMixin"
   ],
   "server": [],

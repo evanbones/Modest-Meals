@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.trait;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.platform.RegistrationProvider;
 import com.evandev.modest_meals.trait.impl.*;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -10,8 +11,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 public record FoodTraitType<T extends FoodTrait>(MapCodec<T> codec,
                                                  StreamCodec<RegistryFriendlyByteBuf, T> streamCodec) {
@@ -19,7 +18,8 @@ public record FoodTraitType<T extends FoodTrait>(MapCodec<T> codec,
             ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "food_trait_types")
     );
 
-    public static final DeferredRegister<FoodTraitType<?>> TRAIT_TYPES = DeferredRegister.create(REGISTRY_KEY, Constants.MOD_ID);
+    private static final RegistrationProvider<FoodTraitType<?>> TRAIT_TYPES = RegistrationProvider.get(REGISTRY_KEY);
+    public static final Registry<FoodTraitType<?>> REGISTRY = TRAIT_TYPES.createSyncedRegistry();
     public static final FoodTraitType<StaminaAdditionTrait> STAMINA_ADDITION = register("stamina_addition", StaminaAdditionTrait.MAP_CODEC, StaminaAdditionTrait.STREAM_CODEC);
     public static final FoodTraitType<StaminaDepletionTrait> STAMINA_DEPLETION = register("stamina_depletion", StaminaDepletionTrait.MAP_CODEC, StaminaDepletionTrait.STREAM_CODEC);
     public static final FoodTraitType<StaminaNoRegenTrait> STAMINA_NO_REGEN = register("stamina_no_regen", StaminaNoRegenTrait.MAP_CODEC, StaminaNoRegenTrait.STREAM_CODEC);
@@ -32,7 +32,6 @@ public record FoodTraitType<T extends FoodTrait>(MapCodec<T> codec,
     public static final FoodTraitType<TeleportTrait> TELEPORT = register("teleport_randomly", TeleportTrait.MAP_CODEC, TeleportTrait.STREAM_CODEC);
     public static final FoodTraitType<AirBubblesTrait> AIR_BUBBLES = register("air_bubbles", AirBubblesTrait.MAP_CODEC, AirBubblesTrait.STREAM_CODEC);
     public static final FoodTraitType<FireExtinguishTrait> FIRE_EXTINGUISH = register("fire_extinguish", FireExtinguishTrait.MAP_CODEC, FireExtinguishTrait.STREAM_CODEC);
-    public static final Registry<FoodTraitType<?>> REGISTRY = TRAIT_TYPES.makeRegistry(builder -> builder.sync(true));
     public static final Codec<FoodTrait> CODEC = Codec.lazyInitialized(() ->
             REGISTRY.byNameCodec().dispatch("type", FoodTrait::getType, FoodTraitType::codec)
     );
@@ -45,7 +44,6 @@ public record FoodTraitType<T extends FoodTrait>(MapCodec<T> codec,
         return type;
     }
 
-    public static void register(IEventBus modBus) {
-        TRAIT_TYPES.register(modBus);
+    public static void init() {
     }
 }

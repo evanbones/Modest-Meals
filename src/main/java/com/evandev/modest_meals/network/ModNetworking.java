@@ -1,46 +1,24 @@
 package com.evandev.modest_meals.network;
 
+import com.evandev.modest_meals.platform.Platform;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.jetbrains.annotations.ApiStatus;
+
+import java.util.List;
 
 @ApiStatus.Internal
 public class ModNetworking {
-    public static void registerPayloads(final RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar("2.0.0");
-        registrar.playToClient(
-                ClientboundConfigSyncPayload.TYPE,
-                ClientboundConfigSyncPayload.STREAM_CODEC,
-                ClientboundConfigSyncPayload::handle
-        );
-        registrar.playToClient(
-                ClientboundStaminaSyncPayload.TYPE,
-                ClientboundStaminaSyncPayload.STREAM_CODEC,
-                ClientboundStaminaSyncPayload::handle
-        );
-        registrar.playToClient(
-                ClientboundHealthRegenSyncPayload.TYPE,
-                ClientboundHealthRegenSyncPayload.STREAM_CODEC,
-                ClientboundHealthRegenSyncPayload::handle
-        );
-        registrar.playToClient(
-                ClientboundFoodDataSyncPayload.TYPE,
-                ClientboundFoodDataSyncPayload.STREAM_CODEC,
-                ClientboundFoodDataSyncPayload::handle
-        );
-    }
+    public static final String PROTOCOL_VERSION = "2.0.0";
 
-    public static void sendToPlayer(ServerPlayer player, ClientboundStaminaSyncPayload payload) {
-        PacketDistributor.sendToPlayer(player, payload);
-    }
+    public static final List<ClientboundPayload<?>> CLIENTBOUND = List.of(
+            new ClientboundPayload<>(ClientboundConfigSyncPayload.TYPE, ClientboundConfigSyncPayload.STREAM_CODEC, ClientboundConfigSyncPayload::handle),
+            new ClientboundPayload<>(ClientboundStaminaSyncPayload.TYPE, ClientboundStaminaSyncPayload.STREAM_CODEC, ClientboundStaminaSyncPayload::handle),
+            new ClientboundPayload<>(ClientboundHealthRegenSyncPayload.TYPE, ClientboundHealthRegenSyncPayload.STREAM_CODEC, ClientboundHealthRegenSyncPayload::handle),
+            new ClientboundPayload<>(ClientboundFoodDataSyncPayload.TYPE, ClientboundFoodDataSyncPayload.STREAM_CODEC, ClientboundFoodDataSyncPayload::handle)
+    );
 
-    public static void sendToPlayer(ServerPlayer player, ClientboundHealthRegenSyncPayload payload) {
-        PacketDistributor.sendToPlayer(player, payload);
-    }
-
-    public static void sendToPlayer(ServerPlayer player, ClientboundFoodDataSyncPayload payload) {
-        PacketDistributor.sendToPlayer(player, payload);
+    public static void sendToPlayer(ServerPlayer player, CustomPacketPayload payload) {
+        Platform.sendToPlayer(player, payload);
     }
 }

@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.client.gui;
 
+import com.evandev.modest_meals.client.gui.compat.CompatScreen;
 import com.evandev.modest_meals.client.gui.editor.FormBuilder;
 import com.evandev.modest_meals.client.gui.util.GuiUtil;
 import com.evandev.modest_meals.client.gui.widget.DropdownWidget;
@@ -23,7 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public class IngredientEditDialog extends Screen {
+public class IngredientEditDialog extends CompatScreen {
     private static final int PANEL_W = 288;
     private static final int TITLE_H = 22;
     private static final int HEADER_H = 24;

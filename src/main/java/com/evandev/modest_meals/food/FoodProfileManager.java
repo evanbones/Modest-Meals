@@ -1,7 +1,6 @@
 package com.evandev.modest_meals.food;
 
 import com.evandev.modest_meals.Constants;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,7 +10,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
@@ -19,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
 
-public class FoodProfileManager extends SimpleJsonResourceReloadListener {
+public class FoodProfileManager extends JsonReloadListener {
     public static final FoodProfileManager INSTANCE = new FoodProfileManager();
 
     private static final ResourceLocation CUSTOM_FILE_ID =
@@ -30,7 +28,7 @@ public class FoodProfileManager extends SimpleJsonResourceReloadListener {
     private volatile List<FoodProfile> baselineProfiles = List.of();
 
     public FoodProfileManager() {
-        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "food_profiles");
+        super("food_profiles");
     }
 
     public static Optional<FoodProfile> resolve(ItemStack stack) {

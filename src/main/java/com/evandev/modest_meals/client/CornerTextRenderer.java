@@ -36,6 +36,6 @@ public abstract class CornerTextRenderer {
             }
         }
 
-        graphics.drawString(font, text, x, y, 0xFFFFFF, shadow);
+        graphics.drawString(font, text, x, y, 0xFFFFFFFF, shadow);
     }
 }

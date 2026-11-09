@@ -1,10 +1,10 @@
 package com.evandev.modest_meals.trait;
 
+import com.evandev.modest_meals.food.JsonReloadListener;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,7 +14,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.effect.MobEffect;
@@ -25,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class FoodTraitManager extends SimpleJsonResourceReloadListener {
+public class FoodTraitManager extends JsonReloadListener {
     public static final FoodTraitManager INSTANCE = new FoodTraitManager();
 
     private static final ResourceLocation CUSTOM_FILE_ID =
@@ -39,7 +38,7 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
     private volatile List<TagTraitEntry> baselineTagTraits = List.of();
 
     public FoodTraitManager() {
-        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "food_traits");
+        super("food_traits");
     }
 
     public static List<FoodTrait> getTraits(ItemStack stack) {
@@ -288,8 +287,19 @@ public class FoodTraitManager extends SimpleJsonResourceReloadListener {
         }
     }
 
+    private static boolean isTargetPresent(String target) {
+        if (target.startsWith("#")) {
+            return true;
+        }
+        ResourceLocation id = ResourceLocation.tryParse(target);
+        return id == null || BuiltInRegistries.ITEM.containsKey(id);
+    }
+
     private void parseAndAdd(String target, JsonArray traitsArray, int priority, boolean baseline,
                              Map<TagPriority, List<FoodTrait>> tags, Map<TagPriority, List<FoodTrait>> baselineTags) {
+        if (!isTargetPresent(target)) {
+            return;
+        }
         List<FoodTrait> parsedList = new ArrayList<>();
         for (JsonElement traitEl : traitsArray) {
             if (traitEl.isJsonObject()) {

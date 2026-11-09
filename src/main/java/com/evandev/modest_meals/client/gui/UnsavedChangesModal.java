@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.client.gui;
 
+import com.evandev.modest_meals.client.gui.compat.CompatScreen;
 import com.evandev.modest_meals.client.gui.util.GuiUtil;
 import com.evandev.modest_meals.client.gui.widget.ModButton;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class UnsavedChangesModal extends Screen {
+public class UnsavedChangesModal extends CompatScreen {
     private static final int MODAL_W = 260;
     private static final int MODAL_H = 110;
 

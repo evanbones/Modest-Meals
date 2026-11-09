@@ -1,7 +1,8 @@
 package com.evandev.modest_meals.client.gui.widget;
 
+import com.evandev.modest_meals.client.RenderCompat;
+import com.evandev.modest_meals.client.gui.compat.CompatWidget;
 import com.evandev.modest_meals.client.gui.util.GuiUtil;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -11,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class DropdownWidget extends AbstractWidget {
+public class DropdownWidget extends CompatWidget {
     private static final int ROW_H = 12;
     private static final int MAX_VISIBLE_ROWS = 10;
     private static final int SEARCH_H = 14;
@@ -212,18 +213,18 @@ public class DropdownWidget extends AbstractWidget {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (!open) return false;
         switch (keyCode) {
-            case GLFW.GLFW_KEY_ESCAPE -> {
+            case InputConstants.KEY_ESCAPE -> {
                 close();
                 return true;
             }
-            case GLFW.GLFW_KEY_BACKSPACE -> {
+            case InputConstants.KEY_BACKSPACE -> {
                 if (searchable && !filter.isEmpty()) {
                     filter = filter.substring(0, filter.length() - 1);
                     refilter();
                 }
                 return true;
             }
-            case GLFW.GLFW_KEY_ENTER, GLFW.GLFW_KEY_KP_ENTER -> {
+            case InputConstants.KEY_RETURN, InputConstants.KEY_NUMPADENTER -> {
                 if (!visible.isEmpty()) select(visible.getFirst());
                 return true;
             }
@@ -244,10 +245,10 @@ public class DropdownWidget extends AbstractWidget {
 
     @Override
     public void renderWidget(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        RenderSystem.enableBlend();
-        guiGraphics.blitSprite(this.isHovered || open ? GuiUtil.TEXT_FIELD_HIGHLIGHTED : GuiUtil.TEXT_FIELD,
+        RenderCompat.enableBlend();
+        RenderCompat.blitSprite(guiGraphics, this.isHovered || open ? GuiUtil.TEXT_FIELD_HIGHLIGHTED : GuiUtil.TEXT_FIELD,
                 this.getX(), this.getY(), this.width, this.height);
-        RenderSystem.disableBlend();
+        RenderCompat.disableBlend();
 
         var font = Minecraft.getInstance().font;
         Component label = Component.empty().append(title).append(labelFor(selectedValue));
@@ -266,15 +267,15 @@ public class DropdownWidget extends AbstractWidget {
         int ch = contentHeight();
         var font = Minecraft.getInstance().font;
 
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0, 0, 300);
+        RenderCompat.pushPose(guiGraphics);
+        RenderCompat.raiseLayer(guiGraphics);
 
         GuiUtil.drawContentPanel(guiGraphics, cx, cy, cw, ch);
 
         if (searchable) {
-            RenderSystem.enableBlend();
-            guiGraphics.blitSprite(GuiUtil.TEXT_FIELD_HIGHLIGHTED, cx, cy, cw, SEARCH_H);
-            RenderSystem.disableBlend();
+            RenderCompat.enableBlend();
+            RenderCompat.blitSprite(guiGraphics, GuiUtil.TEXT_FIELD_HIGHLIGHTED, cx, cy, cw, SEARCH_H);
+            RenderCompat.disableBlend();
             boolean empty = filter.isEmpty();
             String shown = empty ? searchPlaceholder.getString() : filter + "_";
             guiGraphics.drawString(font, GuiUtil.trim(font, shown, cw - 8),
@@ -310,7 +311,7 @@ public class DropdownWidget extends AbstractWidget {
         }
 
         GuiUtil.drawVanillaScrollbar(guiGraphics, cx + cw, cy, ch, scrollAmount, maxScroll());
-        guiGraphics.pose().popPose();
+        RenderCompat.popPose(guiGraphics);
     }
 
     @Override

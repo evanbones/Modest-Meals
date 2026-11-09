@@ -1,16 +1,17 @@
 package com.evandev.modest_meals.compat.shield_expansion;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.api.StaminaApi;
 import com.evandev.modest_meals.config.ModConfig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.EntityHitResult;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.fml.ModList;
+//? if neoforge && shield_expansion {
+/*import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+*///?}
 
 public final class ShieldExpansionCompat {
     public static final String MOD_ID = "shieldexp";
@@ -19,12 +20,13 @@ public final class ShieldExpansionCompat {
 
     public static boolean isLoaded() {
         if (loaded == null) {
-            loaded = ModList.get() != null && ModList.get().isLoaded(MOD_ID);
+            loaded = Platform.isModLoaded(MOD_ID);
         }
         return loaded;
     }
 
-    public static void init() {
+    //? if neoforge && shield_expansion {
+    /*public static void init() {
         if (!isLoaded()) {
             return;
         }
@@ -33,15 +35,21 @@ public final class ShieldExpansionCompat {
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ShieldExpansionCompat::onProjectileImpact);
     }
 
+    *///?}
+
     public static boolean isBlocking(Player player) {
+        //? if shield_expansion {
         return ModConfig.get().staminaShieldBlocking && isLoaded() && ShieldExpansionBridge.isRaisingShield(player);
+        //?} else
+        /*return false;*/
     }
 
     private static boolean tracksStamina(Player player) {
-        return StaminaApi.isEnabled() && !player.isCreative() && !player.isSpectator() && !(player instanceof FakePlayer);
+        return StaminaApi.isEnabled() && !player.isCreative() && !player.isSpectator() && !Platform.isFakePlayer(player);
     }
 
-    private static void onStartUsing(LivingEntityUseItemEvent.Start event) {
+    //? if neoforge && shield_expansion {
+    /*private static void onStartUsing(LivingEntityUseItemEvent.Start event) {
         if (!ModConfig.get().staminaShieldBlocking || !(event.getEntity() instanceof Player player) || !tracksStamina(player)) {
             return;
         }
@@ -68,6 +76,7 @@ public final class ShieldExpansionCompat {
             onParry(player);
         }
     }
+    *///?}
 
     private static void onParry(Player player) {
         StaminaApi.restore(player, ModConfig.get().staminaParryRestore);

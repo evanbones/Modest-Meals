@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.compat.emi;
 
-import com.baisylia.culturaldelights.integration.emi.EMICulturalDelightsPlugin;
+//? if neoforge_legacy {
+/*import com.baisylia.culturaldelights.integration.emi.EMICulturalDelightsPlugin;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.item.MealItem;
@@ -108,3 +109,4 @@ public class VatMealEmiRecipe extends MealEmiRecipe {
         }
     }
 }
+*///?}

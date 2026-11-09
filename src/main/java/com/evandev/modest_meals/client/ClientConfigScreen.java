@@ -89,6 +89,8 @@ public class ClientConfigScreen {
                 .option(createEnumOption("hud_layout", HudLayoutOption.class, defaults.hudLayout, () -> config.hudLayout, val -> config.hudLayout = val, HudLayoutOption::getTitle))
                 .option(createBoolOption("hide_hunger_bar", defaults.hideHungerBar, () -> config.hideHungerBar, val -> config.hideHungerBar = val))
                 .option(createBoolOption("hide_stamina_bar", defaults.hideStaminaBar, () -> config.hideStaminaBar, val -> config.hideStaminaBar = val))
+                .option(createIntOption("stamina_bar_offset_x", defaults.staminaBarOffsetX, -100, 100, 1, () -> config.staminaBarOffsetX, val -> config.staminaBarOffsetX = val))
+                .option(createIntOption("stamina_bar_offset_y", defaults.staminaBarOffsetY, -100, 100, 1, () -> config.staminaBarOffsetY, val -> config.staminaBarOffsetY = val))
                 .option(createBoolOption("hide_stamina_bar_moving", defaults.hideStaminaBarMoving, () -> config.hideStaminaBarMoving, val -> config.hideStaminaBarMoving = val))
                 .option(createBoolOption("hide_stamina_bar_cooldown", defaults.hideStaminaBarCooldown, () -> config.hideStaminaBarCooldown, val -> config.hideStaminaBarCooldown = val))
                 .option(createBoolOption("hide_stamina_bar_inactive", defaults.hideStaminaBarInactive, () -> config.hideStaminaBarInactive, val -> config.hideStaminaBarInactive = val))

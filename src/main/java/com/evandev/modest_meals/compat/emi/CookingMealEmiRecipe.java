@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.emi;
 
+//? if emi {
 import vectorwing.farmersdelight.integration.emi.FDRecipeCategories;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
@@ -144,3 +145,4 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
                 .toList();
     }
 }
+//?}

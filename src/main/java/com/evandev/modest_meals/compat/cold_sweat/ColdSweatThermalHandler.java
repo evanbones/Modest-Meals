@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.compat.cold_sweat;
 
-import com.evandev.modest_meals.Constants;
+//? if neoforge_legacy {
+/*import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.momosoftworks.coldsweat.api.event.core.registry.TempModifierRegisterEvent;
 import com.momosoftworks.coldsweat.api.util.Temperature;
@@ -64,3 +65,4 @@ public final class ColdSweatThermalHandler {
         }
     }
 }
+*///?}

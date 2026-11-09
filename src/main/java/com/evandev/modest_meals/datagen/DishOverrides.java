@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
-import com.evandev.modest_meals.food.meal.MealType;
+//? if neoforge_legacy {
+/*import com.evandev.modest_meals.food.meal.MealType;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -251,3 +252,4 @@ public final class DishOverrides {
                 .add(new MealType.ItemOverride(ResourceLocation.parse(result), 1, List.of(ingredients), true, base));
     }
 }
+*///?}

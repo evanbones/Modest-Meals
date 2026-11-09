@@ -11,7 +11,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
-import net.neoforged.neoforge.common.conditions.ICondition;
+//? if >=26.1 {
+/*import com.evandev.modest_meals.mixin.ShapedRecipeAccessor;
+import com.evandev.modest_meals.mixin.ShapelessRecipeAccessor;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.crafting.Recipe;
+import java.util.stream.Stream;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
+*///?}
+import com.evandev.modest_meals.food.ItemTagLookup;
 
 import java.io.Reader;
 import java.util.HashSet;
@@ -31,7 +43,7 @@ public final class ReplacedDishRecipes {
     );
 
     public static Map<ResourceLocation, JsonElement> filter(Map<ResourceLocation, JsonElement> recipes,
-                                                            ResourceManager resourceManager, ICondition.IContext context) {
+                                                            ResourceManager resourceManager, ItemTagLookup context) {
         Set<String> replaced = replacedResults(resourceManager, context);
         if (replaced.isEmpty()) {
             return recipes;
@@ -49,6 +61,62 @@ public final class ReplacedDishRecipes {
         Constants.LOG.info("Removed {} recipes for dishes now made as meals", dropped);
         return kept;
     }
+
+    //? if >=26.1 {
+    /*public static List<RecipeHolder<?>> withoutReplaced(Iterable<RecipeHolder<?>> recipes, ResourceManager resourceManager,
+                                                         ItemTagLookup context) {
+        Set<String> replaced = replacedResults(resourceManager, context);
+        List<RecipeHolder<?>> kept = new ArrayList<>();
+        int dropped = 0;
+        for (RecipeHolder<?> holder : recipes) {
+            if (!replaced.isEmpty() && isReplaced(holder, replaced)) {
+                dropped++;
+            } else {
+                kept.add(holder);
+            }
+        }
+        if (dropped > 0) {
+            Constants.LOG.info("Removed {} recipes for dishes now made as meals", dropped);
+        }
+        return kept;
+    }
+
+    private static boolean isReplaced(RecipeHolder<?> holder, Set<String> replaced) {
+        return isReplaced(holder.id(), holder.value(), replaced);
+    }
+
+    private static boolean isReplaced(ResourceKey<Recipe<?>> id, Recipe<?> recipe, Set<String> replaced) {
+        if (id.identifier().getNamespace().equals(Constants.MOD_ID)) {
+            return false;
+        }
+        ItemStackTemplate result = switch (recipe) {
+            case ShapedRecipe shaped -> ((ShapedRecipeAccessor) shaped).mm$result();
+            case ShapelessRecipe shapeless -> ((ShapelessRecipeAccessor) shapeless).mm$result();
+            default -> null;
+        };
+        return result != null && result.item().unwrapKey()
+                .map(key -> replaced.contains(key.location().toString()))
+                .orElse(false);
+    }
+
+    private static volatile ResourceManager loadingResources;
+
+    public static void setLoadingResources(ResourceManager resourceManager) {
+        loadingResources = resourceManager;
+    }
+
+    public static Stream<Holder.Reference<Recipe<?>>> withoutReplaced(Stream<Holder.Reference<Recipe<?>>> recipes) {
+        ResourceManager resourceManager = loadingResources;
+        if (resourceManager == null) {
+            return recipes;
+        }
+        Set<String> replaced = replacedResults(resourceManager, ItemTagLookup.UNKNOWN);
+        if (replaced.isEmpty()) {
+            return recipes;
+        }
+        return recipes.filter(holder -> !isReplaced(holder.key(), holder.value(), replaced));
+    }
+    *///?}
 
     private static boolean isReplaced(ResourceLocation id, JsonElement json, Set<String> replaced) {
         if (id.getNamespace().equals(Constants.MOD_ID) || !(json instanceof JsonObject recipe)) {
@@ -72,7 +140,7 @@ public final class ReplacedDishRecipes {
         return false;
     }
 
-    private static Set<String> replacedResults(ResourceManager resourceManager, ICondition.IContext context) {
+    private static Set<String> replacedResults(ResourceManager resourceManager, ItemTagLookup context) {
         Set<String> results = new HashSet<>();
         Map<ResourceLocation, Resource> files = resourceManager.listResources("modest_meals/meal_types",
                 path -> path.getPath().endsWith(".json"));

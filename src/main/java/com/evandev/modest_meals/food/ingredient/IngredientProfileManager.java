@@ -1,12 +1,12 @@
 package com.evandev.modest_meals.food.ingredient;
 
+import com.evandev.modest_meals.food.JsonReloadListener;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.component.MealContents;
 import com.evandev.modest_meals.component.ModDataComponents;
 import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.tag.ModItemTags;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -18,7 +18,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
+public class IngredientProfileManager extends JsonReloadListener {
     public static final IngredientProfileManager INSTANCE = new IngredientProfileManager();
 
     private static final ResourceLocation CUSTOM_FILE_ID =
@@ -42,7 +41,7 @@ public class IngredientProfileManager extends SimpleJsonResourceReloadListener {
     private volatile List<TagEntry> customTagProfiles = List.of();
 
     public IngredientProfileManager() {
-        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "modest_meals/ingredients");
+        super("modest_meals/ingredients");
     }
 
     public static Optional<IngredientProfile> authored(ItemStack stack) {

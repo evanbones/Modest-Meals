@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "modest_meals:meal",
+    "model": "modest_meals:item/salad"
+  }
+}

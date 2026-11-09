@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.food.ingredient;
 
+import com.evandev.modest_meals.food.JsonReloadListener;
 import com.evandev.modest_meals.Constants;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,7 +13,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
@@ -22,14 +21,14 @@ import net.minecraft.world.item.ItemStack;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MealIngredientManager extends SimpleJsonResourceReloadListener {
+public class MealIngredientManager extends JsonReloadListener {
     public static final MealIngredientManager INSTANCE = new MealIngredientManager();
 
     private final Map<ResourceLocation, MealIngredientVisual> itemVisuals = new ConcurrentHashMap<>();
     private volatile List<TagEntry> tagVisuals = List.of();
 
     public MealIngredientManager() {
-        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "modest_meals/meal_ingredients");
+        super("modest_meals/meal_ingredients");
     }
 
     public static Optional<MealIngredientVisual> resolve(ItemStack stack) {

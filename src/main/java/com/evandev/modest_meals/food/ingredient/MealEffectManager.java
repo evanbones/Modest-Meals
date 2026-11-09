@@ -1,13 +1,12 @@
 package com.evandev.modest_meals.food.ingredient;
 
+import com.evandev.modest_meals.food.JsonReloadListener;
 import com.evandev.modest_meals.Constants;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.util.Collection;
@@ -16,14 +15,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MealEffectManager extends SimpleJsonResourceReloadListener {
+public class MealEffectManager extends JsonReloadListener {
     public static final MealEffectManager INSTANCE = new MealEffectManager();
 
     private final Map<ResourceLocation, MealEffect> effects = new ConcurrentHashMap<>();
     private final Map<ResourceLocation, MealEffect> baseline = new ConcurrentHashMap<>();
 
     public MealEffectManager() {
-        super(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "modest_meals/meal_effects");
+        super("modest_meals/meal_effects");
     }
 
     public static Optional<MealEffect> get(ResourceLocation id) {

@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.client.gui.util;
 
+import com.evandev.modest_meals.client.RenderCompat;
 import com.evandev.modest_meals.Constants;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -33,20 +33,20 @@ public class GuiUtil {
     public static final int ROW_INSET = 4;
     public static final int LINE_H = 10;
     public static final int SELECTED_SLOT = 0x7700BBFF;
-    public static final int SUBTEXT = 0xB5B5B5;
-    public static final int BADGE_CUSTOM = 0x88CC88;
+    public static final int SUBTEXT = 0xFFB5B5B5;
+    public static final int BADGE_CUSTOM = 0xFF88CC88;
     public static final int HEADER_BG = 0xDD181818;
     public static final int HEADER_OUTLINE = 0xFF333333;
     public static final int SEPARATOR = 0x55FFFFFF;
-    public static final int SECTION = 0xFFD264;
+    public static final int SECTION = 0xFFFFD264;
     public static final int SECTION_RULE = 0x66FFD264;
     public static final int HOVER_WASH = 0x18FFFFFF;
-    public static final int LABEL = 0xDDDDDD;
-    public static final int DIM = 0x777777;
-    public static final int EMPTY_STATE = 0x888888;
-    public static final int STATUS_GREEN = 0x55FF55;
-    public static final int ERROR_RED = 0xFF5555;
-    public static final int WHITE = 0xFFFFFF;
+    public static final int LABEL = 0xFFDDDDDD;
+    public static final int DIM = 0xFF777777;
+    public static final int EMPTY_STATE = 0xFF888888;
+    public static final int STATUS_GREEN = 0xFF55FF55;
+    public static final int ERROR_RED = 0xFFFF5555;
+    public static final int WHITE = 0xFFFFFFFF;
     private static final int TRACK_PADDING = 2;
 
     public static float tickRate() {
@@ -61,15 +61,15 @@ public class GuiUtil {
         int coriw = cornerLength + innerWidth;
         int corih = cornerLength + innerHeight;
 
-        context.blit(texture, x, y, cornerLength, cornerLength, u, v, cornerLength, cornerLength, 256, 256);
-        context.blit(texture, x + cornerLength, y, innerWidth, cornerLength, u + cornerLength, v, centerLength, cornerLength, 256, 256);
-        context.blit(texture, x + coriw, y, cornerLength, cornerLength, u + corcen, v, cornerLength, cornerLength, 256, 256);
-        context.blit(texture, x, y + cornerLength, cornerLength, innerHeight, u, v + cornerLength, cornerLength, centerLength, 256, 256);
-        context.blit(texture, x + cornerLength, y + cornerLength, innerWidth, innerHeight, u + cornerLength, v + cornerLength, centerLength, centerLength, 256, 256);
-        context.blit(texture, x + coriw, y + cornerLength, cornerLength, innerHeight, u + corcen, v + cornerLength, cornerLength, centerLength, 256, 256);
-        context.blit(texture, x, y + corih, cornerLength, cornerLength, u, v + corcen, cornerLength, cornerLength, 256, 256);
-        context.blit(texture, x + cornerLength, y + corih, innerWidth, cornerLength, u + cornerLength, v + corcen, centerLength, cornerLength, 256, 256);
-        context.blit(texture, x + coriw, y + corih, cornerLength, cornerLength, u + corcen, v + corcen, cornerLength, cornerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x, y, cornerLength, cornerLength, u, v, cornerLength, cornerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x + cornerLength, y, innerWidth, cornerLength, u + cornerLength, v, centerLength, cornerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x + coriw, y, cornerLength, cornerLength, u + corcen, v, cornerLength, cornerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x, y + cornerLength, cornerLength, innerHeight, u, v + cornerLength, cornerLength, centerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x + cornerLength, y + cornerLength, innerWidth, innerHeight, u + cornerLength, v + cornerLength, centerLength, centerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x + coriw, y + cornerLength, cornerLength, innerHeight, u + corcen, v + cornerLength, cornerLength, centerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x, y + corih, cornerLength, cornerLength, u, v + corcen, cornerLength, cornerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x + cornerLength, y + corih, innerWidth, cornerLength, u + cornerLength, v + corcen, centerLength, cornerLength, 256, 256);
+        RenderCompat.blitRegion(context, texture, x + coriw, y + corih, cornerLength, cornerLength, u + corcen, v + corcen, cornerLength, cornerLength, 256, 256);
     }
 
     public static void drawVanillaPanel(GuiGraphics context, int x, int y, int width, int height) {
@@ -95,9 +95,9 @@ public class GuiUtil {
         int trackY = contentY - TRACK_PADDING;
         int trackHeight = contentHeight + TRACK_PADDING * 2;
 
-        RenderSystem.enableBlend();
-        context.blitSprite(SCROLLBAR_BACKGROUND, x, contentY - PANEL_PADDING, SCROLLBAR_WIDTH, contentHeight + PANEL_PADDING * 2);
-        context.blitSprite(SCROLLBAR_TRACK, x, trackY, SCROLLBAR_WIDTH, trackHeight);
+        RenderCompat.enableBlend();
+        RenderCompat.blitSprite(context, SCROLLBAR_BACKGROUND, x, contentY - PANEL_PADDING, SCROLLBAR_WIDTH, contentHeight + PANEL_PADDING * 2);
+        RenderCompat.blitSprite(context, SCROLLBAR_TRACK, x, trackY, SCROLLBAR_WIDTH, trackHeight);
 
         int thumbHeight = trackHeight;
         int thumbY = trackY;
@@ -105,8 +105,8 @@ public class GuiUtil {
             thumbHeight = thumbHeight(trackHeight, viewportHeight, maxScroll);
             thumbY = trackY + (int) ((trackHeight - thumbHeight) * (scrollAmount / maxScroll));
         }
-        context.blitSprite(SCROLLBAR_THUMB, x, thumbY, SCROLLBAR_WIDTH, thumbHeight);
-        RenderSystem.disableBlend();
+        RenderCompat.blitSprite(context, SCROLLBAR_THUMB, x, thumbY, SCROLLBAR_WIDTH, thumbHeight);
+        RenderCompat.disableBlend();
     }
 
     private static int thumbHeight(int trackHeight, int viewportHeight, int maxScroll) {
@@ -132,7 +132,7 @@ public class GuiUtil {
     }
 
     public static void drawSlot(GuiGraphics context, int x, int y) {
-        context.blit(WIDGETS, x, y, 0, 0, 18, 18, 256, 256);
+        RenderCompat.blitTexture(context, WIDGETS, x, y, 0, 0, 18, 18, 256, 256);
     }
 
     public static void drawSlotHighlight(GuiGraphics context, int x, int y) {
@@ -140,12 +140,12 @@ public class GuiUtil {
     }
 
     public static void drawRow(GuiGraphics context, int x, int y, int width, int height, boolean selected, boolean hovered) {
-        RenderSystem.enableBlend();
-        context.blitSprite(selected ? ROW_SELECTED : ROW, x, y, width, height);
+        RenderCompat.enableBlend();
+        RenderCompat.blitSprite(context, selected ? ROW_SELECTED : ROW, x, y, width, height);
         if (hovered && !selected) {
             context.fill(x + 1, y + 1, x + width - 1, y + height - 1, HOVER_WASH);
         }
-        RenderSystem.disableBlend();
+        RenderCompat.disableBlend();
     }
 
     public static String trim(Font font, String text, int maxWidth) {

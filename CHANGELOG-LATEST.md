@@ -1,13 +1,13 @@
 ### Added
 
-- Effects that foods grant on their own (e.g. golden apple's Regeneration, raw chicken's Hunger) now show up in the food
-  editor and can be edited or removed.
-- Effect traits now support a chance to apply, shown in tooltips (e.g. "Hunger (00:30) (30% chance)").
-- The Health trait's tooltip preview in the food editor now shows its regeneration speed.
+- Fabric support.
+- Support for 26.1, 26.2, and 26.3 on both NeoForge and Fabric.
+    - Farmer's Delight Refabricated compat is available on every Fabric version.
+    - Farmer's Delight (NeoForge), Cultural Delights, EMI, Thermoo, Cold Sweat, and Shield Expansion compat is only
+      available on 1.21.1 for now.
+- Stamina bar X and Y offset options in the HUD config.
 
-### Changed
+### Fixed
 
-- Gameplay config options (hunger, health regeneration, stamina, and food effect settings) are now controlled by the
-  server. 
-  - On a server, they show the server's values and are greyed out in the config screen.
-- Dedicated servers now reload the config file on `/reload` and send the new values to everyone online.
+- Fixed players being disconnected when joining a server with a large amount of food data.
+- Food traits for items from mods that aren't installed no longer log errors.

@@ -1,5 +1,7 @@
 package com.evandev.modest_meals.client.gui;
 
+import com.evandev.modest_meals.client.RenderCompat;
+import com.evandev.modest_meals.client.gui.compat.CompatScreen;
 import com.evandev.modest_meals.client.gui.util.GuiUtil;
 import com.evandev.modest_meals.client.gui.widget.DropdownWidget;
 import com.evandev.modest_meals.client.gui.widget.ModButton;
@@ -19,6 +21,8 @@ import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+//? if >=26.1
+/*import net.minecraft.client.input.MouseButtonEvent;*/
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -35,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class FoodEditorScreen extends Screen {
+public class FoodEditorScreen extends CompatScreen {
     private static final int HEADER_H = 28;
     private static final int FOOTER_H = 32;
     private static final int GUTTER = 6;
@@ -352,7 +356,7 @@ public class FoodEditorScreen extends Screen {
     private void renderPaneWidgets(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         int hoverY = mouseY >= contentTop && mouseY < contentBottom ? mouseY : -1;
         for (AbstractWidget widget : paneWidgets) {
-            widget.render(graphics, mouseX, hoverY, partialTick);
+            RenderCompat.renderWidget(widget, graphics, mouseX, hoverY, partialTick);
         }
     }
 
@@ -736,7 +740,7 @@ public class FoodEditorScreen extends Screen {
         int editW = Math.min(90, Math.max(50, contentW / 3));
         GuiUtil.drawTrimmed(graphics, this.font,
                 Component.translatable("gui.modest_meals.food_profile_header").withStyle(ChatFormatting.YELLOW),
-                contentX, profileY, contentW - editW - 6, 0xFFFF55);
+                contentX, profileY, contentW - editW - 6, 0xFFFFFF55);
 
         GuiUtil.drawWrapped(graphics, this.font, profileSummary(), contentX, paneY(VY_PROFILE_SUMMARY), contentW,
                 PROFILE_SUMMARY_MAX_LINES, GuiUtil.LABEL);
@@ -746,7 +750,7 @@ public class FoodEditorScreen extends Screen {
         GuiUtil.drawTrimmed(graphics, this.font,
                 Component.translatable(isMeal(selectedItem) ? "gui.modest_meals.eating_header"
                         : "gui.modest_meals.ingredient_header").withStyle(ChatFormatting.YELLOW),
-                contentX, ingredientY, contentW - editW - 6, 0xFFFF55);
+                contentX, ingredientY, contentW - editW - 6, 0xFFFFFF55);
         List<Component> ingredientLines = ingredientSummary();
         for (int i = 0; i < ingredientLines.size(); i++) {
             GuiUtil.drawTrimmed(graphics, this.font, ingredientLines.get(i), contentX,
@@ -757,7 +761,7 @@ public class FoodEditorScreen extends Screen {
         GuiUtil.drawSeparator(graphics, contentX, traitsY - 8, contentW);
         GuiUtil.drawTrimmed(graphics, this.font,
                 Component.translatable("gui.modest_meals.traits_header").withStyle(ChatFormatting.YELLOW),
-                contentX, traitsY, contentW - editW - 6, 0xFFFF55);
+                contentX, traitsY, contentW - editW - 6, 0xFFFFFF55);
 
         renderTraitRows(graphics, contentX, contentW);
         renderPaneWidgets(graphics, mouseX, mouseY, partialTick);
@@ -812,6 +816,150 @@ public class FoodEditorScreen extends Screen {
     private record Candidate(Item item, String id, String lowerName, String lowerId, boolean isFood) {
     }
 
+    //? if >=26.1 {
+    /*public static class FoodItemList extends ObjectSelectionList<FoodItemList.ItemEntry> {
+        private boolean draggingScrollbar = false;
+
+        public FoodItemList(Minecraft minecraft, int width, int height, int y, int itemHeight) {
+            super(minecraft, width, height, y, itemHeight);
+        }
+
+        public int addEntry(ItemEntry entry) {
+            return super.addEntry(entry);
+        }
+
+        public void clearEntries() {
+            super.clearEntries();
+        }
+
+        public double getScrollAmount() {
+            return this.scrollAmount();
+        }
+
+        public int getMaxScroll() {
+            return this.maxScrollAmount();
+        }
+
+        @Override
+        public int getRowWidth() {
+            return this.width - GuiUtil.ROW_INSET * 2;
+        }
+
+        @Override
+        public int getRowLeft() {
+            return this.getX() + GuiUtil.ROW_INSET;
+        }
+
+        @Override
+        protected int scrollBarX() {
+            return this.getX() + this.width;
+        }
+
+        @Override
+        protected void extractListSeparators(GuiGraphics graphics) {
+        }
+
+        @Override
+        protected void extractListBackground(GuiGraphics graphics) {
+            GuiUtil.drawContentPanel(graphics, this.getX(), this.getY(), this.width, this.height);
+        }
+
+        @Override
+        protected void extractSelection(GuiGraphics graphics, ItemEntry entry, int outlineColor) {
+        }
+
+        @Override
+        protected void extractScrollbar(GuiGraphics graphics, int mouseX, int mouseY) {
+            GuiUtil.drawVanillaScrollbar(graphics, scrollBarX(), this.getY(), this.height, this.scrollAmount(), this.maxScrollAmount());
+        }
+
+        @Override
+        protected boolean isOverScrollbar(double mouseX, double mouseY) {
+            return mouseX >= scrollBarX() && mouseX < scrollBarX() + GuiUtil.SCROLLBAR_WIDTH
+                    && mouseY >= this.getY() && mouseY < this.getBottom();
+        }
+
+        @Override
+        public boolean isMouseOver(double mouseX, double mouseY) {
+            return super.isMouseOver(mouseX, mouseY) || isOverScrollbar(mouseX, mouseY);
+        }
+
+        @Override
+        public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+            if (event.button() == 0 && isOverScrollbar(event.x(), event.y()) && maxScrollAmount() > 0) {
+                this.draggingScrollbar = true;
+                this.setScrollAmount(GuiUtil.scrollAmountFromMouse(event.y(), this.getY(), this.height, maxScrollAmount()));
+                return true;
+            }
+            this.draggingScrollbar = false;
+            return super.mouseClicked(event, doubleClick);
+        }
+
+        @Override
+        public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+            if (draggingScrollbar) {
+                this.setScrollAmount(GuiUtil.scrollAmountFromMouse(event.y(), this.getY(), this.height, maxScrollAmount()));
+                return true;
+            }
+            return super.mouseDragged(event, dragX, dragY);
+        }
+
+        @Override
+        public boolean mouseReleased(MouseButtonEvent event) {
+            this.draggingScrollbar = false;
+            return super.mouseReleased(event);
+        }
+
+        public static class ItemEntry extends ObjectSelectionList.Entry<ItemEntry> {
+            public final Item item;
+            private final FoodEditorScreen screen;
+
+            public ItemEntry(Item item, FoodEditorScreen screen) {
+                this.item = item;
+                this.screen = screen;
+            }
+
+            @Override
+            public void extractContent(GuiGraphics graphics, int mouseX, int mouseY, boolean hovered, float partialTick) {
+                renderRow(graphics, this.getContentY(), this.getContentX(), this.getContentWidth(), this.getContentHeight(), hovered);
+            }
+
+            private void renderRow(GuiGraphics graphics, int top, int left, int width, int height, boolean isHovered) {
+                boolean selected = screen.selectedItem == this.item;
+
+                int rowH = height + 2;
+                GuiUtil.drawRow(graphics, left, top, width, rowH, selected, isHovered);
+
+                ItemStack stack = new ItemStack(item);
+                graphics.renderFakeItem(stack, left + 3, top + (rowH - 16) / 2);
+
+                String idStr = itemId(item);
+                boolean isCustom = screen.isCustomized(idStr);
+
+                int badgeW = isCustom ? 8 : 0;
+                var font = Minecraft.getInstance().font;
+                graphics.drawString(font,
+                        GuiUtil.trim(font, stack.getHoverName().getString(), width - 24 - badgeW - 4),
+                        left + 22, top + (rowH - 8) / 2, selected ? GuiUtil.WHITE : 0xFFE0E0E0);
+
+                if (isCustom) {
+                    graphics.drawString(font, "*", left + width - 8, top + (rowH - 8) / 2, GuiUtil.BADGE_CUSTOM);
+                }
+            }
+
+            @Override
+            public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+                screen.selectItem(this.item);
+                return true;
+            }
+
+            @Override
+            public @NotNull Component getNarration() {
+                return new ItemStack(item).getHoverName();
+            }
+        }
+    }
+    *///?} else {
     public static class FoodItemList extends ObjectSelectionList<FoodItemList.ItemEntry> {
         private boolean draggingScrollbar = false;
 
@@ -920,6 +1068,10 @@ public class FoodEditorScreen extends Screen {
             @Override
             public void render(@NotNull GuiGraphics graphics, int index, int top, int left, int width, int height,
                                int mouseX, int mouseY, boolean isHovered, float partialTick) {
+                renderRow(graphics, top, left, width, height, isHovered);
+            }
+
+            private void renderRow(GuiGraphics graphics, int top, int left, int width, int height, boolean isHovered) {
                 boolean selected = screen.selectedItem == this.item;
 
                 int rowH = height + 2;
@@ -935,7 +1087,7 @@ public class FoodEditorScreen extends Screen {
                 var font = Minecraft.getInstance().font;
                 graphics.drawString(font,
                         GuiUtil.trim(font, stack.getHoverName().getString(), width - 24 - badgeW - 4),
-                        left + 22, top + (rowH - 8) / 2, selected ? GuiUtil.WHITE : 0xE0E0E0);
+                        left + 22, top + (rowH - 8) / 2, selected ? GuiUtil.WHITE : 0xFFE0E0E0);
 
                 if (isCustom) {
                     graphics.drawString(font, "*", left + width - 8, top + (rowH - 8) / 2, GuiUtil.BADGE_CUSTOM);
@@ -954,6 +1106,7 @@ public class FoodEditorScreen extends Screen {
             }
         }
     }
+    //?}
 
     private class PaneButton extends ModButton {
         PaneButton(int x, int y, int width, int height, Component message, OnPress onPress) {
@@ -964,10 +1117,12 @@ public class FoodEditorScreen extends Screen {
             return mouseY >= contentTop && mouseY < contentBottom;
         }
 
+        //? if <26.1 {
         @Override
         protected boolean clicked(double mouseX, double mouseY) {
             return withinPane(mouseY) && super.clicked(mouseX, mouseY);
         }
+        //?}
 
         @Override
         public boolean isMouseOver(double mouseX, double mouseY) {

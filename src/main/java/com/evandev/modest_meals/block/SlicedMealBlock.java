@@ -15,6 +15,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+//? if >=26.1 {
+/*import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
+*///?} else
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -103,28 +107,39 @@ public abstract class SlicedMealBlock extends BaseEntityBlock {
     }
 
     @Override
+    //? if >=26.1 {
+    /*protected InteractionResult useItemOn(ItemStack held, BlockState state, Level level, BlockPos pos,
+                                          Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!held.is(ModItemTags.KNIVES)) {
+            return InteractionResult.TRY_WITH_EMPTY_HAND;
+        }
+    *///?} else {
     protected ItemInteractionResult useItemOn(ItemStack held, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hit) {
         if (!held.is(ModItemTags.KNIVES)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        if (!level.isClientSide) {
+    //?}
+        if (!level.isClientSide()) {
             Direction face = hit.getDirection() == Direction.DOWN ? Direction.UP : hit.getDirection();
             Block.popResourceFromFace(level, pos, face, sliceOf(contentsAt(level, pos)));
             level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
             takeSlice(level, pos, state, player);
         }
-        return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        //? if >=26.1 {
+        /*return InteractionResult.SUCCESS;
+        *///?} else
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         ItemStack slice = sliceOf(contentsAt(level, pos));
-        FoodProperties food = slice.getFoodProperties(player);
+        FoodProperties food = FoodConsumption.foodOf(slice, player);
         if (food == null || !FoodConsumption.canConsume(player, slice)) {
             return InteractionResult.PASS;
         }
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             EdibleBlockContext.Context previous = EdibleBlockContext.set(player, state, new EdibleBlockFoods.EdibleBlock(slice, 1.0F));
             try {
                 player.getFoodData().eat(food);
@@ -134,10 +149,16 @@ public abstract class SlicedMealBlock extends BaseEntityBlock {
             if (player instanceof ServerPlayer serverPlayer) {
                 CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, slice);
             }
-            level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F + level.random.nextFloat() * 0.4F);
+            //? if >=26.1 {
+            /*level.playSound(null, pos, SoundEvents.GENERIC_EAT.value(), SoundSource.PLAYERS, 0.8F, 0.8F + level.getRandom().nextFloat() * 0.4F);
+            *///?} else
+            level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F + level.getRandom().nextFloat() * 0.4F);
             takeSlice(level, pos, state, player);
         }
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        //? if >=26.1 {
+        /*return InteractionResult.SUCCESS;
+        *///?} else
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     private void takeSlice(Level level, BlockPos pos, BlockState state, Player player) {
@@ -167,6 +188,20 @@ public abstract class SlicedMealBlock extends BaseEntityBlock {
         return drops;
     }
 
+    //? if >=26.1 {
+    /*@Override
+    protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
+        return wholeOf(contentsAt(level, pos));
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos,
+                                     Direction direction, BlockPos neighborPos, BlockState neighbor, RandomSource random) {
+        return direction == Direction.DOWN && !state.canSurvive(level, pos)
+                ? Blocks.AIR.defaultBlockState()
+                : super.updateShape(state, level, ticks, pos, direction, neighborPos, neighbor, random);
+    }
+    *///?} else {
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
         return wholeOf(contentsAt(level, pos));
@@ -179,6 +214,7 @@ public abstract class SlicedMealBlock extends BaseEntityBlock {
                 ? Blocks.AIR.defaultBlockState()
                 : super.updateShape(state, direction, neighbor, level, pos, neighborPos);
     }
+    //?}
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
@@ -191,6 +227,9 @@ public abstract class SlicedMealBlock extends BaseEntityBlock {
     }
 
     @Override
+    //? if >=26.1 {
+    /*protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
+    *///?} else
     protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         return Math.round((slices() - state.getValue(bites())) * 15.0F / slices());
     }

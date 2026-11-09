@@ -1,8 +1,8 @@
 package com.evandev.modest_meals.registry;
 
-import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealTypeManager;
 import com.evandev.modest_meals.item.MealItem;
+import com.evandev.modest_meals.platform.RegistrationProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -10,16 +10,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
 public class ModCreativeTabs {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Constants.MOD_ID);
+    private static final RegistrationProvider<CreativeModeTab> CREATIVE_TABS =
+            RegistrationProvider.get(Registries.CREATIVE_MODE_TAB);
 
-    public static final Supplier<CreativeModeTab> MAIN = CREATIVE_TABS.register("main", () -> CreativeModeTab.builder()
+    public static final Supplier<CreativeModeTab> MAIN = CREATIVE_TABS.register("main", () ->
+            //? if neoforge {
+            /*CreativeModeTab.builder()
+            *///?} else if >=26.1 {
+            /*net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab.builder()
+            *///?} else
+            net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup.builder()
             .title(Component.translatable("itemGroup.modest_meals"))
             .icon(() -> new ItemStack(ModItems.SANDWICH.get()))
             .displayItems((params, output) -> {
@@ -38,7 +42,6 @@ public class ModCreativeTabs {
             })
             .build());
 
-    public static void register(IEventBus modBus) {
-        CREATIVE_TABS.register(modBus);
+    public static void init() {
     }
 }

@@ -5,11 +5,14 @@ import com.evandev.modest_meals.effect.ModMobEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+//? if farmers_delight {
 import vectorwing.farmersdelight.common.registry.ModEffects;
+//?}
 
 public class NourishmentEffectHandler {
 
     public static MobEffectInstance getEffectToApply(MobEffectInstance effect) {
+        //? if farmers_delight {
         if (!FarmersDelightCompat.isLoaded()) {
             return effect;
         }
@@ -20,5 +23,7 @@ public class NourishmentEffectHandler {
         return new MobEffectInstance(
                 ModMobEffects.STAMINA_NOURISHMENT, effect.getDuration(), effect.getAmplifier(), effect.isAmbient(), false, true
         );
+        //?} else
+        /*return effect;*/
     }
 }

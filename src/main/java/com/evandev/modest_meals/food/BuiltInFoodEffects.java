@@ -6,8 +6,8 @@ import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
 import com.evandev.modest_meals.trait.impl.EffectGrantTrait;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffectInstance;
+//? if <26.1
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,12 +17,8 @@ import java.util.Set;
 
 public class BuiltInFoodEffects {
 
-    public static List<FoodProperties.PossibleEffect> of(ItemStack stack) {
-        List<FoodProperties.PossibleEffect> effects = new ArrayList<>();
-        FoodProperties food = stack.get(DataComponents.FOOD);
-        if (food != null) {
-            effects.addAll(food.effects());
-        }
+    public static List<FoodEffect> of(ItemStack stack) {
+        List<FoodEffect> effects = new ArrayList<>(FoodEffect.ofStack(stack));
         if (FarmersDelightCompat.isLoaded()) {
             effects.addAll(FarmersDelightSoupEffects.get(stack));
         }
@@ -45,25 +41,29 @@ public class BuiltInFoodEffects {
         return true;
     }
 
-    public static List<FoodProperties.PossibleEffect> kept(ItemStack stack, List<FoodProperties.PossibleEffect> effects) {
+    public static List<FoodEffect> kept(ItemStack stack, List<FoodEffect> effects) {
         return effects.stream().filter(effect -> isKept(stack, effect.effect())).toList();
     }
 
+    //? if <26.1 {
     public static FoodProperties withKeptEffects(ItemStack stack, FoodProperties food) {
-        List<FoodProperties.PossibleEffect> kept = kept(stack, food.effects());
+        List<FoodProperties.PossibleEffect> kept = food.effects().stream()
+                .filter(effect -> isKept(stack, effect.effect()))
+                .toList();
         if (kept.size() == food.effects().size()) {
             return food;
         }
         return new FoodProperties(food.nutrition(), food.saturation(), food.canAlwaysEat(), food.eatSeconds(),
                 food.usingConvertsTo(), kept);
     }
+    //?}
 
     public static List<FoodTrait> appendTo(ItemStack stack, List<FoodTrait> traits, Set<String> suppressed) {
         if (stack.isEmpty()) {
             return traits;
         }
         List<FoodTrait> result = new ArrayList<>(traits);
-        for (FoodProperties.PossibleEffect possible : of(stack)) {
+        for (FoodEffect possible : of(stack)) {
             MobEffectInstance effect = possible.effect();
             String key = FoodTraitManager.effectGrantKey(effect.getEffect());
             if (suppressed.contains(key) || result.stream().anyMatch(t -> FoodTraitManager.getMergeKey(t).equals(key))) {

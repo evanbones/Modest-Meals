@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.mixin;
 
 import com.evandev.modest_meals.config.ModConfig;
+import com.evandev.modest_meals.stamina.SprintRules;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
@@ -31,30 +32,10 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         return canSprint;
     }
 
+    //? if <26.1 {
     @WrapMethod(method = "hasEnoughFoodToStartSprinting")
     private boolean mm$canPlayerSprint(Operation<Boolean> original) {
-        if (this.isPassenger() || this.getAbilities().mayfly) {
-            return true;
-        }
-        if (!ModConfig.get().staminaSprint || !ModConfig.get().staminaSprinting) {
-            switch (ModConfig.get().sprinting) {
-                case DISABLED -> {
-                    if (!this.isUnderWater()) {
-                        return false;
-                    }
-                }
-                case LIMITED_BY_HEALTH -> {
-                    if (this.getHealth() <= ModConfig.get().sprintingHealthLimit) {
-                        return false;
-                    }
-                }
-                case VANILLA -> {
-                }
-            }
-        }
-        if (ModConfig.get().disableHunger) {
-            return true;
-        }
-        return original.call();
+        return SprintRules.hasEnoughFoodToSprint(this, original::call);
     }
+    //?}
 }

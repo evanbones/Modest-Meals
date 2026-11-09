@@ -121,6 +121,12 @@
   "config.modest_meals.option.hide_stamina_bar": "Hide Stamina Bar",
   "config.modest_meals.option.hide_stamina_bar.tooltip": "Hides the stamina bar icon display from the HUD.",
 
+  "config.modest_meals.option.stamina_bar_offset_x": "Stamina Bar X Offset",
+  "config.modest_meals.option.stamina_bar_offset_x.tooltip": "Moves the stamina bar left (negative) or right (positive), in pixels.",
+
+  "config.modest_meals.option.stamina_bar_offset_y": "Stamina Bar Y Offset",
+  "config.modest_meals.option.stamina_bar_offset_y.tooltip": "Moves the stamina bar down (negative) or up (positive), in pixels.",
+
   "config.modest_meals.option.hide_stamina_bar_moving": "Hide Moving Indicator",
   "config.modest_meals.option.hide_stamina_bar_moving.tooltip": "Disables the red indicator icons shown when stamina cannot recover while moving.",
 

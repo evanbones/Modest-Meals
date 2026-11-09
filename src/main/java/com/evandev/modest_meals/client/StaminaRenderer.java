@@ -5,7 +5,6 @@ import com.evandev.modest_meals.client.hud.StaminaSprites;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaHelper;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -167,8 +166,8 @@ public abstract class StaminaRenderer {
         PlayerStamina stamina = StaminaHelper.get(player);
         int width = minecraft.getWindow().getGuiScaledWidth();
         int height = minecraft.getWindow().getGuiScaledHeight();
-        int left = width / 2 + 91 + offsetLeft;
-        int baseTop = height - rightHeight;
+        int left = width / 2 + 91 + offsetLeft + ModConfig.get().staminaBarOffsetX;
+        int baseTop = height - rightHeight - ModConfig.get().staminaBarOffsetY;
         int level = stamina.getData().getStamina();
         int maxLevel = stamina.getMaxLevel();
         int previewLevel = getPreviewLevel(player, stamina);
@@ -187,8 +186,7 @@ public abstract class StaminaRenderer {
 
         boolean highlight = shouldHighlight(stamina);
 
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
+        RenderCompat.prepareHud();
 
         for (int i = 0; i < icons; i++) {
             int x = left - (i % ICONS_PER_ROW) * 8 - ICON_SIZE;
@@ -200,20 +198,17 @@ public abstract class StaminaRenderer {
             int icon = i * 2 + 1;
             ResourceLocation sprite = getSprite(stamina, icon);
 
-            graphics.blitSprite(ModSprites.STAMINA_EMPTY, x, top, ICON_SIZE, ICON_SIZE);
-            graphics.blitSprite(sprite, x, top, ICON_SIZE, ICON_SIZE);
+            RenderCompat.blitSprite(graphics, ModSprites.STAMINA_EMPTY, x, top, ICON_SIZE, ICON_SIZE);
+            RenderCompat.blitSprite(graphics, sprite, x, top, ICON_SIZE, ICON_SIZE);
 
             renderPreview(graphics, x, top, icon, level, previewLevel);
 
             if (highlight) {
-                graphics.pose().pushPose();
-                graphics.pose().translate(0.0F, 0.0F, 1.0F);
-                graphics.blitSprite(ModSprites.STAMINA_HIGHLIGHT, x, top, ICON_SIZE, ICON_SIZE);
-                graphics.pose().popPose();
+                RenderCompat.blitSprite(graphics, ModSprites.STAMINA_HIGHLIGHT, x, top, ICON_SIZE, ICON_SIZE);
             }
         }
 
-        RenderSystem.disableBlend();
+        RenderCompat.disableBlend();
     }
 
     private static void renderPreview(GuiGraphics graphics, int x, int y, int icon, int level, int previewLevel) {
@@ -233,21 +228,17 @@ public abstract class StaminaRenderer {
     }
 
     private static void drawPreviewSprite(GuiGraphics graphics, int x, int y, ResourceLocation sprite) {
-        withPreviewColor(graphics, () -> graphics.blitSprite(sprite, x, y, ICON_SIZE, ICON_SIZE));
+        RenderCompat.blitSprite(graphics, sprite, x, y, ICON_SIZE, ICON_SIZE, previewColor());
     }
 
     private static void drawPreviewTexture(GuiGraphics graphics, int x, int y, ResourceLocation texture) {
         if (!StaminaSprites.isOtherHalfAvailable()) {
             return;
         }
-        withPreviewColor(graphics, () -> graphics.blit(texture, x, y, 0.0F, 0.0F, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE));
+        RenderCompat.blitTexture(graphics, texture, x, y, 0.0F, 0.0F, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE, previewColor());
     }
 
-    private static void withPreviewColor(GuiGraphics graphics, Runnable draw) {
-        Color color = ModConfig.get().restoredStaminaOverlayColor;
-        float[] rgba = color.getRGBComponents(null);
-        graphics.setColor(rgba[0], rgba[1], rgba[2], rgba[3]);
-        draw.run();
-        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+    private static int previewColor() {
+        return ModConfig.get().restoredStaminaOverlayColor.getRGB();
     }
 }

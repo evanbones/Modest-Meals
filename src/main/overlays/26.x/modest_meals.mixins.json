@@ -1,0 +1,34 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.evandev.modest_meals.mixin",
+  "compatibilityLevel": "JAVA_${java_version}",
+  "mixins": [
+    "ApplyStatusEffectsConsumeEffectMixin",
+    "BlockStateBaseMixin",
+    "ConsumableMixin",
+    "FoodDataMixin",
+    "FoodPropertiesMixin",
+    "LivingEntityMixin",
+    "MobEffectInstanceAccessor",
+    "PlayerMixin",
+    "RecipeManagerMixin",
+    "ReloadableServerResourcesMixin",
+    "ServerGamePacketListenerImplAccessor",
+    "ShapedRecipeAccessor",
+    "ShapelessRecipeAccessor",
+    "compat.GlidingStateMixin"
+  ],
+  "client": [
+    "GuiMixin",
+    "compat.RollManagerMixin",
+    "LocalPlayerMixin",
+    "MinecraftMixin",
+    "SpriteContentsAccessor",
+    "TooltipComponentMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

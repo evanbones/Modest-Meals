@@ -1,61 +1,29 @@
 package com.evandev.modest_meals;
 
 import com.evandev.modest_meals.attribute.ModAttributes;
-import com.evandev.modest_meals.client.ClientConfigSetup;
-import com.evandev.modest_meals.client.ClientEventHandler;
-import com.evandev.modest_meals.compat.cold_sweat.ColdSweatCompat;
 import com.evandev.modest_meals.compat.combat_roll.CombatRollCompat;
 import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
-import com.evandev.modest_meals.compat.shield_expansion.ShieldExpansionCompat;
 import com.evandev.modest_meals.component.ModDataComponents;
-import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
-import com.evandev.modest_meals.event.CommonEventHandler;
-import com.evandev.modest_meals.food.CustomFoodDatapack;
-import com.evandev.modest_meals.network.ModNetworking;
 import com.evandev.modest_meals.recipe.ModRecipes;
 import com.evandev.modest_meals.registry.ModBlocks;
 import com.evandev.modest_meals.registry.ModCreativeTabs;
 import com.evandev.modest_meals.registry.ModItems;
 import com.evandev.modest_meals.trait.FoodTraitType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.common.NeoForge;
 
-@Mod(Constants.MOD_ID)
-public class ModestMeals {
-    public ModestMeals(IEventBus modEventBus, ModContainer modContainer) {
-        ModAttributes.register(modEventBus);
-        ModMobEffects.register(modEventBus);
-        FoodTraitType.register(modEventBus);
-        ModDataComponents.register(modEventBus);
-        ModBlocks.register(modEventBus);
-        ModItems.register(modEventBus);
-        ModCreativeTabs.register(modEventBus);
-        ModRecipes.register(modEventBus);
-        FarmersDelightCompat.register(modEventBus);
-        CulturalDelightsCompat.register(modEventBus);
-        modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(ModNetworking::registerPayloads);
-        modEventBus.addListener(CustomFoodDatapack::onAddPackFinders);
-
-        NeoForge.EVENT_BUS.register(CommonEventHandler.class);
-        ColdSweatCompat.register();
-        ShieldExpansionCompat.init();
+public final class ModestMeals {
+    public static void init() {
+        ModAttributes.init();
+        ModMobEffects.init();
+        FoodTraitType.init();
+        ModDataComponents.init();
+        ModBlocks.init();
+        ModItems.init();
+        ModCreativeTabs.init();
+        ModRecipes.init();
+        FarmersDelightCompat.init();
+        CulturalDelightsCompat.init();
         CombatRollCompat.init();
-
-        if (FMLEnvironment.dist.isClient()) {
-            ClientConfigSetup.register(modContainer);
-            modEventBus.register(ClientEventHandler.class);
-            NeoForge.EVENT_BUS.register(ClientEventHandler.GameEvents.class);
-        }
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        ModConfig.load();
     }
 }

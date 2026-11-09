@@ -15,6 +15,11 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+//? if >=26.1 {
+/*import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+*///?}
 
 public class MealBlockEntity extends BlockEntity {
     private static final String CONTENTS_KEY = "contents";
@@ -29,6 +34,33 @@ public class MealBlockEntity extends BlockEntity {
         return contents;
     }
 
+    //? if >=26.1 {
+    /*@Override
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.store(CONTENTS_KEY, MealContents.CODEC, contents);
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        contents = input.read(CONTENTS_KEY, MealContents.CODEC).orElse(MealContents.EMPTY);
+        //? if fabric
+        redraw();
+    }
+
+    @Override
+    protected void applyImplicitComponents(DataComponentGetter components) {
+        super.applyImplicitComponents(components);
+        MealContents fromItem = components.get(ModDataComponents.MEAL_CONTENTS.get());
+        contents = fromItem == null ? MealContents.EMPTY : fromItem;
+    }
+
+    @Override
+    public void removeComponentsFromTag(ValueOutput output) {
+        output.discard(CONTENTS_KEY);
+    }
+    *///?} else {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
@@ -43,6 +75,8 @@ public class MealBlockEntity extends BlockEntity {
                 ? MealContents.CODEC.parse(registries.createSerializationContext(NbtOps.INSTANCE), tag.get(CONTENTS_KEY))
                         .result().orElse(MealContents.EMPTY)
                 : MealContents.EMPTY;
+        //? if fabric
+        redraw();
     }
 
     @Override
@@ -53,16 +87,17 @@ public class MealBlockEntity extends BlockEntity {
     }
 
     @Override
+    public void removeComponentsFromTag(CompoundTag tag) {
+        tag.remove(CONTENTS_KEY);
+    }
+    //?}
+
+    @Override
     protected void collectImplicitComponents(DataComponentMap.Builder components) {
         super.collectImplicitComponents(components);
         if (contents != MealContents.EMPTY) {
             components.set(ModDataComponents.MEAL_CONTENTS.get(), contents);
         }
-    }
-
-    @Override
-    public void removeComponentsFromTag(CompoundTag tag) {
-        tag.remove(CONTENTS_KEY);
     }
 
     @Override
@@ -75,7 +110,20 @@ public class MealBlockEntity extends BlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
+    //? if neoforge && >=26.1 {
+    /*@Override
+    public void onDataPacket(Connection connection, ValueInput input) {
+        super.onDataPacket(connection, input);
+        redraw();
+    }
+
     @Override
+    public void handleUpdateTag(ValueInput input) {
+        super.handleUpdateTag(input);
+        redraw();
+    }
+    *///?} else if neoforge {
+    /*@Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
         super.onDataPacket(connection, packet, registries);
         redraw();
@@ -86,9 +134,10 @@ public class MealBlockEntity extends BlockEntity {
         super.handleUpdateTag(tag, registries);
         redraw();
     }
+    *///?}
 
     private void redraw() {
-        if (level != null && level.isClientSide) {
+        if (level != null && level.isClientSide()) {
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_IMMEDIATE);
         }
     }

@@ -1,23 +1,31 @@
 package com.evandev.modest_meals.recipe;
 
-import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.platform.RegistrationProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
+//? if >=26.1 {
+/*import com.mojang.serialization.MapCodec;
+import net.minecraft.network.codec.StreamCodec;
+*///?} else
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+
 public class ModRecipes {
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
-            DeferredRegister.create(Registries.RECIPE_SERIALIZER, Constants.MOD_ID);
+    private static final RegistrationProvider<RecipeSerializer<?>> RECIPE_SERIALIZERS =
+            RegistrationProvider.get(Registries.RECIPE_SERIALIZER);
 
-    public static final Supplier<SimpleCraftingRecipeSerializer<MealCraftingRecipe>> MEAL_CRAFTING =
-            RECIPE_SERIALIZERS.register("meal_crafting",
-                    () -> new SimpleCraftingRecipeSerializer<>(MealCraftingRecipe::new));
+    public static final Supplier<RecipeSerializer<MealCraftingRecipe>> MEAL_CRAFTING =
+            RECIPE_SERIALIZERS.<RecipeSerializer<MealCraftingRecipe>>register("meal_crafting", ModRecipes::mealCraftingSerializer);
 
-    public static void register(IEventBus modBus) {
-        RECIPE_SERIALIZERS.register(modBus);
+    private static RecipeSerializer<MealCraftingRecipe> mealCraftingSerializer() {
+        //? if >=26.1 {
+        /*return new RecipeSerializer<>(MapCodec.unit(MealCraftingRecipe::new), StreamCodec.unit(new MealCraftingRecipe()));
+        *///?} else
+        return new SimpleCraftingRecipeSerializer<>(MealCraftingRecipe::new);
+    }
+
+    public static void init() {
     }
 }

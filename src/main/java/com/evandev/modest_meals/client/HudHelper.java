@@ -2,18 +2,13 @@ package com.evandev.modest_meals.client;
 
 import com.evandev.modest_meals.config.HudLayoutOption;
 import com.evandev.modest_meals.config.ModConfig;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import org.joml.Matrix4f;
 
 public abstract class HudHelper {
     public static final ResourceLocation ARMOR_EMPTY_SPRITE = ResourceLocation.withDefaultNamespace("hud/armor_empty");
@@ -64,24 +59,7 @@ public abstract class HudHelper {
     }
 
     private static void renderInverseHalfArmor(GuiGraphics graphics, int x, int y) {
-        TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(ARMOR_HALF_SPRITE);
-
-        RenderSystem.setShaderTexture(0, sprite.atlasLocation());
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-
-        Matrix4f matrix = graphics.pose().last().pose();
-        Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder builder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-
-        builder.addVertex(matrix, x, y + 9, 0.0F).setUv(sprite.getU1(), sprite.getV1());
-        builder.addVertex(matrix, x + 9, y + 9, 0.0F).setUv(sprite.getU0(), sprite.getV1());
-        builder.addVertex(matrix, x + 9, y, 0.0F).setUv(sprite.getU0(), sprite.getV0());
-        builder.addVertex(matrix, x, y, 0.0F).setUv(sprite.getU1(), sprite.getV0());
-
-        MeshData meshData = builder.build();
-        if (meshData != null) {
-            BufferUploader.drawWithShader(meshData);
-        }
+        RenderCompat.blitSpriteMirrored(graphics, RenderCompat.guiSprite(ARMOR_HALF_SPRITE), x, y, 9, 9);
     }
 
     public static void renderArmor(GuiGraphics graphics, int offsetHeight, int offsetRight) {
@@ -94,7 +72,7 @@ public abstract class HudHelper {
         int armor = player.getArmorValue();
         int top = graphics.guiHeight() - offsetHeight;
 
-        RenderSystem.enableBlend();
+        RenderCompat.enableBlend();
 
         for (int i = 1; armor > 0 && i < 20; i += 2) {
             right -= 8;
@@ -102,13 +80,13 @@ public abstract class HudHelper {
             if (i == armor) {
                 renderInverseHalfArmor(graphics, right, top);
             } else if (i < armor) {
-                graphics.blitSprite(ARMOR_FULL_SPRITE, right, top, 9, 9);
+                RenderCompat.blitSprite(graphics, ARMOR_FULL_SPRITE, right, top, 9, 9);
             } else {
-                graphics.blitSprite(ARMOR_EMPTY_SPRITE, right, top, 9, 9);
+                RenderCompat.blitSprite(graphics, ARMOR_EMPTY_SPRITE, right, top, 9, 9);
             }
         }
 
-        RenderSystem.disableBlend();
+        RenderCompat.disableBlend();
     }
 
     public static void renderAir(GuiGraphics graphics, int offsetHeight, int offsetLeft) {
@@ -123,12 +101,12 @@ public abstract class HudHelper {
         int full = Mth.ceil((double) (air - 2) * 10.0D / 300.0D);
         int partial = Mth.ceil((double) air * 10.0D / 300.0D) - full;
 
-        RenderSystem.enableBlend();
+        RenderCompat.enableBlend();
 
         for (int i = 0; i < full + partial; ++i) {
-            graphics.blitSprite(i < full ? AIR_SPRITE : AIR_BURSTING_SPRITE, offsetLeft + i * 8 + 9, top, 9, 9);
+            RenderCompat.blitSprite(graphics, i < full ? AIR_SPRITE : AIR_BURSTING_SPRITE, offsetLeft + i * 8 + 9, top, 9, 9);
         }
 
-        RenderSystem.disableBlend();
+        RenderCompat.disableBlend();
     }
 }

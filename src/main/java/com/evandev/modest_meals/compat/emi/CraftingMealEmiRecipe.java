@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.emi;
 
+//? if emi {
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.item.MealItem;
@@ -132,3 +133,4 @@ public class CraftingMealEmiRecipe extends MealEmiRecipe {
         widgets.addSlot(output, 92, 14).large(true).recipeContext(this);
     }
 }
+//?}

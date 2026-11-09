@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.compat.emi;
 
+//? if emi {
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.item.MealItem;
@@ -54,7 +55,7 @@ public abstract class MealEmiRecipe implements EmiRecipe {
         List<EmiIngredient> base = new ArrayList<>();
         for (MealType.BaseEntry entry : type.base()) {
             for (int i = 0; i < entry.count(); i++) {
-                base.add(EmiIngredient.of(entry.ingredient()));
+                base.add(EmiIngredient.of(entry.ingredient().displayStacks().stream().map(EmiStack::of).toList()));
             }
         }
         return base;
@@ -82,7 +83,7 @@ public abstract class MealEmiRecipe implements EmiRecipe {
     }
 
     protected static Optional<List<EmiIngredient>> overrideFillings(MealType.ItemOverride override) {
-        List<EmiIngredient> fillings = override.matchers().stream().map(EmiIngredient::of).toList();
+        List<EmiIngredient> fillings = override.ingredients().stream().map(MealType.ItemOverride::parseIngredient).map(EmiIngredient::of).toList();
         return fillings.stream().anyMatch(EmiIngredient::isEmpty) ? Optional.empty() : Optional.of(fillings);
     }
 
@@ -170,3 +171,4 @@ public abstract class MealEmiRecipe implements EmiRecipe {
         return true;
     }
 }
+//?}

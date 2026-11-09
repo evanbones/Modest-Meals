@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.mixin;
 
+import com.evandev.modest_meals.food.FoodConsumption;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.compat.farmers_delight.NourishmentEffectHandler;
 import com.evandev.modest_meals.config.HungerEffectOption;
@@ -53,6 +54,7 @@ public abstract class LivingEntityMixin {
         return original.call(effect, source);
     }
 
+    //? if <26.1 {
     @WrapOperation(
             method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;",
             at = @At(
@@ -64,6 +66,7 @@ public abstract class LivingEntityMixin {
                                          @Local(argsOnly = true) ItemStack stack) {
         original.call(entity, BuiltInFoodEffects.withKeptEffects(stack, food));
     }
+    //?}
 
     @WrapOperation(
             method = "startUsingItem",
@@ -75,7 +78,7 @@ public abstract class LivingEntityMixin {
     private int mm$setCurrentHandMaxUseTime(
             ItemStack stack, LivingEntity user, Operation<Integer> original
     ) {
-        if (stack.getFoodProperties(user) == null) {
+        if (FoodConsumption.foodOf(stack, user) == null) {
             return original.call(stack, user);
         }
         if (ModConfig.get().instantEating) {

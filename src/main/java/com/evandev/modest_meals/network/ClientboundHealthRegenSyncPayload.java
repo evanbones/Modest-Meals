@@ -8,7 +8,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundHealthRegenSyncPayload(int consumedNutrition) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<ClientboundHealthRegenSyncPayload> TYPE =
@@ -21,11 +20,9 @@ public record ClientboundHealthRegenSyncPayload(int consumedNutrition) implement
                     ClientboundHealthRegenSyncPayload::new
             );
 
-    public static void handle(ClientboundHealthRegenSyncPayload payload, IPayloadContext context) {
-        context.enqueueWork(() -> {
-            Player player = context.player();
-            HealthRegenHelper.get(player).setClientConsumedNutrition(payload.consumedNutrition());
-        });
+    public static void handle(ClientboundHealthRegenSyncPayload payload, ClientPacketContext context) {
+        Player player = context.player();
+        HealthRegenHelper.get(player).setClientConsumedNutrition(payload.consumedNutrition());
     }
 
     @Override

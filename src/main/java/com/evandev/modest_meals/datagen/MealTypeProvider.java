@@ -1,6 +1,8 @@
 package com.evandev.modest_meals.datagen;
 
-import com.evandev.modest_meals.Constants;
+//? if neoforge_legacy {
+/*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.food.meal.ItemMatcher;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.registry.ModItems;
 import com.evandev.modest_meals.tag.ModItemTags;
@@ -14,9 +16,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.crafting.CompoundIngredient;
-import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import java.util.List;
 import java.util.Map;
@@ -50,8 +49,8 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
     }
 
     @SafeVarargs
-    private static Ingredient tags(TagKey<Item>... tags) {
-        return Ingredient.fromValues(Stream.of(tags).map(Ingredient.TagValue::new));
+    private static ItemMatcher tags(TagKey<Item>... tags) {
+        return ItemMatcher.tags(tags);
     }
 
     private static String any() {
@@ -72,40 +71,40 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
 
     @Override
     protected void collect(Map<ResourceLocation, MealType> entries) {
-        Ingredient soupBase = withWaterBottle(SOUP_BASES);
-        Ingredient bowl = Ingredient.of(Items.BOWL);
+        ItemMatcher soupBase = withWaterBottle(SOUP_BASES);
+        ItemMatcher bowl = ItemMatcher.item(Items.BOWL);
 
-        Ingredient savoryOnly = tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS, ModItemTags.STAPLES);
-        Ingredient savoryNoFruit = tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS, ModItemTags.STAPLES,
+        ItemMatcher savoryOnly = tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS, ModItemTags.STAPLES);
+        ItemMatcher savoryNoFruit = tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS, ModItemTags.STAPLES,
                 ModItemTags.JAM_FRUITS);
 
         put(entries, "curry", ModItems.CURRY, MealType.Station.COOKING_POT,
-                List.of(new MealType.BaseEntry(Ingredient.of(RICES), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(RICES), 1)),
                 Optional.empty(), 2, 5, Optional.of(itemId(Items.BOWL)), 25,
                 MealType.Rules.forbidding(savoryOnly));
         put(entries, "jam", ModItems.JAM, MealType.Station.COOKING_POT,
-                List.of(new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.item(Items.SUGAR), 1)),
                 Optional.empty(), 1, 3, Optional.of(itemId(Items.GLASS_BOTTLE)), 30,
-                MealType.Rules.allowing(Ingredient.of(ModItemTags.JAM_FRUITS))
-                        .withForbidden(Ingredient.of(ModItemTags.NOT_FOR_JAM)));
+                MealType.Rules.allowing(ItemMatcher.tag(ModItemTags.JAM_FRUITS))
+                        .withForbidden(ItemMatcher.tag(ModItemTags.NOT_FOR_JAM)));
 
         put(entries, "soup", ModItems.SOUP, MealType.Station.COOKING_POT,
                 List.of(new MealType.BaseEntry(soupBase, 1)),
                 Optional.empty(), 2, 5, Optional.of(itemId(Items.BOWL)), 0);
         put(entries, "salad", ModItems.SALAD, MealType.Station.CRAFTING_TABLE,
                 List.of(new MealType.BaseEntry(bowl, 1),
-                        new MealType.BaseEntry(Ingredient.of(LEAFY_GREENS), 1)),
+                        new MealType.BaseEntry(ItemMatcher.tag(LEAFY_GREENS), 1)),
                 Optional.empty(), 1, 3, Optional.of(itemId(Items.BOWL)), 5,
                 MealType.Rules.requiring(tags(VEGETABLES, LEAFY_GREENS, FRUITS, BERRIES))
                         .withForbidden(tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS, ModItemTags.STAPLES,
                                 RAW_MEATS)));
         put(entries, "ramen", ModItems.RAMEN, MealType.Station.COOKING_POT,
-                List.of(new MealType.BaseEntry(Ingredient.of(PASTAS), 1),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(PASTAS), 1),
                         new MealType.BaseEntry(soupBase, 1)),
                 Optional.empty(), 1, 4, Optional.of(itemId(Items.BOWL)), 20,
                 MealType.Rules.forbidding(savoryNoFruit));
         put(entries, "pasta", ModItems.PASTA, MealType.Station.COOKING_POT,
-                List.of(new MealType.BaseEntry(Ingredient.of(PASTAS), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(PASTAS), 1)),
                 Optional.empty(), 1, 4, Optional.of(itemId(Items.BOWL)), 15,
                 MealType.Rules.forbidding(savoryNoFruit));
 
@@ -114,8 +113,8 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 iceCreamId,
                 itemId(ModItems.ICE_CREAM.get()),
                 MealType.Station.VAT,
-                List.of(new MealType.BaseEntry(Ingredient.of(MILKS), 1),
-                        new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(MILKS), 1),
+                        new MealType.BaseEntry(ItemMatcher.item(Items.SUGAR), 1)),
                 Optional.empty(),
                 1,
                 1,
@@ -133,8 +132,8 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 iceCreamBowlId,
                 itemId(ModItems.ICE_CREAM_BOWL.get()),
                 MealType.Station.VAT,
-                List.of(new MealType.BaseEntry(Ingredient.of(MILKS), 1),
-                        new MealType.BaseEntry(Ingredient.of(Items.SUGAR), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(MILKS), 1),
+                        new MealType.BaseEntry(ItemMatcher.item(Items.SUGAR), 1)),
                 Optional.empty(),
                 1,
                 3,
@@ -163,13 +162,13 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/sandwich/sandwich_top")
                 )),
                 List.of()
-        ).withRules(MealType.Rules.forbidding(Ingredient.of(ModItemTags.NOT_FOR_DISHES))));
+        ).withRules(MealType.Rules.forbidding(ItemMatcher.tag(ModItemTags.NOT_FOR_DISHES))));
         ResourceLocation wrapId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "wrap");
         entries.put(wrapId, new MealType(
                 wrapId,
                 itemId(ModItems.WRAP.get()),
                 MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(TORTILLAS), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(TORTILLAS), 1)),
                 Optional.empty(),
                 3,
                 3,
@@ -181,7 +180,7 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/wrap/wrap_base")
                 )),
                 List.of()
-        ).withRules(MealType.Rules.forbidding(Ingredient.of(ModItemTags.NOT_FOR_DISHES))));
+        ).withRules(MealType.Rules.forbidding(ItemMatcher.tag(ModItemTags.NOT_FOR_DISHES))));
         ResourceLocation pizzaId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "pizza");
         entries.put(pizzaId, new MealType(
                 pizzaId,
@@ -203,10 +202,10 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         ).withRules(MealType.Rules.forbidding(tags(ModItemTags.NOT_FOR_DISHES, ModItemTags.SWEETS,
                 ModItemTags.STAPLES, ModItemTags.JAM_FRUITS, MILKS))));
         put(entries, "roll", ModItems.ROLL, MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(COOKED_RICES), 1),
-                        new MealType.BaseEntry(Ingredient.of(Items.DRIED_KELP), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(COOKED_RICES), 1),
+                        new MealType.BaseEntry(ItemMatcher.item(Items.DRIED_KELP), 1)),
                 Optional.empty(), 1, 3, Optional.empty(), 10,
-                MealType.Rules.allowing(Ingredient.of(ModItemTags.ROLL_FILLINGS)));
+                MealType.Rules.allowing(ItemMatcher.tag(ModItemTags.ROLL_FILLINGS)));
         shapedMeal(entries, "pie", ModItems.PIE, 1, 3, List.of("###", "SOS"),
                 Map.of("S", id(Items.SUGAR), "O", "#" + PIE_CRUSTS.location(), "#", any()));
         shapedMeal(entries, "cake", ModItems.CAKE, 1, 3, List.of("M#M", "#E#", "WSW"),
@@ -215,13 +214,13 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         ResourceLocation milkshakeId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "milkshake");
         entries.put(milkshakeId, new MealType(milkshakeId, itemId(ModItems.MILKSHAKE.get()),
                 MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(Ingredient.of(MILKS), 1),
-                        new MealType.BaseEntry(Ingredient.of(Items.GLASS_BOTTLE), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(MILKS), 1),
+                        new MealType.BaseEntry(ItemMatcher.item(Items.GLASS_BOTTLE), 1)),
                 Optional.empty(), 1, 1, Optional.of(itemId(Items.GLASS_BOTTLE)), 30, true,
                 Optional.of(mealSprite("milkshake", "dubious")),
                 Optional.of(new MealType.BaseSprites(mealSprite("milkshake", "milkshake_bottom"),
                         mealSprite("milkshake", "milkshake_top"))),
-                List.of()).withRules(MealType.Rules.forbidding(Ingredient.of(ModItemTags.NOT_FOR_DISHES))));
+                List.of()).withRules(MealType.Rules.forbidding(ItemMatcher.tag(ModItemTags.NOT_FOR_DISHES))));
 
 
         DishOverrides.build().forEach((name, overrides) -> entries.computeIfPresent(
@@ -236,7 +235,7 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 Optional.of(new MealType.Shape(pattern, key)), min, max, Optional.empty(), 10, true,
                 Optional.of(mealSprite(name, "dubious")),
                 Optional.of(new MealType.BaseSprites(mealSprite(name, name + "_base"))), List.of())
-                .withRules(MealType.Rules.forbidding(Ingredient.of(ModItemTags.NOT_FOR_DISHES))));
+                .withRules(MealType.Rules.forbidding(ItemMatcher.tag(ModItemTags.NOT_FOR_DISHES))));
     }
 
     private void put(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
@@ -260,8 +259,8 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/meal/" + meal + "/" + sprite);
     }
 
-    private static Ingredient withWaterBottle(TagKey<Item> liquids) {
-        return CompoundIngredient.of(Ingredient.of(liquids), DataComponentIngredient.of(false,
-                DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER), Items.POTION));
+    private static ItemMatcher withWaterBottle(TagKey<Item> liquids) {
+        return ItemMatcher.tag(liquids).or(ItemMatcher.withComponent(Items.POTION, DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER)));
     }
 }
+*///?}

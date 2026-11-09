@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.event;
 
+import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.api.StaminaApi;
 import com.evandev.modest_meals.compat.reliable_gliders.ReliableGlidersCompat;
 import com.evandev.modest_meals.compat.shield_expansion.ShieldExpansionCompat;
@@ -20,23 +21,20 @@ import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.stamina.StaminaHolder;
 import com.evandev.modest_meals.tag.ModBlockTags;
 import com.evandev.modest_meals.trait.FoodTraitManager;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
-import net.neoforged.neoforge.event.OnDatapackSyncEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-public class CommonEventHandler {
-    @SubscribeEvent
-    public static void onPlayerTick(PlayerTickEvent.Post event) {
-        Player player = event.getEntity();
+import java.util.List;
+import java.util.Map;
 
+public class CommonEvents {
+    public static void onPlayerTick(Player player) {
         if (player.isCreative() || player.isSpectator()) {
             return;
         }
@@ -74,20 +72,16 @@ public class CommonEventHandler {
         }
     }
 
-    @SubscribeEvent
-    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        Player player = event.getEntity();
+    public static boolean allowBlockInteraction(Player player, Level level, BlockPos pos) {
         float cost = ModConfig.get().staminaHandCrankCost;
-        if (cost <= 0.0F || !StaminaApi.isEnabled() || player.isCreative() || player.isSpectator() || player instanceof FakePlayer) {
-            return;
+        if (cost <= 0.0F || !StaminaApi.isEnabled() || player.isCreative() || player.isSpectator() || Platform.isFakePlayer(player)) {
+            return true;
         }
-        if (!event.getLevel().getBlockState(event.getPos()).is(ModBlockTags.STAMINA_CRANKS)) {
-            return;
+        if (!level.getBlockState(pos).is(ModBlockTags.STAMINA_CRANKS)) {
+            return true;
         }
         if (StaminaApi.isExhausted(player)) {
-            event.setCanceled(true);
-            event.setCancellationResult(InteractionResult.FAIL);
-            return;
+            return false;
         }
         if (!player.level().isClientSide()) {
             PlayerStamina stamina = StaminaHelper.get(player);
@@ -95,28 +89,21 @@ public class CommonEventHandler {
             stamina.getData().setCooldown(stamina.getCooldownInTicks());
             stamina.syncNow();
         }
+        return true;
     }
 
-    @SubscribeEvent
-    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-            ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
-            HealthRegenHelper.get(serverPlayer).sync();
-        }
+    public static void onPlayerLoggedIn(ServerPlayer serverPlayer) {
+        ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
+        HealthRegenHelper.get(serverPlayer).sync();
     }
 
-    @SubscribeEvent
-    public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-        StaminaHelper.remove(event.getEntity());
+    public static void onPlayerLoggedOut(Player player) {
+        StaminaHelper.remove(player);
     }
 
-    @SubscribeEvent
-    public static void onPlayerClone(PlayerEvent.Clone event) {
-        Player original = event.getOriginal();
-        Player player = event.getEntity();
-
+    public static void onPlayerClone(Player original, Player player, boolean wasDeath) {
         if (original instanceof StaminaHolder origHolder && player instanceof StaminaHolder newHolder) {
-            if (!event.isWasDeath()) {
+            if (!wasDeath) {
                 newHolder.mm$setStaminaData(origHolder.mm$getStaminaData());
             }
         }
@@ -127,40 +114,39 @@ public class CommonEventHandler {
         }
     }
 
-    @SubscribeEvent
-    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-            PlayerStamina stamina = StaminaHelper.get(serverPlayer);
-            stamina.reset();
-            HealthRegenHelper.get(serverPlayer).reset();
-            ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
-            HealthRegenHelper.get(serverPlayer).sync();
-        }
+    public static void onPlayerRespawn(ServerPlayer serverPlayer) {
+        PlayerStamina stamina = StaminaHelper.get(serverPlayer);
+        stamina.reset();
+        HealthRegenHelper.get(serverPlayer).reset();
+        ModNetworking.sendToPlayer(serverPlayer, ClientboundStaminaSyncPayload.create(serverPlayer));
+        HealthRegenHelper.get(serverPlayer).sync();
     }
 
-    @SubscribeEvent
-    public static void onAddReloadListeners(AddReloadListenerEvent event) {
-        event.addListener(FoodTraitManager.INSTANCE);
-        event.addListener(FoodProfileManager.INSTANCE);
-        event.addListener(MealEffectManager.INSTANCE);
-        event.addListener(IngredientProfileManager.INSTANCE);
-        event.addListener(MealTypeManager.INSTANCE);
-        event.addListener(MealFormulaManager.INSTANCE);
-        event.addListener(MealIngredientManager.INSTANCE);
+    public static Map<String, PreparableReloadListener> serverReloadListeners() {
+        return Map.of(
+                "food_traits", FoodTraitManager.INSTANCE,
+                "food_profiles", FoodProfileManager.INSTANCE,
+                "meal_effects", MealEffectManager.INSTANCE,
+                "ingredient_profiles", IngredientProfileManager.INSTANCE,
+                "meal_types", MealTypeManager.INSTANCE,
+                "meal_formula", MealFormulaManager.INSTANCE,
+                "meal_ingredients", MealIngredientManager.INSTANCE
+        );
     }
 
-    @SubscribeEvent
-    public static void onDatapackSync(OnDatapackSyncEvent event) {
-        if (event.getPlayer() == null && event.getPlayerList().getServer().isDedicatedServer()) {
+    public static void onDataPackReloaded(MinecraftServer server) {
+        if (server.isDedicatedServer()) {
             ModConfig.load();
         }
-        event.getRelevantPlayers().forEach(ClientboundConfigSyncPayload::sendTo);
-        ClientboundFoodDataSyncPayload payload = ClientboundFoodDataSyncPayload.create();
-        event.getRelevantPlayers().forEach(player -> ModNetworking.sendToPlayer(player, payload));
     }
 
-    @SubscribeEvent
-    public static void onItemConsumed(LivingEntityUseItemEvent.Finish event) {
-        FoodTraitManager.applyAll(event.getEntity(), event.getItem());
+    public static void onDatapackSync(List<ServerPlayer> players) {
+        players.forEach(ClientboundConfigSyncPayload::sendTo);
+        ClientboundFoodDataSyncPayload payload = ClientboundFoodDataSyncPayload.create();
+        players.forEach(player -> ModNetworking.sendToPlayer(player, payload));
+    }
+
+    public static void onItemConsumed(LivingEntity entity, ItemStack stack) {
+        FoodTraitManager.applyAll(entity, stack);
     }
 }

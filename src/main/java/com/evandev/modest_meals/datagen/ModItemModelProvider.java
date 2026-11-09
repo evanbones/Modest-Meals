@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
-import com.evandev.modest_meals.Constants;
+//? if neoforge_legacy {
+/*import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.registry.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -28,3 +29,4 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "item/" + name));
     }
 }
+*///?}

@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.mixin;
 
+//? if <26.1 {
 import com.evandev.modest_meals.food.FoodConsumption;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -29,3 +30,4 @@ public class ItemMixin {
         return FoodConsumption.canConsume(player, itemStack);
     }
 }
+//?}

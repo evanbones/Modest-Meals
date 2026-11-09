@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
-import com.google.gson.JsonElement;
+//? if neoforge_legacy {
+/*import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.data.CachedOutput;
@@ -50,3 +51,4 @@ public abstract class JsonDataProvider<T> implements DataProvider {
         return name;
     }
 }
+*///?}
