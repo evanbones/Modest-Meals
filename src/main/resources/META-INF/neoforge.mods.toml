@@ -76,7 +76,7 @@ side = "BOTH"
 [[dependencies.${mod_id}]]
 modId = "reliable_remover"
 type = "optional"
-versionRange = "[3.5.2,)"
+versionRange = "[3.9.1,)"
 ordering = "NONE"
 side = "BOTH"
 

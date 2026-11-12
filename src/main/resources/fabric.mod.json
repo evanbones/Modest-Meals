@@ -53,6 +53,7 @@
     "farmersdelight": "*"
   },
   "breaks": {
-    "melancholic_hunger": "*"
+    "melancholic_hunger": "*",
+    "reliable_remover": "<3.9.1"
   }
 }
