@@ -19,11 +19,11 @@ public class ModCreativeTabs {
 
     public static final Supplier<CreativeModeTab> MAIN = CREATIVE_TABS.register("main", () ->
             //? if neoforge {
-            /*CreativeModeTab.builder()
-            *///?} else if >=26.1 {
+            CreativeModeTab.builder()
+            //?} else if >=26.1 {
             /*net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab.builder()
             *///?} else
-            net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup.builder()
+            //net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup.builder()
             .title(Component.translatable("itemGroup.modest_meals"))
             .icon(() -> new ItemStack(ModItems.SANDWICH.get()))
             .displayItems((params, output) -> {

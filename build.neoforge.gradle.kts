@@ -131,7 +131,6 @@ neoForge {
     }
 }
 
-// Blueprint's own data generators crash the data run, so these mods are copied into the client and server mods folders only
 val gameplayMods: Configuration by configurations.creating {
     isTransitive = false
 }
@@ -156,6 +155,12 @@ dependencies {
 
     // Combat Roll
     compileOnly("maven.modrinth:combat-roll:${property("deps.combat_roll")}")
+
+    if (!isLegacy) {
+        // RRV
+        compileOnly("maven.modrinth:rrv:${property("deps.rrv")}")
+        runtimeOnly("maven.modrinth:rrv:${property("deps.rrv")}")
+    }
 
     if (isLegacy) {
         // EMI
@@ -269,7 +274,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         requires("yacl")
         optional("raised", "reliable-remover", "reliable-gliders", "combat-roll")
-        if (isLegacy) optional("farmers-delight", "cultural-delights", "emi", "thermoo", "cold-sweat", "shield-expansion")
+        if (isLegacy) optional("farmers-delight", "cultural-delights", "emi", "thermoo", "cold-sweat", "shield-expansion") else optional("rrv")
         incompatible("melancholic_hunger")
     }
 
@@ -280,7 +285,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         requires("yacl")
         optional("raised", "reliable-remover", "reliable-gliders", "combat-roll")
-        if (isLegacy) optional("farmers-delight", "cultural-delights", "emi", "thermoo", "cold-sweat", "shield-expansion")
+        if (isLegacy) optional("farmers-delight", "cultural-delights", "emi", "thermoo", "cold-sweat", "shield-expansion") else optional("rrv")
         client = true
         server = true
     }

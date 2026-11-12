@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.fabric.mixin;
 
 //? if fabric {
-import com.evandev.modest_meals.food.CustomFoodDatapack;
+/*import com.evandev.modest_meals.food.CustomFoodDatapack;
 import net.minecraft.server.packs.repository.RepositorySource;
 import net.minecraft.server.packs.repository.ServerPacksSource;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,4 +20,4 @@ public abstract class ServerPacksSourceMixin {
         return extended;
     }
 }
-//?}
+*///?}

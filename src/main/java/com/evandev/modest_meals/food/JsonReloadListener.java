@@ -26,12 +26,12 @@ public abstract class JsonReloadListener extends SimpleJsonResourceReloadListene
     }
 
     //? if neoforge {
-    /*protected ItemTagLookup tagLookup() {
+    protected ItemTagLookup tagLookup() {
         return ItemTagLookup.of(this.getContext());
     }
-    *///?} else {
-    protected ItemTagLookup tagLookup() {
+    //?} else {
+    /*protected ItemTagLookup tagLookup() {
         return ItemTagLookup.UNKNOWN;
     }
-    //?}
+    *///?}
 }

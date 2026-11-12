@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.fabric.mixin;
 
 //? if fabric {
-import com.evandev.modest_meals.attribute.ModAttributes;
+/*import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.event.CommonEvents;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -23,4 +23,4 @@ public abstract class PlayerMixin {
         CommonEvents.onPlayerTick((Player) (Object) this);
     }
 }
-//?}
+*///?}

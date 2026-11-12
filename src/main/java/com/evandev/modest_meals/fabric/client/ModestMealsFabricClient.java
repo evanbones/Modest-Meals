@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.fabric.client;
 
 //? if fabric {
-import com.evandev.modest_meals.Constants;
+/*import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.client.MealBlockColors;
 import com.evandev.modest_meals.client.ModestMealsClient;
 import com.evandev.modest_meals.client.StaminaTextRenderer;
@@ -14,14 +14,14 @@ import com.evandev.modest_meals.registry.ModBlocks;
 import com.evandev.modest_meals.registry.ModItems;
 import net.fabricmc.api.ClientModInitializer;
 //? if >=26.1 {
-/*import com.evandev.modest_meals.client.model.MealItemModel;
+/^import com.evandev.modest_meals.client.model.MealItemModel;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.minecraft.client.renderer.item.ItemModels;
 import java.util.List;
-*///?} else {
+^///?} else {
 import com.evandev.modest_meals.client.model.DynamicMealBakedModel;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
@@ -59,14 +59,14 @@ public class ModestMealsFabricClient implements ClientModInitializer {
         ResourceLocation hudPackId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ModestMealsClient.BAISYLIA_HUD_PACK);
         ResourceLocation hudTexturesId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud_textures");
         //? if >=26.1 {
-        /*KeyMappingHelper.registerKeyMapping(ModestMealsClient.OPEN_FOOD_EDITOR_KEY);
+        /^KeyMappingHelper.registerKeyMapping(ModestMealsClient.OPEN_FOOD_EDITOR_KEY);
         BlockColorRegistry.register(List.of(MealBlockColors.TINT), ModBlocks.PIE.get(), ModBlocks.CAKE.get());
         FabricLoader.getInstance().getModContainer(Constants.MOD_ID).ifPresent(container -> ResourceLoader.registerBuiltinPack(
                 hudPackId, container, ModestMealsClient.BAISYLIA_HUD_TITLE, PackActivationType.NORMAL));
         ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(hudTexturesId, ModestMealsClient.RESOURCE_RELOAD_LISTENER);
         ItemModels.ID_MAPPER.put(MealItemModel.ID, MealItemModel.Unbaked.MAP_CODEC);
         FabricHud.register();
-        *///?} else {
+        ^///?} else {
         KeyBindingHelper.registerKeyBinding(ModestMealsClient.OPEN_FOOD_EDITOR_KEY);
         ColorProviderRegistry.BLOCK.register(MealBlockColors::color, ModBlocks.PIE.get(), ModBlocks.CAKE.get());
         FabricLoader.getInstance().getModContainer(Constants.MOD_ID).ifPresent(container ->
@@ -114,4 +114,4 @@ public class ModestMealsFabricClient implements ClientModInitializer {
                         context.client().getConnection() != null && context.client().getConnection().getConnection().isMemoryConnection())));
     }
 }
-//?}
+*///?}

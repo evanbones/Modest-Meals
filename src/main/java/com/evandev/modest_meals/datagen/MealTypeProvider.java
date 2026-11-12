@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
 //? if neoforge_legacy {
-/*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.ItemMatcher;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.registry.ModItems;
@@ -263,4 +263,4 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
         return ItemMatcher.tag(liquids).or(ItemMatcher.withComponent(Items.POTION, DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER)));
     }
 }
-*///?}
+//?}

@@ -8,16 +8,16 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 //? if neoforge
-//import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Pseudo
 //? if neoforge {
-/*@Mixin(targets = "vectorwing.farmersdelight.common.event.CommonEvents", remap = false)
-*///?} else
-@Mixin(targets = "vectorwing.farmersdelight.common.event.CommonEvents")
+@Mixin(targets = "vectorwing.farmersdelight.common.event.CommonEvents", remap = false)
+//?} else
+//@Mixin(targets = "vectorwing.farmersdelight.common.event.CommonEvents")
 public abstract class FarmersDelightSoupEffectsMixin {
 
     @WrapOperation(
@@ -28,13 +28,13 @@ public abstract class FarmersDelightSoupEffectsMixin {
             )
     )
     //? if neoforge {
-    /*private static boolean mm$applyKeptSoupEffect(LivingEntity entity, MobEffectInstance effect, Operation<Boolean> original,
+    private static boolean mm$applyKeptSoupEffect(LivingEntity entity, MobEffectInstance effect, Operation<Boolean> original,
                                                   @Local(argsOnly = true) LivingEntityUseItemEvent.Finish event) {
         ItemStack stack = event.getItem();
-    *///?} else {
-    private static boolean mm$applyKeptSoupEffect(LivingEntity entity, MobEffectInstance effect, Operation<Boolean> original,
+    //?} else {
+    /*private static boolean mm$applyKeptSoupEffect(LivingEntity entity, MobEffectInstance effect, Operation<Boolean> original,
                                                   @Local(argsOnly = true) ItemStack stack) {
-    //?}
+    *///?}
         if (!BuiltInFoodEffects.isKept(stack, effect)) {
             return false;
         }

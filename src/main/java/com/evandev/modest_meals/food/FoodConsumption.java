@@ -16,16 +16,16 @@ public class FoodConsumption {
 
     public static @Nullable FoodProperties foodOf(ItemStack stack, @Nullable LivingEntity entity) {
         //? if neoforge && <26.1 {
-        /*return stack.getFoodProperties(entity);
-        *///?} else {
-        if (stack.getItem() instanceof MealItem meal) {
+        return stack.getFoodProperties(entity);
+        //?} else {
+        /*if (stack.getItem() instanceof MealItem meal) {
             FoodProperties food = meal.mealFoodProperties(stack);
             if (food != null) {
                 return food;
             }
         }
         return stack.get(net.minecraft.core.component.DataComponents.FOOD);
-        //?}
+        *///?}
     }
 
     public static boolean canConsume(Player player, ItemStack stack) {

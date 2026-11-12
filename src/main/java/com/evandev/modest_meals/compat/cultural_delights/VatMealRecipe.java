@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.compat.cultural_delights;
 
-//? if neoforge_legacy {
-/*import com.baisylia.culturaldelights.recipes.ModRecipes;
+//? if cultural_delights {
+import com.baisylia.culturaldelights.recipes.ModRecipes;
 import com.baisylia.culturaldelights.recipes.VatRecipe;
 import com.baisylia.culturaldelights.util.VatTemperature;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
@@ -12,7 +12,6 @@ import com.evandev.modest_meals.recipe.AuthoredRecipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -22,7 +21,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+//?}
+//? if cultural_delights && <26.1
+import net.minecraft.core.HolderLookup;
+//? if neoforge_legacy
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+//? if cultural_delights && fabric
+//import vectorwing.farmersdelight.refabricated.inventory.RecipeWrapper;
+//? if cultural_delights && >=26.1 {
+/*import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.PlacementInfo;
+*///?}
+//? if cultural_delights {
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +48,12 @@ public class VatMealRecipe extends VatRecipe {
     private final ResourceLocation mealTypeId;
 
     public VatMealRecipe(ResourceLocation mealTypeId, VatTemperature temperature, int cookTime) {
+//?}
+        //? if cultural_delights && <26.1
         super(ItemStack.EMPTY, NonNullList.create(), temperature, Ingredient.EMPTY, cookTime);
+        //? if cultural_delights && >=26.1
+        /*super(new ItemStackTemplate(Items.BOWL), NonNullList.create(), temperature, Optional.empty(), cookTime);*/
+//? if cultural_delights {
         this.mealTypeId = mealTypeId;
     }
 
@@ -122,8 +138,7 @@ public class VatMealRecipe extends VatRecipe {
                 .isPresent();
     }
 
-    @Override
-    public ItemStack assemble(RecipeWrapper inventory, HolderLookup.Provider registries) {
+    private ItemStack assembleMeal(RecipeWrapper inventory) {
         return mealType()
                 .flatMap(type -> ingredientsFor(inventory, type)
                         .flatMap(split -> MealAssembler.assemble(type, split.ingredients(), split.base())))
@@ -131,25 +146,34 @@ public class VatMealRecipe extends VatRecipe {
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider registries) {
-        return mealType().flatMap(MealType::resolveItem)
-                .map(item -> new ItemStack(item, mealType().get().servings()))
+    public ItemStack getResultItem() {
+        return mealType().flatMap(type -> type.resolveItem().map(item -> new ItemStack(item, type.servings())))
                 .orElse(ItemStack.EMPTY);
     }
 
-    @Override
-    public ItemStack getResultItem() {
-        return getResultItem(null);
-    }
-
-    @Override
-    public Ingredient getContainer() {
-        return mealType().flatMap(MealType::resolveContainer).map(Ingredient::of).orElse(Ingredient.EMPTY);
+    private Optional<Ingredient> containerIngredient() {
+        return mealType().flatMap(MealType::resolveContainer).map(Ingredient::of);
     }
 
     @Override
     public boolean isSpecial() {
         return true;
+    }
+//?}
+    //? if cultural_delights && <26.1 {
+    @Override
+    public ItemStack assemble(RecipeWrapper inventory, HolderLookup.Provider registries) {
+        return assembleMeal(inventory);
+    }
+
+    @Override
+    public ItemStack getResultItem(HolderLookup.Provider registries) {
+        return getResultItem();
+    }
+
+    @Override
+    public Ingredient getContainer() {
+        return containerIngredient().orElse(Ingredient.EMPTY);
     }
 
     @Override
@@ -157,7 +181,47 @@ public class VatMealRecipe extends VatRecipe {
         return CulturalDelightsCompat.VAT_MEAL_SERIALIZER.get();
     }
 
+    public static RecipeSerializer<VatMealRecipe> serializer() {
+        return new Serializer();
+    }
+
     public static class Serializer implements RecipeSerializer<VatMealRecipe> {
+    //?}
+    //? if cultural_delights && >=26.1 {
+    /*@Override
+    public ItemStack assemble(RecipeWrapper inventory) {
+        return assembleMeal(inventory);
+    }
+
+    @Override
+    public ItemStackTemplate getOutput() {
+        return mealType()
+                .flatMap(type -> type.resolveItem().map(item -> new ItemStackTemplate(item, type.servings())))
+                .orElseGet(super::getOutput);
+    }
+
+    @Override
+    public Optional<Ingredient> getContainer() {
+        return containerIngredient();
+    }
+
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    @Override
+    public RecipeSerializer<VatMealRecipe> getSerializer() {
+        return CulturalDelightsCompat.VAT_MEAL_SERIALIZER.get();
+    }
+
+    public static RecipeSerializer<VatMealRecipe> serializer() {
+        return new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
+    }
+
+    private static class Serializer {
+    *///?}
+    //? if cultural_delights {
         private static final MapCodec<VatMealRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 ResourceLocation.CODEC.fieldOf("meal_type").forGetter(VatMealRecipe::mealTypeId),
                 VatTemperature.CODEC.optionalFieldOf("temperature", VatTemperature.COLD)
@@ -172,7 +236,8 @@ public class VatMealRecipe extends VatRecipe {
                         ByteBufCodecs.VAR_INT, VatMealRecipe::getCookTime,
                         VatMealRecipe::new
                 );
-
+    //?}
+        //? if cultural_delights && <26.1 {
         @Override
         public MapCodec<VatMealRecipe> codec() {
             return CODEC;
@@ -182,6 +247,8 @@ public class VatMealRecipe extends VatRecipe {
         public StreamCodec<RegistryFriendlyByteBuf, VatMealRecipe> streamCodec() {
             return STREAM_CODEC;
         }
+        //?}
+//? if cultural_delights {
     }
 }
-*///?}
+//?}

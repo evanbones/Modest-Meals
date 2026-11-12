@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.compat.emi;
 
-//? if neoforge_legacy {
-/*import com.baisylia.culturaldelights.integration.emi.EMICulturalDelightsPlugin;
+//? if cultural_delights && emi {
+import com.baisylia.culturaldelights.integration.emi.EMICulturalDelightsPlugin;
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.food.meal.MealType;
 import com.evandev.modest_meals.item.MealItem;
@@ -99,14 +99,14 @@ public class VatMealEmiRecipe extends MealEmiRecipe {
 
         SlotWidget containerSlot = widgets.addSlot(container, 62, 38);
         if (!container.isEmpty()) {
-            containerSlot.appendTooltip(Component.translatable("emi.modest_meals.container")
+            containerSlot.appendTooltip(Component.translatable("recipe_viewer.modest_meals.container")
                     .withStyle(ChatFormatting.GRAY));
         }
         widgets.addSlot(COLD_SOURCE, 0, 38).catalyst(true)
-                .appendTooltip(Component.translatable("emi.modest_meals.cold_vat").withStyle(ChatFormatting.AQUA));
+                .appendTooltip(Component.translatable("recipe_viewer.modest_meals.cold_vat").withStyle(ChatFormatting.AQUA));
         if (!isOverride()) {
             widgets.addTexture(EmiTexture.SHAPELESS, 97, 34);
         }
     }
 }
-*///?}
+//?}

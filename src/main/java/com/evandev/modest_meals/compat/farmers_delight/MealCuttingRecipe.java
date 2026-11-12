@@ -17,9 +17,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.util.RandomSource;
 //?}
 //? if neoforge {
-/*import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
-*///?} else
-import vectorwing.farmersdelight.refabricated.inventory.RecipeWrapper;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+//?} else
+//import vectorwing.farmersdelight.refabricated.inventory.RecipeWrapper;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;

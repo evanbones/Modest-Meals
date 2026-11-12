@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.compat.emi;
 
-//? if neoforge_legacy {
-/*import com.baisylia.culturaldelights.integration.emi.VatRecipeHandler;
+//? if cultural_delights && emi {
+import com.baisylia.culturaldelights.integration.emi.VatRecipeHandler;
 import com.baisylia.culturaldelights.screens.ModMenuTypes;
 import com.evandev.modest_meals.compat.cultural_delights.VatMealRecipe;
 import com.evandev.modest_meals.food.meal.MealType;
@@ -55,4 +55,4 @@ public final class VatEmiSupport {
         }
     }
 }
-*///?}
+//?}

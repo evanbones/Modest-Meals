@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.compat.cold_sweat;
 
 //? if neoforge_legacy {
-/*import com.momosoftworks.coldsweat.api.temperature.modifier.TempModifier;
+import com.momosoftworks.coldsweat.api.temperature.modifier.TempModifier;
 import com.momosoftworks.coldsweat.api.util.Temperature;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -33,4 +33,4 @@ public class MealResistanceTempModifier extends TempModifier {
         return value -> Math.min(1.0, value + amount);
     }
 }
-*///?}
+//?}

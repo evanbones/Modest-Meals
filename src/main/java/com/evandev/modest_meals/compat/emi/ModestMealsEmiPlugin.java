@@ -40,11 +40,11 @@ public class ModestMealsEmiPlugin implements EmiPlugin {
         if (FarmersDelightCompat.isLoaded()) {
             CookingPotEmiSupport.register(registry, pool);
         }
-        //? if neoforge_legacy {
-        /*if (CulturalDelightsCompat.isLoaded()) {
+        //? if cultural_delights {
+        if (CulturalDelightsCompat.isLoaded()) {
             VatEmiSupport.register(registry, pool);
         }
-        *///?}
+        //?}
 
         Constants.LOG.debug("Registered EMI recipes for Modest Meals ({} pool ingredients)", pool.size());
     }

@@ -63,9 +63,9 @@ public abstract class RecipeManagerMixin extends SimpleJsonResourceReloadListene
     @org.spongepowered.asm.mixin.Unique
     private ItemTagLookup mm$tagLookup() {
         //? if neoforge {
-        /*return ItemTagLookup.of(this.getContext());
-        *///?} else
-        return ItemTagLookup.UNKNOWN;
+        return ItemTagLookup.of(this.getContext());
+        //?} else
+        //return ItemTagLookup.UNKNOWN;
     }
 }
 //?}

@@ -129,10 +129,10 @@ public abstract class MealEmiRecipe implements EmiRecipe {
 
     protected void decorateFreeSlot(SlotWidget slot) {
         String titleKey = isDubious()
-                ? "emi.modest_meals.unsupported_ingredient"
+                ? "recipe_viewer.modest_meals.unsupported_ingredient"
                 : (type.requiresSupportedIngredients()
-                ? "emi.modest_meals.supported_ingredient"
-                : "emi.modest_meals.any_ingredient");
+                ? "recipe_viewer.modest_meals.supported_ingredient"
+                : "recipe_viewer.modest_meals.any_ingredient");
         slot.appendTooltip(Component.translatable(titleKey)
                 .withStyle(ChatFormatting.YELLOW));
     }

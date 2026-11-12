@@ -5,7 +5,7 @@ plugins {
     id("me.modmuss50.mod-publish-plugin") version "2.2.1" apply false
 }
 
-stonecutter active "1.21.1-fabric"
+stonecutter active "1.21.1-neoforge"
 
 stonecutter parameters {
     val loader = node.metadata.project.substringAfterLast('-')
@@ -16,6 +16,8 @@ stonecutter parameters {
     constants["thermoo"] = legacy
     constants["shield_expansion"] = legacy
     constants["neoforge_legacy"] = legacy && loader == "neoforge"
+    constants["cultural_delights"] = legacy || loader == "fabric"
+    constants["rrv"] = !legacy
 
     replacements {
         string(eval(node.metadata.version, ">=26.1")) {

@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
 //? if neoforge_legacy {
-/*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
@@ -35,4 +35,4 @@ public class ModDataGenerators {
                 new ModItemModelProvider(output, event.getExistingFileHelper()));
     }
 }
-*///?}
+//?}

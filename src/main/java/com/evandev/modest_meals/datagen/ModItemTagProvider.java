@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
 //? if neoforge_legacy {
-/*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.registry.ModItems;
 import com.evandev.modest_meals.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
@@ -710,4 +710,4 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(Tags.Items.DRINKS).addOptionalTag(convention("drinks/tea"));
     }
 }
-*///?}
+//?}

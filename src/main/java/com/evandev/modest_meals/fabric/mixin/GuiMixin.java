@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.fabric.mixin;
 
 //? if fabric && <26.1 {
-import com.evandev.modest_meals.client.HudLayers;
+/*import com.evandev.modest_meals.client.HudLayers;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -68,4 +68,4 @@ public abstract class GuiMixin {
         return y - this.mm$airShift;
     }
 }
-//?}
+*///?}

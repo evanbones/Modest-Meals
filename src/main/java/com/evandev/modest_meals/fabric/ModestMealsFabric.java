@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.fabric;
 
 //? if fabric {
-import com.evandev.modest_meals.Constants;
+/*import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.ModestMeals;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.event.CommonEvents;
@@ -15,8 +15,8 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 //? if >=26.1 {
-/*import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-*///?} else {
+/^import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+^///?} else {
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 //?}
@@ -56,10 +56,10 @@ public class ModestMealsFabric implements ModInitializer {
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> CommonEvents.onPlayerRespawn(newPlayer));
 
         //? if >=26.1 {
-        /*ResourceLoader serverData = ResourceLoader.get(PackType.SERVER_DATA);
+        /^ResourceLoader serverData = ResourceLoader.get(PackType.SERVER_DATA);
         CommonEvents.serverReloadListeners().forEach((name, listener) ->
                 serverData.registerReloadListener(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name), listener));
-        *///?} else {
+        ^///?} else {
         ResourceManagerHelper serverData = ResourceManagerHelper.get(PackType.SERVER_DATA);
         CommonEvents.serverReloadListeners().forEach((name, listener) ->
                 serverData.registerReloadListener(identified(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name), listener)));
@@ -68,8 +68,8 @@ public class ModestMealsFabric implements ModInitializer {
 
     private static <T extends CustomPacketPayload> void registerPayloadType(ClientboundPayload<T> payload) {
         //? if >=26.1 {
-        /*PayloadTypeRegistry.clientboundPlay().registerLarge(payload.type(), payload.codec(), MAX_PAYLOAD_SIZE);
-        *///?} else
+        /^PayloadTypeRegistry.clientboundPlay().registerLarge(payload.type(), payload.codec(), MAX_PAYLOAD_SIZE);
+        ^///?} else
         PayloadTypeRegistry.playS2C().register(payload.type(), payload.codec());
     }
 
@@ -96,4 +96,4 @@ public class ModestMealsFabric implements ModInitializer {
     }
     //?}
 }
-//?}
+*///?}

@@ -19,14 +19,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 //? if neoforge {
-/*import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderType;
 import net.neoforged.neoforge.client.NeoForgeRenderTypes;
 import net.neoforged.neoforge.client.RenderTypeGroup;
 import net.neoforged.neoforge.client.model.BakedModelWrapper;
 import net.neoforged.neoforge.client.model.CompositeModel;
 import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
-*///?} else {
-import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
+//?} else {
+/*import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.FaceBakery;
 import net.minecraft.client.renderer.block.model.ItemModelGenerator;
@@ -36,27 +36,27 @@ import net.minecraft.core.Direction;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-//?}
+*///?}
 
 //? if neoforge {
-/*public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
-*///?} else
-public class DynamicMealBakedModel extends ForwardingBakedModel {
+public class DynamicMealBakedModel extends BakedModelWrapper<BakedModel> {
+//?} else
+//public class DynamicMealBakedModel extends ForwardingBakedModel {
     private static final float LAYER_DEPTH_OFFSET = 0.05F;
     //? if fabric {
-    private static final ItemModelGenerator ITEM_MODEL_GENERATOR = new ItemModelGenerator();
+    /*private static final ItemModelGenerator ITEM_MODEL_GENERATOR = new ItemModelGenerator();
     private static final FaceBakery FACE_BAKERY = new FaceBakery();
     private static final Map<Direction, List<BakedQuad>> EMPTY_CULLED_FACES = Arrays.stream(Direction.values())
             .collect(Collectors.toMap(direction -> direction, direction -> List.of()));
-    //?}
+    *///?}
 
     private final ItemOverrides overrides;
 
     private DynamicMealBakedModel(BakedModel originalModel, MealModelSpec spec) {
         //? if neoforge {
-        /*super(originalModel);
-        *///?} else
-        this.wrapped = originalModel;
+        super(originalModel);
+        //?} else
+        //this.wrapped = originalModel;
         this.overrides = new DynamicMealItemOverrides(originalModel, spec);
     }
 
@@ -90,7 +90,7 @@ public class DynamicMealBakedModel extends ForwardingBakedModel {
         private static BakedModel bakeLayered(BakedModel original, List<TextureAtlasSprite> sprites) {
             TextureAtlasSprite particle = sprites.isEmpty() ? original.getParticleIcon() : sprites.getFirst();
             //? if neoforge {
-            /*var normalRenderTypes = new RenderTypeGroup(RenderType.translucent(), NeoForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get());
+            var normalRenderTypes = new RenderTypeGroup(RenderType.translucent(), NeoForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get());
             CompositeModel.Baked.Builder builder = CompositeModel.Baked.builder(
                     original.useAmbientOcclusion(),
                     false,
@@ -110,8 +110,8 @@ public class DynamicMealBakedModel extends ForwardingBakedModel {
                 builder.addQuads(normalRenderTypes, UnbakedGeometryHelper.bakeElements(unbaked, $ -> sprite, BlockModelRotation.X0_Y0));
             }
             return builder.build();
-            *///?} else {
-            List<BakedQuad> quads = new ArrayList<>();
+            //?} else {
+            /*List<BakedQuad> quads = new ArrayList<>();
             for (int i = 0; i < sprites.size(); i++) {
                 TextureAtlasSprite sprite = sprites.get(i);
                 float offset = i * LAYER_DEPTH_OFFSET;
@@ -124,7 +124,7 @@ public class DynamicMealBakedModel extends ForwardingBakedModel {
             }
             return new SimpleBakedModel(quads, EMPTY_CULLED_FACES, original.useAmbientOcclusion(), false, false,
                     particle, original.getTransforms(), ItemOverrides.EMPTY);
-            //?}
+            *///?}
         }
     }
 }

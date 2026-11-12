@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.fabric.mixin;
 
 //? if fabric {
-import com.evandev.modest_meals.event.CommonEvents;
+/*import com.evandev.modest_meals.event.CommonEvents;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,4 +21,4 @@ public abstract class LivingEntityMixin {
         return result;
     }
 }
-//?}
+*///?}

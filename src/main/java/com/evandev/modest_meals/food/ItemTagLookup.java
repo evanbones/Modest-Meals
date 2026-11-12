@@ -14,12 +14,12 @@ public interface ItemTagLookup {
     Optional<Collection<Holder<Item>>> members(TagKey<Item> tag);
 
     //? if neoforge {
-    /*static ItemTagLookup of(net.neoforged.neoforge.common.conditions.ICondition.IContext context) {
+    static ItemTagLookup of(net.neoforged.neoforge.common.conditions.ICondition.IContext context) {
         if (context == net.neoforged.neoforge.common.conditions.ICondition.IContext.EMPTY
                 || context == net.neoforged.neoforge.common.conditions.ICondition.IContext.TAGS_INVALID) {
             return UNKNOWN;
         }
         return tag -> Optional.of(context.getTag(tag));
     }
-    *///?}
+    //?}
 }

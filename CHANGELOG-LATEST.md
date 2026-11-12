@@ -1,13 +1,8 @@
 ### Added
 
-- Fabric support.
-- Support for 26.1, 26.2, and 26.3 on both NeoForge and Fabric.
-    - Farmer's Delight Refabricated compat is available on every Fabric version.
-    - Farmer's Delight (NeoForge), Cultural Delights, EMI, Thermoo, Cold Sweat, and Shield Expansion compat is only
-      available on 1.21.1 for now.
-- Stamina bar X and Y offset options in the HUD config.
-
-### Fixed
-
-- Fixed players being disconnected when joining a server with a large amount of food data.
-- Food traits for items from mods that aren't installed no longer log errors.
+- Cultural Delights compat on Fabric (1.21.1, 26.1, 26.2, and 26.3).
+    - Ice cream and ice cream bowls can be made in the Vat, and Cultural Delights foods work as meal ingredients.
+    - Vat meals show up in EMI on 1.21.1.
+- Reliable Recipe Viewer (RRV) compat on 26.1, 26.2, and 26.3.
+    - Crafting table meals show up on both NeoForge and Fabric.
+    - Cooking pot meals (Farmer's Delight Refabricated) and Vat meals (Cultural Delights) show up on Fabric.

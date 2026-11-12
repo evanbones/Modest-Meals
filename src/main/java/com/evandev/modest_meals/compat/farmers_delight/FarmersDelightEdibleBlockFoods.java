@@ -27,9 +27,9 @@ public class FarmersDelightEdibleBlockFoods {
             }
             case RiceRollMedleyBlock riceRollMedleyBlock -> {
                 //? if neoforge {
-                /*riceRollMedleyBlock.riceRollServings.forEach(item -> totalFoodProperties.addFromItem(item.get().getDefaultInstance(), 1));
-                *///?} else
-                riceRollMedleyBlock.riceRollServings.get().forEach(item -> totalFoodProperties.addFromItem(item.getDefaultInstance(), 1));
+                riceRollMedleyBlock.riceRollServings.forEach(item -> totalFoodProperties.addFromItem(item.get().getDefaultInstance(), 1));
+                //?} else
+                //riceRollMedleyBlock.riceRollServings.get().forEach(item -> totalFoodProperties.addFromItem(item.getDefaultInstance(), 1));
                 return Optional.of(totalFoodProperties.getResult());
             }
             case FeastBlock feastBlock -> {

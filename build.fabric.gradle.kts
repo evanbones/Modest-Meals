@@ -160,6 +160,18 @@ dependencies {
     modCompileOnly("maven.modrinth:farmers-delight-refabricated:${property("deps.farmers_delight")}")
     modRuntimeOnly("maven.modrinth:farmers-delight-refabricated:${property("deps.farmers_delight")}")
 
+    // Cultural Delights
+    modCompileOnly("maven.modrinth:cultural-delights:${property("deps.cultural_delights")}")
+    modRuntimeOnly("maven.modrinth:cultural-delights:${property("deps.cultural_delights")}")
+    modCompileOnly("maven.modrinth:asphodel-api:${property("deps.asphodel")}")
+    if (isLegacy) modRuntimeOnly("maven.modrinth:asphodel-api:${property("deps.asphodel")}")
+
+    if (!isLegacy) {
+        // RRV
+        modCompileOnly("maven.modrinth:rrv:${property("deps.rrv")}")
+        modRuntimeOnly("maven.modrinth:rrv:${property("deps.rrv")}")
+    }
+
     if (isLegacy) {
         // EMI
         modCompileOnly("maven.modrinth:emi:${property("deps.emi")}+fabric")
@@ -187,7 +199,6 @@ loom {
 
 tasks {
     processResources {
-        if (!isLegacy) exclude("data/modest_meals/recipe/chilling/**")
         exclude("**/neoforge.mods.toml", "**/mods.toml", "**/accesstransformer.cfg", "data/neoforge/**", ".cache/**")
     }
 
@@ -246,8 +257,8 @@ publishMods {
         minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
         requires("fabric-api", "yacl")
-        optional("modmenu", "raised", "reliable-remover", "reliable-gliders", "combat-roll", "farmers-delight-refabricated")
-        if (isLegacy) optional("emi", "thermoo", "shield-expansion")
+        optional("modmenu", "raised", "reliable-remover", "reliable-gliders", "combat-roll", "farmers-delight-refabricated", "cultural-delights")
+        if (isLegacy) optional("emi", "thermoo", "shield-expansion") else optional("rrv")
         incompatible("melancholic_hunger")
     }
 
@@ -257,8 +268,8 @@ publishMods {
         minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
         requires("fabric-api", "yacl")
-        optional("modmenu", "raised", "reliable-remover", "reliable-gliders", "combat-roll", "farmers-delight-refabricated")
-        if (isLegacy) optional("emi", "thermoo", "shield-expansion")
+        optional("modmenu", "raised", "reliable-remover", "reliable-gliders", "combat-roll", "farmers-delight-refabricated", "cultural-delights")
+        if (isLegacy) optional("emi", "thermoo", "shield-expansion") else optional("rrv")
         client = true
         server = true
     }

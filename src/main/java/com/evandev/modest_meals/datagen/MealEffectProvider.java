@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
 //? if neoforge_legacy {
-/*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.compat.cold_sweat.ColdSweatCompat;
 import com.evandev.modest_meals.compat.thermoo.ThermooCompat;
 import com.evandev.modest_meals.food.ingredient.MealEffect;
@@ -95,4 +95,4 @@ public class MealEffectProvider extends JsonDataProvider<MealEffect> {
                 requiredMods, anyOfMods));
     }
 }
-*///?}
+//?}

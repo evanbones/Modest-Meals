@@ -11,6 +11,7 @@ ${logo_property} = "${mod_id}.png"
 credits = "${credits}"
 authors = "${mod_author}"
 description = '''${description}'''
+rrv_client = "com.evandev.modest_meals.compat.rrv.ModestMealsRrvPlugin"
 
 [[mixins]]
 config = "${mod_id}.mixins.json"

@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.compat.raised;
 
 //? if neoforge_legacy {
-/*import dev.yurisuika.raised.api.RaisedApi;
+import dev.yurisuika.raised.api.RaisedApi;
 import dev.yurisuika.raised.client.gui.layer.Layer;
 import dev.yurisuika.raised.client.gui.layer.Layers;
 import dev.yurisuika.raised.config.Config;
@@ -31,4 +31,4 @@ public class RaisedLayerSync {
         }));
     }
 }
-*///?}
+//?}

@@ -29,9 +29,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 //? if neoforge {
-/*import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
-*///?} else
-import vectorwing.farmersdelight.refabricated.inventory.RecipeWrapper;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+//?} else
+//import vectorwing.farmersdelight.refabricated.inventory.RecipeWrapper;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 

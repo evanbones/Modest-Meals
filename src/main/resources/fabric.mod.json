@@ -32,6 +32,9 @@
     ],
     "emi": [
       "com.evandev.modest_meals.compat.emi.ModestMealsEmiPlugin"
+    ],
+    "rrv_client": [
+      "com.evandev.modest_meals.compat.rrv.ModestMealsRrvPlugin"
     ]
   },
   "mixins": [

@@ -21,7 +21,8 @@ public class ModRecipes {
 
     private static RecipeSerializer<MealCraftingRecipe> mealCraftingSerializer() {
         //? if >=26.1 {
-        /*return new RecipeSerializer<>(MapCodec.unit(MealCraftingRecipe::new), StreamCodec.unit(new MealCraftingRecipe()));
+        /*MealCraftingRecipe instance = new MealCraftingRecipe();
+        return new RecipeSerializer<>(MapCodec.unit(instance), StreamCodec.unit(instance));
         *///?} else
         return new SimpleCraftingRecipeSerializer<>(MealCraftingRecipe::new);
     }

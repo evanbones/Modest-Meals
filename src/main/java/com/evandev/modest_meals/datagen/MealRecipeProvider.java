@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.datagen;
 
 //? if neoforge_legacy {
-/*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.registry.ModItems;
@@ -90,4 +90,4 @@ public class MealRecipeProvider implements DataProvider {
         return "Modest Meals recipes";
     }
 }
-*///?}
+//?}

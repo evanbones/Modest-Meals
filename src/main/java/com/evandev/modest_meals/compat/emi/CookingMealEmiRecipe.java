@@ -108,7 +108,7 @@ public class CookingMealEmiRecipe extends MealEmiRecipe {
         addSlot(widgets, output, 94, 9);
         SlotWidget containerSlot = addSlot(widgets, container, 62, 38);
         if (!container.isEmpty()) {
-            containerSlot.appendTooltip(Component.translatable("emi.modest_meals.container")
+            containerSlot.appendTooltip(Component.translatable("recipe_viewer.modest_meals.container")
                     .withStyle(ChatFormatting.GRAY));
         }
         addSlot(widgets, output, 94, 38).recipeContext(this);

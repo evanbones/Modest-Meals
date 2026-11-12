@@ -4,16 +4,16 @@ import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.ApiStatus;
 
 //? if neoforge {
-/*import net.neoforged.bus.api.ICancellableEvent;
+import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-/^*
+/**
  * Events fired as a player's stamina changes.
  *
  * <p>All of these are posted on the {@link NeoForge#EVENT_BUS} and only ever on the server.
  * Read current values through {@link StaminaApi}.
- ^/
+ */
 public abstract class StaminaEvent extends PlayerEvent {
 
     protected StaminaEvent(Player player) {
@@ -40,38 +40,38 @@ public abstract class StaminaEvent extends PlayerEvent {
         NeoForge.EVENT_BUS.post(new Restored(player, amount));
     }
 
-    /^*
+    /**
      * Fired before sprinting takes stamina off a player, and cancellable to stop it.
-     ^/
+     */
     public static class Drain extends StaminaEvent implements ICancellableEvent {
         public Drain(Player player) {
             super(player);
         }
     }
 
-    /^*
+    /**
      * Fired when a player's stamina bar empties and they become exhausted.
-     ^/
+     */
     public static class Exhausted extends StaminaEvent {
         public Exhausted(Player player) {
             super(player);
         }
     }
 
-    /^*
+    /**
      * Fired when a player finishes recharging and stops being exhausted.
-     ^/
+     */
     public static class Recovered extends StaminaEvent {
         public Recovered(Player player) {
             super(player);
         }
     }
 
-    /^*
+    /**
      * Fired after something gives a player stamina back.
      * <p>
      * {@code amount} is how much stamina was granted, in half-bolts
-     ^/
+     */
     public static class Restored extends StaminaEvent {
         private final float amount;
 
@@ -85,19 +85,19 @@ public abstract class StaminaEvent extends PlayerEvent {
         }
     }
 }
-*///?} else {
-import net.fabricmc.fabric.api.event.Event;
+//?} else {
+/*import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 
-/**
+/^*
  * Events fired as a player's stamina changes.
  *
  * <p>All of these are only ever invoked on the server. Read current values through {@link StaminaApi}.
- */
+ ^/
 public final class StaminaEvent {
-    /**
+    /^*
      * Fired before sprinting takes stamina off a player. Return {@code false} to stop it.
-     */
+     ^/
     public static final Event<Drain> DRAIN = EventFactory.createArrayBacked(Drain.class, listeners -> player -> {
         for (Drain listener : listeners) {
             if (!listener.allowDrain(player)) {
@@ -107,9 +107,9 @@ public final class StaminaEvent {
         return true;
     });
 
-    /**
+    /^*
      * Fired when a player's stamina bar empties and they become exhausted.
-     */
+     ^/
     public static final Event<PlayerCallback> EXHAUSTED = EventFactory.createArrayBacked(PlayerCallback.class,
             listeners -> player -> {
                 for (PlayerCallback listener : listeners) {
@@ -117,9 +117,9 @@ public final class StaminaEvent {
                 }
             });
 
-    /**
+    /^*
      * Fired when a player finishes recharging and stops being exhausted.
-     */
+     ^/
     public static final Event<PlayerCallback> RECOVERED = EventFactory.createArrayBacked(PlayerCallback.class,
             listeners -> player -> {
                 for (PlayerCallback listener : listeners) {
@@ -127,9 +127,9 @@ public final class StaminaEvent {
                 }
             });
 
-    /**
+    /^*
      * Fired after something gives a player stamina back, with the amount granted in half-bolts.
-     */
+     ^/
     public static final Event<Restored> RESTORED = EventFactory.createArrayBacked(Restored.class,
             listeners -> (player, amount) -> {
                 for (Restored listener : listeners) {
@@ -175,4 +175,4 @@ public final class StaminaEvent {
         void onRestored(Player player, float amount);
     }
 }
-//?}
+*///?}

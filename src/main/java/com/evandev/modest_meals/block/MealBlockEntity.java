@@ -76,7 +76,7 @@ public class MealBlockEntity extends BlockEntity {
                         .result().orElse(MealContents.EMPTY)
                 : MealContents.EMPTY;
         //? if fabric
-        redraw();
+        //redraw();
     }
 
     @Override
@@ -123,7 +123,7 @@ public class MealBlockEntity extends BlockEntity {
         redraw();
     }
     *///?} else if neoforge {
-    /*@Override
+    @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
         super.onDataPacket(connection, packet, registries);
         redraw();
@@ -134,7 +134,7 @@ public class MealBlockEntity extends BlockEntity {
         super.handleUpdateTag(tag, registries);
         redraw();
     }
-    *///?}
+    //?}
 
     private void redraw() {
         if (level != null && level.isClientSide()) {

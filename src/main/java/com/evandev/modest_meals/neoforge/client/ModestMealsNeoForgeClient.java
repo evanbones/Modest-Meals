@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.neoforge.client;
 
 //? if neoforge {
-/*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.client.ClientConfigScreen;
 import com.evandev.modest_meals.client.HudLayers;
 import com.evandev.modest_meals.client.MealBlockColors;
@@ -23,11 +23,11 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 //?} else {
-import com.evandev.modest_meals.client.model.MealItemModel;
+/*import com.evandev.modest_meals.client.model.MealItemModel;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterItemModelsEvent;
 import java.util.List;
-//?}
+*///?}
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -61,12 +61,12 @@ public final class ModestMealsNeoForgeClient {
         modEventBus.addListener(ModestMealsNeoForgeClient::registerGuiLayers);
         modEventBus.addListener(ModestMealsNeoForgeClient::addPackFinders);
         //? if >=26.1 {
-        modEventBus.addListener((RegisterColorHandlersEvent.BlockTintSources event) ->
+        /*modEventBus.addListener((RegisterColorHandlersEvent.BlockTintSources event) ->
                 event.register(List.of(MealBlockColors.TINT), ModBlocks.PIE.get(), ModBlocks.CAKE.get()));
         modEventBus.addListener((AddClientReloadListenersEvent event) -> event.addListener(
                 ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hud_textures"), ModestMealsClient.RESOURCE_RELOAD_LISTENER));
         modEventBus.addListener((RegisterItemModelsEvent event) -> event.register(MealItemModel.ID, MealItemModel.Unbaked.MAP_CODEC));
-        //?} else {
+        *///?} else {
         modEventBus.addListener((RegisterColorHandlersEvent.Block event) ->
                 event.register(MealBlockColors::color, ModBlocks.PIE.get(), ModBlocks.CAKE.get()));
         modEventBus.addListener((RegisterClientReloadListenersEvent event) ->
@@ -140,4 +140,4 @@ public final class ModestMealsNeoForgeClient {
     }
     //?}
 }
-*///?}
+//?}

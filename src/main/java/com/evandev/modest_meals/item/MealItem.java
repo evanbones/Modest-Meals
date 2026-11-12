@@ -12,16 +12,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 //? if fabric || >=26.1 {
-import net.minecraft.world.InteractionHand;
+/*import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-//?}
+*///?}
 //? if >=26.1 {
 /*import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.component.Consumable;
 *///?} else if fabric
-import net.minecraft.world.InteractionResultHolder;
+//import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.food.FoodConstants;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -77,12 +77,12 @@ public class MealItem extends Item {
     }
 
     //? if neoforge && <26.1 {
-    /*@Override
+    @Override
     public @Nullable FoodProperties getFoodProperties(ItemStack stack, @Nullable LivingEntity entity) {
         FoodProperties meal = mealFoodProperties(stack);
         return meal != null ? meal : super.getFoodProperties(stack, entity);
     }
-    *///?} else if >=26.1 {
+    //?} else if >=26.1 {
     /*@Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         FoodProperties food = mealFoodProperties(player.getItemInHand(hand));
@@ -112,7 +112,7 @@ public class MealItem extends Item {
         return super.finishUsingItem(stack, level, entity);
     }
     *///?} else {
-    @Override
+    /*@Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         FoodProperties food = mealFoodProperties(stack);
@@ -137,7 +137,7 @@ public class MealItem extends Item {
         FoodProperties food = mealFoodProperties(stack);
         return food != null ? entity.eat(level, stack, food) : super.finishUsingItem(stack, level, entity);
     }
-    //?}
+    *///?}
 
     public @Nullable FoodProperties mealFoodProperties(ItemStack stack) {
         MealContents contents = contentsOf(stack);

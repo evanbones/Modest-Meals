@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.neoforge;
 
 //? if neoforge {
-/*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.ModestMeals;
 import com.evandev.modest_meals.attribute.ModAttributes;
 //? if neoforge_legacy
@@ -29,9 +29,9 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 //? if >=26.1 {
-import net.minecraft.resources.ResourceLocation;
+/*import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
-//?} else
+*///?} else
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
@@ -76,9 +76,9 @@ public class ModestMealsNeoForge {
             }
         });
         //? if >=26.1 {
-        gameBus.addListener((AddServerReloadListenersEvent event) -> CommonEvents.serverReloadListeners().forEach((name, listener) ->
+        /*gameBus.addListener((AddServerReloadListenersEvent event) -> CommonEvents.serverReloadListeners().forEach((name, listener) ->
                 event.addListener(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name), listener)));
-        //?} else {
+        *///?} else {
         gameBus.addListener((AddReloadListenerEvent event) ->
                 CommonEvents.serverReloadListeners().values().forEach(event::addListener));
         //?}
@@ -92,7 +92,7 @@ public class ModestMealsNeoForge {
                 CommonEvents.onItemConsumed(event.getEntity(), event.getItem()));
 
         //? if neoforge_legacy
-        //ColdSweatCompat.register();
+        ColdSweatCompat.register();
         //? if shield_expansion
         ShieldExpansionCompat.init();
 
@@ -117,4 +117,4 @@ public class ModestMealsNeoForge {
         }
     }
 }
-*///?}
+//?}

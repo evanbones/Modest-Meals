@@ -1,7 +1,7 @@
 package com.evandev.modest_meals.compat.cold_sweat;
 
 //? if neoforge_legacy {
-/*import com.evandev.modest_meals.platform.Platform;
+import com.evandev.modest_meals.platform.Platform;
 import net.neoforged.neoforge.common.NeoForge;
 
 public final class ColdSweatCompat {
@@ -17,4 +17,4 @@ public final class ColdSweatCompat {
         }
     }
 }
-*///?}
+//?}
