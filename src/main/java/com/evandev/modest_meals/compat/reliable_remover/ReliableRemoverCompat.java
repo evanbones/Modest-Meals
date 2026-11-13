@@ -45,11 +45,11 @@ public final class ReliableRemoverCompat {
     }
 
     public static boolean isSatisfiable(String result, List<String> ingredients, List<String> base, ItemTagLookup context) {
-        return !removed(result) && pruneSpecs(ingredients, context).isPresent() && pruneSpecs(base, context).isPresent();
+        return !unavailable(result) && pruneSpecs(ingredients, context).isPresent() && pruneSpecs(base, context).isPresent();
     }
 
     private static Optional<MealType.ItemOverride> prune(MealType.ItemOverride override, ItemTagLookup context) {
-        if (removed(override.result().toString())) {
+        if (unavailable(override.result().toString())) {
             return Optional.empty();
         }
         Optional<List<String>> ingredients = pruneSpecs(override.ingredients(), context);
@@ -66,7 +66,7 @@ public final class ReliableRemoverCompat {
         for (String spec : specs) {
             List<String> options = new ArrayList<>();
             for (String option : spec.split("\\|")) {
-                if (option.startsWith("#") ? hasMembers(option.substring(1), context) : !removed(option)) {
+                if (option.startsWith("#") ? hasMembers(option.substring(1), context) : !unavailable(option)) {
                     options.add(option);
                 }
             }
@@ -88,11 +88,11 @@ public final class ReliableRemoverCompat {
                 .orElse(true);
     }
 
-    private static boolean removed(String id) {
+    private static boolean unavailable(String id) {
         ResourceLocation location = ResourceLocation.tryParse(id);
         if (location == null) {
-            return false;
+            return true;
         }
-        return BuiltInRegistries.ITEM.getOptional(location).map(ReliableRemoverCompat::isRemoved).orElse(false);
+        return BuiltInRegistries.ITEM.getOptional(location).map(ReliableRemoverCompat::isRemoved).orElse(true);
     }
 }

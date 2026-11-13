@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2026-11-13
+
+### Added
+
+- Added a Regain Time config option, which sets how long stamina takes to refill from empty when not exhausted.
+  - Previously this always matched Sprint Duration.
+- Added a Blocking Stamina Cost config option, which sets how fast holding up a Shield Expansion shield drains stamina compared with sprinting.
+
+### Fixed
+
+- Fixed broken mouse input on 26.3 (@cassiancc).
+- Fixed Farmer's Delight's Mutton Wrap recipe disappearing without Cultural Delights installed.
+- Fixed wraps being uncraftable without a mod that adds tortillas.
+  - Wraps now use bread when no tortillas exist.
+
 ## [3.1.1] - 2026-11-11
 
 ### Changed

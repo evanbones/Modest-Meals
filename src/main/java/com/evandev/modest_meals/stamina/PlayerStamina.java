@@ -29,6 +29,8 @@ public class PlayerStamina {
     protected boolean regainThisTick = false;
     private int ticksSinceSync = 0;
     private int naturalRegenTickTimer = 0;
+    private float regainCarry = 0.0F;
+    private float drainCarry = 0.0F;
 
     protected PlayerStamina(Player player, StaminaData data) {
         this.player = player;
@@ -236,7 +238,10 @@ public class PlayerStamina {
             this.data.setStaminaUsingTicks(this.barTicks(this.data.isExhausted()), maxLevel);
         } else if (this.isExerting()) {
             if (!this.isNourished() && !this.isDrainCancelled()) {
-                this.data.remaining--;
+                this.drainCarry += this.drainRate();
+                int drained = (int) this.drainCarry;
+                this.drainCarry -= drained;
+                this.data.remaining -= drained;
 
                 if (this.data.remaining <= 0) {
                     this.data.remaining = 0;
@@ -251,7 +256,10 @@ public class PlayerStamina {
                 if (this.data.cooldown > 0) {
                     this.data.cooldown--;
                 } else if (this.regainThisTick) {
-                    this.data.remaining++;
+                    this.regainCarry += this.regainRate();
+                    int regained = (int) this.regainCarry;
+                    this.regainCarry -= regained;
+                    this.data.remaining = Math.min(durationInTicks, this.data.remaining + regained);
                 }
             } else if (this.data.remaining > durationInTicks) {
                 this.data.remaining = durationInTicks;
@@ -259,6 +267,16 @@ public class PlayerStamina {
 
             this.data.setStaminaUsingTicks(durationInTicks, maxLevel);
         }
+    }
+
+    private float regainRate() {
+        return ModConfig.get().staminaDuration / (float) Math.max(1, ModConfig.get().staminaRegainTime);
+    }
+
+    private float drainRate() {
+        boolean onlyBlocking = !this.isAtFullSprint() && !this.isElytraGliding()
+                && !ReliableGlidersCompat.isGliding(this.player) && ShieldExpansionCompat.isBlocking(this.player);
+        return onlyBlocking ? ModConfig.get().staminaShieldBlockingCost : 1.0F;
     }
 
     private void recover() {

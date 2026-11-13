@@ -168,7 +168,7 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                 wrapId,
                 itemId(ModItems.WRAP.get()),
                 MealType.Station.CRAFTING_TABLE,
-                List.of(new MealType.BaseEntry(ItemMatcher.tag(TORTILLAS), 1)),
+                List.of(new MealType.BaseEntry(ItemMatcher.tag(TORTILLAS), 1).orElse(ItemMatcher.tag(BREADS))),
                 Optional.empty(),
                 3,
                 3,

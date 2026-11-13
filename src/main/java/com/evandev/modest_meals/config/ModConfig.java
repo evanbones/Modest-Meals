@@ -75,6 +75,10 @@ public class ModConfig {
     public int staminaDuration = 33;
 
     @ServerSynced
+    @SerializedName("stamina_regain_time")
+    public int staminaRegainTime = 33;
+
+    @ServerSynced
     @SerializedName("stamina_recharge")
     public int staminaRecharge = 33;
 
@@ -101,6 +105,10 @@ public class ModConfig {
     @ServerSynced
     @SerializedName("stamina_shield_blocking")
     public boolean staminaShieldBlocking = true;
+
+    @ServerSynced
+    @SerializedName("stamina_shield_blocking_cost")
+    public float staminaShieldBlockingCost = 1.0f;
 
     @ServerSynced
     @SerializedName("stamina_parry_restore")

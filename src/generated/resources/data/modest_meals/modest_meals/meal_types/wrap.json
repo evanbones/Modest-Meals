@@ -1,6 +1,9 @@
 {
   "base": [
     {
+      "fallback": {
+        "tag": "c:foods/bread"
+      },
       "ingredient": {
         "tag": "c:foods/tortilla"
       }

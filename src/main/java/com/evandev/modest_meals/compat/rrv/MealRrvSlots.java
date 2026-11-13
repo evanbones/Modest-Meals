@@ -132,7 +132,7 @@ public final class MealRrvSlots {
         List<Slot> base = new ArrayList<>();
         for (MealType.BaseEntry entry : type.base()) {
             for (int i = 0; i < entry.count(); i++) {
-                base.add(new Slot(entry.ingredient().displayStacks(), false));
+                base.add(new Slot(entry.active().displayStacks(), false));
             }
         }
         return base;

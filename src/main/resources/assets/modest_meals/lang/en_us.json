@@ -84,6 +84,9 @@
   "config.modest_meals.option.stamina_duration": "Sprint Duration (Seconds)",
   "config.modest_meals.option.stamina_duration.tooltip": "The continuous sprint time in seconds before stamina is completely depleted.",
 
+  "config.modest_meals.option.stamina_regain_time": "Regain Time (Seconds)",
+  "config.modest_meals.option.stamina_regain_time.tooltip": "The time in seconds to regain stamina from 0% back to 100% capacity when not exhausted, after the cooldown delay.",
+
   "config.modest_meals.option.stamina_recharge": "Exhaustion Recharge Time (Seconds)",
   "config.modest_meals.option.stamina_recharge.tooltip": "The time in seconds required to recharge from 0% back to 100% capacity when exhausted.",
 
@@ -102,6 +105,8 @@
 
   "config.modest_meals.option.stamina_shield_blocking": "Blocking Uses Stamina",
   "config.modest_meals.option.stamina_shield_blocking.tooltip": "With Shield Expansion installed, holding up a shield drains stamina like sprinting does, and an exhausted player can't block.",
+  "config.modest_meals.option.stamina_shield_blocking_cost": "Blocking Stamina Cost",
+  "config.modest_meals.option.stamina_shield_blocking_cost.tooltip": "With Shield Expansion installed, how fast holding up a shield drains stamina, compared with sprinting. 0.5 drains at half the sprint rate. 0 makes blocking free.",
 
   "config.modest_meals.option.stamina_parry_restore": "Parry Stamina Restore",
   "config.modest_meals.option.stamina_parry_restore.tooltip": "With Shield Expansion installed, how much stamina a successful parry gives back, in half-bolts. 0 turns it off.",

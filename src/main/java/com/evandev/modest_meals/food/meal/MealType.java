@@ -125,7 +125,7 @@ public record MealType(
         List<ItemStack> taken = new ArrayList<>();
         for (BaseEntry entry : base) {
             for (int consumed = 0; consumed < entry.count(); consumed++) {
-                int index = indexMatching(remaining, entry.ingredient());
+                int index = indexMatching(remaining, entry.active());
                 if (index < 0) {
                     return Optional.empty();
                 }
@@ -242,11 +242,24 @@ public record MealType(
         }
     }
 
-    public record BaseEntry(ItemMatcher ingredient, int count) {
+    public record BaseEntry(ItemMatcher ingredient, int count, Optional<ItemMatcher> fallback) {
         public static final Codec<BaseEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ItemMatcher.CODEC.fieldOf("ingredient").forGetter(BaseEntry::ingredient),
-                Codec.INT.optionalFieldOf("count", 1).forGetter(BaseEntry::count)
+                Codec.INT.optionalFieldOf("count", 1).forGetter(BaseEntry::count),
+                ItemMatcher.CODEC.optionalFieldOf("fallback").forGetter(BaseEntry::fallback)
         ).apply(instance, BaseEntry::new));
+
+        public BaseEntry(ItemMatcher ingredient, int count) {
+            this(ingredient, count, Optional.empty());
+        }
+
+        public BaseEntry orElse(ItemMatcher fallback) {
+            return new BaseEntry(ingredient, count, Optional.of(fallback));
+        }
+
+        public ItemMatcher active() {
+            return fallback.filter(unused -> ingredient.isEmpty()).orElse(ingredient);
+        }
     }
 
     public record Shape(List<String> pattern, Map<String, String> key) {

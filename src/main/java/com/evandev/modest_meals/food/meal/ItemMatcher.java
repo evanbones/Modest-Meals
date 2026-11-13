@@ -62,6 +62,10 @@ public record ItemMatcher(List<Entry> entries) implements Predicate<ItemStack> {
         return !stack.isEmpty() && entries.stream().anyMatch(entry -> entry.test(stack));
     }
 
+    public boolean isEmpty() {
+        return entries.stream().allMatch(entry -> entry.displayStacks().findAny().isEmpty());
+    }
+
     public List<ItemStack> displayStacks() {
         return entries.stream().flatMap(Entry::displayStacks).toList();
     }

@@ -55,7 +55,7 @@ public abstract class MealEmiRecipe implements EmiRecipe {
         List<EmiIngredient> base = new ArrayList<>();
         for (MealType.BaseEntry entry : type.base()) {
             for (int i = 0; i < entry.count(); i++) {
-                base.add(EmiIngredient.of(entry.ingredient().displayStacks().stream().map(EmiStack::of).toList()));
+                base.add(EmiIngredient.of(entry.active().displayStacks().stream().map(EmiStack::of).toList()));
             }
         }
         return base;
