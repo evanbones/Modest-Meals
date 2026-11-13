@@ -3,7 +3,6 @@ package com.evandev.modest_meals.stamina;
 import com.evandev.modest_meals.api.StaminaEvent;
 import com.evandev.modest_meals.attribute.ModAttributes;
 import com.evandev.modest_meals.compat.reliable_gliders.ReliableGlidersCompat;
-import com.evandev.modest_meals.compat.shield_expansion.ShieldExpansionCompat;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.mixin.MobEffectInstanceAccessor;
@@ -275,7 +274,7 @@ public class PlayerStamina {
 
     private float drainRate() {
         boolean onlyBlocking = !this.isAtFullSprint() && !this.isElytraGliding()
-                && !ReliableGlidersCompat.isGliding(this.player) && ShieldExpansionCompat.isBlocking(this.player);
+                && !ReliableGlidersCompat.isGliding(this.player) && ShieldBlocking.isBlocking(this.player);
         return onlyBlocking ? ModConfig.get().staminaShieldBlockingCost : 1.0F;
     }
 
@@ -333,7 +332,7 @@ public class PlayerStamina {
         if (this.player.level().isClientSide() && !this.player.isLocalPlayer()) {
             return false;
         }
-        return this.isElytraGliding() || ReliableGlidersCompat.isGliding(this.player) || ShieldExpansionCompat.isBlocking(this.player);
+        return this.isElytraGliding() || ReliableGlidersCompat.isGliding(this.player) || ShieldBlocking.isBlocking(this.player);
     }
 
     public boolean isTiringOrExhausted() {

@@ -15,10 +15,6 @@ final class ShieldExpansionBridge {
         return !ShieldExpansionConfig.ITEM_ONLY_MODE && ShieldExpansionConfig.isShield(stack.getItem());
     }
 
-    static boolean isRaisingShield(Player player) {
-        return player.isUsingItem() && isShield(player.getUseItem());
-    }
-
     static boolean willParry(Player player, DamageSource source) {
         return inParryWindow(player) && player.isDamageSourceBlocked(source);
     }

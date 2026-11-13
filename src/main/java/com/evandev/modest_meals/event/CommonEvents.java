@@ -3,7 +3,6 @@ package com.evandev.modest_meals.event;
 import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.api.StaminaApi;
 import com.evandev.modest_meals.compat.reliable_gliders.ReliableGlidersCompat;
-import com.evandev.modest_meals.compat.shield_expansion.ShieldExpansionCompat;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodProfileManager;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
@@ -16,6 +15,7 @@ import com.evandev.modest_meals.network.ClientboundFoodDataSyncPayload;
 import com.evandev.modest_meals.network.ClientboundStaminaSyncPayload;
 import com.evandev.modest_meals.network.ModNetworking;
 import com.evandev.modest_meals.regen.HealthRegenHelper;
+import com.evandev.modest_meals.stamina.ShieldBlocking;
 import com.evandev.modest_meals.stamina.PlayerStamina;
 import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.evandev.modest_meals.stamina.StaminaHolder;
@@ -53,7 +53,7 @@ public class CommonEvents {
                         player.setSwimming(false);
                     }
                 }
-                if (ShieldExpansionCompat.isBlocking(player)) {
+                if (ShieldBlocking.isBlocking(player)) {
                     player.stopUsingItem();
                 }
                 if (stamina.isElytraGliding()) {

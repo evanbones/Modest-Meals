@@ -1,12 +1,8 @@
-### Added
+### Changed
 
-- Added a Regain Time config option, which sets how long stamina takes to refill from empty when not exhausted. 
-  - Previously this always matched Sprint Duration.
-- Added a Blocking Stamina Cost config option, which sets how fast holding up a Shield Expansion shield drains stamina compared with sprinting.
+- Holding up a shield now drains stamina without Shield Expansion installed.
+  - Shield Expansion is still needed for parries to restore stamina.
 
 ### Fixed
 
-- Fixed broken mouse input on 26.3 (@cassiancc).
-- Fixed Farmer's Delight's Mutton Wrap recipe disappearing without Cultural Delights installed. 
-- Fixed wraps being uncraftable without a mod that adds tortillas. 
-  - Wraps now use bread when no tortillas exist.
+- Fixed placed Farmer's Delight pies not giving health or other food traits when eaten on 26.x.

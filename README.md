@@ -84,7 +84,7 @@ For example, a sandwich made with beetroot gives Strength, so it's called a **Mi
 | [Cultural Delights](https://modrinth.com/mod/cultural-delights)                                                       | Ice cream, made in a cold vat                                                                  |
 | [EMI](https://modrinth.com/mod/emi)                                                                                   | Recipe pages for meal crafting, cooking, and chilling                                          |
 | [Cold Sweat](https://modrinth.com/mod/cold-sweat), [Thermoo](https://modrinth.com/mod/thermoo) (Frostiful, Scorchful) | *Spicy* and *Chilly* meals give cold and heat resistance                                       |
-| [Shield Expansion](https://modrinth.com/mod/shield-expansion)                                                         | Holding up a shield drains stamina, and a successful parry restores some                       |
+| [Shield Expansion](https://modrinth.com/mod/shield-expansion)                                                         | A successful parry restores stamina                                                            |
 | [Reliable Gliders](https://modrinth.com/mod/reliable-gliders)                                                         | Gliding drains stamina, and an exhausted player can't glide                                    |
 | [Reliable Remover](https://modrinth.com/mod/reliable-remover)                                                         | Meal recipes skip items that have been removed                                                 |
 

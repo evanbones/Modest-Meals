@@ -37,13 +37,6 @@ public final class ShieldExpansionCompat {
 
     //?}
 
-    public static boolean isBlocking(Player player) {
-        //? if shield_expansion {
-        return ModConfig.get().staminaShieldBlocking && isLoaded() && ShieldExpansionBridge.isRaisingShield(player);
-        //?} else
-        /*return false;*/
-    }
-
     private static boolean tracksStamina(Player player) {
         return StaminaApi.isEnabled() && !player.isCreative() && !player.isSpectator() && !Platform.isFakePlayer(player);
     }

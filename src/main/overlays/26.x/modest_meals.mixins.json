@@ -8,7 +8,6 @@
     "BlockStateBaseMixin",
     "ConsumableMixin",
     "FoodDataMixin",
-    "FoodPropertiesMixin",
     "LivingEntityMixin",
     "MobEffectInstanceAccessor",
     "PlayerMixin",
