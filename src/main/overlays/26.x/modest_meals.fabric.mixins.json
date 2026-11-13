@@ -9,7 +9,9 @@
     "ServerPacksSourceMixin",
     "compat.FarmersDelightCuttingBoardMixin"
   ],
-  "client": [],
+  "client": [
+    "HudRowBaseMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

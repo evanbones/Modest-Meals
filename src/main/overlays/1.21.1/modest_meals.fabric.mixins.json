@@ -9,7 +9,8 @@
     "ServerPacksSourceMixin"
   ],
   "client": [
-    "GuiMixin"
+    "GuiMixin",
+    "HudRowBaseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

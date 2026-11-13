@@ -41,20 +41,29 @@ body:
         - "26.3"
     validations:
       required: true
-  - type: input
+  - type: dropdown
     attributes:
-      label: Mod Version
-      description: The version of the mod you were using
-      placeholder: 1.0.0
+      label: Mod Loader
+      description: The mod loader you were using
+      options:
+        - "Fabric"
+        - "NeoForge"
     validations:
-      required: false
+      required: true
   - type: input
     attributes:
       label: Loader Version
-      description: The version of the loader used (e.g., Forge 47.2.0 or Fabric Loader 0.15.7)
-      placeholder: 47.2.0
+      description: The version of the loader used (e.g., Fabric Loader 0.20.1 or NeoForge 26.3.0.76)
+      placeholder: 0.20.1
     validations:
       required: false
+  - type: input
+    attributes:
+      label: Mod Version
+      description: The full version of Modest Meals, as shown in the jar name or mod list
+      placeholder: 3.3.0+26.3
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Other Mods / Modpack

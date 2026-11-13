@@ -41,6 +41,7 @@ stonecutter parameters {
             replace("VanillaGuiLayers.EXPERIENCE_BAR", "VanillaGuiLayers.CONTEXTUAL_INFO_BAR")
             replace("import net.minecraft.world.level.BlockAndTintGetter;", "import net.minecraft.client.renderer.block.BlockAndTintGetter;")
             replace("method = \"renderHearts\"", "method = \"extractHearts\"")
+            replace("method = \"renderPlayerHealth\"", "method = \"extractPlayerHealth\"")
             replace("Screen.hasShiftDown()", "Minecraft.getInstance().hasShiftDown()")
             replace("import net.minecraft.client.gui.GuiGraphics;", "import net.minecraft.client.gui.GuiGraphicsExtractor;")
             replace("GuiGraphics ", "GuiGraphicsExtractor ")

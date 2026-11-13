@@ -2,6 +2,7 @@ package com.evandev.modest_meals.fabric.client;
 
 //? if fabric && >=26.1 {
 /*import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.client.HudHelper;
 import com.evandev.modest_meals.client.HudLayers;
 import com.evandev.modest_meals.client.RenderCompat;
 import com.evandev.modest_meals.client.StaminaTextRenderer;
@@ -22,15 +23,16 @@ public final class FabricHud {
             }
         });
         HudElementRegistry.replaceElement(VanillaHudElements.FOOD_BAR, original -> (graphics, deltaTracker) -> {
-            int rightHeight = FOOD_ROW_HEIGHT;
+            int rowBaseShift = HudHelper.rowBaseShift();
+            int rightHeight = FOOD_ROW_HEIGHT + rowBaseShift;
             if (!HudLayers.hidesVanillaFood()) {
                 original.extractRenderState(graphics, deltaTracker);
-                rightHeight = AIR_ROW_HEIGHT;
+                rightHeight = AIR_ROW_HEIGHT + rowBaseShift;
             }
             rightHeight = HudLayers.renderClassicArmor(graphics, rightHeight);
             rightHeight = HudLayers.renderClassicStamina(graphics, rightHeight);
             rightHeight = HudLayers.renderDefaultStamina(graphics, rightHeight);
-            airShift = rightHeight - AIR_ROW_HEIGHT;
+            airShift = rightHeight - AIR_ROW_HEIGHT - rowBaseShift;
         });
         HudElementRegistry.replaceElement(VanillaHudElements.AIR_BAR, original -> (graphics, deltaTracker) -> {
             if (HudLayers.hidesVanillaArmorAndAir()) {

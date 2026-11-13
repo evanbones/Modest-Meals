@@ -1,7 +1,8 @@
 package com.evandev.modest_meals.fabric.mixin;
 
 //? if fabric && <26.1 {
-/*import com.evandev.modest_meals.client.HudLayers;
+/*import com.evandev.modest_meals.client.HudHelper;
+import com.evandev.modest_meals.client.HudLayers;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -48,11 +49,12 @@ public abstract class GuiMixin {
     @Inject(method = "renderPlayerHealth", at = @At(value = "INVOKE_STRING",
             target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V", args = "ldc=air"))
     private void mm$renderRightStack(GuiGraphics graphics, CallbackInfo ci) {
-        int rightHeight = this.mm$foodRendered ? mm$AIR_ROW_HEIGHT : mm$FOOD_ROW_HEIGHT;
+        int rowBaseShift = HudHelper.rowBaseShift();
+        int rightHeight = (this.mm$foodRendered ? mm$AIR_ROW_HEIGHT : mm$FOOD_ROW_HEIGHT) + rowBaseShift;
         rightHeight = HudLayers.renderClassicArmor(graphics, rightHeight);
         rightHeight = HudLayers.renderClassicStamina(graphics, rightHeight);
         rightHeight = HudLayers.renderDefaultStamina(graphics, rightHeight);
-        this.mm$airShift = rightHeight - mm$AIR_ROW_HEIGHT;
+        this.mm$airShift = rightHeight - mm$AIR_ROW_HEIGHT - rowBaseShift;
         HudLayers.renderClassicAir(graphics);
     }
 

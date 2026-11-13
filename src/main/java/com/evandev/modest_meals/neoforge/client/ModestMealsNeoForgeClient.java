@@ -3,6 +3,7 @@ package com.evandev.modest_meals.neoforge.client;
 //? if neoforge {
 import com.evandev.modest_meals.Constants;
 import com.evandev.modest_meals.client.ClientConfigScreen;
+import com.evandev.modest_meals.client.HudHelper;
 import com.evandev.modest_meals.client.HudLayers;
 import com.evandev.modest_meals.client.MealBlockColors;
 import com.evandev.modest_meals.client.ModestMealsClient;
@@ -77,7 +78,7 @@ public final class ModestMealsNeoForgeClient {
                 event.registerBlockEntityRenderer(ModBlocks.MEAL_ENTITY.get(), PizzaRenderer::new));
 
         IEventBus gameBus = NeoForge.EVENT_BUS;
-        gameBus.addListener(EventPriority.HIGHEST, ModestMealsNeoForgeClient::hideVanillaLayers);
+        gameBus.addListener(EventPriority.HIGHEST, ModestMealsNeoForgeClient::prepareVanillaLayer);
         gameBus.addListener(EventPriority.LOWEST, (ItemTooltipEvent event) ->
                 FoodItemTooltips.onTooltip(event.getItemStack(), event.getToolTip(), event.getContext().tickRate()));
         gameBus.addListener((ClientPlayerNetworkEvent.LoggingOut event) -> ModestMealsClient.onLoggingOut());
@@ -111,8 +112,12 @@ public final class ModestMealsNeoForgeClient {
         //?}
     }
 
-    private static void hideVanillaLayers(RenderGuiLayerEvent.Pre event) {
+    private static void prepareVanillaLayer(RenderGuiLayerEvent.Pre event) {
         ResourceLocation layer = event.getName();
+        if (layer.equals(VanillaGuiLayers.PLAYER_HEALTH)) {
+            Minecraft minecraft = Minecraft.getInstance();
+            HudHelper.captureRowBase(minecraft.gui.rightHeight);
+        }
         if (layer.equals(VanillaGuiLayers.FOOD_LEVEL) && HudLayers.hidesVanillaFood()) {
             event.setCanceled(true);
         } else if ((layer.equals(VanillaGuiLayers.ARMOR_LEVEL) || layer.equals(VanillaGuiLayers.AIR_LEVEL))

@@ -16,6 +16,17 @@ public abstract class HudHelper {
     public static final ResourceLocation ARMOR_FULL_SPRITE = ResourceLocation.withDefaultNamespace("hud/armor_full");
     public static final ResourceLocation AIR_SPRITE = ResourceLocation.withDefaultNamespace("hud/air");
     public static final ResourceLocation AIR_BURSTING_SPRITE = ResourceLocation.withDefaultNamespace("hud/air_bursting");
+    private static final int VANILLA_ROW_BASE = 39;
+
+    private static int rowBaseShift;
+
+    public static void captureRowBase(int rowBase) {
+        rowBaseShift = rowBase - VANILLA_ROW_BASE;
+    }
+
+    public static int rowBaseShift() {
+        return rowBaseShift;
+    }
 
     public static boolean isArmorEmpty() {
         LocalPlayer player = Minecraft.getInstance().player;
@@ -25,7 +36,7 @@ public abstract class HudHelper {
     public static int getHeightOffsetFromHearts() {
         Player player = Minecraft.getInstance().player;
         if (player == null) {
-            return 39;
+            return VANILLA_ROW_BASE + rowBaseShift;
         }
 
         int absorptionAmount = Mth.ceil(player.getAbsorptionAmount());
@@ -35,7 +46,7 @@ public abstract class HudHelper {
         int numberOfRows = Mth.ceil((maxHealth + (float) absorptionAmount) / 2.0F / 10.0F);
         int rowHeight = Math.max(10 - (numberOfRows - 2), 3);
 
-        return 39 + (numberOfRows - 1) * rowHeight + 10;
+        return VANILLA_ROW_BASE + rowBaseShift + (numberOfRows - 1) * rowHeight + 10;
     }
 
     public static int getHeightOffsetForStamina() {
