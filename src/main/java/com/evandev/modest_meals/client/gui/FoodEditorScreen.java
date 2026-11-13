@@ -19,10 +19,11 @@ import com.evandev.modest_meals.food.ingredient.MealEffectManager;
 import com.evandev.modest_meals.item.MealItem;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitManager;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 //? if >=26.1
-/*import net.minecraft.client.input.MouseButtonEvent;*/
+//import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -607,7 +608,7 @@ public class FoodEditorScreen extends CompatScreen {
             this.setFocused(filterDropdown);
             return true;
         }
-        if (button == 0 && isOverPaneScrollbar(mouseX, mouseY)) {
+        if (button == InputConstants.MOUSE_BUTTON_LEFT && isOverPaneScrollbar(mouseX, mouseY)) {
             this.draggingPaneScrollbar = true;
             updatePaneScroll(mouseY);
             return true;
@@ -886,7 +887,7 @@ public class FoodEditorScreen extends CompatScreen {
 
         @Override
         public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-            if (event.button() == 0 && isOverScrollbar(event.x(), event.y()) && maxScrollAmount() > 0) {
+            if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && isOverScrollbar(event.x(), event.y()) && maxScrollAmount() > 0) {
                 this.draggingScrollbar = true;
                 this.setScrollAmount(GuiUtil.scrollAmountFromMouse(event.y(), this.getY(), this.height, maxScrollAmount()));
                 return true;
@@ -1032,7 +1033,7 @@ public class FoodEditorScreen extends CompatScreen {
 
         @Override
         public boolean mouseClicked(double mouseX, double mouseY, int button) {
-            if (button == 0 && isOverScrollbar(mouseX, mouseY) && getMaxScroll() > 0) {
+            if (button == InputConstants.MOUSE_BUTTON_LEFT && isOverScrollbar(mouseX, mouseY) && getMaxScroll() > 0) {
                 this.draggingScrollbar = true;
                 this.setScrollAmount(GuiUtil.scrollAmountFromMouse(mouseY, this.getY(), this.height, getMaxScroll()));
                 return true;

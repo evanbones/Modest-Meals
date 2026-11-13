@@ -3,6 +3,7 @@ package com.evandev.modest_meals.client.gui.widget;
 import com.evandev.modest_meals.client.RenderCompat;
 import com.evandev.modest_meals.client.gui.compat.CompatEditBox;
 import com.evandev.modest_meals.client.gui.util.GuiUtil;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -41,7 +42,7 @@ public class ModEditBox extends CompatEditBox {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == 1 && isMouseOver(mouseX, mouseY)) {
+        if (button == InputConstants.MOUSE_BUTTON_RIGHT && isMouseOver(mouseX, mouseY)) {
             this.setValue("");
             this.setFocused(true);
             return true;

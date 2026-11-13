@@ -10,6 +10,7 @@ import com.evandev.modest_meals.client.gui.widget.ModButton;
 import com.evandev.modest_meals.client.tooltip.FoodItemTooltips;
 import com.evandev.modest_meals.trait.FoodTrait;
 import com.evandev.modest_meals.trait.FoodTraitType;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -193,7 +194,7 @@ public class TraitEditDialog extends CompatScreen {
             }
         }
 
-        if (button == 0 && isOverScrollbar(mouseX, mouseY)) {
+        if (button == InputConstants.MOUSE_BUTTON_LEFT && isOverScrollbar(mouseX, mouseY)) {
             this.draggingScrollbar = true;
             this.scroll = GuiUtil.scrollAmountFromMouse(mouseY, formViewTop(), formViewHeight(), maxScroll());
             return true;

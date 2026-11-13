@@ -8,6 +8,7 @@ import com.evandev.modest_meals.client.gui.widget.ModButton;
 import com.evandev.modest_meals.food.ingredient.IngredientProfile;
 import com.evandev.modest_meals.food.ingredient.MealEffect;
 import com.evandev.modest_meals.food.ingredient.MealEffectManager;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -223,7 +224,7 @@ public class IngredientEditDialog extends CompatScreen {
             }
         }
 
-        if (button == 0 && isOverScrollbar(mouseX, mouseY)) {
+        if (button == InputConstants.MOUSE_BUTTON_LEFT && isOverScrollbar(mouseX, mouseY)) {
             this.draggingScrollbar = true;
             this.scroll = GuiUtil.scrollAmountFromMouse(mouseY, scrollTrackTop(), scrollTrackHeight(),
                     formViewHeight(), maxScroll());
