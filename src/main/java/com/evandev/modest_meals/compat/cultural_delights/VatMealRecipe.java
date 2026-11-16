@@ -52,7 +52,7 @@ public class VatMealRecipe extends VatRecipe {
         //? if cultural_delights && <26.1
         super(ItemStack.EMPTY, NonNullList.create(), temperature, Ingredient.EMPTY, cookTime);
         //? if cultural_delights && >=26.1
-        /*super(new ItemStackTemplate(Items.BOWL), NonNullList.create(), temperature, Optional.empty(), cookTime);*/
+        //super(new ItemStackTemplate(Items.BOWL), NonNullList.create(), temperature, Optional.empty(), cookTime);
 //? if cultural_delights {
         this.mealTypeId = mealTypeId;
     }

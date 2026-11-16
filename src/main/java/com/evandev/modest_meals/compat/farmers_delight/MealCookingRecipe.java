@@ -25,7 +25,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 //? if >=26.1
-/*import net.minecraft.world.item.Items;*/
+//import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 //? if neoforge {
@@ -42,7 +42,7 @@ import java.util.Optional;
 public class MealCookingRecipe extends CookingPotRecipe {
 
     //? if >=26.1
-    /*private static final List<Ingredient> PROPERTY_SET_PLACEHOLDER_INPUT = List.of(Ingredient.of(Items.BOWL));*/
+    //private static final List<Ingredient> PROPERTY_SET_PLACEHOLDER_INPUT = List.of(Ingredient.of(Items.BOWL));
 
     private final ResourceLocation mealTypeId;
     private final int cookTime;

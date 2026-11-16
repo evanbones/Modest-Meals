@@ -46,7 +46,7 @@ public class MealBlockEntity extends BlockEntity {
         super.loadAdditional(input);
         contents = input.read(CONTENTS_KEY, MealContents.CODEC).orElse(MealContents.EMPTY);
         //? if fabric
-        redraw();
+        //redraw();
     }
 
     @Override

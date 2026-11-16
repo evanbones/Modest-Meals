@@ -5,7 +5,7 @@ import com.evandev.modest_meals.platform.RegistrationProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 //? if cultural_delights && fabric && >=26.1
-/*import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;*/
+//import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
 
 import java.util.function.Supplier;
 
@@ -31,6 +31,6 @@ public class CulturalDelightsCompat {
         VAT_MEAL_SERIALIZER = serializers.register("meal_vat", VatMealRecipe::serializer);
         //?}
         //? if cultural_delights && fabric && >=26.1
-        /*RecipeSynchronization.synchronizeRecipeSerializer(VAT_MEAL_SERIALIZER.get());*/
+        //RecipeSynchronization.synchronizeRecipeSerializer(VAT_MEAL_SERIALIZER.get());
     }
 }

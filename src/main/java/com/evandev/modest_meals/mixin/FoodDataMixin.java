@@ -8,7 +8,7 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.entity.player.Player;
 //? if >=26.1
-/*import net.minecraft.server.level.ServerPlayer;*/
+//import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
 import org.jetbrains.annotations.Nullable;

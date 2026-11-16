@@ -70,10 +70,10 @@ public class ModItems {
         if (remainder != null) {
             properties.craftRemainder(remainder);
             //? if >=26.1
-            /*properties.usingConvertsTo(remainder);*/
+            //properties.usingConvertsTo(remainder);
         }
         //? if >=26.1
-        /*properties.component(DataComponents.CONSUMABLE, animation == UseAnim.DRINK ? Consumables.DEFAULT_DRINK : Consumables.DEFAULT_FOOD);*/
+        //properties.component(DataComponents.CONSUMABLE, animation == UseAnim.DRINK ? Consumables.DEFAULT_DRINK : Consumables.DEFAULT_FOOD);
         return properties;
     }
 

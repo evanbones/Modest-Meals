@@ -12,9 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 *///?}
 //? if rrv && farmers_delight
-/*import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;*/
+//import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 //? if rrv && cultural_delights
-/*import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;*/
+//import com.evandev.modest_meals.compat.cultural_delights.CulturalDelightsCompat;
 //? if rrv {
 
 /*public class ModestMealsRrvPlugin implements ReliableRecipeViewerClientPlugin {

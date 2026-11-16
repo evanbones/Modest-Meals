@@ -22,7 +22,7 @@ import net.minecraft.client.resources.model.cuboid.FaceBakery;
 import net.minecraft.client.resources.model.cuboid.ItemModelGenerator;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 //? if >=26.3
-import net.minecraft.client.resources.model.geometry.ItemQuads;
+//import net.minecraft.client.resources.model.geometry.ItemQuads;
 import net.minecraft.client.resources.model.geometry.QuadCollection;
 import net.minecraft.client.resources.model.sprite.TextureSlots;
 import net.minecraft.client.renderer.item.CuboidItemModelWrapper;
@@ -88,8 +88,8 @@ public final class MealItemModel implements ItemModel {
         layer.setLocalTransform(this.transformation);
         this.properties.applyToLayer(layer, displayContext);
         //? if >=26.3 {
-        layer.setQuads(ItemQuads.split(quads));
-        //?} else
+        /^layer.setQuads(ItemQuads.split(quads));
+        ^///?} else
         layer.prepareQuadList().addAll(quads);
     }
 
@@ -98,10 +98,10 @@ public final class MealItemModel implements ItemModel {
         for (int i = 0; i < spriteIds.size(); i++) {
             TextureAtlasSprite sprite = RenderCompat.itemSprite(spriteIds.get(i));
             //? if >=26.3 {
-            BakedQuad.MaterialInfo material = new BakedQuad.MaterialInfo(sprite, ChunkSectionLayer.TRANSLUCENT,
+            /^BakedQuad.MaterialInfo material = new BakedQuad.MaterialInfo(sprite, ChunkSectionLayer.TRANSLUCENT,
                     Sheets.translucentItemSheet(), Sheets.translucentItemGlintSheet(), Sheets.translucentItemGlintSpecialSheet(),
                     -1, null, 0);
-            //?} else {
+            ^///?} else {
             BakedQuad.MaterialInfo material = new BakedQuad.MaterialInfo(sprite, ChunkSectionLayer.TRANSLUCENT,
                     Sheets.translucentItemSheet(), -1, true, 0);
             //?}

@@ -26,6 +26,6 @@ public class FarmersDelightSoupEffects {
         FoodProperties soup = FoodValues.VANILLA_SOUP_EFFECTS.get(item);
         return soup == null ? List.of() : FoodEffect.of(soup.effects());
         //?} else
-        /*return List.of();*/
+        //return List.of();
     }
 }
