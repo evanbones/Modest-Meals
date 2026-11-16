@@ -133,6 +133,19 @@ public class PlayerStamina {
         this.syncNow();
     }
 
+    public void endExhaustionFromEating() {
+        if (!this.data.isExhausted() || this.player.level().isClientSide() || !ModConfig.get().staminaEatingEndsExhaustion) {
+            return;
+        }
+        if (locksOut()) {
+            long rescaled = (long) this.data.getRemaining() * this.getDurationInTicks() / this.getRechargeInTicks();
+            this.data.setRemaining((int) Math.min(this.getDurationInTicks(), rescaled));
+        }
+        this.data.setCooldown(0);
+        this.data.setStaminaUsingTicks(this.getDurationInTicks(), this.getMaxLevel());
+        this.recover();
+    }
+
     public int levelAfterGain(float levels) {
         Gain gain = gain(levels);
         return StaminaData.levelFor(gain.remaining(),

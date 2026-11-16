@@ -94,6 +94,8 @@
   "config.modest_meals.option.stamina_cooldown.tooltip": "The delay in seconds after stopping sprinting before stamina begins to naturally recover.",
   "config.modest_meals.option.stamina_exhaustion_lockout": "Exhaustion Lockout",
   "config.modest_meals.option.stamina_exhaustion_lockout.tooltip": "When stamina runs out, wait for the bar to fully recharge before sprinting again. Disable to only wait out the recharge cooldown, then use stamina as it refills.",
+  "config.modest_meals.option.stamina_eating_ends_exhaustion": "Eating Ends Exhaustion",
+  "config.modest_meals.option.stamina_eating_ends_exhaustion.tooltip": "Eating anything while out of stamina lets you sprint again right away, keeping whatever stamina has recharged so far.",
 
   "config.modest_meals.option.stamina_sprinting": "Sprinting Uses Stamina",
   "config.modest_meals.option.stamina_sprinting.tooltip": "When enabled, sprinting and swimming drain stamina, and an exhausted player can't sprint. Turn off to keep stamina for other exertion only.",

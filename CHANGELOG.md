@@ -5,18 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.2] - 2026-11-15
+
+### Added
+
+- Eating while exhausted now lets you sprint again right away, keeping whatever stamina has recharged.
+- Added an Eating Ends Exhaustion option (on by default).
+
 ## [3.3.1] - 2026-11-13
 
 ### Fixed
 
-- Fixed the stamina bar being too high on Fabric when another mod moves the health and hunger rows, such as Experience Obliterator.
+- Fixed the stamina bar being too high on Fabric when another mod moves the health and hunger rows, such as Experience
+  Obliterator.
 
 ## [3.3.0] - 2026-11-13
 
 ### Changed
 
 - Holding up a shield now drains stamina without Shield Expansion installed.
-  - Shield Expansion is still needed for parries to restore stamina.
+    - Shield Expansion is still needed for parries to restore stamina.
 
 ### Fixed
 
@@ -27,15 +35,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added a Regain Time config option, which sets how long stamina takes to refill from empty when not exhausted.
-  - Previously this always matched Sprint Duration.
-- Added a Blocking Stamina Cost config option, which sets how fast holding up a Shield Expansion shield drains stamina compared with sprinting.
+    - Previously this always matched Sprint Duration.
+- Added a Blocking Stamina Cost config option, which sets how fast holding up a Shield Expansion shield drains stamina
+  compared with sprinting.
 
 ### Fixed
 
 - Fixed broken mouse input on 26.3 (@cassiancc).
 - Fixed Farmer's Delight's Mutton Wrap recipe disappearing without Cultural Delights installed.
 - Fixed wraps being uncraftable without a mod that adds tortillas.
-  - Wraps now use bread when no tortillas exist.
+    - Wraps now use bread when no tortillas exist.
 
 ## [3.1.1] - 2026-11-11
 
@@ -52,11 +61,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Cultural Delights compat on Fabric (1.21.1, 26.1, 26.2, and 26.3).
-  - Ice cream and ice cream bowls can be made in the Vat, and Cultural Delights foods work as meal ingredients.
-  - Vat meals show up in EMI on 1.21.1.
+    - Ice cream and ice cream bowls can be made in the Vat, and Cultural Delights foods work as meal ingredients.
+    - Vat meals show up in EMI on 1.21.1.
 - Reliable Recipe Viewer (RRV) compat on 26.1, 26.2, and 26.3.
-  - Crafting table meals show up on both NeoForge and Fabric.
-  - Cooking pot meals (Farmer's Delight Refabricated) and Vat meals (Cultural Delights) show up on Fabric.
+    - Crafting table meals show up on both NeoForge and Fabric.
+    - Cooking pot meals (Farmer's Delight Refabricated) and Vat meals (Cultural Delights) show up on Fabric.
 
 ## [3.0.0] - 2026-11-09
 

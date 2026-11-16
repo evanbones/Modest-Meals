@@ -67,6 +67,7 @@ public class ClientConfigScreen {
                 .option(createIntOption("stamina_recharge", defaults.staminaRecharge, 1, 600, 1, () -> gameplay.staminaRecharge, val -> gameplay.staminaRecharge = val))
                 .option(createIntOption("stamina_cooldown", defaults.staminaCooldown, 0, 60, 1, () -> gameplay.staminaCooldown, val -> gameplay.staminaCooldown = val))
                 .option(createBoolOption("stamina_exhaustion_lockout", defaults.staminaExhaustionLockout, () -> gameplay.staminaExhaustionLockout, val -> gameplay.staminaExhaustionLockout = val))
+                .option(createBoolOption("stamina_eating_ends_exhaustion", defaults.staminaEatingEndsExhaustion, () -> gameplay.staminaEatingEndsExhaustion, val -> gameplay.staminaEatingEndsExhaustion = val))
                 .option(createBoolOption("stamina_sprinting", defaults.staminaSprinting, () -> gameplay.staminaSprinting, val -> gameplay.staminaSprinting = val))
                 .option(createBoolOption("stamina_gliding", defaults.staminaGliding, () -> gameplay.staminaGliding, val -> gameplay.staminaGliding = val))
                 .option(createBoolOption("stamina_elytra", defaults.staminaElytra, () -> gameplay.staminaElytra, val -> gameplay.staminaElytra = val))

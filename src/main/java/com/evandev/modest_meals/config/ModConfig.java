@@ -91,6 +91,10 @@ public class ModConfig {
     public boolean staminaExhaustionLockout = true;
 
     @ServerSynced
+    @SerializedName("stamina_eating_ends_exhaustion")
+    public boolean staminaEatingEndsExhaustion = true;
+
+    @ServerSynced
     @SerializedName("stamina_sprinting")
     public boolean staminaSprinting = true;
 

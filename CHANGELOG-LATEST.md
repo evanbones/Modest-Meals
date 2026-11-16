@@ -1,3 +1,4 @@
-### Fixed
+### Added
 
-- Fixed the stamina bar being too high on Fabric when another mod moves the health and hunger rows, such as Experience Obliterator.
+- Eating while exhausted now lets you sprint again right away, keeping whatever stamina has recharged. 
+- Added an Eating Ends Exhaustion option (on by default).

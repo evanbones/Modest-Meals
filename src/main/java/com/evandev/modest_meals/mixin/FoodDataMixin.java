@@ -3,6 +3,7 @@ package com.evandev.modest_meals.mixin;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodConsumption;
 import com.evandev.modest_meals.food.FoodDataOwner;
+import com.evandev.modest_meals.stamina.StaminaHelper;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.entity.player.Player;
@@ -52,19 +53,20 @@ public abstract class FoodDataMixin implements FoodDataOwner {
 
     @WrapMethod(method = "eat(IF)V")
     private void mm$eatRawFood(int nutrition, float saturationModifier, Operation<Void> original) {
-        mm$feedFromBlock(nutrition);
+        mm$onEat(nutrition);
         original.call(nutrition, saturationModifier);
     }
 
     @WrapMethod(method = "eat(Lnet/minecraft/world/food/FoodProperties;)V")
     private void mm$eatFoodProperties(FoodProperties foodProperties, Operation<Void> original) {
-        mm$feedFromBlock(foodProperties.nutrition());
+        mm$onEat(foodProperties.nutrition());
         original.call(foodProperties);
     }
 
     @Unique
-    private void mm$feedFromBlock(int nutrition) {
+    private void mm$onEat(int nutrition) {
         if (mm$owner != null) {
+            StaminaHelper.get(mm$owner).endExhaustionFromEating();
             FoodConsumption.consumeFromBlock(mm$owner, nutrition);
         }
     }
