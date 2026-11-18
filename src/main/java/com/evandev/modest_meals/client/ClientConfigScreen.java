@@ -66,6 +66,7 @@ public class ClientConfigScreen {
                 .option(createIntOption("stamina_regain_time", defaults.staminaRegainTime, 1, 600, 1, () -> gameplay.staminaRegainTime, val -> gameplay.staminaRegainTime = val))
                 .option(createIntOption("stamina_recharge", defaults.staminaRecharge, 1, 600, 1, () -> gameplay.staminaRecharge, val -> gameplay.staminaRecharge = val))
                 .option(createIntOption("stamina_cooldown", defaults.staminaCooldown, 0, 60, 1, () -> gameplay.staminaCooldown, val -> gameplay.staminaCooldown = val))
+                .option(createIntOption("stamina_exhaustion_cooldown", defaults.staminaExhaustionCooldown, 0, 60, 1, () -> gameplay.staminaExhaustionCooldown, val -> gameplay.staminaExhaustionCooldown = val))
                 .option(createBoolOption("stamina_exhaustion_lockout", defaults.staminaExhaustionLockout, () -> gameplay.staminaExhaustionLockout, val -> gameplay.staminaExhaustionLockout = val))
                 .option(createBoolOption("stamina_eating_ends_exhaustion", defaults.staminaEatingEndsExhaustion, () -> gameplay.staminaEatingEndsExhaustion, val -> gameplay.staminaEatingEndsExhaustion = val))
                 .option(createBoolOption("stamina_sprinting", defaults.staminaSprinting, () -> gameplay.staminaSprinting, val -> gameplay.staminaSprinting = val))
@@ -158,6 +159,7 @@ public class ClientConfigScreen {
                         .action((yaclScreen, opt) -> Minecraft.getInstance().setScreen(new FoodEditorScreen(yaclScreen)))
                         .build())
                 .option(createBoolOption("show_food_trait_tooltips", defaults.showFoodTraitTooltips, () -> config.showFoodTraitTooltips, val -> config.showFoodTraitTooltips = val))
+                .option(createBoolOption("hide_effect_attribute_tooltips", defaults.hideEffectAttributeTooltips, () -> config.hideEffectAttributeTooltips, val -> config.hideEffectAttributeTooltips = val))
                 .option(createEnumOption("when_eaten_tooltip", TooltipVisibility.class, defaults.whenEatenTooltip, () -> config.whenEatenTooltip, val -> config.whenEatenTooltip = val, TooltipVisibility::getTitle))
                 .option(createEnumOption("ingredient_tooltip", TooltipVisibility.class, defaults.ingredientTooltip, () -> config.ingredientTooltip, val -> config.ingredientTooltip = val, TooltipVisibility::getTitle))
                 .build());

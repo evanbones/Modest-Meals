@@ -76,6 +76,15 @@ public class PlayerStamina {
         return ModConfig.get().staminaCooldown * 20;
     }
 
+    public int getExhaustionCooldownInTicks() {
+        int exhaustion = ModConfig.get().staminaExhaustionCooldown * 20;
+        return locksOut() ? exhaustion : Math.max(this.getCooldownInTicks(), exhaustion);
+    }
+
+    private static boolean waitsAfterExhaustion() {
+        return ModConfig.get().staminaExhaustionCooldown > 0;
+    }
+
     public int getActiveBarInTicks() {
         return this.barTicks(this.data.isExhausted());
     }
@@ -124,8 +133,8 @@ public class PlayerStamina {
             return;
         }
         this.data.setExhausted(true);
-        if (!locksOut()) {
-            this.data.setCooldown(this.getCooldownInTicks());
+        if (!locksOut() || waitsAfterExhaustion()) {
+            this.data.setCooldown(this.getExhaustionCooldownInTicks());
         }
         if (!this.player.level().isClientSide()) {
             StaminaEvent.postExhausted(this.player);
@@ -233,7 +242,9 @@ public class PlayerStamina {
             }
             this.data.setStaminaUsingTicks(durationInTicks, maxLevel);
         } else if (this.data.isExhausted()) {
-            if (this.regainThisTick) {
+            if (waitsAfterExhaustion() && this.data.cooldown > 0) {
+                this.data.cooldown--;
+            } else if (this.regainThisTick) {
                 this.data.remaining++;
             }
 
@@ -260,7 +271,9 @@ public class PlayerStamina {
                     this.markExhausted();
                 }
             }
-            this.data.cooldown = this.getCooldownInTicks();
+            if (!this.data.isExhausted()) {
+                this.data.cooldown = this.getCooldownInTicks();
+            }
 
             this.data.setStaminaUsingTicks(durationInTicks, maxLevel);
         } else {
@@ -363,7 +376,7 @@ public class PlayerStamina {
         if (!ModConfig.get().staminaSprint) {
             return false;
         }
-        return this.data.cooldown > 0 && this.data.cooldown < this.getCooldownInTicks();
+        return this.data.cooldown > 0 && this.data.cooldown < Math.max(this.getCooldownInTicks(), this.getExhaustionCooldownInTicks());
     }
 
     public void holdEnduranceWhileNourished() {

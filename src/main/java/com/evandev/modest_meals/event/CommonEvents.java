@@ -86,7 +86,7 @@ public class CommonEvents {
         if (!player.level().isClientSide()) {
             PlayerStamina stamina = StaminaHelper.get(player);
             stamina.spend(cost);
-            stamina.getData().setCooldown(stamina.getCooldownInTicks());
+            stamina.getData().setCooldown(Math.max(stamina.getData().getCooldown(), stamina.getCooldownInTicks()));
             stamina.syncNow();
         }
         return true;

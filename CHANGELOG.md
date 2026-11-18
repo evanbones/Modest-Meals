@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] - 2026-11-17
+
+### Added
+
+- Added an Exhaustion Cooldown Delay option
+  - How long an emptied stamina bar waits before it starts recharging (off by
+    default).
+- Added a Hide Effect Attribute Stats option (on by default) that removes the exact attribute bonuses, such as from
+  Bountiful Fares' Enrichment.
+
+### Changed
+
+- Bountiful Fares food effects such as Enrichment are now listed under "When Eaten" with the rest of a food's effects
+  instead of above the health/stamina icons.
+
 ## [3.3.2] - 2026-11-15
 
 ### Added

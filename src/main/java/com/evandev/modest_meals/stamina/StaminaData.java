@@ -64,7 +64,7 @@ public class StaminaData {
     }
 
     public void setCooldown(int cooldown) {
-        this.cooldown = Mth.clamp(cooldown, 0, ModConfig.get().staminaCooldown * 20);
+        this.cooldown = Mth.clamp(cooldown, 0, Math.max(ModConfig.get().staminaCooldown, ModConfig.get().staminaExhaustionCooldown) * 20);
     }
 
     public boolean isExhausted() {

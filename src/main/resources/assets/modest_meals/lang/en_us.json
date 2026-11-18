@@ -92,6 +92,8 @@
 
   "config.modest_meals.option.stamina_cooldown": "Recharge Cooldown Delay (Seconds)",
   "config.modest_meals.option.stamina_cooldown.tooltip": "The delay in seconds after stopping sprinting before stamina begins to naturally recover.",
+  "config.modest_meals.option.stamina_exhaustion_cooldown": "Exhaustion Cooldown Delay (Seconds)",
+  "config.modest_meals.option.stamina_exhaustion_cooldown.tooltip": "How long an emptied stamina bar waits before it starts recharging. When Exhaustion Lockout is off, the Recharge Cooldown Delay is used if it is longer.",
   "config.modest_meals.option.stamina_exhaustion_lockout": "Exhaustion Lockout",
   "config.modest_meals.option.stamina_exhaustion_lockout.tooltip": "When stamina runs out, wait for the bar to fully recharge before sprinting again. Disable to only wait out the recharge cooldown, then use stamina as it refills.",
   "config.modest_meals.option.stamina_eating_ends_exhaustion": "Eating Ends Exhaustion",
@@ -300,6 +302,8 @@
   "config.modest_meals.option.open_food_editor.tooltip": "Launch the visual in-game browser and editor for food traits and profiles.",
   "config.modest_meals.option.show_food_trait_tooltips": "Show Food Trait Tooltips",
   "config.modest_meals.option.show_food_trait_tooltips.tooltip": "Displays status effects and trait modifiers on food item tooltips.",
+  "config.modest_meals.option.hide_effect_attribute_tooltips": "Hide Effect Attribute Stats",
+  "config.modest_meals.option.hide_effect_attribute_tooltips.tooltip": "Hides the exact attribute bonuses (e.g. \"+8% Speed\") that some mods list under a food's effects, such as Bountiful Fares' Enrichment.",
 
   "config.modest_meals.option.when_eaten_tooltip": "\"When Eaten\" Tooltip",
   "config.modest_meals.option.when_eaten_tooltip.tooltip": "When to show the list of effects and traits a food applies when eaten.",

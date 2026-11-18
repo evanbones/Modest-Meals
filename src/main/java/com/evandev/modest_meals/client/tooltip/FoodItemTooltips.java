@@ -2,6 +2,7 @@ package com.evandev.modest_meals.client.tooltip;
 
 import com.evandev.modest_meals.client.ModSprites;
 import com.evandev.modest_meals.client.hud.StaminaSprites;
+import com.evandev.modest_meals.compat.bountiful_fares.BountifulFaresEffects;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightSoupEffects;
 import com.evandev.modest_meals.component.ModDataComponents;
@@ -69,7 +70,12 @@ public class FoodItemTooltips {
 
         List<FoodEffect> effects = foodEffects(stack);
         if (FoodValues.isFood(stack)) {
-            removePreExistingFoodEffects(lines, effects);
+            List<FoodEffect> listedEffects = new ArrayList<>(effects);
+            listedEffects.addAll(BountifulFaresEffects.missingFrom(effects, stack));
+            removePreExistingFoodEffects(lines, listedEffects);
+            if (ModConfig.get().hideEffectAttributeTooltips) {
+                removeEffectAttributeBlocks(lines);
+            }
         }
 
         Optional<EdibleBlockFoods.Servings> servings = EdibleBlockFoods.servingsOf(stack);
@@ -232,7 +238,8 @@ public class FoodItemTooltips {
         List<Component> effectLines = new ArrayList<>();
         List<Component> traitLines = new ArrayList<>();
 
-        List<FoodEffect> shownEffects = BuiltInFoodEffects.kept(stack, effects);
+        List<FoodEffect> shownEffects = new ArrayList<>(BuiltInFoodEffects.kept(stack, effects));
+        shownEffects.addAll(BountifulFaresEffects.missingFrom(effects, stack));
         List<FoodTrait> traits = new ArrayList<>();
         double valMult = ModConfig.get().traitGlobalValueMultiplier * scale;
         double durMult = ModConfig.get().traitGlobalDurationMultiplier * scale;
@@ -285,6 +292,32 @@ public class FoodItemTooltips {
                 i++;
             }
         }
+    }
+
+    private static void removeEffectAttributeBlocks(List<Component> lines) {
+        for (int i = 1; i < lines.size(); i++) {
+            if (!hasTranslationKey(lines.get(i), "potion.whenDrank")
+                    || i + 1 >= lines.size()
+                    || !isAttributeModifierLine(lines.get(i + 1))) {
+                continue;
+            }
+
+            int end = i + 1;
+            while (end < lines.size() && isAttributeModifierLine(lines.get(end))) {
+                end++;
+            }
+            int start = i > 1 && lines.get(i - 1).getString().isEmpty() ? i - 1 : i;
+            lines.subList(start, end).clear();
+            i = start - 1;
+        }
+    }
+
+    private static boolean hasTranslationKey(Component c, String key) {
+        return c.getContents() instanceof TranslatableContents trans && key.equals(trans.getKey());
+    }
+
+    private static boolean isAttributeModifierLine(Component c) {
+        return c.getContents() instanceof TranslatableContents trans && trans.getKey().startsWith("attribute.modifier.");
     }
 
     private static boolean isPotionAttributeLine(Component c) {

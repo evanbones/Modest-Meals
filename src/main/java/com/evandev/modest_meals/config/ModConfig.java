@@ -87,6 +87,10 @@ public class ModConfig {
     public int staminaCooldown = 2;
 
     @ServerSynced
+    @SerializedName("stamina_exhaustion_cooldown")
+    public int staminaExhaustionCooldown = 0;
+
+    @ServerSynced
     @SerializedName("stamina_exhaustion_lockout")
     public boolean staminaExhaustionLockout = true;
 
@@ -198,6 +202,9 @@ public class ModConfig {
 
     @SerializedName("show_food_trait_tooltips")
     public boolean showFoodTraitTooltips = true;
+
+    @SerializedName("hide_effect_attribute_tooltips")
+    public boolean hideEffectAttributeTooltips = true;
 
     @SerializedName("when_eaten_tooltip")
     public TooltipVisibility whenEatenTooltip = TooltipVisibility.VISIBLE;
