@@ -13,7 +13,8 @@
     "RecipeManagerMixin",
     "ServerGamePacketListenerImplAccessor",
     "compat.FarmersDelightSoupEffectsMixin",
-    "compat.GlidingStateMixin"
+    "compat.GlidingStateMixin",
+    "compat.ParCoolStaminaTypeMixin"
   ],
   "client": [
     "GuiMixin",

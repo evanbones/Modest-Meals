@@ -16,6 +16,7 @@ stonecutter parameters {
     constants["thermoo"] = legacy
     constants["shield_expansion"] = legacy
     constants["neoforge_legacy"] = legacy && loader == "neoforge"
+    constants["parcool"] = legacy && loader == "neoforge"
     constants["cultural_delights"] = legacy || loader == "fabric"
     constants["rrv"] = !legacy
 

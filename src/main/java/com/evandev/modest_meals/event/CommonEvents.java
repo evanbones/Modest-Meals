@@ -2,6 +2,7 @@ package com.evandev.modest_meals.event;
 
 import com.evandev.modest_meals.platform.Platform;
 import com.evandev.modest_meals.api.StaminaApi;
+import com.evandev.modest_meals.compat.parcool.ParCoolCompat;
 import com.evandev.modest_meals.compat.reliable_gliders.ReliableGlidersCompat;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.food.FoodProfileManager;
@@ -42,6 +43,7 @@ public class CommonEvents {
         if (ModConfig.get().staminaSprint) {
             PlayerStamina stamina = StaminaHelper.get(player);
             stamina.tick();
+            ParCoolCompat.tick(player, stamina);
             stamina.holdEnduranceWhileNourished();
 
             if (stamina.getData().isExhausted()) {

@@ -86,6 +86,7 @@ For example, a sandwich made with beetroot gives Strength, so it's called a **Mi
 | [Cold Sweat](https://modrinth.com/mod/cold-sweat), [Thermoo](https://modrinth.com/mod/thermoo) (Frostiful, Scorchful) | *Spicy* and *Chilly* meals give cold and heat resistance                                       |
 | [Shield Expansion](https://modrinth.com/mod/shield-expansion)                                                         | A successful parry restores stamina                                                            |
 | [Reliable Gliders](https://modrinth.com/mod/reliable-gliders)                                                         | Gliding drains stamina, and an exhausted player can't glide                                    |
+| [ParCool](https://modrinth.com/mod/parcool) (NeoForge 1.21.1)                                                         | Parkour moves take stamina in place of ParCool's own bar                                       |
 | [Reliable Remover](https://modrinth.com/mod/reliable-remover)                                                         | Meal recipes skip items that have been removed                                                 |
 
 **Incompatible:**

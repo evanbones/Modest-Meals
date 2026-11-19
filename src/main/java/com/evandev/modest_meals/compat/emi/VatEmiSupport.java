@@ -32,13 +32,13 @@ public final class VatEmiSupport {
             if (type.isEmpty() || type.get().resolveItem().isEmpty()) {
                 continue;
             }
-            registry.addRecipe(VatMealEmiRecipe.of(type.get(), vat.getCookTime(), pool));
+            registry.addRecipe(VatMealEmiRecipe.of(type.get(), vat.getCookTime(), vat.getTemperature(), pool));
             if (type.get().requiresSupportedIngredients()) {
-                registry.addRecipe(VatMealEmiRecipe.dubiousOf(type.get(), vat.getCookTime(), pool));
+                registry.addRecipe(VatMealEmiRecipe.dubiousOf(type.get(), vat.getCookTime(), vat.getTemperature(), pool));
             }
             List<MealType.ItemOverride> overrides = type.get().itemOverrides();
             for (int i = 0; i < overrides.size(); i++) {
-                VatMealEmiRecipe.overrideOf(type.get(), overrides.get(i), i, vat.getCookTime())
+                VatMealEmiRecipe.overrideOf(type.get(), overrides.get(i), i, vat.getCookTime(), vat.getTemperature())
                         .ifPresent(registry::addRecipe);
             }
         }

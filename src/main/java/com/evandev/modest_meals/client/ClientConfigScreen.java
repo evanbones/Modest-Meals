@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.client;
 
 import com.evandev.modest_meals.client.gui.FoodEditorScreen;
+import com.evandev.modest_meals.compat.parcool.ParCoolCompat;
 import com.evandev.modest_meals.config.*;
 import com.evandev.modest_meals.stamina.Corner;
 import com.evandev.modest_meals.stamina.StaminaRegain;
@@ -73,15 +74,62 @@ public class ClientConfigScreen {
                 .option(createBoolOption("stamina_gliding", defaults.staminaGliding, () -> gameplay.staminaGliding, val -> gameplay.staminaGliding = val))
                 .option(createBoolOption("stamina_elytra", defaults.staminaElytra, () -> gameplay.staminaElytra, val -> gameplay.staminaElytra = val))
                 .option(createBoolOption("stamina_shield_blocking", defaults.staminaShieldBlocking, () -> gameplay.staminaShieldBlocking, val -> gameplay.staminaShieldBlocking = val))
-                .option(createFloatOption("stamina_shield_blocking_cost", defaults.staminaShieldBlockingCost, 0.0F, 5.0F, 0.1F, () -> gameplay.staminaShieldBlockingCost, val -> gameplay.staminaShieldBlockingCost = val))
-                .option(createFloatOption("stamina_parry_restore", defaults.staminaParryRestore, 0.0F, 20.0F, 0.5F, () -> gameplay.staminaParryRestore, val -> gameplay.staminaParryRestore = val))
-                .option(createFloatOption("stamina_combat_roll_cost", defaults.staminaCombatRollCost, 0.0F, 20.0F, 0.5F, () -> gameplay.staminaCombatRollCost, val -> gameplay.staminaCombatRollCost = val))
-                .option(createFloatOption("stamina_hand_crank_cost", defaults.staminaHandCrankCost, 0.0F, 2.0F, 0.01F, () -> gameplay.staminaHandCrankCost, val -> gameplay.staminaHandCrankCost = val))
                 .option(createEnumOption("sprinting", SprintingOption.class, defaults.sprinting, () -> gameplay.sprinting, val -> gameplay.sprinting = val, SprintingOption::getTitle))
                 .option(createIntOption("sprinting_health_limit", defaults.sprintingHealthLimit, 1, 20, 1, () -> gameplay.sprintingHealthLimit, val -> gameplay.sprintingHealthLimit = val))
                 .build());
 
+        gameplayCategoryBuilder.group(OptionGroup.createBuilder()
+                .name(Component.translatable("config.modest_meals.group.stamina_costs"))
+                .description(OptionDescription.of(Component.translatable("config.modest_meals.group.stamina_costs.tooltip")))
+                .option(createFloatOption("stamina_sprinting_cost", defaults.staminaSprintingCost, 0.0F, 5.0F, 0.1F, () -> gameplay.staminaSprintingCost, val -> gameplay.staminaSprintingCost = val))
+                .option(createFloatOption("stamina_swimming_cost", defaults.staminaSwimmingCost, 0.0F, 5.0F, 0.1F, () -> gameplay.staminaSwimmingCost, val -> gameplay.staminaSwimmingCost = val))
+                .option(createFloatOption("stamina_elytra_cost", defaults.staminaElytraCost, 0.0F, 5.0F, 0.1F, () -> gameplay.staminaElytraCost, val -> gameplay.staminaElytraCost = val))
+                .option(createFloatOption("stamina_gliding_cost", defaults.staminaGlidingCost, 0.0F, 5.0F, 0.1F, () -> gameplay.staminaGlidingCost, val -> gameplay.staminaGlidingCost = val))
+                .option(createFloatOption("stamina_shield_blocking_cost", defaults.staminaShieldBlockingCost, 0.0F, 5.0F, 0.1F, () -> gameplay.staminaShieldBlockingCost, val -> gameplay.staminaShieldBlockingCost = val))
+                .option(createFloatOption("stamina_parry_restore", defaults.staminaParryRestore, 0.0F, 20.0F, 0.5F, () -> gameplay.staminaParryRestore, val -> gameplay.staminaParryRestore = val))
+                .option(createFloatOption("stamina_combat_roll_cost", defaults.staminaCombatRollCost, 0.0F, 20.0F, 0.5F, () -> gameplay.staminaCombatRollCost, val -> gameplay.staminaCombatRollCost = val))
+                .option(createFloatOption("stamina_hand_crank_cost", defaults.staminaHandCrankCost, 0.0F, 2.0F, 0.01F, () -> gameplay.staminaHandCrankCost, val -> gameplay.staminaHandCrankCost = val))
+                .build());
+
         builder.category(gameplayCategoryBuilder.build());
+
+        if (ParCoolCompat.isLoaded()) {
+            builder.category(ConfigCategory.createBuilder()
+                    .name(Component.translatable("config.modest_meals.category.parcool"))
+                    .tooltip(Component.translatable("config.modest_meals.category.parcool.tooltip"))
+                    .option(createBoolOption("parcool_stamina", defaults.parcoolStamina, () -> gameplay.parcoolStamina, val -> gameplay.parcoolStamina = val))
+                    .group(OptionGroup.createBuilder()
+                            .name(Component.translatable("config.modest_meals.group.parcool_once"))
+                            .description(OptionDescription.of(Component.translatable("config.modest_meals.group.parcool_once.tooltip")))
+                            .option(createParCoolCost("parcool_vault_cost", defaults.parcoolVaultCost, () -> gameplay.parcoolVaultCost, val -> gameplay.parcoolVaultCost = val))
+                            .option(createParCoolCost("parcool_wall_jump_cost", defaults.parcoolWallJumpCost, () -> gameplay.parcoolWallJumpCost, val -> gameplay.parcoolWallJumpCost = val))
+                            .option(createParCoolCost("parcool_wall_run_cost", defaults.parcoolWallRunCost, () -> gameplay.parcoolWallRunCost, val -> gameplay.parcoolWallRunCost = val))
+                            .option(createParCoolCost("parcool_long_jump_cost", defaults.parcoolLongJumpCost, () -> gameplay.parcoolLongJumpCost, val -> gameplay.parcoolLongJumpCost = val))
+                            .option(createParCoolCost("parcool_charge_jump_cost", defaults.parcoolChargeJumpCost, () -> gameplay.parcoolChargeJumpCost, val -> gameplay.parcoolChargeJumpCost = val))
+                            .option(createParCoolCost("parcool_trick_jump_cost", defaults.parcoolTrickJumpCost, () -> gameplay.parcoolTrickJumpCost, val -> gameplay.parcoolTrickJumpCost = val))
+                            .option(createParCoolCost("parcool_dive_cost", defaults.parcoolDiveCost, () -> gameplay.parcoolDiveCost, val -> gameplay.parcoolDiveCost = val))
+                            .option(createParCoolCost("parcool_slide_cost", defaults.parcoolSlideCost, () -> gameplay.parcoolSlideCost, val -> gameplay.parcoolSlideCost = val))
+                            .option(createParCoolCost("parcool_climb_up_cost", defaults.parcoolClimbUpCost, () -> gameplay.parcoolClimbUpCost, val -> gameplay.parcoolClimbUpCost = val))
+                            .option(createParCoolCost("parcool_castaway_cost", defaults.parcoolCastawayCost, () -> gameplay.parcoolCastawayCost, val -> gameplay.parcoolCastawayCost = val))
+                            .option(createParCoolCost("parcool_dodge_cost", defaults.parcoolDodgeCost, () -> gameplay.parcoolDodgeCost, val -> gameplay.parcoolDodgeCost = val))
+                            .option(createParCoolCost("parcool_breakfall_cost", defaults.parcoolBreakfallCost, () -> gameplay.parcoolBreakfallCost, val -> gameplay.parcoolBreakfallCost = val))
+                            .build())
+                    .group(OptionGroup.createBuilder()
+                            .name(Component.translatable("config.modest_meals.group.parcool_held"))
+                            .description(OptionDescription.of(Component.translatable("config.modest_meals.group.parcool_held.tooltip")))
+                            .option(createParCoolCost("parcool_horizontal_wall_run_cost", defaults.parcoolHorizontalWallRunCost, () -> gameplay.parcoolHorizontalWallRunCost, val -> gameplay.parcoolHorizontalWallRunCost = val))
+                            .option(createParCoolCost("parcool_hang_on_cost", defaults.parcoolHangOnCost, () -> gameplay.parcoolHangOnCost, val -> gameplay.parcoolHangOnCost = val))
+                            .option(createParCoolCost("parcool_hang_down_cost", defaults.parcoolHangDownCost, () -> gameplay.parcoolHangDownCost, val -> gameplay.parcoolHangDownCost = val))
+                            .option(createParCoolCost("parcool_slide_down_cost", defaults.parcoolSlideDownCost, () -> gameplay.parcoolSlideDownCost, val -> gameplay.parcoolSlideDownCost = val))
+                            .option(createParCoolCost("parcool_pole_climb_cost", defaults.parcoolPoleClimbCost, () -> gameplay.parcoolPoleClimbCost, val -> gameplay.parcoolPoleClimbCost = val))
+                            .option(createParCoolCost("parcool_crawl_cost", defaults.parcoolCrawlCost, () -> gameplay.parcoolCrawlCost, val -> gameplay.parcoolCrawlCost = val))
+                            .option(createParCoolCost("parcool_skydive_cost", defaults.parcoolSkydiveCost, () -> gameplay.parcoolSkydiveCost, val -> gameplay.parcoolSkydiveCost = val))
+                            .option(createParCoolCost("parcool_fast_run_cost", defaults.parcoolFastRunCost, () -> gameplay.parcoolFastRunCost, val -> gameplay.parcoolFastRunCost = val))
+                            .option(createParCoolCost("parcool_fast_swim_cost", defaults.parcoolFastSwimCost, () -> gameplay.parcoolFastSwimCost, val -> gameplay.parcoolFastSwimCost = val))
+                            .option(createParCoolCost("parcool_ride_zipline_cost", defaults.parcoolRideZiplineCost, () -> gameplay.parcoolRideZiplineCost, val -> gameplay.parcoolRideZiplineCost = val))
+                            .build())
+                    .build());
+        }
 
         ConfigCategory.Builder hudCategoryBuilder = ConfigCategory.createBuilder()
                 .name(Component.translatable("config.modest_meals.category.hud"))
@@ -216,6 +264,10 @@ public class ClientConfigScreen {
                         value -> Component.literal(String.format("%,.2f", value))
                 ))
                 .build();
+    }
+
+    private static Option<Float> createParCoolCost(String name, float defaultValue, Supplier<Float> getter, Consumer<Float> setter) {
+        return createFloatOption(name, defaultValue, 0.0F, 10.0F, 0.1F, getter, setter);
     }
 
     private static Option<Color> createColorOption(String name, Color defaultValue, Supplier<Color> getter, Consumer<Color> setter) {

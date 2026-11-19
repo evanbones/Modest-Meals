@@ -12,6 +12,8 @@
   "config.modest_meals.group.health_regeneration.tooltip": "Settings related to gradual food digestion and healing over time.",
   "config.modest_meals.group.mechanics": "Stamina Mechanics",
   "config.modest_meals.group.mechanics.tooltip": "Configure stamina sprint duration, recharge delays, and movement recovery.",
+  "config.modest_meals.group.stamina_costs": "Stamina Costs",
+  "config.modest_meals.group.stamina_costs.tooltip": "How much stamina each action takes. Drain rates are compared with the base rate, where 1.0 empties a full bar in the stamina duration.",
   "config.modest_meals.category.hud": "HUD & Display",
   "config.modest_meals.category.hud.tooltip": "Configure stamina bar, heart overlays, and item tooltips.",
   "config.modest_meals.group.stamina_bar": "Stamina Bar",
@@ -109,8 +111,16 @@
 
   "config.modest_meals.option.stamina_shield_blocking": "Blocking Uses Stamina",
   "config.modest_meals.option.stamina_shield_blocking.tooltip": "Holding up a shield drains stamina like sprinting does, and an exhausted player can't block.",
+  "config.modest_meals.option.stamina_sprinting_cost": "Sprinting Stamina Cost",
+  "config.modest_meals.option.stamina_sprinting_cost.tooltip": "How fast sprinting drains stamina. 1.0 empties a full bar in the stamina duration, 0.5 takes twice as long. 0 makes sprinting free, though stamina still won't regain while sprinting.",
+  "config.modest_meals.option.stamina_swimming_cost": "Swimming Stamina Cost",
+  "config.modest_meals.option.stamina_swimming_cost.tooltip": "How fast sprint-swimming drains stamina, when Sprinting Uses Stamina is on. 1.0 drains at the base rate, 0.5 at half. Ordinary swimming is free.",
+  "config.modest_meals.option.stamina_elytra_cost": "Elytra Stamina Cost",
+  "config.modest_meals.option.stamina_elytra_cost.tooltip": "How fast elytra flight drains stamina, when Elytra Uses Stamina is on. 1.0 drains at the sprint rate, 0.5 at half.",
+  "config.modest_meals.option.stamina_gliding_cost": "Gliding Stamina Cost",
+  "config.modest_meals.option.stamina_gliding_cost.tooltip": "With Reliable Gliders installed, how fast gliding drains stamina, when Gliding Uses Stamina is on. 1.0 drains at the sprint rate, 0.5 at half.",
   "config.modest_meals.option.stamina_shield_blocking_cost": "Blocking Stamina Cost",
-  "config.modest_meals.option.stamina_shield_blocking_cost.tooltip": "How fast holding up a shield drains stamina, compared with sprinting. 0.5 drains at half the sprint rate. 0 makes blocking free.",
+  "config.modest_meals.option.stamina_shield_blocking_cost.tooltip": "How fast holding up a shield drains stamina. 1.0 empties a full bar in the stamina duration, 0.5 takes twice as long. 0 makes blocking free.",
 
   "config.modest_meals.option.stamina_parry_restore": "Parry Stamina Restore",
   "config.modest_meals.option.stamina_parry_restore.tooltip": "With Shield Expansion installed, how much stamina a successful parry gives back, in half-bolts. 0 turns it off.",
@@ -120,6 +130,83 @@
 
   "config.modest_meals.option.stamina_hand_crank_cost": "Hand Crank Stamina Cost",
   "config.modest_meals.option.stamina_hand_crank_cost.tooltip": "How much stamina each turn of a hand crank (like Create's) takes, in half-bolts. An exhausted player can't turn one. 0 turns it off.",
+
+  "config.modest_meals.category.parcool": "ParCool",
+  "config.modest_meals.category.parcool.tooltip": "Configure how much stamina ParCool's parkour moves take.",
+
+  "config.modest_meals.option.parcool_stamina": "Parkour Uses Stamina",
+  "config.modest_meals.option.parcool_stamina.tooltip": "Parkour moves take stamina from the stamina bar, and ParCool's own stamina bar is replaced. An exhausted player can't start a move that costs stamina, and moves held over time end when the bar runs out. Off leaves ParCool's own stamina alone.",
+
+  "config.modest_meals.group.parcool_once": "Single Moves",
+  "config.modest_meals.group.parcool_once.tooltip": "Stamina taken each time the move is done, in half-bolts. 0 makes a move free.",
+  "config.modest_meals.group.parcool_held": "Held Moves",
+  "config.modest_meals.group.parcool_held.tooltip": "Stamina taken every second the move is held, in half-bolts. Stamina doesn't recharge while a held move costs stamina. 0 makes a move free.",
+
+  "config.modest_meals.option.parcool_vault_cost": "Vault Cost",
+  "config.modest_meals.option.parcool_vault_cost.tooltip": "Vaulting over a low obstacle while sprinting. In half-bolts.",
+
+  "config.modest_meals.option.parcool_wall_jump_cost": "Wall Jump Cost",
+  "config.modest_meals.option.parcool_wall_jump_cost.tooltip": "Kicking off a wall. In half-bolts.",
+
+  "config.modest_meals.option.parcool_wall_run_cost": "Wall Run Cost",
+  "config.modest_meals.option.parcool_wall_run_cost.tooltip": "Running up a wall. In half-bolts.",
+
+  "config.modest_meals.option.parcool_long_jump_cost": "Long Jump Cost",
+  "config.modest_meals.option.parcool_long_jump_cost.tooltip": "A sprinting long jump. In half-bolts.",
+
+  "config.modest_meals.option.parcool_charge_jump_cost": "Charge Jump Cost",
+  "config.modest_meals.option.parcool_charge_jump_cost.tooltip": "Releasing a charged jump. Charging without jumping is free. In half-bolts.",
+
+  "config.modest_meals.option.parcool_trick_jump_cost": "Trick Jump Cost",
+  "config.modest_meals.option.parcool_trick_jump_cost.tooltip": "A trick jump. In half-bolts.",
+
+  "config.modest_meals.option.parcool_dive_cost": "Dive Cost",
+  "config.modest_meals.option.parcool_dive_cost.tooltip": "Diving forward from a jump. In half-bolts.",
+
+  "config.modest_meals.option.parcool_slide_cost": "Slide Cost",
+  "config.modest_meals.option.parcool_slide_cost.tooltip": "Sliding along the ground. In half-bolts.",
+
+  "config.modest_meals.option.parcool_climb_up_cost": "Climb Up Cost",
+  "config.modest_meals.option.parcool_climb_up_cost.tooltip": "Pulling up onto a ledge while hanging. In half-bolts.",
+
+  "config.modest_meals.option.parcool_castaway_cost": "Castaway Cost",
+  "config.modest_meals.option.parcool_castaway_cost.tooltip": "Pushing off backwards while hanging. In half-bolts.",
+
+  "config.modest_meals.option.parcool_dodge_cost": "Dodge Cost",
+  "config.modest_meals.option.parcool_dodge_cost.tooltip": "A dodge step. In half-bolts.",
+
+  "config.modest_meals.option.parcool_breakfall_cost": "Breakfall Cost",
+  "config.modest_meals.option.parcool_breakfall_cost.tooltip": "Rolling on landing to break a fall. In half-bolts.",
+
+  "config.modest_meals.option.parcool_horizontal_wall_run_cost": "Horizontal Wall Run Cost",
+  "config.modest_meals.option.parcool_horizontal_wall_run_cost.tooltip": "Running along a wall. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_hang_on_cost": "Hang On Cost",
+  "config.modest_meals.option.parcool_hang_on_cost.tooltip": "Hanging from a ledge. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_hang_down_cost": "Hang Down Cost",
+  "config.modest_meals.option.parcool_hang_down_cost.tooltip": "Hanging below bars. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_slide_down_cost": "Slide Down Cost",
+  "config.modest_meals.option.parcool_slide_down_cost.tooltip": "Sliding down a wall. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_pole_climb_cost": "Pole Climb Cost",
+  "config.modest_meals.option.parcool_pole_climb_cost.tooltip": "Climbing a pole. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_crawl_cost": "Crawl Cost",
+  "config.modest_meals.option.parcool_crawl_cost.tooltip": "Crawling. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_skydive_cost": "Skydive Cost",
+  "config.modest_meals.option.parcool_skydive_cost.tooltip": "Skydiving after a dive. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_fast_run_cost": "Fast Run Cost",
+  "config.modest_meals.option.parcool_fast_run_cost.tooltip": "ParCool's fast run, on top of what sprinting already takes. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_fast_swim_cost": "Fast Swim Cost",
+  "config.modest_meals.option.parcool_fast_swim_cost.tooltip": "ParCool's fast swim, on top of what swimming already takes. In half-bolts per second.",
+
+  "config.modest_meals.option.parcool_ride_zipline_cost": "Ride Zipline Cost",
+  "config.modest_meals.option.parcool_ride_zipline_cost.tooltip": "Riding a zipline. In half-bolts per second.",
 
   "config.modest_meals.option.hud_layout": "HUD Layout",
   "config.modest_meals.option.hud_layout.tooltip": "Default: Standard layout with armor above hearts on the left, stamina in place of hunger on the right, and air bubbles above stamina.\nClassic: Beta-style layout with air bubbles above hearts on the left, armor on the right, and stamina above armor.",
@@ -527,7 +614,6 @@
   "tag.item.modest_meals.not_for_jam": "Not for Jam",
   "tag.item.modest_meals.sweets": "Sweets",
   "tag.item.modest_meals.dessert_ingredients": "Dessert Ingredients",
-  "recipe_viewer.modest_meals.cold_vat": "Needs a cold vat",
   "recipe_viewer.modest_meals.any_ingredient": "Any Ingredient",
   "recipe_viewer.modest_meals.supported_ingredient": "Supported Ingredient",
   "recipe_viewer.modest_meals.unsupported_ingredient": "Unsupported Ingredient",

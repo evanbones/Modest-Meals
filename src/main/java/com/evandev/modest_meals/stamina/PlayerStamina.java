@@ -113,7 +113,10 @@ public class PlayerStamina {
     }
 
     public void spend(float levels) {
-        int ticks = this.levelsToTicks(levels);
+        this.spendTicks(this.levelsToTicks(levels));
+    }
+
+    public void spendTicks(int ticks) {
         if (ticks <= 0) {
             return;
         }
@@ -299,9 +302,21 @@ public class PlayerStamina {
     }
 
     private float drainRate() {
-        boolean onlyBlocking = !this.isAtFullSprint() && !this.isElytraGliding()
-                && !ReliableGlidersCompat.isGliding(this.player) && ShieldBlocking.isBlocking(this.player);
-        return onlyBlocking ? ModConfig.get().staminaShieldBlockingCost : 1.0F;
+        ModConfig config = ModConfig.get();
+        float rate = 0.0F;
+        if (this.isAtFullSprint()) {
+            rate = Math.max(rate, this.player.isSwimming() ? config.staminaSwimmingCost : config.staminaSprintingCost);
+        }
+        if (this.isElytraGliding()) {
+            rate = Math.max(rate, config.staminaElytraCost);
+        }
+        if (ReliableGlidersCompat.isGliding(this.player)) {
+            rate = Math.max(rate, config.staminaGlidingCost);
+        }
+        if (ShieldBlocking.isBlocking(this.player)) {
+            rate = Math.max(rate, config.staminaShieldBlockingCost);
+        }
+        return rate;
     }
 
     private void recover() {

@@ -115,6 +115,22 @@ public class ModConfig {
     public boolean staminaShieldBlocking = true;
 
     @ServerSynced
+    @SerializedName("stamina_sprinting_cost")
+    public float staminaSprintingCost = 1.0f;
+
+    @ServerSynced
+    @SerializedName("stamina_swimming_cost")
+    public float staminaSwimmingCost = 1.0f;
+
+    @ServerSynced
+    @SerializedName("stamina_gliding_cost")
+    public float staminaGlidingCost = 1.0f;
+
+    @ServerSynced
+    @SerializedName("stamina_elytra_cost")
+    public float staminaElytraCost = 1.0f;
+
+    @ServerSynced
     @SerializedName("stamina_shield_blocking_cost")
     public float staminaShieldBlockingCost = 1.0f;
 
@@ -129,6 +145,98 @@ public class ModConfig {
     @ServerSynced
     @SerializedName("stamina_hand_crank_cost")
     public float staminaHandCrankCost = 0.13f;
+
+    @ServerSynced
+    @SerializedName("parcool_stamina")
+    public boolean parcoolStamina = true;
+
+    @ServerSynced
+    @SerializedName("parcool_vault_cost")
+    public float parcoolVaultCost = 1.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_wall_jump_cost")
+    public float parcoolWallJumpCost = 1.5f;
+
+    @ServerSynced
+    @SerializedName("parcool_wall_run_cost")
+    public float parcoolWallRunCost = 2.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_long_jump_cost")
+    public float parcoolLongJumpCost = 2.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_charge_jump_cost")
+    public float parcoolChargeJumpCost = 2.5f;
+
+    @ServerSynced
+    @SerializedName("parcool_trick_jump_cost")
+    public float parcoolTrickJumpCost = 1.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_dive_cost")
+    public float parcoolDiveCost = 0.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_slide_cost")
+    public float parcoolSlideCost = 1.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_climb_up_cost")
+    public float parcoolClimbUpCost = 1.5f;
+
+    @ServerSynced
+    @SerializedName("parcool_castaway_cost")
+    public float parcoolCastawayCost = 0.5f;
+
+    @ServerSynced
+    @SerializedName("parcool_dodge_cost")
+    public float parcoolDodgeCost = 3.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_breakfall_cost")
+    public float parcoolBreakfallCost = 1.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_horizontal_wall_run_cost")
+    public float parcoolHorizontalWallRunCost = 1.5f;
+
+    @ServerSynced
+    @SerializedName("parcool_hang_on_cost")
+    public float parcoolHangOnCost = 0.6f;
+
+    @ServerSynced
+    @SerializedName("parcool_hang_down_cost")
+    public float parcoolHangDownCost = 0.6f;
+
+    @ServerSynced
+    @SerializedName("parcool_slide_down_cost")
+    public float parcoolSlideDownCost = 0.3f;
+
+    @ServerSynced
+    @SerializedName("parcool_pole_climb_cost")
+    public float parcoolPoleClimbCost = 0.4f;
+
+    @ServerSynced
+    @SerializedName("parcool_crawl_cost")
+    public float parcoolCrawlCost = 0.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_skydive_cost")
+    public float parcoolSkydiveCost = 0.0f;
+
+    @ServerSynced
+    @SerializedName("parcool_fast_run_cost")
+    public float parcoolFastRunCost = 0.4f;
+
+    @ServerSynced
+    @SerializedName("parcool_fast_swim_cost")
+    public float parcoolFastSwimCost = 0.4f;
+
+    @ServerSynced
+    @SerializedName("parcool_ride_zipline_cost")
+    public float parcoolRideZiplineCost = 0.0f;
 
     @ServerSynced
     @SerializedName("disable_hunger")

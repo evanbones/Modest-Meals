@@ -6,6 +6,9 @@ import com.evandev.modest_meals.ModestMeals;
 import com.evandev.modest_meals.attribute.ModAttributes;
 //? if neoforge_legacy
 import com.evandev.modest_meals.compat.cold_sweat.ColdSweatCompat;
+//? if parcool
+import com.evandev.modest_meals.compat.parcool.ParCoolBridge;
+import com.evandev.modest_meals.compat.parcool.ParCoolCompat;
 //? if shield_expansion
 import com.evandev.modest_meals.compat.shield_expansion.ShieldExpansionCompat;
 import com.evandev.modest_meals.config.ModConfig;
@@ -93,6 +96,11 @@ public class ModestMealsNeoForge {
 
         //? if neoforge_legacy
         ColdSweatCompat.register();
+        //? if parcool {
+        if (ParCoolCompat.isLoaded()) {
+            ParCoolBridge.register();
+        }
+        //?}
         //? if shield_expansion
         ShieldExpansionCompat.init();
 

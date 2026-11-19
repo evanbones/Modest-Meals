@@ -102,6 +102,13 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
+modId = "parcool"
+type = "optional"
+versionRange = "[4.0.0,)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
 modId = "culturaldelights"
 type = "optional"
 versionRange = "[0.19.5,)"

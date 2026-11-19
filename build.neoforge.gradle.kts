@@ -181,6 +181,9 @@ dependencies {
         // Cold Sweat
         compileOnly("maven.modrinth:cold-sweat:${property("deps.cold_sweat")}")
 
+        // ParCool
+        compileOnly("maven.modrinth:parcool:${property("deps.parcool")}")
+
         // Shield Expansion
         compileOnly("maven.modrinth:shield-expansion:${property("deps.shield_expansion")}")
         runtimeOnly("maven.modrinth:shield-expansion:${property("deps.shield_expansion")}")
@@ -274,7 +277,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         requires("yacl")
         optional("raised", "reliable-remover", "reliable-gliders", "combat-roll")
-        if (isLegacy) optional("farmers-delight", "cultural-delights", "emi", "thermoo", "cold-sweat", "shield-expansion") else optional("rrv")
+        if (isLegacy) optional("farmers-delight", "cultural-delights", "emi", "thermoo", "cold-sweat", "shield-expansion", "parcool") else optional("rrv")
         incompatible("melancholic_hunger")
     }
 
@@ -285,7 +288,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         requires("yacl")
         optional("raised", "reliable-remover", "reliable-gliders", "combat-roll")
-        if (isLegacy) optional("farmers-delight", "cultural-delights", "emi", "thermoo", "cold-sweat", "shield-expansion") else optional("rrv")
+        if (isLegacy) optional("farmers-delight", "cultural-delights", "emi", "thermoo", "cold-sweat", "shield-expansion", "parcool") else optional("rrv")
         client = true
         server = true
     }
