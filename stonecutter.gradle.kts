@@ -75,6 +75,8 @@ stonecutter parameters {
             replace("Gui inGameHud", "Hud inGameHud")
             replace("import net.minecraft.world.entity.EntityType;", "import net.minecraft.world.entity.EntityType;\nimport net.minecraft.world.entity.EntityTypes;")
             replace("EntityType.PLAYER", "EntityTypes.PLAYER")
+            replace("isInstantenous()", "isInstantaneous()")
+            replace("applyInstantenousEffect(", "applyInstantaneousEffect(")
         }
         string(eval(node.metadata.version, ">=26.3")) {
             replace("PushReaction.DESTROY", "PushReaction.POPPED")
