@@ -34,7 +34,7 @@ public final class CookingPotEmiSupport {
             backing.add(holder.id());
             registry.addRecipe(CookingMealEmiRecipe.of(
                     type.get(), cooking.getCookTime(), cooking.getExperience(), pool));
-            if (type.get().requiresSupportedIngredients()) {
+            if (MealEmiIngredients.hasDubious(type.get(), pool)) {
                 registry.addRecipe(CookingMealEmiRecipe.dubiousOf(
                         type.get(), cooking.getCookTime(), cooking.getExperience(), pool));
             }

@@ -1,6 +1,6 @@
 {
-  "base_seconds": 70,
-  "filler_scale": 2.0,
+  "base_seconds": 280,
+  "filler_scale": 8.0,
   "id": "modest_meals:water_breathing",
   "mob_effect": "minecraft:water_breathing"
 }

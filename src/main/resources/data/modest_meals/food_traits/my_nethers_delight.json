@@ -7,7 +7,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:fire_resistance",
-          "duration": 150,
+          "duration": 600,
           "amplifier": 0
         }
       ]
@@ -40,7 +40,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -54,7 +54,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 3600
+          "duration": 24000
         }
       ]
     },
@@ -64,7 +64,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -74,7 +74,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -84,7 +84,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "modest_meals:cold_resistance",
-          "duration": 1200,
+          "duration": 3600,
           "amplifier": 0
         }
       ]
@@ -95,7 +95,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "modest_meals:cold_resistance",
-          "duration": 1600,
+          "duration": 4800,
           "amplifier": 0
         }
       ]
@@ -106,13 +106,13 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "modest_meals:cold_resistance",
-          "duration": 2400,
+          "duration": 7200,
           "amplifier": 0
         },
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -122,13 +122,13 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "modest_meals:cold_resistance",
-          "duration": 3600,
+          "duration": 10800,
           "amplifier": 0
         },
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -138,7 +138,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "modest_meals:cold_resistance",
-          "duration": 1200,
+          "duration": 3600,
           "amplifier": 0
         }
       ]
@@ -149,13 +149,13 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "modest_meals:cold_resistance",
-          "duration": 3600,
+          "duration": 10800,
           "amplifier": 0
         },
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -165,7 +165,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:fire_resistance",
-          "duration": 400,
+          "duration": 1600,
           "amplifier": 0
         }
       ]
@@ -176,7 +176,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:fire_resistance",
-          "duration": 300,
+          "duration": 1200,
           "amplifier": 0
         }
       ]
@@ -187,7 +187,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:fire_resistance",
-          "duration": 400,
+          "duration": 1600,
           "amplifier": 0
         }
       ]
@@ -239,7 +239,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -249,7 +249,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -259,13 +259,13 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "modest_meals:cold_resistance",
-          "duration": 2400,
+          "duration": 7200,
           "amplifier": 0
         },
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -275,7 +275,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -285,7 +285,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     }

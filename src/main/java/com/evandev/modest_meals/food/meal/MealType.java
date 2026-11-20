@@ -242,10 +242,12 @@ public record MealType(
             if (required.isPresent() && present.stream().noneMatch(required.get())) {
                 return false;
             }
-            if (forbidden.isPresent() && present.stream().anyMatch(forbidden.get())) {
-                return false;
-            }
-            return allowed.isEmpty() || present.stream().allMatch(allowed.get());
+            return present.stream().allMatch(this::permits);
+        }
+
+        public boolean permits(ItemStack stack) {
+            return forbidden.map(matcher -> !matcher.test(stack)).orElse(true)
+                    && allowed.map(matcher -> matcher.test(stack)).orElse(true);
         }
     }
 

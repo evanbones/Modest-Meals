@@ -17,7 +17,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 120,
+          "duration": 480,
           "amplifier": 0
         }
       ]
@@ -29,7 +29,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 120,
+          "duration": 480,
           "amplifier": 0
         }
       ]
@@ -45,7 +45,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 200,
+          "duration": 800,
           "amplifier": 0
         }
       ]
@@ -57,7 +57,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 200,
+          "duration": 800,
           "amplifier": 0
         }
       ]
@@ -91,7 +91,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -110,7 +110,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -120,7 +120,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -130,7 +130,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -140,7 +140,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -150,13 +150,13 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 400,
+          "duration": 1600,
           "amplifier": 0
         },
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -177,7 +177,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -187,7 +187,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 600
+          "duration": 6000
         }
       ]
     },
@@ -197,12 +197,12 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 600
+          "duration": 6000
         },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:haste",
-          "duration": 400,
+          "duration": 1600,
           "amplifier": 0
         }
       ]
@@ -213,7 +213,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 600
+          "duration": 6000
         },
         {
           "type": "modest_meals:temporary_health",
@@ -227,12 +227,12 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 600
+          "duration": 6000
         },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:jump_boost",
-          "duration": 400,
+          "duration": 1600,
           "amplifier": 0
         }
       ]
@@ -243,7 +243,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 600
+          "duration": 6000
         },
         {
           "type": "modest_meals:effect_grant",
@@ -259,7 +259,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 600
+          "duration": 6000
         },
         {
           "type": "modest_meals:effect_removal",
@@ -273,7 +273,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 600
+          "duration": 6000
         }
       ]
     }

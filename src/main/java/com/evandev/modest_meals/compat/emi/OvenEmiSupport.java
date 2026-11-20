@@ -34,7 +34,7 @@ public final class OvenEmiSupport {
                 continue;
             }
             registry.addRecipe(OvenMealEmiRecipe.of(type.get(), oven.getCookTime(), pool));
-            if (type.get().requiresSupportedIngredients()) {
+            if (MealEmiIngredients.hasDubious(type.get(), pool)) {
                 registry.addRecipe(OvenMealEmiRecipe.dubiousOf(type.get(), oven.getCookTime(), pool));
             }
             List<MealType.ItemOverride> overrides = type.get().itemOverrides();

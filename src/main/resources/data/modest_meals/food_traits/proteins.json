@@ -16,7 +16,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 150,
+          "duration": 600,
           "amplifier": 0
         }
       ]
@@ -28,7 +28,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 300,
+          "duration": 1200,
           "amplifier": 0
         }
       ]
@@ -84,7 +84,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 120,
+          "duration": 480,
           "amplifier": 0
         }
       ]
@@ -95,7 +95,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 150,
+          "duration": 600,
           "amplifier": 0
         }
       ]
@@ -110,7 +110,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 200,
+          "duration": 800,
           "amplifier": 0
         }
       ]
@@ -121,7 +121,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 250,
+          "duration": 1000,
           "amplifier": 0
         }
       ]

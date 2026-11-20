@@ -6,7 +6,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 2400
+          "duration": 18000
         }
       ]
     },
@@ -16,7 +16,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 2400
+          "duration": 18000
         }
       ]
     },
@@ -26,7 +26,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 2400
+          "duration": 18000
         }
       ]
     },
@@ -36,7 +36,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -46,7 +46,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -56,7 +56,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -66,7 +66,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         },
         {
           "type": "modest_meals:effect_grant",
@@ -92,7 +92,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -102,7 +102,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -112,7 +112,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -122,7 +122,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -132,7 +132,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -142,7 +142,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -152,7 +152,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -162,7 +162,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -172,7 +172,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -182,7 +182,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -192,7 +192,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -202,7 +202,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -212,7 +212,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -222,7 +222,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -232,7 +232,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -242,7 +242,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -252,7 +252,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -262,7 +262,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -272,7 +272,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -282,7 +282,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -296,7 +296,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -310,7 +310,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -324,7 +324,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -334,7 +334,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -344,7 +344,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -354,7 +354,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -364,7 +364,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -374,7 +374,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -384,7 +384,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -433,7 +433,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -443,7 +443,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },

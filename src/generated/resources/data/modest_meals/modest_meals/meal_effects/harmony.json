@@ -1,6 +1,6 @@
 {
-  "base_seconds": 40,
-  "filler_scale": 2.0,
+  "base_seconds": 160,
+  "filler_scale": 8.0,
   "id": "modest_meals:harmony",
   "mob_effect": "neapolitan:harmony"
 }

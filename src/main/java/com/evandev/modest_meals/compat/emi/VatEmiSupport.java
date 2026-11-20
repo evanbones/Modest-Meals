@@ -33,7 +33,7 @@ public final class VatEmiSupport {
                 continue;
             }
             registry.addRecipe(VatMealEmiRecipe.of(type.get(), vat.getCookTime(), vat.getTemperature(), pool));
-            if (type.get().requiresSupportedIngredients()) {
+            if (MealEmiIngredients.hasDubious(type.get(), pool)) {
                 registry.addRecipe(VatMealEmiRecipe.dubiousOf(type.get(), vat.getCookTime(), vat.getTemperature(), pool));
             }
             List<MealType.ItemOverride> overrides = type.get().itemOverrides();

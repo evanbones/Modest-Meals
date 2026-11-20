@@ -70,9 +70,9 @@ public final class MealRrvSlots {
             variants.add(new Variant(id(kind, type), layout.free(type, any), output.get(), false));
         }
 
-        if (type.requiresSupportedIngredients()) {
-            List<ItemStack> unsupported = pool.stream().filter(stack -> MealViewerIngredients.isUnsupported(type, stack)).toList();
-            Slot dubiousAny = new Slot(unsupported.isEmpty() ? List.of(MealViewerIngredients.unsupportedFallback()) : unsupported, true);
+        List<ItemStack> unsupported = MealViewerIngredients.unsupportedPool(type, pool);
+        if (!unsupported.isEmpty()) {
+            Slot dubiousAny = new Slot(unsupported, true);
             ItemStack dubiousOutput = MealItem.makeDubious(type.resolveItem().get());
             variants.add(new Variant(id(kind + "_dubious", type), layout.free(type, dubiousAny), dubiousOutput, true));
         }

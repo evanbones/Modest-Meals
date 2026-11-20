@@ -23,16 +23,24 @@ public final class MealViewerIngredients {
     }
 
     public static boolean fits(MealType type, ItemStack stack) {
-        boolean allowed = type.rules().allowed().map(matcher -> matcher.test(stack)).orElse(true);
-        return allowed && (!type.requiresSupportedIngredients() || MealIngredientManager.isSupported(type.id(), stack));
+        return type.rules().permits(stack)
+                && (!type.requiresSupportedIngredients() || MealIngredientManager.isSupported(type.id(), stack));
     }
 
     public static boolean isUnsupported(MealType type, ItemStack stack) {
-        return !MealIngredientManager.isSupported(type.id(), stack);
+        return type.rules().permits(stack) && !MealIngredientManager.isSupported(type.id(), stack);
     }
 
-    public static ItemStack unsupportedFallback() {
-        return new ItemStack(Items.ROTTEN_FLESH);
+    public static List<ItemStack> unsupportedPool(MealType type, List<ItemStack> pool) {
+        if (!type.requiresSupportedIngredients()) {
+            return List.of();
+        }
+        List<ItemStack> unsupported = pool.stream().filter(stack -> isUnsupported(type, stack)).toList();
+        if (!unsupported.isEmpty()) {
+            return unsupported;
+        }
+        ItemStack fallback = new ItemStack(Items.ROTTEN_FLESH);
+        return isUnsupported(type, fallback) ? List.of(fallback) : List.of();
     }
 
     private static int interest(ItemStack stack) {

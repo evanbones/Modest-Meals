@@ -1,6 +1,6 @@
 {
-  "base_seconds": 60,
-  "filler_scale": 2.0,
+  "base_seconds": 240,
+  "filler_scale": 8.0,
   "id": "modest_meals:glowing",
   "mob_effect": "minecraft:glowing"
 }

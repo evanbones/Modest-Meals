@@ -1,6 +1,6 @@
 {
-  "base_seconds": 70,
-  "filler_scale": 2.0,
+  "base_seconds": 280,
+  "filler_scale": 8.0,
   "id": "modest_meals:fire_resistance",
   "mob_effect": "minecraft:fire_resistance"
 }

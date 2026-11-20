@@ -6,7 +6,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -16,7 +16,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -55,7 +55,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -71,7 +71,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -81,12 +81,12 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1800
+          "duration": 14400
         },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:speed",
-          "duration": 400,
+          "duration": 1600,
           "amplifier": 0
         }
       ]
@@ -97,7 +97,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -107,7 +107,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -117,7 +117,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:night_vision",
-          "duration": 600,
+          "duration": 2400,
           "amplifier": 0
         }
       ]
@@ -128,7 +128,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 250,
+          "duration": 1000,
           "amplifier": 0
         }
       ]
@@ -139,7 +139,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 250,
+          "duration": 1000,
           "amplifier": 0
         }
       ]
@@ -150,7 +150,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:night_vision",
-          "duration": 300,
+          "duration": 1200,
           "amplifier": 0
         }
       ]
@@ -161,7 +161,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -171,7 +171,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:night_vision",
-          "duration": 600,
+          "duration": 2400,
           "amplifier": 0
         }
       ]
@@ -182,7 +182,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:night_vision",
-          "duration": 600,
+          "duration": 2400,
           "amplifier": 0
         }
       ]
@@ -204,7 +204,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 250,
+          "duration": 1000,
           "amplifier": 0
         }
       ]
@@ -215,7 +215,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 400,
+          "duration": 1600,
           "amplifier": 0
         }
       ]
@@ -226,7 +226,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:night_vision",
-          "duration": 400,
+          "duration": 1600,
           "amplifier": 0
         }
       ]
@@ -257,7 +257,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -278,7 +278,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:night_vision",
-          "duration": 500,
+          "duration": 2000,
           "amplifier": 0
         }
       ]
@@ -300,7 +300,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:invisibility",
-          "duration": 200,
+          "duration": 800,
           "amplifier": 0
         }
       ]
@@ -311,8 +311,18 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:dolphins_grace",
-          "duration": 300,
+          "duration": 1200,
           "amplifier": 0
+        }
+      ]
+    },
+    {
+      "target": "farmersdelight:barbecue_stick",
+      "traits": [
+        {
+          "type": "modest_meals:health_addition",
+          "value": 5.0,
+          "duration": 150
         }
       ]
     }

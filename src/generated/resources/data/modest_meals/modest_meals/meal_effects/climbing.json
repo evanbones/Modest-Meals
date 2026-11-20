@@ -1,5 +1,6 @@
 {
-  "base_seconds": 45,
+  "base_seconds": 180,
+  "filler_scale": 4.0,
   "id": "modest_meals:climbing",
   "mob_effect": "neapolitan:agility"
 }

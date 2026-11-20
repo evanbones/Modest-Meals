@@ -60,12 +60,12 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         },
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:night_vision",
-          "duration": 600,
+          "duration": 2400,
           "amplifier": 0
         }
       ]
@@ -76,7 +76,7 @@
         {
           "type": "modest_meals:effect_grant",
           "effect": "minecraft:night_vision",
-          "duration": 800,
+          "duration": 3200,
           "amplifier": 0
         }
       ]
@@ -87,7 +87,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -97,7 +97,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -107,7 +107,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 3.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -117,7 +117,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -127,7 +127,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -137,7 +137,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -147,7 +147,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -179,7 +179,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 1800
+          "duration": 14400
         }
       ]
     },
@@ -198,7 +198,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 1.0,
-          "duration": 1200
+          "duration": 9600
         }
       ]
     },
@@ -208,7 +208,7 @@
         {
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
-          "duration": 2400
+          "duration": 18000
         },
         {
           "type": "modest_meals:temporary_health",

@@ -1,5 +1,6 @@
 {
-  "base_seconds": 60,
+  "base_seconds": 240,
+  "filler_scale": 4.0,
   "id": "modest_meals:invisibility",
   "mob_effect": "minecraft:invisibility"
 }
