@@ -67,6 +67,22 @@
           "type": "modest_meals:stamina_capacity",
           "value": 2.0,
           "duration": 1800
+        },
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:instant_health",
+          "duration": 1
+        }
+      ]
+    },
+    {
+      "target": "bountifulfares:elderberry_tart",
+      "traits": [
+        {
+          "type": "modest_meals:effect_grant",
+          "effect": "minecraft:instant_health",
+          "duration": 1,
+          "probability": 0.5
         }
       ]
     },

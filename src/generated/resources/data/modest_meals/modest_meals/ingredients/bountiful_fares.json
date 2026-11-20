@@ -43,15 +43,17 @@
       "target": "bountifulfares:passion_fruit"
     },
     {
+      "effect": "modest_meals:instant_health",
+      "potency": 14,
       "priority": 145,
       "stamina": 1.5,
-      "target": "#c:foods/elderberry",
-      "temporary_health": 1.0
+      "target": "#c:foods/elderberry"
     },
     {
+      "effect": "modest_meals:instant_health",
+      "potency": 14,
       "stamina": 1.5,
-      "target": "bountifulfares:elderberries",
-      "temporary_health": 1.0
+      "target": "bountifulfares:elderberries"
     },
     {
       "effect": "modest_meals:night_vision",

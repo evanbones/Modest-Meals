@@ -27,6 +27,7 @@ public class MealTypeManager extends JsonReloadListener {
     private volatile List<MealType> craftingTableTypes = List.of();
     private volatile List<MealType> cookingPotTypes = List.of();
     private volatile List<MealType> vatTypes = List.of();
+    private volatile List<MealType> ovenTypes = List.of();
 
     public MealTypeManager() {
         super("modest_meals/meal_types");
@@ -52,6 +53,10 @@ public class MealTypeManager extends JsonReloadListener {
         return INSTANCE.vatTypes;
     }
 
+    public static List<MealType> oven() {
+        return INSTANCE.ovenTypes;
+    }
+
     public static Map<ResourceLocation, MealType> snapshot() {
         return Map.copyOf(INSTANCE.types);
     }
@@ -70,11 +75,12 @@ public class MealTypeManager extends JsonReloadListener {
         this.craftingTableTypes = atStation(MealType.Station.CRAFTING_TABLE, order);
         this.cookingPotTypes = atStation(MealType.Station.COOKING_POT, order);
         this.vatTypes = atStation(MealType.Station.VAT, order);
+        this.ovenTypes = atStation(MealType.Station.OVEN, order);
     }
 
     private List<MealType> atStation(MealType.Station station, Comparator<MealType> order) {
         return types.values().stream()
-                .filter(type -> type.station() == station)
+                .filter(type -> type.station().effective() == station)
                 .sorted(order)
                 .toList();
     }
@@ -102,7 +108,7 @@ public class MealTypeManager extends JsonReloadListener {
                         type.id(), type.item());
                 continue;
             }
-            if (!type.station().isAvailable()) {
+            if (!type.station().effective().isAvailable()) {
                 Constants.LOG.debug("Skipping meal type {}: its station {} is not in this game",
                         type.id(), type.station().getSerializedName());
                 continue;
@@ -111,7 +117,7 @@ public class MealTypeManager extends JsonReloadListener {
         }
 
         reindex();
-        Constants.LOG.info("Loaded {} meal types ({} on the crafting table, {} in the cooking pot, {} in the vat)",
-                types.size(), craftingTableTypes.size(), cookingPotTypes.size(), vatTypes.size());
+        Constants.LOG.info("Loaded {} meal types ({} on the crafting table, {} in the cooking pot, {} in the vat, {} in the oven)",
+                types.size(), craftingTableTypes.size(), cookingPotTypes.size(), vatTypes.size(), ovenTypes.size());
     }
 }

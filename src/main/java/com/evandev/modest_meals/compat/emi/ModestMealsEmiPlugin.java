@@ -44,6 +44,9 @@ public class ModestMealsEmiPlugin implements EmiPlugin {
         if (CulturalDelightsCompat.isLoaded()) {
             VatEmiSupport.register(registry, pool);
         }
+        if (CulturalDelightsCompat.hasOven()) {
+            OvenEmiSupport.register(registry, pool);
+        }
         //?}
 
         Constants.LOG.debug("Registered EMI recipes for Modest Meals ({} pool ingredients)", pool.size());

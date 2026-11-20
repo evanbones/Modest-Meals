@@ -52,6 +52,10 @@ public class MealIngredientManager extends JsonReloadListener {
         return Optional.empty();
     }
 
+    public static boolean hasItemVisual(Item item) {
+        return INSTANCE.itemVisuals.containsKey(BuiltInRegistries.ITEM.getKey(item));
+    }
+
     public static Optional<MealIngredientVisual> resolveFor(ResourceLocation mealTypeId, Item item) {
         MealIngredientVisual direct = INSTANCE.itemVisuals.get(BuiltInRegistries.ITEM.getKey(item));
         if (direct != null && direct.supportsMeal(mealTypeId)) {

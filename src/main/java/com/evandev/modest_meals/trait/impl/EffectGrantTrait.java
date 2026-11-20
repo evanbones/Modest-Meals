@@ -21,6 +21,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+//? if >=26.1
+//import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 
 public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int amplifier, boolean showParticles,
@@ -76,6 +78,15 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
         if (this.probability < 1.0F && entity.getRandom().nextFloat() >= this.probability) {
             return;
         }
+        if (this.effect.value().isInstantenous()) {
+            //? if >=26.1 {
+            /*if (entity.level() instanceof ServerLevel level) {
+                this.effect.value().applyInstantenousEffect(level, null, null, entity, this.amplifier, 1.0);
+            }
+            *///?} else
+            this.effect.value().applyInstantenousEffect(null, null, entity, this.amplifier, 1.0);
+            return;
+        }
         int dur = (int) (this.duration * durationMultiplier);
         MobEffectInstance active = entity.getEffect(this.effect);
         if (this.stackLimit > 0 && active != null && active.getAmplifier() == this.amplifier) {
@@ -96,7 +107,7 @@ public record EffectGrantTrait(Holder<MobEffect> effect, int duration, int ampli
             effectName = Component.translatable("potion.withAmplifier", effectName, Component.translatable("potion.potency." + this.amplifier));
         }
 
-        long dur = (long) (this.duration * durationMultiplier);
+        long dur = this.effect.value().isInstantenous() ? 0 : (long) (this.duration * durationMultiplier);
         if (dur > 0) {
             effectName = Component.translatable("potion.withDuration", effectName, TraitTooltipHelper.formatDuration(dur, tickRate));
         }

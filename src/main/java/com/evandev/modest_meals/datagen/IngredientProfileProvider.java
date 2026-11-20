@@ -558,8 +558,8 @@ public class IngredientProfileProvider implements DataProvider {
         builder.addTag("c:foods/passion_fruit", 145, dish(1.5F, null, FRUIT_DIGEST));
         builder.add(bf("passion_fruit"), dish(1.5F, null, FRUIT_DIGEST));
 
-        builder.addTag("c:foods/elderberry", 145, temporary(null, 1.5F, 0, 1.0F));
-        builder.add(bf("elderberries"), temporary(null, 1.5F, 0, 1.0F));
+        builder.addTag("c:foods/elderberry", 145, effect(null, 1.5F, "instant_health", MEDIUM));
+        builder.add(bf("elderberries"), effect(null, 1.5F, "instant_health", MEDIUM));
 
         builder.addTag("c:foods/lapisberry", 145, effect(0.5F, 1.5F, "night_vision", WEAK));
         builder.add(bf("lapisberries"), effect(0.5F, 1.5F, "night_vision", WEAK));

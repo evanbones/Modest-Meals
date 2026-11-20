@@ -15,13 +15,19 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 public abstract class MealEmiRecipe implements EmiRecipe {
+
+    protected static final int GRID = 3;
+    protected static final int GRID_SLOTS = GRID * GRID;
 
     protected final EmiRecipeCategory category;
     protected final ResourceLocation id;
@@ -117,6 +123,46 @@ public abstract class MealEmiRecipe implements EmiRecipe {
         }
         laid.addAll(Collections.nCopies(capacity - laid.size(), EmiStack.EMPTY));
         return laid;
+    }
+
+    protected static List<EmiIngredient> gridSlots(MealType type, EmiIngredient any) {
+        return type.isShaped() ? shapedSlots(type, symbol -> any, List.of()) : flatSlots(type, any, GRID_SLOTS);
+    }
+
+    protected static List<EmiIngredient> gridOverrideSlots(MealType type, List<EmiIngredient> fillings, List<String> base) {
+        if (!type.isShaped()) {
+            return fixedSlots(type, fillings, GRID_SLOTS);
+        }
+        Iterator<EmiIngredient> next = fillings.iterator();
+        List<Ingredient> required = base.stream().map(MealType.ItemOverride::parseIngredient).toList();
+        return shapedSlots(type, symbol -> next.hasNext() ? next.next() : EmiStack.EMPTY, required);
+    }
+
+    private static List<EmiIngredient> shapedSlots(MealType type, Function<Character, EmiIngredient> free,
+                                                   List<Ingredient> required) {
+        MealType.Shape shape = type.shape().orElseThrow();
+        List<EmiIngredient> laid = new ArrayList<>(Collections.nCopies(GRID_SLOTS, (EmiIngredient) EmiStack.EMPTY));
+        for (int row = 0; row < Math.min(GRID, shape.height()); row++) {
+            for (int column = 0; column < Math.min(GRID, shape.width()); column++) {
+                char symbol = shape.symbolAt(row, column);
+                if (symbol == ' ') {
+                    continue;
+                }
+                laid.set(row * GRID + column, shape.isAny(symbol) ? free.apply(symbol) : narrowed(keyIngredient(shape, symbol, EmiStack.EMPTY), required));
+            }
+        }
+        return laid;
+    }
+
+    private static EmiIngredient narrowed(EmiIngredient key, List<Ingredient> required) {
+        for (Ingredient ingredient : required) {
+            boolean overlaps = key.getEmiStacks().stream()
+                    .anyMatch(stack -> ingredient.test(stack.getItemStack()));
+            if (overlaps) {
+                return EmiIngredient.of(ingredient);
+            }
+        }
+        return key;
     }
 
     protected int poolSize() {

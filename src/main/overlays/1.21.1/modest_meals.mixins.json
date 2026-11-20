@@ -12,6 +12,7 @@
     "PlayerMixin",
     "RecipeManagerMixin",
     "ServerGamePacketListenerImplAccessor",
+    "compat.CulturalDelightsOvenMixin",
     "compat.FarmersDelightSoupEffectsMixin",
     "compat.GlidingStateMixin",
     "compat.ParCoolStaminaTypeMixin"

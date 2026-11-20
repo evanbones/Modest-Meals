@@ -206,9 +206,9 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
                         new MealType.BaseEntry(ItemMatcher.item(Items.DRIED_KELP), 1)),
                 Optional.empty(), 1, 3, Optional.empty(), 10,
                 MealType.Rules.allowing(ItemMatcher.tag(ModItemTags.ROLL_FILLINGS)));
-        shapedMeal(entries, "pie", ModItems.PIE, 1, 3, List.of("###", "SOS"),
+        shapedMeal(entries, "pie", ModItems.PIE, MealType.Station.OVEN, 1, 3, List.of("###", "SOS"),
                 Map.of("S", id(Items.SUGAR), "O", "#" + PIE_CRUSTS.location(), "#", any()));
-        shapedMeal(entries, "cake", ModItems.CAKE, 1, 3, List.of("M#M", "#E#", "WSW"),
+        shapedMeal(entries, "cake", ModItems.CAKE, MealType.Station.OVEN, 1, 3, List.of("M#M", "#E#", "WSW"),
                 Map.of("M", "#" + MILKS.location(), "E", "#" + EGGS.location(), "W", "#" + WHEATS.location(),
                         "S", id(Items.SUGAR), "#", any()));
         ResourceLocation milkshakeId = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "milkshake");
@@ -229,9 +229,9 @@ public class MealTypeProvider extends JsonDataProvider<MealType> {
     }
 
     private void shapedMeal(Map<ResourceLocation, MealType> entries, String name, Supplier<Item> item,
-                            int min, int max, List<String> pattern, Map<String, String> key) {
+                            MealType.Station station, int min, int max, List<String> pattern, Map<String, String> key) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
-        entries.put(id, new MealType(id, itemId(item.get()), MealType.Station.CRAFTING_TABLE, List.of(),
+        entries.put(id, new MealType(id, itemId(item.get()), station, List.of(),
                 Optional.of(new MealType.Shape(pattern, key)), min, max, Optional.empty(), 10, true,
                 Optional.of(mealSprite(name, "dubious")),
                 Optional.of(new MealType.BaseSprites(mealSprite(name, name + "_base"))), List.of())

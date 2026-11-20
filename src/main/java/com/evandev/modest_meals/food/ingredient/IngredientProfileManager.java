@@ -143,7 +143,8 @@ public class IngredientProfileManager extends JsonReloadListener {
         if (stack == null || stack.isEmpty()) {
             return false;
         }
-        if (stack.is(ModItemTags.NOT_AN_INGREDIENT) && !hasCustomProfile(stack.getItem())) {
+        if (stack.is(ModItemTags.NOT_AN_INGREDIENT) && !hasCustomProfile(stack.getItem())
+                && !MealIngredientManager.hasItemVisual(stack.getItem())) {
             return false;
         }
         return resolve(stack).isPresent();

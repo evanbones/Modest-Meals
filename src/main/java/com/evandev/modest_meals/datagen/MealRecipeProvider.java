@@ -23,6 +23,7 @@ public class MealRecipeProvider implements DataProvider {
 
     private static final List<String> POT_MEAL_TYPES = List.of("soup", "curry", "jam", "ramen", "pasta");
     private static final List<String> COLD_VAT_MEAL_TYPES = List.of("ice_cream", "ice_cream_bowl");
+    private static final List<String> OVEN_MEAL_TYPES = List.of("cake", "pie");
 
     private final PackOutput.PathProvider pathProvider;
 
@@ -75,6 +76,15 @@ public class MealRecipeProvider implements DataProvider {
             chilling.addProperty("temperature", "cold");
             chilling.addProperty("cooktime", 200);
             futures.add(write(output, "chilling/" + mealType, chilling));
+        }
+
+        for (String mealType : OVEN_MEAL_TYPES) {
+            JsonObject baking = new JsonObject();
+            baking.add("neoforge:conditions", modLoaded(CulturalDelightsCompat.MOD_ID));
+            baking.addProperty("type", Constants.MOD_ID + ":meal_oven");
+            baking.addProperty("meal_type", Constants.MOD_ID + ":" + mealType);
+            baking.addProperty("cooktime", 200);
+            futures.add(write(output, "baking/" + mealType, baking));
         }
 
         return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));

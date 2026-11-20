@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.6.0] - 2026-11-19
+
+### Added
+
+- Cakes and pies are baked in the Cultural Delights oven when it's installed.
+- Instant Health dish effect:
+    - Bountiful Fares Elderberries heal you instantly when cooked into a dish (Instant Health II with three of them),
+      and Bountiful Fares' Apple Stew and Elderberry Tart heal too.
+
+### Fixed
+
+- Chocolate bars, cooked rice, creamed corn, honeyed apples, and syruped pears can go into dishes again.
+- Instant effects on foods (like Instant Health) apply once instead of every tick, and their tooltips no longer show a
+  duration.
+
 ## [3.5.0] - 2026-11-18
 
 ### Added

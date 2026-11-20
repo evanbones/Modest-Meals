@@ -147,7 +147,7 @@ public final class ReplacedDishRecipes {
         for (Map.Entry<ResourceLocation, Resource> file : files.entrySet()) {
             try (Reader reader = file.getValue().openAsReader()) {
                 JsonObject type = JsonParser.parseReader(reader).getAsJsonObject();
-                if (!MealType.Station.byName(GsonHelper.getAsString(type, "station", "crafting_table")).isAvailable()) {
+                if (!MealType.Station.byName(GsonHelper.getAsString(type, "station", "crafting_table")).effective().isAvailable()) {
                     continue;
                 }
                 for (JsonElement element : GsonHelper.getAsJsonArray(type, "item_overrides", new JsonArray())) {

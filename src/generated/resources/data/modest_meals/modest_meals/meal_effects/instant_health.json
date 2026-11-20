@@ -1,0 +1,16 @@
+{
+  "base_seconds": 1,
+  "filler_scale": 0.0,
+  "id": "modest_meals:instant_health",
+  "mob_effect": "minecraft:instant_health",
+  "tiers": [
+    {
+      "amplifier": 0,
+      "threshold": 0
+    },
+    {
+      "amplifier": 1,
+      "threshold": 40
+    }
+  ]
+}

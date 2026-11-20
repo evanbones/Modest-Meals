@@ -159,22 +159,29 @@ public record MealType(
     }
 
     public enum Station implements StringRepresentable {
-        CRAFTING_TABLE("crafting_table", () -> true),
-        COOKING_POT("cooking_pot", FarmersDelightCompat::isLoaded),
-        VAT("vat", CulturalDelightsCompat::isLoaded);
+        CRAFTING_TABLE("crafting_table", () -> true, null),
+        COOKING_POT("cooking_pot", FarmersDelightCompat::isLoaded, null),
+        VAT("vat", CulturalDelightsCompat::isLoaded, null),
+        OVEN("oven", CulturalDelightsCompat::hasOven, CRAFTING_TABLE);
 
         public static final Codec<Station> CODEC = StringRepresentable.fromEnum(Station::values);
 
         private final String name;
         private final BooleanSupplier available;
+        private final Station fallback;
 
-        Station(String name, BooleanSupplier available) {
+        Station(String name, BooleanSupplier available, Station fallback) {
             this.name = name;
             this.available = available;
+            this.fallback = fallback;
         }
 
         public boolean isAvailable() {
             return available.getAsBoolean();
+        }
+
+        public Station effective() {
+            return fallback != null && !isAvailable() ? fallback : this;
         }
 
         public static Station byName(String name) {

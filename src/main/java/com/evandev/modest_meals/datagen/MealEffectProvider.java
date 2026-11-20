@@ -47,6 +47,7 @@ public class MealEffectProvider extends JsonDataProvider<MealEffect> {
         singleTier(entries, "glowing", MobEffects.GLOWING, 60, UTILITY);
         singleTier(entries, "invisibility", MobEffects.INVISIBILITY, 60, MOBILITY);
         singleTier(entries, "luck", MobEffects.LUCK, 60, UTILITY);
+        instant(entries, "instant_health", MobEffects.HEAL);
 
         thermal(entries, "cold_resistance", 70);
         thermal(entries, "heat_resistance", 70);
@@ -59,6 +60,13 @@ public class MealEffectProvider extends JsonDataProvider<MealEffect> {
                         String namespace, String path, int baseSeconds, float fillerScale) {
         put(entries, name, Optional.of(ResourceLocation.fromNamespaceAndPath(namespace, path)), baseSeconds, fillerScale,
                 List.of(new MealEffect.Tier(0, 0)), List.of(), List.of());
+    }
+
+    private void instant(Map<ResourceLocation, MealEffect> entries, String name, Holder<MobEffect> effect) {
+        put(entries, name, Optional.of(idOf(effect)), 1, 0.0F, List.of(
+                new MealEffect.Tier(0, 0),
+                new MealEffect.Tier(40, 1)
+        ), List.of(), List.of());
     }
 
     private void thermal(Map<ResourceLocation, MealEffect> entries, String name, int baseSeconds) {
