@@ -3,17 +3,15 @@ package com.evandev.modest_meals.mixin;
 import com.evandev.modest_meals.food.FoodConsumption;
 import com.evandev.modest_meals.compat.farmers_delight.FarmersDelightCompat;
 import com.evandev.modest_meals.compat.farmers_delight.NourishmentEffectHandler;
-import com.evandev.modest_meals.config.HungerEffectOption;
 import com.evandev.modest_meals.config.ModConfig;
-import com.evandev.modest_meals.effect.ModMobEffects;
 import com.evandev.modest_meals.food.BuiltInFoodEffects;
+import com.evandev.modest_meals.food.HungerEffectConversion;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -34,20 +32,11 @@ public abstract class LivingEntityMixin {
         if (!(((LivingEntity) (Object) this) instanceof Player)) {
             return original.call(effect, source);
         }
-        if (ModConfig.get().disableHunger && effect.is(MobEffects.HUNGER)) {
-            HungerEffectOption hungerEffect = ModConfig.get().hungerEffect;
-            if (hungerEffect == HungerEffectOption.DISABLED) {
+        if (HungerEffectConversion.applies(effect)) {
+            effect = HungerEffectConversion.convert(effect);
+            if (effect == null) {
                 return false;
             }
-            effect = new MobEffectInstance(
-                    hungerEffect == HungerEffectOption.REPLACED_WITH_OTHER
-                            ? ModConfig.getHungerReplacementEffect()
-                            : ModMobEffects.STAMINA_DEPLETION,
-                    hungerEffect == HungerEffectOption.REPLACED_WITH_OTHER
-                            ? (int) (effect.getDuration() * ModConfig.get().hungerReplacementDurationMultiplier)
-                            : effect.getDuration(),
-                    effect.getAmplifier()
-            );
         } else if (FarmersDelightCompat.isLoaded()) {
             effect = NourishmentEffectHandler.getEffectToApply(effect);
         }

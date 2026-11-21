@@ -11,6 +11,7 @@ import com.evandev.modest_meals.config.TooltipVisibility;
 import com.evandev.modest_meals.food.BuiltInFoodEffects;
 import com.evandev.modest_meals.food.EdibleBlockFoods;
 import com.evandev.modest_meals.food.FoodEffect;
+import com.evandev.modest_meals.food.HungerEffectConversion;
 import com.evandev.modest_meals.food.FoodValues;
 import com.evandev.modest_meals.food.ingredient.IngredientProfile;
 import com.evandev.modest_meals.food.ingredient.IngredientProfileManager;
@@ -240,6 +241,11 @@ public class FoodItemTooltips {
 
         List<FoodEffect> shownEffects = new ArrayList<>(BuiltInFoodEffects.kept(stack, effects));
         shownEffects.addAll(BountifulFaresEffects.missingFrom(effects, stack));
+        shownEffects.replaceAll(effect -> {
+            MobEffectInstance converted = HungerEffectConversion.convert(effect.effect());
+            return converted == null ? null : new FoodEffect(converted, effect.probability());
+        });
+        shownEffects.removeIf(java.util.Objects::isNull);
         List<FoodTrait> traits = new ArrayList<>();
         double valMult = ModConfig.get().traitGlobalValueMultiplier * scale;
         double durMult = ModConfig.get().traitGlobalDurationMultiplier * scale;
