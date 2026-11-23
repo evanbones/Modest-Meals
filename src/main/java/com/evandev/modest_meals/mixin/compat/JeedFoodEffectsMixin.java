@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.mixin.compat;
 
+//? if neoforge_legacy {
 import com.evandev.modest_meals.food.HungerEffectConversion;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -26,3 +27,4 @@ public abstract class JeedFoodEffectsMixin {
         return effect == null ? null : HungerEffectConversion.convert(effect);
     }
 }
+//?}
