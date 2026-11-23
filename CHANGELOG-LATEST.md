@@ -1,3 +1,3 @@
 ### Fixed
 
-- No Man's Land pine nuts have their own sandwich, wrap, salad and pie sprites.
+- Just Enough Effect Descriptions lists foods that cause Hunger under the effect they really give.
