@@ -30,6 +30,7 @@ public class PlayerStamina {
     private int naturalRegenTickTimer = 0;
     private float regainCarry = 0.0F;
     private float drainCarry = 0.0F;
+    private float rechargeCarry = 0.0F;
 
     protected PlayerStamina(Player player, StaminaData data) {
         this.player = player;
@@ -248,7 +249,10 @@ public class PlayerStamina {
             if (waitsAfterExhaustion() && this.data.cooldown > 0) {
                 this.data.cooldown--;
             } else if (this.regainThisTick) {
-                this.data.remaining++;
+                this.rechargeCarry += this.rechargeRate();
+                int recharged = (int) this.rechargeCarry;
+                this.rechargeCarry -= recharged;
+                this.data.remaining += recharged;
             }
 
             if (this.data.remaining >= rechargeInTicks) {
@@ -298,7 +302,11 @@ public class PlayerStamina {
     }
 
     private float regainRate() {
-        return ModConfig.get().staminaDuration / (float) Math.max(1, ModConfig.get().staminaRegainTime);
+        return this.getDurationInTicks() / (20.0F * Math.max(1, ModConfig.get().staminaRegainTime));
+    }
+
+    private float rechargeRate() {
+        return this.getRechargeInTicks() / (20.0F * Math.max(1, ModConfig.get().staminaRecharge));
     }
 
     private float drainRate() {
