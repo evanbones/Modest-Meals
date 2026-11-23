@@ -249,7 +249,7 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
         entries.put(id("nml_frog_leg"), topping("nomansland:frog_leg", "chicken"));
         entries.put(id("nml_cooked_frog_leg"), topping("nomansland:cooked_frog_leg", "chicken"));
         entries.put(id("nml_maple_syrup_bottle"), sandwich("nomansland:maple_syrup_bottle", "honey"));
-        entries.put(id("nml_pine_nuts"), sandwich("nomansland:pine_nuts", "walnut"));
+        entries.put(id("nml_pine_nuts"), sandwich("nomansland:pine_nuts", "pine_nut"));
         entries.put(id("nml_walnuts"), sandwich("nomansland:walnuts", "walnut"));
         entries.put(id("nml_pear"), sandwich("nomansland:pear", "pear"));
         entries.put(id("nml_field_mushroom"), topping("nomansland:field_mushroom", "mushroom"));
@@ -390,7 +390,7 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
             "beetroot", "bullet_pepper", "cabbage", "carrot", "cheese", "cherry", "chicken", "chorus_fruit", "cod",
             "coconut", "creamed_corn", "cucumber", "eggplant", "elderberry", "fried_egg", "glow_berries",
             "golden_apple", "kelp", "lapisberry", "lemon", "mango", "melon", "mushroom", "mutton", "onion", "orange",
-            "passion_fruit", "pear", "pickle", "plum", "pork", "potato", "pumpkin", "rabbit", "red_grapes", "salmon",
+            "passion_fruit", "pear", "pickle", "pine_nut", "plum", "pork", "potato", "pumpkin", "rabbit", "red_grapes", "salmon",
             "smoked_ham", "squid", "strawberry", "sweet_berries", "tofu", "tomato", "truffle", "walnut",
             "white_grapes");
     private static final Set<String> FRUIT = Set.of("apple", "banana", "cherry", "chorus_fruit", "coconut",
@@ -403,7 +403,7 @@ public class MealIngredientProvider extends JsonDataProvider<MealIngredientProvi
     private static final Set<String> PIE = Set.of("apple", "banana", "beef", "butter", "carrot", "cheese", "cherry",
             "chicken", "chocolate", "chorus_fruit", "cinnamon", "cocoa_beans", "coconut", "elderberry", "glow_berries",
             "golden_apple", "honey", "lapisberry", "lemon", "mango", "melon", "mushroom", "mutton", "onion", "orange",
-            "passion_fruit", "pear", "plum", "pork", "potato", "pumpkin", "rabbit", "red_grapes", "strawberry",
+            "passion_fruit", "pear", "pine_nut", "plum", "pork", "potato", "pumpkin", "rabbit", "red_grapes", "strawberry",
             "sweet_berries", "vanilla", "walnut", "white_grapes");
 
     private record Dish(String name, int slots, Set<String> families) {
