@@ -360,6 +360,7 @@
   "modest_meals.food.withChance": "%s (%d%%)",
 
   "modest_meals.trait.header.consumed": "When Eaten:",
+  "modest_meals.trait.header.drunk": "When Drunk:",
   "modest_meals.trait.modifier.plus": "+%s %s",
   "modest_meals.trait.modifier.take": "-%s %s",
   "modest_meals.trait.chance": "%s (%s%% chance)",

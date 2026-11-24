@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.client.tooltip;
 
+import com.evandev.modest_meals.trait.FoodTraitManager;
 import com.evandev.modest_meals.client.ModSprites;
 import com.evandev.modest_meals.client.hud.StaminaSprites;
 import com.evandev.modest_meals.compat.bountiful_fares.BountifulFaresEffects;
@@ -232,7 +233,7 @@ public class FoodItemTooltips {
     private static void addEffectsAndTraits(List<Component> lines, ItemStack stack,
                                             List<FoodEffect> effects, float tickRate,
                                             float scale) {
-        if (!FoodValues.isFood(stack) || !isVisible(ModConfig.get().whenEatenTooltip)) {
+        if ((!FoodValues.isFood(stack) && !FoodTraitManager.hasTraits(stack)) || !isVisible(ModConfig.get().whenEatenTooltip)) {
             return;
         }
 
@@ -268,7 +269,7 @@ public class FoodItemTooltips {
 
         if (!effectLines.isEmpty() || !traitLines.isEmpty()) {
             boolean isDrink = stack.getUseAnimation() == UseAnim.DRINK;
-            lines.add(Component.translatable(isDrink ? "potion.whenDrank" : "modest_meals.trait.header.consumed")
+            lines.add(Component.translatable(isDrink ? "modest_meals.trait.header.drunk" : "modest_meals.trait.header.consumed")
                     .withStyle(ChatFormatting.GRAY));
             effectLines.forEach(line -> lines.add(indent(line)));
             traitLines.forEach(line -> lines.add(indent(line)));
@@ -302,7 +303,7 @@ public class FoodItemTooltips {
 
     private static void removeEffectAttributeBlocks(List<Component> lines) {
         for (int i = 1; i < lines.size(); i++) {
-            if (!hasTranslationKey(lines.get(i), "potion.whenDrank")
+            if (!hasTranslationKey(lines.get(i), "potion.whenDrank") && !hasTranslationKey(lines.get(i), "modest_meals.trait.header.drunk")
                     || i + 1 >= lines.size()
                     || !isAttributeModifierLine(lines.get(i + 1))) {
                 continue;
@@ -329,7 +330,7 @@ public class FoodItemTooltips {
     private static boolean isPotionAttributeLine(Component c) {
         if (c.getContents() instanceof TranslatableContents trans) {
             String key = trans.getKey();
-            return "potion.whenDrank".equals(key) || "modest_meals.food.whenEaten".equals(key) || key.startsWith("attribute.modifier.");
+            return "potion.whenDrank".equals(key) || "modest_meals.trait.header.drunk".equals(key) || "modest_meals.food.whenEaten".equals(key) || key.startsWith("attribute.modifier.");
         }
         return false;
     }
