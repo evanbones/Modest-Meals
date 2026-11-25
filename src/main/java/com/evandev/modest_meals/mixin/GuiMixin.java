@@ -1,6 +1,5 @@
 package com.evandev.modest_meals.mixin;
 
-import com.evandev.modest_meals.client.RenderCompat;
 import com.evandev.modest_meals.client.hud.RestoredHeartsDrawHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -58,18 +57,6 @@ public abstract class GuiMixin {
         }
     }
 
-    @Unique
-    private void mm$drawHeartWithColor(
-            GuiGraphics context, RestoredHeartsDrawHelper.RenderedHeart renderedHeart, int x, int y
-    ) {
-        int color = renderedHeart.color().getRGB();
-        if (renderedHeart.isAtlasTexture()) {
-            RenderCompat.blitSprite(context, RenderCompat.guiSprite(renderedHeart.texture()), x, y, 9, 9, color);
-            return;
-        }
-        RenderCompat.blitTexture(context, renderedHeart.texture(), x, y, 0.0F, 0.0F, 9, 9, 9, 9, color);
-    }
-
     @WrapOperation(
             method = "renderHearts",
             at = @At(
@@ -99,11 +86,11 @@ public abstract class GuiMixin {
         if (firstHeart != null) {
             // drawing container for correct background
             original.call(inGameHud, drawContext, Gui.HeartType.CONTAINER, x, y, hardcore, blinking, half);
-            mm$drawHeartWithColor(drawContext, firstHeart, x, y);
+            RestoredHeartsDrawHelper.draw(drawContext, firstHeart, x, y);
             RestoredHeartsDrawHelper.RenderedHeart secondHeart = res.getSecond();
             if (secondHeart != null) {
                 // drawing second heart on top of the first
-                mm$drawHeartWithColor(drawContext, secondHeart, x, y);
+                RestoredHeartsDrawHelper.draw(drawContext, secondHeart, x, y);
             }
         } else {
             original.call(inGameHud, drawContext, type, x, y, hardcore, blinking, half);

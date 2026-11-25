@@ -1,5 +1,6 @@
 package com.evandev.modest_meals.client;
 
+import com.evandev.modest_meals.compat.overflowing_bars.OverflowingBarsCompat;
 import com.evandev.modest_meals.config.HudLayoutOption;
 import com.evandev.modest_meals.config.ModConfig;
 import net.minecraft.client.Minecraft;
@@ -43,7 +44,9 @@ public abstract class HudHelper {
         int currentHealth = Mth.ceil(player.getHealth());
         float maxHealthAttr = (float) player.getAttributeValue(Attributes.MAX_HEALTH);
         float maxHealth = Math.max(maxHealthAttr, currentHealth);
-        int numberOfRows = Mth.ceil((maxHealth + (float) absorptionAmount) / 2.0F / 10.0F);
+        int numberOfRows = OverflowingBarsCompat.isLoaded()
+                ? OverflowingBarsCompat.healthRows(player)
+                : Mth.ceil((maxHealth + (float) absorptionAmount) / 2.0F / 10.0F);
         int rowHeight = Math.max(10 - (numberOfRows - 2), 3);
 
         return VANILLA_ROW_BASE + rowBaseShift + (numberOfRows - 1) * rowHeight + 10;
