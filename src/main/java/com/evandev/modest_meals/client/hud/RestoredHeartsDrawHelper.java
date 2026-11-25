@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.client.hud;
 
 import com.evandev.modest_meals.Constants;
+import com.evandev.modest_meals.client.RenderCompat;
 import com.evandev.modest_meals.config.HeartTextureOption;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.config.SprintingOption;
@@ -8,6 +9,7 @@ import com.evandev.modest_meals.regen.HealthRegenHelper;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -145,7 +147,11 @@ public class RestoredHeartsDrawHelper {
     }
 
     public Pair<RenderedHeart, RenderedHeart> heartsToDraw() {
-        int heartsDiff = currentHeart - playerHealth - 1;
+        return heartsToDrawAt(currentHeart);
+    }
+
+    public Pair<RenderedHeart, RenderedHeart> heartsToDrawAt(int heartTop) {
+        int heartsDiff = heartTop - playerHealth - 1;
         if (heartsDiff < 0) {
             return new Pair<>(null, null);
         }
@@ -196,6 +202,15 @@ public class RestoredHeartsDrawHelper {
         y = addShakingIfNeeded(y);
         currentY = y;
         return y;
+    }
+
+    public static void draw(GuiGraphics graphics, RenderedHeart heart, int x, int y) {
+        int color = heart.color().getRGB();
+        if (heart.isAtlasTexture()) {
+            RenderCompat.blitSprite(graphics, RenderCompat.guiSprite(heart.texture()), x, y, 9, 9, color);
+            return;
+        }
+        RenderCompat.blitTexture(graphics, heart.texture(), x, y, 0.0F, 0.0F, 9, 9, 9, 9, color);
     }
 
     public record RenderedHeart(ResourceLocation texture, boolean isAtlasTexture, Color color) {

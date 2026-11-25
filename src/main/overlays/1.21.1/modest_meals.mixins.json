@@ -20,6 +20,7 @@
   "client": [
     "GuiMixin",
     "compat.JeedFoodEffectsMixin",
+    "compat.OverflowingBarsHealthMixin",
     "compat.RollManagerMixin",
     "LocalPlayerMixin",
     "MinecraftMixin",

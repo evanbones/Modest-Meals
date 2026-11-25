@@ -1,6 +1,7 @@
 package com.evandev.modest_meals.client;
 
 import com.evandev.modest_meals.client.hud.PreviewFood;
+import com.evandev.modest_meals.compat.overflowing_bars.OverflowingBarsCompat;
 import com.evandev.modest_meals.client.hud.StaminaSprites;
 import com.evandev.modest_meals.config.ModConfig;
 import com.evandev.modest_meals.stamina.PlayerStamina;
@@ -18,6 +19,7 @@ import java.awt.*;
 public abstract class StaminaRenderer {
     private static final int ICONS_PER_ROW = 10;
     private static final int ICON_SIZE = 9;
+    private static final int[] LAYER_COLORS = {0xFFFF9A3C, 0xFFFF5A6E, 0xFFC86EFF, 0xFF6EB4FF};
 
     private static boolean hasBegunToDrain = false;
     private static long fullFlashStartTime = 0;
@@ -51,6 +53,9 @@ public abstract class StaminaRenderer {
     }
 
     public static int rowCount(PlayerStamina stamina) {
+        if (OverflowingBarsCompat.isLoaded()) {
+            return 1;
+        }
         return Mth.ceil(totalIconCount(stamina) / (float) ICONS_PER_ROW);
     }
 
@@ -188,20 +193,33 @@ public abstract class StaminaRenderer {
 
         RenderCompat.prepareHud();
 
-        for (int i = 0; i < icons; i++) {
+        boolean layered = OverflowingBarsCompat.isLoaded();
+        int slots = layered ? Math.min(icons, ICONS_PER_ROW) : icons;
+        int layers = layered ? Mth.ceil(icons / (float) ICONS_PER_ROW) : 1;
+
+        for (int i = 0; i < slots; i++) {
             int x = left - (i % ICONS_PER_ROW) * 8 - ICON_SIZE;
             int top = baseTop - (i / ICONS_PER_ROW) * rowHeight;
             if (i == bounceIcon) {
                 top -= 2;
             }
 
-            int icon = i * 2 + 1;
-            ResourceLocation sprite = getSprite(stamina, icon);
-
             RenderCompat.blitSprite(graphics, ModSprites.STAMINA_EMPTY, x, top, ICON_SIZE, ICON_SIZE);
-            RenderCompat.blitSprite(graphics, sprite, x, top, ICON_SIZE, ICON_SIZE);
 
-            renderPreview(graphics, x, top, icon, level, previewLevel);
+            for (int layer = 0; layer < layers; layer++) {
+                int index = layer * ICONS_PER_ROW + i;
+                if (index >= icons) {
+                    break;
+                }
+                int icon = index * 2 + 1;
+                ResourceLocation sprite = getSprite(stamina, icon);
+                if (layer == 0) {
+                    RenderCompat.blitSprite(graphics, sprite, x, top, ICON_SIZE, ICON_SIZE);
+                } else if (sprite != ModSprites.STAMINA_EMPTY) {
+                    RenderCompat.blitSprite(graphics, sprite, x, top, ICON_SIZE, ICON_SIZE, layerColor(layer));
+                }
+                renderPreview(graphics, x, top, icon, level, previewLevel);
+            }
 
             if (highlight) {
                 RenderCompat.blitSprite(graphics, ModSprites.STAMINA_HIGHLIGHT, x, top, ICON_SIZE, ICON_SIZE);
@@ -236,6 +254,10 @@ public abstract class StaminaRenderer {
             return;
         }
         RenderCompat.blitTexture(graphics, texture, x, y, 0.0F, 0.0F, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE, previewColor());
+    }
+
+    private static int layerColor(int layer) {
+        return LAYER_COLORS[(layer - 1) % LAYER_COLORS.length];
     }
 
     private static int previewColor() {
